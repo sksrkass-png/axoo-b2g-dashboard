@@ -1,0 +1,62 @@
+[
+  {
+    "grade": "S",
+    "agencyName": "서울디자인재단",
+    "agencyType": "재단",
+    "region": "서울",
+    "mainKeywords": ["미디어아트", "공공디자인", "도시브랜딩", "축제"],
+    "relatedCount": 6,
+    "estimatedAmount": 2730000000,
+    "recommendedProposal": "미디어아트 기반 도시 브랜딩 및 공공디자인 협력 제안",
+    "nextAction": "서울라이트·디자인 행사 발주계획 확인 후 사전 제안",
+    "note": "대형 사업은 직접 수주보다 작가풀·콘텐츠 파트너 포지션으로 접근"
+  },
+  {
+    "grade": "S",
+    "agencyName": "서울문화재단",
+    "agencyType": "재단",
+    "region": "서울",
+    "mainKeywords": ["축제", "전시", "융합예술", "거리예술"],
+    "relatedCount": 8,
+    "estimatedAmount": 1200000000,
+    "recommendedProposal": "아티스트 섭외와 전시·축제 콘텐츠 운영 파트너 제안",
+    "nextAction": "연간 축제·융합예술 사업 일정 확인 후 협력 제안",
+    "note": "반복 발주형 문화사업이 많아 관계 유지형 타깃으로 적합"
+  },
+  {
+    "grade": "A",
+    "agencyName": "영등포문화재단",
+    "agencyType": "문화재단",
+    "region": "서울",
+    "mainKeywords": ["공공디자인", "예술기술", "전시운영", "수변문화"],
+    "relatedCount": 5,
+    "estimatedAmount": 400000000,
+    "recommendedProposal": "수변·도시공간 기반 예술기술 프로그램 제안",
+    "nextAction": "문화도시·수변 관련 공고 모니터링",
+    "note": "악수의 공공디자인·예술기술형 제안과 적합"
+  },
+  {
+    "grade": "A",
+    "agencyName": "용산구",
+    "agencyType": "자치구",
+    "region": "서울",
+    "mainKeywords": ["공공미술", "문화공간", "작가매칭"],
+    "relatedCount": 3,
+    "estimatedAmount": 135000000,
+    "recommendedProposal": "공공미술 기획·작가 매칭·설치 운영 패키지 제안",
+    "nextAction": "문화예술과·도시디자인 관련 부서 접촉",
+    "note": "공공미술형 소규모/중규모 사업 후보"
+  },
+  {
+    "grade": "A",
+    "agencyName": "LH 한국토지주택공사",
+    "agencyType": "공공기관",
+    "region": "전국",
+    "mainKeywords": ["건축물 미술작품", "공공주택", "미술작품 공모"],
+    "relatedCount": 4,
+    "estimatedAmount": 800000000,
+    "recommendedProposal": "건축물 미술작품 공모 대응 및 작가풀 매칭 제안",
+    "nextAction": "LH 미술작품 공모 게시판 및 발주계획 정기 확인",
+    "note": "작가 추천·공모 대응·제작 설치 관리형으로 접근 가능"
+  }
+]
