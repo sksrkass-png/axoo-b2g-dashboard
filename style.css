@@ -306,3 +306,85 @@ select {
     flex-direction: column;
   }
 }
+/* =========================
+   V2 Tabs UI Fix
+   ========================= */
+
+.tabs {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 32px 0 !important;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #e5dfd6;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.tab-button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0 !important;
+  outline: none;
+  border-radius: 999px !important;
+  padding: 12px 18px !important;
+  background: transparent;
+  color: #555555;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tab-button:hover {
+  background: #f4f1eb;
+  color: #111111;
+}
+
+.tab-button.active {
+  background: #111111 !important;
+  color: #ffffff !important;
+}
+
+.tab-button.active:hover {
+  background: #111111 !important;
+  color: #ffffff !important;
+}
+
+.tab-panel {
+  display: none !important;
+}
+
+.tab-panel.active {
+  display: block !important;
+}
+
+.section-head {
+  margin: 0 0 20px 0 !important;
+}
+
+.summary {
+  margin-top: 0 !important;
+  margin-bottom: 20px !important;
+}
+
+/* 모바일 대응 */
+@media (max-width: 760px) {
+  .tabs {
+    display: flex !important;
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 18px;
+    padding: 8px;
+    margin-bottom: 24px !important;
+  }
+
+  .tab-button {
+    flex: 0 0 auto;
+    padding: 12px 14px !important;
+    font-size: 13px;
+  }
+}
