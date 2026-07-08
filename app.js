@@ -1,4 +1,6 @@
 let allItems = [];
+let targetAgencies = [];
+let artCommissions = [];
 
 const categoryNames = {
   public_art: "공공미술",
@@ -33,11 +35,17 @@ function renderSummary(items) {
   document.getElementById("bCount").textContent = items.filter(item => item.grade === "B").length;
 }
 
-function createCard(item) {
+function getGradeClass(grade) {
+  if (grade === "S") return "grade-s";
+  if (grade === "A") return "grade-a";
+  return "grade-b";
+}
+
+function createOpportunityCard(item) {
   const card = document.createElement("article");
   card.className = "card";
 
-  const gradeClass = item.grade === "S" ? "grade-s" : item.grade === "A" ? "grade-a" : "grade-b";
+  const gradeClass = getGradeClass(item.grade);
   const categoryLabel = categoryNames[item.category] || "기타";
   const docUrl = getDocumentUrl(item);
 
@@ -80,7 +88,7 @@ function createCard(item) {
   return card;
 }
 
-function renderCards() {
+function renderOpportunityCards() {
   const searchValue = document.getElementById("searchInput").value.toLowerCase();
   const gradeValue = document.getElementById("gradeFilter").value;
   const categoryValue = document.getElementById("categoryFilter").value;
@@ -107,32 +115,155 @@ function renderCards() {
   cards.innerHTML = "";
 
   filtered.forEach(item => {
-    cards.appendChild(createCard(item));
+    cards.appendChild(createOpportunityCard(item));
   });
 
   empty.style.display = filtered.length ? "none" : "block";
 }
 
-async function init() {
+function createAgencyCard(item) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  const gradeClass = getGradeClass(item.grade);
+  const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
+
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="badges">
+        <span class="badge ${gradeClass}">${safeText(item.grade)}등급</span>
+        <span class="badge category">${safeText(item.agencyType)}</span>
+        <span class="badge category">${safeText(item.region)}</span>
+      </div>
+      <div class="score">관련 ${safeText(item.relatedCount)}건</div>
+    </div>
+
+    <h2>${safeText(item.agencyName)}</h2>
+
+    <div class="meta">
+      <div><span>기관유형</span>${safeText(item.agencyType)}</div>
+      <div><span>지역</span>${safeText(item.region)}</div>
+      <div><span>추정 규모</span>${formatMoney(item.estimatedAmount)}</div>
+      <div><span>관련 이력</span>${safeText(item.relatedCount)}건</div>
+    </div>
+
+    <div class="keywords">
+      ${keywords.map(keyword => `<span class="keyword">${keyword}</span>`).join("")}
+    </div>
+
+    <div class="reason">
+      ${safeText(item.note)}
+    </div>
+
+    <p class="action">제안 방향: ${safeText(item.recommendedProposal)}</p>
+    <p class="action">다음 액션: ${safeText(item.nextAction)}</p>
+  `;
+
+  return card;
+}
+
+function renderAgencyCards() {
+  const cards = document.getElementById("agencyCards");
+  cards.innerHTML = "";
+
+  targetAgencies.forEach(item => {
+    cards.appendChild(createAgencyCard(item));
+  });
+}
+
+function createArtCard(item) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  const keywords = Array.isArray(item.keywords) ? item.keywords : [];
+
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="badges">
+        <span class="badge grade-a">${safeText(item.source)}</span>
+        <span class="badge category">${safeText(item.category)}</span>
+        <span class="badge category">${safeText(item.status)}</span>
+      </div>
+      <div class="score">${safeText(item.region)}</div>
+    </div>
+
+    <h2>${safeText(item.title)}</h2>
+
+    <div class="meta">
+      <div><span>기관</span>${safeText(item.agency)}</div>
+      <div><span>지역</span>${safeText(item.region)}</div>
+      <div><span>공개일</span>${safeText(item.publishedDate)}</div>
+      <div><span>예산</span>${formatMoney(item.budget)}</div>
+    </div>
+
+    <div class="keywords">
+      ${keywords.map(keyword => `<span class="keyword">${keyword}</span>`).join("")}
+    </div>
+
+    <p class="action">추천 액션: ${safeText(item.recommendedAction)}</p>
+
+    ${item.sourceUrl ? `<a class="link" href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
+  `;
+
+  return card;
+}
+
+function renderArtCards() {
+  const cards = document.getElementById("artCards");
+  cards.innerHTML = "";
+
+  artCommissions.forEach(item => {
+    cards.appendChild(createArtCard(item));
+  });
+}
+
+function setupTabs() {
+  const buttons = document.querySelectorAll(".tab-button");
+  const panels = {
+    opportunities: document.getElementById("opportunitiesTab"),
+    agencies: document.getElementById("agenciesTab"),
+    art: document.getElementById("artTab")
+  };
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const target = button.dataset.tab;
+
+      buttons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      Object.values(panels).forEach(panel => panel.classList.remove("active"));
+      panels[target].classList.add("active");
+    });
+  });
+}
+
+async function loadJson(path, fallback = []) {
   try {
-    const response = await fetch("data/b2g_opportunities.json");
-    allItems = await response.json();
-
-    renderSummary(allItems);
-    renderCards();
-
-    document.getElementById("searchInput").addEventListener("input", renderCards);
-    document.getElementById("gradeFilter").addEventListener("change", renderCards);
-    document.getElementById("categoryFilter").addEventListener("change", renderCards);
+    const response = await fetch(path);
+    if (!response.ok) return fallback;
+    return await response.json();
   } catch (error) {
-    console.error(error);
-    document.getElementById("cards").innerHTML = `
-      <article class="card">
-        <h2>데이터를 불러오지 못했습니다.</h2>
-        <p>data/b2g_opportunities.json 파일이 있는지 확인해 주세요.</p>
-      </article>
-    `;
+    console.error(path, error);
+    return fallback;
   }
+}
+
+async function init() {
+  setupTabs();
+
+  allItems = await loadJson("data/b2g_opportunities.json", []);
+  targetAgencies = await loadJson("data/target_agencies.json", []);
+  artCommissions = await loadJson("data/art_commissions.json", []);
+
+  renderSummary(allItems);
+  renderOpportunityCards();
+  renderAgencyCards();
+  renderArtCards();
+
+  document.getElementById("searchInput").addEventListener("input", renderOpportunityCards);
+  document.getElementById("gradeFilter").addEventListener("change", renderOpportunityCards);
+  document.getElementById("categoryFilter").addEventListener("change", renderOpportunityCards);
 }
 
 init();
