@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXOO B2G Research Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div>
+      <p class="eyebrow">AXOO AGENCY</p>
+      <h1>B2G 공고 모니터링</h1>
+      <p class="subtitle">공공미술 · 미디어아트 · 전시 · 문화행사 · 공공디자인 맞춤 공고 확인 페이지</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="summary">
+      <div class="summary-card">
+        <span class="label">전체 후보</span>
+        <strong id="totalCount">0</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">S등급</span>
+        <strong id="sCount">0</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">A등급</span>
+        <strong id="aCount">0</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">B등급</span>
+        <strong id="bCount">0</strong>
+      </div>
+    </section>
+
+    <section class="filters">
+      <input id="searchInput" type="text" placeholder="공고명, 기관명, 키워드 검색" />
+
+      <select id="gradeFilter">
+        <option value="all">전체 등급</option>
+        <option value="S">S등급</option>
+        <option value="A">A등급</option>
+        <option value="B">B등급</option>
+      </select>
+
+      <select id="categoryFilter">
+        <option value="all">전체 유형</option>
+        <option value="public_art">공공미술</option>
+        <option value="media_art">미디어아트</option>
+        <option value="exhibition">전시</option>
+        <option value="festival">문화행사</option>
+        <option value="design">공공디자인</option>
+        <option value="tourism">관광콘텐츠</option>
+        <option value="general">기타</option>
+      </select>
+    </section>
+
+    <section id="cards" class="cards"></section>
+
+    <p id="emptyMessage" class="empty">조건에 맞는 공고가 없습니다.</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
