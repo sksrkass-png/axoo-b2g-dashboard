@@ -1,0 +1,40 @@
+[
+  {
+    "bidNtceNo": "R26BK01599346",
+    "bidNtceOrd": "000",
+    "bidNtceNm": "창원도계부부시장 문화장터 야시장 페스티발 운영 용역",
+    "ntceInsttNm": "도계부부시장 문화관광형시장 육성사업단",
+    "dminsttNm": "도계부부시장 문화관광형시장 육성사업단",
+    "bidMethdNm": "직찰",
+    "cntrctCnclsMthdNm": "제한경쟁",
+    "bidBeginDt": "",
+    "bidClseDt": "",
+    "opengDt": "2026-07-16 14:00:00",
+    "asignBdgtAmt": "62750000",
+    "presmptPrce": "57045455",
+    "ntceInsttOfclNm": "박동호",
+    "ntceInsttOfclTelNo": "***********",
+    "ntceInsttOfclEmailAdrs": "",
+    "ntceSpecDocUrl1": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01599346&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "ntceSpecDocUrl2": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01599346&bidPbancOrd=000&fileType=&fileSeq=2&prcmBsneSeCd=03",
+    "ntceSpecFileNm1": "붙임1. (입찰공고서) 2026 도계부부시장 문화장터 야시장 페스티발 운영용역.pdf",
+    "ntceSpecFileNm2": "붙임2. (제안요청서) 2026 도계부부시장 문화장터 야시장 페스티발 운영용역.pdf",
+    "score": 60,
+    "grade": "B",
+    "category": "tourism",
+    "matchedKeywords": [
+      "문화관광"
+    ],
+    "matchedCategories": [
+      "tourism"
+    ],
+    "budgetAmount": 62750000,
+    "daysLeft": null,
+    "scoreReasons": [
+      "악수 관련 핵심 키워드 포함",
+      "예산 규모 적합",
+      "문화/관광/디자인 관련 기관"
+    ],
+    "recommendedAction": "저장 후 유사 사업/기관 모니터링"
+  }
+]
