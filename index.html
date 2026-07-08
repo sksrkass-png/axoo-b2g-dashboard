@@ -10,56 +10,85 @@
   <header class="header">
     <div>
       <p class="eyebrow">AXOO AGENCY</p>
-      <h1>B2G 공고 모니터링</h1>
-      <p class="subtitle">공공미술 · 미디어아트 · 전시 · 문화행사 · 공공디자인 맞춤 공고 확인 페이지</p>
+      <h1>B2G 리서치 대시보드</h1>
+      <p class="subtitle">맞춤 공고 · 기관 타깃 · 건축물 미술작품 공모를 한 곳에서 확인합니다.</p>
     </div>
   </header>
 
   <main class="container">
-    <section class="summary">
-      <div class="summary-card">
-        <span class="label">전체 후보</span>
-        <strong id="totalCount">0</strong>
-      </div>
-      <div class="summary-card">
-        <span class="label">S등급</span>
-        <strong id="sCount">0</strong>
-      </div>
-      <div class="summary-card">
-        <span class="label">A등급</span>
-        <strong id="aCount">0</strong>
-      </div>
-      <div class="summary-card">
-        <span class="label">B등급</span>
-        <strong id="bCount">0</strong>
-      </div>
+    <nav class="tabs">
+      <button class="tab-button active" data-tab="opportunities">맞춤 공고</button>
+      <button class="tab-button" data-tab="agencies">기관 타깃</button>
+      <button class="tab-button" data-tab="art">건축물 미술작품</button>
+    </nav>
+
+    <section id="opportunitiesTab" class="tab-panel active">
+      <section class="summary">
+        <div class="summary-card">
+          <span class="label">전체 후보</span>
+          <strong id="totalCount">0</strong>
+        </div>
+        <div class="summary-card">
+          <span class="label">S등급</span>
+          <strong id="sCount">0</strong>
+        </div>
+        <div class="summary-card">
+          <span class="label">A등급</span>
+          <strong id="aCount">0</strong>
+        </div>
+        <div class="summary-card">
+          <span class="label">B등급</span>
+          <strong id="bCount">0</strong>
+        </div>
+      </section>
+
+      <section class="filters">
+        <input id="searchInput" type="text" placeholder="공고명, 기관명, 키워드 검색" />
+
+        <select id="gradeFilter">
+          <option value="all">전체 등급</option>
+          <option value="S">S등급</option>
+          <option value="A">A등급</option>
+          <option value="B">B등급</option>
+        </select>
+
+        <select id="categoryFilter">
+          <option value="all">전체 유형</option>
+          <option value="public_art">공공미술</option>
+          <option value="media_art">미디어아트</option>
+          <option value="exhibition">전시</option>
+          <option value="festival">문화행사</option>
+          <option value="design">공공디자인</option>
+          <option value="tourism">관광콘텐츠</option>
+          <option value="general">기타</option>
+        </select>
+      </section>
+
+      <section id="cards" class="cards"></section>
+      <p id="emptyMessage" class="empty">조건에 맞는 공고가 없습니다.</p>
     </section>
 
-    <section class="filters">
-      <input id="searchInput" type="text" placeholder="공고명, 기관명, 키워드 검색" />
+    <section id="agenciesTab" class="tab-panel">
+      <section class="section-head">
+        <div>
+          <h2>집행 이력 기반 기관 타깃</h2>
+          <p>반복 발주, 문화·관광·디자인 관련성, 악수 제안 적합도를 기준으로 관리합니다.</p>
+        </div>
+      </section>
 
-      <select id="gradeFilter">
-        <option value="all">전체 등급</option>
-        <option value="S">S등급</option>
-        <option value="A">A등급</option>
-        <option value="B">B등급</option>
-      </select>
-
-      <select id="categoryFilter">
-        <option value="all">전체 유형</option>
-        <option value="public_art">공공미술</option>
-        <option value="media_art">미디어아트</option>
-        <option value="exhibition">전시</option>
-        <option value="festival">문화행사</option>
-        <option value="design">공공디자인</option>
-        <option value="tourism">관광콘텐츠</option>
-        <option value="general">기타</option>
-      </select>
+      <section id="agencyCards" class="cards"></section>
     </section>
 
-    <section id="cards" class="cards"></section>
+    <section id="artTab" class="tab-panel">
+      <section class="section-head">
+        <div>
+          <h2>건축물 미술작품 & 공공미술 공모</h2>
+          <p>서울시, LH, 나라장터, 지자체의 미술작품 제작·설치 공모를 별도 관리합니다.</p>
+        </div>
+      </section>
 
-    <p id="emptyMessage" class="empty">조건에 맞는 공고가 없습니다.</p>
+      <section id="artCards" class="cards"></section>
+    </section>
   </main>
 
   <script src="app.js"></script>
