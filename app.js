@@ -234,10 +234,12 @@ function renderOpportunityCards() {
   const searchInput = document.getElementById("searchInput");
   const gradeFilter = document.getElementById("gradeFilter");
   const categoryFilter = document.getElementById("categoryFilter");
+  const reviewFilter = document.getElementById("reviewFilter");
 
   const searchValue = searchInput ? searchInput.value.toLowerCase() : "";
   const gradeValue = gradeFilter ? gradeFilter.value : "all";
   const categoryValue = categoryFilter ? categoryFilter.value : "all";
+  const reviewValue = reviewFilter ? reviewFilter.value : "all";
 
   const filtered = allItems.filter(item => {
     const searchTarget = [
@@ -252,7 +254,11 @@ function renderOpportunityCards() {
     const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
     const matchesCategory = categoryValue === "all" || item.category === categoryValue;
 
-    return matchesSearch && matchesGrade && matchesCategory;
+    const reviewKey = getOpportunityReviewKey(item);
+    const itemReviewStatus = getReviewStatus(reviewKey);
+    const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
+
+    return matchesSearch && matchesGrade && matchesCategory && matchesReview;
   });
 
   const cards = document.getElementById("cards");
@@ -474,10 +480,9 @@ async function init() {
   const searchInput = document.getElementById("searchInput");
   const gradeFilter = document.getElementById("gradeFilter");
   const categoryFilter = document.getElementById("categoryFilter");
+  const reviewFilter = document.getElementById("reviewFilter");
 
   if (searchInput) searchInput.addEventListener("input", renderOpportunityCards);
-  if (gradeFilter) gradeFilter.addEventListener("change", renderOpportunityCards);
-  if (categoryFilter) categoryFilter.addEventListener("change", renderOpportunityCards);
 }
 
 document.addEventListener("DOMContentLoaded", init);
