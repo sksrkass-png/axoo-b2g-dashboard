@@ -600,3 +600,131 @@ select {
     width: 100%;
   }
 }
+
+/* =========================
+   Dashboard Meta Bar - Stable
+   ========================= */
+
+.meta-bar {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 0 0 18px;
+}
+
+.meta-card {
+  background: #ffffff;
+  border: 1px solid #e3ddd3;
+  border-radius: 18px;
+  padding: 16px 18px;
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.03);
+}
+
+.meta-card-wide {
+  background: #f7f3ec;
+}
+
+.meta-label {
+  font-size: 12px;
+  line-height: 1;
+  color: #7b746b;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.meta-value {
+  font-size: 26px;
+  line-height: 1.1;
+  color: #111111;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.meta-card-wide .meta-value {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+/* =========================
+   Review Status Control
+   ========================= */
+
+.review-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: #f8f5ef;
+  border: 1px solid #ece3d7;
+  border-radius: 14px;
+}
+
+.review-label {
+  color: #666666;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.review-select {
+  width: auto;
+  min-width: 120px;
+  padding: 8px 12px;
+  border: 1px solid #d8d0c4;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.review-select:focus {
+  outline: none;
+  border-color: #111111;
+}
+
+@media (max-width: 960px) {
+  .meta-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .meta-card-wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .meta-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .meta-card,
+  .meta-card-wide {
+    min-height: auto;
+  }
+
+  .meta-value {
+    font-size: 22px;
+  }
+
+  .meta-card-wide .meta-value {
+    font-size: 16px;
+  }
+
+  .review-box {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .review-select {
+    width: 100%;
+  }
+}
