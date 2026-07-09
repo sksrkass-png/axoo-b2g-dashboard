@@ -1,6 +1,7 @@
 let allItems = [];
 let targetAgencies = [];
 let artCommissions = [];
+let dashboardMeta = {};
 
 const categoryNames = {
   public_art: "공공미술",
@@ -319,7 +320,9 @@ async function init() {
   allItems = await loadJson("data/b2g_opportunities.json", []);
   targetAgencies = await loadJson("data/target_agencies.json", []);
   artCommissions = await loadJson("data/art_commissions.json", []);
+  dashboardMeta = await loadJson("data/dashboard_meta.json", {});
 
+  renderDashboardMeta();
   renderSummary(allItems);
   renderOpportunityCards();
   renderAgencyCards();
@@ -335,3 +338,28 @@ async function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+function renderDashboardMeta() {
+  const lastUpdatedAt = document.getElementById("lastUpdatedAt");
+  const opportunityCount = document.getElementById("metaOpportunityCount");
+  const agencyCount = document.getElementById("metaAgencyCount");
+  const artCount = document.getElementById("metaArtCount");
+
+  if (lastUpdatedAt) {
+    lastUpdatedAt.textContent = dashboardMeta.lastUpdatedAt
+      ? `${dashboardMeta.lastUpdatedAt} ${dashboardMeta.timezone || ""}`
+      : "-";
+  }
+
+  if (opportunityCount) {
+    opportunityCount.textContent = dashboardMeta.opportunityCount ?? 0;
+  }
+
+  if (agencyCount) {
+    agencyCount.textContent = dashboardMeta.agencyCount ?? 0;
+  }
+
+  if (artCount) {
+    artCount.textContent = dashboardMeta.artCommissionCount ?? 0;
+  }
+}
