@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "id": "external-5f8e87f4b042458e",
+    "source": "경기도 건축물 미술작품",
+    "title": "오산 서2구역 공동주택 내 미술작품 제작 및 설치 미술작품 공고공모",
+    "agency": "경기도",
+    "region": "경기",
+    "category": "미술작품 공모",
+    "status": "공모중",
+    "publishedDate": "2026-07-07",
+    "periodStart": "2026-07-07",
+    "deadline": "2026-07-28",
+    "budget": 0,
+    "keywords": [
+      "미술작품",
+      "공모",
+      "공고",
+      "제작",
+      "설치"
+    ],
+    "recommendedAction": "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토 / 공모기간: 2026-07-07 ~ 2026-07-28",
+    "sourceUrl": "https://gg.go.kr/publicart/bbs/board.do?bsIdx=825&menuId=3865",
+    "bidNtceNo": "",
+    "score": 85,
+    "grade": "A"
+  }
+]
