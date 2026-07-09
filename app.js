@@ -416,21 +416,32 @@ function createArtCard(item) {
 
 function renderArtCards() {
   const cards = document.getElementById("artCards");
+  const artReviewFilter = document.getElementById("artReviewFilter");
+
   if (!cards) return;
+
+  const reviewValue = artReviewFilter ? artReviewFilter.value : "all";
+
+  const filtered = artCommissions.filter(item => {
+    const reviewKey = getArtReviewKey(item);
+    const itemReviewStatus = getReviewStatus(reviewKey);
+
+    return reviewValue === "all" || itemReviewStatus === reviewValue;
+  });
 
   cards.innerHTML = "";
 
-  if (!artCommissions.length) {
+  if (!filtered.length) {
     cards.innerHTML = `
       <article class="card">
-        <h2>건축물 미술작품 데이터가 없습니다.</h2>
-        <p class="reason">engine Actions를 실행해 art_commissions.json을 생성/동기화해 주세요.</p>
+        <h2>조건에 맞는 건축물 미술작품 데이터가 없습니다.</h2>
+        <p class="reason">검토 상태 필터를 전체 상태로 바꾸거나, engine Actions를 실행해 art_commissions.json을 동기화해 주세요.</p>
       </article>
     `;
     return;
   }
 
-  artCommissions.forEach(item => {
+  filtered.forEach(item => {
     cards.appendChild(createArtCard(item));
   });
 
