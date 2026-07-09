@@ -122,8 +122,9 @@ function renderSummary(items) {
 }
 
 function createOpportunityCard(item) {
-  const card = document.createElement("article");
-  card.className = "card";
+  const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
+  const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
+  const reviewKey = getOpportunityReviewKey(item);  
 
   const gradeClass = getGradeClass(item.grade);
   const categoryLabel = categoryNames[item.category] || "기타";
@@ -160,6 +161,8 @@ function createOpportunityCard(item) {
     </div>
 
     <p class="action">추천 액션: ${safeText(item.recommendedAction)}</p>
+
+    ${createReviewControl(reviewKey)}
 
     ${docUrl ? `<a class="link" href="${docUrl}" target="_blank" rel="noopener noreferrer">공고문 보기</a>` : ""}
   `;
@@ -204,6 +207,7 @@ function renderOpportunityCards() {
   if (empty) {
     empty.style.display = filtered.length ? "none" : "block";
   }
+  bindReviewControls();
 }
 
 function createAgencyCard(item) {
@@ -301,6 +305,7 @@ function createArtCard(item) {
   card.className = "card";
 
   const keywords = Array.isArray(item.keywords) ? item.keywords : [];
+  const reviewKey = getArtReviewKey(item);
 
   card.innerHTML = `
     <div class="card-top">
@@ -328,6 +333,8 @@ function createArtCard(item) {
 
     <p class="action">추천 액션: ${safeText(item.recommendedAction)}</p>
 
+    ${createReviewControl(reviewKey)}
+
     ${item.sourceUrl ? `<a class="link" href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
   `;
 
@@ -353,6 +360,7 @@ function renderArtCards() {
   artCommissions.forEach(item => {
     cards.appendChild(createArtCard(item));
   });
+  bindReviewControls();
 }
 
 function setupTabs() {
