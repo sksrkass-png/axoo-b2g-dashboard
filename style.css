@@ -728,3 +728,7 @@ select {
     width: 100%;
   }
 }
+
+.filters select {
+  min-width: 130px;
+}
