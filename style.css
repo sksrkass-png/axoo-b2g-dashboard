@@ -591,3 +591,64 @@ h1 {
     width: 100%;
   }
 }
+
+/* =========================
+   Card Tools: Copy + Memo
+   ========================= */
+
+.card-tools {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #eee4d8;
+  display: grid;
+  gap: 10px;
+}
+
+.copy-card-button {
+  width: fit-content;
+  appearance: none;
+  border: 0;
+  background: #111111;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 11px 15px;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.copy-card-button.copied {
+  background: #ff3b30;
+}
+
+.card-memo {
+  width: 100%;
+  min-height: 72px;
+  resize: vertical;
+  border: 1px solid #e3ddd3;
+  border-radius: 14px;
+  background: #f8f5ef;
+  color: #111111;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.card-memo::placeholder {
+  color: #9a9187;
+}
+
+.card-memo:focus {
+  outline: none;
+  border-color: #111111;
+  background: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .copy-card-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
