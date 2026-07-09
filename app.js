@@ -3,6 +3,73 @@ let targetAgencies = [];
 let artCommissions = [];
 let dashboardMeta = {};
 
+const REVIEW_STORAGE_KEY = "axooB2GReviewStatus";
+
+const reviewStatusOptions = {
+  new: "미검토",
+  reviewing: "검토중",
+  proposal: "제안 준비",
+  hold: "보류",
+  done: "처리 완료"
+};
+
+function getReviewStore() {
+  try {
+    return JSON.parse(localStorage.getItem(REVIEW_STORAGE_KEY)) || {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveReviewStore(store) {
+  localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(store));
+}
+
+function getReviewStatus(key) {
+  const store = getReviewStore();
+  return store[key] || "new";
+}
+
+function setReviewStatus(key, value) {
+  const store = getReviewStore();
+  store[key] = value;
+  saveReviewStore(store);
+}
+
+function getOpportunityReviewKey(item) {
+  return `opportunity-${item.bidNtceNo || item.bidNtceNm || ""}`;
+}
+
+function getArtReviewKey(item) {
+  return `art-${item.bidNtceNo || item.title || ""}-${item.deadline || ""}`;
+}
+
+function createReviewControl(key) {
+  const currentStatus = getReviewStatus(key);
+
+  return `
+    <div class="review-box">
+      <span class="review-label">검토 상태</span>
+      <select class="review-select" data-review-key="${key}">
+        ${Object.entries(reviewStatusOptions).map(([value, label]) => `
+          <option value="${value}" ${value === currentStatus ? "selected" : ""}>${label}</option>
+        `).join("")}
+      </select>
+    </div>
+  `;
+}
+
+function bindReviewControls() {
+  document.querySelectorAll(".review-select").forEach(select => {
+    select.addEventListener("change", event => {
+      const key = event.target.dataset.reviewKey;
+      const value = event.target.value;
+
+      setReviewStatus(key, value);
+    });
+  });
+}
+
 const categoryNames = {
   public_art: "공공미술",
   media_art: "미디어아트",
