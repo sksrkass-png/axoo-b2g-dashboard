@@ -14,9 +14,7 @@ const categoryNames = {
 
 function formatMoney(value) {
   const number = Number(value || 0);
-
   if (!number) return "금액 미공개";
-
   return number.toLocaleString("ko-KR") + "원";
 }
 
@@ -24,8 +22,28 @@ function safeText(value) {
   return value && String(value).trim() ? String(value) : "-";
 }
 
+function getGradeClass(grade) {
+  if (grade === "S") return "grade-s";
+  if (grade === "A") return "grade-a";
+  return "grade-b";
+}
+
 function getDocumentUrl(item) {
-  return item.ntceSpecDocUrl1 || item.ntceSpecDocUrl2 || "";
+  return item.ntceSpecDocUrl1 || item.ntceSpecDocUrl2 || item.sourceUrl || "";
+}
+
+async function loadJson(path, fallback = []) {
+  try {
+    const response = await fetch(path + "?v=" + Date.now());
+    if (!response.ok) {
+      console.warn("JSON load failed:", path, response.status);
+      return fallback;
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("JSON error:", path, error);
+    return fallback;
+  }
 }
 
 function renderSummary(items) {
@@ -35,12 +53,6 @@ function renderSummary(items) {
   document.getElementById("bCount").textContent = items.filter(item => item.grade === "B").length;
 }
 
-function getGradeClass(grade) {
-  if (grade === "S") return "grade-s";
-  if (grade === "A") return "grade-a";
-  return "grade-b";
-}
-
 function createOpportunityCard(item) {
   const card = document.createElement("article");
   card.className = "card";
@@ -48,7 +60,6 @@ function createOpportunityCard(item) {
   const gradeClass = getGradeClass(item.grade);
   const categoryLabel = categoryNames[item.category] || "기타";
   const docUrl = getDocumentUrl(item);
-
   const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
   const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
 
@@ -89,9 +100,13 @@ function createOpportunityCard(item) {
 }
 
 function renderOpportunityCards() {
-  const searchValue = document.getElementById("searchInput").value.toLowerCase();
-  const gradeValue = document.getElementById("gradeFilter").value;
-  const categoryValue = document.getElementById("categoryFilter").value;
+  const searchInput = document.getElementById("searchInput");
+  const gradeFilter = document.getElementById("gradeFilter");
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  const searchValue = searchInput ? searchInput.value.toLowerCase() : "";
+  const gradeValue = gradeFilter ? gradeFilter.value : "all";
+  const categoryValue = categoryFilter ? categoryFilter.value : "all";
 
   const filtered = allItems.filter(item => {
     const searchTarget = [
@@ -118,7 +133,9 @@ function renderOpportunityCards() {
     cards.appendChild(createOpportunityCard(item));
   });
 
-  empty.style.display = filtered.length ? "none" : "block";
+  if (empty) {
+    empty.style.display = filtered.length ? "none" : "block";
+  }
 }
 
 function createAgencyCard(item) {
@@ -150,12 +167,7 @@ function createAgencyCard(item) {
         </div>
       </div>
     `
-    : `
-      <div class="evidence-box">
-        <strong>근거 자료</strong>
-        <p class="evidence-empty">아직 표시할 근거 자료가 없습니다.</p>
-      </div>
-    `;
+    : "";
 
   card.innerHTML = `
     <div class="card-top">
@@ -194,3 +206,132 @@ function createAgencyCard(item) {
 
   return card;
 }
+
+function renderAgencyCards() {
+  const cards = document.getElementById("agencyCards");
+  if (!cards) return;
+
+  cards.innerHTML = "";
+
+  if (!targetAgencies.length) {
+    cards.innerHTML = `
+      <article class="card">
+        <h2>기관 타깃 데이터가 없습니다.</h2>
+        <p class="reason">engine Actions를 다시 실행해 target_agencies.json을 생성/동기화해 주세요.</p>
+      </article>
+    `;
+    return;
+  }
+
+  targetAgencies.forEach(item => {
+    cards.appendChild(createAgencyCard(item));
+  });
+}
+
+function createArtCard(item) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  const keywords = Array.isArray(item.keywords) ? item.keywords : [];
+
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="badges">
+        <span class="badge grade-a">${safeText(item.source)}</span>
+        <span class="badge category">${safeText(item.category)}</span>
+        <span class="badge category">${safeText(item.status)}</span>
+      </div>
+      <div class="score">${safeText(item.region)}</div>
+    </div>
+
+    <h2>${safeText(item.title)}</h2>
+
+    <div class="meta">
+      <div><span>기관</span>${safeText(item.agency)}</div>
+      <div><span>지역</span>${safeText(item.region)}</div>
+      <div><span>공개일</span>${safeText(item.publishedDate)}</div>
+      <div><span>마감일</span>${safeText(item.deadline)}</div>
+      <div><span>예산</span>${formatMoney(item.budget)}</div>
+    </div>
+
+    <div class="keywords">
+      ${keywords.map(keyword => `<span class="keyword">${keyword}</span>`).join("")}
+    </div>
+
+    <p class="action">추천 액션: ${safeText(item.recommendedAction)}</p>
+
+    ${item.sourceUrl ? `<a class="link" href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
+  `;
+
+  return card;
+}
+
+function renderArtCards() {
+  const cards = document.getElementById("artCards");
+  if (!cards) return;
+
+  cards.innerHTML = "";
+
+  if (!artCommissions.length) {
+    cards.innerHTML = `
+      <article class="card">
+        <h2>건축물 미술작품 데이터가 없습니다.</h2>
+        <p class="reason">engine Actions를 다시 실행해 art_commissions.json을 생성/동기화해 주세요.</p>
+      </article>
+    `;
+    return;
+  }
+
+  artCommissions.forEach(item => {
+    cards.appendChild(createArtCard(item));
+  });
+}
+
+function setupTabs() {
+  const buttons = document.querySelectorAll(".tab-button");
+  const panels = {
+    opportunities: document.getElementById("opportunitiesTab"),
+    agencies: document.getElementById("agenciesTab"),
+    art: document.getElementById("artTab")
+  };
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const target = button.dataset.tab;
+
+      buttons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      Object.values(panels).forEach(panel => {
+        if (panel) panel.classList.remove("active");
+      });
+
+      if (panels[target]) {
+        panels[target].classList.add("active");
+      }
+    });
+  });
+}
+
+async function init() {
+  setupTabs();
+
+  allItems = await loadJson("data/b2g_opportunities.json", []);
+  targetAgencies = await loadJson("data/target_agencies.json", []);
+  artCommissions = await loadJson("data/art_commissions.json", []);
+
+  renderSummary(allItems);
+  renderOpportunityCards();
+  renderAgencyCards();
+  renderArtCards();
+
+  const searchInput = document.getElementById("searchInput");
+  const gradeFilter = document.getElementById("gradeFilter");
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  if (searchInput) searchInput.addEventListener("input", renderOpportunityCards);
+  if (gradeFilter) gradeFilter.addEventListener("change", renderOpportunityCards);
+  if (categoryFilter) categoryFilter.addEventListener("change", renderOpportunityCards);
+}
+
+document.addEventListener("DOMContentLoaded", init);
