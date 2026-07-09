@@ -235,6 +235,7 @@ function renderOpportunityCards() {
   const gradeFilter = document.getElementById("gradeFilter");
   const categoryFilter = document.getElementById("categoryFilter");
   const reviewFilter = document.getElementById("reviewFilter");
+  const artReviewFilter = document.getElementById("artReviewFilter");
 
   const searchValue = searchInput ? searchInput.value.toLowerCase() : "";
   const gradeValue = gradeFilter ? gradeFilter.value : "all";
@@ -492,8 +493,14 @@ async function init() {
   const gradeFilter = document.getElementById("gradeFilter");
   const categoryFilter = document.getElementById("categoryFilter");
   const reviewFilter = document.getElementById("reviewFilter");
+  const artReviewFilter = document.getElementById("artReviewFilter");
 
   if (searchInput) searchInput.addEventListener("input", renderOpportunityCards);
+  if (gradeFilter) gradeFilter.addEventListener("change", renderOpportunityCards);
+  if (categoryFilter) categoryFilter.addEventListener("change", renderOpportunityCards);
+  if (reviewFilter) reviewFilter.addEventListener("change", renderOpportunityCards);
+  if (artReviewFilter) artReviewFilter.addEventListener("change", renderArtCards);
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
