@@ -1,5 +1,34 @@
 [
   {
+    "grade": "A",
+    "score": 60,
+    "agencyName": "조달청 서울지방조달청",
+    "agencyType": "공공기관",
+    "region": "서울",
+    "mainKeywords": [
+      "행사대행"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 1,
+    "estimatedAmount": 4198400000,
+    "bidAmount": 0,
+    "contractAmount": 4198400000,
+    "recommendedProposal": "행사대행 관련 악수 협업 제안",
+    "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 1건, 총 4,198,400,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "2026년 제1차 한-중앙아시아 정상회의 행사대행 PCO 용역",
+        "sourceType": "계약정보",
+        "amount": 4198400000,
+        "date": "2026-05-08",
+        "sourceUrl": "http://www.g2b.go.kr",
+        "id": "R26TE14743022"
+      }
+    ]
+  },
+  {
     "grade": "B",
     "score": 55,
     "agencyName": "조달청",
@@ -8,31 +37,23 @@
     "mainKeywords": [
       "전시"
     ],
-    "relatedCount": 2,
+    "relatedCount": 1,
     "bidCount": 0,
-    "contractCount": 2,
-    "estimatedAmount": 520000000,
+    "contractCount": 1,
+    "estimatedAmount": 395000000,
     "bidAmount": 0,
-    "contractAmount": 520000000,
+    "contractAmount": 395000000,
     "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
     "nextAction": "기관 저장 후 예산 시즌에 재접촉",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 2건, 총 520,000,000원 규모의 근거가 확인되었습니다.",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 1건, 총 395,000,000원 규모의 근거가 확인되었습니다.",
     "evidenceSources": [
       {
-        "title": "2026년 무형유산 디지털체험관 전시영상 제작 용역",
+        "title": "2026년 K-북 해외 홍보·교류 행사 운영 대행 용역",
         "sourceType": "계약정보",
-        "amount": 260000000,
-        "date": "2026-06-09",
+        "amount": 395000000,
+        "date": "2026-05-08",
         "sourceUrl": "http://www.g2b.go.kr",
-        "id": "R26TE15589209"
-      },
-      {
-        "title": "2026년 무형유산 디지털체험관 전시영상 제작 용역",
-        "sourceType": "계약정보",
-        "amount": 260000000,
-        "date": "2026-06-09",
-        "sourceUrl": "http://www.g2b.go.kr",
-        "id": "R26TE15593602"
+        "id": "R26TE14749688"
       }
     ]
   },
@@ -346,6 +367,35 @@
   {
     "grade": "C",
     "score": 35,
+    "agencyName": "서울특별시",
+    "agencyType": "지자체",
+    "region": "서울",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 153000000,
+    "bidAmount": 153000000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 153,000,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "2027학년도 대학입학전형 온라인 채점시스템 임대 용역",
+        "sourceType": "입찰공고",
+        "amount": 153000000,
+        "date": "2026-07-08 17:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601550&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01601550"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 35,
     "agencyName": "울산문화관광재단",
     "agencyType": "관광재단",
     "region": "울산",
@@ -404,6 +454,93 @@
   {
     "grade": "C",
     "score": 28,
+    "agencyName": "전라남도정보문화산업진흥원",
+    "agencyType": "공공기관",
+    "region": "전남",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 99887000,
+    "bidAmount": 99887000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 99,887,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "2026 XR & Metaverse Fair Tokyo 하반기 공동관 운영 용역",
+        "sourceType": "입찰공고",
+        "amount": 99887000,
+        "date": "2026-07-07 11:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01598513&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01598513"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
+    "agencyName": "경기도시장상권진흥원",
+    "agencyType": "공공기관",
+    "region": "경기",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 92000000,
+    "bidAmount": 92000000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 92,000,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "경기도시장상권진흥원 주사무소 건립 입지 타당성 연구용역",
+        "sourceType": "입찰공고",
+        "amount": 92000000,
+        "date": "2026-07-07 12:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601453&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01601453"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
+    "agencyName": "서울특별시교육청 서울특별시중부교육지원청",
+    "agencyType": "공공기관",
+    "region": "서울",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 89394000,
+    "bidAmount": 89394000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 89,394,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "(긴급)2026 중부 중등 AI·디지털 기반 교육혁신 연수 위탁 운영 용역(수의시담)",
+        "sourceType": "입찰공고",
+        "amount": 89394000,
+        "date": "2026-06-26 11:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601649&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01601649"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
     "agencyName": "(사)에이펙국제교육협력원",
     "agencyType": "공공기관",
     "region": "전국/기타",
@@ -435,6 +572,35 @@
         "date": "2026-07-06 14:00:00",
         "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601644&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
         "id": "R26BK01601644"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
+    "agencyName": "국가유산청",
+    "agencyType": "공공기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 80000000,
+    "bidAmount": 80000000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 80,000,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "역사문화환경 보존지역 합리적 조정 성과 분석 및 개선방안 마련 연구",
+        "sourceType": "입찰공고",
+        "amount": 80000000,
+        "date": "2026-07-07 10:12:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601639&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01601639"
       }
     ]
   },
@@ -586,6 +752,35 @@
   {
     "grade": "C",
     "score": 28,
+    "agencyName": "서울특별시 강서구",
+    "agencyType": "자치구",
+    "region": "서울",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 61158120,
+    "bidAmount": 61158120,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 61,158,120원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "2026년 벼 병해충 공동방제 헬기 임차용역/공원24655",
+        "sourceType": "입찰공고",
+        "amount": 61158120,
+        "date": "2026-06-18 15:00:00",
+        "sourceUrl": "",
+        "id": "R26BK01569353"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
     "agencyName": "한국농어촌공사",
     "agencyType": "공공기관",
     "region": "전국/기타",
@@ -638,6 +833,93 @@
         "date": "2026-07-01 15:00:00",
         "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601626&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
         "id": "R26BK01601626"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
+    "agencyName": "광주정보.문화산업진흥원",
+    "agencyType": "공공기관",
+    "region": "광주",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 49840000,
+    "bidAmount": 49840000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 49,840,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "광주온에어스테이션 운영",
+        "sourceType": "입찰공고",
+        "amount": 49840000,
+        "date": "2026-07-06 11:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601476&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01601476"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
+    "agencyName": "예술경영지원센터",
+    "agencyType": "공공기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 37860000,
+    "bidAmount": 37860000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 37,860,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "공연예술통합전산망 시스템사업 운영관리 인력 단기 파견 및 관리위탁",
+        "sourceType": "입찰공고",
+        "amount": 37860000,
+        "date": "2026-07-09 11:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601570&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01601570"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
+    "agencyName": "서울특별시 도로사업소 성동도로사업소",
+    "agencyType": "공공기관",
+    "region": "서울",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 35970000,
+    "bidAmount": 35970000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 35,970,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "26~27년 재방송설비 유지관리 용역",
+        "sourceType": "입찰공고",
+        "amount": 35970000,
+        "date": "2026-06-25 11:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01598428&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01598428"
       }
     ]
   },
@@ -725,6 +1007,35 @@
         "date": "2026-07-09 17:00:00",
         "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601463&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
         "id": "R26BK01601463"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 28,
+    "agencyName": "동아방송예술대학교",
+    "agencyType": "교육기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "기타"
+    ],
+    "relatedCount": 1,
+    "bidCount": 1,
+    "contractCount": 0,
+    "estimatedAmount": 20000000,
+    "bidAmount": 20000000,
+    "contractAmount": 0,
+    "recommendedProposal": "기타 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 총 20,000,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "(혁신) 학생이력관리(DIMA-C) 시스템 고도화 용역업체 선정(재공고)",
+        "sourceType": "입찰공고",
+        "amount": 20000000,
+        "date": "2026-07-06 15:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601552&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01601552"
       }
     ]
   },
