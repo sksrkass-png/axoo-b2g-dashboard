@@ -388,3 +388,84 @@ select {
     font-size: 13px;
   }
 }
+/* =========================
+   Agency Evidence UI
+   ========================= */
+
+.evidence-box {
+  margin-top: 18px;
+  padding: 14px;
+  background: #f8f5ef;
+  border: 1px solid #ece3d7;
+  border-radius: 16px;
+}
+
+.evidence-box > strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #111111;
+}
+
+.evidence-list {
+  display: grid;
+  gap: 8px;
+}
+
+.evidence-item {
+  padding: 11px 12px;
+  background: #ffffff;
+  border: 1px solid #ebe2d6;
+  border-radius: 12px;
+}
+
+.evidence-main {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.evidence-type {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  background: #111111;
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.evidence-title {
+  color: #111111;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.evidence-sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 2px;
+  color: #777777;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.evidence-sub a {
+  color: #ff3b30;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.evidence-sub a:hover {
+  text-decoration: underline;
+}
+
+.evidence-empty {
+  margin: 0;
+  color: #777777;
+  font-size: 13px;
+}
