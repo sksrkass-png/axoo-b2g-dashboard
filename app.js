@@ -3,6 +3,8 @@ let targetAgencies = [];
 let artCommissions = [];
 let dashboardMeta = {};
 
+const REVIEW_STORAGE_KEY = "axooB2GReviewStatus";
+
 const categoryNames = {
   public_art: "공공미술",
   media_art: "미디어아트",
@@ -12,8 +14,6 @@ const categoryNames = {
   tourism: "관광콘텐츠",
   general: "기타"
 };
-
-const REVIEW_STORAGE_KEY = "axooB2GReviewStatus";
 
 const reviewStatusOptions = {
   new: "미검토",
@@ -39,19 +39,94 @@ function safeText(value) {
 
 function safeUrl(value) {
   const url = String(value ?? "").trim();
-
   if (!url) return "";
   if (url.startsWith("http://") || url.startsWith("https://")) return url;
-
   return "";
 }
 
 function formatMoney(value) {
   const number = Number(value || 0);
-
   if (!number) return "금액 미공개";
-
   return number.toLocaleString("ko-KR") + "원";
+}
+
+function parseDateValue(value) {
+  const raw = String(value ?? "").trim();
+  if (!raw) return null;
+
+  if (raw.includes("-")) {
+    const parsed = new Date(raw.replace(" ", "T"));
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+  }
+
+  if (/^\d{8}/.test(raw)) {
+    const year = raw.slice(0, 4);
+    const month = raw.slice(4, 6);
+    const day = raw.slice(6, 8);
+    const hour = raw.slice(8, 10) || "00";
+    const minute = raw.slice(10, 12) || "00";
+    const parsed = new Date(`${year}-${month}-${day}T${hour}:${minute}:00`);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+  }
+
+  return null;
+}
+
+function getDDay(value) {
+  const targetDate = parseDateValue(value);
+
+  if (!targetDate) {
+    return {
+      label: "마감일 확인 필요",
+      className: "deadline-unknown",
+      sortDays: 9999
+    };
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  targetDate.setHours(0, 0, 0, 0);
+
+  const diff = targetDate.getTime() - today.getTime();
+  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+  if (days < 0) {
+    return {
+      label: "마감",
+      className: "deadline-closed",
+      sortDays: 9998
+    };
+  }
+
+  if (days === 0) {
+    return {
+      label: "D-DAY",
+      className: "deadline-urgent",
+      sortDays: 0
+    };
+  }
+
+  if (days <= 3) {
+    return {
+      label: `D-${days}`,
+      className: "deadline-urgent",
+      sortDays: days
+    };
+  }
+
+  if (days <= 7) {
+    return {
+      label: `D-${days}`,
+      className: "deadline-soon",
+      sortDays: days
+    };
+  }
+
+  return {
+    label: `D-${days}`,
+    className: "deadline-normal",
+    sortDays: days
+  };
 }
 
 function getGradeClass(grade) {
@@ -129,7 +204,15 @@ function bindReviewControls() {
     select.addEventListener("change", event => {
       const key = event.target.dataset.reviewKey;
       const value = event.target.value;
+
       setReviewStatus(key, value);
+
+      const activePanel = document.querySelector(".tab-panel.active");
+      if (activePanel && activePanel.id === "artTab") {
+        renderArtCards();
+      } else {
+        renderOpportunityCards();
+      }
     });
   });
 }
@@ -181,6 +264,10 @@ function getDocumentUrl(item) {
   );
 }
 
+function getOpportunityDeadlineValue(item) {
+  return item.bidClseDt || item.bidNtceEndDt || item.opengDt || item.deadline || "";
+}
+
 function createOpportunityCard(item) {
   const card = document.createElement("article");
   card.className = "card";
@@ -191,6 +278,7 @@ function createOpportunityCard(item) {
   const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
   const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
   const reviewKey = getOpportunityReviewKey(item);
+  const deadlineInfo = getDDay(getOpportunityDeadlineValue(item));
 
   card.innerHTML = `
     <div class="card-top">
@@ -198,7 +286,11 @@ function createOpportunityCard(item) {
         <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
         <span class="badge category">${escapeHtml(categoryLabel)}</span>
       </div>
-      <div class="score">${escapeHtml(safeText(item.score))}점</div>
+
+      <div class="score-group">
+        <div class="deadline-badge ${deadlineInfo.className}">${escapeHtml(deadlineInfo.label)}</div>
+        <div class="score">${escapeHtml(safeText(item.score))}점</div>
+      </div>
     </div>
 
     <h2>${escapeHtml(safeText(item.bidNtceNm))}</h2>
@@ -208,7 +300,7 @@ function createOpportunityCard(item) {
       <div><span>수요기관</span>${escapeHtml(safeText(item.dminsttNm))}</div>
       <div><span>계약방법</span>${escapeHtml(safeText(item.cntrctCnclsMthdNm))}</div>
       <div><span>예산</span>${escapeHtml(formatMoney(item.budgetAmount || item.asignBdgtAmt || item.presmptPrce))}</div>
-      <div><span>개찰일</span>${escapeHtml(safeText(item.opengDt))}</div>
+      <div><span>마감/개찰</span>${escapeHtml(safeText(getOpportunityDeadlineValue(item)))}</div>
       <div><span>공고번호</span>${escapeHtml(safeText(item.bidNtceNo))}</div>
     </div>
 
@@ -235,7 +327,6 @@ function renderOpportunityCards() {
   const gradeFilter = document.getElementById("gradeFilter");
   const categoryFilter = document.getElementById("categoryFilter");
   const reviewFilter = document.getElementById("reviewFilter");
-  const artReviewFilter = document.getElementById("artReviewFilter");
 
   const searchValue = searchInput ? searchInput.value.toLowerCase() : "";
   const gradeValue = gradeFilter ? gradeFilter.value : "all";
@@ -260,6 +351,15 @@ function renderOpportunityCards() {
     const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
 
     return matchesSearch && matchesGrade && matchesCategory && matchesReview;
+  });
+
+  filtered.sort((a, b) => {
+    const aDeadline = getDDay(getOpportunityDeadlineValue(a)).sortDays;
+    const bDeadline = getDDay(getOpportunityDeadlineValue(b)).sortDays;
+
+    if (aDeadline !== bDeadline) return aDeadline - bDeadline;
+
+    return (b.score || 0) - (a.score || 0);
   });
 
   const cards = document.getElementById("cards");
@@ -380,6 +480,7 @@ function createArtCard(item) {
   const keywords = Array.isArray(item.keywords) ? item.keywords : [];
   const sourceUrl = safeUrl(item.sourceUrl);
   const reviewKey = getArtReviewKey(item);
+  const deadlineInfo = getDDay(item.deadline);
 
   card.innerHTML = `
     <div class="card-top">
@@ -388,7 +489,11 @@ function createArtCard(item) {
         <span class="badge category">${escapeHtml(safeText(item.category))}</span>
         <span class="badge category">${escapeHtml(safeText(item.status))}</span>
       </div>
-      <div class="score">${escapeHtml(safeText(item.region))}</div>
+
+      <div class="score-group">
+        <div class="deadline-badge ${deadlineInfo.className}">${escapeHtml(deadlineInfo.label)}</div>
+        <div class="score">${escapeHtml(safeText(item.region))}</div>
+      </div>
     </div>
 
     <h2>${escapeHtml(safeText(item.title))}</h2>
@@ -405,11 +510,12 @@ function createArtCard(item) {
       ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
     </div>
 
-   <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
+    <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
 
-   ${createReviewControl(reviewKey)}
+    ${createReviewControl(reviewKey)}
 
-   ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
+    ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
+  `;
 
   return card;
 }
@@ -429,13 +535,20 @@ function renderArtCards() {
     return reviewValue === "all" || itemReviewStatus === reviewValue;
   });
 
+  filtered.sort((a, b) => {
+    const aDeadline = getDDay(a.deadline).sortDays;
+    const bDeadline = getDDay(b.deadline).sortDays;
+
+    return aDeadline - bDeadline;
+  });
+
   cards.innerHTML = "";
 
   if (!filtered.length) {
     cards.innerHTML = `
       <article class="card">
         <h2>조건에 맞는 건축물 미술작품 데이터가 없습니다.</h2>
-        <p class="reason">검토 상태 필터를 전체 상태로 바꾸거나, engine Actions를 실행해 art_commissions.json을 동기화해 주세요.</p>
+        <p class="reason">검토 상태 필터를 전체 상태로 바꾸거나, engine Actions를 실행해 데이터를 동기화해 주세요.</p>
       </article>
     `;
     return;
@@ -450,6 +563,7 @@ function renderArtCards() {
 
 function setupTabs() {
   const buttons = document.querySelectorAll(".tab-button");
+
   const panels = {
     opportunities: document.getElementById("opportunitiesTab"),
     agencies: document.getElementById("agenciesTab"),
@@ -502,4 +616,3 @@ async function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
