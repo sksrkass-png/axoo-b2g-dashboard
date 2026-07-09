@@ -127,6 +127,35 @@ function createAgencyCard(item) {
 
   const gradeClass = getGradeClass(item.grade);
   const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
+  const evidenceSources = Array.isArray(item.evidenceSources) ? item.evidenceSources : [];
+
+  const evidenceHtml = evidenceSources.length
+    ? `
+      <div class="evidence-box">
+        <strong>근거 자료</strong>
+        <div class="evidence-list">
+          ${evidenceSources.slice(0, 4).map(source => `
+            <div class="evidence-item">
+              <div class="evidence-main">
+                <span class="evidence-type">${safeText(source.sourceType)}</span>
+                <span class="evidence-title">${safeText(source.title)}</span>
+              </div>
+              <div class="evidence-sub">
+                <span>${formatMoney(source.amount)}</span>
+                <span>${safeText(source.date)}</span>
+                ${source.sourceUrl ? `<a href="${source.sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `
+    : `
+      <div class="evidence-box">
+        <strong>근거 자료</strong>
+        <p class="evidence-empty">아직 표시할 근거 자료가 없습니다.</p>
+      </div>
+    `;
 
   card.innerHTML = `
     <div class="card-top">
@@ -145,6 +174,8 @@ function createAgencyCard(item) {
       <div><span>지역</span>${safeText(item.region)}</div>
       <div><span>추정 규모</span>${formatMoney(item.estimatedAmount)}</div>
       <div><span>관련 이력</span>${safeText(item.relatedCount)}건</div>
+      <div><span>공고 이력</span>${safeText(item.bidCount || 0)}건</div>
+      <div><span>계약 이력</span>${safeText(item.contractCount || 0)}건</div>
     </div>
 
     <div class="keywords">
@@ -157,113 +188,9 @@ function createAgencyCard(item) {
 
     <p class="action">제안 방향: ${safeText(item.recommendedProposal)}</p>
     <p class="action">다음 액션: ${safeText(item.nextAction)}</p>
+
+    ${evidenceHtml}
   `;
 
   return card;
 }
-
-function renderAgencyCards() {
-  const cards = document.getElementById("agencyCards");
-  cards.innerHTML = "";
-
-  targetAgencies.forEach(item => {
-    cards.appendChild(createAgencyCard(item));
-  });
-}
-
-function createArtCard(item) {
-  const card = document.createElement("article");
-  card.className = "card";
-
-  const keywords = Array.isArray(item.keywords) ? item.keywords : [];
-
-  card.innerHTML = `
-    <div class="card-top">
-      <div class="badges">
-        <span class="badge grade-a">${safeText(item.source)}</span>
-        <span class="badge category">${safeText(item.category)}</span>
-        <span class="badge category">${safeText(item.status)}</span>
-      </div>
-      <div class="score">${safeText(item.region)}</div>
-    </div>
-
-    <h2>${safeText(item.title)}</h2>
-
-    <div class="meta">
-      <div><span>기관</span>${safeText(item.agency)}</div>
-      <div><span>지역</span>${safeText(item.region)}</div>
-      <div><span>공개일</span>${safeText(item.publishedDate)}</div>
-      <div><span>예산</span>${formatMoney(item.budget)}</div>
-    </div>
-
-    <div class="keywords">
-      ${keywords.map(keyword => `<span class="keyword">${keyword}</span>`).join("")}
-    </div>
-
-    <p class="action">추천 액션: ${safeText(item.recommendedAction)}</p>
-
-    ${item.sourceUrl ? `<a class="link" href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
-  `;
-
-  return card;
-}
-
-function renderArtCards() {
-  const cards = document.getElementById("artCards");
-  cards.innerHTML = "";
-
-  artCommissions.forEach(item => {
-    cards.appendChild(createArtCard(item));
-  });
-}
-
-function setupTabs() {
-  const buttons = document.querySelectorAll(".tab-button");
-  const panels = {
-    opportunities: document.getElementById("opportunitiesTab"),
-    agencies: document.getElementById("agenciesTab"),
-    art: document.getElementById("artTab")
-  };
-
-  buttons.forEach(button => {
-    button.addEventListener("click", () => {
-      const target = button.dataset.tab;
-
-      buttons.forEach(btn => btn.classList.remove("active"));
-      button.classList.add("active");
-
-      Object.values(panels).forEach(panel => panel.classList.remove("active"));
-      panels[target].classList.add("active");
-    });
-  });
-}
-
-async function loadJson(path, fallback = []) {
-  try {
-    const response = await fetch(path);
-    if (!response.ok) return fallback;
-    return await response.json();
-  } catch (error) {
-    console.error(path, error);
-    return fallback;
-  }
-}
-
-async function init() {
-  setupTabs();
-
-  allItems = await loadJson("data/b2g_opportunities.json", []);
-  targetAgencies = await loadJson("data/target_agencies.json", []);
-  artCommissions = await loadJson("data/art_commissions.json", []);
-
-  renderSummary(allItems);
-  renderOpportunityCards();
-  renderAgencyCards();
-  renderArtCards();
-
-  document.getElementById("searchInput").addEventListener("input", renderOpportunityCards);
-  document.getElementById("gradeFilter").addEventListener("change", renderOpportunityCards);
-  document.getElementById("categoryFilter").addEventListener("change", renderOpportunityCards);
-}
-
-init();
