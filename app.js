@@ -405,12 +405,11 @@ function createArtCard(item) {
       ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
     </div>
 
-    <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
+   <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
 
-    ${createReviewControl(reviewKey)}
+   ${createReviewControl(reviewKey)}
 
-    ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
-  `;
+   ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
 
   return card;
 }
