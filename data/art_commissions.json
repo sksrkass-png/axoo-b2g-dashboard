@@ -1,5 +1,23 @@
 [
   {
+    "source": "나라장터",
+    "title": "2026년 꽃바람정원 메인 테마정원 조성 토피어리조형물 임대서비스",
+    "agency": "전북특별자치도 익산시",
+    "region": "전국/기타",
+    "category": "건축물 미술작품/공공미술",
+    "status": "마감",
+    "publishedDate": "2026-06-29 11:00:00",
+    "deadline": "2026-07-01 14:00:00",
+    "budget": 49980000,
+    "keywords": [
+      "조형물"
+    ],
+    "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01601626&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "bidNtceNo": "R26BK01601626",
+    "recommendedAction": "마감 공고입니다. 유사 기관·유사 사업 이력으로 저장하고 다음 공고를 모니터링",
+    "isMonitoringSource": false
+  },
+  {
     "source": "LH",
     "title": "LH 건축물 미술작품 공모 모니터링",
     "agency": "한국토지주택공사",
@@ -7,10 +25,16 @@
     "category": "건축물 미술작품",
     "status": "모니터링",
     "publishedDate": "-",
+    "deadline": "-",
     "budget": 0,
-    "keywords": ["건축물 미술작품", "미술작품 공모", "공공주택"],
+    "keywords": [
+      "건축물 미술작품",
+      "미술작품 공모",
+      "공공주택"
+    ],
     "sourceUrl": "https://www.lh.or.kr",
-    "recommendedAction": "LH 미술작품 공모 게시판을 정기 확인하고 작가풀 매칭 가능성 검토"
+    "recommendedAction": "LH 미술작품 공모 게시판을 정기 확인하고 작가풀 매칭 가능성 검토",
+    "isMonitoringSource": true
   },
   {
     "source": "서울시",
@@ -20,22 +44,35 @@
     "category": "건축물 미술작품",
     "status": "모니터링",
     "publishedDate": "-",
+    "deadline": "-",
     "budget": 0,
-    "keywords": ["미술작품 제작", "미술작품 설치", "건축물 미술작품"],
+    "keywords": [
+      "건축물 미술작품",
+      "미술작품 제작",
+      "미술작품 설치"
+    ],
     "sourceUrl": "https://culture.seoul.go.kr",
-    "recommendedAction": "서울문화포털 및 서울시 문화본부 공모 게시판에서 신규 공모 확인"
+    "recommendedAction": "서울문화포털 및 서울시 문화본부 공모 게시판에서 신규 공모 확인",
+    "isMonitoringSource": true
   },
   {
     "source": "나라장터",
-    "title": "나라장터 미술작품·조형물 제작 설치 공고",
+    "title": "나라장터 미술작품·조형물 제작 설치 공고 모니터링",
     "agency": "공공기관",
     "region": "전국",
     "category": "공공미술/조형물",
     "status": "키워드 모니터링",
     "publishedDate": "-",
+    "deadline": "-",
     "budget": 0,
-    "keywords": ["미술작품", "조형물", "제작 설치", "공공미술"],
+    "keywords": [
+      "미술작품",
+      "조형물",
+      "제작 설치",
+      "공공미술"
+    ],
     "sourceUrl": "https://www.g2b.go.kr",
-    "recommendedAction": "나라장터 용역 공고 내 미술작품·조형물 키워드 공고를 별도 분류"
+    "recommendedAction": "나라장터 용역 공고 내 미술작품·조형물 키워드 공고를 별도 분류",
+    "isMonitoringSource": true
   }
 ]
