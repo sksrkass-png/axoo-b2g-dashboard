@@ -3,6 +3,16 @@ let targetAgencies = [];
 let artCommissions = [];
 let dashboardMeta = {};
 
+const categoryNames = {
+  public_art: "공공미술",
+  media_art: "미디어아트",
+  exhibition: "전시",
+  festival: "문화행사",
+  design: "공공디자인",
+  tourism: "관광콘텐츠",
+  general: "기타"
+};
+
 const REVIEW_STORAGE_KEY = "axooB2GReviewStatus";
 
 const reviewStatusOptions = {
@@ -12,6 +22,59 @@ const reviewStatusOptions = {
   hold: "보류",
   done: "처리 완료"
 };
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function safeText(value) {
+  const text = String(value ?? "").trim();
+  return text ? text : "-";
+}
+
+function safeUrl(value) {
+  const url = String(value ?? "").trim();
+
+  if (!url) return "";
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+
+  return "";
+}
+
+function formatMoney(value) {
+  const number = Number(value || 0);
+
+  if (!number) return "금액 미공개";
+
+  return number.toLocaleString("ko-KR") + "원";
+}
+
+function getGradeClass(grade) {
+  if (grade === "S") return "grade-s";
+  if (grade === "A") return "grade-a";
+  return "grade-b";
+}
+
+async function loadJson(path, fallback = []) {
+  try {
+    const response = await fetch(`${path}?v=${Date.now()}`);
+
+    if (!response.ok) {
+      console.warn("JSON load failed:", path, response.status);
+      return fallback;
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("JSON load error:", path, error);
+    return fallback;
+  }
+}
 
 function getReviewStore() {
   try {
@@ -50,9 +113,11 @@ function createReviewControl(key) {
   return `
     <div class="review-box">
       <span class="review-label">검토 상태</span>
-      <select class="review-select" data-review-key="${key}">
+      <select class="review-select" data-review-key="${escapeHtml(key)}">
         ${Object.entries(reviewStatusOptions).map(([value, label]) => `
-          <option value="${value}" ${value === currentStatus ? "selected" : ""}>${label}</option>
+          <option value="${escapeHtml(value)}" ${value === currentStatus ? "selected" : ""}>
+            ${escapeHtml(label)}
+          </option>
         `).join("")}
       </select>
     </div>
@@ -64,103 +129,98 @@ function bindReviewControls() {
     select.addEventListener("change", event => {
       const key = event.target.dataset.reviewKey;
       const value = event.target.value;
-
       setReviewStatus(key, value);
     });
   });
 }
 
-const categoryNames = {
-  public_art: "공공미술",
-  media_art: "미디어아트",
-  exhibition: "전시",
-  festival: "문화행사",
-  design: "공공디자인",
-  tourism: "관광콘텐츠",
-  general: "기타"
-};
+function renderDashboardMeta() {
+  const lastUpdatedAt = document.getElementById("lastUpdatedAt");
+  const opportunityCount = document.getElementById("metaOpportunityCount");
+  const agencyCount = document.getElementById("metaAgencyCount");
+  const artCount = document.getElementById("metaArtCount");
 
-function formatMoney(value) {
-  const number = Number(value || 0);
-  if (!number) return "금액 미공개";
-  return number.toLocaleString("ko-KR") + "원";
-}
+  if (lastUpdatedAt) {
+    lastUpdatedAt.textContent = dashboardMeta.lastUpdatedAt
+      ? `${dashboardMeta.lastUpdatedAt} ${dashboardMeta.timezone ? `(${dashboardMeta.timezone})` : ""}`
+      : "-";
+  }
 
-function safeText(value) {
-  return value && String(value).trim() ? String(value) : "-";
-}
+  if (opportunityCount) {
+    opportunityCount.textContent = dashboardMeta.opportunityCount ?? allItems.length ?? 0;
+  }
 
-function getGradeClass(grade) {
-  if (grade === "S") return "grade-s";
-  if (grade === "A") return "grade-a";
-  return "grade-b";
-}
+  if (agencyCount) {
+    agencyCount.textContent = dashboardMeta.agencyCount ?? targetAgencies.length ?? 0;
+  }
 
-function getDocumentUrl(item) {
-  return item.ntceSpecDocUrl1 || item.ntceSpecDocUrl2 || item.sourceUrl || "";
-}
-
-async function loadJson(path, fallback = []) {
-  try {
-    const response = await fetch(path + "?v=" + Date.now());
-    if (!response.ok) {
-      console.warn("JSON load failed:", path, response.status);
-      return fallback;
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("JSON error:", path, error);
-    return fallback;
+  if (artCount) {
+    artCount.textContent = dashboardMeta.artCommissionCount ?? artCommissions.length ?? 0;
   }
 }
 
 function renderSummary(items) {
-  document.getElementById("totalCount").textContent = items.length;
-  document.getElementById("sCount").textContent = items.filter(item => item.grade === "S").length;
-  document.getElementById("aCount").textContent = items.filter(item => item.grade === "A").length;
-  document.getElementById("bCount").textContent = items.filter(item => item.grade === "B").length;
+  const totalCount = document.getElementById("totalCount");
+  const sCount = document.getElementById("sCount");
+  const aCount = document.getElementById("aCount");
+  const bCount = document.getElementById("bCount");
+
+  if (totalCount) totalCount.textContent = items.length;
+  if (sCount) sCount.textContent = items.filter(item => item.grade === "S").length;
+  if (aCount) aCount.textContent = items.filter(item => item.grade === "A").length;
+  if (bCount) bCount.textContent = items.filter(item => item.grade === "B").length;
+}
+
+function getDocumentUrl(item) {
+  return safeUrl(
+    item.ntceSpecDocUrl1 ||
+    item.ntceSpecDocUrl2 ||
+    item.ntceSpecDocUrl3 ||
+    item.sourceUrl ||
+    ""
+  );
 }
 
 function createOpportunityCard(item) {
-  const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
-  const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
-  const reviewKey = getOpportunityReviewKey(item);  
+  const card = document.createElement("article");
+  card.className = "card";
 
   const gradeClass = getGradeClass(item.grade);
   const categoryLabel = categoryNames[item.category] || "기타";
   const docUrl = getDocumentUrl(item);
   const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
   const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
+  const reviewKey = getOpportunityReviewKey(item);
 
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
-        <span class="badge ${gradeClass}">${safeText(item.grade)}등급</span>
-        <span class="badge category">${categoryLabel}</span>
+        <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
+        <span class="badge category">${escapeHtml(categoryLabel)}</span>
       </div>
-      <div class="score">${safeText(item.score)}점</div>
+      <div class="score">${escapeHtml(safeText(item.score))}점</div>
     </div>
 
-    <h2>${safeText(item.bidNtceNm)}</h2>
+    <h2>${escapeHtml(safeText(item.bidNtceNm))}</h2>
 
     <div class="meta">
-      <div><span>공고기관</span>${safeText(item.ntceInsttNm)}</div>
-      <div><span>수요기관</span>${safeText(item.dminsttNm)}</div>
-      <div><span>계약방법</span>${safeText(item.cntrctCnclsMthdNm)}</div>
-      <div><span>예산</span>${formatMoney(item.budgetAmount || item.asignBdgtAmt || item.presmptPrce)}</div>
-      <div><span>개찰일</span>${safeText(item.opengDt)}</div>
-      <div><span>공고번호</span>${safeText(item.bidNtceNo)}</div>
+      <div><span>공고기관</span>${escapeHtml(safeText(item.ntceInsttNm))}</div>
+      <div><span>수요기관</span>${escapeHtml(safeText(item.dminsttNm))}</div>
+      <div><span>계약방법</span>${escapeHtml(safeText(item.cntrctCnclsMthdNm))}</div>
+      <div><span>예산</span>${escapeHtml(formatMoney(item.budgetAmount || item.asignBdgtAmt || item.presmptPrce))}</div>
+      <div><span>개찰일</span>${escapeHtml(safeText(item.opengDt))}</div>
+      <div><span>공고번호</span>${escapeHtml(safeText(item.bidNtceNo))}</div>
     </div>
 
     <div class="keywords">
-      ${keywords.map(keyword => `<span class="keyword">${keyword}</span>`).join("")}
+      ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
     </div>
 
     <div class="reason">
-      ${reasons.length ? reasons.join(" · ") : "점수 산정 사유 없음"}
+      ${reasons.length ? reasons.map(reason => escapeHtml(reason)).join(" · ") : "점수 산정 사유 없음"}
     </div>
 
-    <p class="action">추천 액션: ${safeText(item.recommendedAction)}</p>
+    <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
 
     ${createReviewControl(reviewKey)}
 
@@ -198,6 +258,8 @@ function renderOpportunityCards() {
   const cards = document.getElementById("cards");
   const empty = document.getElementById("emptyMessage");
 
+  if (!cards) return;
+
   cards.innerHTML = "";
 
   filtered.forEach(item => {
@@ -207,6 +269,7 @@ function renderOpportunityCards() {
   if (empty) {
     empty.style.display = filtered.length ? "none" : "block";
   }
+
   bindReviewControls();
 }
 
@@ -223,19 +286,22 @@ function createAgencyCard(item) {
       <div class="evidence-box">
         <strong>근거 자료</strong>
         <div class="evidence-list">
-          ${evidenceSources.slice(0, 4).map(source => `
-            <div class="evidence-item">
-              <div class="evidence-main">
-                <span class="evidence-type">${safeText(source.sourceType)}</span>
-                <span class="evidence-title">${safeText(source.title)}</span>
+          ${evidenceSources.slice(0, 4).map(source => {
+            const sourceUrl = safeUrl(source.sourceUrl);
+            return `
+              <div class="evidence-item">
+                <div class="evidence-main">
+                  <span class="evidence-type">${escapeHtml(safeText(source.sourceType))}</span>
+                  <span class="evidence-title">${escapeHtml(safeText(source.title))}</span>
+                </div>
+                <div class="evidence-sub">
+                  <span>${escapeHtml(formatMoney(source.amount))}</span>
+                  <span>${escapeHtml(safeText(source.date))}</span>
+                  ${sourceUrl ? `<a href="${sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
+                </div>
               </div>
-              <div class="evidence-sub">
-                <span>${formatMoney(source.amount)}</span>
-                <span>${safeText(source.date)}</span>
-                ${source.sourceUrl ? `<a href="${source.sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
-              </div>
-            </div>
-          `).join("")}
+            `;
+          }).join("")}
         </div>
       </div>
     `
@@ -244,34 +310,34 @@ function createAgencyCard(item) {
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
-        <span class="badge ${gradeClass}">${safeText(item.grade)}등급</span>
-        <span class="badge category">${safeText(item.agencyType)}</span>
-        <span class="badge category">${safeText(item.region)}</span>
+        <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
+        <span class="badge category">${escapeHtml(safeText(item.agencyType))}</span>
+        <span class="badge category">${escapeHtml(safeText(item.region))}</span>
       </div>
-      <div class="score">관련 ${safeText(item.relatedCount)}건</div>
+      <div class="score">관련 ${escapeHtml(safeText(item.relatedCount))}건</div>
     </div>
 
-    <h2>${safeText(item.agencyName)}</h2>
+    <h2>${escapeHtml(safeText(item.agencyName))}</h2>
 
     <div class="meta">
-      <div><span>기관유형</span>${safeText(item.agencyType)}</div>
-      <div><span>지역</span>${safeText(item.region)}</div>
-      <div><span>추정 규모</span>${formatMoney(item.estimatedAmount)}</div>
-      <div><span>관련 이력</span>${safeText(item.relatedCount)}건</div>
-      <div><span>공고 이력</span>${safeText(item.bidCount || 0)}건</div>
-      <div><span>계약 이력</span>${safeText(item.contractCount || 0)}건</div>
+      <div><span>기관유형</span>${escapeHtml(safeText(item.agencyType))}</div>
+      <div><span>지역</span>${escapeHtml(safeText(item.region))}</div>
+      <div><span>추정 규모</span>${escapeHtml(formatMoney(item.estimatedAmount))}</div>
+      <div><span>관련 이력</span>${escapeHtml(safeText(item.relatedCount))}건</div>
+      <div><span>공고 이력</span>${escapeHtml(safeText(item.bidCount || 0))}건</div>
+      <div><span>계약 이력</span>${escapeHtml(safeText(item.contractCount || 0))}건</div>
     </div>
 
     <div class="keywords">
-      ${keywords.map(keyword => `<span class="keyword">${keyword}</span>`).join("")}
+      ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
     </div>
 
     <div class="reason">
-      ${safeText(item.note)}
+      ${escapeHtml(safeText(item.note))}
     </div>
 
-    <p class="action">제안 방향: ${safeText(item.recommendedProposal)}</p>
-    <p class="action">다음 액션: ${safeText(item.nextAction)}</p>
+    <p class="action">제안 방향: ${escapeHtml(safeText(item.recommendedProposal))}</p>
+    <p class="action">다음 액션: ${escapeHtml(safeText(item.nextAction))}</p>
 
     ${evidenceHtml}
   `;
@@ -289,7 +355,7 @@ function renderAgencyCards() {
     cards.innerHTML = `
       <article class="card">
         <h2>기관 타깃 데이터가 없습니다.</h2>
-        <p class="reason">engine Actions를 다시 실행해 target_agencies.json을 생성/동기화해 주세요.</p>
+        <p class="reason">engine Actions를 실행해 target_agencies.json을 생성/동기화해 주세요.</p>
       </article>
     `;
     return;
@@ -305,37 +371,38 @@ function createArtCard(item) {
   card.className = "card";
 
   const keywords = Array.isArray(item.keywords) ? item.keywords : [];
+  const sourceUrl = safeUrl(item.sourceUrl);
   const reviewKey = getArtReviewKey(item);
 
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
-        <span class="badge grade-a">${safeText(item.source)}</span>
-        <span class="badge category">${safeText(item.category)}</span>
-        <span class="badge category">${safeText(item.status)}</span>
+        <span class="badge grade-a">${escapeHtml(safeText(item.source))}</span>
+        <span class="badge category">${escapeHtml(safeText(item.category))}</span>
+        <span class="badge category">${escapeHtml(safeText(item.status))}</span>
       </div>
-      <div class="score">${safeText(item.region)}</div>
+      <div class="score">${escapeHtml(safeText(item.region))}</div>
     </div>
 
-    <h2>${safeText(item.title)}</h2>
+    <h2>${escapeHtml(safeText(item.title))}</h2>
 
     <div class="meta">
-      <div><span>기관</span>${safeText(item.agency)}</div>
-      <div><span>지역</span>${safeText(item.region)}</div>
-      <div><span>공개일</span>${safeText(item.publishedDate)}</div>
-      <div><span>마감일</span>${safeText(item.deadline)}</div>
-      <div><span>예산</span>${formatMoney(item.budget)}</div>
+      <div><span>기관</span>${escapeHtml(safeText(item.agency))}</div>
+      <div><span>지역</span>${escapeHtml(safeText(item.region))}</div>
+      <div><span>공개일</span>${escapeHtml(safeText(item.publishedDate))}</div>
+      <div><span>마감일</span>${escapeHtml(safeText(item.deadline))}</div>
+      <div><span>예산</span>${escapeHtml(formatMoney(item.budget))}</div>
     </div>
 
     <div class="keywords">
-      ${keywords.map(keyword => `<span class="keyword">${keyword}</span>`).join("")}
+      ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
     </div>
 
-    <p class="action">추천 액션: ${safeText(item.recommendedAction)}</p>
+    <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
 
     ${createReviewControl(reviewKey)}
 
-    ${item.sourceUrl ? `<a class="link" href="${item.sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
+    ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
   `;
 
   return card;
@@ -351,7 +418,7 @@ function renderArtCards() {
     cards.innerHTML = `
       <article class="card">
         <h2>건축물 미술작품 데이터가 없습니다.</h2>
-        <p class="reason">engine Actions를 다시 실행해 art_commissions.json을 생성/동기화해 주세요.</p>
+        <p class="reason">engine Actions를 실행해 art_commissions.json을 생성/동기화해 주세요.</p>
       </article>
     `;
     return;
@@ -360,6 +427,7 @@ function renderArtCards() {
   artCommissions.forEach(item => {
     cards.appendChild(createArtCard(item));
   });
+
   bindReviewControls();
 }
 
@@ -413,28 +481,3 @@ async function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
-function renderDashboardMeta() {
-  const lastUpdatedAt = document.getElementById("lastUpdatedAt");
-  const opportunityCount = document.getElementById("metaOpportunityCount");
-  const agencyCount = document.getElementById("metaAgencyCount");
-  const artCount = document.getElementById("metaArtCount");
-
-  if (lastUpdatedAt) {
-  lastUpdatedAt.textContent = dashboardMeta.lastUpdatedAt
-    ? `${dashboardMeta.lastUpdatedAt} ${dashboardMeta.timezone ? `(${dashboardMeta.timezone})` : ""}`
-    : "-";
-}
-
-  if (opportunityCount) {
-    opportunityCount.textContent = dashboardMeta.opportunityCount ?? 0;
-  }
-
-  if (agencyCount) {
-    agencyCount.textContent = dashboardMeta.agencyCount ?? 0;
-  }
-
-  if (artCount) {
-    artCount.textContent = dashboardMeta.artCommissionCount ?? 0;
-  }
-}
