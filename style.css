@@ -470,3 +470,42 @@ select {
   color: #777777;
   font-size: 13px;
 }
+
+/* =========================
+   Dashboard Meta Bar
+   ========================= */
+
+.meta-bar {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 10px;
+  margin: 0 0 20px;
+}
+
+.meta-bar > div {
+  background: #ffffff;
+  border: 1px solid #e5dfd6;
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.meta-bar span {
+  display: block;
+  margin-bottom: 6px;
+  color: #777777;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.meta-bar strong {
+  display: block;
+  color: #111111;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+@media (max-width: 760px) {
+  .meta-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
