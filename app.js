@@ -346,10 +346,10 @@ function renderDashboardMeta() {
   const artCount = document.getElementById("metaArtCount");
 
   if (lastUpdatedAt) {
-    lastUpdatedAt.textContent = dashboardMeta.lastUpdatedAt
-      ? `${dashboardMeta.lastUpdatedAt} ${dashboardMeta.timezone || ""}`
-      : "-";
-  }
+  lastUpdatedAt.textContent = dashboardMeta.lastUpdatedAt
+    ? `${dashboardMeta.lastUpdatedAt} ${dashboardMeta.timezone ? `(${dashboardMeta.timezone})` : ""}`
+    : "-";
+}
 
   if (opportunityCount) {
     opportunityCount.textContent = dashboardMeta.opportunityCount ?? 0;
