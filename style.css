@@ -1130,3 +1130,241 @@ h1 {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* =========================
+   AXOO Dashboard Update A/B/C/D
+   ========================= */
+
+.header-inner {
+  position: relative;
+}
+
+.header-update-card {
+  position: absolute !important;
+  right: 30px !important;
+  bottom: 26px !important;
+  min-height: auto !important;
+  width: auto !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.header-update-card .meta-label {
+  display: none !important;
+}
+
+.header-update-card,
+.header-update-card span,
+.header-update-card .meta-value {
+  font-size: 13px !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  color: rgba(255,255,255,0.82) !important;
+  letter-spacing: -0.02em;
+}
+
+.summary-panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 18px;
+  margin: 0 0 22px;
+}
+
+.summary-panel-head {
+  margin-bottom: 14px;
+}
+
+.summary-panel-head h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.meta-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 12px;
+  margin: 0 0 12px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 0;
+}
+
+.meta-card {
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.meta-card:hover {
+  transform: translateY(-2px);
+  border-color: #c8bfb2;
+}
+
+.meta-card-dark {
+  background: var(--paper) !important;
+  border-color: var(--line) !important;
+  color: var(--black) !important;
+}
+
+.meta-card-dark .meta-label,
+.meta-card-dark .meta-value {
+  color: var(--black) !important;
+}
+
+.tab-button.active {
+  background: #ff3b30 !important;
+  color: #ffffff !important;
+}
+
+.list-head {
+  display: grid;
+  grid-template-columns: 170px minmax(300px, 1fr) 220px 180px;
+  gap: 12px;
+  align-items: center;
+  padding: 0 22px 12px;
+  margin-top: 8px;
+  color: #7b746b;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.card.card-as-accordion {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.accordion-card {
+  width: 100%;
+}
+
+.accordion-summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 170px minmax(300px, 1fr) 220px 180px;
+  gap: 12px;
+  align-items: center;
+  padding: 18px 22px;
+}
+
+.accordion-summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary-source-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-source {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.summary-grade {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #f3ede4;
+  color: #111111;
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.summary-title {
+  color: #111111;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.summary-period,
+.summary-deadline {
+  display: grid;
+  gap: 4px;
+}
+
+.summary-period span,
+.summary-deadline span {
+  color: #777777;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.summary-period strong,
+.summary-deadline strong {
+  color: #111111;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+.accordion-card[open] .accordion-summary {
+  border-bottom: 1px solid #eee4d8;
+  background: #faf8f4;
+}
+
+.accordion-body {
+  padding: 20px 22px 22px;
+}
+
+#artTab .section-head {
+  display: none !important;
+}
+
+.card-tools {
+  display: none !important;
+}
+
+@media (max-width: 960px) {
+  .meta-bar {
+    grid-template-columns: 1fr !important;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .list-head,
+  .accordion-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-update-card {
+    position: static !important;
+    margin-top: 14px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-panel {
+    padding: 16px;
+  }
+}
