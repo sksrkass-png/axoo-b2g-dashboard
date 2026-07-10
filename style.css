@@ -1528,3 +1528,68 @@ h1 {
   min-width: 120px !important;
   justify-content: center !important;
 }
+
+/* =========================
+   Compact Source / Grade Pills
+   ========================= */
+
+/* 첫 번째 컬럼은 출처+등급을 담을 만큼만 유지 */
+.list-head {
+  grid-template-columns: 260px minmax(300px, 1fr) 220px 180px !important;
+}
+
+.accordion-summary {
+  grid-template-columns: 260px minmax(300px, 1fr) 220px 180px !important;
+}
+
+/* 상단 헤더: 출처 / 공고등급 위치 분리 */
+.list-source-grade {
+  display: grid !important;
+  grid-template-columns: 92px 70px !important;
+  column-gap: 46px !important;
+  align-items: center !important;
+  width: 220px !important;
+}
+
+.list-source-grade em {
+  display: block !important;
+  font-style: normal !important;
+  color: #7b746b !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+/* 실제 카드 안의 출처 / 등급 칩 위치 */
+.summary-source-wrap {
+  display: grid !important;
+  grid-template-columns: 92px 70px !important;
+  column-gap: 46px !important;
+  align-items: center !important;
+  width: 220px !important;
+}
+
+/* 나라장터 칩: 너무 넓지 않게 */
+.summary-source {
+  width: 92px !important;
+  min-width: 92px !important;
+  max-width: 92px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+}
+
+/* B등급 칩: 컴팩트하게 */
+.summary-grade {
+  width: 70px !important;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+}
