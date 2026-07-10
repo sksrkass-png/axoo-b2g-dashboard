@@ -953,3 +953,180 @@ h1 {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* =========================
+   Safe AXOO Dashboard UI Patch
+   ========================= */
+
+.header-inner {
+  position: relative;
+}
+
+.header-update-card {
+  position: absolute !important;
+  right: 28px !important;
+  bottom: 22px !important;
+  min-height: auto !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.header-update-card .meta-label {
+  display: none !important;
+}
+
+.header-update-card .meta-value {
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+}
+
+.meta-bar {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.meta-card {
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.meta-card:hover {
+  transform: translateY(-2px);
+  border-color: #111111;
+}
+
+.meta-card-dark {
+  background: #24211f !important;
+  border-color: #24211f !important;
+  color: #ffffff !important;
+}
+
+.meta-card-dark .meta-label,
+.meta-card-dark .meta-value {
+  color: #ffffff !important;
+}
+
+.tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-button.active {
+  background: #ff3b30 !important;
+  color: #ffffff !important;
+}
+
+.card-tools {
+  display: none !important;
+}
+
+.card.card-as-accordion {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.accordion-card {
+  width: 100%;
+}
+
+.accordion-summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 96px minmax(220px, 1fr) 190px 150px 72px;
+  gap: 12px;
+  align-items: center;
+  padding: 18px 22px;
+}
+
+.accordion-summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary-source {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 96px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.summary-title {
+  color: #111111;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.summary-period,
+.summary-deadline {
+  display: grid;
+  gap: 4px;
+}
+
+.summary-period span,
+.summary-deadline span {
+  color: #777777;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.summary-period strong,
+.summary-deadline strong {
+  color: #111111;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+.summary-toggle {
+  justify-self: end;
+  color: #ff3b30;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.accordion-card[open] .accordion-summary {
+  border-bottom: 1px solid #eee4d8;
+  background: #faf8f4;
+}
+
+.accordion-body {
+  padding: 20px 22px 22px;
+}
+
+@media (max-width: 900px) {
+  .accordion-summary {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .summary-toggle {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-update-card {
+    position: static !important;
+    margin-top: 16px;
+  }
+
+  .meta-bar {
+    grid-template-columns: 1fr !important;
+  }
+}
