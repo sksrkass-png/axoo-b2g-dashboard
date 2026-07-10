@@ -1593,3 +1593,29 @@ h1 {
   justify-content: center !important;
   font-size: 12px !important;
 }
+
+/* =========================
+   Opportunity List Spacing Fix
+   ========================= */
+
+.list-head {
+  grid-template-columns: 260px minmax(520px, 1fr) 190px 170px !important;
+  column-gap: 42px !important;
+}
+
+.accordion-summary {
+  grid-template-columns: 260px minmax(520px, 1fr) 190px 170px !important;
+  column-gap: 42px !important;
+}
+
+.summary-title {
+  padding-right: 28px !important;
+  max-width: 100%;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.summary-period,
+.summary-deadline {
+  min-width: 160px;
+}
