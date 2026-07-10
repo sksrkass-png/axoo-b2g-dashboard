@@ -1748,3 +1748,16 @@ h1 {
 .source-view-link:hover {
   background: #ff3b30;
 }
+
+/* =========================
+   Source View Left Align
+   ========================= */
+
+.source-view-box {
+  justify-content: flex-start !important;
+}
+
+.source-view-link {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
