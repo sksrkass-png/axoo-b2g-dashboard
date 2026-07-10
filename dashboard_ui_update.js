@@ -377,6 +377,21 @@
       getMetaValue(card, "마감") ||
       "";
 
+    const sourceUrl =
+      getFirstValue(matchedItem, [
+        "sourceUrl",
+        "url",
+        "link",
+        "originUrl",
+        "detailUrl",
+        "bidNtceDtlUrl",
+        "bidDetailUrl",
+        "bidNtceUrl",
+        "ntceUrl",
+        "공고URL",
+        "원문URL"
+      ]);
+
     const publishedDate = formatDateOnly(publishedRaw);
     const deadlineDate = formatDateOnly(deadlineRaw);
 
@@ -385,7 +400,8 @@
       grade: getGradeText(card),
       title,
       period: publishedDate || "공고일 확인 필요",
-      deadline: deadlineDate || "확인 필요"
+      deadline: deadlineDate || "확인 필요",
+      sourceUrl
     };
   }
 
@@ -425,7 +441,8 @@
       grade: "",
       title,
       period: publishedDate || "확인 필요",
-      deadline: deadlineDate || "확인 필요"
+      deadline: deadlineDate || "확인 필요",
+      sourceUrl: ""
     };
   }
 
@@ -458,7 +475,8 @@
       grade: "",
       title,
       period: region,
-      deadline: related
+      deadline: related,
+      sourceUrl: ""
     };
   }
 
@@ -506,6 +524,28 @@
     originalNodes.forEach(node => {
       body.appendChild(node);
     });
+
+    if (type === "opportunity") {
+      const existingLink = body.querySelector("a[href]");
+      const sourceUrl = data.sourceUrl || existingLink?.href || "";
+
+      if (sourceUrl) {
+        if (existingLink) {
+          existingLink.style.display = "none";
+        }
+
+        const sourceViewBox = document.createElement("div");
+        sourceViewBox.className = "source-view-box";
+
+        sourceViewBox.innerHTML = `
+          <a class="source-view-link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">
+            소스보기
+          </a>
+        `;
+
+        body.appendChild(sourceViewBox);
+      }
+    }
 
     details.appendChild(summary);
     details.appendChild(body);
