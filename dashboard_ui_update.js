@@ -14,16 +14,7 @@
     return String(value || "").trim();
   }
 
-  function normalizeText(value) {
-    return safeText(value)
-      .replace(/\[재공고\]/g, "")
-      .replace(/\[긴급\]/g, "")
-      .replace(/[「」『』"']/g, "")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function cleanTitleForMatch(value) {
+  function compactText(value) {
     return safeText(value)
       .replace(/\[재공고\]/g, "")
       .replace(/\[긴급\]/g, "")
@@ -37,13 +28,16 @@
 
     if (!text || text === "-") return "";
 
-    // 20260720 형태 대응
     const compact = text.match(/\b(20\d{2})(\d{2})(\d{2})\b/);
     if (compact) {
       return `${compact[1]}-${compact[2]}-${compact[3]}`;
     }
 
-    // 2026-07-20 / 2026.07.20 / 2026년 7월 20일 / 2026-07-20 10:00:00 대응
+    const compactLong = text.match(/\b(20\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})?\b/);
+    if (compactLong) {
+      return `${compactLong[1]}-${compactLong[2]}-${compactLong[3]}`;
+    }
+
     const match = text.match(/(20\d{2})[-./년\s]*(\d{1,2})[-./월\s]*(\d{1,2})/);
 
     if (!match) return "";
@@ -116,7 +110,9 @@
       object.original,
       object.data,
       object.bid,
-      object.meta
+      object.meta,
+      object.source,
+      object.originalItem
     ].filter(Boolean);
 
     for (const source of sources) {
@@ -165,12 +161,12 @@
   }
 
   function findOpportunityByTitle(title) {
-    const targetTitle = cleanTitleForMatch(title);
+    const targetTitle = compactText(title);
 
     if (!targetTitle) return null;
 
     return opportunitySummaryData.find(item => {
-      const itemTitle = cleanTitleForMatch(
+      const itemTitle = compactText(
         item.title ||
         item.bidNtceNm ||
         item.bidName ||
@@ -341,12 +337,15 @@
         "postingDate",
         "noticeDate",
         "noticeStartDate",
-        "bidNtceDate",
         "bidNtceDt",
+        "bidNtceDate",
         "bidNtceBgn",
         "bidNtceBgnDt",
         "bidNtceBgnDate",
         "bidNtceRegDt",
+        "bidBeginDt",
+        "bidBeginDate",
+        "bidBegin",
         "ntceDt",
         "ntceDate",
         "regDate",
@@ -367,8 +366,8 @@
       getFirstValue(matchedItem, [
         "deadline",
         "deadlineDate",
-        "bidClseDate",
         "bidClseDt",
+        "bidClseDate",
         "bidClseDtStr",
         "closeDate",
         "endDate",
