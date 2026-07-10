@@ -8,9 +8,30 @@
   ];
 
   let artSummaryData = [];
+  let opportunitySummaryData = [];
 
   function safeText(value) {
     return String(value || "").trim();
+  }
+
+  function normalizeText(value) {
+    return safeText(value).replace(/\s+/g, " ");
+  }
+
+  function formatDateOnly(value) {
+    const text = safeText(value);
+
+    if (!text || text === "-") return "";
+
+    const match = text.match(/(20\d{2})[-./년\s]*(\d{1,2})[-./월\s]*(\d{1,2})/);
+
+    if (!match) return text;
+
+    const year = match[1];
+    const month = String(match[2]).padStart(2, "0");
+    const day = String(match[3]).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
   }
 
   function formatLastUpdated(value) {
@@ -21,16 +42,23 @@
 
     if (!text || text === "-") return "최근 업데이트 : -";
 
-    const match = text.match(/(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
+    const dateOnly = formatDateOnly(text);
+    const timeMatch = text.match(/(\d{1,2}):(\d{2})/);
 
-    if (!match) return `최근 업데이트 : ${text}`;
+    if (!dateOnly) return `최근 업데이트 : ${text}`;
 
-    const month = match[2];
-    const day = match[3];
-    const hour = match[4];
-    const minute = match[5];
+    const dateMatch = dateOnly.match(/20\d{2}-(\d{2})-(\d{2})/);
 
-    return `최근 업데이트 : ${month}.${day} ${hour}:${minute}`;
+    if (!dateMatch) return `최근 업데이트 : ${dateOnly}`;
+
+    const month = dateMatch[1];
+    const day = dateMatch[2];
+
+    if (timeMatch) {
+      return `최근 업데이트 : ${month}.${day} ${timeMatch[1].padStart(2, "0")}:${timeMatch[2]}`;
+    }
+
+    return `최근 업데이트 : ${month}.${day}`;
   }
 
   function shortSourceName(value) {
@@ -58,6 +86,20 @@
     return "";
   }
 
+  function getFirstValue(object, keys) {
+    if (!object) return "";
+
+    for (const key of keys) {
+      const value = object[key];
+
+      if (value !== undefined && value !== null && safeText(value)) {
+        return value;
+      }
+    }
+
+    return "";
+  }
+
   async function loadArtSummaryData() {
     try {
       const response = await fetch(`data/art_commissions.json?v=${Date.now()}`);
@@ -72,6 +114,47 @@
     } catch (error) {
       console.warn("art summary load failed", error);
     }
+  }
+
+  async function loadOpportunitySummaryData() {
+    try {
+      const response = await fetch(`data/b2g_opportunities.json?v=${Date.now()}`);
+
+      if (!response.ok) return;
+
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        opportunitySummaryData = data;
+      }
+    } catch (error) {
+      console.warn("opportunity summary load failed", error);
+    }
+  }
+
+  function findOpportunityByTitle(title) {
+    const targetTitle = normalizeText(title);
+
+    if (!targetTitle) return null;
+
+    return opportunitySummaryData.find(item => {
+      const itemTitle = normalizeText(
+        item.title ||
+        item.bidNtceNm ||
+        item.noticeName ||
+        item.bidName ||
+        item.name ||
+        item.공고명
+      );
+
+      if (!itemTitle) return false;
+
+      return (
+        itemTitle === targetTitle ||
+        itemTitle.includes(targetTitle) ||
+        targetTitle.includes(itemTitle)
+      );
+    }) || null;
   }
 
   function moveLastUpdateIntoHeader() {
@@ -209,24 +292,52 @@
 
   function getOpportunitySummary(card) {
     const title = safeText(card.querySelector("h2")?.textContent) || "제목 없음";
+    const matchedItem = findOpportunityByTitle(title);
 
-    const deadline =
-      getMetaValue(card, "마감일") ||
-      getMetaValue(card, "마감") ||
-      "확인 필요";
-
-    const period =
-      getMetaValue(card, "게재기간") ||
+    const publishedRaw =
+      getFirstValue(matchedItem, [
+        "publishedDate",
+        "postedDate",
+        "noticeDate",
+        "bidNtceDate",
+        "bidNtceDt",
+        "bidNtceDtStr",
+        "ntceDt",
+        "regDate",
+        "createdAt",
+        "공고일",
+        "게시일",
+        "등록일"
+      ]) ||
+      getMetaValue(card, "게재일") ||
       getMetaValue(card, "공고일") ||
       getMetaValue(card, "등록일") ||
-      deadline;
+      "";
+
+    const deadlineRaw =
+      getFirstValue(matchedItem, [
+        "deadline",
+        "deadlineDate",
+        "bidClseDate",
+        "bidClseDt",
+        "bidClseDtStr",
+        "closeDate",
+        "endDate",
+        "마감일"
+      ]) ||
+      getMetaValue(card, "마감일") ||
+      getMetaValue(card, "마감") ||
+      "";
+
+    const publishedDate = formatDateOnly(publishedRaw);
+    const deadlineDate = formatDateOnly(deadlineRaw);
 
     return {
       source: "나라장터",
       grade: getGradeText(card),
       title,
-      period,
-      deadline
+      period: publishedDate || "확인 필요",
+      deadline: deadlineDate || "확인 필요"
     };
   }
 
@@ -246,24 +357,27 @@
 
     const source = shortSourceName(sourceRaw);
 
-    const published =
+    const publishedRaw =
       getMetaValue(card, "게재기간") ||
       getMetaValue(card, "공개일") ||
       getMetaValue(card, "등록일") ||
       getMetaValue(card, "공고일") ||
       "";
 
-    const deadline =
+    const deadlineRaw =
       getMetaValue(card, "마감일") ||
       getMetaValue(card, "마감") ||
-      "확인 필요";
+      "";
+
+    const publishedDate = formatDateOnly(publishedRaw);
+    const deadlineDate = formatDateOnly(deadlineRaw);
 
     return {
       source,
       grade: "",
       title,
-      period: published ? `${published}` : "확인 필요",
-      deadline
+      period: publishedDate || "확인 필요",
+      deadline: deadlineDate || "확인 필요"
     };
   }
 
@@ -467,11 +581,7 @@
       const reviewValue = card.querySelector(".review-select")?.value || "new";
 
       const matchKeyword = !keyword || text.includes(keyword);
-
-      const matchSource =
-        source === "all" ||
-        sourceText.includes(source);
-
+      const matchSource = source === "all" || sourceText.includes(source);
       const matchReview = review === "all" || reviewValue === review;
 
       card.style.display = matchKeyword && matchSource && matchReview ? "" : "none";
@@ -528,6 +638,7 @@
 
   document.addEventListener("DOMContentLoaded", async () => {
     await loadArtSummaryData();
+    await loadOpportunitySummaryData();
 
     applyDashboardPatch();
     schedulePatch();
