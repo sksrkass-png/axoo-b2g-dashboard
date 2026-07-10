@@ -15,7 +15,21 @@
   }
 
   function normalizeText(value) {
-    return safeText(value).replace(/\s+/g, " ");
+    return safeText(value)
+      .replace(/\[재공고\]/g, "")
+      .replace(/\[긴급\]/g, "")
+      .replace(/[「」『』"']/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function cleanTitleForMatch(value) {
+    return safeText(value)
+      .replace(/\[재공고\]/g, "")
+      .replace(/\[긴급\]/g, "")
+      .replace(/[「」『』"']/g, "")
+      .replace(/\s+/g, "")
+      .trim();
   }
 
   function formatDateOnly(value) {
@@ -23,9 +37,16 @@
 
     if (!text || text === "-") return "";
 
+    // 20260720 형태 대응
+    const compact = text.match(/\b(20\d{2})(\d{2})(\d{2})\b/);
+    if (compact) {
+      return `${compact[1]}-${compact[2]}-${compact[3]}`;
+    }
+
+    // 2026-07-20 / 2026.07.20 / 2026년 7월 20일 / 2026-07-20 10:00:00 대응
     const match = text.match(/(20\d{2})[-./년\s]*(\d{1,2})[-./월\s]*(\d{1,2})/);
 
-    if (!match) return text;
+    if (!match) return "";
 
     const year = match[1];
     const month = String(match[2]).padStart(2, "0");
@@ -89,11 +110,22 @@
   function getFirstValue(object, keys) {
     if (!object) return "";
 
-    for (const key of keys) {
-      const value = object[key];
+    const sources = [
+      object,
+      object.raw,
+      object.original,
+      object.data,
+      object.bid,
+      object.meta
+    ].filter(Boolean);
 
-      if (value !== undefined && value !== null && safeText(value)) {
-        return value;
+    for (const source of sources) {
+      for (const key of keys) {
+        const value = source[key];
+
+        if (value !== undefined && value !== null && safeText(value)) {
+          return value;
+        }
       }
     }
 
@@ -133,18 +165,26 @@
   }
 
   function findOpportunityByTitle(title) {
-    const targetTitle = normalizeText(title);
+    const targetTitle = cleanTitleForMatch(title);
 
     if (!targetTitle) return null;
 
     return opportunitySummaryData.find(item => {
-      const itemTitle = normalizeText(
+      const itemTitle = cleanTitleForMatch(
         item.title ||
         item.bidNtceNm ||
-        item.noticeName ||
         item.bidName ||
+        item.noticeName ||
         item.name ||
-        item.공고명
+        item.공고명 ||
+        getFirstValue(item, [
+          "title",
+          "bidNtceNm",
+          "bidName",
+          "noticeName",
+          "name",
+          "공고명"
+        ])
       );
 
       if (!itemTitle) return false;
@@ -298,16 +338,25 @@
       getFirstValue(matchedItem, [
         "publishedDate",
         "postedDate",
+        "postingDate",
         "noticeDate",
+        "noticeStartDate",
         "bidNtceDate",
         "bidNtceDt",
-        "bidNtceDtStr",
+        "bidNtceBgn",
+        "bidNtceBgnDt",
+        "bidNtceBgnDate",
+        "bidNtceRegDt",
         "ntceDt",
+        "ntceDate",
         "regDate",
+        "regDt",
         "createdAt",
+        "createdDate",
         "공고일",
         "게시일",
-        "등록일"
+        "등록일",
+        "게재일"
       ]) ||
       getMetaValue(card, "게재일") ||
       getMetaValue(card, "공고일") ||
@@ -336,7 +385,7 @@
       source: "나라장터",
       grade: getGradeText(card),
       title,
-      period: publishedDate || "확인 필요",
+      period: publishedDate || "공고일 확인 필요",
       deadline: deadlineDate || "확인 필요"
     };
   }
