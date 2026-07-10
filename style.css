@@ -1471,3 +1471,60 @@ h1 {
   min-width: 80px !important;
   justify-content: center;
 }
+
+/* =========================
+   Source / Grade Label Alignment Fix
+   ========================= */
+
+/* 리스트 전체 컬럼: 출처+등급 영역을 넓혀서 공고등급을 B등급 위로 이동 */
+.list-head {
+  grid-template-columns: 360px minmax(300px, 1fr) 220px 180px !important;
+}
+
+/* 카드 접힌 상태도 같은 컬럼 구조로 맞춤 */
+.accordion-summary {
+  grid-template-columns: 360px minmax(300px, 1fr) 220px 180px !important;
+}
+
+/* 상단 헤더의 '출처 / 공고등급'을 각각 칩 위치에 맞춰 분리 */
+.list-source-grade {
+  display: grid !important;
+  grid-template-columns: 170px 120px !important;
+  column-gap: 42px !important;
+  align-items: center !important;
+  width: 360px !important;
+}
+
+/* 이탤릭 제거 */
+.list-source-grade em {
+  display: block !important;
+  font-style: normal !important;
+  color: #7b746b !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+/* 실제 카드 안의 '나라장터 / B등급'도 헤더와 같은 위치로 분리 */
+.summary-source-wrap {
+  display: grid !important;
+  grid-template-columns: 170px 120px !important;
+  column-gap: 42px !important;
+  align-items: center !important;
+  width: 360px !important;
+}
+
+/* 출처 칩 */
+.summary-source {
+  width: 170px !important;
+  min-width: 170px !important;
+  justify-content: center !important;
+}
+
+/* 등급 칩 */
+.summary-grade {
+  width: 120px !important;
+  min-width: 120px !important;
+  justify-content: center !important;
+}
