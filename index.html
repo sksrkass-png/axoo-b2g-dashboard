@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AXOO B2G Dashboard</title>
-  <link rel="stylesheet" href="style.css?v=109" />
+  <link rel="stylesheet" href="style.css?v=111" />
 </head>
 <body>
   <header class="site-header">
@@ -49,14 +49,17 @@
           <span>전체</span>
           <strong id="totalCount">0</strong>
         </div>
+
         <div class="summary-card">
           <span>S등급</span>
           <strong id="sCount">0</strong>
         </div>
+
         <div class="summary-card">
           <span>A등급</span>
           <strong id="aCount">0</strong>
         </div>
+
         <div class="summary-card">
           <span>B등급</span>
           <strong id="bCount">0</strong>
@@ -103,7 +106,10 @@
       </section>
 
       <div class="list-head">
-        <span>출처</span>
+        <span class="list-source-grade">
+          <em>출처</em>
+          <em>공고등급</em>
+        </span>
         <span>공모명</span>
         <span>게재기간</span>
         <span>마감일</span>
@@ -157,6 +163,6 @@
   </main>
 
   <script src="app.js?v=99"></script>
-  <script src="dashboard_ui_update.js?v=9"></script>
+  <script src="dashboard_ui_update.js?v=10"></script>
 </body>
 </html>
