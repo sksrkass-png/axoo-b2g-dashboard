@@ -88,6 +88,33 @@
     return text || "-";
   }
 
+  function normalizeRegion(value) {
+    const text = safeText(value);
+
+    if (text.includes("서울")) return "서울";
+    if (text.includes("경기")) return "경기";
+    if (text.includes("인천")) return "인천";
+    if (text.includes("부산")) return "부산";
+    if (text.includes("대전")) return "대전";
+    if (text.includes("광주")) return "광주";
+    if (text.includes("대구")) return "대구";
+    if (text.includes("울산")) return "울산";
+    if (text.includes("세종")) return "세종";
+    if (text.includes("강원")) return "기타";
+    if (text.includes("충청")) return "기타";
+    if (text.includes("충북")) return "기타";
+    if (text.includes("충남")) return "기타";
+    if (text.includes("전라")) return "기타";
+    if (text.includes("전북")) return "기타";
+    if (text.includes("전남")) return "기타";
+    if (text.includes("경상")) return "기타";
+    if (text.includes("경북")) return "기타";
+    if (text.includes("경남")) return "기타";
+    if (text.includes("제주")) return "기타";
+
+    return text || "기타";
+  }
+
   function getMetaValue(card, labelKeyword) {
     const metaItems = Array.from(card.querySelectorAll(".meta div"));
 
@@ -254,6 +281,25 @@
     return number.toLocaleString();
   }
 
+  function getAgencyGrade(data) {
+    return safeText(
+      data?.grade ||
+      data?.priorityGrade ||
+      data?.targetGrade ||
+      ""
+    ).replace("등급", "");
+  }
+
+  function getAgencyRegion(data) {
+    return normalizeRegion(
+      data?.region ||
+      data?.area ||
+      data?.location ||
+      data?.agencyRegion ||
+      ""
+    );
+  }
+
   function moveLastUpdateIntoHeader() {
     const lastUpdatedAt = document.getElementById("lastUpdatedAt");
 
@@ -370,7 +416,7 @@
   }
 
   function setupReviewControls() {
-    document.querySelectorAll("#reviewFilter, #artReviewFilter").forEach(select => {
+    document.querySelectorAll("#reviewFilter, #artReviewFilter, #agencyReviewFilter").forEach(select => {
       if (select.dataset.reviewUpdated === "true") return;
 
       rewriteReviewFilter(select);
@@ -528,12 +574,13 @@
 
   function getAgencySummary(card) {
     const title = safeText(card.querySelector("h2")?.textContent) || "기관명 없음";
+    const matchedAgency = findAgencyByTitle(title);
 
     const badgeTexts = Array.from(card.querySelectorAll(".badge"))
       .map(badge => safeText(badge.textContent))
       .filter(Boolean);
 
-    const region = badgeTexts.find(text =>
+    const regionFromCard = badgeTexts.find(text =>
       text.includes("서울") ||
       text.includes("경기") ||
       text.includes("부산") ||
@@ -545,10 +592,14 @@
       text.includes("세종")
     ) || getMetaValue(card, "지역") || "지역 확인";
 
+    const region = matchedAgency ? getAgencyRegion(matchedAgency) : regionFromCard;
+
     const related =
-      safeText(card.querySelector(".score")?.textContent) ||
-      getMetaValue(card, "관련 이력") ||
-      "관련 이력 확인";
+      matchedAgency
+        ? `관련 ${matchedAgency.relatedCount || 0}건`
+        : safeText(card.querySelector(".score")?.textContent) ||
+          getMetaValue(card, "관련 이력") ||
+          "관련 이력 확인";
 
     return {
       source: "기관",
@@ -713,7 +764,7 @@
     const total = agencySummaryData.length || document.getElementById("metaAgencyCount")?.textContent || "0";
 
     const priority = agencySummaryData.filter(item =>
-      item.grade === "S" || item.grade === "A"
+      getAgencyGrade(item) === "S" || getAgencyGrade(item) === "A"
     ).length;
 
     const award = agencySummaryData.filter(item =>
@@ -795,7 +846,21 @@
 
       if (!data || !body) return;
 
+      const region = getAgencyRegion(data);
+      const grade = getAgencyGrade(data);
+
+      card.dataset.agencyRegion = region;
+      card.dataset.agencyGrade = grade;
+      card.dataset.agencyAwardCount = String(data.awardCount || 0);
+      card.dataset.agencyPlanCount = String(data.orderPlanCount || 0);
+      card.dataset.agencyRelatedCount = String(data.relatedCount || 0);
+
+      const summaryPeriod = card.querySelector(".summary-period strong");
       const summaryRelated = card.querySelector(".summary-deadline strong");
+
+      if (summaryPeriod) {
+        summaryPeriod.textContent = region || "기타";
+      }
 
       if (summaryRelated) {
         summaryRelated.textContent = `관련 ${data.relatedCount || 0}건`;
@@ -822,6 +887,75 @@
     });
   }
 
+  function filterAgencyCards() {
+    const keyword = safeText(document.getElementById("agencySearchInput")?.value).toLowerCase();
+    const regionFilter = document.getElementById("agencyRegionFilter")?.value || "all";
+    const gradeFilter = document.getElementById("agencyGradeFilter")?.value || "all";
+    const reviewFilter = document.getElementById("agencyReviewFilter")?.value || "all";
+    const awardOnly = document.getElementById("agencyAwardOnly")?.checked || false;
+    const planOnly = document.getElementById("agencyPlanOnly")?.checked || false;
+
+    let visibleCount = 0;
+
+    document.querySelectorAll("#agencyCards .card").forEach(card => {
+      const title = safeText(card.querySelector(".summary-title")?.textContent || card.querySelector("h2")?.textContent);
+      const data = findAgencyByTitle(title);
+
+      const text = safeText(card.textContent).toLowerCase();
+      const region = data ? getAgencyRegion(data) : safeText(card.dataset.agencyRegion || getMetaValue(card, "지역") || "기타");
+      const grade = data ? getAgencyGrade(data) : safeText(card.dataset.agencyGrade || "");
+      const awardCount = data ? Number(data.awardCount || 0) : Number(card.dataset.agencyAwardCount || 0);
+      const planCount = data ? Number(data.orderPlanCount || 0) : Number(card.dataset.agencyPlanCount || 0);
+      const reviewValue = card.querySelector(".review-select")?.value || "new";
+
+      const matchKeyword = !keyword || text.includes(keyword);
+      const matchRegion =
+        regionFilter === "all" ||
+        (regionFilter === "기타" ? region === "기타" : region.includes(regionFilter));
+      const matchGrade = gradeFilter === "all" || grade === gradeFilter;
+      const matchReview = reviewFilter === "all" || reviewValue === reviewFilter;
+      const matchAward = !awardOnly || awardCount > 0;
+      const matchPlan = !planOnly || planCount > 0;
+
+      const visible = matchKeyword && matchRegion && matchGrade && matchReview && matchAward && matchPlan;
+
+      card.style.display = visible ? "" : "none";
+
+      if (visible) {
+        visibleCount += 1;
+      }
+    });
+
+    const emptyMessage = document.getElementById("agencyEmptyMessage");
+
+    if (emptyMessage) {
+      emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
+    }
+  }
+
+  function bindAgencyFilters() {
+    const search = document.getElementById("agencySearchInput");
+    const region = document.getElementById("agencyRegionFilter");
+    const grade = document.getElementById("agencyGradeFilter");
+    const review = document.getElementById("agencyReviewFilter");
+    const awardOnly = document.getElementById("agencyAwardOnly");
+    const planOnly = document.getElementById("agencyPlanOnly");
+
+    if (!search || search.dataset.bound === "true") return;
+
+    const handler = () => filterAgencyCards();
+
+    search.addEventListener("input", handler);
+    region?.addEventListener("change", handler);
+    grade?.addEventListener("change", handler);
+    review?.addEventListener("change", handler);
+    awardOnly?.addEventListener("change", handler);
+    planOnly?.addEventListener("change", handler);
+
+    search.dataset.bound = "true";
+    filterAgencyCards();
+  }
+
   function applyDashboardPatch() {
     try {
       moveLastUpdateIntoHeader();
@@ -836,6 +970,8 @@
       syncMetaCardsWithActiveTab();
       bindArtFilters();
       filterArtCards();
+      bindAgencyFilters();
+      filterAgencyCards();
     } catch (error) {
       console.warn("dashboard ui patch failed", error);
     }
