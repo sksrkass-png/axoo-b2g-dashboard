@@ -1619,3 +1619,102 @@ h1 {
 .summary-deadline {
   min-width: 160px;
 }
+
+/* =========================
+   Final List Column Layout Fix
+   ========================= */
+
+/* 전체 리스트 컬럼 폭 재조정: 공모명은 넓게, 날짜 칸은 고정 */
+.list-head,
+.accordion-summary {
+  grid-template-columns: 220px minmax(0, 1fr) 150px 150px !important;
+  column-gap: 30px !important;
+}
+
+/* 출처 / 공고등급 내부 위치 */
+.list-source-grade,
+.summary-source-wrap {
+  display: grid !important;
+  grid-template-columns: 88px 64px !important;
+  column-gap: 34px !important;
+  align-items: center !important;
+  width: 190px !important;
+}
+
+/* 헤더 텍스트 기울임 제거 */
+.list-source-grade em {
+  display: block !important;
+  font-style: normal !important;
+  color: #7b746b !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+/* 나라장터 칩 컴팩트 */
+.summary-source {
+  width: 88px !important;
+  min-width: 88px !important;
+  max-width: 88px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+}
+
+/* 등급 칩 컴팩트 */
+.summary-grade {
+  width: 64px !important;
+  min-width: 64px !important;
+  max-width: 64px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+}
+
+/* 공모명은 두 줄 허용 */
+.summary-title {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
+  overflow-wrap: anywhere !important;
+  line-height: 1.42 !important;
+  padding-right: 18px !important;
+}
+
+/* 날짜 영역은 우측으로 밀리지 않게 고정 */
+.summary-period,
+.summary-deadline {
+  min-width: 0 !important;
+  width: 150px !important;
+}
+
+.summary-period strong,
+.summary-deadline strong {
+  white-space: nowrap !important;
+  font-size: 13px !important;
+}
+
+/* 모바일에서는 다시 1열 */
+@media (max-width: 960px) {
+  .list-head,
+  .accordion-summary {
+    grid-template-columns: 1fr !important;
+    row-gap: 10px !important;
+  }
+
+  .list-source-grade,
+  .summary-source-wrap {
+    width: 100% !important;
+  }
+
+  .summary-period,
+  .summary-deadline {
+    width: auto !important;
+  }
+}
