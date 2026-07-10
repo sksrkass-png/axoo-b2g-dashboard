@@ -195,6 +195,37 @@
   }
 
   function getArtSummary(card) {
+      function getAgencySummary(card) {
+    const title = safeText(card.querySelector("h2")?.textContent) || "기관명 없음";
+
+    const badgeTexts = Array.from(card.querySelectorAll(".badge"))
+      .map(badge => safeText(badge.textContent))
+      .filter(Boolean);
+
+    const region = badgeTexts.find(text =>
+      text.includes("서울") ||
+      text.includes("경기") ||
+      text.includes("부산") ||
+      text.includes("인천") ||
+      text.includes("대전") ||
+      text.includes("광주") ||
+      text.includes("대구") ||
+      text.includes("울산") ||
+      text.includes("세종")
+    ) || "지역 확인";
+
+    const related =
+      safeText(card.querySelector(".score")?.textContent) ||
+      getMetaValue(card, "관련 이력") ||
+      "관련 이력 확인";
+
+    return {
+      source: "기관",
+      title,
+      period: region,
+      deadline: related
+    };
+  }
     const title = safeText(card.querySelector("h2")?.textContent) || "제목 없음";
 
     const badgeTexts = Array.from(card.querySelectorAll(".badge"))
@@ -234,6 +265,15 @@
     if (!card.querySelector("h2")) return;
 
     const data = type === "art" ? getArtSummary(card) : getOpportunitySummary(card);
+    let data;
+
+    if (type === "art") {
+      data = getArtSummary(card);
+    } else if (type === "agency") {
+      data = getAgencySummary(card);
+    } else {
+      data = getOpportunitySummary(card);
+    }
 
     const originalNodes = Array.from(card.childNodes);
 
@@ -281,13 +321,17 @@
     });
   }
 
-  function setupAccordions() {
+function setupAccordions() {
     document.querySelectorAll("#cards .card").forEach(card => {
       makeAccordion(card, "opportunity");
     });
 
     document.querySelectorAll("#artCards .card").forEach(card => {
       makeAccordion(card, "art");
+    });
+
+    document.querySelectorAll("#agencyCards .card").forEach(card => {
+      makeAccordion(card, "agency");
     });
   }
 
