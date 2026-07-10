@@ -14,20 +14,23 @@
   }
 
   function formatLastUpdated(value) {
-    const text = safeText(value).replace("(KST)", "").trim();
+    const text = safeText(value)
+      .replace("최근 업데이트 :", "")
+      .replace("(KST)", "")
+      .trim();
 
-    if (!text || text === "-") return "-";
+    if (!text || text === "-") return "최근 업데이트 : -";
 
     const match = text.match(/(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
 
-    if (!match) return text;
+    if (!match) return `최근 업데이트 : ${text}`;
 
     const month = match[2];
     const day = match[3];
     const hour = match[4];
     const minute = match[5];
 
-    return `${month}.${day} ${hour}:${minute}`;
+    return `최근 업데이트 : ${month}.${day} ${hour}:${minute}`;
   }
 
   function shortSourceName(value) {
@@ -72,18 +75,11 @@
   }
 
   function moveLastUpdateIntoHeader() {
-    const headerInner = document.querySelector(".header-inner");
-    const lastUpdateCard = document.querySelector(".meta-card-wide");
     const lastUpdatedAt = document.getElementById("lastUpdatedAt");
 
-    if (!headerInner || !lastUpdateCard || !lastUpdatedAt) return;
+    if (!lastUpdatedAt) return;
 
     lastUpdatedAt.textContent = formatLastUpdated(lastUpdatedAt.textContent);
-
-    if (!lastUpdateCard.classList.contains("header-update-card")) {
-      lastUpdateCard.classList.add("header-update-card");
-      headerInner.appendChild(lastUpdateCard);
-    }
   }
 
   function setupMetaCards() {
@@ -98,14 +94,14 @@
     if (!opportunityCard || !agencyCard || !artCard) return;
 
     const opportunityLabel = opportunityCard.querySelector(".meta-label");
-    const agencyLabel = agencyCard.querySelector(".meta-label");
     const artLabel = artCard.querySelector(".meta-label");
+    const agencyLabel = agencyCard.querySelector(".meta-label");
 
     if (opportunityLabel) opportunityLabel.textContent = "❤️나라장터 공고";
     if (artLabel) artLabel.textContent = "💙건축물 미술작품";
     if (agencyLabel) agencyLabel.textContent = "🎯기관 타깃";
 
-    agencyCard.classList.add("meta-card-dark");
+    agencyCard.classList.remove("meta-card-dark");
 
     opportunityCard.dataset.tabTarget = "opportunities";
     artCard.dataset.tabTarget = "art";
@@ -135,10 +131,10 @@
     if (!tabs) return;
 
     const opportunityButton = tabs.querySelector('[data-tab="opportunities"]');
-    const agencyButton = tabs.querySelector('[data-tab="agencies"]');
     const artButton = tabs.querySelector('[data-tab="art"]');
+    const agencyButton = tabs.querySelector('[data-tab="agencies"]');
 
-    if (!opportunityButton || !agencyButton || !artButton) return;
+    if (!opportunityButton || !artButton || !agencyButton) return;
 
     opportunityButton.textContent = "❤️나라장터 공고";
     artButton.textContent = "💙건축물 미술작품";
@@ -201,6 +197,16 @@
     });
   }
 
+  function getGradeText(card) {
+    const gradeBadge = Array.from(card.querySelectorAll(".badge")).find(element => {
+      const text = safeText(element.textContent);
+
+      return text === "S등급" || text === "A등급" || text === "B등급";
+    });
+
+    return gradeBadge ? safeText(gradeBadge.textContent) : "";
+  }
+
   function getOpportunitySummary(card) {
     const title = safeText(card.querySelector("h2")?.textContent) || "제목 없음";
 
@@ -210,12 +216,14 @@
       "확인 필요";
 
     const period =
+      getMetaValue(card, "게재기간") ||
       getMetaValue(card, "공고일") ||
       getMetaValue(card, "등록일") ||
       deadline;
 
     return {
       source: "나라장터",
+      grade: getGradeText(card),
       title,
       period,
       deadline
@@ -239,6 +247,7 @@
     const source = shortSourceName(sourceRaw);
 
     const published =
+      getMetaValue(card, "게재기간") ||
       getMetaValue(card, "공개일") ||
       getMetaValue(card, "등록일") ||
       getMetaValue(card, "공고일") ||
@@ -251,8 +260,9 @@
 
     return {
       source,
+      grade: "",
       title,
-      period: published ? `${published} ~ ${deadline}` : "확인 필요",
+      period: published ? `${published}` : "확인 필요",
       deadline
     };
   }
@@ -283,6 +293,7 @@
 
     return {
       source: "기관",
+      grade: "",
       title,
       period: region,
       deadline: related
@@ -312,7 +323,10 @@
     summary.className = "accordion-summary";
 
     summary.innerHTML = `
-      <div class="summary-source">${data.source}</div>
+      <div class="summary-source-wrap">
+        <span class="summary-source">${data.source}</span>
+        ${data.grade ? `<span class="summary-grade">${data.grade}</span>` : ""}
+      </div>
       <div class="summary-title">${data.title}</div>
       <div class="summary-period">
         <span>${type === "agency" ? "지역" : "게재기간"}</span>
@@ -322,7 +336,6 @@
         <span>${type === "agency" ? "관련" : "마감일"}</span>
         <strong>${data.deadline}</strong>
       </div>
-      <div class="summary-toggle">펼치기</div>
     `;
 
     const body = document.createElement("div");
@@ -341,11 +354,7 @@
     card.dataset.accordionReady = "true";
 
     details.addEventListener("toggle", () => {
-      const toggle = summary.querySelector(".summary-toggle");
-
-      if (toggle) {
-        toggle.textContent = details.open ? "접기" : "펼치기";
-      }
+      updateSourceLabels();
     });
   }
 
@@ -443,6 +452,49 @@
     updateOpportunitySummary();
   }
 
+  function filterArtCards() {
+    const keyword = safeText(document.getElementById("artSearchInput")?.value).toLowerCase();
+    const source = document.getElementById("artSourceFilter")?.value || "all";
+    const review = document.getElementById("artReviewFilter")?.value || "all";
+
+    document.querySelectorAll("#artCards .card").forEach(card => {
+      const text = safeText(card.textContent).toLowerCase();
+      const sourceText = safeText(
+        card.querySelector(".summary-source")?.textContent ||
+        card.querySelector(".badge")?.textContent
+      );
+
+      const reviewValue = card.querySelector(".review-select")?.value || "new";
+
+      const matchKeyword = !keyword || text.includes(keyword);
+
+      const matchSource =
+        source === "all" ||
+        sourceText.includes(source);
+
+      const matchReview = review === "all" || reviewValue === review;
+
+      card.style.display = matchKeyword && matchSource && matchReview ? "" : "none";
+    });
+  }
+
+  function bindArtFilters() {
+    const search = document.getElementById("artSearchInput");
+    const source = document.getElementById("artSourceFilter");
+    const review = document.getElementById("artReviewFilter");
+
+    if (!search || search.dataset.bound === "true") return;
+
+    const handler = () => filterArtCards();
+
+    search.addEventListener("input", handler);
+    source?.addEventListener("change", handler);
+    review?.addEventListener("change", handler);
+
+    search.dataset.bound = "true";
+    filterArtCards();
+  }
+
   function applyDashboardPatch() {
     try {
       moveLastUpdateIntoHeader();
@@ -453,6 +505,8 @@
       setupAccordions();
       removeCardTools();
       updateSummaryByActiveTab();
+      bindArtFilters();
+      filterArtCards();
     } catch (error) {
       console.warn("dashboard ui patch failed", error);
     }
