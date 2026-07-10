@@ -201,6 +201,10 @@
     lastUpdatedAt.textContent = formatLastUpdated(lastUpdatedAt.textContent);
   }
 
+  function getActiveTab() {
+    return document.querySelector(".tab-button.active")?.dataset.tab || "opportunities";
+  }
+
   function setupMetaCards() {
     const metaBar = document.querySelector(".meta-bar");
 
@@ -240,7 +244,22 @@
       card.addEventListener("click", () => {
         const target = card.dataset.tabTarget;
         document.querySelector(`.tab-button[data-tab="${target}"]`)?.click();
+
+        setTimeout(applyDashboardPatch, 80);
+        setTimeout(applyDashboardPatch, 250);
       });
+    });
+  }
+
+  function syncMetaCardsWithActiveTab() {
+    const activeTab = getActiveTab();
+    const cards = document.querySelectorAll(".meta-card[data-tab-target]");
+
+    cards.forEach(card => {
+      const isActive = card.dataset.tabTarget === activeTab;
+
+      card.classList.toggle("meta-card-active", isActive);
+      card.classList.toggle("meta-card-muted", !isActive);
     });
   }
 
@@ -639,7 +658,7 @@
   }
 
   function updateSummaryByActiveTab() {
-    const activeTab = document.querySelector(".tab-button.active")?.dataset.tab;
+    const activeTab = getActiveTab();
 
     if (activeTab === "art") {
       updateArtSummary();
@@ -703,6 +722,7 @@
       setupAccordions();
       removeCardTools();
       updateSummaryByActiveTab();
+      syncMetaCardsWithActiveTab();
       bindArtFilters();
       filterArtCards();
     } catch (error) {
