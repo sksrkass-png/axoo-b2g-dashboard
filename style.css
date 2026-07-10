@@ -1368,3 +1368,12 @@ h1 {
     padding: 16px;
   }
 }
+
+  <span class="list-source-grade">
+    <em>출처</em>
+    <em>공고등급</em>
+  </span>
+  <span>공모명</span>
+  <span>게재기간</span>
+  <span>마감일</span>
+</div>
