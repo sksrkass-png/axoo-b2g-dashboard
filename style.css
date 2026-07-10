@@ -1377,3 +1377,51 @@ h1 {
   <span>게재기간</span>
   <span>마감일</span>
 </div>
+
+/* =========================
+   Source / Grade Column Split
+   ========================= */
+
+.list-source-grade {
+  display: grid !important;
+  grid-template-columns: 104px 80px;
+  column-gap: 18px;
+  align-items: center;
+}
+
+.list-source-grade em {
+  font-style: normal !important;
+  color: #7b746b;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* 리스트 첫 번째 컬럼을 출처 + 공고등급 2칸으로 넓힘 */
+.list-head {
+  grid-template-columns: 260px minmax(300px, 1fr) 220px 180px !important;
+}
+
+.accordion-summary {
+  grid-template-columns: 260px minmax(300px, 1fr) 220px 180px !important;
+}
+
+/* 실제 카드 안 출처 / 등급도 같은 위치로 분리 */
+.summary-source-wrap {
+  display: grid !important;
+  grid-template-columns: 104px 80px;
+  column-gap: 18px;
+  align-items: center;
+}
+
+.summary-source {
+  width: 104px !important;
+  min-width: 104px !important;
+  justify-content: center;
+}
+
+.summary-grade {
+  width: 80px !important;
+  min-width: 80px !important;
+  justify-content: center;
+}
