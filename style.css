@@ -1865,3 +1865,81 @@ h1 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* =========================
+   Agency Target Filters
+   ========================= */
+
+.agency-filters {
+  align-items: center;
+}
+
+.filter-check {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.filter-check input {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  accent-color: #ff3b30;
+  cursor: pointer;
+}
+
+.filter-check span {
+  white-space: nowrap;
+}
+
+#agenciesTab .agency-list-head {
+  grid-template-columns: 220px minmax(0, 1fr) 150px 150px !important;
+}
+
+#agenciesTab .accordion-summary {
+  grid-template-columns: 220px minmax(0, 1fr) 150px 150px !important;
+}
+
+#agenciesTab .summary-source-wrap {
+  width: 190px !important;
+}
+
+#agenciesTab .summary-source {
+  width: 88px !important;
+  min-width: 88px !important;
+  max-width: 88px !important;
+}
+
+#agenciesTab .summary-period,
+#agenciesTab .summary-deadline {
+  width: 150px !important;
+}
+
+@media (max-width: 960px) {
+  #agenciesTab .agency-list-head,
+  #agenciesTab .accordion-summary {
+    grid-template-columns: 1fr !important;
+  }
+
+  #agenciesTab .summary-source-wrap,
+  #agenciesTab .summary-period,
+  #agenciesTab .summary-deadline {
+    width: auto !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .filter-check {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
