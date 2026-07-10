@@ -1718,3 +1718,33 @@ h1 {
     width: auto !important;
   }
 }
+
+/* =========================
+   Source View Link
+   ========================= */
+
+.source-view-box {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #eee4d8;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.source-view-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.source-view-link:hover {
+  background: #ff3b30;
+}
