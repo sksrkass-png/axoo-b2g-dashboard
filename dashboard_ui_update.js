@@ -149,6 +149,19 @@
     tabs.appendChild(agencyButton);
   }
 
+  function rewriteReviewFilter(select) {
+    if (!select) return;
+
+    const currentValue = select.value || "all";
+    const allOptions = [["all", "전체 상태"], ...REVIEW_OPTIONS];
+    const allowedValues = allOptions.map(option => option[0]);
+    const nextValue = allowedValues.includes(currentValue) ? currentValue : "all";
+
+    select.innerHTML = allOptions.map(([value, label]) => {
+      return `<option value="${value}" ${value === nextValue ? "selected" : ""}>${label}</option>`;
+    }).join("");
+  }
+
   function rewriteReviewSelect(select) {
     if (!select) return;
 
@@ -162,7 +175,14 @@
   }
 
   function setupReviewControls() {
-    document.querySelectorAll("#reviewFilter, #artReviewFilter, .review-select").forEach(select => {
+    document.querySelectorAll("#reviewFilter, #artReviewFilter").forEach(select => {
+      if (select.dataset.reviewUpdated === "true") return;
+
+      rewriteReviewFilter(select);
+      select.dataset.reviewUpdated = "true";
+    });
+
+    document.querySelectorAll(".review-select").forEach(select => {
       if (select.dataset.reviewUpdated === "true") return;
 
       rewriteReviewSelect(select);
@@ -183,8 +203,16 @@
 
   function getOpportunitySummary(card) {
     const title = safeText(card.querySelector("h2")?.textContent) || "제목 없음";
-    const deadline = getMetaValue(card, "마감") || getMetaValue(card, "마감일") || "확인 필요";
-    const period = getMetaValue(card, "공고일") || getMetaValue(card, "등록일") || deadline;
+
+    const deadline =
+      getMetaValue(card, "마감일") ||
+      getMetaValue(card, "마감") ||
+      "확인 필요";
+
+    const period =
+      getMetaValue(card, "공고일") ||
+      getMetaValue(card, "등록일") ||
+      deadline;
 
     return {
       source: "나라장터",
@@ -195,37 +223,6 @@
   }
 
   function getArtSummary(card) {
-      function getAgencySummary(card) {
-    const title = safeText(card.querySelector("h2")?.textContent) || "기관명 없음";
-
-    const badgeTexts = Array.from(card.querySelectorAll(".badge"))
-      .map(badge => safeText(badge.textContent))
-      .filter(Boolean);
-
-    const region = badgeTexts.find(text =>
-      text.includes("서울") ||
-      text.includes("경기") ||
-      text.includes("부산") ||
-      text.includes("인천") ||
-      text.includes("대전") ||
-      text.includes("광주") ||
-      text.includes("대구") ||
-      text.includes("울산") ||
-      text.includes("세종")
-    ) || "지역 확인";
-
-    const related =
-      safeText(card.querySelector(".score")?.textContent) ||
-      getMetaValue(card, "관련 이력") ||
-      "관련 이력 확인";
-
-    return {
-      source: "기관",
-      title,
-      period: region,
-      deadline: related
-    };
-  }
     const title = safeText(card.querySelector("h2")?.textContent) || "제목 없음";
 
     const badgeTexts = Array.from(card.querySelectorAll(".badge"))
@@ -260,11 +257,42 @@
     };
   }
 
+  function getAgencySummary(card) {
+    const title = safeText(card.querySelector("h2")?.textContent) || "기관명 없음";
+
+    const badgeTexts = Array.from(card.querySelectorAll(".badge"))
+      .map(badge => safeText(badge.textContent))
+      .filter(Boolean);
+
+    const region = badgeTexts.find(text =>
+      text.includes("서울") ||
+      text.includes("경기") ||
+      text.includes("부산") ||
+      text.includes("인천") ||
+      text.includes("대전") ||
+      text.includes("광주") ||
+      text.includes("대구") ||
+      text.includes("울산") ||
+      text.includes("세종")
+    ) || getMetaValue(card, "지역") || "지역 확인";
+
+    const related =
+      safeText(card.querySelector(".score")?.textContent) ||
+      getMetaValue(card, "관련 이력") ||
+      "관련 이력 확인";
+
+    return {
+      source: "기관",
+      title,
+      period: region,
+      deadline: related
+    };
+  }
+
   function makeAccordion(card, type) {
     if (!card || card.dataset.accordionReady === "true") return;
     if (!card.querySelector("h2")) return;
 
-    const data = type === "art" ? getArtSummary(card) : getOpportunitySummary(card);
     let data;
 
     if (type === "art") {
@@ -287,11 +315,11 @@
       <div class="summary-source">${data.source}</div>
       <div class="summary-title">${data.title}</div>
       <div class="summary-period">
-        <span>게재기간</span>
+        <span>${type === "agency" ? "지역" : "게재기간"}</span>
         <strong>${data.period}</strong>
       </div>
       <div class="summary-deadline">
-        <span>마감일</span>
+        <span>${type === "agency" ? "관련" : "마감일"}</span>
         <strong>${data.deadline}</strong>
       </div>
       <div class="summary-toggle">펼치기</div>
@@ -321,7 +349,7 @@
     });
   }
 
-function setupAccordions() {
+  function setupAccordions() {
     document.querySelectorAll("#cards .card").forEach(card => {
       makeAccordion(card, "opportunity");
     });
@@ -390,11 +418,25 @@ function setupAccordions() {
     setSummaryCard(3, "LH/SH", lhsh);
   }
 
+  function updateAgencySummary() {
+    const agencyCount = document.getElementById("metaAgencyCount")?.textContent || "0";
+
+    setSummaryCard(0, "전체", agencyCount);
+    setSummaryCard(1, "우선 검토", "-");
+    setSummaryCard(2, "제안 가능", "-");
+    setSummaryCard(3, "보류", "-");
+  }
+
   function updateSummaryByActiveTab() {
     const activeTab = document.querySelector(".tab-button.active")?.dataset.tab;
 
     if (activeTab === "art") {
       updateArtSummary();
+      return;
+    }
+
+    if (activeTab === "agencies") {
+      updateAgencySummary();
       return;
     }
 
