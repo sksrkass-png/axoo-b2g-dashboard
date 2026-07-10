@@ -9,6 +9,7 @@
 
   let artSummaryData = [];
   let opportunitySummaryData = [];
+  let agencySummaryData = [];
 
   function safeText(value) {
     return String(value || "").trim();
@@ -160,6 +161,22 @@
     }
   }
 
+  async function loadAgencySummaryData() {
+    try {
+      const response = await fetch(`data/target_agencies.json?v=${Date.now()}`);
+
+      if (!response.ok) return;
+
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        agencySummaryData = data;
+      }
+    } catch (error) {
+      console.warn("agency summary load failed", error);
+    }
+  }
+
   function findOpportunityByTitle(title) {
     const targetTitle = compactText(title);
 
@@ -191,6 +208,50 @@
         targetTitle.includes(itemTitle)
       );
     }) || null;
+  }
+
+  function findAgencyByTitle(title) {
+    const targetTitle = compactText(title);
+
+    if (!targetTitle) return null;
+
+    return agencySummaryData.find(item => {
+      const agencyName = compactText(
+        item.agencyName ||
+        item.name ||
+        item.title ||
+        getFirstValue(item, [
+          "agencyName",
+          "name",
+          "title",
+          "기관명"
+        ])
+      );
+
+      if (!agencyName) return false;
+
+      return (
+        agencyName === targetTitle ||
+        agencyName.includes(targetTitle) ||
+        targetTitle.includes(agencyName)
+      );
+    }) || null;
+  }
+
+  function formatKrw(value) {
+    const number = Number(value || 0);
+
+    if (!number) return "-";
+
+    if (number >= 100000000) {
+      return `${(number / 100000000).toFixed(1).replace(".0", "")}억`;
+    }
+
+    if (number >= 10000) {
+      return `${Math.round(number / 10000).toLocaleString()}만`;
+    }
+
+    return number.toLocaleString();
   }
 
   function moveLastUpdateIntoHeader() {
@@ -649,12 +710,24 @@
   }
 
   function updateAgencySummary() {
-    const agencyCount = document.getElementById("metaAgencyCount")?.textContent || "0";
+    const total = agencySummaryData.length || document.getElementById("metaAgencyCount")?.textContent || "0";
 
-    setSummaryCard(0, "전체", agencyCount);
-    setSummaryCard(1, "우선 검토", "-");
-    setSummaryCard(2, "제안 가능", "-");
-    setSummaryCard(3, "보류", "-");
+    const priority = agencySummaryData.filter(item =>
+      item.grade === "S" || item.grade === "A"
+    ).length;
+
+    const award = agencySummaryData.filter(item =>
+      Number(item.awardCount || 0) > 0
+    ).length;
+
+    const plan = agencySummaryData.filter(item =>
+      Number(item.orderPlanCount || 0) > 0
+    ).length;
+
+    setSummaryCard(0, "전체", total);
+    setSummaryCard(1, "S/A등급", priority);
+    setSummaryCard(2, "낙찰 있음", award);
+    setSummaryCard(3, "발주계획", plan);
   }
 
   function updateSummaryByActiveTab() {
@@ -712,6 +785,43 @@
     filterArtCards();
   }
 
+  function enhanceAgencyCards() {
+    document.querySelectorAll("#agencyCards .card.card-as-accordion").forEach(card => {
+      if (card.dataset.agencyMetricsReady === "true") return;
+
+      const title = safeText(card.querySelector(".summary-title")?.textContent);
+      const data = findAgencyByTitle(title);
+      const body = card.querySelector(".accordion-body");
+
+      if (!data || !body) return;
+
+      const summaryRelated = card.querySelector(".summary-deadline strong");
+
+      if (summaryRelated) {
+        summaryRelated.textContent = `관련 ${data.relatedCount || 0}건`;
+      }
+
+      const box = document.createElement("div");
+      box.className = "agency-insight-box";
+
+      box.innerHTML = `
+        <div class="agency-metric-grid">
+          <div><span>입찰</span><strong>${data.bidCount || 0}건</strong></div>
+          <div><span>계약</span><strong>${data.contractCount || 0}건</strong></div>
+          <div><span>낙찰</span><strong>${data.awardCount || 0}건</strong></div>
+          <div><span>발주계획</span><strong>${data.orderPlanCount || 0}건</strong></div>
+        </div>
+        <div class="agency-action-line">
+          <strong>총 관련 규모 ${formatKrw(data.estimatedAmount)}</strong>
+          <span>${data.nextAction || "모니터링 유지"}</span>
+        </div>
+      `;
+
+      body.insertBefore(box, body.firstChild);
+      card.dataset.agencyMetricsReady = "true";
+    });
+  }
+
   function applyDashboardPatch() {
     try {
       moveLastUpdateIntoHeader();
@@ -720,6 +830,7 @@
       setupReviewControls();
       updateSourceLabels();
       setupAccordions();
+      enhanceAgencyCards();
       removeCardTools();
       updateSummaryByActiveTab();
       syncMetaCardsWithActiveTab();
@@ -747,6 +858,7 @@
   document.addEventListener("DOMContentLoaded", async () => {
     await loadArtSummaryData();
     await loadOpportunitySummaryData();
+    await loadAgencySummaryData();
 
     applyDashboardPatch();
     schedulePatch();
