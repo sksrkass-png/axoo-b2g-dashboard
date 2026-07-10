@@ -1761,3 +1761,44 @@ h1 {
   margin-left: 0 !important;
   margin-right: auto !important;
 }
+
+/* =========================
+   Summary Active / Muted State
+   ========================= */
+
+.meta-card {
+  transition:
+    opacity 0.18s ease,
+    filter 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.meta-card-active {
+  opacity: 1 !important;
+  filter: none !important;
+  border-color: #ff3b30 !important;
+  background: #ffffff !important;
+}
+
+.meta-card-active .meta-label,
+.meta-card-active .meta-value {
+  color: #111111 !important;
+}
+
+.meta-card-muted {
+  opacity: 0.38 !important;
+  filter: grayscale(1);
+  background: #f6f2eb !important;
+}
+
+.meta-card-muted .meta-label,
+.meta-card-muted .meta-value {
+  color: #9c948a !important;
+}
+
+.meta-card-muted:hover {
+  opacity: 0.7 !important;
+  filter: grayscale(0.4);
+}
