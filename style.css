@@ -1802,3 +1802,66 @@ h1 {
   opacity: 0.7 !important;
   filter: grayscale(0.4);
 }
+
+/* =========================
+   Agency Insight Metrics
+   ========================= */
+
+.agency-insight-box {
+  margin-bottom: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #faf8f4;
+  border: 1px solid #eee4d8;
+}
+
+.agency-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.agency-metric-grid div {
+  background: #ffffff;
+  border: 1px solid #eee4d8;
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.agency-metric-grid span {
+  display: block;
+  color: #777777;
+  font-size: 11px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.agency-metric-grid strong {
+  color: #111111;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.agency-action-line {
+  margin-top: 12px;
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.agency-action-line strong {
+  color: #ff3b30;
+  font-weight: 900;
+}
+
+.agency-action-line span {
+  color: #333333;
+  font-weight: 800;
+}
+
+@media (max-width: 640px) {
+  .agency-metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
