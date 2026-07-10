@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AXOO B2G Dashboard</title>
-  <link rel="stylesheet" href="style.css?v=108" />
+  <link rel="stylesheet" href="style.css?v=109" />
 </head>
 <body>
   <header class="site-header">
@@ -14,55 +14,60 @@
         <h1>공공 프로젝트 자동 리서치 대시보드</h1>
         <p class="subtitle">나라장터 기반 맞춤 공고, 기관 타깃, 건축물 미술작품 후보를 한눈에 관리합니다.</p>
       </div>
+
+      <div class="header-update-card">
+        <span id="lastUpdatedAt">최근 업데이트 : -</span>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="meta-bar">
-      <div class="meta-card meta-card-wide">
-        <div class="meta-label">마지막 업데이트</div>
-        <div class="meta-value" id="lastUpdatedAt">-</div>
+    <section class="summary-panel">
+      <div class="summary-panel-head">
+        <h2>현황 요약</h2>
       </div>
 
-      <div class="meta-card">
-        <div class="meta-label">맞춤 공고</div>
-        <div class="meta-value" id="metaOpportunityCount">0</div>
-      </div>
+      <section class="meta-bar">
+        <div class="meta-card">
+          <div class="meta-label">❤️나라장터 공고</div>
+          <div class="meta-value" id="metaOpportunityCount">0</div>
+        </div>
 
-      <div class="meta-card">
-        <div class="meta-label">기관 타깃</div>
-        <div class="meta-value" id="metaAgencyCount">0</div>
-      </div>
+        <div class="meta-card">
+          <div class="meta-label">💙건축물 미술작품</div>
+          <div class="meta-value" id="metaArtCount">0</div>
+        </div>
 
-      <div class="meta-card">
-        <div class="meta-label">건축물 미술작품</div>
-        <div class="meta-value" id="metaArtCount">0</div>
-      </div>
-    </section>
+        <div class="meta-card">
+          <div class="meta-label">🎯기관 타깃</div>
+          <div class="meta-value" id="metaAgencyCount">0</div>
+        </div>
+      </section>
 
-    <section class="summary-grid">
-      <div class="summary-card">
-        <span>전체 후보</span>
-        <strong id="totalCount">0</strong>
-      </div>
-      <div class="summary-card">
-        <span>S등급</span>
-        <strong id="sCount">0</strong>
-      </div>
-      <div class="summary-card">
-        <span>A등급</span>
-        <strong id="aCount">0</strong>
-      </div>
-      <div class="summary-card">
-        <span>B등급</span>
-        <strong id="bCount">0</strong>
-      </div>
+      <section class="summary-grid">
+        <div class="summary-card">
+          <span>전체</span>
+          <strong id="totalCount">0</strong>
+        </div>
+        <div class="summary-card">
+          <span>S등급</span>
+          <strong id="sCount">0</strong>
+        </div>
+        <div class="summary-card">
+          <span>A등급</span>
+          <strong id="aCount">0</strong>
+        </div>
+        <div class="summary-card">
+          <span>B등급</span>
+          <strong id="bCount">0</strong>
+        </div>
+      </section>
     </section>
 
     <nav class="tabs">
-      <button class="tab-button active" data-tab="opportunities">맞춤 공고</button>
-      <button class="tab-button" data-tab="agencies">기관 타깃</button>
-      <button class="tab-button" data-tab="art">건축물 미술작품</button>
+      <button class="tab-button active" data-tab="opportunities">❤️나라장터 공고</button>
+      <button class="tab-button" data-tab="art">💙건축물 미술작품</button>
+      <button class="tab-button" data-tab="agencies">🎯기관 타깃</button>
     </nav>
 
     <section id="opportunitiesTab" class="tab-panel active">
@@ -90,15 +95,53 @@
         <select id="reviewFilter">
           <option value="all">전체 상태</option>
           <option value="new">미검토</option>
+          <option value="hold">보류</option>
           <option value="reviewing">검토중</option>
           <option value="proposal">제안 준비</option>
-          <option value="hold">보류</option>
-          <option value="done">처리 완료</option>
+          <option value="done">제안 완료</option>
         </select>
       </section>
 
+      <div class="list-head">
+        <span>출처</span>
+        <span>공모명</span>
+        <span>게재기간</span>
+        <span>마감일</span>
+      </div>
+
       <section id="cards" class="cards"></section>
       <p id="emptyMessage" class="empty-message">조건에 맞는 공고가 없습니다.</p>
+    </section>
+
+    <section id="artTab" class="tab-panel">
+      <section class="filters">
+        <input id="artSearchInput" type="text" placeholder="공모명, 기관명, 키워드 검색" />
+
+        <select id="artSourceFilter">
+          <option value="all">전체 출처</option>
+          <option value="서울">서울</option>
+          <option value="경기도">경기도</option>
+          <option value="LH/SH">LH/SH</option>
+        </select>
+
+        <select id="artReviewFilter">
+          <option value="all">전체 상태</option>
+          <option value="new">미검토</option>
+          <option value="hold">보류</option>
+          <option value="reviewing">검토중</option>
+          <option value="proposal">제안 준비</option>
+          <option value="done">제안 완료</option>
+        </select>
+      </section>
+
+      <div class="list-head">
+        <span>출처</span>
+        <span>공모명</span>
+        <span>게재기간</span>
+        <span>마감일</span>
+      </div>
+
+      <section id="artCards" class="cards"></section>
     </section>
 
     <section id="agenciesTab" class="tab-panel">
@@ -111,31 +154,9 @@
 
       <section id="agencyCards" class="cards"></section>
     </section>
-
-    <section id="artTab" class="tab-panel">
-      <section class="section-head">
-        <div>
-          <h2>건축물 미술작품 & 공공미술 공모</h2>
-          <p>미술작품 제작·설치 관련 후보를 별도 관리합니다.</p>
-        </div>
-      </section>
-
-      <section class="filters">
-        <select id="artReviewFilter">
-          <option value="all">전체 상태</option>
-          <option value="new">미검토</option>
-          <option value="reviewing">검토중</option>
-          <option value="proposal">제안 준비</option>
-          <option value="hold">보류</option>
-          <option value="done">처리 완료</option>
-        </select>
-      </section>
-
-      <section id="artCards" class="cards"></section>
-    </section>
   </main>
 
-<script src="app.js?v=99"></script>
-<script src="dashboard_ui_update.js?v=8"></script>
+  <script src="app.js?v=99"></script>
+  <script src="dashboard_ui_update.js?v=9"></script>
 </body>
 </html>
