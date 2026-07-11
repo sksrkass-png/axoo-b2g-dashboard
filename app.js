@@ -72,7 +72,8 @@ function parseDateValue(value) {
   if (!raw) return null;
 
   if (raw.includes("-")) {
-    const parsed = new Date(raw.replace(" ", "T"));
+    const firstDate = raw.split("/")[0].trim();
+    const parsed = new Date(firstDate.replace(" ", "T"));
     return Number.isNaN(parsed.getTime()) ? null : parsed;
   }
 
@@ -211,7 +212,7 @@ function getArtReviewKey(item) {
 }
 
 function getLocalReviewKey(item) {
-  return `local-${item.sourceId || item.title || ""}-${item.deadline || ""}`;
+  return `local-${item.noticeNo || item.sourceId || item.title || ""}-${item.deadline || ""}`;
 }
 
 function notifyRendered() {
@@ -303,7 +304,7 @@ function renderSummary(items) {
   if (totalCount) totalCount.textContent = items.length;
   if (sCount) sCount.textContent = items.filter(item => item.grade === "S").length;
   if (aCount) aCount.textContent = items.filter(item => item.grade === "A").length;
-  if (bCount) bCount.textContent = items.filter(item => item.grade === "B").length;
+  if (bCount) bCount.textContent = items.filter(item => item.grade === "B" || item.grade === "C").length;
 }
 
 function getDocumentUrl(item) {
@@ -325,7 +326,7 @@ function createOpportunityCard(item) {
   card.className = "card";
 
   const gradeClass = getGradeClass(item.grade);
-  const categoryLabel = categoryNames[item.category] || "기타";
+  const categoryLabel = item.categoryLabel || categoryNames[item.category] || "기타";
   const docUrl = getDocumentUrl(item);
   const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
   const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
@@ -337,6 +338,8 @@ function createOpportunityCard(item) {
       <div class="badges">
         <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
         <span class="badge category">${escapeHtml(categoryLabel)}</span>
+        ${item.opportunityStatus ? `<span class="badge category">${escapeHtml(item.opportunityStatus)}</span>` : ""}
+        ${item.projectScale ? `<span class="badge category">${escapeHtml(item.projectScale)}</span>` : ""}
       </div>
 
       <div class="score-group">
@@ -345,15 +348,15 @@ function createOpportunityCard(item) {
       </div>
     </div>
 
-    <h2>${escapeHtml(safeText(item.bidNtceNm))}</h2>
+    <h2>${escapeHtml(safeText(item.bidNtceNm || item.title))}</h2>
 
     <div class="meta">
-      <div><span>공고기관</span>${escapeHtml(safeText(item.ntceInsttNm))}</div>
-      <div><span>수요기관</span>${escapeHtml(safeText(item.dminsttNm))}</div>
-      <div><span>계약방법</span>${escapeHtml(safeText(item.cntrctCnclsMthdNm))}</div>
+      <div><span>공고기관</span>${escapeHtml(safeText(item.noticeAgency || item.ntceInsttNm))}</div>
+      <div><span>수요기관</span>${escapeHtml(safeText(item.demandAgency || item.dminsttNm))}</div>
+      <div><span>계약방법</span>${escapeHtml(safeText(item.contractMethod || item.cntrctCnclsMthdNm || item.bidMethdNm))}</div>
       <div><span>예산</span>${escapeHtml(formatMoney(item.budgetAmount || item.asignBdgtAmt || item.presmptPrce))}</div>
       <div><span>마감/개찰</span>${escapeHtml(safeText(getOpportunityDeadlineValue(item)))}</div>
-      <div><span>공고번호</span>${escapeHtml(safeText(item.bidNtceNo))}</div>
+      <div><span>공고번호</span>${escapeHtml(safeText(item.noticeNo || item.bidNtceNo))}</div>
     </div>
 
     <div class="keywords">
@@ -361,7 +364,7 @@ function createOpportunityCard(item) {
     </div>
 
     <div class="reason">
-      ${reasons.length ? reasons.map(reason => escapeHtml(reason)).join(" · ") : "점수 산정 사유 없음"}
+      ${item.fitReason ? escapeHtml(item.fitReason) : (reasons.length ? reasons.map(reason => escapeHtml(reason)).join(" · ") : "점수 산정 사유 없음")}
     </div>
 
     <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
@@ -388,10 +391,18 @@ function renderOpportunityCards() {
   const filtered = allItems.filter(item => {
     const searchTarget = [
       item.bidNtceNm,
+      item.title,
       item.ntceInsttNm,
       item.dminsttNm,
+      item.noticeAgency,
+      item.demandAgency,
       item.category,
-      ...(item.matchedKeywords || [])
+      item.categoryLabel,
+      item.opportunityStatus,
+      item.projectScale,
+      ...(item.matchedKeywords || []),
+      ...(item.directFitKeywords || []),
+      ...(item.supportFitKeywords || [])
     ].join(" ").toLowerCase();
 
     const reviewKey = getOpportunityReviewKey(item);
@@ -406,6 +417,10 @@ function renderOpportunityCards() {
   });
 
   filtered.sort((a, b) => {
+    const gradeDiff = (gradeOrder[a.grade] ?? 9) - (gradeOrder[b.grade] ?? 9);
+
+    if (gradeDiff !== 0) return gradeDiff;
+
     const aDeadline = getDDay(getOpportunityDeadlineValue(a)).sortDays;
     const bDeadline = getDDay(getOpportunityDeadlineValue(b)).sortDays;
 
@@ -732,12 +747,32 @@ function getLocalDeadlineValue(item) {
   return item.deadline || item.endDate || item.closeDate || "";
 }
 
+function getLocalDeadlineAndOpeningValue(item) {
+  return item.deadlineAndOpening || item.deadline || item.openingDate || item.endDate || item.closeDate || "";
+}
+
 function getLocalProjectTypeValue(item) {
   return item.projectType || item.type || item.category || "기타";
 }
 
 function getLocalSourceUrl(item) {
-  return safeUrl(item.sourceUrl || item.sourcePageUrl || item.attachmentUrl || "");
+  return safeUrl(item.sourceUrl || item.sourcePageUrl || item.rawSourcePageUrl || item.attachmentUrl || "");
+}
+
+function getLocalNoticeAgencyValue(item) {
+  return item.noticeAgency || item.agencyName || item.sourceName || "서울특별시";
+}
+
+function getLocalDemandAgencyValue(item) {
+  return item.demandAgency || item.agencyName || item.department || "확인 필요";
+}
+
+function getLocalContractMethodValue(item) {
+  return item.contractMethod || "확인 필요";
+}
+
+function getLocalNoticeNoValue(item) {
+  return item.noticeNo || item.sourceId || "";
 }
 
 function setupLocalProjectDefaultFilter() {
@@ -755,18 +790,33 @@ function createLocalProjectCard(item) {
   card.className = "card";
 
   const gradeClass = getGradeClass(item.grade);
-  const keywords = Array.isArray(item.keywords) ? item.keywords : [];
+  const projectType = getLocalProjectTypeValue(item);
   const sourceUrl = getLocalSourceUrl(item);
   const reviewKey = getLocalReviewKey(item);
   const deadlineInfo = getDDay(getLocalDeadlineValue(item));
-  const projectType = getLocalProjectTypeValue(item);
+
+  const keywords = [
+    ...(Array.isArray(item.directFitKeywords) ? item.directFitKeywords : []),
+    ...(Array.isArray(item.supportFitKeywords) ? item.supportFitKeywords : []),
+    ...(Array.isArray(item.keywords) ? item.keywords : [])
+  ].filter(Boolean);
+
+  const uniqueKeywords = Array.from(new Set(keywords)).slice(0, 8);
+
+  const noticeAgency = getLocalNoticeAgencyValue(item);
+  const demandAgency = getLocalDemandAgencyValue(item);
+  const contractMethod = getLocalContractMethodValue(item);
+  const deadlineAndOpening = getLocalDeadlineAndOpeningValue(item);
+  const noticeNo = getLocalNoticeNoValue(item);
+  const reasonText = item.fitReason || item.reason || "AXOO Fit 산정 사유를 확인해 주세요.";
 
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
         <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
         <span class="badge category">${escapeHtml(safeText(projectType))}</span>
-        <span class="badge category">${escapeHtml(safeText(item.sourceName))}</span>
+        ${item.opportunityStatus ? `<span class="badge category">${escapeHtml(item.opportunityStatus)}</span>` : ""}
+        ${item.projectScale ? `<span class="badge category">${escapeHtml(item.projectScale)}</span>` : ""}
       </div>
 
       <div class="score-group">
@@ -778,27 +828,27 @@ function createLocalProjectCard(item) {
     <h2>${escapeHtml(safeText(item.title))}</h2>
 
     <div class="meta">
-      <div><span>출처</span>${escapeHtml(safeText(item.sourceName))}</div>
-      <div><span>기관</span>${escapeHtml(safeText(item.agencyName))}</div>
-      <div><span>담당부서</span>${escapeHtml(safeText(item.department))}</div>
-      <div><span>유형</span>${escapeHtml(safeText(projectType))}</div>
-      <div><span>게재일</span>${escapeHtml(safeText(item.postedDate))}</div>
-      <div><span>마감일</span>${escapeHtml(safeText(item.deadline))}</div>
+      <div><span>공고기관</span>${escapeHtml(safeText(noticeAgency))}</div>
+      <div><span>수요기관</span>${escapeHtml(safeText(demandAgency))}</div>
+      <div><span>계약방법</span>${escapeHtml(safeText(contractMethod))}</div>
+      <div><span>예산</span>${escapeHtml(formatMoney(item.budget))}</div>
+      <div><span>마감/개찰</span>${escapeHtml(safeText(deadlineAndOpening))}</div>
+      <div><span>공고번호</span>${escapeHtml(safeText(noticeNo))}</div>
     </div>
 
     <div class="keywords">
-      ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
+      ${uniqueKeywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
     </div>
 
     <div class="reason">
-      ${escapeHtml(safeText(item.reason))}
+      ${escapeHtml(reasonText)}
     </div>
 
     <p class="action">추천 액션: ${escapeHtml(safeText(item.nextAction))}</p>
 
     ${createReviewControl(reviewKey)}
 
-    ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
+    ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
   `;
 
   return card;
@@ -842,20 +892,31 @@ function renderLocalProjectCards() {
 
   const filtered = localProjects.filter(item => {
     const projectType = getLocalProjectTypeValue(item);
+    const reviewKey = getLocalReviewKey(item);
+    const itemReviewStatus = getReviewStatus(reviewKey);
+    const deadlineInfo = getDDay(getLocalDeadlineValue(item));
+
+    const keywords = [
+      ...(Array.isArray(item.directFitKeywords) ? item.directFitKeywords : []),
+      ...(Array.isArray(item.supportFitKeywords) ? item.supportFitKeywords : []),
+      ...(Array.isArray(item.keywords) ? item.keywords : [])
+    ];
 
     const searchTarget = [
       item.title,
       item.sourceName,
       item.agencyName,
+      item.noticeAgency,
+      item.demandAgency,
       item.department,
+      item.contractMethod,
+      item.noticeNo,
+      item.opportunityStatus,
+      item.projectScale,
       projectType,
       item.region,
-      ...(item.keywords || [])
+      ...keywords
     ].join(" ").toLowerCase();
-
-    const reviewKey = getLocalReviewKey(item);
-    const itemReviewStatus = getReviewStatus(reviewKey);
-    const deadlineInfo = getDDay(getLocalDeadlineValue(item));
 
     const matchesSearch = !searchValue || searchTarget.includes(searchValue);
     const matchesRegion = regionValue === "all" || safeText(item.region).includes(regionValue);
@@ -868,6 +929,10 @@ function renderLocalProjectCards() {
   });
 
   filtered.sort((a, b) => {
+    const gradeDiff = (gradeOrder[a.grade] ?? 9) - (gradeOrder[b.grade] ?? 9);
+
+    if (gradeDiff !== 0) return gradeDiff;
+
     const aDeadline = getDDay(getLocalDeadlineValue(a)).sortDays;
     const bDeadline = getDDay(getLocalDeadlineValue(b)).sortDays;
 
