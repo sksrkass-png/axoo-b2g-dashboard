@@ -649,6 +649,28 @@ function createLocalProjectCard(item) {
   return card;
 }
 
+function matchesDeadlineStatus(deadlineInfo, status) {
+  if (status === "all") return true;
+
+  if (status === "soon") {
+    return deadlineInfo.sortDays >= 0 && deadlineInfo.sortDays <= 7;
+  }
+
+  if (status === "active") {
+    return deadlineInfo.sortDays >= 0 && deadlineInfo.sortDays < 9998;
+  }
+
+  if (status === "closed") {
+    return deadlineInfo.className === "deadline-closed";
+  }
+
+  if (status === "unknown") {
+    return deadlineInfo.className === "deadline-unknown";
+  }
+
+  return true;
+}
+
 function renderLocalProjectCards() {
   const cards = document.getElementById("localCards");
   const empty = document.getElementById("localEmptyMessage");
@@ -660,7 +682,7 @@ function renderLocalProjectCards() {
   const typeValue = document.getElementById("localTypeFilter")?.value || "all";
   const gradeValue = document.getElementById("localGradeFilter")?.value || "all";
   const reviewValue = document.getElementById("localReviewFilter")?.value || "all";
-  const deadlineSoon = document.getElementById("localDeadlineSoon")?.checked || false;
+    const deadlineStatusValue = document.getElementById("localDeadlineStatusFilter")?.value || "active";
 
   const filtered = localProjects.filter(item => {
     const searchTarget = [
@@ -682,7 +704,7 @@ function renderLocalProjectCards() {
     const matchesType = typeValue === "all" || item.projectType === typeValue;
     const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
     const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
-    const matchesDeadline = !deadlineSoon || deadlineInfo.sortDays <= 7;
+    const matchesDeadline = matchesDeadlineStatus(deadlineInfo, deadlineStatusValue);
 
     return matchesSearch && matchesRegion && matchesType && matchesGrade && matchesReview && matchesDeadline;
   });
@@ -767,7 +789,7 @@ async function init() {
   const localTypeFilter = document.getElementById("localTypeFilter");
   const localGradeFilter = document.getElementById("localGradeFilter");
   const localReviewFilter = document.getElementById("localReviewFilter");
-  const localDeadlineSoon = document.getElementById("localDeadlineSoon");
+  const localDeadlineStatusFilter = document.getElementById("localDeadlineStatusFilter");
 
   if (searchInput) searchInput.addEventListener("input", renderOpportunityCards);
   if (gradeFilter) gradeFilter.addEventListener("change", renderOpportunityCards);
@@ -780,7 +802,7 @@ async function init() {
   if (localTypeFilter) localTypeFilter.addEventListener("change", renderLocalProjectCards);
   if (localGradeFilter) localGradeFilter.addEventListener("change", renderLocalProjectCards);
   if (localReviewFilter) localReviewFilter.addEventListener("change", renderLocalProjectCards);
-  if (localDeadlineSoon) localDeadlineSoon.addEventListener("change", renderLocalProjectCards);
+  if (localDeadlineStatusFilter) localDeadlineStatusFilter.addEventListener("change", renderLocalProjectCards);
 
   setTimeout(notifyRendered, 250);
 }
