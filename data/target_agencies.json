@@ -58,19 +58,19 @@
     "mainKeywords": [
       "전시"
     ],
-    "relatedCount": 4,
-    "bidCount": 2,
+    "relatedCount": 3,
+    "bidCount": 1,
     "contractCount": 0,
     "awardCount": 2,
     "orderPlanCount": 0,
-    "estimatedAmount": 1441440000,
-    "bidAmount": 798182000,
+    "estimatedAmount": 1393601000,
+    "bidAmount": 750343000,
     "contractAmount": 0,
     "awardAmount": 643258000,
     "orderPlanAmount": 0,
     "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
     "nextAction": "기관 저장 후 예산 시즌에 재접촉",
-    "note": "최근 수집 기준 입찰공고 2건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 1,441,440,000원 규모의 근거가 확인되었습니다.",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 1,393,601,000원 규모의 근거가 확인되었습니다.",
     "evidenceSources": [
       {
         "title": "수도권공역(인천공항 중심) 항공교통체계 고도화 연구용역",
@@ -79,14 +79,6 @@
         "date": "2026-08-06 15:00:00",
         "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01563505&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
         "id": "R26BK01563505"
-      },
-      {
-        "title": "2026년 Green Report 제작용역",
-        "sourceType": "입찰공고",
-        "amount": 47839000,
-        "date": "2026-06-29 18:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01599046&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-        "id": "R26BK01599046"
       },
       {
         "title": "교통안전시설물 디지털 전환을 위한 DB 구축",
@@ -196,55 +188,6 @@
         "date": "2026-04-03",
         "sourceUrl": "",
         "id": "R26BK01276433"
-      }
-    ]
-  },
-  {
-    "grade": "B",
-    "score": 50,
-    "agencyName": "경기도 용인시",
-    "agencyType": "지자체",
-    "region": "경기",
-    "mainKeywords": [
-      "기타"
-    ],
-    "relatedCount": 5,
-    "bidCount": 5,
-    "contractCount": 0,
-    "awardCount": 0,
-    "orderPlanCount": 0,
-    "estimatedAmount": 228644230,
-    "bidAmount": 228644230,
-    "contractAmount": 0,
-    "awardAmount": 0,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "기타 관련 악수 협업 제안",
-    "nextAction": "기관 저장 후 예산 시즌에 재접촉",
-    "note": "최근 수집 기준 입찰공고 5건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 228,644,230원 규모의 근거가 확인되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "[수의시담]2026년 신봉힐링근린공원 물놀이장 운영관리 용역",
-        "sourceType": "입찰공고",
-        "amount": 42207000,
-        "date": "2026-06-26 11:30:00",
-        "sourceUrl": "",
-        "id": "R26BK01603615"
-      },
-      {
-        "title": "[수의시담]2026년 동부권역 수경시설(조합놀이대) 편의시설 임차용역",
-        "sourceType": "입찰공고",
-        "amount": 49590000,
-        "date": "2026-06-26 11:30:00",
-        "sourceUrl": "",
-        "id": "R26BK01603604"
-      },
-      {
-        "title": "[수의시담]2026년 한숲햇빛근린공원 물놀이장 운영관리 용역",
-        "sourceType": "입찰공고",
-        "amount": 47026830,
-        "date": "2026-06-26 11:30:00",
-        "sourceUrl": "",
-        "id": "R26BK01603600"
       }
     ]
   },
@@ -909,72 +852,6 @@
         "date": "2026-07-16 14:00:00",
         "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01603570&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
         "id": "R26BK01603570"
-      }
-    ]
-  },
-  {
-    "grade": "C",
-    "score": 40,
-    "agencyName": "서울특별시 강동구",
-    "agencyType": "자치구",
-    "region": "서울",
-    "mainKeywords": [
-      "축제"
-    ],
-    "relatedCount": 1,
-    "bidCount": 1,
-    "contractCount": 0,
-    "awardCount": 0,
-    "orderPlanCount": 0,
-    "estimatedAmount": 730000000,
-    "bidAmount": 730000000,
-    "contractAmount": 0,
-    "awardAmount": 0,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "축제 기반 아티스트 협업형 행사 운영 제안",
-    "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 730,000,000원 규모의 근거가 확인되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "「2026년 제31회 강동선사문화축제 및 야간 빛 축제」 행사 대행 용역(긴급)",
-        "sourceType": "입찰공고",
-        "amount": 730000000,
-        "date": "2026-07-08 17:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01603648&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-        "id": "R26BK01603648"
-      }
-    ]
-  },
-  {
-    "grade": "C",
-    "score": 40,
-    "agencyName": "충청남도 공주시",
-    "agencyType": "지자체",
-    "region": "충남",
-    "mainKeywords": [
-      "축제"
-    ],
-    "relatedCount": 1,
-    "bidCount": 1,
-    "contractCount": 0,
-    "awardCount": 0,
-    "orderPlanCount": 0,
-    "estimatedAmount": 500000000,
-    "bidAmount": 500000000,
-    "contractAmount": 0,
-    "awardAmount": 0,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "축제 기반 아티스트 협업형 행사 운영 제안",
-    "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 500,000,000원 규모의 근거가 확인되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "제2회 공주야밤 맥주축제 연출 및 운영 대행용역(협상)",
-        "sourceType": "입찰공고",
-        "amount": 500000000,
-        "date": "2026-07-07 11:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01603667&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-        "id": "R26BK01603667"
       }
     ]
   },
@@ -1780,6 +1657,105 @@
         "date": "2025-09-22",
         "sourceUrl": "",
         "id": "R25BK01023208"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 35,
+    "agencyName": "용인문화재단",
+    "agencyType": "문화재단",
+    "region": "경기",
+    "mainKeywords": [
+      "아트"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 128667000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 128667000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "아트 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 128,667,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "2025 용인포은아트홀 가을밤 콘서트 운영",
+        "sourceType": "낙찰정보",
+        "amount": 128667000,
+        "date": "2025-08-21",
+        "sourceUrl": "",
+        "id": "R25BK00947072"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 35,
+    "agencyName": "(재）경기문화재단 경기역사문화유산원",
+    "agencyType": "문화재단",
+    "region": "경기",
+    "mainKeywords": [
+      "행사 운영"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 120000000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 120000000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "행사 운영 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 120,000,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "「2026년 옛길따라 만나는 문화체험」 경기옛길 마라톤 행사 운영 용역",
+        "sourceType": "낙찰정보",
+        "amount": 120000000,
+        "date": "2026-06-25",
+        "sourceUrl": "",
+        "id": "R26BK01547326"
+      }
+    ]
+  },
+  {
+    "grade": "C",
+    "score": 35,
+    "agencyName": "복정동 빛축제 추진위원회",
+    "agencyType": "공공기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "축제"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 113900000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 113900000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "축제 기반 아티스트 협업형 행사 운영 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 113,900,000원 규모의 근거가 확인되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "(긴급)제11회 복정동 어울림 빛축제 실행 용역",
+        "sourceType": "낙찰정보",
+        "amount": 113900000,
+        "date": "2025-11-20",
+        "sourceUrl": "",
+        "id": "R25BK01074398"
       }
     ]
   }
