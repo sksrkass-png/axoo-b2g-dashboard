@@ -91,6 +91,7 @@
     setTimeout(() => {
       updateMetaCardState();
       updateSummaryByActiveTab();
+      updateListHeadLabels();
       setupAccordions();
     }, 160);
   }
@@ -146,9 +147,66 @@
         setTimeout(() => {
           updateMetaCardState();
           updateSummaryByActiveTab();
+          updateListHeadLabels();
           setupAccordions();
         }, 160);
       });
+    });
+  }
+
+  function updateListHeadLabels() {
+    const headers = {
+      opportunities: `
+        <span class="list-source-grade">
+          <em>출처</em>
+          <em>등급</em>
+        </span>
+        <span>공고명</span>
+        <span>마감/개찰</span>
+        <span>상태</span>
+      `,
+      agencies: `
+        <span class="list-source-grade">
+          <em>기관유형</em>
+          <em>등급</em>
+        </span>
+        <span>기관명</span>
+        <span>지역</span>
+        <span>관련 이력</span>
+      `,
+      art: `
+        <span class="list-source-grade">
+          <em>출처</em>
+          <em></em>
+        </span>
+        <span>공고명</span>
+        <span>공개일</span>
+        <span>마감일</span>
+      `,
+      local: `
+        <span class="list-source-grade">
+          <em>공고기관</em>
+          <em>등급</em>
+        </span>
+        <span>공고명</span>
+        <span>계약방법</span>
+        <span>마감/개찰</span>
+      `
+    };
+
+    const panelMap = {
+      opportunities: document.getElementById("opportunitiesTab"),
+      agencies: document.getElementById("agenciesTab"),
+      art: document.getElementById("artTab"),
+      local: document.getElementById("localTab")
+    };
+
+    Object.entries(panelMap).forEach(([key, panel]) => {
+      const head = panel?.querySelector(".list-head");
+
+      if (!head) return;
+
+      head.innerHTML = headers[key];
     });
   }
 
@@ -211,7 +269,7 @@
 
     if (tabKey === "local") {
       return {
-        source: getMetaValue(card, "출처"),
+        source: getMetaValue(card, "공고기관") || getMetaValue(card, "출처") || "로컬공고",
         grade
       };
     }
@@ -252,10 +310,10 @@
 
     if (tabKey === "local") {
       return {
-        periodLabel: "게재일",
-        period: getMetaValue(card, "게재일"),
-        deadlineLabel: "마감일",
-        deadline: getMetaValue(card, "마감일")
+        periodLabel: "계약방법",
+        period: getMetaValue(card, "계약방법"),
+        deadlineLabel: "마감/개찰",
+        deadline: getMetaValue(card, "마감/개찰") || safeText(card.querySelector(".deadline-badge")?.textContent)
       };
     }
 
@@ -508,6 +566,7 @@
 
       element.addEventListener(eventName, () => {
         setTimeout(() => {
+          updateListHeadLabels();
           setupAccordions();
           updateSummaryByActiveTab();
         }, 180);
@@ -519,6 +578,7 @@
     setupMetaCards();
     setupTabButtons();
     setupReviewSelects();
+    updateListHeadLabels();
     setupAccordions();
     updateMetaCountsFromData();
     updateMetaCardState();
