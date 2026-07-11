@@ -808,3 +808,254 @@ async function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+function getAgencyPatchReviewKey(item) {
+  return `agency-${item.agencyName || item.sourceId || ""}-${item.region || ""}`;
+}
+
+bindReviewControls = function () {
+  document.querySelectorAll(".review-select").forEach(select => {
+    if (select.dataset.reviewBound === "true") return;
+
+    select.dataset.reviewBound = "true";
+
+    select.addEventListener("change", event => {
+      const key = event.target.dataset.reviewKey;
+      const value = event.target.value;
+
+      setReviewStatus(key, value);
+
+      const activePanel = document.querySelector(".tab-panel.active");
+
+      if (activePanel?.id === "artTab") {
+        renderArtCards();
+      } else if (activePanel?.id === "localTab") {
+        renderLocalProjectCards();
+      } else if (activePanel?.id === "agenciesTab") {
+        renderAgencyCards();
+      } else {
+        renderOpportunityCards();
+      }
+
+      setTimeout(notifyRendered, 120);
+    });
+  });
+};
+
+function createAgencyCardFixed(item) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  card.dataset.agencyRegion = safeText(item.region || "기타");
+  card.dataset.agencyGrade = safeText(item.grade || "C");
+  card.dataset.agencyAwardCount = String(item.awardCount || 0);
+  card.dataset.agencyPlanCount = String(item.orderPlanCount || 0);
+  card.dataset.agencyRelatedCount = String(item.relatedCount || 0);
+
+  const gradeClass = getGradeClass(item.grade);
+  const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
+  const evidenceSources = Array.isArray(item.evidenceSources) ? item.evidenceSources : [];
+  const reviewKey = getAgencyPatchReviewKey(item);
+
+  const evidenceHtml = evidenceSources.length
+    ? `
+      <div class="evidence-box">
+        <strong>근거 자료</strong>
+        <div class="evidence-list">
+          ${evidenceSources.slice(0, 4).map(source => {
+            const sourceUrl = safeUrl(source.sourceUrl);
+
+            return `
+              <div class="evidence-item">
+                <div class="evidence-main">
+                  <span class="evidence-type">${escapeHtml(safeText(source.sourceType))}</span>
+                  <span class="evidence-title">${escapeHtml(safeText(source.title))}</span>
+                </div>
+                <div class="evidence-sub">
+                  <span>${escapeHtml(formatMoney(source.amount))}</span>
+                  <span>${escapeHtml(safeText(source.date))}</span>
+                  ${sourceUrl ? `<a href="${sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `
+    : "";
+
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="badges">
+        <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade || "C"))}등급</span>
+        <span class="badge category">${escapeHtml(safeText(item.agencyType || "기관"))}</span>
+        <span class="badge category">${escapeHtml(safeText(item.region || "기타"))}</span>
+      </div>
+      <div class="score">관련 ${escapeHtml(safeText(item.relatedCount || 0))}건</div>
+    </div>
+
+    <h2>${escapeHtml(safeText(item.agencyName || "기관명 없음"))}</h2>
+
+    <div class="meta">
+      <div><span>기관유형</span>${escapeHtml(safeText(item.agencyType || "-"))}</div>
+      <div><span>지역</span>${escapeHtml(safeText(item.region || "-"))}</div>
+      <div><span>추정 규모</span>${escapeHtml(formatMoney(item.estimatedAmount))}</div>
+      <div><span>관련 이력</span>${escapeHtml(safeText(item.relatedCount || 0))}건</div>
+      <div><span>공고 이력</span>${escapeHtml(safeText(item.bidCount || 0))}건</div>
+      <div><span>계약 이력</span>${escapeHtml(safeText(item.contractCount || 0))}건</div>
+      <div><span>낙찰 이력</span>${escapeHtml(safeText(item.awardCount || 0))}건</div>
+      <div><span>발주계획</span>${escapeHtml(safeText(item.orderPlanCount || 0))}건</div>
+    </div>
+
+    <div class="keywords">
+      ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
+    </div>
+
+    <div class="reason">
+      ${escapeHtml(safeText(item.note || "기관 타깃 근거를 확인해 주세요."))}
+    </div>
+
+    <p class="action">제안 방향: ${escapeHtml(safeText(item.recommendedProposal || "-"))}</p>
+    <p class="action">다음 액션: ${escapeHtml(safeText(item.nextAction || "-"))}</p>
+
+    ${createReviewControl(reviewKey)}
+
+    ${evidenceHtml}
+  `;
+
+  return card;
+}
+
+function matchAgencyRegion(itemRegion, filterValue) {
+  const region = safeText(itemRegion);
+
+  if (filterValue === "all") return true;
+
+  if (filterValue === "기타") {
+    return (
+      region.includes("기타") ||
+      region.includes("전국") ||
+      !["서울", "경기", "인천", "부산", "대전", "광주", "대구", "울산", "세종"].some(value => region.includes(value))
+    );
+  }
+
+  return region.includes(filterValue);
+}
+
+renderAgencyCards = function () {
+  const cards = document.getElementById("agencyCards");
+  const empty = document.getElementById("agencyEmptyMessage");
+
+  if (!cards) return;
+
+  const searchValue = plainText(document.getElementById("agencySearchInput")?.value).toLowerCase();
+  const regionValue = document.getElementById("agencyRegionFilter")?.value || "all";
+  const gradeValue = document.getElementById("agencyGradeFilter")?.value || "all";
+  const reviewValue = document.getElementById("agencyReviewFilter")?.value || "all";
+  const awardOnly = document.getElementById("agencyAwardOnly")?.checked || false;
+  const planOnly = document.getElementById("agencyPlanOnly")?.checked || false;
+
+  const filtered = targetAgencies.filter(item => {
+    const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
+
+    const searchTarget = [
+      item.agencyName,
+      item.agencyType,
+      item.region,
+      item.note,
+      item.recommendedProposal,
+      item.nextAction,
+      ...keywords
+    ].join(" ").toLowerCase();
+
+    const reviewKey = getAgencyPatchReviewKey(item);
+    const itemReviewStatus = getReviewStatus(reviewKey);
+
+    const matchesSearch = !searchValue || searchTarget.includes(searchValue);
+    const matchesRegion = matchAgencyRegion(item.region, regionValue);
+    const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
+    const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
+    const matchesAward = !awardOnly || Number(item.awardCount || 0) > 0;
+    const matchesPlan = !planOnly || Number(item.orderPlanCount || 0) > 0;
+
+    return matchesSearch && matchesRegion && matchesGrade && matchesReview && matchesAward && matchesPlan;
+  });
+
+  const gradeOrder = {
+    S: 0,
+    A: 1,
+    B: 2,
+    C: 3
+  };
+
+  filtered.sort((a, b) => {
+    const gradeDiff = (gradeOrder[a.grade] ?? 9) - (gradeOrder[b.grade] ?? 9);
+    if (gradeDiff !== 0) return gradeDiff;
+
+    return Number(b.estimatedAmount || 0) - Number(a.estimatedAmount || 0);
+  });
+
+  cards.innerHTML = "";
+
+  filtered.forEach(item => {
+    cards.appendChild(createAgencyCardFixed(item));
+  });
+
+  if (empty) {
+    empty.style.display = filtered.length ? "none" : "block";
+  }
+
+  bindReviewControls();
+
+  setTimeout(notifyRendered, 120);
+};
+
+function bindAgencyFilterControlsFixed() {
+  const search = document.getElementById("agencySearchInput");
+  const region = document.getElementById("agencyRegionFilter");
+  const grade = document.getElementById("agencyGradeFilter");
+  const review = document.getElementById("agencyReviewFilter");
+  const awardOnly = document.getElementById("agencyAwardOnly");
+  const planOnly = document.getElementById("agencyPlanOnly");
+
+  if (search && search.dataset.appAgencyBound !== "true") {
+    search.addEventListener("input", renderAgencyCards);
+    search.dataset.appAgencyBound = "true";
+  }
+
+  if (region && region.dataset.appAgencyBound !== "true") {
+    region.addEventListener("change", renderAgencyCards);
+    region.dataset.appAgencyBound = "true";
+  }
+
+  if (grade && grade.dataset.appAgencyBound !== "true") {
+    grade.addEventListener("change", renderAgencyCards);
+    grade.dataset.appAgencyBound = "true";
+  }
+
+  if (review && review.dataset.appAgencyBound !== "true") {
+    review.addEventListener("change", renderAgencyCards);
+    review.dataset.appAgencyBound = "true";
+  }
+
+  if (awardOnly && awardOnly.dataset.appAgencyBound !== "true") {
+    awardOnly.addEventListener("change", renderAgencyCards);
+    awardOnly.dataset.appAgencyBound = "true";
+  }
+
+  if (planOnly && planOnly.dataset.appAgencyBound !== "true") {
+    planOnly.addEventListener("change", renderAgencyCards);
+    planOnly.dataset.appAgencyBound = "true";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    bindAgencyFilterControlsFixed();
+    renderAgencyCards();
+  }, 900);
+
+  setTimeout(() => {
+    bindAgencyFilterControlsFixed();
+    renderAgencyCards();
+  }, 2200);
+});
