@@ -1023,12 +1023,30 @@
     filterArtCards();
   }
 
-  function renderAgencyFallbackCards() {
+    function renderAgencyFallbackCards() {
     const cards = document.getElementById("agencyCards");
 
     if (!cards) return;
-    if (cards.querySelector(".card")) return;
     if (!Array.isArray(agencySummaryData) || !agencySummaryData.length) return;
+
+    const currentText = safeText(cards.textContent);
+    const hasRealAgencyTitle = Array.from(cards.querySelectorAll("h2, .summary-title")).some(element => {
+      const text = safeText(element.textContent);
+
+      return (
+        text &&
+        !text.includes("기관 타깃 데이터가 없습니다") &&
+        !text.includes("조건에 맞는 기관 타깃이 없습니다")
+      );
+    });
+
+    if (hasRealAgencyTitle && cards.dataset.fallbackRendered === "true") {
+      return;
+    }
+
+    if (hasRealAgencyTitle && !currentText.includes("기관 타깃 데이터가 없습니다")) {
+      return;
+    }
 
     cards.innerHTML = "";
 
@@ -1105,6 +1123,8 @@
 
       cards.appendChild(card);
     });
+
+    cards.dataset.fallbackRendered = "true";
 
     const emptyMessage = document.getElementById("agencyEmptyMessage");
 
