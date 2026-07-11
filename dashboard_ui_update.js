@@ -25,6 +25,20 @@
     return text || fallback;
   }
 
+  function getCompactContractMethod(value) {
+    const text = safeText(value, "");
+
+    if (!text || text === "-") return "확인 필요";
+    if (text.includes("협상에 의한 계약")) return "협상계약";
+    if (text.includes("제한경쟁")) return "제한경쟁";
+    if (text.includes("일반경쟁")) return "일반경쟁";
+    if (text.includes("수의계약")) return "수의계약";
+    if (text.includes("전자입찰")) return "전자입찰";
+    if (text.includes("방문제출")) return "방문제출";
+
+    return text.split("/")[0].trim();
+  }
+
   async function loadJson(path, fallback = []) {
     try {
       const response = await fetch(`${path}?ui=${Date.now()}`);
@@ -91,7 +105,7 @@
     setTimeout(() => {
       updateMetaCardState();
       updateSummaryByActiveTab();
-      updateListHeadLabels();
+      updateLocalListHeadLabel();
       setupAccordions();
     }, 160);
   }
@@ -147,67 +161,28 @@
         setTimeout(() => {
           updateMetaCardState();
           updateSummaryByActiveTab();
-          updateListHeadLabels();
+          updateLocalListHeadLabel();
           setupAccordions();
         }, 160);
       });
     });
   }
 
-  function updateListHeadLabels() {
-    const headers = {
-      opportunities: `
-        <span class="list-source-grade">
-          <em>출처</em>
-          <em>등급</em>
-        </span>
-        <span>공고명</span>
-        <span>마감/개찰</span>
-        <span>상태</span>
-      `,
-      agencies: `
-        <span class="list-source-grade">
-          <em>기관유형</em>
-          <em>등급</em>
-        </span>
-        <span>기관명</span>
-        <span>지역</span>
-        <span>관련 이력</span>
-      `,
-      art: `
-        <span class="list-source-grade">
-          <em>출처</em>
-          <em></em>
-        </span>
-        <span>공고명</span>
-        <span>공개일</span>
-        <span>마감일</span>
-      `,
-      local: `
-        <span class="list-source-grade">
-          <em>공고기관</em>
-          <em>등급</em>
-        </span>
-        <span>공고명</span>
-        <span>계약방법</span>
-        <span>마감/개찰</span>
-      `
-    };
+  function updateLocalListHeadLabel() {
+    const localPanel = document.getElementById("localTab");
+    const head = localPanel?.querySelector(".list-head");
 
-    const panelMap = {
-      opportunities: document.getElementById("opportunitiesTab"),
-      agencies: document.getElementById("agenciesTab"),
-      art: document.getElementById("artTab"),
-      local: document.getElementById("localTab")
-    };
+    if (!head) return;
 
-    Object.entries(panelMap).forEach(([key, panel]) => {
-      const head = panel?.querySelector(".list-head");
-
-      if (!head) return;
-
-      head.innerHTML = headers[key];
-    });
+    head.innerHTML = `
+      <span class="list-source-grade">
+        <em>공고기관</em>
+        <em>등급</em>
+      </span>
+      <span>공고명</span>
+      <span>계약방법</span>
+      <span>마감/개찰</span>
+    `;
   }
 
   function getMetaValue(card, label) {
@@ -311,7 +286,7 @@
     if (tabKey === "local") {
       return {
         periodLabel: "계약방법",
-        period: getMetaValue(card, "계약방법"),
+        period: getCompactContractMethod(getMetaValue(card, "계약방법")),
         deadlineLabel: "마감/개찰",
         deadline: getMetaValue(card, "마감/개찰") || safeText(card.querySelector(".deadline-badge")?.textContent)
       };
@@ -566,7 +541,7 @@
 
       element.addEventListener(eventName, () => {
         setTimeout(() => {
-          updateListHeadLabels();
+          updateLocalListHeadLabel();
           setupAccordions();
           updateSummaryByActiveTab();
         }, 180);
@@ -578,7 +553,7 @@
     setupMetaCards();
     setupTabButtons();
     setupReviewSelects();
-    updateListHeadLabels();
+    updateLocalListHeadLabel();
     setupAccordions();
     updateMetaCountsFromData();
     updateMetaCardState();
