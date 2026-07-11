@@ -1,6 +1,7 @@
 let allItems = [];
 let targetAgencies = [];
 let artCommissions = [];
+let localProjects = [];
 let dashboardMeta = {};
 
 const REVIEW_STORAGE_KEY = "axooB2GReviewStatus";
@@ -20,7 +21,7 @@ const reviewStatusOptions = {
   reviewing: "검토중",
   proposal: "제안 준비",
   hold: "보류",
-  done: "처리 완료"
+  done: "제안 완료"
 };
 
 function escapeHtml(value) {
@@ -35,6 +36,10 @@ function escapeHtml(value) {
 function safeText(value) {
   const text = String(value ?? "").trim();
   return text ? text : "-";
+}
+
+function plainText(value) {
+  return String(value ?? "").trim();
 }
 
 function safeUrl(value) {
@@ -182,6 +187,14 @@ function getArtReviewKey(item) {
   return `art-${item.bidNtceNo || item.title || ""}-${item.deadline || ""}`;
 }
 
+function getLocalReviewKey(item) {
+  return `local-${item.sourceId || item.title || ""}-${item.deadline || ""}`;
+}
+
+function notifyRendered() {
+  window.dispatchEvent(new Event("axoo:rendered"));
+}
+
 function createReviewControl(key) {
   const currentStatus = getReviewStatus(key);
 
@@ -201,6 +214,10 @@ function createReviewControl(key) {
 
 function bindReviewControls() {
   document.querySelectorAll(".review-select").forEach(select => {
+    if (select.dataset.reviewBound === "true") return;
+
+    select.dataset.reviewBound = "true";
+
     select.addEventListener("change", event => {
       const key = event.target.dataset.reviewKey;
       const value = event.target.value;
@@ -208,11 +225,16 @@ function bindReviewControls() {
       setReviewStatus(key, value);
 
       const activePanel = document.querySelector(".tab-panel.active");
-      if (activePanel && activePanel.id === "artTab") {
+
+      if (activePanel?.id === "artTab") {
         renderArtCards();
+      } else if (activePanel?.id === "localTab") {
+        renderLocalProjectCards();
       } else {
         renderOpportunityCards();
       }
+
+      setTimeout(notifyRendered, 80);
     });
   });
 }
@@ -222,6 +244,7 @@ function renderDashboardMeta() {
   const opportunityCount = document.getElementById("metaOpportunityCount");
   const agencyCount = document.getElementById("metaAgencyCount");
   const artCount = document.getElementById("metaArtCount");
+  const localCount = document.getElementById("metaLocalCount");
 
   if (lastUpdatedAt) {
     lastUpdatedAt.textContent = dashboardMeta.lastUpdatedAt
@@ -239,6 +262,10 @@ function renderDashboardMeta() {
 
   if (artCount) {
     artCount.textContent = dashboardMeta.artCommissionCount ?? artCommissions.length ?? 0;
+  }
+
+  if (localCount) {
+    localCount.textContent = dashboardMeta.localProjectCount ?? localProjects.length ?? 0;
   }
 }
 
@@ -378,6 +405,7 @@ function renderOpportunityCards() {
   }
 
   bindReviewControls();
+  notifyRendered();
 }
 
 function createAgencyCard(item) {
@@ -471,6 +499,8 @@ function renderAgencyCards() {
   targetAgencies.forEach(item => {
     cards.appendChild(createAgencyCard(item));
   });
+
+  notifyRendered();
 }
 
 function createArtCard(item) {
@@ -559,6 +589,125 @@ function renderArtCards() {
   });
 
   bindReviewControls();
+  notifyRendered();
+}
+
+function getLocalDeadlineValue(item) {
+  return item.deadline || item.endDate || item.closeDate || "";
+}
+
+function createLocalProjectCard(item) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  const gradeClass = getGradeClass(item.grade);
+  const keywords = Array.isArray(item.keywords) ? item.keywords : [];
+  const sourceUrl = safeUrl(item.sourceUrl);
+  const reviewKey = getLocalReviewKey(item);
+  const deadlineInfo = getDDay(getLocalDeadlineValue(item));
+
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="badges">
+        <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
+        <span class="badge category">${escapeHtml(safeText(item.projectType))}</span>
+        <span class="badge category">${escapeHtml(safeText(item.sourceName))}</span>
+      </div>
+
+      <div class="score-group">
+        <div class="deadline-badge ${deadlineInfo.className}">${escapeHtml(deadlineInfo.label)}</div>
+        <div class="score">${escapeHtml(safeText(item.score))}점</div>
+      </div>
+    </div>
+
+    <h2>${escapeHtml(safeText(item.title))}</h2>
+
+    <div class="meta">
+      <div><span>출처</span>${escapeHtml(safeText(item.sourceName))}</div>
+      <div><span>기관</span>${escapeHtml(safeText(item.agencyName))}</div>
+      <div><span>담당부서</span>${escapeHtml(safeText(item.department))}</div>
+      <div><span>유형</span>${escapeHtml(safeText(item.projectType))}</div>
+      <div><span>게재일</span>${escapeHtml(safeText(item.postedDate))}</div>
+      <div><span>마감일</span>${escapeHtml(safeText(item.deadline))}</div>
+    </div>
+
+    <div class="keywords">
+      ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
+    </div>
+
+    <div class="reason">
+      ${escapeHtml(safeText(item.reason))}
+    </div>
+
+    <p class="action">추천 액션: ${escapeHtml(safeText(item.nextAction))}</p>
+
+    ${createReviewControl(reviewKey)}
+
+    ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
+  `;
+
+  return card;
+}
+
+function renderLocalProjectCards() {
+  const cards = document.getElementById("localCards");
+  const empty = document.getElementById("localEmptyMessage");
+
+  if (!cards) return;
+
+  const searchValue = plainText(document.getElementById("localSearchInput")?.value).toLowerCase();
+  const regionValue = document.getElementById("localRegionFilter")?.value || "all";
+  const typeValue = document.getElementById("localTypeFilter")?.value || "all";
+  const gradeValue = document.getElementById("localGradeFilter")?.value || "all";
+  const reviewValue = document.getElementById("localReviewFilter")?.value || "all";
+  const deadlineSoon = document.getElementById("localDeadlineSoon")?.checked || false;
+
+  const filtered = localProjects.filter(item => {
+    const searchTarget = [
+      item.title,
+      item.sourceName,
+      item.agencyName,
+      item.department,
+      item.projectType,
+      item.region,
+      ...(item.keywords || [])
+    ].join(" ").toLowerCase();
+
+    const reviewKey = getLocalReviewKey(item);
+    const itemReviewStatus = getReviewStatus(reviewKey);
+    const deadlineInfo = getDDay(getLocalDeadlineValue(item));
+
+    const matchesSearch = !searchValue || searchTarget.includes(searchValue);
+    const matchesRegion = regionValue === "all" || safeText(item.region).includes(regionValue);
+    const matchesType = typeValue === "all" || item.projectType === typeValue;
+    const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
+    const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
+    const matchesDeadline = !deadlineSoon || deadlineInfo.sortDays <= 7;
+
+    return matchesSearch && matchesRegion && matchesType && matchesGrade && matchesReview && matchesDeadline;
+  });
+
+  filtered.sort((a, b) => {
+    const aDeadline = getDDay(getLocalDeadlineValue(a)).sortDays;
+    const bDeadline = getDDay(getLocalDeadlineValue(b)).sortDays;
+
+    if (aDeadline !== bDeadline) return aDeadline - bDeadline;
+
+    return (b.score || 0) - (a.score || 0);
+  });
+
+  cards.innerHTML = "";
+
+  filtered.forEach(item => {
+    cards.appendChild(createLocalProjectCard(item));
+  });
+
+  if (empty) {
+    empty.style.display = filtered.length ? "none" : "block";
+  }
+
+  bindReviewControls();
+  notifyRendered();
 }
 
 function setupTabs() {
@@ -567,7 +716,8 @@ function setupTabs() {
   const panels = {
     opportunities: document.getElementById("opportunitiesTab"),
     agencies: document.getElementById("agenciesTab"),
-    art: document.getElementById("artTab")
+    art: document.getElementById("artTab"),
+    local: document.getElementById("localTab")
   };
 
   buttons.forEach(button => {
@@ -584,6 +734,8 @@ function setupTabs() {
       if (panels[target]) {
         panels[target].classList.add("active");
       }
+
+      setTimeout(notifyRendered, 80);
     });
   });
 }
@@ -594,6 +746,7 @@ async function init() {
   allItems = await loadJson("data/b2g_opportunities.json", []);
   targetAgencies = await loadJson("data/target_agencies.json", []);
   artCommissions = await loadJson("data/art_commissions.json", []);
+  localProjects = await loadJson("data/local_projects.json", []);
   dashboardMeta = await loadJson("data/dashboard_meta.json", {});
 
   renderDashboardMeta();
@@ -601,6 +754,7 @@ async function init() {
   renderOpportunityCards();
   renderAgencyCards();
   renderArtCards();
+  renderLocalProjectCards();
 
   const searchInput = document.getElementById("searchInput");
   const gradeFilter = document.getElementById("gradeFilter");
@@ -608,11 +762,27 @@ async function init() {
   const reviewFilter = document.getElementById("reviewFilter");
   const artReviewFilter = document.getElementById("artReviewFilter");
 
+  const localSearchInput = document.getElementById("localSearchInput");
+  const localRegionFilter = document.getElementById("localRegionFilter");
+  const localTypeFilter = document.getElementById("localTypeFilter");
+  const localGradeFilter = document.getElementById("localGradeFilter");
+  const localReviewFilter = document.getElementById("localReviewFilter");
+  const localDeadlineSoon = document.getElementById("localDeadlineSoon");
+
   if (searchInput) searchInput.addEventListener("input", renderOpportunityCards);
   if (gradeFilter) gradeFilter.addEventListener("change", renderOpportunityCards);
   if (categoryFilter) categoryFilter.addEventListener("change", renderOpportunityCards);
   if (reviewFilter) reviewFilter.addEventListener("change", renderOpportunityCards);
   if (artReviewFilter) artReviewFilter.addEventListener("change", renderArtCards);
+
+  if (localSearchInput) localSearchInput.addEventListener("input", renderLocalProjectCards);
+  if (localRegionFilter) localRegionFilter.addEventListener("change", renderLocalProjectCards);
+  if (localTypeFilter) localTypeFilter.addEventListener("change", renderLocalProjectCards);
+  if (localGradeFilter) localGradeFilter.addEventListener("change", renderLocalProjectCards);
+  if (localReviewFilter) localReviewFilter.addEventListener("change", renderLocalProjectCards);
+  if (localDeadlineSoon) localDeadlineSoon.addEventListener("change", renderLocalProjectCards);
+
+  setTimeout(notifyRendered, 250);
 }
 
 document.addEventListener("DOMContentLoaded", init);
