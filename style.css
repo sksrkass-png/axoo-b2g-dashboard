@@ -1943,3 +1943,61 @@ h1 {
     justify-content: flex-start;
   }
 }
+
+/* =========================
+   Local Project Radar
+   ========================= */
+
+.meta-bar {
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+
+.local-filters {
+  align-items: center;
+}
+
+#localTab .local-list-head {
+  grid-template-columns: 220px minmax(0, 1fr) 150px 150px !important;
+}
+
+#localTab .accordion-summary {
+  grid-template-columns: 220px minmax(0, 1fr) 150px 150px !important;
+}
+
+#localTab .summary-source-wrap {
+  width: 190px !important;
+}
+
+#localTab .summary-source {
+  width: 88px !important;
+  min-width: 88px !important;
+  max-width: 88px !important;
+}
+
+#localTab .summary-period,
+#localTab .summary-deadline {
+  width: 150px !important;
+}
+
+@media (max-width: 960px) {
+  .meta-bar {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  #localTab .local-list-head,
+  #localTab .accordion-summary {
+    grid-template-columns: 1fr !important;
+  }
+
+  #localTab .summary-source-wrap,
+  #localTab .summary-period,
+  #localTab .summary-deadline {
+    width: auto !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .meta-bar {
+    grid-template-columns: 1fr !important;
+  }
+}
