@@ -24,6 +24,13 @@ const reviewStatusOptions = {
   done: "제안 완료"
 };
 
+const gradeOrder = {
+  S: 0,
+  A: 1,
+  B: 2,
+  C: 3
+};
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -44,19 +51,24 @@ function plainText(value) {
 
 function safeUrl(value) {
   const url = String(value ?? "").trim();
+
   if (!url) return "";
   if (url.startsWith("http://") || url.startsWith("https://")) return url;
+
   return "";
 }
 
 function formatMoney(value) {
   const number = Number(value || 0);
+
   if (!number) return "금액 미공개";
+
   return number.toLocaleString("ko-KR") + "원";
 }
 
 function parseDateValue(value) {
   const raw = String(value ?? "").trim();
+
   if (!raw) return null;
 
   if (raw.includes("-")) {
@@ -71,6 +83,7 @@ function parseDateValue(value) {
     const hour = raw.slice(8, 10) || "00";
     const minute = raw.slice(10, 12) || "00";
     const parsed = new Date(`${year}-${month}-${day}T${hour}:${minute}:00`);
+
     return Number.isNaN(parsed.getTime()) ? null : parsed;
   }
 
@@ -89,6 +102,7 @@ function getDDay(value) {
   }
 
   const today = new Date();
+
   today.setHours(0, 0, 0, 0);
   targetDate.setHours(0, 0, 0, 0);
 
@@ -137,6 +151,9 @@ function getDDay(value) {
 function getGradeClass(grade) {
   if (grade === "S") return "grade-s";
   if (grade === "A") return "grade-a";
+  if (grade === "B") return "grade-b";
+  if (grade === "C") return "grade-c";
+
   return "grade-b";
 }
 
@@ -170,17 +187,23 @@ function saveReviewStore(store) {
 
 function getReviewStatus(key) {
   const store = getReviewStore();
+
   return store[key] || "new";
 }
 
 function setReviewStatus(key, value) {
   const store = getReviewStore();
+
   store[key] = value;
   saveReviewStore(store);
 }
 
 function getOpportunityReviewKey(item) {
   return `opportunity-${item.bidNtceNo || item.bidNtceNm || ""}`;
+}
+
+function getAgencyReviewKey(item) {
+  return `agency-${item.agencyName || ""}-${item.region || ""}`;
 }
 
 function getArtReviewKey(item) {
@@ -226,7 +249,9 @@ function bindReviewControls() {
 
       const activePanel = document.querySelector(".tab-panel.active");
 
-      if (activePanel?.id === "artTab") {
+      if (activePanel?.id === "agenciesTab") {
+        renderAgencyCards();
+      } else if (activePanel?.id === "artTab") {
         renderArtCards();
       } else if (activePanel?.id === "localTab") {
         renderLocalProjectCards();
@@ -234,7 +259,7 @@ function bindReviewControls() {
         renderOpportunityCards();
       }
 
-      setTimeout(notifyRendered, 80);
+      setTimeout(notifyRendered, 120);
     });
   });
 }
@@ -248,8 +273,8 @@ function renderDashboardMeta() {
 
   if (lastUpdatedAt) {
     lastUpdatedAt.textContent = dashboardMeta.lastUpdatedAt
-      ? `${dashboardMeta.lastUpdatedAt} ${dashboardMeta.timezone ? `(${dashboardMeta.timezone})` : ""}`
-      : "-";
+      ? `최근 업데이트 : ${dashboardMeta.lastUpdatedAt}${dashboardMeta.timezone ? ` (${dashboardMeta.timezone})` : ""}`
+      : "최근 업데이트 : -";
   }
 
   if (opportunityCount) {
@@ -369,12 +394,12 @@ function renderOpportunityCards() {
       ...(item.matchedKeywords || [])
     ].join(" ").toLowerCase();
 
-    const matchesSearch = searchTarget.includes(searchValue);
-    const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
-    const matchesCategory = categoryValue === "all" || item.category === categoryValue;
-
     const reviewKey = getOpportunityReviewKey(item);
     const itemReviewStatus = getReviewStatus(reviewKey);
+
+    const matchesSearch = !searchValue || searchTarget.includes(searchValue);
+    const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
+    const matchesCategory = categoryValue === "all" || item.category === categoryValue;
     const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
 
     return matchesSearch && matchesGrade && matchesCategory && matchesReview;
@@ -386,7 +411,7 @@ function renderOpportunityCards() {
 
     if (aDeadline !== bDeadline) return aDeadline - bDeadline;
 
-    return (b.score || 0) - (a.score || 0);
+    return Number(b.score || 0) - Number(a.score || 0);
   });
 
   const cards = document.getElementById("cards");
@@ -408,13 +433,39 @@ function renderOpportunityCards() {
   notifyRendered();
 }
 
+function matchAgencyRegion(itemRegion, filterValue) {
+  const region = safeText(itemRegion);
+
+  if (filterValue === "all") return true;
+
+  if (filterValue === "기타") {
+    const majorRegions = ["서울", "경기", "인천", "부산", "대전", "광주", "대구", "울산", "세종"];
+
+    return (
+      region.includes("기타") ||
+      region.includes("전국") ||
+      !majorRegions.some(value => region.includes(value))
+    );
+  }
+
+  return region.includes(filterValue);
+}
+
 function createAgencyCard(item) {
   const card = document.createElement("article");
   card.className = "card";
 
+  card.dataset.agencyName = safeText(item.agencyName);
+  card.dataset.agencyRegion = safeText(item.region);
+  card.dataset.agencyGrade = safeText(item.grade);
+  card.dataset.agencyAwardCount = String(item.awardCount || 0);
+  card.dataset.agencyPlanCount = String(item.orderPlanCount || 0);
+  card.dataset.agencyRelatedCount = String(item.relatedCount || 0);
+
   const gradeClass = getGradeClass(item.grade);
   const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
   const evidenceSources = Array.isArray(item.evidenceSources) ? item.evidenceSources : [];
+  const reviewKey = getAgencyReviewKey(item);
 
   const evidenceHtml = evidenceSources.length
     ? `
@@ -423,6 +474,7 @@ function createAgencyCard(item) {
         <div class="evidence-list">
           ${evidenceSources.slice(0, 4).map(source => {
             const sourceUrl = safeUrl(source.sourceUrl);
+
             return `
               <div class="evidence-item">
                 <div class="evidence-main">
@@ -445,22 +497,25 @@ function createAgencyCard(item) {
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
-        <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
-        <span class="badge category">${escapeHtml(safeText(item.agencyType))}</span>
-        <span class="badge category">${escapeHtml(safeText(item.region))}</span>
+        <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade || "C"))}등급</span>
+        <span class="badge category">${escapeHtml(safeText(item.agencyType || "기관"))}</span>
+        <span class="badge category">${escapeHtml(safeText(item.region || "기타"))}</span>
       </div>
-      <div class="score">관련 ${escapeHtml(safeText(item.relatedCount))}건</div>
+
+      <div class="score">관련 ${escapeHtml(safeText(item.relatedCount || 0))}건</div>
     </div>
 
-    <h2>${escapeHtml(safeText(item.agencyName))}</h2>
+    <h2>${escapeHtml(safeText(item.agencyName || "기관명 없음"))}</h2>
 
     <div class="meta">
-      <div><span>기관유형</span>${escapeHtml(safeText(item.agencyType))}</div>
-      <div><span>지역</span>${escapeHtml(safeText(item.region))}</div>
+      <div><span>기관유형</span>${escapeHtml(safeText(item.agencyType || "-"))}</div>
+      <div><span>지역</span>${escapeHtml(safeText(item.region || "-"))}</div>
       <div><span>추정 규모</span>${escapeHtml(formatMoney(item.estimatedAmount))}</div>
-      <div><span>관련 이력</span>${escapeHtml(safeText(item.relatedCount))}건</div>
+      <div><span>관련 이력</span>${escapeHtml(safeText(item.relatedCount || 0))}건</div>
       <div><span>공고 이력</span>${escapeHtml(safeText(item.bidCount || 0))}건</div>
       <div><span>계약 이력</span>${escapeHtml(safeText(item.contractCount || 0))}건</div>
+      <div><span>낙찰 이력</span>${escapeHtml(safeText(item.awardCount || 0))}건</div>
+      <div><span>발주계획</span>${escapeHtml(safeText(item.orderPlanCount || 0))}건</div>
     </div>
 
     <div class="keywords">
@@ -468,11 +523,13 @@ function createAgencyCard(item) {
     </div>
 
     <div class="reason">
-      ${escapeHtml(safeText(item.note))}
+      ${escapeHtml(safeText(item.note || "기관 타깃 근거를 확인해 주세요."))}
     </div>
 
-    <p class="action">제안 방향: ${escapeHtml(safeText(item.recommendedProposal))}</p>
-    <p class="action">다음 액션: ${escapeHtml(safeText(item.nextAction))}</p>
+    <p class="action">제안 방향: ${escapeHtml(safeText(item.recommendedProposal || "-"))}</p>
+    <p class="action">다음 액션: ${escapeHtml(safeText(item.nextAction || "-"))}</p>
+
+    ${createReviewControl(reviewKey)}
 
     ${evidenceHtml}
   `;
@@ -482,7 +539,50 @@ function createAgencyCard(item) {
 
 function renderAgencyCards() {
   const cards = document.getElementById("agencyCards");
+  const empty = document.getElementById("agencyEmptyMessage");
+
   if (!cards) return;
+
+  const searchValue = plainText(document.getElementById("agencySearchInput")?.value).toLowerCase();
+  const regionValue = document.getElementById("agencyRegionFilter")?.value || "all";
+  const gradeValue = document.getElementById("agencyGradeFilter")?.value || "all";
+  const reviewValue = document.getElementById("agencyReviewFilter")?.value || "all";
+  const awardOnly = document.getElementById("agencyAwardOnly")?.checked || false;
+  const planOnly = document.getElementById("agencyPlanOnly")?.checked || false;
+
+  const filtered = targetAgencies.filter(item => {
+    const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
+
+    const searchTarget = [
+      item.agencyName,
+      item.agencyType,
+      item.region,
+      item.note,
+      item.recommendedProposal,
+      item.nextAction,
+      ...keywords
+    ].join(" ").toLowerCase();
+
+    const reviewKey = getAgencyReviewKey(item);
+    const itemReviewStatus = getReviewStatus(reviewKey);
+
+    const matchesSearch = !searchValue || searchTarget.includes(searchValue);
+    const matchesRegion = matchAgencyRegion(item.region, regionValue);
+    const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
+    const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
+    const matchesAward = !awardOnly || Number(item.awardCount || 0) > 0;
+    const matchesPlan = !planOnly || Number(item.orderPlanCount || 0) > 0;
+
+    return matchesSearch && matchesRegion && matchesGrade && matchesReview && matchesAward && matchesPlan;
+  });
+
+  filtered.sort((a, b) => {
+    const gradeDiff = (gradeOrder[a.grade] ?? 9) - (gradeOrder[b.grade] ?? 9);
+
+    if (gradeDiff !== 0) return gradeDiff;
+
+    return Number(b.estimatedAmount || 0) - Number(a.estimatedAmount || 0);
+  });
 
   cards.innerHTML = "";
 
@@ -493,14 +593,27 @@ function renderAgencyCards() {
         <p class="reason">engine Actions를 실행해 target_agencies.json을 생성/동기화해 주세요.</p>
       </article>
     `;
+
+    if (empty) empty.style.display = "none";
+
+    notifyRendered();
     return;
   }
 
-  targetAgencies.forEach(item => {
+  filtered.forEach(item => {
     cards.appendChild(createAgencyCard(item));
   });
 
+  if (empty) {
+    empty.style.display = filtered.length ? "none" : "block";
+  }
+
+  bindReviewControls();
   notifyRendered();
+}
+
+function getArtSourceValue(item) {
+  return item.source || item.region || item.agency || "";
 }
 
 function createArtCard(item) {
@@ -552,17 +665,38 @@ function createArtCard(item) {
 
 function renderArtCards() {
   const cards = document.getElementById("artCards");
+  const artSearchInput = document.getElementById("artSearchInput");
+  const artSourceFilter = document.getElementById("artSourceFilter");
   const artReviewFilter = document.getElementById("artReviewFilter");
 
   if (!cards) return;
 
-  const reviewValue = artReviewFilter ? artReviewFilter.value : "all";
+  const searchValue = plainText(artSearchInput?.value).toLowerCase();
+  const sourceValue = artSourceFilter?.value || "all";
+  const reviewValue = artReviewFilter?.value || "all";
 
   const filtered = artCommissions.filter(item => {
+    const keywords = Array.isArray(item.keywords) ? item.keywords : [];
+
+    const searchTarget = [
+      item.title,
+      item.agency,
+      item.region,
+      item.source,
+      item.category,
+      item.status,
+      ...keywords
+    ].join(" ").toLowerCase();
+
+    const sourceTarget = getArtSourceValue(item);
     const reviewKey = getArtReviewKey(item);
     const itemReviewStatus = getReviewStatus(reviewKey);
 
-    return reviewValue === "all" || itemReviewStatus === reviewValue;
+    const matchesSearch = !searchValue || searchTarget.includes(searchValue);
+    const matchesSource = sourceValue === "all" || sourceTarget.includes(sourceValue);
+    const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
+
+    return matchesSearch && matchesSource && matchesReview;
   });
 
   filtered.sort((a, b) => {
@@ -578,9 +712,11 @@ function renderArtCards() {
     cards.innerHTML = `
       <article class="card">
         <h2>조건에 맞는 건축물 미술작품 데이터가 없습니다.</h2>
-        <p class="reason">검토 상태 필터를 전체 상태로 바꾸거나, engine Actions를 실행해 데이터를 동기화해 주세요.</p>
+        <p class="reason">검색어와 필터를 초기화하거나, engine Actions를 실행해 데이터를 동기화해 주세요.</p>
       </article>
     `;
+
+    notifyRendered();
     return;
   }
 
@@ -596,13 +732,17 @@ function getLocalDeadlineValue(item) {
   return item.deadline || item.endDate || item.closeDate || "";
 }
 
+function getLocalSourceUrl(item) {
+  return safeUrl(item.sourceUrl || item.sourcePageUrl || item.attachmentUrl || "");
+}
+
 function createLocalProjectCard(item) {
   const card = document.createElement("article");
   card.className = "card";
 
   const gradeClass = getGradeClass(item.grade);
   const keywords = Array.isArray(item.keywords) ? item.keywords : [];
-  const sourceUrl = safeUrl(item.sourceUrl);
+  const sourceUrl = getLocalSourceUrl(item);
   const reviewKey = getLocalReviewKey(item);
   const deadlineInfo = getDDay(getLocalDeadlineValue(item));
 
@@ -682,7 +822,7 @@ function renderLocalProjectCards() {
   const typeValue = document.getElementById("localTypeFilter")?.value || "all";
   const gradeValue = document.getElementById("localGradeFilter")?.value || "all";
   const reviewValue = document.getElementById("localReviewFilter")?.value || "all";
-    const deadlineStatusValue = document.getElementById("localDeadlineStatusFilter")?.value || "active";
+  const deadlineStatusValue = document.getElementById("localDeadlineStatusFilter")?.value || "active";
 
   const filtered = localProjects.filter(item => {
     const searchTarget = [
@@ -715,7 +855,7 @@ function renderLocalProjectCards() {
 
     if (aDeadline !== bDeadline) return aDeadline - bDeadline;
 
-    return (b.score || 0) - (a.score || 0);
+    return Number(b.score || 0) - Number(a.score || 0);
   });
 
   cards.innerHTML = "";
@@ -757,31 +897,38 @@ function setupTabs() {
         panels[target].classList.add("active");
       }
 
-      setTimeout(notifyRendered, 80);
+      setTimeout(() => {
+        if (target === "agencies") {
+          renderAgencyCards();
+        } else if (target === "art") {
+          renderArtCards();
+        } else if (target === "local") {
+          renderLocalProjectCards();
+        } else {
+          renderOpportunityCards();
+        }
+
+        notifyRendered();
+      }, 80);
     });
   });
 }
 
-async function init() {
-  setupTabs();
-
-  allItems = await loadJson("data/b2g_opportunities.json", []);
-  targetAgencies = await loadJson("data/target_agencies.json", []);
-  artCommissions = await loadJson("data/art_commissions.json", []);
-  localProjects = await loadJson("data/local_projects.json", []);
-  dashboardMeta = await loadJson("data/dashboard_meta.json", {});
-
-  renderDashboardMeta();
-  renderSummary(allItems);
-  renderOpportunityCards();
-  renderAgencyCards();
-  renderArtCards();
-  renderLocalProjectCards();
-
+function bindFilterControls() {
   const searchInput = document.getElementById("searchInput");
   const gradeFilter = document.getElementById("gradeFilter");
   const categoryFilter = document.getElementById("categoryFilter");
   const reviewFilter = document.getElementById("reviewFilter");
+
+  const agencySearchInput = document.getElementById("agencySearchInput");
+  const agencyRegionFilter = document.getElementById("agencyRegionFilter");
+  const agencyGradeFilter = document.getElementById("agencyGradeFilter");
+  const agencyReviewFilter = document.getElementById("agencyReviewFilter");
+  const agencyAwardOnly = document.getElementById("agencyAwardOnly");
+  const agencyPlanOnly = document.getElementById("agencyPlanOnly");
+
+  const artSearchInput = document.getElementById("artSearchInput");
+  const artSourceFilter = document.getElementById("artSourceFilter");
   const artReviewFilter = document.getElementById("artReviewFilter");
 
   const localSearchInput = document.getElementById("localSearchInput");
@@ -795,6 +942,16 @@ async function init() {
   if (gradeFilter) gradeFilter.addEventListener("change", renderOpportunityCards);
   if (categoryFilter) categoryFilter.addEventListener("change", renderOpportunityCards);
   if (reviewFilter) reviewFilter.addEventListener("change", renderOpportunityCards);
+
+  if (agencySearchInput) agencySearchInput.addEventListener("input", renderAgencyCards);
+  if (agencyRegionFilter) agencyRegionFilter.addEventListener("change", renderAgencyCards);
+  if (agencyGradeFilter) agencyGradeFilter.addEventListener("change", renderAgencyCards);
+  if (agencyReviewFilter) agencyReviewFilter.addEventListener("change", renderAgencyCards);
+  if (agencyAwardOnly) agencyAwardOnly.addEventListener("change", renderAgencyCards);
+  if (agencyPlanOnly) agencyPlanOnly.addEventListener("change", renderAgencyCards);
+
+  if (artSearchInput) artSearchInput.addEventListener("input", renderArtCards);
+  if (artSourceFilter) artSourceFilter.addEventListener("change", renderArtCards);
   if (artReviewFilter) artReviewFilter.addEventListener("change", renderArtCards);
 
   if (localSearchInput) localSearchInput.addEventListener("input", renderLocalProjectCards);
@@ -803,482 +960,28 @@ async function init() {
   if (localGradeFilter) localGradeFilter.addEventListener("change", renderLocalProjectCards);
   if (localReviewFilter) localReviewFilter.addEventListener("change", renderLocalProjectCards);
   if (localDeadlineStatusFilter) localDeadlineStatusFilter.addEventListener("change", renderLocalProjectCards);
+}
+
+async function init() {
+  setupTabs();
+
+  allItems = await loadJson("data/b2g_opportunities.json", []);
+  targetAgencies = await loadJson("data/target_agencies.json", []);
+  artCommissions = await loadJson("data/art_commissions.json", []);
+  localProjects = await loadJson("data/local_projects.json", []);
+  dashboardMeta = await loadJson("data/dashboard_meta.json", {});
+
+  renderDashboardMeta();
+  renderSummary(allItems);
+
+  renderOpportunityCards();
+  renderAgencyCards();
+  renderArtCards();
+  renderLocalProjectCards();
+
+  bindFilterControls();
 
   setTimeout(notifyRendered, 250);
 }
 
 document.addEventListener("DOMContentLoaded", init);
-function getAgencyPatchReviewKey(item) {
-  return `agency-${item.agencyName || item.sourceId || ""}-${item.region || ""}`;
-}
-
-bindReviewControls = function () {
-  document.querySelectorAll(".review-select").forEach(select => {
-    if (select.dataset.reviewBound === "true") return;
-
-    select.dataset.reviewBound = "true";
-
-    select.addEventListener("change", event => {
-      const key = event.target.dataset.reviewKey;
-      const value = event.target.value;
-
-      setReviewStatus(key, value);
-
-      const activePanel = document.querySelector(".tab-panel.active");
-
-      if (activePanel?.id === "artTab") {
-        renderArtCards();
-      } else if (activePanel?.id === "localTab") {
-        renderLocalProjectCards();
-      } else if (activePanel?.id === "agenciesTab") {
-        renderAgencyCards();
-      } else {
-        renderOpportunityCards();
-      }
-
-      setTimeout(notifyRendered, 120);
-    });
-  });
-};
-
-function createAgencyCardFixed(item) {
-  const card = document.createElement("article");
-  card.className = "card";
-
-  card.dataset.agencyRegion = safeText(item.region || "기타");
-  card.dataset.agencyGrade = safeText(item.grade || "C");
-  card.dataset.agencyAwardCount = String(item.awardCount || 0);
-  card.dataset.agencyPlanCount = String(item.orderPlanCount || 0);
-  card.dataset.agencyRelatedCount = String(item.relatedCount || 0);
-
-  const gradeClass = getGradeClass(item.grade);
-  const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
-  const evidenceSources = Array.isArray(item.evidenceSources) ? item.evidenceSources : [];
-  const reviewKey = getAgencyPatchReviewKey(item);
-
-  const evidenceHtml = evidenceSources.length
-    ? `
-      <div class="evidence-box">
-        <strong>근거 자료</strong>
-        <div class="evidence-list">
-          ${evidenceSources.slice(0, 4).map(source => {
-            const sourceUrl = safeUrl(source.sourceUrl);
-
-            return `
-              <div class="evidence-item">
-                <div class="evidence-main">
-                  <span class="evidence-type">${escapeHtml(safeText(source.sourceType))}</span>
-                  <span class="evidence-title">${escapeHtml(safeText(source.title))}</span>
-                </div>
-                <div class="evidence-sub">
-                  <span>${escapeHtml(formatMoney(source.amount))}</span>
-                  <span>${escapeHtml(safeText(source.date))}</span>
-                  ${sourceUrl ? `<a href="${sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
-                </div>
-              </div>
-            `;
-          }).join("")}
-        </div>
-      </div>
-    `
-    : "";
-
-  card.innerHTML = `
-    <div class="card-top">
-      <div class="badges">
-        <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade || "C"))}등급</span>
-        <span class="badge category">${escapeHtml(safeText(item.agencyType || "기관"))}</span>
-        <span class="badge category">${escapeHtml(safeText(item.region || "기타"))}</span>
-      </div>
-      <div class="score">관련 ${escapeHtml(safeText(item.relatedCount || 0))}건</div>
-    </div>
-
-    <h2>${escapeHtml(safeText(item.agencyName || "기관명 없음"))}</h2>
-
-    <div class="meta">
-      <div><span>기관유형</span>${escapeHtml(safeText(item.agencyType || "-"))}</div>
-      <div><span>지역</span>${escapeHtml(safeText(item.region || "-"))}</div>
-      <div><span>추정 규모</span>${escapeHtml(formatMoney(item.estimatedAmount))}</div>
-      <div><span>관련 이력</span>${escapeHtml(safeText(item.relatedCount || 0))}건</div>
-      <div><span>공고 이력</span>${escapeHtml(safeText(item.bidCount || 0))}건</div>
-      <div><span>계약 이력</span>${escapeHtml(safeText(item.contractCount || 0))}건</div>
-      <div><span>낙찰 이력</span>${escapeHtml(safeText(item.awardCount || 0))}건</div>
-      <div><span>발주계획</span>${escapeHtml(safeText(item.orderPlanCount || 0))}건</div>
-    </div>
-
-    <div class="keywords">
-      ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
-    </div>
-
-    <div class="reason">
-      ${escapeHtml(safeText(item.note || "기관 타깃 근거를 확인해 주세요."))}
-    </div>
-
-    <p class="action">제안 방향: ${escapeHtml(safeText(item.recommendedProposal || "-"))}</p>
-    <p class="action">다음 액션: ${escapeHtml(safeText(item.nextAction || "-"))}</p>
-
-    ${createReviewControl(reviewKey)}
-
-    ${evidenceHtml}
-  `;
-
-  return card;
-}
-
-function matchAgencyRegion(itemRegion, filterValue) {
-  const region = safeText(itemRegion);
-
-  if (filterValue === "all") return true;
-
-  if (filterValue === "기타") {
-    return (
-      region.includes("기타") ||
-      region.includes("전국") ||
-      !["서울", "경기", "인천", "부산", "대전", "광주", "대구", "울산", "세종"].some(value => region.includes(value))
-    );
-  }
-
-  return region.includes(filterValue);
-}
-
-renderAgencyCards = function () {
-  const cards = document.getElementById("agencyCards");
-  const empty = document.getElementById("agencyEmptyMessage");
-
-  if (!cards) return;
-
-  const searchValue = plainText(document.getElementById("agencySearchInput")?.value).toLowerCase();
-  const regionValue = document.getElementById("agencyRegionFilter")?.value || "all";
-  const gradeValue = document.getElementById("agencyGradeFilter")?.value || "all";
-  const reviewValue = document.getElementById("agencyReviewFilter")?.value || "all";
-  const awardOnly = document.getElementById("agencyAwardOnly")?.checked || false;
-  const planOnly = document.getElementById("agencyPlanOnly")?.checked || false;
-
-  const filtered = targetAgencies.filter(item => {
-    const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
-
-    const searchTarget = [
-      item.agencyName,
-      item.agencyType,
-      item.region,
-      item.note,
-      item.recommendedProposal,
-      item.nextAction,
-      ...keywords
-    ].join(" ").toLowerCase();
-
-    const reviewKey = getAgencyPatchReviewKey(item);
-    const itemReviewStatus = getReviewStatus(reviewKey);
-
-    const matchesSearch = !searchValue || searchTarget.includes(searchValue);
-    const matchesRegion = matchAgencyRegion(item.region, regionValue);
-    const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
-    const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
-    const matchesAward = !awardOnly || Number(item.awardCount || 0) > 0;
-    const matchesPlan = !planOnly || Number(item.orderPlanCount || 0) > 0;
-
-    return matchesSearch && matchesRegion && matchesGrade && matchesReview && matchesAward && matchesPlan;
-  });
-
-  const gradeOrder = {
-    S: 0,
-    A: 1,
-    B: 2,
-    C: 3
-  };
-
-  filtered.sort((a, b) => {
-    const gradeDiff = (gradeOrder[a.grade] ?? 9) - (gradeOrder[b.grade] ?? 9);
-    if (gradeDiff !== 0) return gradeDiff;
-
-    return Number(b.estimatedAmount || 0) - Number(a.estimatedAmount || 0);
-  });
-
-  cards.innerHTML = "";
-
-  filtered.forEach(item => {
-    cards.appendChild(createAgencyCardFixed(item));
-  });
-
-  if (empty) {
-    empty.style.display = filtered.length ? "none" : "block";
-  }
-
-  bindReviewControls();
-
-  setTimeout(notifyRendered, 120);
-};
-
-function bindAgencyFilterControlsFixed() {
-  const search = document.getElementById("agencySearchInput");
-  const region = document.getElementById("agencyRegionFilter");
-  const grade = document.getElementById("agencyGradeFilter");
-  const review = document.getElementById("agencyReviewFilter");
-  const awardOnly = document.getElementById("agencyAwardOnly");
-  const planOnly = document.getElementById("agencyPlanOnly");
-
-  if (search && search.dataset.appAgencyBound !== "true") {
-    search.addEventListener("input", renderAgencyCards);
-    search.dataset.appAgencyBound = "true";
-  }
-
-  if (region && region.dataset.appAgencyBound !== "true") {
-    region.addEventListener("change", renderAgencyCards);
-    region.dataset.appAgencyBound = "true";
-  }
-
-  if (grade && grade.dataset.appAgencyBound !== "true") {
-    grade.addEventListener("change", renderAgencyCards);
-    grade.dataset.appAgencyBound = "true";
-  }
-
-  if (review && review.dataset.appAgencyBound !== "true") {
-    review.addEventListener("change", renderAgencyCards);
-    review.dataset.appAgencyBound = "true";
-  }
-
-  if (awardOnly && awardOnly.dataset.appAgencyBound !== "true") {
-    awardOnly.addEventListener("change", renderAgencyCards);
-    awardOnly.dataset.appAgencyBound = "true";
-  }
-
-  if (planOnly && planOnly.dataset.appAgencyBound !== "true") {
-    planOnly.addEventListener("change", renderAgencyCards);
-    planOnly.dataset.appAgencyBound = "true";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    bindAgencyFilterControlsFixed();
-    renderAgencyCards();
-  }, 900);
-
-  setTimeout(() => {
-    bindAgencyFilterControlsFixed();
-    renderAgencyCards();
-  }, 2200);
-});
-
-/* =========================
-   Agency Direct Render Patch
-   기관 타깃 강제 렌더링 패치
-   ========================= */
-
-(function () {
-  function agencyPatchEscape(value) {
-    return String(value ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function agencyPatchText(value, fallback = "-") {
-    const text = String(value ?? "").trim();
-    return text || fallback;
-  }
-
-  function agencyPatchMoney(value) {
-    const number = Number(value || 0);
-    if (!number) return "금액 미공개";
-    return number.toLocaleString("ko-KR") + "원";
-  }
-
-  function agencyPatchUrl(value) {
-    const url = String(value ?? "").trim();
-    if (!url) return "";
-    if (url.startsWith("http://") || url.startsWith("https://")) return url;
-    return "";
-  }
-
-  function findAgencyPanel() {
-    return (
-      document.getElementById("agenciesTab") ||
-      document.getElementById("agencyTab") ||
-      document.querySelector('.tab-panel[data-tab="agencies"]') ||
-      document.querySelector(".tab-panel.active")
-    );
-  }
-
-  function ensureAgencyCardsBox() {
-    let cards = document.getElementById("agencyCards");
-
-    if (cards) return cards;
-
-    const panel = findAgencyPanel();
-
-    if (!panel) {
-      let diagnostic = document.getElementById("agencyPatchDiagnostic");
-
-      if (!diagnostic) {
-        diagnostic = document.createElement("div");
-        diagnostic.id = "agencyPatchDiagnostic";
-        diagnostic.style.cssText = `
-          margin: 16px;
-          padding: 16px;
-          border-radius: 14px;
-          background: #fff1f0;
-          border: 1px solid rgba(255, 59, 48, 0.35);
-          color: #111;
-          font-weight: 800;
-          z-index: 9999;
-        `;
-        document.body.prepend(diagnostic);
-      }
-
-      diagnostic.textContent = "기관 타깃 패치 실행됨: agenciesTab 또는 agencyCards 영역을 찾지 못했습니다.";
-      return null;
-    }
-
-    cards = document.createElement("div");
-    cards.id = "agencyCards";
-    cards.className = "cards agency-direct-cards";
-    panel.appendChild(cards);
-
-    return cards;
-  }
-
-  function createAgencyPatchCard(item) {
-    const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
-    const evidenceSources = Array.isArray(item.evidenceSources) ? item.evidenceSources : [];
-
-    const evidenceHtml = evidenceSources.length
-      ? `
-        <div class="evidence-box">
-          <strong>근거 자료</strong>
-          <div class="evidence-list">
-            ${evidenceSources.slice(0, 4).map(source => {
-              const sourceUrl = agencyPatchUrl(source.sourceUrl);
-
-              return `
-                <div class="evidence-item">
-                  <div class="evidence-main">
-                    <span class="evidence-type">${agencyPatchEscape(agencyPatchText(source.sourceType))}</span>
-                    <span class="evidence-title">${agencyPatchEscape(agencyPatchText(source.title))}</span>
-                  </div>
-                  <div class="evidence-sub">
-                    <span>${agencyPatchEscape(agencyPatchMoney(source.amount))}</span>
-                    <span>${agencyPatchEscape(agencyPatchText(source.date))}</span>
-                    ${sourceUrl ? `<a href="${sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
-                  </div>
-                </div>
-              `;
-            }).join("")}
-          </div>
-        </div>
-      `
-      : "";
-
-    return `
-      <article class="card agency-direct-card" style="display:block;">
-        <div class="card-top">
-          <div class="badges">
-            <span class="badge grade-b">${agencyPatchEscape(agencyPatchText(item.grade, "C"))}등급</span>
-            <span class="badge category">${agencyPatchEscape(agencyPatchText(item.agencyType, "기관"))}</span>
-            <span class="badge category">${agencyPatchEscape(agencyPatchText(item.region, "기타"))}</span>
-          </div>
-          <div class="score">관련 ${agencyPatchEscape(agencyPatchText(item.relatedCount, "0"))}건</div>
-        </div>
-
-        <h2>${agencyPatchEscape(agencyPatchText(item.agencyName, "기관명 없음"))}</h2>
-
-        <div class="meta">
-          <div><span>기관유형</span>${agencyPatchEscape(agencyPatchText(item.agencyType))}</div>
-          <div><span>지역</span>${agencyPatchEscape(agencyPatchText(item.region))}</div>
-          <div><span>추정 규모</span>${agencyPatchEscape(agencyPatchMoney(item.estimatedAmount))}</div>
-          <div><span>관련 이력</span>${agencyPatchEscape(agencyPatchText(item.relatedCount, "0"))}건</div>
-          <div><span>공고 이력</span>${agencyPatchEscape(agencyPatchText(item.bidCount, "0"))}건</div>
-          <div><span>계약 이력</span>${agencyPatchEscape(agencyPatchText(item.contractCount, "0"))}건</div>
-          <div><span>낙찰 이력</span>${agencyPatchEscape(agencyPatchText(item.awardCount, "0"))}건</div>
-          <div><span>발주계획</span>${agencyPatchEscape(agencyPatchText(item.orderPlanCount, "0"))}건</div>
-        </div>
-
-        <div class="keywords">
-          ${keywords.map(keyword => `<span class="keyword">${agencyPatchEscape(keyword)}</span>`).join("")}
-        </div>
-
-        <div class="reason">
-          ${agencyPatchEscape(agencyPatchText(item.note, "기관 타깃 근거를 확인해 주세요."))}
-        </div>
-
-        <p class="action">제안 방향: ${agencyPatchEscape(agencyPatchText(item.recommendedProposal))}</p>
-        <p class="action">다음 액션: ${agencyPatchEscape(agencyPatchText(item.nextAction))}</p>
-
-        ${evidenceHtml}
-      </article>
-    `;
-  }
-
-  async function renderAgencyDirectly() {
-    const cards = ensureAgencyCardsBox();
-
-    if (!cards) return;
-
-    cards.style.display = "grid";
-    cards.style.visibility = "visible";
-    cards.style.opacity = "1";
-
-    cards.innerHTML = `
-      <article class="card" style="display:block;">
-        <h2>기관 타깃 데이터를 불러오는 중입니다.</h2>
-        <p class="reason">target_agencies.json 직접 연결을 확인하고 있습니다.</p>
-      </article>
-    `;
-
-    try {
-      const response = await fetch(`data/target_agencies.json?v=${Date.now()}`);
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (!Array.isArray(data) || !data.length) {
-        cards.innerHTML = `
-          <article class="card" style="display:block;">
-            <h2>기관 타깃 데이터가 비어 있습니다.</h2>
-            <p class="reason">target_agencies.json은 연결되었지만 배열 데이터가 없습니다.</p>
-          </article>
-        `;
-        return;
-      }
-
-      cards.innerHTML = data.map(createAgencyPatchCard).join("");
-
-      const emptyMessage = document.getElementById("agencyEmptyMessage");
-
-      if (emptyMessage) {
-        emptyMessage.style.display = "none";
-      }
-
-      console.log(`[AXOO] 기관 타깃 직접 렌더링 완료: ${data.length}건`);
-    } catch (error) {
-      cards.innerHTML = `
-        <article class="card" style="display:block;">
-          <h2>기관 타깃 데이터를 불러오지 못했습니다.</h2>
-          <p class="reason">data/target_agencies.json 연결 또는 JSON 형식을 확인해야 합니다.</p>
-          <p class="action">${agencyPatchEscape(error.message)}</p>
-        </article>
-      `;
-
-      console.error("[AXOO] 기관 타깃 직접 렌더링 실패:", error);
-    }
-  }
-
-  window.renderAgencyDirectly = renderAgencyDirectly;
-
-  function scheduleAgencyDirectRender() {
-    setTimeout(renderAgencyDirectly, 700);
-    setTimeout(renderAgencyDirectly, 2200);
-    setTimeout(renderAgencyDirectly, 4800);
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", scheduleAgencyDirectRender);
-  } else {
-    scheduleAgencyDirectRender();
-  }
-})();
