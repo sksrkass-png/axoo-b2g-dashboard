@@ -9,6 +9,7 @@
 
   let artSummaryData = [];
   let opportunitySummaryData = [];
+  let localSummaryData = [];
   let agencySummaryData = [];
 
   function safeText(value) {
@@ -80,10 +81,12 @@
   function shortSourceName(value) {
     const text = safeText(value);
 
+    if (text.includes("나라장터")) return "나라장터";
+    if (text.includes("서울시 입찰공고")) return "서울";
+    if (text.includes("서울특별시")) return "서울";
     if (text.includes("서울")) return "서울";
     if (text.includes("경기")) return "경기도";
     if (text.includes("LH") || text.includes("SH")) return "LH/SH";
-    if (text.includes("나라장터")) return "나라장터";
 
     return text || "-";
   }
@@ -188,6 +191,22 @@
     }
   }
 
+  async function loadLocalSummaryData() {
+    try {
+      const response = await fetch(`data/local_projects.json?v=${Date.now()}`);
+
+      if (!response.ok) return;
+
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        localSummaryData = data;
+      }
+    } catch (error) {
+      console.warn("local summary load failed", error);
+    }
+  }
+
   async function loadAgencySummaryData() {
     try {
       const response = await fetch(`data/target_agencies.json?v=${Date.now()}`);
@@ -223,6 +242,35 @@
           "bidName",
           "noticeName",
           "name",
+          "공고명"
+        ])
+      );
+
+      if (!itemTitle) return false;
+
+      return (
+        itemTitle === targetTitle ||
+        itemTitle.includes(targetTitle) ||
+        targetTitle.includes(itemTitle)
+      );
+    }) || null;
+  }
+
+  function findLocalByTitle(title) {
+    const targetTitle = compactText(title);
+
+    if (!targetTitle) return null;
+
+    return localSummaryData.find(item => {
+      const itemTitle = compactText(
+        item.title ||
+        item.name ||
+        item.projectName ||
+        getFirstValue(item, [
+          "title",
+          "name",
+          "projectName",
+          "사업명",
           "공고명"
         ])
       );
@@ -318,30 +366,35 @@
     if (!metaBar) return;
 
     const opportunityCard = document.getElementById("metaOpportunityCount")?.closest(".meta-card");
-    const agencyCard = document.getElementById("metaAgencyCount")?.closest(".meta-card");
     const artCard = document.getElementById("metaArtCount")?.closest(".meta-card");
+    const localCard = document.getElementById("metaLocalCount")?.closest(".meta-card");
+    const agencyCard = document.getElementById("metaAgencyCount")?.closest(".meta-card");
 
-    if (!opportunityCard || !agencyCard || !artCard) return;
+    if (!opportunityCard || !artCard || !localCard || !agencyCard) return;
 
     const opportunityLabel = opportunityCard.querySelector(".meta-label");
     const artLabel = artCard.querySelector(".meta-label");
+    const localLabel = localCard.querySelector(".meta-label");
     const agencyLabel = agencyCard.querySelector(".meta-label");
 
     if (opportunityLabel) opportunityLabel.textContent = "❤️나라장터 공고";
     if (artLabel) artLabel.textContent = "💙건축물 미술작품";
+    if (localLabel) localLabel.textContent = "🧩로컬 프로젝트";
     if (agencyLabel) agencyLabel.textContent = "🎯기관 타깃";
 
     agencyCard.classList.remove("meta-card-dark");
 
     opportunityCard.dataset.tabTarget = "opportunities";
     artCard.dataset.tabTarget = "art";
+    localCard.dataset.tabTarget = "local";
     agencyCard.dataset.tabTarget = "agencies";
 
     metaBar.appendChild(opportunityCard);
     metaBar.appendChild(artCard);
+    metaBar.appendChild(localCard);
     metaBar.appendChild(agencyCard);
 
-    [opportunityCard, artCard, agencyCard].forEach(card => {
+    [opportunityCard, artCard, localCard, agencyCard].forEach(card => {
       if (card.dataset.clickReady === "true") return;
 
       card.dataset.clickReady = "true";
@@ -354,6 +407,13 @@
 
         setTimeout(applyDashboardPatch, 80);
         setTimeout(applyDashboardPatch, 250);
+      });
+
+      card.addEventListener("keydown", event => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+
+        event.preventDefault();
+        card.click();
       });
     });
   }
@@ -377,16 +437,19 @@
 
     const opportunityButton = tabs.querySelector('[data-tab="opportunities"]');
     const artButton = tabs.querySelector('[data-tab="art"]');
+    const localButton = tabs.querySelector('[data-tab="local"]');
     const agencyButton = tabs.querySelector('[data-tab="agencies"]');
 
-    if (!opportunityButton || !artButton || !agencyButton) return;
+    if (!opportunityButton || !artButton || !localButton || !agencyButton) return;
 
     opportunityButton.textContent = "❤️나라장터 공고";
     artButton.textContent = "💙건축물 미술작품";
+    localButton.textContent = "🧩로컬 프로젝트";
     agencyButton.textContent = "🎯기관 타깃";
 
     tabs.appendChild(opportunityButton);
     tabs.appendChild(artButton);
+    tabs.appendChild(localButton);
     tabs.appendChild(agencyButton);
   }
 
@@ -416,7 +479,7 @@
   }
 
   function setupReviewControls() {
-    document.querySelectorAll("#reviewFilter, #artReviewFilter, #agencyReviewFilter").forEach(select => {
+    document.querySelectorAll("#reviewFilter, #artReviewFilter, #localReviewFilter, #agencyReviewFilter").forEach(select => {
       if (select.dataset.reviewUpdated === "true") return;
 
       rewriteReviewFilter(select);
@@ -432,7 +495,7 @@
   }
 
   function updateSourceLabels() {
-    document.querySelectorAll("#artTab .badge, #artTab .summary-source").forEach(element => {
+    document.querySelectorAll("#artTab .badge, #artTab .summary-source, #localTab .badge, #localTab .summary-source").forEach(element => {
       const original = safeText(element.textContent);
       const shortened = shortSourceName(original);
 
@@ -446,7 +509,7 @@
     const gradeBadge = Array.from(card.querySelectorAll(".badge")).find(element => {
       const text = safeText(element.textContent);
 
-      return text === "S등급" || text === "A등급" || text === "B등급";
+      return text === "S등급" || text === "A등급" || text === "B등급" || text === "C등급";
     });
 
     return gradeBadge ? safeText(gradeBadge.textContent) : "";
@@ -527,7 +590,8 @@
       title,
       period: publishedDate || "공고일 확인 필요",
       deadline: deadlineDate || "확인 필요",
-      sourceUrl
+      sourceUrl,
+      attachmentUrl: ""
     };
   }
 
@@ -568,7 +632,87 @@
       title,
       period: publishedDate || "확인 필요",
       deadline: deadlineDate || "확인 필요",
-      sourceUrl: ""
+      sourceUrl: "",
+      attachmentUrl: ""
+    };
+  }
+
+  function getLocalSummary(card) {
+    const title = safeText(card.querySelector("h2")?.textContent) || "제목 없음";
+    const matchedItem = findLocalByTitle(title);
+
+    const sourceRaw =
+      getFirstValue(matchedItem, [
+        "sourceName",
+        "sourceType",
+        "agencyName",
+        "source"
+      ]) ||
+      getMetaValue(card, "출처") ||
+      "로컬";
+
+    const publishedRaw =
+      getFirstValue(matchedItem, [
+        "postedDate",
+        "publishedDate",
+        "postingDate",
+        "noticeDate",
+        "createdDate",
+        "regDate",
+        "게재일",
+        "게시일",
+        "등록일"
+      ]) ||
+      getMetaValue(card, "게재일") ||
+      getMetaValue(card, "공개일") ||
+      getMetaValue(card, "등록일") ||
+      "";
+
+    const deadlineRaw =
+      getFirstValue(matchedItem, [
+        "deadline",
+        "deadlineDate",
+        "closeDate",
+        "endDate",
+        "마감일"
+      ]) ||
+      getMetaValue(card, "마감일") ||
+      getMetaValue(card, "마감") ||
+      "";
+
+    const sourceUrl =
+      getFirstValue(matchedItem, [
+        "sourcePageUrl",
+        "sourceUrl",
+        "url",
+        "link",
+        "originUrl",
+        "detailUrl",
+        "postUrl",
+        "공고URL",
+        "원문URL"
+      ]);
+
+    const attachmentUrl =
+      getFirstValue(matchedItem, [
+        "attachmentUrl",
+        "fileUrl",
+        "FILE_URL",
+        "attachFileUrl",
+        "첨부URL"
+      ]);
+
+    const publishedDate = formatDateOnly(publishedRaw);
+    const deadlineDate = formatDateOnly(deadlineRaw);
+
+    return {
+      source: shortSourceName(sourceRaw) || "로컬",
+      grade: getGradeText(card),
+      title,
+      period: publishedDate || "확인 필요",
+      deadline: deadlineDate || "확인 필요",
+      sourceUrl,
+      attachmentUrl
     };
   }
 
@@ -607,8 +751,44 @@
       title,
       period: region,
       deadline: related,
-      sourceUrl: ""
+      sourceUrl: "",
+      attachmentUrl: ""
     };
+  }
+
+  function appendSourceButtons(body, data, existingLink) {
+    const sourceUrl = data.sourceUrl || existingLink?.href || "";
+    const attachmentUrl = data.attachmentUrl || "";
+
+    if (!sourceUrl && !attachmentUrl) return;
+
+    if (existingLink) {
+      existingLink.style.display = "none";
+    }
+
+    const sourceViewBox = document.createElement("div");
+    sourceViewBox.className = "source-view-box";
+
+    const links = [];
+
+    if (sourceUrl) {
+      links.push(`
+        <a class="source-view-link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">
+          공고 원문 보기
+        </a>
+      `);
+    }
+
+    if (attachmentUrl && attachmentUrl !== sourceUrl) {
+      links.push(`
+        <a class="source-view-link source-view-link-secondary" href="${attachmentUrl}" target="_blank" rel="noopener noreferrer">
+          첨부파일 보기
+        </a>
+      `);
+    }
+
+    sourceViewBox.innerHTML = links.join("");
+    body.appendChild(sourceViewBox);
   }
 
   function makeAccordion(card, type) {
@@ -621,6 +801,8 @@
       data = getArtSummary(card);
     } else if (type === "agency") {
       data = getAgencySummary(card);
+    } else if (type === "local") {
+      data = getLocalSummary(card);
     } else {
       data = getOpportunitySummary(card);
     }
@@ -656,26 +838,9 @@
       body.appendChild(node);
     });
 
-    if (type === "opportunity") {
+    if (type === "opportunity" || type === "local") {
       const existingLink = body.querySelector("a[href]");
-      const sourceUrl = data.sourceUrl || existingLink?.href || "";
-
-      if (sourceUrl) {
-        if (existingLink) {
-          existingLink.style.display = "none";
-        }
-
-        const sourceViewBox = document.createElement("div");
-        sourceViewBox.className = "source-view-box";
-
-        sourceViewBox.innerHTML = `
-          <a class="source-view-link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">
-            소스보기
-          </a>
-        `;
-
-        body.appendChild(sourceViewBox);
-      }
+      appendSourceButtons(body, data, existingLink);
     }
 
     details.appendChild(summary);
@@ -698,6 +863,10 @@
 
     document.querySelectorAll("#artCards .card").forEach(card => {
       makeAccordion(card, "art");
+    });
+
+    document.querySelectorAll("#localCards .card").forEach(card => {
+      makeAccordion(card, "local");
     });
 
     document.querySelectorAll("#agencyCards .card").forEach(card => {
@@ -760,6 +929,19 @@
     setSummaryCard(3, "LH/SH", lhsh);
   }
 
+  function updateLocalSummary() {
+    const total = localSummaryData.length || document.getElementById("metaLocalCount")?.textContent || "0";
+
+    const s = localSummaryData.filter(item => safeText(item.grade) === "S").length;
+    const a = localSummaryData.filter(item => safeText(item.grade) === "A").length;
+    const b = localSummaryData.filter(item => safeText(item.grade) === "B").length;
+
+    setSummaryCard(0, "전체", total);
+    setSummaryCard(1, "S등급", s);
+    setSummaryCard(2, "A등급", a);
+    setSummaryCard(3, "B등급", b);
+  }
+
   function updateAgencySummary() {
     const total = agencySummaryData.length || document.getElementById("metaAgencyCount")?.textContent || "0";
 
@@ -786,6 +968,11 @@
 
     if (activeTab === "art") {
       updateArtSummary();
+      return;
+    }
+
+    if (activeTab === "local") {
+      updateLocalSummary();
       return;
     }
 
@@ -994,10 +1181,16 @@
   document.addEventListener("DOMContentLoaded", async () => {
     await loadArtSummaryData();
     await loadOpportunitySummaryData();
+    await loadLocalSummaryData();
     await loadAgencySummaryData();
 
     applyDashboardPatch();
     schedulePatch();
+
+    window.addEventListener("axoo:rendered", () => {
+      setTimeout(applyDashboardPatch, 80);
+      setTimeout(applyDashboardPatch, 250);
+    });
 
     document.addEventListener("click", event => {
       if (event.target.closest(".tab-button")) {
