@@ -25,6 +25,58 @@
     return text || fallback;
   }
 
+  function compactWhitespace(value) {
+    return String(value ?? "").replace(/\s+/g, " ").trim();
+  }
+
+  function extractDateOnlyList(value) {
+    const text = safeText(value, "");
+    const dates = [];
+
+    if (!text) return dates;
+
+    const compactPattern = /\b(20\d{2})(\d{2})(\d{2})(?:\d{2}\d{2}(?:\d{2})?)?\b/g;
+    const separatedPattern = /(20\d{2})\s*(?:년|[-./])\s*(\d{1,2})\s*(?:월|[-./])\s*(\d{1,2})/g;
+
+    let compactMatch;
+
+    while ((compactMatch = compactPattern.exec(text)) !== null) {
+      dates.push(`${compactMatch[1]}-${compactMatch[2]}-${compactMatch[3]}`);
+    }
+
+    let separatedMatch;
+
+    while ((separatedMatch = separatedPattern.exec(text)) !== null) {
+      const year = separatedMatch[1];
+      const month = String(separatedMatch[2]).padStart(2, "0");
+      const day = String(separatedMatch[3]).padStart(2, "0");
+
+      dates.push(`${year}-${month}-${day}`);
+    }
+
+    return Array.from(new Set(dates));
+  }
+
+  function formatDateOnly(value) {
+    const dates = extractDateOnlyList(value);
+
+    return dates[0] || "-";
+  }
+
+  function formatDateRange(startValue, endValue) {
+    const startDate = formatDateOnly(startValue);
+    const endDate = formatDateOnly(endValue);
+
+    if (startDate !== "-" && endDate !== "-" && startDate !== endDate) {
+      return `${startDate} ~ ${endDate}`;
+    }
+
+    if (startDate !== "-") return startDate;
+    if (endDate !== "-") return endDate;
+
+    return "-";
+  }
+
   function getCompactContractMethod(value) {
     const text = safeText(value, "");
 
@@ -37,6 +89,17 @@
     if (text.includes("방문제출")) return "방문제출";
 
     return text.split("/")[0].trim();
+  }
+
+  function getCompactArtSource(value) {
+    const text = safeText(value, "");
+
+    if (!text || text === "-") return "-";
+    if (text.includes("경기")) return "경기도";
+    if (text.includes("서울")) return "서울시";
+    if (text.includes("인천")) return "인천시";
+
+    return text;
   }
 
   async function loadJson(path, fallback = []) {
@@ -105,7 +168,7 @@
     setTimeout(() => {
       updateMetaCardState();
       updateSummaryByActiveTab();
-      updateLocalListHeadLabel();
+      updateRequestedListHeadLabels();
       setupAccordions();
     }, 160);
   }
@@ -161,28 +224,58 @@
         setTimeout(() => {
           updateMetaCardState();
           updateSummaryByActiveTab();
-          updateLocalListHeadLabel();
+          updateRequestedListHeadLabels();
           setupAccordions();
         }, 160);
       });
     });
   }
 
-  function updateLocalListHeadLabel() {
+  function updateRequestedListHeadLabels() {
+    const opportunitiesPanel = document.getElementById("opportunitiesTab");
+    const opportunitiesHead = opportunitiesPanel?.querySelector(".list-head");
+
+    if (opportunitiesHead) {
+      opportunitiesHead.innerHTML = `
+        <span class="list-source-grade">
+          <em>출처</em>
+          <em>등급</em>
+        </span>
+        <span>공고명</span>
+        <span>게재기간</span>
+        <span>마감일</span>
+      `;
+    }
+
+    const artPanel = document.getElementById("artTab");
+    const artHead = artPanel?.querySelector(".list-head");
+
+    if (artHead) {
+      artHead.innerHTML = `
+        <span class="list-source-grade">
+          <em>출처</em>
+          <em></em>
+        </span>
+        <span>공고명</span>
+        <span>공개일</span>
+        <span>마감일</span>
+      `;
+    }
+
     const localPanel = document.getElementById("localTab");
-    const head = localPanel?.querySelector(".list-head");
+    const localHead = localPanel?.querySelector(".list-head");
 
-    if (!head) return;
-
-    head.innerHTML = `
-      <span class="list-source-grade">
-        <em>공고기관</em>
-        <em>등급</em>
-      </span>
-      <span>공고명</span>
-      <span>계약방법</span>
-      <span>마감/개찰</span>
-    `;
+    if (localHead) {
+      localHead.innerHTML = `
+        <span class="list-source-grade">
+          <em>공고기관</em>
+          <em>등급</em>
+        </span>
+        <span>공고명</span>
+        <span>계약방법</span>
+        <span>마감/개찰</span>
+      `;
+    }
   }
 
   function getMetaValue(card, label) {
@@ -218,6 +311,62 @@
     );
   }
 
+  function findDataByTitle(tabKey, title) {
+    const normalizedTitle = compactWhitespace(title);
+
+    return summaryData[tabKey].find(item => {
+      const itemTitle = compactWhitespace(
+        item.bidNtceNm ||
+        item.title ||
+        item.agencyName ||
+        ""
+      );
+
+      return itemTitle === normalizedTitle;
+    }) || null;
+  }
+
+  function getOpportunityPublishPeriod(card) {
+    const title = getTitleText(card);
+    const data = findDataByTitle("opportunities", title);
+
+    const startValue = (
+      data?.publishedDate ||
+      data?.postedDate ||
+      data?.noticeDate ||
+      data?.bidNtceDt ||
+      data?.bidNtceBgnDt ||
+      data?.bidNtceBgn ||
+      getMetaValue(card, "게재일")
+    );
+
+    const endValue = (
+      data?.deadlineDate ||
+      data?.deadline ||
+      data?.bidClseDt ||
+      data?.bidNtceEndDt ||
+      getMetaValue(card, "마감/개찰")
+    );
+
+    return formatDateRange(startValue, endValue);
+  }
+
+  function getOpportunityDeadlineDate(card) {
+    const title = getTitleText(card);
+    const data = findDataByTitle("opportunities", title);
+
+    const deadlineValue = (
+      data?.deadlineDate ||
+      data?.deadline ||
+      data?.bidClseDt ||
+      data?.bidClseDate ||
+      data?.bidNtceEndDt ||
+      getMetaValue(card, "마감/개찰")
+    );
+
+    return formatDateOnly(deadlineValue);
+  }
+
   function getSourceGradeInfo(card, tabKey) {
     const grade = getFirstBadgeText(card);
 
@@ -237,7 +386,7 @@
 
     if (tabKey === "art") {
       return {
-        source: getFirstBadgeText(card),
+        source: getCompactArtSource(getFirstBadgeText(card)),
         grade: ""
       };
     }
@@ -258,10 +407,10 @@
   function getPeriodDeadlineInfo(card, tabKey) {
     if (tabKey === "opportunities") {
       return {
-        periodLabel: "마감/개찰",
-        period: getMetaValue(card, "마감/개찰"),
-        deadlineLabel: "상태",
-        deadline: safeText(card.querySelector(".deadline-badge")?.textContent)
+        periodLabel: "게재기간",
+        period: getOpportunityPublishPeriod(card),
+        deadlineLabel: "마감일",
+        deadline: getOpportunityDeadlineDate(card)
       };
     }
 
@@ -277,9 +426,9 @@
     if (tabKey === "art") {
       return {
         periodLabel: "공개일",
-        period: getMetaValue(card, "공개일"),
+        period: formatDateOnly(getMetaValue(card, "공개일")),
         deadlineLabel: "마감일",
-        deadline: getMetaValue(card, "마감일")
+        deadline: formatDateOnly(getMetaValue(card, "마감일"))
       };
     }
 
@@ -288,7 +437,7 @@
         periodLabel: "계약방법",
         period: getCompactContractMethod(getMetaValue(card, "계약방법")),
         deadlineLabel: "마감/개찰",
-        deadline: getMetaValue(card, "마감/개찰") || safeText(card.querySelector(".deadline-badge")?.textContent)
+        deadline: formatDateOnly(getMetaValue(card, "마감/개찰")) || getMetaValue(card, "마감/개찰")
       };
     }
 
@@ -541,7 +690,7 @@
 
       element.addEventListener(eventName, () => {
         setTimeout(() => {
-          updateLocalListHeadLabel();
+          updateRequestedListHeadLabels();
           setupAccordions();
           updateSummaryByActiveTab();
         }, 180);
@@ -553,7 +702,7 @@
     setupMetaCards();
     setupTabButtons();
     setupReviewSelects();
-    updateLocalListHeadLabel();
+    updateRequestedListHeadLabels();
     setupAccordions();
     updateMetaCountsFromData();
     updateMetaCardState();
