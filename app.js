@@ -1059,3 +1059,226 @@ document.addEventListener("DOMContentLoaded", () => {
     renderAgencyCards();
   }, 2200);
 });
+
+/* =========================
+   Agency Direct Render Patch
+   기관 타깃 강제 렌더링 패치
+   ========================= */
+
+(function () {
+  function agencyPatchEscape(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function agencyPatchText(value, fallback = "-") {
+    const text = String(value ?? "").trim();
+    return text || fallback;
+  }
+
+  function agencyPatchMoney(value) {
+    const number = Number(value || 0);
+    if (!number) return "금액 미공개";
+    return number.toLocaleString("ko-KR") + "원";
+  }
+
+  function agencyPatchUrl(value) {
+    const url = String(value ?? "").trim();
+    if (!url) return "";
+    if (url.startsWith("http://") || url.startsWith("https://")) return url;
+    return "";
+  }
+
+  function findAgencyPanel() {
+    return (
+      document.getElementById("agenciesTab") ||
+      document.getElementById("agencyTab") ||
+      document.querySelector('.tab-panel[data-tab="agencies"]') ||
+      document.querySelector(".tab-panel.active")
+    );
+  }
+
+  function ensureAgencyCardsBox() {
+    let cards = document.getElementById("agencyCards");
+
+    if (cards) return cards;
+
+    const panel = findAgencyPanel();
+
+    if (!panel) {
+      let diagnostic = document.getElementById("agencyPatchDiagnostic");
+
+      if (!diagnostic) {
+        diagnostic = document.createElement("div");
+        diagnostic.id = "agencyPatchDiagnostic";
+        diagnostic.style.cssText = `
+          margin: 16px;
+          padding: 16px;
+          border-radius: 14px;
+          background: #fff1f0;
+          border: 1px solid rgba(255, 59, 48, 0.35);
+          color: #111;
+          font-weight: 800;
+          z-index: 9999;
+        `;
+        document.body.prepend(diagnostic);
+      }
+
+      diagnostic.textContent = "기관 타깃 패치 실행됨: agenciesTab 또는 agencyCards 영역을 찾지 못했습니다.";
+      return null;
+    }
+
+    cards = document.createElement("div");
+    cards.id = "agencyCards";
+    cards.className = "cards agency-direct-cards";
+    panel.appendChild(cards);
+
+    return cards;
+  }
+
+  function createAgencyPatchCard(item) {
+    const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
+    const evidenceSources = Array.isArray(item.evidenceSources) ? item.evidenceSources : [];
+
+    const evidenceHtml = evidenceSources.length
+      ? `
+        <div class="evidence-box">
+          <strong>근거 자료</strong>
+          <div class="evidence-list">
+            ${evidenceSources.slice(0, 4).map(source => {
+              const sourceUrl = agencyPatchUrl(source.sourceUrl);
+
+              return `
+                <div class="evidence-item">
+                  <div class="evidence-main">
+                    <span class="evidence-type">${agencyPatchEscape(agencyPatchText(source.sourceType))}</span>
+                    <span class="evidence-title">${agencyPatchEscape(agencyPatchText(source.title))}</span>
+                  </div>
+                  <div class="evidence-sub">
+                    <span>${agencyPatchEscape(agencyPatchMoney(source.amount))}</span>
+                    <span>${agencyPatchEscape(agencyPatchText(source.date))}</span>
+                    ${sourceUrl ? `<a href="${sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `
+      : "";
+
+    return `
+      <article class="card agency-direct-card" style="display:block;">
+        <div class="card-top">
+          <div class="badges">
+            <span class="badge grade-b">${agencyPatchEscape(agencyPatchText(item.grade, "C"))}등급</span>
+            <span class="badge category">${agencyPatchEscape(agencyPatchText(item.agencyType, "기관"))}</span>
+            <span class="badge category">${agencyPatchEscape(agencyPatchText(item.region, "기타"))}</span>
+          </div>
+          <div class="score">관련 ${agencyPatchEscape(agencyPatchText(item.relatedCount, "0"))}건</div>
+        </div>
+
+        <h2>${agencyPatchEscape(agencyPatchText(item.agencyName, "기관명 없음"))}</h2>
+
+        <div class="meta">
+          <div><span>기관유형</span>${agencyPatchEscape(agencyPatchText(item.agencyType))}</div>
+          <div><span>지역</span>${agencyPatchEscape(agencyPatchText(item.region))}</div>
+          <div><span>추정 규모</span>${agencyPatchEscape(agencyPatchMoney(item.estimatedAmount))}</div>
+          <div><span>관련 이력</span>${agencyPatchEscape(agencyPatchText(item.relatedCount, "0"))}건</div>
+          <div><span>공고 이력</span>${agencyPatchEscape(agencyPatchText(item.bidCount, "0"))}건</div>
+          <div><span>계약 이력</span>${agencyPatchEscape(agencyPatchText(item.contractCount, "0"))}건</div>
+          <div><span>낙찰 이력</span>${agencyPatchEscape(agencyPatchText(item.awardCount, "0"))}건</div>
+          <div><span>발주계획</span>${agencyPatchEscape(agencyPatchText(item.orderPlanCount, "0"))}건</div>
+        </div>
+
+        <div class="keywords">
+          ${keywords.map(keyword => `<span class="keyword">${agencyPatchEscape(keyword)}</span>`).join("")}
+        </div>
+
+        <div class="reason">
+          ${agencyPatchEscape(agencyPatchText(item.note, "기관 타깃 근거를 확인해 주세요."))}
+        </div>
+
+        <p class="action">제안 방향: ${agencyPatchEscape(agencyPatchText(item.recommendedProposal))}</p>
+        <p class="action">다음 액션: ${agencyPatchEscape(agencyPatchText(item.nextAction))}</p>
+
+        ${evidenceHtml}
+      </article>
+    `;
+  }
+
+  async function renderAgencyDirectly() {
+    const cards = ensureAgencyCardsBox();
+
+    if (!cards) return;
+
+    cards.style.display = "grid";
+    cards.style.visibility = "visible";
+    cards.style.opacity = "1";
+
+    cards.innerHTML = `
+      <article class="card" style="display:block;">
+        <h2>기관 타깃 데이터를 불러오는 중입니다.</h2>
+        <p class="reason">target_agencies.json 직접 연결을 확인하고 있습니다.</p>
+      </article>
+    `;
+
+    try {
+      const response = await fetch(`data/target_agencies.json?v=${Date.now()}`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (!Array.isArray(data) || !data.length) {
+        cards.innerHTML = `
+          <article class="card" style="display:block;">
+            <h2>기관 타깃 데이터가 비어 있습니다.</h2>
+            <p class="reason">target_agencies.json은 연결되었지만 배열 데이터가 없습니다.</p>
+          </article>
+        `;
+        return;
+      }
+
+      cards.innerHTML = data.map(createAgencyPatchCard).join("");
+
+      const emptyMessage = document.getElementById("agencyEmptyMessage");
+
+      if (emptyMessage) {
+        emptyMessage.style.display = "none";
+      }
+
+      console.log(`[AXOO] 기관 타깃 직접 렌더링 완료: ${data.length}건`);
+    } catch (error) {
+      cards.innerHTML = `
+        <article class="card" style="display:block;">
+          <h2>기관 타깃 데이터를 불러오지 못했습니다.</h2>
+          <p class="reason">data/target_agencies.json 연결 또는 JSON 형식을 확인해야 합니다.</p>
+          <p class="action">${agencyPatchEscape(error.message)}</p>
+        </article>
+      `;
+
+      console.error("[AXOO] 기관 타깃 직접 렌더링 실패:", error);
+    }
+  }
+
+  window.renderAgencyDirectly = renderAgencyDirectly;
+
+  function scheduleAgencyDirectRender() {
+    setTimeout(renderAgencyDirectly, 700);
+    setTimeout(renderAgencyDirectly, 2200);
+    setTimeout(renderAgencyDirectly, 4800);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleAgencyDirectRender);
+  } else {
+    scheduleAgencyDirectRender();
+  }
+})();
