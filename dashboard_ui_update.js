@@ -1023,6 +1023,96 @@
     filterArtCards();
   }
 
+  function renderAgencyFallbackCards() {
+    const cards = document.getElementById("agencyCards");
+
+    if (!cards) return;
+    if (cards.querySelector(".card")) return;
+    if (!Array.isArray(agencySummaryData) || !agencySummaryData.length) return;
+
+    cards.innerHTML = "";
+
+    agencySummaryData.forEach(item => {
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const keywords = Array.isArray(item.mainKeywords) ? item.mainKeywords : [];
+      const evidenceSources = Array.isArray(item.evidenceSources) ? item.evidenceSources : [];
+
+      const evidenceHtml = evidenceSources.length
+        ? `
+          <div class="evidence-box">
+            <strong>근거 자료</strong>
+            <div class="evidence-list">
+              ${evidenceSources.slice(0, 4).map(source => {
+                const sourceUrl = safeText(source.sourceUrl);
+
+                return `
+                  <div class="evidence-item">
+                    <div class="evidence-main">
+                      <span class="evidence-type">${safeText(source.sourceType)}</span>
+                      <span class="evidence-title">${safeText(source.title)}</span>
+                    </div>
+                    <div class="evidence-sub">
+                      <span>${formatKrw(source.amount)}</span>
+                      <span>${safeText(source.date)}</span>
+                      ${sourceUrl ? `<a href="${sourceUrl}" target="_blank" rel="noopener noreferrer">원문 보기</a>` : ""}
+                    </div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+        `
+        : "";
+
+      card.innerHTML = `
+        <div class="card-top">
+          <div class="badges">
+            <span class="badge grade-b">${safeText(item.grade || "B")}등급</span>
+            <span class="badge category">${safeText(item.agencyType || "기관")}</span>
+            <span class="badge category">${safeText(item.region || "기타")}</span>
+          </div>
+          <div class="score">관련 ${safeText(item.relatedCount || 0)}건</div>
+        </div>
+
+        <h2>${safeText(item.agencyName || "기관명 없음")}</h2>
+
+        <div class="meta">
+          <div><span>기관유형</span>${safeText(item.agencyType || "-")}</div>
+          <div><span>지역</span>${safeText(item.region || "-")}</div>
+          <div><span>추정 규모</span>${formatKrw(item.estimatedAmount)}</div>
+          <div><span>관련 이력</span>${safeText(item.relatedCount || 0)}건</div>
+          <div><span>공고 이력</span>${safeText(item.bidCount || 0)}건</div>
+          <div><span>계약 이력</span>${safeText(item.contractCount || 0)}건</div>
+          <div><span>낙찰 이력</span>${safeText(item.awardCount || 0)}건</div>
+          <div><span>발주계획</span>${safeText(item.orderPlanCount || 0)}건</div>
+        </div>
+
+        <div class="keywords">
+          ${keywords.map(keyword => `<span class="keyword">${safeText(keyword)}</span>`).join("")}
+        </div>
+
+        <div class="reason">
+          ${safeText(item.note || "기관 타깃 근거를 확인해 주세요.")}
+        </div>
+
+        <p class="action">제안 방향: ${safeText(item.recommendedProposal || "-")}</p>
+        <p class="action">다음 액션: ${safeText(item.nextAction || "-")}</p>
+
+        ${evidenceHtml}
+      `;
+
+      cards.appendChild(card);
+    });
+
+    const emptyMessage = document.getElementById("agencyEmptyMessage");
+
+    if (emptyMessage) {
+      emptyMessage.style.display = "none";
+    }
+  }
+  
   function enhanceAgencyCards() {
     document.querySelectorAll("#agencyCards .card.card-as-accordion").forEach(card => {
       if (card.dataset.agencyMetricsReady === "true") return;
@@ -1150,6 +1240,7 @@
       setupTabs();
       setupReviewControls();
       updateSourceLabels();
+      renderAgencyFallbackCards();
       setupAccordions();
       enhanceAgencyCards();
       removeCardTools();
