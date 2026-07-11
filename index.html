@@ -3,16 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>AXOO B2G Dashboard</title>
+
   <link rel="stylesheet" href="style.css?v=126" />
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <div>
         <p class="eyebrow">AXOO B2G ENGINE</p>
         <h1>공공 프로젝트 자동 리서치 대시보드</h1>
-        <p class="subtitle">나라장터 기반 맞춤 공고, 로컬 프로젝트, 기관 타깃, 건축물 미술작품 후보를 한눈에 관리합니다.</p>
+        <p class="subtitle">
+          나라장터 기반 맞춤 공고, 로컬 프로젝트, 기관 타깃, 건축물 미술작품 후보를 한눈에 관리합니다.
+        </p>
       </div>
 
       <div class="header-update-card">
@@ -28,22 +33,22 @@
       </div>
 
       <section class="meta-bar">
-        <div class="meta-card">
+        <div class="meta-card" data-tab-target="opportunities">
           <div class="meta-label">❤️나라장터 공고</div>
           <div class="meta-value" id="metaOpportunityCount">0</div>
         </div>
 
-        <div class="meta-card">
+        <div class="meta-card" data-tab-target="art">
           <div class="meta-label">💙건축물 미술작품</div>
           <div class="meta-value" id="metaArtCount">0</div>
         </div>
 
-        <div class="meta-card">
+        <div class="meta-card" data-tab-target="local">
           <div class="meta-label">🧩로컬 프로젝트</div>
           <div class="meta-value" id="metaLocalCount">0</div>
         </div>
 
-        <div class="meta-card">
+        <div class="meta-card" data-tab-target="agencies">
           <div class="meta-label">🎯기관 타깃</div>
           <div class="meta-value" id="metaAgencyCount">0</div>
         </div>
@@ -51,7 +56,7 @@
 
       <section class="summary-grid">
         <div class="summary-card">
-          <span>전체</span>
+          <span>현재 표시</span>
           <strong id="totalCount">0</strong>
         </div>
 
@@ -66,7 +71,7 @@
         </div>
 
         <div class="summary-card">
-          <span>B등급</span>
+          <span>B/C등급</span>
           <strong id="bCount">0</strong>
         </div>
       </section>
@@ -88,6 +93,7 @@
           <option value="S">S등급</option>
           <option value="A">A등급</option>
           <option value="B">B등급</option>
+          <option value="C">C등급</option>
         </select>
 
         <select id="categoryFilter">
@@ -104,9 +110,9 @@
         <select id="reviewFilter">
           <option value="all">전체 상태</option>
           <option value="new">미검토</option>
-          <option value="hold">보류</option>
           <option value="reviewing">검토중</option>
           <option value="proposal">제안 준비</option>
+          <option value="hold">보류</option>
           <option value="done">제안 완료</option>
         </select>
       </section>
@@ -122,7 +128,10 @@
       </div>
 
       <section id="cards" class="cards"></section>
-      <p id="emptyMessage" class="empty-message">조건에 맞는 공고가 없습니다.</p>
+
+      <p id="emptyMessage" class="empty-message">
+        조건에 맞는 공고가 없습니다.
+      </p>
     </section>
 
     <section id="artTab" class="tab-panel">
@@ -139,9 +148,9 @@
         <select id="artReviewFilter">
           <option value="all">전체 상태</option>
           <option value="new">미검토</option>
-          <option value="hold">보류</option>
           <option value="reviewing">검토중</option>
           <option value="proposal">제안 준비</option>
+          <option value="hold">보류</option>
           <option value="done">제안 완료</option>
         </select>
       </section>
@@ -191,9 +200,9 @@
         <select id="localReviewFilter">
           <option value="all">전체 상태</option>
           <option value="new">미검토</option>
-          <option value="hold">보류</option>
           <option value="reviewing">검토중</option>
           <option value="proposal">제안 준비</option>
+          <option value="hold">보류</option>
           <option value="done">제안 완료</option>
         </select>
 
@@ -217,7 +226,10 @@
       </div>
 
       <section id="localCards" class="cards"></section>
-      <p id="localEmptyMessage" class="empty-message">조건에 맞는 로컬 프로젝트가 없습니다.</p>
+
+      <p id="localEmptyMessage" class="empty-message">
+        조건에 맞는 로컬 프로젝트가 없습니다.
+      </p>
     </section>
 
     <section id="agenciesTab" class="tab-panel">
@@ -249,9 +261,9 @@
         <select id="agencyReviewFilter">
           <option value="all">전체 상태</option>
           <option value="new">미검토</option>
-          <option value="hold">보류</option>
           <option value="reviewing">검토중</option>
           <option value="proposal">제안 준비</option>
+          <option value="hold">보류</option>
           <option value="done">제안 완료</option>
         </select>
 
@@ -274,11 +286,14 @@
       </div>
 
       <section id="agencyCards" class="cards"></section>
-      <p id="agencyEmptyMessage" class="empty-message">조건에 맞는 기관 타깃이 없습니다.</p>
+
+      <p id="agencyEmptyMessage" class="empty-message">
+        조건에 맞는 기관 타깃이 없습니다.
+      </p>
     </section>
   </main>
 
-  <script src="app.js?v=103"></script>
+  <script src="app.js?v=104"></script>
   <script src="dashboard_ui_update.js?v=25"></script>
 </body>
 </html>
