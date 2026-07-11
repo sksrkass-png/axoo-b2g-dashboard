@@ -732,8 +732,22 @@ function getLocalDeadlineValue(item) {
   return item.deadline || item.endDate || item.closeDate || "";
 }
 
+function getLocalProjectTypeValue(item) {
+  return item.projectType || item.type || item.category || "기타";
+}
+
 function getLocalSourceUrl(item) {
   return safeUrl(item.sourceUrl || item.sourcePageUrl || item.attachmentUrl || "");
+}
+
+function setupLocalProjectDefaultFilter() {
+  const deadlineFilter = document.getElementById("localDeadlineStatusFilter");
+
+  if (!deadlineFilter) return;
+  if (deadlineFilter.dataset.defaultInitialized === "true") return;
+
+  deadlineFilter.value = "all";
+  deadlineFilter.dataset.defaultInitialized = "true";
 }
 
 function createLocalProjectCard(item) {
@@ -745,12 +759,13 @@ function createLocalProjectCard(item) {
   const sourceUrl = getLocalSourceUrl(item);
   const reviewKey = getLocalReviewKey(item);
   const deadlineInfo = getDDay(getLocalDeadlineValue(item));
+  const projectType = getLocalProjectTypeValue(item);
 
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
         <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
-        <span class="badge category">${escapeHtml(safeText(item.projectType))}</span>
+        <span class="badge category">${escapeHtml(safeText(projectType))}</span>
         <span class="badge category">${escapeHtml(safeText(item.sourceName))}</span>
       </div>
 
@@ -766,7 +781,7 @@ function createLocalProjectCard(item) {
       <div><span>출처</span>${escapeHtml(safeText(item.sourceName))}</div>
       <div><span>기관</span>${escapeHtml(safeText(item.agencyName))}</div>
       <div><span>담당부서</span>${escapeHtml(safeText(item.department))}</div>
-      <div><span>유형</span>${escapeHtml(safeText(item.projectType))}</div>
+      <div><span>유형</span>${escapeHtml(safeText(projectType))}</div>
       <div><span>게재일</span>${escapeHtml(safeText(item.postedDate))}</div>
       <div><span>마감일</span>${escapeHtml(safeText(item.deadline))}</div>
     </div>
@@ -822,15 +837,18 @@ function renderLocalProjectCards() {
   const typeValue = document.getElementById("localTypeFilter")?.value || "all";
   const gradeValue = document.getElementById("localGradeFilter")?.value || "all";
   const reviewValue = document.getElementById("localReviewFilter")?.value || "all";
-  const deadlineStatusValue = document.getElementById("localDeadlineStatusFilter")?.value || "active";
+  const deadlineStatusFilter = document.getElementById("localDeadlineStatusFilter");
+  const deadlineStatusValue = deadlineStatusFilter?.value || "all";
 
   const filtered = localProjects.filter(item => {
+    const projectType = getLocalProjectTypeValue(item);
+
     const searchTarget = [
       item.title,
       item.sourceName,
       item.agencyName,
       item.department,
-      item.projectType,
+      projectType,
       item.region,
       ...(item.keywords || [])
     ].join(" ").toLowerCase();
@@ -841,7 +859,7 @@ function renderLocalProjectCards() {
 
     const matchesSearch = !searchValue || searchTarget.includes(searchValue);
     const matchesRegion = regionValue === "all" || safeText(item.region).includes(regionValue);
-    const matchesType = typeValue === "all" || item.projectType === typeValue;
+    const matchesType = typeValue === "all" || projectType === typeValue;
     const matchesGrade = gradeValue === "all" || item.grade === gradeValue;
     const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
     const matchesDeadline = matchesDeadlineStatus(deadlineInfo, deadlineStatusValue);
@@ -973,6 +991,7 @@ async function init() {
 
   renderDashboardMeta();
   renderSummary(allItems);
+  setupLocalProjectDefaultFilter();
 
   renderOpportunityCards();
   renderAgencyCards();
