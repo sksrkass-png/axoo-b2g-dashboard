@@ -13,13 +13,6 @@
     local: []
   };
 
-  const tabPanelIds = {
-    opportunities: "opportunitiesTab",
-    agencies: "agenciesTab",
-    art: "artTab",
-    local: "localTab"
-  };
-
   const cardContainerIds = {
     opportunities: "cards",
     agencies: "agencyCards",
@@ -30,14 +23,6 @@
   function safeText(value, fallback = "-") {
     const text = String(value ?? "").trim();
     return text || fallback;
-  }
-
-  function formatKrw(value) {
-    const number = Number(value || 0);
-
-    if (!number) return "금액 미공개";
-
-    return number.toLocaleString("ko-KR") + "원";
   }
 
   async function loadJson(path, fallback = []) {
@@ -80,7 +65,6 @@
     const activePanel = document.querySelector(".tab-panel.active");
 
     if (!activePanel) return "opportunities";
-
     if (activePanel.id === "agenciesTab") return "agencies";
     if (activePanel.id === "artTab") return "art";
     if (activePanel.id === "localTab") return "local";
@@ -108,7 +92,7 @@
       updateMetaCardState();
       updateSummaryByActiveTab();
       setupAccordions();
-    }, 120);
+    }, 160);
   }
 
   function setupMetaCards() {
@@ -163,7 +147,7 @@
           updateMetaCardState();
           updateSummaryByActiveTab();
           setupAccordions();
-        }, 120);
+        }, 160);
       });
     });
   }
@@ -324,14 +308,11 @@
     if (!card || card.classList.contains("card-as-accordion")) return;
     if (isEmptyCard(card)) return;
 
+    const summaryHtml = createAccordionSummary(card, tabKey);
+
     const details = document.createElement("details");
     details.className = "accordion-card";
-
-    if (tabKey === "opportunities" || tabKey === "local") {
-      details.open = false;
-    } else {
-      details.open = false;
-    }
+    details.open = false;
 
     const body = document.createElement("div");
     body.className = "accordion-body";
@@ -340,7 +321,7 @@
       body.appendChild(card.firstChild);
     }
 
-    details.innerHTML = createAccordionSummary(card, tabKey);
+    details.innerHTML = summaryHtml;
     details.appendChild(body);
 
     card.classList.add("card-as-accordion");
@@ -396,7 +377,11 @@
   }
 
   function getGradeFromCard(card) {
-    const text = safeText(card.querySelector(".summary-grade")?.textContent || card.querySelector(".badge")?.textContent, "");
+    const text = safeText(
+      card.querySelector(".summary-grade")?.textContent ||
+      card.querySelector(".badge")?.textContent,
+      ""
+    );
 
     if (text.includes("S")) return "S";
     if (text.includes("A")) return "A";
@@ -525,7 +510,7 @@
         setTimeout(() => {
           setupAccordions();
           updateSummaryByActiveTab();
-        }, 160);
+        }, 180);
       });
     });
   }
@@ -546,12 +531,12 @@
 
     applyDashboardPatch();
 
-    setTimeout(applyDashboardPatch, 300);
-    setTimeout(applyDashboardPatch, 1000);
+    setTimeout(applyDashboardPatch, 400);
+    setTimeout(applyDashboardPatch, 1200);
   }
 
   window.addEventListener("axoo:rendered", () => {
-    setTimeout(applyDashboardPatch, 80);
+    setTimeout(applyDashboardPatch, 100);
   });
 
   if (document.readyState === "loading") {
