@@ -74,6 +74,7 @@ function parseDateValue(value) {
   if (raw.includes("-")) {
     const firstDate = raw.split("/")[0].trim();
     const parsed = new Date(firstDate.replace(" ", "T"));
+
     return Number.isNaN(parsed.getTime()) ? null : parsed;
   }
 
@@ -200,7 +201,7 @@ function setReviewStatus(key, value) {
 }
 
 function getOpportunityReviewKey(item) {
-  return `opportunity-${item.bidNtceNo || item.bidNtceNm || ""}`;
+  return `opportunity-${item.bidNtceNo || item.noticeNo || item.bidNtceNm || item.title || ""}`;
 }
 
 function getAgencyReviewKey(item) {
@@ -318,7 +319,7 @@ function getDocumentUrl(item) {
 }
 
 function getOpportunityDeadlineValue(item) {
-  return item.bidClseDt || item.bidNtceEndDt || item.opengDt || item.deadline || "";
+  return item.bidClseDt || item.bidNtceEndDt || item.opengDt || item.deadline || item.deadlineDate || "";
 }
 
 function createOpportunityCard(item) {
@@ -326,7 +327,7 @@ function createOpportunityCard(item) {
   card.className = "card";
 
   const gradeClass = getGradeClass(item.grade);
-  const categoryLabel = item.categoryLabel || categoryNames[item.category] || "기타";
+  const categoryLabel = categoryNames[item.category] || item.categoryLabel || "기타";
   const docUrl = getDocumentUrl(item);
   const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
   const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
@@ -338,8 +339,6 @@ function createOpportunityCard(item) {
       <div class="badges">
         <span class="badge ${gradeClass}">${escapeHtml(safeText(item.grade))}등급</span>
         <span class="badge category">${escapeHtml(categoryLabel)}</span>
-        ${item.opportunityStatus ? `<span class="badge category">${escapeHtml(item.opportunityStatus)}</span>` : ""}
-        ${item.projectScale ? `<span class="badge category">${escapeHtml(item.projectScale)}</span>` : ""}
       </div>
 
       <div class="score-group">
@@ -351,12 +350,12 @@ function createOpportunityCard(item) {
     <h2>${escapeHtml(safeText(item.bidNtceNm || item.title))}</h2>
 
     <div class="meta">
-      <div><span>공고기관</span>${escapeHtml(safeText(item.noticeAgency || item.ntceInsttNm))}</div>
-      <div><span>수요기관</span>${escapeHtml(safeText(item.demandAgency || item.dminsttNm))}</div>
-      <div><span>계약방법</span>${escapeHtml(safeText(item.contractMethod || item.cntrctCnclsMthdNm || item.bidMethdNm))}</div>
+      <div><span>공고기관</span>${escapeHtml(safeText(item.ntceInsttNm || item.noticeAgency || item.agency))}</div>
+      <div><span>수요기관</span>${escapeHtml(safeText(item.dminsttNm || item.demandAgency))}</div>
+      <div><span>계약방법</span>${escapeHtml(safeText(item.cntrctCnclsMthdNm || item.bidMethdNm || item.contractMethod))}</div>
       <div><span>예산</span>${escapeHtml(formatMoney(item.budgetAmount || item.asignBdgtAmt || item.presmptPrce))}</div>
       <div><span>마감/개찰</span>${escapeHtml(safeText(getOpportunityDeadlineValue(item)))}</div>
-      <div><span>공고번호</span>${escapeHtml(safeText(item.noticeNo || item.bidNtceNo))}</div>
+      <div><span>공고번호</span>${escapeHtml(safeText(item.bidNtceNo || item.noticeNo))}</div>
     </div>
 
     <div class="keywords">
@@ -364,7 +363,7 @@ function createOpportunityCard(item) {
     </div>
 
     <div class="reason">
-      ${item.fitReason ? escapeHtml(item.fitReason) : (reasons.length ? reasons.map(reason => escapeHtml(reason)).join(" · ") : "점수 산정 사유 없음")}
+      ${reasons.length ? reasons.map(reason => escapeHtml(reason)).join(" · ") : "점수 산정 사유 없음"}
     </div>
 
     <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
@@ -394,15 +393,9 @@ function renderOpportunityCards() {
       item.title,
       item.ntceInsttNm,
       item.dminsttNm,
-      item.noticeAgency,
-      item.demandAgency,
       item.category,
       item.categoryLabel,
-      item.opportunityStatus,
-      item.projectScale,
-      ...(item.matchedKeywords || []),
-      ...(item.directFitKeywords || []),
-      ...(item.supportFitKeywords || [])
+      ...(item.matchedKeywords || [])
     ].join(" ").toLowerCase();
 
     const reviewKey = getOpportunityReviewKey(item);
@@ -771,6 +764,20 @@ function getLocalContractMethodValue(item) {
   return item.contractMethod || "확인 필요";
 }
 
+function getCompactContractMethod(value) {
+  const text = safeText(value);
+
+  if (!text || text === "-") return "확인 필요";
+  if (text.includes("협상에 의한 계약")) return "협상계약";
+  if (text.includes("제한경쟁")) return "제한경쟁";
+  if (text.includes("일반경쟁")) return "일반경쟁";
+  if (text.includes("수의계약")) return "수의계약";
+  if (text.includes("전자입찰")) return "전자입찰";
+  if (text.includes("방문제출")) return "방문제출";
+
+  return text.split("/")[0].trim();
+}
+
 function getLocalNoticeNoValue(item) {
   return item.noticeNo || item.sourceId || "";
 }
@@ -805,7 +812,8 @@ function createLocalProjectCard(item) {
 
   const noticeAgency = getLocalNoticeAgencyValue(item);
   const demandAgency = getLocalDemandAgencyValue(item);
-  const contractMethod = getLocalContractMethodValue(item);
+  const fullContractMethod = getLocalContractMethodValue(item);
+  const compactContractMethod = getCompactContractMethod(fullContractMethod);
   const deadlineAndOpening = getLocalDeadlineAndOpeningValue(item);
   const noticeNo = getLocalNoticeNoValue(item);
   const reasonText = item.fitReason || item.reason || "AXOO Fit 산정 사유를 확인해 주세요.";
@@ -830,7 +838,7 @@ function createLocalProjectCard(item) {
     <div class="meta">
       <div><span>공고기관</span>${escapeHtml(safeText(noticeAgency))}</div>
       <div><span>수요기관</span>${escapeHtml(safeText(demandAgency))}</div>
-      <div><span>계약방법</span>${escapeHtml(safeText(contractMethod))}</div>
+      <div><span>계약방법</span>${escapeHtml(safeText(compactContractMethod))}</div>
       <div><span>예산</span>${escapeHtml(formatMoney(item.budget))}</div>
       <div><span>마감/개찰</span>${escapeHtml(safeText(deadlineAndOpening))}</div>
       <div><span>공고번호</span>${escapeHtml(safeText(noticeNo))}</div>
@@ -845,6 +853,7 @@ function createLocalProjectCard(item) {
     </div>
 
     <p class="action">추천 액션: ${escapeHtml(safeText(item.nextAction))}</p>
+    <p class="action">계약방법 상세: ${escapeHtml(safeText(fullContractMethod))}</p>
 
     ${createReviewControl(reviewKey)}
 
