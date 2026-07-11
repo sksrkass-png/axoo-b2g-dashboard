@@ -197,11 +197,13 @@
           <option value="done">제안 완료</option>
         </select>
 
-        <label class="filter-check">
-          <input id="localDeadlineSoon" type="checkbox" />
-          <span>7일 내 마감</span>
-        </label>
-      </section>
+        <select id="localDeadlineStatusFilter">
+          <option value="active">진행 중</option>
+          <option value="all">전체</option>
+          <option value="soon">7일 내 마감</option>
+          <option value="closed">마감</option>
+          <option value="unknown">마감일 확인 필요</option>
+        </select>
 
       <div class="list-head local-list-head">
         <span class="list-source-grade">
@@ -275,7 +277,7 @@
     </section>
   </main>
 
-  <script src="app.js?v=100"></script>
+  <script src="app.js?v=101"></script>
   <script src="dashboard_ui_update.js?v=22"></script>
 </body>
 </html>
