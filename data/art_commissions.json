@@ -77,5 +77,30 @@
     "score": 85,
     "grade": "A",
     "budgetStatus": "첨부파일 확인 필요"
+  },
+  {
+    "id": "external-2008007e4ff20f18",
+    "source": "경기도 건축물 미술작품",
+    "title": "화성동탄(2) 택지개발지구 B11블럭 공동주택 미술작품 설치 공모 공고",
+    "agency": "경기도",
+    "region": "경기",
+    "category": "미술작품 공모",
+    "status": "공모중",
+    "publishedDate": "2026-07-13",
+    "periodStart": "2026-07-13",
+    "deadline": "2026-08-04",
+    "budget": 0,
+    "keywords": [
+      "미술작품",
+      "공모",
+      "공고",
+      "설치"
+    ],
+    "recommendedAction": "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토 / 공모기간: 2026-07-13 ~ 2026-08-04",
+    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903368&menuId=3865",
+    "bidNtceNo": "",
+    "score": 85,
+    "grade": "A",
+    "budgetStatus": "첨부파일 확인 필요"
   }
 ]
