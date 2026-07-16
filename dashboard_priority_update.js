@@ -3,7 +3,7 @@
 
   const PRIORITY_DATA_URL = "data/dashboard/priority_projects.json";
 
-  const CATEGORY_TABS = [
+  const TAB_CONFIG = [
     {
       tab: "art",
       label: "건축물 미술작품",
@@ -14,35 +14,43 @@
       tab: "mural",
       label: "벽화 & 조형물",
       icon: "🧱",
-      category: "mural_sculpture",
-      type: "priority"
+      type: "priority",
+      category: "mural_sculpture"
     },
     {
       tab: "exhibition",
       label: "전시 콘텐츠 기획 운영",
       icon: "🖼️",
-      category: "exhibition_content",
-      type: "priority"
+      type: "priority",
+      category: "exhibition_content"
     },
     {
       tab: "other",
       label: "기타 전체 공고",
       icon: "📂",
-      category: "other",
-      type: "priority"
+      type: "priority",
+      category: "other"
     },
     {
       tab: "agencies",
       label: "기관 타깃",
       icon: "🎯",
-      type: "native",
-      separated: true
+      type: "native"
     }
   ];
 
+  const GRADE_ORDER = {
+    S: 0,
+    A: 1,
+    B: 2,
+    C: 3,
+    HOLD: 9
+  };
+
   const state = {
     projects: [],
-    loaded: false
+    loaded: false,
+    currentTab: "art"
   };
 
   function $(selector, root = document) {
@@ -54,24 +62,27 @@
   }
 
   function esc(value) {
-    return String(value ?? "").replace(/[&<>"']/g, match => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    }[match]));
+    return String(value ?? "").replace(/[&<>"']/g, function (match) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[match];
+    });
   }
 
   function formatCount(value) {
-    const number = Number(value || 0);
-    return number.toLocaleString("ko-KR");
+    return Number(value || 0).toLocaleString("ko-KR");
   }
 
   function formatKrw(value) {
     const amount = Number(value || 0);
 
-    if (!amount) return "예산 미확인";
+    if (!amount) {
+      return "예산 미확인";
+    }
 
     if (amount >= 100000000) {
       const eok = amount / 100000000;
@@ -85,16 +96,62 @@
     return `${amount.toLocaleString("ko-KR")}원`;
   }
 
-  function normalizeUrl(url) {
-    const text = String(url || "").trim();
+  function compactDate(value) {
+    const text = String(value || "").trim();
 
-    if (!text) return "";
+    if (!text) {
+      return "확인 필요";
+    }
+
+    const match = text.match(/\d{4}[-.]\d{1,2}[-.]\d{1,2}/);
+
+    if (match) {
+      return match[0].replace(/\./g, "-");
+    }
 
     return text;
   }
 
+  function normalizeUrl(url) {
+    const text = String(url || "").trim();
+
+    if (!text) {
+      return "";
+    }
+
+    return text;
+  }
+
+  function getTabConfig(tab) {
+    return TAB_CONFIG.find(function (item) {
+      return item.tab === tab;
+    });
+  }
+
+  function getNativePanel(tab) {
+    if (tab === "art") {
+      return $("#artTab");
+    }
+
+    if (tab === "agencies") {
+      return $("#agenciesTab") || $("#agencyTab");
+    }
+
+    return null;
+  }
+
+  function getPriorityPanelId(tab) {
+    return `${tab}Tab`;
+  }
+
+  function getPriorityPanel(tab) {
+    return document.getElementById(getPriorityPanelId(tab));
+  }
+
   async function loadPriorityProjects() {
-    if (state.loaded) return state.projects;
+    if (state.loaded) {
+      return state.projects;
+    }
 
     try {
       const response = await fetch(`${PRIORITY_DATA_URL}?v=${Date.now()}`);
@@ -110,7 +167,7 @@
 
       return state.projects;
     } catch (error) {
-      console.warn("priority projects load failed", error);
+      console.warn("[AXOO Priority] priority_projects.json load failed", error);
 
       state.projects = [];
       state.loaded = true;
@@ -119,14 +176,123 @@
     }
   }
 
-  function getProjectsByCategory(category) {
-    return state.projects.filter(project => {
-      return project.priorityCategory === category && project.isExcludedFromPriority !== true;
-    });
+  function getDisplayProjectsByCategory(category) {
+    return state.projects
+      .filter(function (project) {
+        return (
+          project.priorityCategory === category &&
+          project.isExcludedFromPriority !== true
+        );
+      })
+      .sort(function (a, b) {
+        const gradeDiff =
+          (GRADE_ORDER[a.grade || "C"] ?? 9) -
+          (GRADE_ORDER[b.grade || "C"] ?? 9);
+
+        if (gradeDiff !== 0) {
+          return gradeDiff;
+        }
+
+        const amountDiff = Number(b.amount || 0) - Number(a.amount || 0);
+
+        if (amountDiff !== 0) {
+          return amountDiff;
+        }
+
+        return String(a.deadline || "9999-99-99").localeCompare(
+          String(b.deadline || "9999-99-99")
+        );
+      });
   }
 
   function getExcludedProjects() {
-    return state.projects.filter(project => project.isExcludedFromPriority === true);
+    return state.projects.filter(function (project) {
+      return project.isExcludedFromPriority === true;
+    });
+  }
+
+  function getPriorityCounts() {
+    return {
+      mural: getDisplayProjectsByCategory("mural_sculpture").length,
+      exhibition: getDisplayProjectsByCategory("exhibition_content").length,
+      other: getDisplayProjectsByCategory("other").length,
+      excluded: getExcludedProjects().length
+    };
+  }
+
+  function updateTextById(id, text) {
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.textContent = text;
+    }
+  }
+
+  function getLegacyArtCount() {
+    const legacy = document.getElementById("metaArtCount");
+
+    if (legacy && legacy.textContent.trim()) {
+      return legacy.textContent.trim();
+    }
+
+    const artCards = document.getElementById("artCards");
+
+    if (artCards) {
+      const count = artCards.querySelectorAll(".card, article").length;
+
+      if (count > 0) {
+        return formatCount(count);
+      }
+    }
+
+    return "0";
+  }
+
+  function updateMetaCards() {
+    const counts = getPriorityCounts();
+
+    updateTextById("priorityMetaArtCount", getLegacyArtCount());
+    updateTextById("priorityMetaMuralCount", `${formatCount(counts.mural)}건`);
+    updateTextById("priorityMetaExhibitionCount", `${formatCount(counts.exhibition)}건`);
+    updateTextById("priorityMetaOtherCount", `${formatCount(counts.other)}건`);
+
+    $all(".meta-card[data-tab-target]").forEach(function (card) {
+      const target = card.getAttribute("data-tab-target");
+
+      card.setAttribute("role", "button");
+      card.setAttribute("tabindex", "0");
+
+      card.onclick = function () {
+        showTab(target);
+      };
+
+      card.onkeydown = function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showTab(target);
+        }
+      };
+    });
+  }
+
+  function updateSummaryCounts(projects) {
+    const visibleProjects = Array.isArray(projects) ? projects : [];
+
+    const total = visibleProjects.length;
+    const sCount = visibleProjects.filter(function (item) {
+      return item.grade === "S";
+    }).length;
+    const aCount = visibleProjects.filter(function (item) {
+      return item.grade === "A";
+    }).length;
+    const bcCount = visibleProjects.filter(function (item) {
+      return item.grade === "B" || item.grade === "C";
+    }).length;
+
+    updateTextById("totalCount", formatCount(total));
+    updateTextById("sCount", formatCount(sCount));
+    updateTextById("aCount", formatCount(aCount));
+    updateTextById("bCount", formatCount(bcCount));
   }
 
   function getGradeClass(grade) {
@@ -142,24 +308,35 @@
       return `<span class="priority-tag muted">키워드 미분류</span>`;
     }
 
-    return keywords.slice(0, 4).map(keyword => {
-      return `<span class="priority-tag">${esc(keyword)}</span>`;
-    }).join("");
+    return keywords
+      .slice(0, 5)
+      .map(function (keyword) {
+        return `<span class="priority-tag">${esc(keyword)}</span>`;
+      })
+      .join("");
   }
 
   function renderProjectCard(project) {
-    const url = normalizeUrl(project.sourceUrl);
     const grade = project.grade || "C";
     const gradeReason = project.gradeReason || "등급 기준 정보 없음";
-    const amount = formatKrw(project.amount);
-    const deadline = project.deadline || "마감일 미확인";
-    const published = project.publishedDate || "공고일 미확인";
+    const url = normalizeUrl(project.sourceUrl);
+    const title = project.title || "제목 없음";
+    const agency = project.agency || "기관 미확인";
     const sourceType = project.sourceType || "출처 미확인";
+    const amount = formatKrw(project.amount);
+    const published = compactDate(project.publishedDate);
+    const deadline = compactDate(project.deadline);
+    const nextAction = project.nextAction || "검토";
+    const categoryLabel = project.priorityCategoryLabel || "기타 전체 공고";
 
     return `
       <article class="priority-project-card">
         <div class="priority-card-head">
-          <span class="priority-source">${esc(sourceType)}</span>
+          <div class="priority-head-left">
+            <span class="priority-source">${esc(sourceType)}</span>
+            <span class="priority-category-label">${esc(categoryLabel)}</span>
+          </div>
+
           <span
             class="priority-grade ${getGradeClass(grade)}"
             title="${esc(gradeReason)}"
@@ -167,21 +344,24 @@
           >${esc(grade)}</span>
         </div>
 
-        <h3 class="priority-title">${esc(project.title || "제목 없음")}</h3>
+        <h3 class="priority-title">${esc(title)}</h3>
 
         <div class="priority-meta-grid">
           <div>
             <span>기관</span>
-            <strong>${esc(project.agency || "기관 미확인")}</strong>
+            <strong>${esc(agency)}</strong>
           </div>
+
           <div>
             <span>예산</span>
             <strong>${esc(amount)}</strong>
           </div>
+
           <div>
             <span>공고일</span>
             <strong>${esc(published)}</strong>
           </div>
+
           <div>
             <span>마감</span>
             <strong>${esc(deadline)}</strong>
@@ -198,10 +378,10 @@
         </div>
 
         <div class="priority-actions">
-          <span>${esc(project.nextAction || "검토")}</span>
+          <span>${esc(nextAction)}</span>
           ${
             url
-              ? `<a href="${esc(url)}" target="_blank" rel="noopener">공고 보기</a>`
+              ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">공고 보기</a>`
               : `<em>링크 없음</em>`
           }
         </div>
@@ -210,20 +390,27 @@
   }
 
   function renderPriorityPanel(tab, category) {
-    const panel = ensurePriorityPanel(tab);
-    const projects = getProjectsByCategory(category);
+    const config = getTabConfig(tab);
+    const panel = getPriorityPanel(tab);
+
+    if (!panel || !config) {
+      return;
+    }
+
+    const projects = getDisplayProjectsByCategory(category);
     const excludedCount = getExcludedProjects().length;
 
     panel.innerHTML = `
       <div class="priority-panel-head">
         <div>
-          <p class="priority-eyebrow">AXOO Priority KR v1</p>
-          <h2>${esc(getTabLabel(tab))}</h2>
+          <p class="priority-eyebrow">AXOO Priority KR v1.1</p>
+          <h2>${esc(config.icon)} ${esc(config.label)}</h2>
           <p>
             나라장터와 로컬 프로젝트를 통합해 AXOO 우선순위 기준으로 분류했습니다.
             행사 운영대행성 공고는 우선순위에서 제외됩니다.
           </p>
         </div>
+
         <div class="priority-mini-stat">
           <span>표시 공고</span>
           <strong>${formatCount(projects.length)}건</strong>
@@ -247,114 +434,186 @@
           : `<div class="priority-empty">해당 기준에 맞는 공고가 아직 없습니다.</div>`
       }
     `;
+
+    updateSummaryCounts(projects);
   }
 
-  function getTabLabel(tab) {
-    const item = CATEGORY_TABS.find(entry => entry.tab === tab);
-    return item ? `${item.icon} ${item.label}` : tab;
+  function hideAllPanels() {
+    [
+      "artTab",
+      "muralTab",
+      "exhibitionTab",
+      "otherTab",
+      "agenciesTab",
+      "agencyTab",
+      "opportunitiesTab",
+      "localTab"
+    ].forEach(function (id) {
+      const panel = document.getElementById(id);
+
+      if (panel) {
+        panel.classList.remove("active");
+        panel.style.display = "none";
+      }
+    });
   }
 
-  function ensurePriorityPanel(tab) {
-    const id = `${tab}Tab`;
-    let panel = document.getElementById(id);
+  function activateTabButton(tab) {
+    $all(".tab-button").forEach(function (button) {
+      const isActive = button.getAttribute("data-tab") === tab;
 
-    if (panel) return panel;
-
-    panel = document.createElement("section");
-    panel.id = id;
-    panel.className = "tab-panel priority-tab-panel";
-    panel.style.display = "none";
-
-    const existingPanel =
-      document.getElementById("opportunitiesTab") ||
-      document.getElementById("artTab") ||
-      document.getElementById("agenciesTab");
-
-    const parent =
-      existingPanel?.parentElement ||
-      document.querySelector("main") ||
-      document.body;
-
-    parent.appendChild(panel);
-
-    return panel;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
   }
 
-  function ensureTabButton(entry) {
-    const tabs = document.querySelector(".tabs");
+  function showNativeTab(tab) {
+    const panel = getNativePanel(tab);
 
-    if (!tabs) return null;
-
-    let button = tabs.querySelector(`.tab-button[data-tab="${entry.tab}"]`);
-
-    if (!button) {
-      button = document.createElement("button");
-      button.type = "button";
-      button.className = "tab-button";
-      button.dataset.tab = entry.tab;
-      tabs.appendChild(button);
+    if (!panel) {
+      return;
     }
 
-    button.textContent = `${entry.icon} ${entry.label}`;
-    button.style.display = "";
+    panel.classList.add("active");
+    panel.style.display = "";
 
-    return button;
+    if (tab === "art") {
+      const total = Number(String(getLegacyArtCount()).replace(/[^0-9]/g, "")) || 0;
+      updateTextById("totalCount", formatCount(total));
+      updateTextById("sCount", "-");
+      updateTextById("aCount", "-");
+      updateTextById("bCount", "-");
+    }
   }
 
-  function hideOldTabs() {
-    const tabs = document.querySelector(".tabs");
+  function showTab(tab) {
+    const config = getTabConfig(tab);
 
-    if (!tabs) return;
+    if (!config) {
+      return;
+    }
 
-    const oldOpportunity = tabs.querySelector('.tab-button[data-tab="opportunities"]');
-    const oldLocal = tabs.querySelector('.tab-button[data-tab="local"]');
+    state.currentTab = tab;
 
-    if (oldOpportunity) oldOpportunity.style.display = "none";
-    if (oldLocal) oldLocal.style.display = "none";
-  }
+    hideAllPanels();
+    activateTabButton(tab);
 
-  function setupTabs() {
-    const tabs = document.querySelector(".tabs");
+    if (config.type === "priority") {
+      renderPriorityPanel(tab, config.category);
 
-    if (!tabs) return;
+      const panel = getPriorityPanel(tab);
 
-    hideOldTabs();
-
-    const orderedButtons = [];
-
-    CATEGORY_TABS.forEach(entry => {
-      const button = ensureTabButton(entry);
-
-      if (!button) return;
-
-      button.dataset.priorityReady = "true";
-
-      button.onclick = event => {
-        event.preventDefault();
-        showTab(entry.tab);
-      };
-
-      orderedButtons.push({
-        entry,
-        button
-      });
-    });
-
-    const separator = ensureAgencySeparator();
-
-    orderedButtons.forEach(({ entry, button }) => {
-      if (entry.separated && separator) {
-        tabs.appendChild(separator);
+      if (panel) {
+        panel.classList.add("active");
+        panel.style.display = "";
       }
 
-      tabs.appendChild(button);
+      return;
+    }
+
+    showNativeTab(tab);
+  }
+
+  function setupTabButtons() {
+    $all(".tab-button").forEach(function (button) {
+      const tab = button.getAttribute("data-tab");
+
+      if (tab === "opportunities" || tab === "local") {
+        button.style.display = "none";
+        return;
+      }
+
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const nextTab = button.getAttribute("data-tab");
+
+        if (nextTab) {
+          showTab(nextTab);
+        }
+      });
     });
   }
 
-  function ensureAgencySeparator() {
-    const tabs = document.querySelector(".tabs");
+  function ensurePriorityPanels() {
+    ["mural", "exhibition", "other"].forEach(function (tab) {
+      let panel = getPriorityPanel(tab);
 
-    if (!tabs) return null;
+      if (panel) {
+        return;
+      }
+
+      panel = document.createElement("section");
+      panel.id = getPriorityPanelId(tab);
+      panel.className = "tab-panel priority-tab-panel";
+      panel.style.display = "none";
+
+      const agenciesPanel = $("#agenciesTab") || $("#agencyTab");
+      const main = $("main") || document.body;
+
+      if (agenciesPanel && agenciesPanel.parentNode) {
+        agenciesPanel.parentNode.insertBefore(panel, agenciesPanel);
+      } else {
+        main.appendChild(panel);
+      }
+    });
+  }
+
+  function ensureTabLayout() {
+    const tabs = $(".tabs");
+
+    if (!tabs) {
+      return;
+    }
+
+    const desiredTabs = [
+      {
+        tab: "art",
+        text: "💙 건축물 미술작품"
+      },
+      {
+        tab: "mural",
+        text: "🧱 벽화 & 조형물"
+      },
+      {
+        tab: "exhibition",
+        text: "🖼️ 전시 콘텐츠 기획 운영"
+      },
+      {
+        tab: "other",
+        text: "📂 기타 전체 공고"
+      },
+      {
+        tab: "agencies",
+        text: "🎯 기관 타깃"
+      }
+    ];
+
+    desiredTabs.forEach(function (item) {
+      let button = tabs.querySelector(`.tab-button[data-tab="${item.tab}"]`);
+
+      if (!button) {
+        button = document.createElement("button");
+        button.type = "button";
+        button.className = "tab-button";
+        button.setAttribute("data-tab", item.tab);
+      }
+
+      button.textContent = item.text;
+      button.style.display = "";
+      tabs.appendChild(button);
+    });
+
+    const opportunityButton = tabs.querySelector('.tab-button[data-tab="opportunities"]');
+    const localButton = tabs.querySelector('.tab-button[data-tab="local"]');
+
+    if (opportunityButton) {
+      opportunityButton.style.display = "none";
+    }
+
+    if (localButton) {
+      localButton.style.display = "none";
+    }
 
     let separator = tabs.querySelector(".priority-tab-separator");
 
@@ -364,174 +623,129 @@
       separator.textContent = "참고";
     }
 
-    return separator;
-  }
+    const agenciesButton = tabs.querySelector('.tab-button[data-tab="agencies"]');
 
-  function getNativePanel(tab) {
-    if (tab === "art") return document.getElementById("artTab");
-
-    if (tab === "agencies") {
-      return (
-        document.getElementById("agenciesTab") ||
-        document.getElementById("agencyTab")
-      );
+    if (agenciesButton) {
+      tabs.insertBefore(separator, agenciesButton);
     }
-
-    return null;
   }
 
-  function hideAllPanels() {
-    [
-      "opportunitiesTab",
-      "localTab",
-      "artTab",
-      "agenciesTab",
-      "agencyTab",
-      "muralTab",
-      "exhibitionTab",
-      "otherTab"
-    ].forEach(id => {
-      const panel = document.getElementById(id);
+  function setupMetaFallback() {
+    const metaBar = $(".meta-bar");
 
-      if (panel) {
-        panel.style.display = "none";
-      }
-    });
-  }
-
-  function showTab(tab) {
-    const buttons = $all(".tab-button");
-
-    buttons.forEach(button => {
-      button.classList.toggle("active", button.dataset.tab === tab);
-    });
-
-    hideAllPanels();
-
-    const entry = CATEGORY_TABS.find(item => item.tab === tab);
-
-    if (!entry) return;
-
-    if (entry.type === "priority") {
-      renderPriorityPanel(entry.tab, entry.category);
-
-      const panel = document.getElementById(`${entry.tab}Tab`);
-      if (panel) panel.style.display = "";
-
+    if (!metaBar) {
       return;
     }
 
-    const panel = getNativePanel(tab);
+    const requiredCards = [
+      {
+        id: "priorityMetaArtCount",
+        label: "1. 건축물 미술작품",
+        tab: "art"
+      },
+      {
+        id: "priorityMetaMuralCount",
+        label: "2. 벽화 & 조형물",
+        tab: "mural"
+      },
+      {
+        id: "priorityMetaExhibitionCount",
+        label: "3. 전시 콘텐츠 기획 운영",
+        tab: "exhibition"
+      },
+      {
+        id: "priorityMetaOtherCount",
+        label: "기타 전체 공고",
+        tab: "other"
+      }
+    ];
 
-    if (panel) {
-      panel.style.display = "";
-    }
-  }
-
-  function createMetaCard(id, label, value, targetTab) {
-    const card = document.createElement("article");
-
-    card.className = "meta-card priority-meta-card";
-    card.dataset.tabTarget = targetTab;
-    card.innerHTML = `
-      <span class="meta-label">${esc(label)}</span>
-      <strong class="meta-value" id="${esc(id)}">${esc(value)}</strong>
-    `;
-
-    card.setAttribute("role", "button");
-    card.setAttribute("tabindex", "0");
-
-    card.addEventListener("click", () => {
-      showTab(targetTab);
+    const alreadyPriority = requiredCards.every(function (item) {
+      return document.getElementById(item.id);
     });
 
-    return card;
-  }
-
-  function setupMetaCards() {
-    const metaBar = document.querySelector(".meta-bar");
-
-    if (!metaBar) return;
-
-    const artCount = document.getElementById("metaArtCount")?.textContent || "0";
-    const muralCount = getProjectsByCategory("mural_sculpture").length;
-    const exhibitionCount = getProjectsByCategory("exhibition_content").length;
-    const otherCount = getProjectsByCategory("other").length;
+    if (alreadyPriority) {
+      return;
+    }
 
     metaBar.innerHTML = "";
 
-    metaBar.appendChild(
-      createMetaCard(
-        "priorityMetaArtCount",
-        "1. 건축물 미술작품",
-        artCount,
-        "art"
-      )
-    );
+    requiredCards.forEach(function (item) {
+      const card = document.createElement("div");
+      card.className = "meta-card priority-meta-card";
+      card.setAttribute("data-tab-target", item.tab);
 
-    metaBar.appendChild(
-      createMetaCard(
-        "priorityMetaMuralCount",
-        "2. 벽화 & 조형물",
-        `${formatCount(muralCount)}건`,
-        "mural"
-      )
-    );
+      card.innerHTML = `
+        <div class="meta-label">${esc(item.label)}</div>
+        <div class="meta-value" id="${esc(item.id)}">0</div>
+      `;
 
-    metaBar.appendChild(
-      createMetaCard(
-        "priorityMetaExhibitionCount",
-        "3. 전시 콘텐츠 기획 운영",
-        `${formatCount(exhibitionCount)}건`,
-        "exhibition"
-      )
-    );
-
-    metaBar.appendChild(
-      createMetaCard(
-        "priorityMetaOtherCount",
-        "기타 전체 공고",
-        `${formatCount(otherCount)}건`,
-        "other"
-      )
-    );
+      metaBar.appendChild(card);
+    });
   }
 
   async function applyPriorityDashboard() {
+    ensurePriorityPanels();
+    ensureTabLayout();
+    setupMetaFallback();
+
     await loadPriorityProjects();
 
-    setupTabs();
-    setupMetaCards();
+    updateMetaCards();
+    setupTabButtons();
 
-    const active = document.querySelector(".tab-button.active")?.dataset.tab;
+    const activeButton = $(".tab-button.active");
+    const activeTab = activeButton ? activeButton.getAttribute("data-tab") : "";
 
-    if (!active || active === "opportunities" || active === "local") {
+    if (!activeTab || activeTab === "opportunities" || activeTab === "local") {
       showTab("art");
+    } else {
+      showTab(activeTab);
     }
   }
 
-  function schedulePriorityPatch() {
+  function schedulePatch() {
     let count = 0;
 
-    const timer = setInterval(() => {
-      applyPriorityDashboard();
+    const timer = window.setInterval(function () {
+      updateMetaCards();
+
+      if (state.currentTab === "mural" || state.currentTab === "exhibition" || state.currentTab === "other") {
+        const config = getTabConfig(state.currentTab);
+
+        if (config && config.type === "priority") {
+          renderPriorityPanel(config.tab, config.category);
+        }
+      }
 
       count += 1;
 
-      if (count >= 18) {
-        clearInterval(timer);
+      if (count >= 12) {
+        window.clearInterval(timer);
       }
-    }, 450);
+    }, 600);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
     applyPriorityDashboard();
-    schedulePriorityPatch();
+    schedulePatch();
 
-    document.addEventListener("click", event => {
-      if (event.target.closest(".tab-button")) {
-        setTimeout(applyPriorityDashboard, 160);
+    document.addEventListener("click", function (event) {
+      const button = event.target.closest(".tab-button");
+
+      if (!button) {
+        return;
       }
+
+      const tab = button.getAttribute("data-tab");
+
+      if (!tab || tab === "opportunities" || tab === "local") {
+        return;
+      }
+
+      window.setTimeout(function () {
+        showTab(tab);
+      }, 80);
     });
   });
 })();
