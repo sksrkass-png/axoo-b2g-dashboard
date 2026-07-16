@@ -1328,3 +1328,60 @@ h1 {
     width: 100%;
   }
 }
+
+/* =========================
+   AXOO Priority Dashboard v1.1 Patch
+   ========================= */
+
+.tabs {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.priority-tab-separator {
+  flex: 0 0 auto;
+}
+
+.priority-head-left {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+
+.priority-category-label {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  background: #fff1eb;
+  color: #ff3b30;
+  border: 1px solid #ffd3c7;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.priority-project-card {
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.priority-project-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 59, 48, 0.35);
+  box-shadow: 0 14px 34px rgba(20, 15, 10, 0.07);
+}
+
+@media (max-width: 640px) {
+  .priority-head-left {
+    width: 100%;
+  }
+
+  .priority-card-head {
+    align-items: flex-start;
+  }
+}
