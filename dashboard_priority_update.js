@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const PRIORITY_DATA_URL = "data/dashboard/priority_projects.json";
+  const PRIORITY_DATA_URL = "data/priority_projects.json";
 
   const TAB_CONFIG = [
     {
