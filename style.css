@@ -1385,3 +1385,437 @@ h1 {
     align-items: flex-start;
   }
 }
+
+/* =========================
+   AXOO Priority Dashboard v1.2
+   Green Clean Theme + Accordion
+   ========================= */
+
+:root {
+  --bg: #f7f7f3;
+  --paper: #ffffff;
+  --paper-soft: #f3f6f1;
+  --black: #161616;
+  --gray: #747b73;
+  --gray-dark: #3f473f;
+  --line: #e3e7df;
+  --line-soft: #edf0ea;
+  --red: #0a7c4a;
+  --red-soft: #ecf7f1;
+  --beige: #eef2ea;
+  --green: #0a7c4a;
+  --green-dark: #075f3a;
+  --green-soft: #ecf7f1;
+  --green-pale: #f4faf6;
+  --shadow-soft: 0 1px 0 rgba(17, 17, 17, 0.03);
+  --shadow-active: 0 14px 34px rgba(10, 124, 74, 0.14);
+}
+
+/* Base tone refresh */
+
+body {
+  background:
+    radial-gradient(circle at top right, rgba(10, 124, 74, 0.05), transparent 34%),
+    var(--bg);
+}
+
+.header-inner {
+  background: #ffffff;
+  color: var(--black);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 48px rgba(16, 24, 20, 0.05);
+}
+
+.eyebrow {
+  color: var(--green);
+}
+
+.subtitle {
+  color: #5f675f;
+}
+
+.header-update-card {
+  background: var(--green);
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 11px 14px;
+  right: 28px;
+  bottom: 24px;
+}
+
+.summary-panel,
+.card,
+.priority-project-card {
+  box-shadow: 0 14px 38px rgba(24, 32, 26, 0.045);
+}
+
+.tabs {
+  background: #e8eee6;
+  border: 1px solid #dce6dc;
+}
+
+.tab-button.active {
+  background: var(--green);
+  color: #ffffff;
+}
+
+.link,
+.priority-actions a,
+.source-view-link {
+  background: var(--green);
+}
+
+.link:hover,
+.priority-actions a:hover,
+.source-view-link:hover {
+  background: var(--green-dark);
+}
+
+/* Summary card sync */
+
+.meta-card-active {
+  background: #ffffff;
+  border-color: rgba(10, 124, 74, 0.55);
+  box-shadow: var(--shadow-active);
+}
+
+.meta-card-muted {
+  opacity: 0.48;
+  filter: grayscale(0.75);
+  background: #f7f8f5;
+}
+
+.meta-card-muted:hover {
+  opacity: 0.85;
+  filter: grayscale(0.2);
+}
+
+.priority-meta-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.priority-meta-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: transparent;
+}
+
+.priority-meta-card.meta-card-active::before {
+  background: var(--green);
+}
+
+/* Priority section header */
+
+.priority-panel-head-green,
+.priority-panel-head {
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #ffffff;
+  padding: 22px;
+  box-shadow: 0 14px 38px rgba(24, 32, 26, 0.045);
+}
+
+.priority-panel-head h2 {
+  color: var(--black);
+}
+
+.priority-panel-head p {
+  color: #5e665f;
+}
+
+.priority-eyebrow {
+  color: var(--green);
+}
+
+.priority-mini-stat {
+  background: var(--green-soft);
+  border-color: rgba(10, 124, 74, 0.18);
+}
+
+.priority-mini-stat strong {
+  color: var(--green-dark);
+}
+
+/* Grade guide */
+
+.grade-guide-box-green,
+.grade-guide-box {
+  background: #ffffff;
+  border: 1px solid rgba(10, 124, 74, 0.22);
+  box-shadow: 0 12px 30px rgba(24, 32, 26, 0.035);
+}
+
+.grade-guide-box strong {
+  color: var(--green-dark);
+}
+
+/* Priority list head */
+
+.priority-list-head {
+  margin-top: 20px;
+}
+
+/* Priority accordion layout */
+
+.priority-accordion-list {
+  gap: 12px;
+}
+
+.priority-accordion-card {
+  border-color: var(--line);
+  background: #ffffff;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.priority-accordion-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(10, 124, 74, 0.28);
+  box-shadow: 0 16px 34px rgba(24, 32, 26, 0.065);
+}
+
+.priority-accordion-summary {
+  grid-template-columns: 220px minmax(0, 1fr) 150px 150px;
+}
+
+.priority-accordion-summary:hover {
+  background: var(--green-pale);
+}
+
+.accordion-card[open] .priority-accordion-summary {
+  background: var(--green-pale);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.priority-summary-title {
+  display: grid;
+  gap: 5px;
+}
+
+.priority-summary-title small {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  border: 1px solid rgba(10, 124, 74, 0.16);
+  padding: 5px 8px;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -0.02em;
+}
+
+/* Source and grade in accordion */
+
+.summary-source {
+  background: #162018;
+}
+
+.priority-grade-wrap {
+  position: relative;
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.priority-grade {
+  width: 64px;
+  min-width: 64px;
+  max-width: 64px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 950;
+  white-space: nowrap;
+  cursor: help;
+}
+
+.priority-grade-s {
+  background: var(--green);
+}
+
+.priority-grade-a {
+  background: #111111;
+}
+
+.priority-grade-b {
+  background: #6e7a70;
+}
+
+.priority-grade-c {
+  background: #a2aaa0;
+}
+
+.priority-grade-hold {
+  background: #c1c8bf;
+  color: #303830;
+}
+
+/* Custom grade tooltip */
+
+.priority-tooltip {
+  position: absolute;
+  z-index: 50;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  width: min(280px, 72vw);
+  padding: 12px 13px;
+  border-radius: 14px;
+  background: #111111;
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 6px);
+  pointer-events: none;
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease,
+    transform 0.15s ease;
+}
+
+.priority-tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 10px;
+  height: 10px;
+  background: #111111;
+  transform: translate(-50%, -5px) rotate(45deg);
+}
+
+.priority-tooltip strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 950;
+}
+
+.priority-tooltip em {
+  display: block;
+  color: rgba(255, 255, 255, 0.86);
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.priority-grade-wrap:hover .priority-tooltip,
+.priority-grade-wrap:focus-within .priority-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* Priority detail body */
+
+.priority-accordion-card .accordion-body {
+  background: #ffffff;
+}
+
+.priority-accordion-card .category {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  border-color: rgba(10, 124, 74, 0.16);
+}
+
+.priority-accordion-card .keyword {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  border-color: rgba(10, 124, 74, 0.14);
+}
+
+.priority-accordion-card .reason {
+  background: #f8fbf7;
+  border-left-color: var(--green);
+  color: #444c45;
+}
+
+.priority-accordion-card .reason strong {
+  color: var(--green-dark);
+}
+
+.empty-message-inline {
+  margin: 14px 0 0;
+  color: #8a9189;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* Empty state */
+
+.priority-empty {
+  background: #ffffff;
+  border: 1px dashed rgba(10, 124, 74, 0.28);
+  color: #667068;
+}
+
+/* Mobile */
+
+@media (max-width: 1100px) {
+  .priority-accordion-summary {
+    grid-template-columns: 210px minmax(0, 1fr) 140px 140px;
+  }
+}
+
+@media (max-width: 960px) {
+  .priority-accordion-summary {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+  }
+
+  .priority-grade-wrap {
+    justify-content: flex-start;
+  }
+
+  .priority-tooltip {
+    left: 0;
+    transform: translate(0, 6px);
+  }
+
+  .priority-grade-wrap:hover .priority-tooltip,
+  .priority-grade-wrap:focus-within .priority-tooltip {
+    transform: translate(0, 0);
+  }
+
+  .priority-tooltip::after {
+    left: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-update-card {
+    position: static;
+    width: fit-content;
+    margin-top: 16px;
+  }
+
+  .priority-panel-head-green,
+  .priority-panel-head {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .priority-tooltip {
+    width: min(260px, 78vw);
+  }
+}
