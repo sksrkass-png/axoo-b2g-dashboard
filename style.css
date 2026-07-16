@@ -2090,3 +2090,49 @@ html body {
     left: 24px !important;
   }
 }
+
+/* =========================
+   AXOO Priority Tooltip Position Hotfix
+   ========================= */
+
+.priority-grade-wrap {
+  overflow: visible !important;
+}
+
+.priority-tooltip {
+  left: calc(100% + 12px) !important;
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translate(0, -50%) !important;
+}
+
+.priority-tooltip::after {
+  left: -5px !important;
+  top: 50% !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+}
+
+.priority-grade-wrap:hover .priority-tooltip,
+.priority-grade-wrap:focus-within .priority-tooltip {
+  transform: translate(0, -50%) !important;
+}
+
+@media (max-width: 960px) {
+  .priority-tooltip {
+    left: 0 !important;
+    top: calc(100% + 10px) !important;
+    bottom: auto !important;
+    transform: translate(0, 6px) !important;
+  }
+
+  .priority-grade-wrap:hover .priority-tooltip,
+  .priority-grade-wrap:focus-within .priority-tooltip {
+    transform: translate(0, 0) !important;
+  }
+
+  .priority-tooltip::after {
+    left: 24px !important;
+    top: -5px !important;
+    transform: rotate(45deg) !important;
+  }
+}
