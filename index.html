@@ -6,7 +6,7 @@
 
   <title>AXOO B2G Dashboard</title>
 
-  <link rel="stylesheet" href="style.css?v=127" />
+  <link rel="stylesheet" href="style.css?v=128" />
 </head>
 
 <body>
@@ -16,7 +16,7 @@
         <p class="eyebrow">AXOO B2G ENGINE</p>
         <h1>공공 프로젝트 자동 리서치 대시보드</h1>
         <p class="subtitle">
-          나라장터 기반 맞춤 공고, 로컬 프로젝트, 기관 타깃, 건축물 미술작품 후보를 한눈에 관리합니다.
+          건축물 미술작품, 벽화·조형물, 전시 콘텐츠 기획 운영 중심으로 AXOO 우선 검토 프로젝트를 관리합니다.
         </p>
       </div>
 
@@ -32,27 +32,42 @@
         <h2>현황 요약</h2>
       </div>
 
+      <!--
+        화면 표시용 요약 카드.
+        실제 숫자는 dashboard_priority_update.js에서 priority_projects.json 기준으로 다시 채웁니다.
+      -->
       <section class="meta-bar">
-        <div class="meta-card" data-tab-target="opportunities">
-          <div class="meta-label">❤️나라장터 공고</div>
-          <div class="meta-value" id="metaOpportunityCount">0</div>
+        <div class="meta-card priority-meta-card" data-tab-target="art">
+          <div class="meta-label">1. 건축물 미술작품</div>
+          <div class="meta-value" id="priorityMetaArtCount">0</div>
         </div>
 
-        <div class="meta-card" data-tab-target="art">
-          <div class="meta-label">💙건축물 미술작품</div>
-          <div class="meta-value" id="metaArtCount">0</div>
+        <div class="meta-card priority-meta-card" data-tab-target="mural">
+          <div class="meta-label">2. 벽화 &amp; 조형물</div>
+          <div class="meta-value" id="priorityMetaMuralCount">0</div>
         </div>
 
-        <div class="meta-card" data-tab-target="local">
-          <div class="meta-label">🧩로컬 프로젝트</div>
-          <div class="meta-value" id="metaLocalCount">0</div>
+        <div class="meta-card priority-meta-card" data-tab-target="exhibition">
+          <div class="meta-label">3. 전시 콘텐츠 기획 운영</div>
+          <div class="meta-value" id="priorityMetaExhibitionCount">0</div>
         </div>
 
-        <div class="meta-card" data-tab-target="agencies">
-          <div class="meta-label">🎯기관 타깃</div>
-          <div class="meta-value" id="metaAgencyCount">0</div>
+        <div class="meta-card priority-meta-card" data-tab-target="other">
+          <div class="meta-label">기타 전체 공고</div>
+          <div class="meta-value" id="priorityMetaOtherCount">0</div>
         </div>
       </section>
+
+      <!--
+        기존 app.js / dashboard_ui_update.js가 참조하는 기존 카운트 ID.
+        화면에는 보이지 않지만 기존 스크립트 오류 방지를 위해 유지합니다.
+      -->
+      <div class="legacy-metrics" hidden>
+        <span id="metaOpportunityCount">0</span>
+        <span id="metaArtCount">0</span>
+        <span id="metaLocalCount">0</span>
+        <span id="metaAgencyCount">0</span>
+      </div>
 
       <section class="summary-grid">
         <div class="summary-card">
@@ -78,13 +93,74 @@
     </section>
 
     <nav class="tabs">
-      <button class="tab-button active" data-tab="opportunities">❤️나라장터 공고</button>
-      <button class="tab-button" data-tab="art">💙건축물 미술작품</button>
-      <button class="tab-button" data-tab="local">🧩로컬 프로젝트</button>
-      <button class="tab-button" data-tab="agencies">🎯기관 타깃</button>
+      <button class="tab-button active" data-tab="art">💙 건축물 미술작품</button>
+      <button class="tab-button" data-tab="mural">🧱 벽화 &amp; 조형물</button>
+      <button class="tab-button" data-tab="exhibition">🖼️ 전시 콘텐츠 기획 운영</button>
+      <button class="tab-button" data-tab="other">📂 기타 전체 공고</button>
+
+      <span class="priority-tab-separator">참고</span>
+      <button class="tab-button" data-tab="agencies">🎯 기관 타깃</button>
+
+      <!-- 기존 app.js 호환용 숨김 버튼 -->
+      <button class="tab-button" data-tab="opportunities" style="display:none;">❤️ 나라장터 공고</button>
+      <button class="tab-button" data-tab="local" style="display:none;">🧩 로컬 프로젝트</button>
     </nav>
 
-    <section id="opportunitiesTab" class="tab-panel active">
+    <!-- 1. 건축물 미술작품 -->
+    <section id="artTab" class="tab-panel active">
+      <section class="filters">
+        <input id="artSearchInput" type="text" placeholder="공모명, 기관명, 키워드 검색" />
+
+        <select id="artSourceFilter">
+          <option value="all">전체 출처</option>
+          <option value="서울">서울</option>
+          <option value="경기도">경기도</option>
+          <option value="LH/SH">LH/SH</option>
+        </select>
+
+        <select id="artReviewFilter">
+          <option value="all">전체 상태</option>
+          <option value="new">미검토</option>
+          <option value="reviewing">검토중</option>
+          <option value="proposal">제안 준비</option>
+          <option value="hold">보류</option>
+          <option value="done">제안 완료</option>
+        </select>
+      </section>
+
+      <div class="list-head">
+        <span>출처</span>
+        <span>공모명</span>
+        <span>게재기간</span>
+        <span>마감일</span>
+      </div>
+
+      <section id="artCards" class="cards"></section>
+    </section>
+
+    <!-- 2. 벽화 & 조형물 / JS에서 priority_projects.json 기준으로 렌더링 -->
+    <section id="muralTab" class="tab-panel priority-tab-panel">
+      <div class="priority-empty">
+        벽화 &amp; 조형물 데이터를 불러오는 중입니다.
+      </div>
+    </section>
+
+    <!-- 3. 전시 콘텐츠 기획 운영 / JS에서 priority_projects.json 기준으로 렌더링 -->
+    <section id="exhibitionTab" class="tab-panel priority-tab-panel">
+      <div class="priority-empty">
+        전시 콘텐츠 기획 운영 데이터를 불러오는 중입니다.
+      </div>
+    </section>
+
+    <!-- 4. 기타 전체 공고 / JS에서 priority_projects.json 기준으로 렌더링 -->
+    <section id="otherTab" class="tab-panel priority-tab-panel">
+      <div class="priority-empty">
+        기타 전체 공고 데이터를 불러오는 중입니다.
+      </div>
+    </section>
+
+    <!-- 기존 나라장터 공고 패널: 새 구조에서는 기타 전체 공고로 통합되지만 기존 app.js 호환을 위해 유지 -->
+    <section id="opportunitiesTab" class="tab-panel">
       <section class="filters">
         <input id="searchInput" type="text" placeholder="공고명, 기관명, 키워드 검색" />
 
@@ -134,37 +210,7 @@
       </p>
     </section>
 
-    <section id="artTab" class="tab-panel">
-      <section class="filters">
-        <input id="artSearchInput" type="text" placeholder="공모명, 기관명, 키워드 검색" />
-
-        <select id="artSourceFilter">
-          <option value="all">전체 출처</option>
-          <option value="서울">서울</option>
-          <option value="경기도">경기도</option>
-          <option value="LH/SH">LH/SH</option>
-        </select>
-
-        <select id="artReviewFilter">
-          <option value="all">전체 상태</option>
-          <option value="new">미검토</option>
-          <option value="reviewing">검토중</option>
-          <option value="proposal">제안 준비</option>
-          <option value="hold">보류</option>
-          <option value="done">제안 완료</option>
-        </select>
-      </section>
-
-      <div class="list-head">
-        <span>출처</span>
-        <span>공모명</span>
-        <span>게재기간</span>
-        <span>마감일</span>
-      </div>
-
-      <section id="artCards" class="cards"></section>
-    </section>
-
+    <!-- 기존 로컬 프로젝트 패널: 새 구조에서는 우선순위/기타 전체 공고로 통합되지만 기존 app.js 호환을 위해 유지 -->
     <section id="localTab" class="tab-panel">
       <section class="filters local-filters">
         <input id="localSearchInput" type="text" placeholder="프로젝트명, 기관명, 키워드 검색" />
@@ -232,6 +278,7 @@
       </p>
     </section>
 
+    <!-- 5. 참고용 기관 타깃 -->
     <section id="agenciesTab" class="tab-panel">
       <section class="filters agency-filters">
         <input id="agencySearchInput" type="text" placeholder="기관명, 지역, 키워드 검색" />
@@ -295,5 +342,6 @@
 
   <script src="app.js?v=107"></script>
   <script src="dashboard_ui_update.js?v=29"></script>
+  <script src="dashboard_priority_update.js?v=1"></script>
 </body>
 </html>
