@@ -15,21 +15,24 @@
       label: "벽화 & 조형물",
       icon: "🧱",
       type: "priority",
-      category: "mural_sculpture"
+      category: "mural_sculpture",
+      description: "벽화, 옹벽 개선, 조형물, 환경 개선, 공공디자인 계열 공고를 모아봅니다."
     },
     {
       tab: "exhibition",
       label: "전시 콘텐츠 기획 운영",
       icon: "🖼️",
       type: "priority",
-      category: "exhibition_content"
+      category: "exhibition_content",
+      description: "전시연출, 전시물 제작, 실감콘텐츠, 미디어아트, 체험 콘텐츠 계열 공고를 모아봅니다."
     },
     {
       tab: "other",
       label: "기타 전체 공고",
       icon: "📂",
       type: "priority",
-      category: "other"
+      category: "other",
+      description: "3대 우선순위에는 속하지 않지만 비주얼 제작, 브랜딩, 영상 제작, 팝업, 굿즈 등 AXOO 서브 핏이 있는 공고를 모아봅니다."
     },
     {
       tab: "agencies",
@@ -113,39 +116,13 @@
   }
 
   function normalizeUrl(url) {
-    const text = String(url || "").trim();
-
-    if (!text) {
-      return "";
-    }
-
-    return text;
+    return String(url || "").trim();
   }
 
   function getTabConfig(tab) {
     return TAB_CONFIG.find(function (item) {
       return item.tab === tab;
     });
-  }
-
-  function getNativePanel(tab) {
-    if (tab === "art") {
-      return $("#artTab");
-    }
-
-    if (tab === "agencies") {
-      return $("#agenciesTab") || $("#agencyTab");
-    }
-
-    return null;
-  }
-
-  function getPriorityPanelId(tab) {
-    return `${tab}Tab`;
-  }
-
-  function getPriorityPanel(tab) {
-    return document.getElementById(getPriorityPanelId(tab));
   }
 
   async function loadPriorityProjects() {
@@ -238,7 +215,7 @@
     const artCards = document.getElementById("artCards");
 
     if (artCards) {
-      const count = artCards.querySelectorAll(".card, article").length;
+      const count = artCards.querySelectorAll(".card, article, details").length;
 
       if (count > 0) {
         return formatCount(count);
@@ -258,6 +235,10 @@
 
     $all(".meta-card[data-tab-target]").forEach(function (card) {
       const target = card.getAttribute("data-tab-target");
+      const isActive = state.currentTab === target;
+
+      card.classList.toggle("meta-card-active", isActive);
+      card.classList.toggle("meta-card-muted", !isActive);
 
       card.setAttribute("role", "button");
       card.setAttribute("tabindex", "0");
@@ -295,8 +276,54 @@
     updateTextById("bCount", formatCount(bcCount));
   }
 
+  function updateArtSummaryCount() {
+    const total = Number(String(getLegacyArtCount()).replace(/[^0-9]/g, "")) || 0;
+
+    updateTextById("totalCount", formatCount(total));
+    updateTextById("sCount", "-");
+    updateTextById("aCount", "-");
+    updateTextById("bCount", "-");
+  }
+
+  function getNativePanel(tab) {
+    if (tab === "art") {
+      return $("#artTab");
+    }
+
+    if (tab === "agencies") {
+      return $("#agenciesTab") || $("#agencyTab");
+    }
+
+    return null;
+  }
+
+  function getPriorityPanelId(tab) {
+    return `${tab}Tab`;
+  }
+
+  function getPriorityPanel(tab) {
+    return document.getElementById(getPriorityPanelId(tab));
+  }
+
   function getGradeClass(grade) {
     return `priority-grade-${String(grade || "C").toLowerCase()}`;
+  }
+
+  function renderGradeBadge(project) {
+    const grade = project.grade || "C";
+    const reason = project.gradeReason || "등급 기준 정보 없음";
+
+    return `
+      <span class="priority-grade-wrap">
+        <span class="priority-grade ${getGradeClass(grade)}">
+          ${esc(grade)}
+        </span>
+        <span class="priority-tooltip">
+          <strong>왜 ${esc(grade)}등급인가?</strong>
+          <em>${esc(reason)}</em>
+        </span>
+      </span>
+    `;
   }
 
   function renderKeywordTags(project) {
@@ -305,86 +332,110 @@
       : [];
 
     if (!keywords.length) {
-      return `<span class="priority-tag muted">키워드 미분류</span>`;
+      return `<span class="keyword">키워드 미분류</span>`;
     }
 
     return keywords
-      .slice(0, 5)
+      .slice(0, 6)
       .map(function (keyword) {
-        return `<span class="priority-tag">${esc(keyword)}</span>`;
+        return `<span class="keyword">${esc(keyword)}</span>`;
       })
       .join("");
   }
 
-  function renderProjectCard(project) {
-    const grade = project.grade || "C";
-    const gradeReason = project.gradeReason || "등급 기준 정보 없음";
-    const url = normalizeUrl(project.sourceUrl);
+  function renderPriorityAccordion(project) {
     const title = project.title || "제목 없음";
     const agency = project.agency || "기관 미확인";
     const sourceType = project.sourceType || "출처 미확인";
+    const categoryLabel = project.priorityCategoryLabel || "기타 전체 공고";
     const amount = formatKrw(project.amount);
     const published = compactDate(project.publishedDate);
     const deadline = compactDate(project.deadline);
     const nextAction = project.nextAction || "검토";
-    const categoryLabel = project.priorityCategoryLabel || "기타 전체 공고";
+    const gradeReason = project.gradeReason || "등급 기준 정보 없음";
+    const url = normalizeUrl(project.sourceUrl);
 
     return `
-      <article class="priority-project-card">
-        <div class="priority-card-head">
-          <div class="priority-head-left">
-            <span class="priority-source">${esc(sourceType)}</span>
-            <span class="priority-category-label">${esc(categoryLabel)}</span>
+      <article class="card card-as-accordion priority-accordion-card">
+        <details class="accordion-card">
+          <summary class="accordion-summary priority-accordion-summary">
+            <span class="summary-source-wrap">
+              <em class="summary-source">${esc(sourceType)}</em>
+              ${renderGradeBadge(project)}
+            </span>
+
+            <span class="summary-title priority-summary-title">
+              <small>${esc(categoryLabel)}</small>
+              ${esc(title)}
+            </span>
+
+            <span class="summary-period">
+              <span>공고일</span>
+              <strong>${esc(published)}</strong>
+            </span>
+
+            <span class="summary-deadline">
+              <span>마감일</span>
+              <strong>${esc(deadline)}</strong>
+            </span>
+          </summary>
+
+          <div class="accordion-body">
+            <div class="card-top">
+              <div class="badges">
+                <span class="badge category">${esc(categoryLabel)}</span>
+                <span class="badge category">${esc(sourceType)}</span>
+              </div>
+
+              <div class="score-group">
+                <span class="score">${esc(nextAction)}</span>
+              </div>
+            </div>
+
+            <h2>${esc(title)}</h2>
+
+            <div class="meta">
+              <div>
+                <span>기관</span>
+                ${esc(agency)}
+              </div>
+
+              <div>
+                <span>예산</span>
+                ${esc(amount)}
+              </div>
+
+              <div>
+                <span>공고일</span>
+                ${esc(published)}
+              </div>
+
+              <div>
+                <span>마감일</span>
+                ${esc(deadline)}
+              </div>
+            </div>
+
+            <div class="keywords">
+              ${renderKeywordTags(project)}
+            </div>
+
+            <div class="reason">
+              <strong>등급 기준</strong><br />
+              ${esc(gradeReason)}
+            </div>
+
+            <p class="action">
+              다음 액션: ${esc(nextAction)}
+            </p>
+
+            ${
+              url
+                ? `<a class="link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">공고 보기</a>`
+                : `<p class="empty-message-inline">공고 링크가 없습니다.</p>`
+            }
           </div>
-
-          <span
-            class="priority-grade ${getGradeClass(grade)}"
-            title="${esc(gradeReason)}"
-            aria-label="${esc(gradeReason)}"
-          >${esc(grade)}</span>
-        </div>
-
-        <h3 class="priority-title">${esc(title)}</h3>
-
-        <div class="priority-meta-grid">
-          <div>
-            <span>기관</span>
-            <strong>${esc(agency)}</strong>
-          </div>
-
-          <div>
-            <span>예산</span>
-            <strong>${esc(amount)}</strong>
-          </div>
-
-          <div>
-            <span>공고일</span>
-            <strong>${esc(published)}</strong>
-          </div>
-
-          <div>
-            <span>마감</span>
-            <strong>${esc(deadline)}</strong>
-          </div>
-        </div>
-
-        <div class="priority-tags">
-          ${renderKeywordTags(project)}
-        </div>
-
-        <div class="priority-reason">
-          <strong>등급 기준</strong>
-          <p>${esc(gradeReason)}</p>
-        </div>
-
-        <div class="priority-actions">
-          <span>${esc(nextAction)}</span>
-          ${
-            url
-              ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">공고 보기</a>`
-              : `<em>링크 없음</em>`
-          }
-        </div>
+        </details>
       </article>
     `;
   }
@@ -401,36 +452,42 @@
     const excludedCount = getExcludedProjects().length;
 
     panel.innerHTML = `
-      <div class="priority-panel-head">
+      <section class="priority-panel-head priority-panel-head-green">
         <div>
-          <p class="priority-eyebrow">AXOO Priority KR v1.1</p>
+          <p class="priority-eyebrow">AXOO Priority KR v1.2</p>
           <h2>${esc(config.icon)} ${esc(config.label)}</h2>
-          <p>
-            나라장터와 로컬 프로젝트를 통합해 AXOO 우선순위 기준으로 분류했습니다.
-            행사 운영대행성 공고는 우선순위에서 제외됩니다.
-          </p>
+          <p>${esc(config.description || "")}</p>
         </div>
 
         <div class="priority-mini-stat">
           <span>표시 공고</span>
           <strong>${formatCount(projects.length)}건</strong>
-          <small>보류 제외 ${formatCount(excludedCount)}건</small>
+          <small>우선순위 제외 ${formatCount(excludedCount)}건</small>
         </div>
-      </div>
+      </section>
 
-      <div class="grade-guide-box">
-        <strong>등급 기준</strong>
+      <section class="grade-guide-box grade-guide-box-green">
+        <strong>등급 기준 안내</strong>
         <p>
-          등급은 AXOO 제안 가능성 기준입니다.
-          S는 즉시 검토, A는 제안 가능성 높음, B는 모니터링,
-          C는 낮은 우선순위, HOLD는 행사 운영대행성 제외 공고입니다.
-          등급 배지에 마우스를 올리면 세부 선정 기준을 볼 수 있습니다.
+          S는 즉시 검토, A는 제안 가능성 높음, B는 모니터링, C는 낮은 우선순위입니다.
+          행사 운영대행, 폐기물, 청소, 시설관리, 보험, 임차, 시스템 유지보수 등은 우선순위에서 제외됩니다.
+          등급 배지에 마우스를 올리면 세부 선정 기준을 확인할 수 있습니다.
         </p>
+      </section>
+
+      <div class="list-head priority-list-head">
+        <span class="list-source-grade">
+          <em>출처</em>
+          <em>등급</em>
+        </span>
+        <span>카테고리 / 공고명</span>
+        <span>게재일</span>
+        <span>마감일</span>
       </div>
 
       ${
         projects.length
-          ? `<div class="priority-card-grid">${projects.map(renderProjectCard).join("")}</div>`
+          ? `<section class="cards priority-accordion-list">${projects.map(renderPriorityAccordion).join("")}</section>`
           : `<div class="priority-empty">해당 기준에 맞는 공고가 아직 없습니다.</div>`
       }
     `;
@@ -478,11 +535,7 @@
     panel.style.display = "";
 
     if (tab === "art") {
-      const total = Number(String(getLegacyArtCount()).replace(/[^0-9]/g, "")) || 0;
-      updateTextById("totalCount", formatCount(total));
-      updateTextById("sCount", "-");
-      updateTextById("aCount", "-");
-      updateTextById("bCount", "-");
+      updateArtSummaryCount();
     }
   }
 
@@ -507,11 +560,11 @@
         panel.classList.add("active");
         panel.style.display = "";
       }
-
-      return;
+    } else {
+      showNativeTab(tab);
     }
 
-    showNativeTab(tab);
+    updateMetaCards();
   }
 
   function setupTabButtons() {
@@ -523,15 +576,16 @@
         return;
       }
 
-      button.addEventListener("click", function (event) {
+      button.onclick = function (event) {
         event.preventDefault();
+        event.stopPropagation();
 
         const nextTab = button.getAttribute("data-tab");
 
         if (nextTab) {
           showTab(nextTab);
         }
-      });
+      };
     });
   }
 
@@ -720,32 +774,14 @@
 
       count += 1;
 
-      if (count >= 12) {
+      if (count >= 8) {
         window.clearInterval(timer);
       }
-    }, 600);
+    }, 700);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     applyPriorityDashboard();
     schedulePatch();
-
-    document.addEventListener("click", function (event) {
-      const button = event.target.closest(".tab-button");
-
-      if (!button) {
-        return;
-      }
-
-      const tab = button.getAttribute("data-tab");
-
-      if (!tab || tab === "opportunities" || tab === "local") {
-        return;
-      }
-
-      window.setTimeout(function () {
-        showTab(tab);
-      }, 80);
-    });
   });
 })();
