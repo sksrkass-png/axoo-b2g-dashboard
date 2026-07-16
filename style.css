@@ -2136,3 +2136,129 @@ html body {
     transform: rotate(45deg) !important;
   }
 }
+
+/* =========================
+   AXOO Dashboard Footer + Sticky Header
+   ========================= */
+
+/* 스크롤 시 상단 헤더 고정 */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 16px 0 12px !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(247, 248, 245, 0.96) 0%,
+      rgba(247, 248, 245, 0.88) 72%,
+      rgba(247, 248, 245, 0) 100%
+    ) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* 고정 헤더가 너무 크게 느껴지지 않도록 컴팩트 처리 */
+.site-header .header-inner {
+  border-radius: 24px !important;
+  padding: 22px 24px !important;
+}
+
+.site-header .eyebrow {
+  margin-bottom: 6px !important;
+  font-size: 11px !important;
+}
+
+.site-header h1 {
+  font-size: clamp(26px, 3vw, 38px) !important;
+  line-height: 1.18 !important;
+}
+
+.site-header .subtitle {
+  margin-top: 8px !important;
+  max-width: 760px;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
+.site-header .header-update-card {
+  font-size: 12px !important;
+  box-shadow: 0 10px 24px rgba(10, 124, 74, 0.16);
+}
+
+/* 푸터 공간 */
+.site-footer {
+  padding: 28px 0 72px;
+  background: transparent;
+}
+
+.footer-inner {
+  border: 1px solid #e2e7de;
+  border-radius: 28px;
+  background: #ffffff;
+  padding: 28px 26px;
+  box-shadow: 0 14px 38px rgba(24, 32, 26, 0.045);
+}
+
+.footer-eyebrow {
+  margin: 0 0 8px;
+  color: #0a7c4a;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.footer-inner h2 {
+  margin: 0 0 12px;
+  color: #161616;
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 950;
+  letter-spacing: -0.04em;
+}
+
+.footer-inner p {
+  margin: 8px 0 0;
+  color: #5f675f;
+  font-size: 14px;
+  line-height: 1.75;
+  font-weight: 750;
+}
+
+/* 마지막 카드와 푸터 사이 여백 */
+main.container {
+  padding-bottom: 24px;
+}
+
+@media (max-width: 760px) {
+  .site-header {
+    position: sticky;
+    padding: 10px 0 8px !important;
+  }
+
+  .site-header .header-inner {
+    padding: 18px !important;
+    border-radius: 22px !important;
+  }
+
+  .site-header h1 {
+    font-size: 24px !important;
+  }
+
+  .site-header .subtitle {
+    font-size: 12px !important;
+  }
+
+  .footer-inner {
+    padding: 22px 20px;
+    border-radius: 22px;
+  }
+
+  .footer-inner h2 {
+    font-size: 19px;
+  }
+
+  .footer-inner p {
+    font-size: 13px;
+  }
+}
