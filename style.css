@@ -1819,3 +1819,274 @@ body {
     width: min(260px, 78vw);
   }
 }
+
+/* =========================
+   AXOO Priority Dashboard v1.2 Hotfix
+   Tooltip + Sync Visual + Clean Green Theme
+   ========================= */
+
+html body {
+  background:
+    radial-gradient(circle at top right, rgba(10, 124, 74, 0.045), transparent 34%),
+    #f7f8f5 !important;
+  color: #161616 !important;
+}
+
+.site-header {
+  padding-top: 32px !important;
+}
+
+.header-inner {
+  background: #ffffff !important;
+  color: #161616 !important;
+  border: 1px solid #e2e7de !important;
+  box-shadow: 0 18px 48px rgba(16, 24, 20, 0.055) !important;
+}
+
+.header-inner h1 {
+  color: #161616 !important;
+}
+
+.eyebrow {
+  color: #0a7c4a !important;
+}
+
+.subtitle {
+  color: #5f675f !important;
+}
+
+.header-update-card {
+  background: #0a7c4a !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+  padding: 11px 14px !important;
+}
+
+.summary-panel,
+.card,
+.priority-accordion-card,
+.priority-panel-head,
+.grade-guide-box {
+  background: #ffffff !important;
+  border-color: #e2e7de !important;
+  box-shadow: 0 14px 38px rgba(24, 32, 26, 0.045) !important;
+}
+
+.tabs {
+  background: #e8eee6 !important;
+  border: 1px solid #dce6dc !important;
+}
+
+.tab-button.active {
+  background: #0a7c4a !important;
+  color: #ffffff !important;
+}
+
+.priority-tab-separator {
+  color: #748075 !important;
+}
+
+.meta-card-active {
+  background: #ffffff !important;
+  border-color: rgba(10, 124, 74, 0.58) !important;
+  box-shadow: 0 14px 34px rgba(10, 124, 74, 0.14) !important;
+}
+
+.meta-card-muted {
+  opacity: 0.48 !important;
+  filter: grayscale(0.75) !important;
+  background: #f7f8f5 !important;
+}
+
+.priority-eyebrow,
+.grade-guide-box strong,
+.priority-accordion-card .reason strong {
+  color: #0a7c4a !important;
+}
+
+.priority-mini-stat {
+  background: #ecf7f1 !important;
+  border-color: rgba(10, 124, 74, 0.18) !important;
+}
+
+.priority-mini-stat strong {
+  color: #075f3a !important;
+}
+
+.priority-summary-title small,
+.priority-accordion-card .category,
+.priority-accordion-card .keyword,
+.priority-tag,
+.priority-category-label {
+  background: #ecf7f1 !important;
+  color: #075f3a !important;
+  border-color: rgba(10, 124, 74, 0.16) !important;
+}
+
+.priority-accordion-summary:hover,
+.accordion-card[open] .priority-accordion-summary {
+  background: #f4faf6 !important;
+}
+
+.priority-accordion-card .reason {
+  background: #f8fbf7 !important;
+  border-left-color: #0a7c4a !important;
+  color: #444c45 !important;
+}
+
+.link,
+.priority-actions a,
+.source-view-link {
+  background: #0a7c4a !important;
+}
+
+.link:hover,
+.priority-actions a:hover,
+.source-view-link:hover {
+  background: #075f3a !important;
+}
+
+/* 등급 배지 레이아웃 */
+
+.priority-grade-wrap {
+  position: relative !important;
+  width: 64px !important;
+  min-width: 64px !important;
+  max-width: 64px !important;
+  height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  vertical-align: middle !important;
+}
+
+.priority-grade {
+  width: 64px !important;
+  min-width: 64px !important;
+  max-width: 64px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  white-space: nowrap !important;
+  cursor: help !important;
+}
+
+.priority-grade-s {
+  background: #0a7c4a !important;
+}
+
+.priority-grade-a {
+  background: #111111 !important;
+}
+
+.priority-grade-b {
+  background: #6e7a70 !important;
+}
+
+.priority-grade-c {
+  background: #a2aaa0 !important;
+}
+
+.priority-grade-hold {
+  background: #c1c8bf !important;
+  color: #303830 !important;
+}
+
+/* 커스텀 툴팁: 평소에는 완전히 숨김 */
+
+.priority-tooltip {
+  position: absolute !important;
+  z-index: 9999 !important;
+  left: 50% !important;
+  bottom: calc(100% + 10px) !important;
+  width: min(300px, 72vw) !important;
+  padding: 12px 13px !important;
+  border-radius: 14px !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translate(-50%, 6px) !important;
+  pointer-events: none !important;
+  white-space: normal !important;
+  text-align: left !important;
+  display: block !important;
+}
+
+.priority-tooltip::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 100% !important;
+  width: 10px !important;
+  height: 10px !important;
+  background: #111111 !important;
+  transform: translate(-50%, -5px) rotate(45deg) !important;
+}
+
+.priority-tooltip strong {
+  display: block !important;
+  margin: 0 0 5px !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+  font-weight: 950 !important;
+}
+
+.priority-tooltip em {
+  display: block !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+  font-style: normal !important;
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+  font-weight: 700 !important;
+}
+
+.priority-grade-wrap:hover .priority-tooltip,
+.priority-grade-wrap:focus-within .priority-tooltip {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translate(-50%, 0) !important;
+}
+
+/* 리스트 안에서 툴팁 때문에 행 높이가 늘어나는 현상 방지 */
+
+.summary-source-wrap {
+  overflow: visible !important;
+}
+
+.priority-accordion-summary {
+  overflow: visible !important;
+}
+
+.priority-accordion-card,
+.accordion-card,
+.card-as-accordion {
+  overflow: visible !important;
+}
+
+@media (max-width: 960px) {
+  .priority-tooltip {
+    left: 0 !important;
+    transform: translate(0, 6px) !important;
+  }
+
+  .priority-grade-wrap:hover .priority-tooltip,
+  .priority-grade-wrap:focus-within .priority-tooltip {
+    transform: translate(0, 0) !important;
+  }
+
+  .priority-tooltip::after {
+    left: 24px !important;
+  }
+}
