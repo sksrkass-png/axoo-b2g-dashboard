@@ -780,8 +780,36 @@
     }, 700);
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
     applyPriorityDashboard();
     schedulePatch();
+
+    document.addEventListener(
+      "click",
+      function (event) {
+        const tabButton = event.target.closest(".tab-button[data-tab]");
+        const metaCard = event.target.closest(".meta-card[data-tab-target]");
+
+        const tab = tabButton
+          ? tabButton.getAttribute("data-tab")
+          : metaCard
+            ? metaCard.getAttribute("data-tab-target")
+            : "";
+
+        const priorityTabs = ["art", "mural", "exhibition", "other", "agencies"];
+
+        if (!priorityTabs.includes(tab)) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        window.setTimeout(function () {
+          showTab(tab);
+        }, 0);
+      },
+      true
+    );
   });
 })();
