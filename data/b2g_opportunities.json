@@ -48,7 +48,7 @@
     ],
     "hardExcludeKeywords": [],
     "budgetAmount": 121222000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
@@ -109,13 +109,13 @@
     "supportFitKeywords": [],
     "hardExcludeKeywords": [],
     "budgetAmount": 205475600,
-    "daysLeft": 8,
+    "daysLeft": 7,
     "scoreReasons": [
       "AXOO 직접 핏 키워드 포함",
       "대형 사업",
       "검토 가능 기간 존재"
     ],
-    "fitReason": "AXOO 직접 핏 키워드 브랜드 확인. 계약 방식은 추가 확인 필요. 예산 205,475,600원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 8일 남음. 최종 등급 B.",
+    "fitReason": "AXOO 직접 핏 키워드 브랜드 확인. 계약 방식은 추가 확인 필요. 예산 205,475,600원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 7일 남음. 최종 등급 B.",
     "recommendedAction": "조건 확인 후 저장/모니터링",
     "scoringVersion": "axoo_bid_fit_v2"
   },
@@ -154,9 +154,9 @@
     "noticeDate": "",
     "deadline": "2026-07-23",
     "deadlineDate": "2026-07-23",
-    "opportunityStatus": "진행중",
+    "opportunityStatus": "임박",
     "projectScale": "대형",
-    "score": 46,
+    "score": 41,
     "grade": "C",
     "category": "exhibition",
     "categoryLabel": "전시",
@@ -173,15 +173,15 @@
     ],
     "hardExcludeKeywords": [],
     "budgetAmount": 248777995,
-    "daysLeft": 4,
+    "daysLeft": 3,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "대형 사업",
       "서울/수도권 기관",
-      "검토 가능 기간 존재",
+      "마감 임박",
       "단순 행사/운영성 키워드 중심"
     ],
-    "fitReason": "확장 검토 키워드 홍보 · 마케팅 중심. 계약 방식은 추가 확인 필요. 예산 248,777,995원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 4일 남음. 최종 등급 C.",
+    "fitReason": "확장 검토 키워드 홍보 · 마케팅 중심. 계약 방식은 추가 확인 필요. 예산 248,777,995원 기준 대형. 공고기관/수요기관 확인 가능. 마감 임박으로 즉시 대응 가능성 확인 필요. 최종 등급 C.",
     "recommendedAction": "낮은 우선순위로 참고 보관",
     "scoringVersion": "axoo_bid_fit_v2"
   },
@@ -234,7 +234,7 @@
     ],
     "hardExcludeKeywords": [],
     "budgetAmount": 93000000,
-    "daysLeft": 1,
+    "daysLeft": 0,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
@@ -296,7 +296,7 @@
     ],
     "hardExcludeKeywords": [],
     "budgetAmount": 66000000,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
@@ -358,14 +358,14 @@
     ],
     "hardExcludeKeywords": [],
     "budgetAmount": 141150000,
-    "daysLeft": 8,
+    "daysLeft": 7,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
       "검토 가능 기간 존재",
       "단순 행사/운영성 키워드 중심"
     ],
-    "fitReason": "확장 검토 키워드 콘텐츠 · 영상 중심. 계약 방식은 추가 확인 필요. 예산 141,150,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 8일 남음. 최종 등급 C.",
+    "fitReason": "확장 검토 키워드 콘텐츠 · 영상 중심. 계약 방식은 추가 확인 필요. 예산 141,150,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 7일 남음. 최종 등급 C.",
     "recommendedAction": "낮은 우선순위로 참고 보관",
     "scoringVersion": "axoo_bid_fit_v2"
   },
@@ -422,7 +422,7 @@
     ],
     "hardExcludeKeywords": [],
     "budgetAmount": 90000000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
