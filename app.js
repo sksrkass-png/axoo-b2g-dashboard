@@ -328,7 +328,10 @@ function createOpportunityCard(item) {
   card.className = "card";
 
   const gradeClass = getGradeClass(item.grade);
-  const categoryLabel = categoryNames[item.category] || item.categoryLabel || "기타";
+  const categoryLabel =
+   item.categoryLabel ||
+   categoryNames[item.category] ||
+   (item.category === "arts_content_support" ? "예술·콘텐츠 지원사업" : "기타");
   const docUrl = getDocumentUrl(item);
   const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
   const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
