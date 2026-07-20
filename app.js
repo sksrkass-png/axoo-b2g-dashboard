@@ -158,6 +158,7 @@ function getGradeClass(grade) {
 
   return "grade-b";
 }
+
 function getArtBudgetValue(item) {
   return Number(
     item.amount ||
@@ -194,6 +195,10 @@ function getArtGradeReason(item) {
   const budget = getArtBudgetValue(item);
   const grade = getArtGradeValue(item);
 
+  if (!budget) {
+    return "예산 정보를 확인할 수 없어 공고문 수동 확인이 필요합니다.";
+  }
+
   if (grade === "S") {
     return "총 예산이 1억 원을 초과하여 제작·설치 규모가 큰 우선 검토 대상입니다.";
   }
@@ -204,10 +209,6 @@ function getArtGradeReason(item) {
 
   if (grade === "B") {
     return "총 예산이 5,000만 원 미만으로 소규모 모니터링 대상입니다.";
-  }
-
-  if (!budget) {
-    return "예산 정보를 확인할 수 없어 공고문 수동 확인이 필요합니다.";
   }
 
   return "예산 기준 등급을 확인해 주세요.";
@@ -686,7 +687,6 @@ function getArtSourceValue(item) {
 }
 
 function createArtCard(item) {
-  function createArtCard(item) {
   const card = document.createElement("article");
   card.className = "card";
 
@@ -749,6 +749,7 @@ function createArtCard(item) {
 
   return card;
 }
+
 function renderArtCards() {
   const cards = document.getElementById("artCards");
   const artSearchInput = document.getElementById("artSearchInput");
@@ -771,6 +772,10 @@ function renderArtCards() {
       item.source,
       item.category,
       item.status,
+      item.grade,
+      item.gradeReason,
+      item.budgetStatus,
+      item.budgetSource,
       ...keywords
     ].join(" ").toLowerCase();
 
