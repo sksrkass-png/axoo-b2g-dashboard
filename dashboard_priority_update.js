@@ -124,13 +124,43 @@
   }
 
   function normalizeUrl(url) {
-    return String(url || "").trim();
+    const text = String(url || "").trim();
+
+    if (!text) {
+      return "";
+    }
+
+    if (text.startsWith("http://") || text.startsWith("https://")) {
+      return text;
+    }
+
+    return "";
   }
 
   function getTabConfig(tab) {
     return TAB_CONFIG.find(function (item) {
       return item.tab === tab;
     });
+  }
+
+  function extractProjects(data) {
+    if (Array.isArray(data)) {
+      return data;
+    }
+
+    if (data && Array.isArray(data.projects)) {
+      return data.projects;
+    }
+
+    if (data && Array.isArray(data.items)) {
+      return data.items;
+    }
+
+    if (data && Array.isArray(data.data)) {
+      return data.data;
+    }
+
+    return [];
   }
 
   async function loadPriorityProjects() {
@@ -147,7 +177,7 @@
 
       const data = await response.json();
 
-      state.projects = Array.isArray(data) ? data : [];
+      state.projects = extractProjects(data);
       state.loaded = true;
 
       return state.projects;
@@ -161,32 +191,91 @@
     }
   }
 
+  function getProjectCategory(project) {
+    return (
+      project.priorityCategory ||
+      project.category ||
+      project.categoryKey ||
+      ""
+    );
+  }
+
+  function getProjectScore(project) {
+    return Number(
+      project.score ||
+      project.axooFitScore ||
+      project.priorityScore ||
+      0
+    );
+  }
+
+  function getProjectGrade(project) {
+    if (project.grade) {
+      return project.grade;
+    }
+
+    const score = getProjectScore(project);
+
+    if (score >= 85) return "S";
+    if (score >= 70) return "A";
+    if (score >= 50) return "B";
+
+    return "C";
+  }
+
+  function getProjectAmount(project) {
+    return Number(
+      project.amount ||
+      project.budget ||
+      project.supportAmount ||
+      project.budgetAmount ||
+      project.asignBdgtAmt ||
+      project.presmptPrce ||
+      0
+    );
+  }
+
+  function getProjectDeadline(project) {
+    return (
+      project.deadline ||
+      project.endDate ||
+      project.bidNtceEndDt ||
+      project.deadlineDate ||
+      project.closeDate ||
+      "9999-99-99"
+    );
+  }
+
   function getDisplayProjectsByCategory(category) {
     return state.projects
       .filter(function (project) {
         return (
-          project.priorityCategory === category &&
+          getProjectCategory(project) === category &&
           project.isExcludedFromPriority !== true
         );
       })
       .sort(function (a, b) {
         const gradeDiff =
-          (GRADE_ORDER[a.grade || "C"] ?? 9) -
-          (GRADE_ORDER[b.grade || "C"] ?? 9);
+          (GRADE_ORDER[getProjectGrade(a)] ?? 9) -
+          (GRADE_ORDER[getProjectGrade(b)] ?? 9);
 
         if (gradeDiff !== 0) {
           return gradeDiff;
         }
 
-        const amountDiff = Number(b.amount || 0) - Number(a.amount || 0);
+        const scoreDiff = getProjectScore(b) - getProjectScore(a);
+
+        if (scoreDiff !== 0) {
+          return scoreDiff;
+        }
+
+        const amountDiff = getProjectAmount(b) - getProjectAmount(a);
 
         if (amountDiff !== 0) {
           return amountDiff;
         }
 
-        return String(a.deadline || "9999-99-99").localeCompare(
-          String(b.deadline || "9999-99-99")
-        );
+        return String(getProjectDeadline(a)).localeCompare(String(getProjectDeadline(b)));
       });
   }
 
@@ -270,13 +359,14 @@
 
     const total = visibleProjects.length;
     const sCount = visibleProjects.filter(function (item) {
-      return item.grade === "S";
+      return getProjectGrade(item) === "S";
     }).length;
     const aCount = visibleProjects.filter(function (item) {
-      return item.grade === "A";
+      return getProjectGrade(item) === "A";
     }).length;
     const bcCount = visibleProjects.filter(function (item) {
-      return item.grade === "B" || item.grade === "C";
+      const grade = getProjectGrade(item);
+      return grade === "B" || grade === "C";
     }).length;
 
     updateTextById("totalCount", formatCount(total));
@@ -319,8 +409,12 @@
   }
 
   function renderGradeBadge(project) {
-    const grade = project.grade || "C";
-    const reason = project.gradeReason || "등급 기준 정보 없음";
+    const grade = getProjectGrade(project);
+    const reason =
+      project.gradeReason ||
+      project.axooFitReason ||
+      project.summary ||
+      "등급 기준 정보 없음";
 
     return `
       <span class="priority-grade-wrap">
@@ -336,9 +430,22 @@
   }
 
   function renderKeywordTags(project) {
-    const keywords = Array.isArray(project.matchedPriorityKeywords)
-      ? project.matchedPriorityKeywords
-      : [];
+    let keywords = [];
+
+    if (Array.isArray(project.matchedPriorityKeywords)) {
+      keywords = project.matchedPriorityKeywords;
+    } else if (Array.isArray(project.matchedKeywords)) {
+      keywords = project.matchedKeywords;
+    } else if (Array.isArray(project.keywords)) {
+      keywords = project.keywords;
+    } else if (project.field) {
+      keywords = String(project.field)
+        .split("/")
+        .map(function (item) {
+          return item.trim();
+        })
+        .filter(Boolean);
+    }
 
     if (!keywords.length) {
       return `<span class="keyword">키워드 미분류</span>`;
@@ -353,16 +460,63 @@
   }
 
   function renderPriorityAccordion(project) {
-    const title = project.title || "제목 없음";
-    const agency = project.agency || "기관 미확인";
-    const sourceType = project.sourceType || "출처 미확인";
-    const categoryLabel = project.priorityCategoryLabel || "기타 AXOO 핏";
-    const amount = formatKrw(project.amount);
-    const published = compactDate(project.publishedDate);
-    const deadline = compactDate(project.deadline);
-    const nextAction = project.nextAction || "검토";
-    const gradeReason = project.gradeReason || "등급 기준 정보 없음";
-    const url = normalizeUrl(project.sourceUrl);
+    const title =
+      project.title ||
+      project.bidNtceNm ||
+      project.projectName ||
+      "제목 없음";
+
+    const agency =
+      project.agency ||
+      project.organization ||
+      project.ntceInsttNm ||
+      project.dminsttNm ||
+      project.noticeAgency ||
+      project.demandAgency ||
+      "기관 미확인";
+
+    const sourceType =
+      project.sourceType ||
+      project.source ||
+      project.sourceName ||
+      "출처 미확인";
+
+    const categoryLabel =
+      project.priorityCategoryLabel ||
+      project.categoryLabel ||
+      project.field ||
+      "기타 AXOO 핏";
+
+    const amount = formatKrw(getProjectAmount(project));
+
+    const published = compactDate(
+      project.publishedDate ||
+      project.postedDate ||
+      project.startDate ||
+      project.bidNtceDt ||
+      ""
+    );
+
+    const deadline = compactDate(getProjectDeadline(project));
+
+    const nextAction =
+      project.nextAction ||
+      project.recommendedAction ||
+      "검토";
+
+    const gradeReason =
+      project.gradeReason ||
+      project.axooFitReason ||
+      project.summary ||
+      "등급 기준 정보 없음";
+
+    const url = normalizeUrl(
+      project.sourceUrl ||
+      project.originalUrl ||
+      project.url ||
+      project.ntceSpecDocUrl1 ||
+      ""
+    );
 
     return `
       <article class="card card-as-accordion priority-accordion-card">
@@ -410,7 +564,7 @@
               </div>
 
               <div>
-                <span>예산</span>
+                <span>예산/지원금</span>
                 ${esc(amount)}
               </div>
 
@@ -430,7 +584,7 @@
             </div>
 
             <div class="reason">
-              <strong>등급 기준</strong><br />
+              <strong>검토 기준</strong><br />
               ${esc(gradeReason)}
             </div>
 
