@@ -16,7 +16,7 @@
       icon: "🧱",
       type: "priority",
       category: "mural_sculpture",
-      description: "벽화, 옹벽 개선, 조형물, 환경 개선, 공공디자인 계열 공고를 모아봅니다."
+      description: "벽화, 옹벽 개선, 조형물, 공공미술, 포토존, 아트월 계열 공고를 모아봅니다."
     },
     {
       tab: "exhibition",
@@ -24,15 +24,23 @@
       icon: "🖼️",
       type: "priority",
       category: "exhibition_content",
-      description: "전시연출, 전시물 제작, 실감콘텐츠, 미디어아트, 체험 콘텐츠 계열 공고를 모아봅니다."
+      description: "시각예술 전시, 전시연출, 전시물 제작, 실감콘텐츠, 미디어아트 계열 공고를 모아봅니다."
+    },
+    {
+      tab: "support",
+      label: "예술·콘텐츠 지원사업",
+      icon: "✨",
+      type: "priority",
+      category: "arts_content_support",
+      description: "콘진원, 문예위, 예경 등 예술·콘텐츠 지원사업 공모를 모아봅니다."
     },
     {
       tab: "other",
-      label: "기타 전체 공고",
+      label: "기타 AXOO 핏",
       icon: "📂",
       type: "priority",
       category: "other",
-      description: "3대 우선순위에는 속하지 않지만 비주얼 제작, 브랜딩, 영상 제작, 팝업, 굿즈 등 AXOO 서브 핏이 있는 공고를 모아봅니다."
+      description: "비주얼 제작, 브랜딩, 영상 제작, 팝업, 굿즈 등 AXOO 서브 핏이 있는 기타 공고를 모아봅니다."
     },
     {
       tab: "agencies",
@@ -192,6 +200,7 @@
     return {
       mural: getDisplayProjectsByCategory("mural_sculpture").length,
       exhibition: getDisplayProjectsByCategory("exhibition_content").length,
+      support: getDisplayProjectsByCategory("arts_content_support").length,
       other: getDisplayProjectsByCategory("other").length,
       excluded: getExcludedProjects().length
     };
@@ -231,7 +240,7 @@
     updateTextById("priorityMetaArtCount", getLegacyArtCount());
     updateTextById("priorityMetaMuralCount", `${formatCount(counts.mural)}건`);
     updateTextById("priorityMetaExhibitionCount", `${formatCount(counts.exhibition)}건`);
-    updateTextById("priorityMetaOtherCount", `${formatCount(counts.other)}건`);
+    updateTextById("priorityMetaSupportCount", `${formatCount(counts.support)}건`);
 
     $all(".meta-card[data-tab-target]").forEach(function (card) {
       const target = card.getAttribute("data-tab-target");
@@ -347,7 +356,7 @@
     const title = project.title || "제목 없음";
     const agency = project.agency || "기관 미확인";
     const sourceType = project.sourceType || "출처 미확인";
-    const categoryLabel = project.priorityCategoryLabel || "기타 전체 공고";
+    const categoryLabel = project.priorityCategoryLabel || "기타 AXOO 핏";
     const amount = formatKrw(project.amount);
     const published = compactDate(project.publishedDate);
     const deadline = compactDate(project.deadline);
@@ -454,7 +463,7 @@
     panel.innerHTML = `
       <section class="priority-panel-head priority-panel-head-green">
         <div>
-          <p class="priority-eyebrow">AXOO Priority KR v1.2</p>
+          <p class="priority-eyebrow">AXOO Priority KR v1.3</p>
           <h2>${esc(config.icon)} ${esc(config.label)}</h2>
           <p>${esc(config.description || "")}</p>
         </div>
@@ -500,6 +509,7 @@
       "artTab",
       "muralTab",
       "exhibitionTab",
+      "supportTab",
       "otherTab",
       "agenciesTab",
       "agencyTab",
@@ -590,7 +600,7 @@
   }
 
   function ensurePriorityPanels() {
-    ["mural", "exhibition", "other"].forEach(function (tab) {
+    ["mural", "exhibition", "support", "other"].forEach(function (tab) {
       let panel = getPriorityPanel(tab);
 
       if (panel) {
@@ -634,8 +644,12 @@
         text: "🖼️ 전시 콘텐츠 기획 운영"
       },
       {
+        tab: "support",
+        text: "✨ 예술·콘텐츠 지원사업"
+      },
+      {
         tab: "other",
-        text: "📂 기타 전체 공고"
+        text: "📂 기타 AXOO 핏"
       },
       {
         tab: "agencies",
@@ -708,9 +722,9 @@
         tab: "exhibition"
       },
       {
-        id: "priorityMetaOtherCount",
-        label: "기타 전체 공고",
-        tab: "other"
+        id: "priorityMetaSupportCount",
+        label: "4. 예술·콘텐츠 지원사업",
+        tab: "support"
       }
     ];
 
@@ -764,12 +778,10 @@
     const timer = window.setInterval(function () {
       updateMetaCards();
 
-      if (state.currentTab === "mural" || state.currentTab === "exhibition" || state.currentTab === "other") {
-        const config = getTabConfig(state.currentTab);
+      const config = getTabConfig(state.currentTab);
 
-        if (config && config.type === "priority") {
-          renderPriorityPanel(config.tab, config.category);
-        }
+      if (config && config.type === "priority") {
+        renderPriorityPanel(config.tab, config.category);
       }
 
       count += 1;
@@ -780,7 +792,7 @@
     }, 700);
   }
 
-    document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
     applyPriorityDashboard();
     schedulePatch();
 
@@ -796,7 +808,7 @@
             ? metaCard.getAttribute("data-tab-target")
             : "";
 
-        const priorityTabs = ["art", "mural", "exhibition", "other", "agencies"];
+        const priorityTabs = ["art", "mural", "exhibition", "support", "other", "agencies"];
 
         if (!priorityTabs.includes(tab)) {
           return;
