@@ -158,6 +158,67 @@ function getGradeClass(grade) {
 
   return "grade-b";
 }
+function getArtBudgetValue(item) {
+  return Number(
+    item.amount ||
+    item.budget ||
+    item.estimatedAmount ||
+    item.budgetAmount ||
+    0
+  );
+}
+
+function getArtGradeValue(item) {
+  const grade = plainText(item.grade).toUpperCase();
+
+  if (["S", "A", "B", "C"].includes(grade)) {
+    return grade;
+  }
+
+  const budget = getArtBudgetValue(item);
+
+  if (!budget) return "C";
+  if (budget > 100000000) return "S";
+  if (budget >= 50000000) return "A";
+
+  return "B";
+}
+
+function getArtGradeReason(item) {
+  const existingReason = plainText(item.gradeReason);
+
+  if (existingReason) {
+    return existingReason;
+  }
+
+  const budget = getArtBudgetValue(item);
+  const grade = getArtGradeValue(item);
+
+  if (grade === "S") {
+    return "총 예산이 1억 원을 초과하여 제작·설치 규모가 큰 우선 검토 대상입니다.";
+  }
+
+  if (grade === "A") {
+    return "총 예산이 5,000만 원 이상 1억 원 이하로 AXOO 검토 가능성이 높습니다.";
+  }
+
+  if (grade === "B") {
+    return "총 예산이 5,000만 원 미만으로 소규모 모니터링 대상입니다.";
+  }
+
+  if (!budget) {
+    return "예산 정보를 확인할 수 없어 공고문 수동 확인이 필요합니다.";
+  }
+
+  return "예산 기준 등급을 확인해 주세요.";
+}
+
+function getArtGradeGuide(item) {
+  return (
+    plainText(item.gradeGuide) ||
+    "S: 1억 초과 / A: 5,000만원 이상~1억 이하 / B: 5,000만원 미만 / C: 예산 확인 필요"
+  );
+}
 
 async function loadJson(path, fallback = []) {
   try {
@@ -625,6 +686,7 @@ function getArtSourceValue(item) {
 }
 
 function createArtCard(item) {
+  function createArtCard(item) {
   const card = document.createElement("article");
   card.className = "card";
 
@@ -633,10 +695,19 @@ function createArtCard(item) {
   const reviewKey = getArtReviewKey(item);
   const deadlineInfo = getDDay(item.deadline);
 
+  const artGrade = getArtGradeValue(item);
+  const gradeClass = getGradeClass(artGrade);
+  const artBudget = getArtBudgetValue(item);
+  const gradeReason = getArtGradeReason(item);
+  const gradeGuide = getArtGradeGuide(item);
+  const budgetStatus = plainText(item.budgetStatus);
+  const budgetSource = plainText(item.budgetSource);
+
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
-        <span class="badge grade-a">${escapeHtml(safeText(item.source))}</span>
+        <span class="badge ${gradeClass}">${escapeHtml(artGrade)}등급</span>
+        <span class="badge category">${escapeHtml(safeText(item.source))}</span>
         <span class="badge category">${escapeHtml(safeText(item.category))}</span>
         <span class="badge category">${escapeHtml(safeText(item.status))}</span>
       </div>
@@ -654,23 +725,30 @@ function createArtCard(item) {
       <div><span>지역</span>${escapeHtml(safeText(item.region))}</div>
       <div><span>공개일</span>${escapeHtml(safeText(item.publishedDate))}</div>
       <div><span>마감일</span>${escapeHtml(safeText(item.deadline))}</div>
-      <div><span>예산</span>${escapeHtml(formatMoney(item.budget))}</div>
+      <div><span>예산</span>${escapeHtml(formatMoney(artBudget))}</div>
+      <div><span>예산 확인</span>${escapeHtml(safeText(budgetStatus || "확인 필요"))}</div>
+      <div><span>금액 출처</span>${escapeHtml(safeText(budgetSource || "공고문 확인 필요"))}</div>
+      <div><span>등급 기준</span>${escapeHtml(safeText(gradeGuide))}</div>
     </div>
 
     <div class="keywords">
       ${keywords.map(keyword => `<span class="keyword">${escapeHtml(keyword)}</span>`).join("")}
     </div>
 
+    <div class="reason">
+      <strong>등급 사유</strong><br>
+      ${escapeHtml(gradeReason)}
+    </div>
+
     <p class="action">추천 액션: ${escapeHtml(safeText(item.recommendedAction))}</p>
 
     ${createReviewControl(reviewKey)}
 
-    ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">소스 보기</a>` : ""}
+    ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">공고 보러가기</a>` : ""}
   `;
 
   return card;
 }
-
 function renderArtCards() {
   const cards = document.getElementById("artCards");
   const artSearchInput = document.getElementById("artSearchInput");
@@ -708,10 +786,18 @@ function renderArtCards() {
   });
 
   filtered.sort((a, b) => {
+    const aGrade = getArtGradeValue(a);
+    const bGrade = getArtGradeValue(b);
+    const gradeDiff = (gradeOrder[aGrade] ?? 9) - (gradeOrder[bGrade] ?? 9);
+
+    if (gradeDiff !== 0) return gradeDiff;
+
     const aDeadline = getDDay(a.deadline).sortDays;
     const bDeadline = getDDay(b.deadline).sortDays;
 
-    return aDeadline - bDeadline;
+    if (aDeadline !== bDeadline) return aDeadline - bDeadline;
+
+    return getArtBudgetValue(b) - getArtBudgetValue(a);
   });
 
   cards.innerHTML = "";
