@@ -16,7 +16,8 @@
       icon: "🧱",
       type: "priority",
       category: "mural_sculpture",
-      description: "벽화, 옹벽 개선, 조형물, 공공미술, 포토존, 아트월 계열 공고를 모아봅니다."
+      description: "벽화, 옹벽 개선, 조형물, 공공미술, 포토존, 아트월 계열 공고를 모아봅니다.",
+      sources: ["나라장터 입찰공고", "지자체·공공기관 공고", "AXOO 우선 키워드 분류"]
     },
     {
       tab: "exhibition",
@@ -24,7 +25,8 @@
       icon: "🖼️",
       type: "priority",
       category: "exhibition_content",
-      description: "시각예술 전시, 전시연출, 전시물 제작, 실감콘텐츠, 미디어아트 계열 공고를 모아봅니다."
+      description: "시각예술 전시, 전시연출, 전시물 제작, 실감콘텐츠, 미디어아트 계열 공고를 모아봅니다.",
+      sources: ["나라장터 입찰공고", "전시·미디어아트 키워드 매칭", "AXOO 우선 검토 기준"]
     },
     {
       tab: "support",
@@ -32,7 +34,8 @@
       icon: "✨",
       type: "priority",
       category: "arts_content_support",
-      description: "콘진원, 문예위, 예경 등 예술·콘텐츠 지원사업 공모를 모아봅니다."
+      description: "콘진원, 문예위, 예경 등 예술·콘텐츠 지원사업 공모를 모아봅니다.",
+      sources: ["문화포털/아트누리", "KOCCA 지원공고", "ARKO·예경 공모사업"]
     },
     {
       tab: "other",
@@ -40,7 +43,8 @@
       icon: "📂",
       type: "priority",
       category: "other",
-      description: "비주얼 제작, 브랜딩, 영상 제작, 팝업, 굿즈 등 AXOO 서브 핏이 있는 기타 공고를 모아봅니다."
+      description: "비주얼 제작, 브랜딩, 영상 제작, 팝업, 굿즈 등 AXOO 서브 핏이 있는 기타 공고를 모아봅니다.",
+      sources: ["나라장터 입찰공고", "지자체 개별 공고", "AXOO 서브 키워드 분류"]
     },
     {
       tab: "agencies",
@@ -459,6 +463,20 @@
       .join("");
   }
 
+  function renderSourceTags(sources) {
+    if (!Array.isArray(sources) || !sources.length) {
+      return "";
+    }
+
+    return `
+      <div class="keywords" style="margin-top:16px;">
+        ${sources.map(function (source) {
+          return `<span class="keyword">${esc(source)}</span>`;
+        }).join("")}
+      </div>
+    `;
+  }
+
   function renderPriorityAccordion(project) {
     const title =
       project.title ||
@@ -620,6 +638,7 @@
           <p class="priority-eyebrow">AXOO Priority KR v1.3</p>
           <h2>${esc(config.icon)} ${esc(config.label)}</h2>
           <p>${esc(config.description || "")}</p>
+          ${renderSourceTags(config.sources)}
         </div>
 
         <div class="priority-mini-stat">
