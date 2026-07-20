@@ -6,6 +6,49 @@
     local: "data/local_projects.json"
   };
 
+  const TAB_INTRO_CONFIG = {
+    opportunities: {
+      eyebrow: "AXOO B2G ENGINE",
+      title: "나라장터 우선 검토 공고",
+      description:
+        "나라장터 입찰공고를 기준으로 AXOO와 연결 가능한 공고를 우선 검토합니다.",
+      criteria:
+        "키워드 매칭, 사업 성격, 예산 규모, 제안 가능성을 기준으로 우선 검토 공고를 정리합니다.",
+      sources: ["나라장터 입찰공고", "나라장터 발주계획", "AXOO Fit 키워드 엔진"],
+      countLabel: "표시 공고"
+    },
+    art: {
+      eyebrow: "AXOO PUBLIC ART TRACK",
+      title: "건축물 미술작품",
+      description:
+        "건축물 미술작품 설치공모를 중심으로 서울·경기·인천 등 주요 권역 공고를 모아봅니다.",
+      criteria:
+        "건축물 미술작품 공모 공고문과 첨부파일을 기준으로 지역, 일정, 설치 조건, 제출 방식, 작품 규모를 검토합니다.",
+      sources: ["서울시/서울주택도시계열 공고", "경기권 공공기관 공고", "공고문·첨부파일 직접 확인"],
+      countLabel: "표시 공고"
+    },
+    local: {
+      eyebrow: "AXOO LOCAL PROJECT FEED",
+      title: "로컬·지자체 공고",
+      description:
+        "지자체 및 산하기관 개별 공고 중 AXOO와 연결 가능성이 있는 프로젝트를 모아봅니다.",
+      criteria:
+        "계약방법, 예산, 지역, 프로젝트 유형, 마감 일정을 기준으로 실무 대응 가능 공고를 우선 검토합니다.",
+      sources: ["지자체 개별 홈페이지", "공공기관 공고 게시판", "수의·용역·운영 공고 수집 데이터"],
+      countLabel: "표시 공고"
+    },
+    agencies: {
+      eyebrow: "AXOO TARGET AGENCY MAP",
+      title: "기관 타깃",
+      description:
+        "AXOO와 접점이 높은 기관들을 지역·유형·관련 이력 기준으로 정리한 기관 타깃 뷰입니다.",
+      criteria:
+        "관련 공고 수, 발주계획, 낙찰/계약 이력, 추정 규모를 기준으로 제안 우선순위를 검토합니다.",
+      sources: ["나라장터 계약/낙찰/계획 데이터", "기관별 공고 이력", "AXOO 내부 우선순위 기준"],
+      countLabel: "표시 기관"
+    }
+  };
+
   const summaryData = {
     opportunities: [],
     agencies: [],
@@ -59,7 +102,6 @@
 
   function formatDateOnly(value) {
     const dates = extractDateOnlyList(value);
-
     return dates[0] || "-";
   }
 
@@ -170,6 +212,7 @@
       updateSummaryByActiveTab();
       updateRequestedListHeadLabels();
       setupAccordions();
+      ensureNativeTabIntros();
     }, 160);
   }
 
@@ -226,6 +269,7 @@
           updateSummaryByActiveTab();
           updateRequestedListHeadLabels();
           setupAccordions();
+          ensureNativeTabIntros();
         }, 160);
       });
     });
@@ -487,48 +531,47 @@
   }
 
   function convertCardToAccordion(card, tabKey) {
-  if (!card || card.classList.contains("card-as-accordion")) {
-    const existingDetails = card?.querySelector("details.accordion-card");
+    if (!card || card.classList.contains("card-as-accordion")) {
+      const existingDetails = card?.querySelector("details.accordion-card");
 
-    if (tabKey === "art" && existingDetails) {
-      existingDetails.removeAttribute("open");
-      existingDetails.open = false;
+      if (tabKey === "art" && existingDetails) {
+        existingDetails.removeAttribute("open");
+        existingDetails.open = false;
+      }
+
+      return;
     }
 
-    return;
+    if (isEmptyCard(card)) return;
+
+    const summaryHtml = createAccordionSummary(card, tabKey);
+
+    const details = document.createElement("details");
+    details.className = "accordion-card";
+
+    if (tabKey === "art") {
+      details.removeAttribute("open");
+      details.open = false;
+    }
+
+    const body = document.createElement("div");
+    body.className = "accordion-body";
+
+    while (card.firstChild) {
+      body.appendChild(card.firstChild);
+    }
+
+    details.innerHTML = summaryHtml;
+    details.appendChild(body);
+
+    if (tabKey === "art") {
+      details.removeAttribute("open");
+      details.open = false;
+    }
+
+    card.classList.add("card-as-accordion");
+    card.appendChild(details);
   }
-
-  if (isEmptyCard(card)) return;
-
-  const summaryHtml = createAccordionSummary(card, tabKey);
-
-  const details = document.createElement("details");
-  details.className = "accordion-card";
-
-  // 건축물 미술작품은 기본값을 항상 접힘 상태로 시작
-  if (tabKey === "art") {
-    details.removeAttribute("open");
-    details.open = false;
-  }
-
-  const body = document.createElement("div");
-  body.className = "accordion-body";
-
-  while (card.firstChild) {
-    body.appendChild(card.firstChild);
-  }
-
-  details.innerHTML = summaryHtml;
-  details.appendChild(body);
-
-  if (tabKey === "art") {
-    details.removeAttribute("open");
-    details.open = false;
-  }
-
-  card.classList.add("card-as-accordion");
-  card.appendChild(details);
-}
 
   function setupAccordions() {
     Object.entries(cardContainerIds).forEach(([tabKey, containerId]) => {
@@ -676,6 +719,87 @@
     }
   }
 
+  function getPanelByTabKey(tabKey) {
+    if (tabKey === "opportunities") return document.getElementById("opportunitiesTab");
+    if (tabKey === "art") return document.getElementById("artTab");
+    if (tabKey === "local") return document.getElementById("localTab");
+    if (tabKey === "agencies") return document.getElementById("agenciesTab");
+
+    return null;
+  }
+
+  function getTabDisplayCount(tabKey) {
+    const visibleCards = getVisibleCards(tabKey);
+
+    if (visibleCards.length > 0) {
+      return visibleCards.length;
+    }
+
+    const data = summaryData[tabKey];
+
+    return Array.isArray(data) ? data.length : 0;
+  }
+
+  function renderSourceTags(sources) {
+    if (!Array.isArray(sources) || !sources.length) return "";
+
+    return `
+      <div class="keywords" style="margin-top: 16px;">
+        ${sources.map(source => `<span class="keyword">${source}</span>`).join("")}
+      </div>
+    `;
+  }
+
+  function createNativeTabIntroHtml(tabKey) {
+    const config = TAB_INTRO_CONFIG[tabKey];
+    if (!config) return "";
+
+    const count = getTabDisplayCount(tabKey);
+
+    return `
+      <div class="native-tab-intro-wrap">
+        <section class="priority-panel-head priority-panel-head-green">
+          <div>
+            <p class="priority-eyebrow">${config.eyebrow}</p>
+            <h2>${config.title}</h2>
+            <p>${config.description}</p>
+            ${renderSourceTags(config.sources)}
+          </div>
+
+          <div class="priority-mini-stat">
+            <span>${config.countLabel}</span>
+            <strong>${count}건</strong>
+            <small>출처 ${config.sources.length}종 기준</small>
+          </div>
+        </section>
+
+        <section class="grade-guide-box grade-guide-box-green">
+          <strong>검토 기준 안내</strong>
+          <p>${config.criteria}</p>
+        </section>
+      </div>
+    `;
+  }
+
+  function ensureNativeTabIntro(tabKey) {
+    const panel = getPanelByTabKey(tabKey);
+    if (!panel) return;
+
+    const existing = panel.querySelector(".native-tab-intro-wrap");
+    if (existing) existing.remove();
+
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = createNativeTabIntroHtml(tabKey);
+
+    if (wrapper.firstElementChild) {
+      panel.insertBefore(wrapper.firstElementChild, panel.firstChild);
+    }
+  }
+
+  function ensureNativeTabIntros() {
+    ["opportunities", "art", "local", "agencies"].forEach(ensureNativeTabIntro);
+  }
+
   function bindFilterRefresh() {
     const filterSelectors = [
       "#searchInput",
@@ -713,6 +837,7 @@
           updateRequestedListHeadLabels();
           setupAccordions();
           updateSummaryByActiveTab();
+          ensureNativeTabIntros();
         }, 180);
       });
     });
@@ -727,6 +852,7 @@
     updateMetaCountsFromData();
     updateMetaCardState();
     updateSummaryByActiveTab();
+    ensureNativeTabIntros();
     bindFilterRefresh();
   }
 
