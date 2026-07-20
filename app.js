@@ -329,9 +329,9 @@ function createOpportunityCard(item) {
 
   const gradeClass = getGradeClass(item.grade);
   const categoryLabel =
-   item.categoryLabel ||
-   categoryNames[item.category] ||
-   (item.category === "arts_content_support" ? "예술·콘텐츠 지원사업" : "기타");
+    item.categoryLabel ||
+    categoryNames[item.category] ||
+    (item.category === "arts_content_support" ? "예술·콘텐츠 지원사업" : "기타");
   const docUrl = getDocumentUrl(item);
   const keywords = Array.isArray(item.matchedKeywords) ? item.matchedKeywords : [];
   const reasons = Array.isArray(item.scoreReasons) ? item.scoreReasons : [];
@@ -348,10 +348,7 @@ function createOpportunityCard(item) {
       <div class="score-group">
         <div class="deadline-badge ${deadlineInfo.className}">${escapeHtml(deadlineInfo.label)}</div>
         <div class="score">${escapeHtml(safeText(item.score))}점</div>
-      </div>const categoryLabel =
-            item.categoryLabel ||
-            categoryNames[item.category] ||
-            (item.category === "arts_content_support" ? "예술·콘텐츠 지원사업" : "기타");
+      </div>
     </div>
 
     <h2>${escapeHtml(safeText(item.bidNtceNm || item.title))}</h2>
