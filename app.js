@@ -7,6 +7,7 @@ let dashboardMeta = {};
 const REVIEW_STORAGE_KEY = "axooB2GReviewStatus";
 
 const categoryNames = {
+  arts_content_support: "예술·콘텐츠 지원사업",
   public_art: "공공미술",
   media_art: "미디어아트",
   exhibition: "전시",
@@ -344,7 +345,10 @@ function createOpportunityCard(item) {
       <div class="score-group">
         <div class="deadline-badge ${deadlineInfo.className}">${escapeHtml(deadlineInfo.label)}</div>
         <div class="score">${escapeHtml(safeText(item.score))}점</div>
-      </div>
+      </div>const categoryLabel =
+            item.categoryLabel ||
+            categoryNames[item.category] ||
+            (item.category === "arts_content_support" ? "예술·콘텐츠 지원사업" : "기타");
     </div>
 
     <h2>${escapeHtml(safeText(item.bidNtceNm || item.title))}</h2>
