@@ -706,11 +706,11 @@ function createArtCard(item) {
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
-        <span class="badge ${gradeClass}">${escapeHtml(artGrade)}등급</span>
-        <span class="badge category">${escapeHtml(safeText(item.source))}</span>
-        <span class="badge category">${escapeHtml(safeText(item.category))}</span>
-        <span class="badge category">${escapeHtml(safeText(item.status))}</span>
-      </div>
+       <span class="badge category">${escapeHtml(safeText(item.source))}</span>
+       <span class="badge ${gradeClass}">${escapeHtml(artGrade)}등급</span>
+       <span class="badge category">${escapeHtml(safeText(item.category))}</span>
+       <span class="badge category">${escapeHtml(safeText(item.status))}</span>
+    </div>
 
       <div class="score-group">
         <div class="deadline-badge ${deadlineInfo.className}">${escapeHtml(deadlineInfo.label)}</div>
