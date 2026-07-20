@@ -487,28 +487,48 @@
   }
 
   function convertCardToAccordion(card, tabKey) {
-    if (!card || card.classList.contains("card-as-accordion")) return;
-    if (isEmptyCard(card)) return;
+  if (!card || card.classList.contains("card-as-accordion")) {
+    const existingDetails = card?.querySelector("details.accordion-card");
 
-    const summaryHtml = createAccordionSummary(card, tabKey);
-
-    const details = document.createElement("details");
-    details.className = "accordion-card";
-    details.open = false;
-
-    const body = document.createElement("div");
-    body.className = "accordion-body";
-
-    while (card.firstChild) {
-      body.appendChild(card.firstChild);
+    if (tabKey === "art" && existingDetails) {
+      existingDetails.removeAttribute("open");
+      existingDetails.open = false;
     }
 
-    details.innerHTML = summaryHtml;
-    details.appendChild(body);
-
-    card.classList.add("card-as-accordion");
-    card.appendChild(details);
+    return;
   }
+
+  if (isEmptyCard(card)) return;
+
+  const summaryHtml = createAccordionSummary(card, tabKey);
+
+  const details = document.createElement("details");
+  details.className = "accordion-card";
+
+  // 건축물 미술작품은 기본값을 항상 접힘 상태로 시작
+  if (tabKey === "art") {
+    details.removeAttribute("open");
+    details.open = false;
+  }
+
+  const body = document.createElement("div");
+  body.className = "accordion-body";
+
+  while (card.firstChild) {
+    body.appendChild(card.firstChild);
+  }
+
+  details.innerHTML = summaryHtml;
+  details.appendChild(body);
+
+  if (tabKey === "art") {
+    details.removeAttribute("open");
+    details.open = false;
+  }
+
+  card.classList.add("card-as-accordion");
+  card.appendChild(details);
+}
 
   function setupAccordions() {
     Object.entries(cardContainerIds).forEach(([tabKey, containerId]) => {
