@@ -40,15 +40,15 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "건축물 미술작품 설치완료(준공) 확인 신청서(서식) 2026-03-09",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
-    "id": "nationwide-art-commission-e8ea8cf40001",
+    "id": "nationwide-art-commission-25efae13dc14",
     "category": "건축물 미술작품",
     "categoryLabel": "건축물 미술작품",
     "status": "공모 후보",
-    "title": "미술작품 공모 공모개요 공모공고 공모결과",
+    "title": "양지7지구3단지 지역주택조합 공동주택 신축공사 內 미술작품 제작 및 설치 공모 공고",
     "agency": "경기도 건축물 미술작품",
     "organization": "경기도 건축물 미술작품",
     "region": "경기",
@@ -57,144 +57,12 @@
     "source": "경기도 건축물 미술작품",
     "sourceName": "경기도 건축물 미술작품",
     "sourceType": "official_portal",
-    "sourceUrl": "https://www.gg.go.kr/publicart/contents/contents.do?ciIdx=1416&menuId=3864",
-    "originalUrl": "https://www.gg.go.kr/publicart/contents/contents.do?ciIdx=1416&menuId=3864",
-    "url": "https://www.gg.go.kr/publicart/contents/contents.do?ciIdx=1416&menuId=3864",
+    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903612&menuId=3865",
+    "originalUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903612&menuId=3865",
+    "url": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903612&menuId=3865",
     "rawSourcePageUrl": "https://www.gg.go.kr/publicart/main.do",
-    "publishedDate": "",
-    "postedDate": "",
-    "deadline": "",
-    "endDate": "",
-    "budget": "",
-    "amount": "",
-    "keywords": [
-      "미술작품 공모",
-      "공모"
-    ],
-    "matchedKeywords": [
-      "미술작품 공모",
-      "공모"
-    ],
-    "crawlMode": "board",
-    "priority": 1,
-    "priorityLabel": "1차 우선 반영",
-    "priorityScore": 80,
-    "grade": "A",
-    "fitReason": "전국 건축물 미술작품 수집 소스에서 키워드가 매칭된 후보 공고입니다.",
-    "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
-    "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
-    "rawText": "미술작품 공모 공모개요 공모공고 공모결과",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
-  },
-  {
-    "id": "nationwide-art-commission-7be4436e4505",
-    "category": "건축물 미술작품",
-    "categoryLabel": "건축물 미술작품",
-    "status": "공모 후보",
-    "title": "미술작품 공모 공모개요 공모공고 공모결과",
-    "agency": "경기도 건축물 미술작품",
-    "organization": "경기도 건축물 미술작품",
-    "region": "경기",
-    "regionGroup": "capital",
-    "regionGroupLabel": "수도권",
-    "source": "경기도 건축물 미술작품",
-    "sourceName": "경기도 건축물 미술작품",
-    "sourceType": "official_portal",
-    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/board.do?bsIdx=825&menuId=3865",
-    "originalUrl": "https://www.gg.go.kr/publicart/bbs/board.do?bsIdx=825&menuId=3865",
-    "url": "https://www.gg.go.kr/publicart/bbs/board.do?bsIdx=825&menuId=3865",
-    "rawSourcePageUrl": "https://www.gg.go.kr/publicart/main.do",
-    "publishedDate": "",
-    "postedDate": "",
-    "deadline": "",
-    "endDate": "",
-    "budget": "",
-    "amount": "",
-    "keywords": [
-      "미술작품 공모",
-      "공모"
-    ],
-    "matchedKeywords": [
-      "미술작품 공모",
-      "공모"
-    ],
-    "crawlMode": "board",
-    "priority": 1,
-    "priorityLabel": "1차 우선 반영",
-    "priorityScore": 80,
-    "grade": "A",
-    "fitReason": "전국 건축물 미술작품 수집 소스에서 키워드가 매칭된 후보 공고입니다.",
-    "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
-    "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
-    "rawText": "미술작품 공모 공모개요 공모공고 공모결과",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
-  },
-  {
-    "id": "nationwide-art-commission-ed676d9308c1",
-    "category": "건축물 미술작품",
-    "categoryLabel": "건축물 미술작품",
-    "status": "공모 후보",
-    "title": "미술작품 공모 공모개요 공모공고 공모결과",
-    "agency": "경기도 건축물 미술작품",
-    "organization": "경기도 건축물 미술작품",
-    "region": "경기",
-    "regionGroup": "capital",
-    "regionGroupLabel": "수도권",
-    "source": "경기도 건축물 미술작품",
-    "sourceName": "경기도 건축물 미술작품",
-    "sourceType": "official_portal",
-    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/board.do?bsIdx=904&menuId=4336",
-    "originalUrl": "https://www.gg.go.kr/publicart/bbs/board.do?bsIdx=904&menuId=4336",
-    "url": "https://www.gg.go.kr/publicart/bbs/board.do?bsIdx=904&menuId=4336",
-    "rawSourcePageUrl": "https://www.gg.go.kr/publicart/main.do",
-    "publishedDate": "",
-    "postedDate": "",
-    "deadline": "",
-    "endDate": "",
-    "budget": "",
-    "amount": "",
-    "keywords": [
-      "미술작품 공모",
-      "공모"
-    ],
-    "matchedKeywords": [
-      "미술작품 공모",
-      "공모"
-    ],
-    "crawlMode": "board",
-    "priority": 1,
-    "priorityLabel": "1차 우선 반영",
-    "priorityScore": 80,
-    "grade": "A",
-    "fitReason": "전국 건축물 미술작품 수집 소스에서 키워드가 매칭된 후보 공고입니다.",
-    "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
-    "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
-    "rawText": "미술작품 공모 공모개요 공모공고 공모결과",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
-  },
-  {
-    "id": "nationwide-art-commission-7b0da5f32cc1",
-    "category": "건축물 미술작품",
-    "categoryLabel": "건축물 미술작품",
-    "status": "공모 후보",
-    "title": "성남금토 A-4BL 및 의왕월암 A-1BL 공동주택 미술작품 제작·설치 공모 공고",
-    "agency": "경기도 건축물 미술작품",
-    "organization": "경기도 건축물 미술작품",
-    "region": "경기",
-    "regionGroup": "capital",
-    "regionGroupLabel": "수도권",
-    "source": "경기도 건축물 미술작품",
-    "sourceName": "경기도 건축물 미술작품",
-    "sourceType": "official_portal",
-    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903102&menuId=3865",
-    "originalUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903102&menuId=3865",
-    "url": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903102&menuId=3865",
-    "rawSourcePageUrl": "https://www.gg.go.kr/publicart/main.do",
-    "publishedDate": "2026-07-06",
-    "postedDate": "2026-07-06",
+    "publishedDate": "2026-07-21",
+    "postedDate": "2026-07-21",
     "deadline": "",
     "endDate": "",
     "budget": "",
@@ -213,9 +81,9 @@
     "fitReason": "전국 건축물 미술작품 수집 소스에서 키워드가 매칭된 후보 공고입니다.",
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
-    "rawText": "성남금토 A-4BL 및 의왕월암 A-1BL 공동주택 미술작품 제작·설치 공모 공고 2026-07-06",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "rawText": "양지7지구3단지 지역주택조합 공동주택 신축공사 內 미술작품 제작 및 설치 공모 공고 2026-07-21",
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-460e352d8b67",
@@ -256,15 +124,15 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "오산 서2구역 공동주택 내 미술작품 제작 및 설치 미술작품 공고공모 (우미건설(주)) 2026-07-07",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
-    "id": "nationwide-art-commission-d7ad9c456837",
+    "id": "nationwide-art-commission-d93fb7dd99bf",
     "category": "건축물 미술작품",
     "categoryLabel": "건축물 미술작품",
     "status": "공모 후보",
-    "title": "화성 남양뉴타운 B-16BL 공동주택 내 미술작품 제작 및 설치 공모공고 (우미산업개발)",
+    "title": "의정부 푸르지오클라시엘 공동주택 신축공사 미술작품 공모 공고",
     "agency": "경기도 건축물 미술작품",
     "organization": "경기도 건축물 미술작품",
     "region": "경기",
@@ -273,20 +141,22 @@
     "source": "경기도 건축물 미술작품",
     "sourceName": "경기도 건축물 미술작품",
     "sourceType": "official_portal",
-    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903128&menuId=3865",
-    "originalUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903128&menuId=3865",
-    "url": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903128&menuId=3865",
+    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903455&menuId=3865",
+    "originalUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903455&menuId=3865",
+    "url": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110903455&menuId=3865",
     "rawSourcePageUrl": "https://www.gg.go.kr/publicart/main.do",
-    "publishedDate": "2026-07-07",
-    "postedDate": "2026-07-07",
+    "publishedDate": "2026-07-16",
+    "postedDate": "2026-07-16",
     "deadline": "",
     "endDate": "",
     "budget": "",
     "amount": "",
     "keywords": [
+      "미술작품 공모",
       "공모"
     ],
     "matchedKeywords": [
+      "미술작품 공모",
       "공모"
     ],
     "crawlMode": "board",
@@ -297,9 +167,9 @@
     "fitReason": "전국 건축물 미술작품 수집 소스에서 키워드가 매칭된 후보 공고입니다.",
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
-    "rawText": "화성 남양뉴타운 B-16BL 공동주택 내 미술작품 제작 및 설치 공모공고 (우미산업개발) 2026-07-07",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "rawText": "의정부 푸르지오클라시엘 공동주택 신축공사 미술작품 공모 공고 2026-07-16",
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-0178e66d22b2",
@@ -342,8 +212,8 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "화성동탄(2) 택지개발지구 B11블럭 공동주택 미술작품 설치 공모 공고 2026-07-13",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-fc5fadb34849",
@@ -386,8 +256,8 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "공지 공지 인천지방국세청 신청사 건축물 미술작품 제작 설치 공모 파일있음 인천지방국세청 2026-07-20 23",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-522ef9320975",
@@ -428,8 +298,8 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "3 루원복합청사 미술작품 제작 및 설치 공모 공고 파일있음 종합건설본부 건축부 2024-11-15 471",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-c76119d01636",
@@ -472,8 +342,8 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "5 인천검단 AA10-1BL 공동주택 신축공사 건축물 미술작품 제작 및 설치 공모 재공고 파일있음 문화기반과 2025-04-28 588",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-822b8df15c60",
@@ -514,8 +384,8 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "6 인천검단 AA21BL, 인천가정2 A-2BL, 인천계양 A-2BL, A-3BL 미술작품 공모 공고 파일있음 문화기반과 2025-06-18 568",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-c30bc2548475",
@@ -557,9 +427,9 @@
     "fitReason": "전국 건축물 미술작품 수집 소스에서 키워드가 매칭된 후보 공고입니다.",
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
-    "rawText": "1 인천국제공항 4단계 건설사업 건축물 미술작품 제작설치 공모 공고 파일있음 문화기반과 2024-01-29 1287",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "rawText": "1 인천국제공항 4단계 건설사업 건축물 미술작품 제작설치 공모 공고 파일있음 문화기반과 2024-01-29 1288",
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-262fc0c59468",
@@ -600,8 +470,8 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "4 인천남동경찰서 청사 재건축공사 미술작품 제작·설치 공모 공고 파일있음 문화기반과 2025-04-09 405",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-618e064b11c0",
@@ -642,8 +512,8 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "7 인천남동경찰서 청사 재건축공사 미술작품 제작·설치 공모 공고(추가) 파일있음 문화기반과 2025-07-14 451",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   },
   {
     "id": "nationwide-art-commission-41be0399e0be",
@@ -686,7 +556,7 @@
     "summary": "원문 확인 후 마감일, 제출 방식, 설치 조건, 예산 규모를 검토해야 하는 후보 공고입니다.",
     "nextAction": "원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
     "rawText": "2 인천영종 A33BL A37BL A60BL 부천괴안B1BL 건축물 미술작품 제작설치 공모 공고 파일있음 문화기반과 2024-03-06 910",
-    "collectedAt": "2026-07-20",
-    "updatedAt": "2026-07-20"
+    "collectedAt": "2026-07-21",
+    "updatedAt": "2026-07-21"
   }
 ]
