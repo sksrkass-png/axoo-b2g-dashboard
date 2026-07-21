@@ -36,7 +36,11 @@
   }
 
   function getArtPanel() {
-    return document.getElementById("artTab");
+    return (
+      document.getElementById("artTab") ||
+      document.querySelector("[data-tab-panel='art']") ||
+      document.querySelector(".tab-panel[data-tab='art']")
+    );
   }
 
   function getEnabledTargets() {
@@ -81,131 +85,137 @@
 
     style.textContent = `
       .nationwide-source-board {
-        margin: 18px 0 22px;
-        background: #ffffff;
-        border: 1px solid var(--line, #e3ddd3);
-        border-radius: 24px;
-        overflow: hidden;
-        box-shadow: var(--shadow-soft, 0 1px 0 rgba(17, 17, 17, 0.03));
+        display: none !important;
       }
 
-      .nationwide-source-board summary {
+      .nationwide-source-inline {
+        width: 100%;
+        flex-basis: 100%;
+        grid-column: 1 / -1;
+        margin-top: 18px;
+        background: #f5fbf7;
+        border: 1px solid #cfe8d8;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .nationwide-source-inline summary {
         list-style: none;
         cursor: pointer;
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        gap: 16px;
+        gap: 14px;
         align-items: center;
-        padding: 22px 24px;
+        padding: 16px 18px;
       }
 
-      .nationwide-source-board summary::-webkit-details-marker {
+      .nationwide-source-inline summary::-webkit-details-marker {
         display: none;
       }
 
-      .nationwide-source-board summary:hover {
-        background: #faf8f4;
+      .nationwide-source-inline summary:hover {
+        background: #edf8f1;
       }
 
-      .source-summary-title {
+      .source-inline-title {
         display: grid;
-        gap: 7px;
+        gap: 5px;
       }
 
-      .source-summary-title em {
+      .source-inline-title em {
         color: #00834f;
         font-style: normal;
-        font-size: 12px;
-        font-weight: 900;
+        font-size: 11px;
+        font-weight: 950;
         letter-spacing: 0.02em;
       }
 
-      .source-summary-title strong {
+      .source-inline-title strong {
         color: #111111;
-        font-size: 23px;
+        font-size: 18px;
         line-height: 1.2;
         font-weight: 950;
-        letter-spacing: -0.05em;
+        letter-spacing: -0.045em;
       }
 
-      .source-summary-title span {
+      .source-inline-title span {
         color: #5d5a54;
-        font-size: 14px;
-        line-height: 1.55;
+        font-size: 12px;
+        line-height: 1.45;
         font-weight: 800;
       }
 
-      .source-summary-stat {
-        min-width: 174px;
-        padding: 18px 20px;
-        border-radius: 20px;
-        background: #edf8f1;
-        border: 1px solid #d5ebdc;
+      .source-inline-stat {
+        min-width: 138px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid #d7eadf;
         text-align: left;
       }
 
-      .source-summary-stat span {
+      .source-inline-stat span {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         color: #605b55;
-        font-size: 12px;
-        font-weight: 900;
+        font-size: 11px;
+        font-weight: 950;
       }
 
-      .source-summary-stat strong {
+      .source-inline-stat strong {
         display: block;
         color: #006b3f;
-        font-size: 30px;
+        font-size: 24px;
         line-height: 1;
         font-weight: 950;
         letter-spacing: -0.05em;
       }
 
-      .source-summary-stat small {
+      .source-inline-stat small {
         display: block;
-        margin-top: 8px;
+        margin-top: 6px;
         color: #6b665f;
-        font-size: 12px;
+        font-size: 11px;
         line-height: 1.35;
         font-weight: 900;
       }
 
-      .nationwide-source-board[open] summary {
-        border-bottom: 1px solid var(--line-soft, #eee4d8);
-        background: #faf8f4;
+      .nationwide-source-inline[open] summary {
+        border-bottom: 1px solid #d7eadf;
+        background: #edf8f1;
       }
 
-      .source-board-body {
-        padding: 22px 24px 24px;
+      .source-inline-body {
+        padding: 16px 18px 18px;
       }
 
       .source-stats-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin-bottom: 16px;
+        gap: 8px;
+        margin-bottom: 14px;
       }
 
       .source-stat-card {
-        min-height: 86px;
-        padding: 15px;
-        border: 1px solid var(--line-soft, #eee4d8);
-        border-radius: 18px;
-        background: #faf8f4;
+        min-height: 72px;
+        padding: 13px;
+        border: 1px solid #e4eee7;
+        border-radius: 16px;
+        background: #ffffff;
       }
 
       .source-stat-card span {
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         color: #777;
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 900;
       }
 
       .source-stat-card strong {
         display: block;
         color: #111;
-        font-size: 25px;
+        font-size: 22px;
         line-height: 1;
         font-weight: 950;
         letter-spacing: -0.04em;
@@ -214,20 +224,20 @@
       .source-filter-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin: 2px 0 16px;
+        gap: 7px;
+        margin: 0 0 14px;
       }
 
       .source-filter-button {
         appearance: none;
-        min-height: 34px;
-        border: 1px solid var(--line, #e3ddd3);
+        min-height: 32px;
+        border: 1px solid #d8e5dc;
         border-radius: 999px;
         background: #ffffff;
         color: #5f594f;
-        padding: 0 12px;
-        font-size: 12px;
-        font-weight: 900;
+        padding: 0 11px;
+        font-size: 11px;
+        font-weight: 950;
         cursor: pointer;
       }
 
@@ -240,31 +250,32 @@
       .source-table-wrap {
         width: 100%;
         overflow-x: auto;
-        border: 1px solid var(--line-soft, #eee4d8);
-        border-radius: 18px;
+        border: 1px solid #e4eee7;
+        border-radius: 16px;
+        background: #ffffff;
       }
 
       .source-table {
         width: 100%;
-        min-width: 900px;
+        min-width: 880px;
         border-collapse: collapse;
         background: #ffffff;
       }
 
       .source-table th,
       .source-table td {
-        padding: 13px 14px;
-        border-bottom: 1px solid var(--line-soft, #eee4d8);
+        padding: 12px 13px;
+        border-bottom: 1px solid #edf2ee;
         text-align: left;
         vertical-align: middle;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.45;
       }
 
       .source-table th {
         color: #777;
-        background: #faf8f4;
-        font-size: 12px;
+        background: #f8fbf9;
+        font-size: 11px;
         font-weight: 950;
         white-space: nowrap;
       }
@@ -283,17 +294,17 @@
       .source-mode-pill {
         display: inline-flex;
         align-items: center;
-        min-height: 28px;
-        padding: 0 10px;
+        min-height: 26px;
+        padding: 0 9px;
         border-radius: 999px;
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 950;
         white-space: nowrap;
       }
 
       .source-priority-pill {
         background: #fff4f2;
-        color: var(--red, #ff3b30);
+        color: #ff3b30;
       }
 
       .source-region-pill {
@@ -314,7 +325,7 @@
       }
 
       .source-note {
-        margin: 14px 0 0;
+        margin: 13px 0 0;
         color: #6f6961;
         font-size: 12px;
         line-height: 1.6;
@@ -322,20 +333,20 @@
       }
 
       .source-empty {
-        padding: 18px;
-        border-radius: 16px;
-        background: #faf8f4;
+        padding: 16px;
+        border-radius: 14px;
+        background: #ffffff;
         color: #777;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 900;
       }
 
       @media (max-width: 860px) {
-        .nationwide-source-board summary {
+        .nationwide-source-inline summary {
           grid-template-columns: 1fr;
         }
 
-        .source-summary-stat {
+        .source-inline-stat {
           min-width: 0;
         }
 
@@ -518,25 +529,24 @@
     const counts = getSummaryCounts(targets);
 
     return `
-      <details class="nationwide-source-board" ${wasOpen ? "open" : ""}>
+      <details class="nationwide-source-inline" ${wasOpen ? "open" : ""}>
         <summary>
-          <span class="source-summary-title">
+          <span class="source-inline-title">
             <em>ART COMMISSION SOURCE MAP</em>
-            <strong>전국 건축물 미술작품 수집 소스</strong>
+            <strong>전국 수집 소스</strong>
             <span>
-              서울·경기/LH·SH 외에도 인천, 부산, 대구, 울산, 강원, 전북, 전남 등 전국 공고 경로를 등록하고,
-              이후 실제 공고 수집 크롤러와 연결합니다.
+              서울·경기/LH·SH 외 인천, 부산, 대구, 울산, 강원, 전북, 전남 등 전국 공고 경로를 함께 관리합니다.
             </span>
           </span>
 
-          <span class="source-summary-stat">
+          <span class="source-inline-stat">
             <span>등록 소스</span>
             <strong>${formatCount(counts.total)}개</strong>
-            <small>1차 우선 ${formatCount(counts.priorityOneCount)}개 · ${formatCount(counts.regionGroupCount)}개 권역</small>
+            <small>1차 ${formatCount(counts.priorityOneCount)}개 · ${formatCount(counts.regionGroupCount)}개 권역</small>
           </span>
         </summary>
 
-        <div class="source-board-body">
+        <div class="source-inline-body">
           <div class="source-stats-grid">
             <div class="source-stat-card">
               <span>전체 활성 소스</span>
@@ -566,8 +576,8 @@
           ${renderRows(targets)}
 
           <p class="source-note">
-            현재 단계는 “수집 소스 등록”입니다. 다음 단계에서 1차 우선 소스부터 실제 게시판 URL 구조를 확인하고,
-            공고명·기관·지역·공개일·마감일·원문 링크를 건축물 미술작품 탭의 실제 카드 데이터로 연결합니다.
+            현재 단계는 “수집 소스 등록 및 자동 후보 수집”입니다. 이후 1차 우선 소스부터 검색 URL 구조를 고도화해
+            공고명·기관·지역·공개일·마감일·원문 링크 정확도를 개선합니다.
           </p>
         </div>
       </details>
@@ -579,11 +589,18 @@
 
     if (!panel) return;
 
-    const oldBoard = panel.querySelector(".nationwide-source-board");
-    const wasOpen = oldBoard ? oldBoard.open : false;
+    const oldStandaloneBoards = panel.querySelectorAll(".nationwide-source-board");
 
-    if (oldBoard) {
-      oldBoard.remove();
+    oldStandaloneBoards.forEach(board => {
+      board.remove();
+    });
+
+    const intro = panel.querySelector(".native-tab-intro-wrap");
+    const oldInlineBoard = panel.querySelector(".nationwide-source-inline");
+    const wasOpen = oldInlineBoard ? oldInlineBoard.open : false;
+
+    if (oldInlineBoard) {
+      oldInlineBoard.remove();
     }
 
     const wrapper = document.createElement("div");
@@ -593,14 +610,13 @@
 
     if (!board) return;
 
-    const intro = panel.querySelector(".native-tab-intro-wrap");
-    const filters = panel.querySelector(".filters");
-    const listHead = panel.querySelector(".list-head");
-
     if (intro) {
-      intro.insertAdjacentElement("afterend", board);
+      intro.appendChild(board);
       return;
     }
+
+    const filters = panel.querySelector(".filters");
+    const listHead = panel.querySelector(".list-head");
 
     if (filters) {
       panel.insertBefore(board, filters);
@@ -636,7 +652,7 @@
       state.activeFilter = button.getAttribute("data-art-source-filter") || "all";
       renderBoard();
 
-      const board = document.querySelector(".nationwide-source-board");
+      const board = document.querySelector(".nationwide-source-inline");
 
       if (board) {
         board.open = true;
