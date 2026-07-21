@@ -400,22 +400,10 @@
     );
 
     const baseFilters = [
-      {
-        label: "전체",
-        value: "all"
-      },
-      {
-        label: "1차 우선 반영",
-        value: "priority:1"
-      },
-      {
-        label: "2차 확장 반영",
-        value: "priority:2"
-      },
-      {
-        label: "3차 후보 검증",
-        value: "priority:3"
-      }
+      { label: "전체", value: "all" },
+      { label: "1차 우선 반영", value: "priority:1" },
+      { label: "2차 확장 반영", value: "priority:2" },
+      { label: "3차 후보 검증", value: "priority:3" }
     ];
 
     const regionFilters = regionGroups.map(regionGroup => ({
@@ -584,6 +572,20 @@
     `;
   }
 
+  function findIntroCard(panel) {
+    const candidates = Array.from(panel.children);
+
+    return candidates.find(element => {
+      const text = element.textContent || "";
+
+      return (
+        text.includes("AXOO PUBLIC ART TRACK") ||
+        text.includes("건축물 미술작품") &&
+        text.includes("서울·경기·인천")
+      );
+    });
+  }
+
   function findCriteriaGuide(panel) {
     const candidates = Array.from(panel.children);
 
@@ -615,10 +617,7 @@
     let wasOpen = false;
 
     oldInlineBoards.forEach(board => {
-      if (board.open) {
-        wasOpen = true;
-      }
-
+      if (board.open) wasOpen = true;
       board.remove();
     });
 
@@ -629,17 +628,16 @@
 
     if (!board) return;
 
+    const introCard = findIntroCard(panel);
     const criteriaGuide = findCriteriaGuide(panel);
 
-    if (criteriaGuide) {
-      panel.insertBefore(board, criteriaGuide);
+    if (introCard) {
+      introCard.insertAdjacentElement("afterend", board);
       return;
     }
 
-    const intro = panel.querySelector(".native-tab-intro-wrap");
-
-    if (intro) {
-      intro.insertAdjacentElement("afterend", board);
+    if (criteriaGuide) {
+      panel.insertBefore(board, criteriaGuide);
       return;
     }
 
