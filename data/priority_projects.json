@@ -117,7 +117,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "군산 P-35정 주기관(MTU16V2000M90) 총분해수리 군산 P-35정 주기관(MTU16V2000M90) 총분해수리 해양경찰청 해양경찰정비창 해양경찰청 해양경찰정비창 해양경찰청 해양경찰정비창 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -141,7 +141,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "고속도로 민간투자사업의 실시협약 체계 개선방안 연구 고속도로 민간투자사업의 실시협약 체계 개선방안 연구 국토교통부 국토교통부 국토교통부 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -167,7 +167,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 배수장 이동식화장실 임차 용역 2026년 배수장 이동식화장실 임차 용역 한국농어촌공사 경기지역본부 파주지사 한국농어촌공사 경기지역본부 파주지사 한국농어촌공사 경기지역본부 파주지사 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -191,7 +191,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 보라매공원 수목 현황 조사 용역 2026년 보라매공원 수목 현황 조사 용역 서울특별시 서부공원여가센터 서울특별시 서부공원여가센터 서울특별시 서부공원여가센터 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -215,7 +215,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "마산배수장 유수지 수초제거 용역 마산배수장 유수지 수초제거 용역 한국농어촌공사 경남지역본부 김해.양산.부산지사 한국농어촌공사 경남지역본부 김해.양산.부산지사 한국농어촌공사 경남지역본부 김해.양산.부산지사 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -237,14 +237,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "연화지구 소규모배수개선사업 건설폐기물처리 용역 연화지구 소규모배수개선사업 건설폐기물처리 용역 한국농어촌공사 경남지역본부 고성.통영.거제지사 한국농어촌공사 경남지역본부 고성.통영.거제지사 한국농어촌공사 경남지역본부 고성.통영.거제지사 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -268,7 +268,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년도 양산지사 보건관리 위탁용역 2026년도 양산지사 보건관리 위탁용역 한국지역난방공사 양산지사 한국지역난방공사 양산지사 한국지역난방공사 양산지사 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -279,22 +279,25 @@
     "publishedDate": "",
     "sourceUrl": "",
     "documentUrl": "",
-    "priorityCategory": "exhibition_content",
-    "priorityCategoryLabel": "전시 콘텐츠 기획 운영",
-    "priorityRank": 2,
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
     "matchedPriorityKeywords": [
-      "전시"
+      "분석 연구",
+      "체계 분석",
+      "투자운영",
+      "운영 및 유지관리"
     ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "A",
-    "gradeReason": "시각예술 전시·전시연출·전시물 제작 계열로 제안 가능성이 높은 공고입니다.",
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
-    "nextAction": "제안 가능성 검토",
+    "nextAction": "우선순위 제외",
     "searchText": "항행안전시설 투자운영 및 유지관리체계 분석 연구 항행안전시설 투자운영 및 유지관리체계 분석 연구 국토교통부 국토교통부 국토교통부 전시 전시",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -322,7 +325,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 농어촌인성학교 체험캠프 지원사업 운영 용역 2026년 농어촌인성학교 체험캠프 지원사업 운영 용역 한국농어촌공사 농어촌자원개발원 한국농어촌공사 농어촌자원개발원 한국농어촌공사 농어촌자원개발원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -343,14 +346,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "마이데이터 지원 플랫폼 구축(3차) 마이데이터 지원 플랫폼 구축(3차) 조달청 서울지방조달청 개인정보보호위원회 개인정보보호위원회 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -378,7 +381,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 중봉청소년수련관 청소년 진로코칭캠프 위탁 용역 2026년 중봉청소년수련관 청소년 진로코칭캠프 위탁 용역 재단법인김포시청소년재단 재단법인김포시청소년재단 재단법인김포시청소년재단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -404,7 +407,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "부산맹학교 2학기 통학버스(동승보호자 포함) 임차 용역 부산맹학교 2학기 통학버스(동승보호자 포함) 임차 용역 부산광역시교육청 부산맹학교 부산광역시교육청 부산맹학교 부산광역시교육청 부산맹학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -430,7 +433,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "부산맹학교 2학기 통학버스(동승보호자 포함) 임차 용역 부산맹학교 2학기 통학버스(동승보호자 포함) 임차 용역 부산광역시교육청 부산맹학교 부산광역시교육청 부산맹학교 부산광역시교육청 부산맹학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -452,14 +455,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "사회관 주변 환경개선공사 건설폐기물처리용역 사회관 주변 환경개선공사 건설폐기물처리용역 부산대학교 부산대학교 부산대학교 공공디자인 환경개선",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -478,14 +481,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 케이워터운영관리 공용차량 임차 용역(렌트) 2026년 케이워터운영관리 공용차량 임차 용역(렌트) 케이워터운영관리(주) 케이워터운영관리(주) 케이워터운영관리(주) 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -511,7 +514,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "밀양아리랑 디아스포라 전승조사 수의 견적 제출 안내 재공고 밀양아리랑 디아스포라 전승조사 수의 견적 제출 안내 재공고 재단법인밀양문화관광재단 재단법인밀양문화관광재단 재단법인밀양문화관광재단 관광콘텐츠 문화관광",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -535,7 +538,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 임산부 친환경농산물지원사업 택배 운송 용역 2026년 임산부 친환경농산물지원사업 택배 운송 용역 (재)춘천지역먹거리통합지원센터 (재)춘천지역먹거리통합지원센터 (재)춘천지역먹거리통합지원센터 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -554,14 +557,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026학년도 천곡중학교 2학년 수학여행 위탁용역 수의견적 제출 안내 공고 2026학년도 천곡중학교 2학년 수학여행 위탁용역 수의견적 제출 안내 공고 전남광주통합특별시교육청 전남광주통합특별시광주서부교육지원청 천곡중학교 전남광주통합특별시교육청 전남광주통합특별시광주서부교육지원청 천곡중학교 전남광주통합특별시교육청 전남광주통합특별시광주서부교육지원청 천곡중학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -582,14 +585,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "처인고 교사동 증축공사 폐기물처리용역 처인고 교사동 증축공사 폐기물처리용역 경기도교육청 경기도용인교육지원청 경기도교육청 경기도용인교육지원청 경기도교육청 경기도용인교육지원청 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -615,7 +618,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 강원특별자치도(본청) 공용차량 보험 용역 2026년 강원특별자치도(본청) 공용차량 보험 용역 강원특별자치도 강원특별자치도 강원특별자치도 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -634,14 +637,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "신원 수옥지구 소규모하수처리시설 설치사업 CCTV 및 수밀시험용역 입찰공고 신원 수옥지구 소규모하수처리시설 설치사업 CCTV 및 수밀시험용역 입찰공고 경상남도 거창군 수도사업소 경상남도 거창군 수도사업소 경상남도 거창군 수도사업소 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -662,14 +665,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "기산7리 상수도 보급사업 폐기물처리용역 기산7리 상수도 보급사업 폐기물처리용역 경기도 포천시 건설교통국 경기도 포천시 건설교통국 경기도 포천시 건설교통국 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -693,7 +696,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "도선(삼마호) 엔진교체 정비용역 도선(삼마호) 엔진교체 정비용역 전남광주통합특별시 해남군 전남광주통합특별시 해남군 전남광주통합특별시 해남군 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -713,14 +716,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026학년도 이리북일초 수학여행연계 국제교류수업 해외현장체험학습 위탁용역 2026학년도 이리북일초 수학여행연계 국제교류수업 해외현장체험학습 위탁용역 전북특별자치도교육청 전북특별자치도익산교육지원청 이리북일초등학교 전북특별자치도교육청 전북특별자치도익산교육지원청 이리북일초등학교 전북특별자치도교육청 전북특별자치도익산교육지원청 이리북일초등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -740,14 +743,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "국립공원 헬기(Ka-32T) 외주정비 용역 국립공원 헬기(Ka-32T) 외주정비 용역 국립공원공단 국립공원공단 국립공원공단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -769,14 +772,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "순천경찰서 역전파출소 신축공사 건설폐기물 처리용역 순천경찰서 역전파출소 신축공사 건설폐기물 처리용역 경찰청 전남경찰청 경찰청 전남경찰청 경찰청 전남경찰청 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -802,7 +805,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "완주군공설공원묘지 예초작업 용역 완주군공설공원묘지 예초작업 용역 완주군시설관리공단 완주군시설관리공단 완주군시설관리공단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -824,14 +827,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "용원초 급식시설 현대화공사 폐기물 처리 용역 수의계약 안내공고 용원초 급식시설 현대화공사 폐기물 처리 용역 수의계약 안내공고 충청북도교육청 충청북도충주교육지원청 충청북도교육청 충청북도충주교육지원청 충청북도교육청 충청북도충주교육지원청 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -853,14 +856,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "용원초 급식시설 현대화공사 폐기물 처리 용역 수의계약 안내공고(변경공고) 용원초 급식시설 현대화공사 폐기물 처리 용역 수의계약 안내공고(변경공고) 충청북도교육청 충청북도충주교육지원청 충청북도교육청 충청북도충주교육지원청 충청북도교육청 충청북도충주교육지원청 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -884,7 +887,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 보청지구 태양광발전소 예초 용역 2026년 보청지구 태양광발전소 예초 용역 한국농어촌공사 충북지역본부 보은지사 한국농어촌공사 충북지역본부 보은지사 한국농어촌공사 충북지역본부 보은지사 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -908,7 +911,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "가치사슬 DX첨단서비스 관제시스템 구축 가치사슬 DX첨단서비스 관제시스템 구축 조달청 대구지방조달청 국립금오공과대학교산학협력단 국립금오공과대학교산학협력단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -932,7 +935,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "AI를 활용한 대학 진학상담 고도화 정보화전략계획(ISP) 수립 AI를 활용한 대학 진학상담 고도화 정보화전략계획(ISP) 수립 조달청 서울지방조달청 한국대학교육협의회 한국대학교육협의회 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -953,14 +956,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "서부동 및 화산동 노후 하수관로 정비사업 폐기물처리용역 서부동 및 화산동 노후 하수관로 정비사업 폐기물처리용역 충청북도 제천시 환경사업소 충청북도 제천시 환경사업소 충청북도 제천시 환경사업소 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -984,7 +987,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "9호선 2, 3단계 신조전동차 48칸 특별점검(하자검사 포함) 용역 9호선 2, 3단계 신조전동차 48칸 특별점검(하자검사 포함) 용역 서울교통공사 서울교통공사 서울교통공사 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1003,14 +1006,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 중앙보훈병원 환자급식 조리원 파견근로용역 2026년 중앙보훈병원 환자급식 조리원 파견근로용역 한국보훈복지의료공단 중앙보훈병원 한국보훈복지의료공단 중앙보훈병원 한국보훈복지의료공단 중앙보훈병원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1034,7 +1037,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026학년도 도계전산정보고 국외 테마학습 2026학년도 도계전산정보고 국외 테마학습 강원특별자치도교육청 도계전산정보고등학교 강원특별자치도교육청 도계전산정보고등학교 강원특별자치도교육청 도계전산정보고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1060,7 +1063,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "드론을 활용한 건축물(청사) 외벽청소 드론을 활용한 건축물(청사) 외벽청소 서울특별시 서울아리수본부 뚝도아리수정수센터 서울특별시 서울아리수본부 뚝도아리수정수센터 서울특별시 서울아리수본부 뚝도아리수정수센터 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1086,7 +1089,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 서울요양병원 음식물 쓰레기 감량기 임차용역 2026년 서울요양병원 음식물 쓰레기 감량기 임차용역 한국보훈복지의료공단 중앙보훈병원 한국보훈복지의료공단 중앙보훈병원 한국보훈복지의료공단 중앙보훈병원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1108,14 +1111,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "유성여자고등학교 교사동 증개축공사 건설폐기물 처리용역 유성여자고등학교 교사동 증개축공사 건설폐기물 처리용역 대전광역시교육청 유성여자고등학교 대전광역시교육청 유성여자고등학교 대전광역시교육청 유성여자고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1136,14 +1139,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "유성여자고등학교 교사동 증개축공사 가연성폐기물 처리 용역 유성여자고등학교 교사동 증개축공사 가연성폐기물 처리 용역 대전광역시교육청 유성여자고등학교 대전광역시교육청 유성여자고등학교 대전광역시교육청 유성여자고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1167,33 +1170,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "홈페이지 및 회원관리프로그램 개발용역 홈페이지 및 회원관리프로그램 개발용역 구리시체육회(주민편익시설) 구리시체육회(주민편익시설) 구리시체육회(주민편익시설) 기타",
-    "priorityVersion": "priority_kr_v1_3"
-  },
-  {
-    "sourceType": "나라장터",
-    "title": "인도네시아 의료기기 전시회(Hospital Expo 2026)전시용역(재공고)",
-    "agency": "(재)원주의료기기산업진흥원",
-    "amount": 35000000,
-    "deadline": "2026-07-20",
-    "publishedDate": "",
-    "sourceUrl": "",
-    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01619664&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-    "priorityCategory": "exhibition_content",
-    "priorityCategoryLabel": "전시 콘텐츠 기획 운영",
-    "priorityRank": 2,
-    "matchedPriorityKeywords": [
-      "전시"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "B",
-    "gradeReason": "전시 관련 공고이나 예산 규모가 작아 모니터링 대상으로 분류했습니다.",
-    "eventOperationKeywords": [],
-    "lowFitKeywords": [],
-    "nextAction": "기관/예산 시즌 모니터링",
-    "searchText": "인도네시아 의료기기 전시회(Hospital Expo 2026)전시용역(재공고) 인도네시아 의료기기 전시회(Hospital Expo 2026)전시용역(재공고) (재)원주의료기기산업진흥원 (재)원주의료기기산업진흥원 (재)원주의료기기산업진흥원 전시 전시",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1219,7 +1196,7 @@
     "lowFitKeywords": [],
     "nextAction": "기타 AXOO 핏으로 보관",
     "searchText": "2026년 전통시장·골목상권 공동브랜드 개발 지원(A) -재공고 2026년 전통시장·골목상권 공동브랜드 개발 지원(A) -재공고 한국발명진흥회 광주지부 한국발명진흥회 광주지부 한국발명진흥회 광주지부 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1243,7 +1220,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 영동군 공무원 역량강화 워크숍 용역[협상에 의한 계약] 2026년 영동군 공무원 역량강화 워크숍 용역[협상에 의한 계약] 충청북도 영동군 충청북도 영동군 충청북도 영동군 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1271,7 +1248,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "AI BIZ 크리에이터 스쿨 행사 기획 및 운영 용역 AI BIZ 크리에이터 스쿨 행사 기획 및 운영 용역 주식회사 어반플레이 주식회사 어반플레이 주식회사 어반플레이 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1299,7 +1276,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "AI BIZ 크리에이터 스쿨 행사 기획 및 운영 용역(재공고) AI BIZ 크리에이터 스쿨 행사 기획 및 운영 용역(재공고) 주식회사 어반플레이 주식회사 어반플레이 주식회사 어반플레이 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1323,7 +1300,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 심사품질 고객평가 조사 및 분석 사업 2026년 심사품질 고객평가 조사 및 분석 사업 지식재산처 지식재산처 지식재산처 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1347,7 +1324,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026 선수 정보 및 전국대회 기록 관리 용역 2026 선수 정보 및 전국대회 기록 관리 용역 사단법인 대한바둑협회 사단법인 대한바둑협회 사단법인 대한바둑협회 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1371,7 +1348,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026. 강진여자중학교 해외역사문화탐방 위탁용역 입찰 공고 2026. 강진여자중학교 해외역사문화탐방 위탁용역 입찰 공고 전라남도강진교육청 강진여자중학교 전라남도강진교육청 강진여자중학교 전라남도강진교육청 강진여자중학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1390,14 +1367,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "AI기반 건설기계 능동제어 시스템 연구용역 AI기반 건설기계 능동제어 시스템 연구용역 대한건설기계안전관리원 대한건설기계안전관리원 대한건설기계안전관리원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1416,14 +1393,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "[정보화] 공공백신 종합 정보시스템 민간지원 유지관리 [정보화] 공공백신 종합 정보시스템 민간지원 유지관리 질병관리청 국립보건연구원 질병관리청 국립보건연구원 질병관리청 국립보건연구원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1451,7 +1428,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "쿨트래디션: 조선의 여름나기 2026 운영 용역 입찰공고 쿨트래디션: 조선의 여름나기 2026 운영 용역 입찰공고 (재)한국정신문화재단 (재)한국정신문화재단 (재)한국정신문화재단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1481,7 +1458,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026 유성 국화음악회 및 소규모 문화공연 행사대행용역 2026 유성 국화음악회 및 소규모 문화공연 행사대행용역 대전광역시 유성구 대전광역시 유성구 대전광역시 유성구 문화행사 행사대행",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1505,7 +1482,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "제46회 전국장애인체육대회 강원특별자치도 선수단 출전 지원 용역 공고(재공고) 제46회 전국장애인체육대회 강원특별자치도 선수단 출전 지원 용역 공고(재공고) 강원특별자치도장애인체육회 강원특별자치도장애인체육회 강원특별자치도장애인체육회 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1529,7 +1506,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026학년도 강릉제일고등학교 2학년 테마여행 위탁용역 입찰공고 2026학년도 강릉제일고등학교 2학년 테마여행 위탁용역 입찰공고 강원특별자치도교육청 강릉제일고등학교 강원특별자치도교육청 강릉제일고등학교 강원특별자치도교육청 강릉제일고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1553,7 +1530,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026학년도 남해보물섬고등학교 해외이동학습 용역 2단계 입찰 공고[규격(기술) 가격 동시] 2026학년도 남해보물섬고등학교 해외이동학습 용역 2단계 입찰 공고[규격(기술) 가격 동시] 경상남도교육청 남해보물섬고등학교 경상남도교육청 남해보물섬고등학교 경상남도교육청 남해보물섬고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1581,7 +1558,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "KAIST 최고경영자과정 63기 중국 해외연수 위탁 용역 KAIST 최고경영자과정 63기 중국 해외연수 위탁 용역 한국과학기술원 한국과학기술원 한국과학기술원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1601,14 +1578,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "순천향대학교 통합성과관리시스템 개발 용역 순천향대학교 통합성과관리시스템 개발 용역 순천향대학교 순천향대학교 순천향대학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1636,7 +1613,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년도 하계 인구문제 해결을 위한 BRIDGE Builder 글로벌 프로젝트 운영 대행 2026년도 하계 인구문제 해결을 위한 BRIDGE Builder 글로벌 프로젝트 운영 대행 성균관대학교 자연과학캠퍼스 부총장 산학협력단 성균관대학교 자연과학캠퍼스 부총장 산학협력단 성균관대학교 자연과학캠퍼스 부총장 산학협력단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1655,14 +1632,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026학년도 풍암고등학교 2학년 수학여행 위탁용역 2단계(규격·가격동시) 입찰 공고 2026학년도 풍암고등학교 2학년 수학여행 위탁용역 2단계(규격·가격동시) 입찰 공고 전남광주통합특별시교육청 풍암고등학교 전남광주통합특별시교육청 풍암고등학교 전남광주통합특별시교육청 풍암고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1690,7 +1667,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 지방공무원 국외체험 과제연수 사업 위탁 용역 2026년 지방공무원 국외체험 과제연수 사업 위탁 용역 강원특별자치도교육청 강원특별자치도교육청 강원특별자치도교육청 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1714,7 +1691,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026학년도 흑석고등학교 1학년 수련활동 위탁용역 입찰 공고 2026학년도 흑석고등학교 1학년 수련활동 위탁용역 입찰 공고 서울특별시교육청 서울흑석고등학교 서울특별시교육청 서울흑석고등학교 서울특별시교육청 서울흑석고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1728,17 +1705,19 @@
     "priorityCategory": "excluded_event",
     "priorityCategoryLabel": "우선순위 제외",
     "priorityRank": 99,
-    "matchedPriorityKeywords": [],
+    "matchedPriorityKeywords": [
+      "성과 분석"
+    ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "3대 우선 카테고리와 AXOO 서브 핏에 해당하지 않는 일반 공고",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "공공언어 개선 지원 사업 성과 분석 및 평가 공공언어 개선 지원 사업 성과 분석 및 평가 사단법인 국어문화원연합회 사단법인 국어문화원연합회 사단법인 국어문화원연합회 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1762,7 +1741,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 섬유패션기업 AI도입 실태조사 2026년 섬유패션기업 AI도입 실태조사 한국섬유산업연합회 한국섬유산업연합회 한국섬유산업연합회 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1786,7 +1765,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "신문제작시스템(CTS) 교체 신문제작시스템(CTS) 교체 (주)경상일보 (주)경상일보 (주)경상일보 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1814,7 +1793,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "지역사회문제해결 프로젝트(로컬솔루션벤쳐크루) 기획 및 운영 용역 지역사회문제해결 프로젝트(로컬솔루션벤쳐크루) 기획 및 운영 용역 울산과학대학산학협력단 울산과학대학산학협력단 울산과학대학산학협력단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1833,14 +1812,43 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "CFE 인증 WEB 기반 운영시스템 개발 CFE 인증 WEB 기반 운영시스템 개발 (재)한국기계전기전자시험연구원 (재)한국기계전기전자시험연구원 (재)한국기계전기전자시험연구원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
+  },
+  {
+    "sourceType": "나라장터",
+    "title": "인도네시아 의료기기 전시회(Hospital Expo 2026)전시용역(재공고)",
+    "agency": "(재)원주의료기기산업진흥원",
+    "amount": 35000000,
+    "deadline": "2026-07-20",
+    "publishedDate": "",
+    "sourceUrl": "",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01619664&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
+    "matchedPriorityKeywords": [
+      "전시",
+      "의료기기",
+      "Hospital",
+      "Expo"
+    ],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "전시 키워드는 있으나 의료기기·해외박람회·무역·투자운영·분석연구 등 AXOO형 전시 콘텐츠가 아니어서 제외",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
+    "eventOperationKeywords": [],
+    "lowFitKeywords": [],
+    "nextAction": "우선순위 제외",
+    "searchText": "인도네시아 의료기기 전시회(Hospital Expo 2026)전시용역(재공고) 인도네시아 의료기기 전시회(Hospital Expo 2026)전시용역(재공고) (재)원주의료기기산업진흥원 (재)원주의료기기산업진흥원 (재)원주의료기기산업진흥원 전시 전시",
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1859,14 +1867,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "윤리·인권경영 전략이행 및 성과환류 컨설팅 윤리·인권경영 전략이행 및 성과환류 컨설팅 (재)공간정보품질관리원 (재)공간정보품질관리원 (재)공간정보품질관리원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1894,7 +1902,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "해양과학기술 산학연 협력센터 카페 위탁운영 해양과학기술 산학연 협력센터 카페 위탁운영 재단법인부산테크노파크 재단법인부산테크노파크 재단법인부산테크노파크 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1918,7 +1926,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "정보자원 이전 및 정보인프라 구축 사업(통합발주) 정보자원 이전 및 정보인프라 구축 사업(통합발주) 조달청 서울지방조달청 국회 국회기록원 국회 국회기록원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1942,7 +1950,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "대기질모델개발시스템의 AI 인프라 구축(Ⅰ) 대기질모델개발시스템의 AI 인프라 구축(Ⅰ) 조달청 인천지방조달청 기후에너지환경부 국립환경과학원 기후에너지환경부 국립환경과학원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1966,7 +1974,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "대기질모델개발시스템의 AI 인프라 구축(Ⅱ) 대기질모델개발시스템의 AI 인프라 구축(Ⅱ) 조달청 인천지방조달청 기후에너지환경부 국립환경과학원 기후에너지환경부 국립환경과학원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -1990,7 +1998,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "[긴급]2026 인재유입 고용서비스 지원을 위한 타광역 경력직 헤드헌팅 및 매칭용역 [긴급]2026 인재유입 고용서비스 지원을 위한 타광역 경력직 헤드헌팅 및 매칭용역 (재)원주의료기기산업진흥원 (재)원주의료기기산업진흥원 (재)원주의료기기산업진흥원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2009,14 +2017,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "AI-Ready 데이터 확보를 위한 데이터 파이프라인 구축 용역 AI-Ready 데이터 확보를 위한 데이터 파이프라인 구축 용역 한국기계연구원 한국기계연구원 한국기계연구원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2038,14 +2046,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "충남대학교 디지털융합혁신파크 신축공사 건설폐기물 처리용역 충남대학교 디지털융합혁신파크 신축공사 건설폐기물 처리용역 조달청 대전지방조달청 충남대학교 충남대학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2069,7 +2077,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 국제감축등록부시스템 구축 2026년 국제감축등록부시스템 구축 기후에너지환경부 온실가스종합정보센터 기후에너지환경부 온실가스종합정보센터 기후에너지환경부 온실가스종합정보센터 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2097,7 +2105,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 의성군 도시숲정원관리인 운영 용역(협상에의한계약)(재공고)(긴급) 2026년 의성군 도시숲정원관리인 운영 용역(협상에의한계약)(재공고)(긴급) 경상북도 의성군 경상북도 의성군 경상북도 의성군 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2127,7 +2135,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "제18회 국제금융기구 채용설명회 행사대행 용역 제18회 국제금융기구 채용설명회 행사대행 용역 재정경제부 재정경제부 재정경제부 문화행사 행사대행",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2146,14 +2154,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 장애인고용기업 추가비용조사 연구 용역 2026년 장애인고용기업 추가비용조사 연구 용역 한국장애인고용공단 한국장애인고용공단 한국장애인고용공단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2177,7 +2185,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026년 한국기계연구원 창업 아이디어 경진대회 운영 2026년 한국기계연구원 창업 아이디어 경진대회 운영 한국기계연구원 한국기계연구원 한국기계연구원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2201,7 +2209,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "부산광역시 산림탄소흡수원 유지 및 증진 기본계획 수립용역 부산광역시 산림탄소흡수원 유지 및 증진 기본계획 수립용역 부산광역시 부산광역시 부산광역시 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2225,7 +2233,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "1:25만 강릉 속초도폭 기반암 유망 유해원소 예측 분포도 제작 1:25만 강릉 속초도폭 기반암 유망 유해원소 예측 분포도 제작 조달청 대전지방조달청 한국지질자원연구원 한국지질자원연구원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2249,7 +2257,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2027년 AI·디지털 분야 트렌드 조사 2027년 AI·디지털 분야 트렌드 조사 한국지능정보사회진흥원 한국지능정보사회진흥원 한국지능정보사회진흥원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2273,7 +2281,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "광양만권 이차전지 산업육성 전략 수립 용역 광양만권 이차전지 산업육성 전략 수립 용역 재단법인전남테크노파크 재단법인전남테크노파크 재단법인전남테크노파크 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2297,7 +2305,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "(재공고) 2026년 지역대표 K-브랜드 100지원사업 수행기관 용역입찰 공고(대구반야월농업협동조합) (재공고) 2026년 지역대표 K-브랜드 100지원사업 수행기관 용역입찰 공고(대구반야월농업협동조합) 대구상공회의소 대구상공회의소 대구상공회의소 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2321,7 +2329,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "방송공익광고 생각의 힘 키우기-AI생활편 제작 용역 방송공익광고 생각의 힘 키우기-AI생활편 제작 용역 한국방송광고진흥공사 한국방송광고진흥공사 한국방송광고진흥공사 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2345,7 +2353,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "케이사운드 라이브러리 효과음원 사운드스케이프 콘텐츠 제작 용역 케이사운드 라이브러리 효과음원 사운드스케이프 콘텐츠 제작 용역 재단법인 전주정보문화산업진흥원 재단법인 전주정보문화산업진흥원 재단법인 전주정보문화산업진흥원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2373,7 +2381,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026 경남 관광 아카데미 및 홍보단 운영 용역 2026 경남 관광 아카데미 및 홍보단 운영 용역 재단법인 경상남도 관광재단 재단법인 경상남도 관광재단 재단법인 경상남도 관광재단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2392,14 +2400,14 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "대덕복지센터 단중기 경영전략 수립 연구용역 입찰공고 대덕복지센터 단중기 경영전략 수립 연구용역 입찰공고 대덕복지센터 대덕복지센터 대덕복지센터 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2429,7 +2437,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026 안동 전통주 박람회 행사 운영 용역 입찰공고 2026 안동 전통주 박람회 행사 운영 용역 입찰공고 (재)한국정신문화재단 (재)한국정신문화재단 (재)한국정신문화재단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2453,7 +2461,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "맹종죽시배지권역 행복한삶터조성사업 지역역량강화 용역 맹종죽시배지권역 행복한삶터조성사업 지역역량강화 용역 한국농어촌공사 경남지역본부 고성.통영.거제지사 한국농어촌공사 경남지역본부 고성.통영.거제지사 한국농어촌공사 경남지역본부 고성.통영.거제지사 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2483,7 +2491,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026 전남아트페스티벌 행사 운영 용역 2026 전남아트페스티벌 행사 운영 용역 재단법인전라남도문화재단 재단법인전라남도문화재단 재단법인전라남도문화재단 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2513,7 +2521,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026. 진로교육 콘퍼런스 운영 대행 용역 2026. 진로교육 콘퍼런스 운영 대행 용역 경상남도교육청 경상남도교육청진로교육원 경상남도교육청 경상남도교육청진로교육원 경상남도교육청 경상남도교육청진로교육원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2532,7 +2540,7 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [
@@ -2541,7 +2549,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "인천하늘고 1학년 현장체험학습 위탁 용역 인천하늘고 1학년 현장체험학습 위탁 용역 인천광역시교육청 인천하늘고등학교 인천광역시교육청 인천하늘고등학교 인천광역시교육청 인천하늘고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2565,7 +2573,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "봉산초등학교 민간참여 컴퓨터교실 운영업체 선정 공고 봉산초등학교 민간참여 컴퓨터교실 운영업체 선정 공고 광주광역시서부교육청 봉산초등학교 광주광역시서부교육청 봉산초등학교 광주광역시서부교육청 봉산초등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2584,7 +2592,7 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [
@@ -2593,7 +2601,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026학년도 창원기계공업고등학교 2학년 수학여행 위탁 용역 2026학년도 창원기계공업고등학교 2학년 수학여행 위탁 용역 경상남도교육청 창원기계공업고등학교 경상남도교육청 창원기계공업고등학교 경상남도교육청 창원기계공업고등학교 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2619,7 +2627,7 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "온두라스 AI 기반 개인 맞춤형 복지 안내 및 상담서비스 PoC 구현 및 확산전략 수립 온두라스 AI 기반 개인 맞춤형 복지 안내 및 상담서비스 PoC 구현 및 확산전략 수립 조달청 대구지방조달청 한국지능정보사회진흥원 한국지능정보사회진흥원 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -2638,13 +2646,13 @@
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
     "grade": "HOLD",
     "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
     "eventOperationKeywords": [],
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "「국제선거참관 프로그램」종료평가 연구용역 「국제선거참관 프로그램」종료평가 연구용역 중앙선거관리위원회 중앙선거관리위원회 중앙선거관리위원회 기타",
-    "priorityVersion": "priority_kr_v1_3"
+    "priorityVersion": "priority_kr_v1_4"
   }
 ]
