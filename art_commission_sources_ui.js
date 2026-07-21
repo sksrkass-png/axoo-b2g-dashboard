@@ -92,7 +92,7 @@
         width: 100%;
         flex-basis: 100%;
         grid-column: 1 / -1;
-        margin-top: 18px;
+        margin: 14px 0 14px;
         background: #f5fbf7;
         border: 1px solid #cfe8d8;
         border-radius: 20px;
@@ -584,24 +584,43 @@
     `;
   }
 
+  function findCriteriaGuide(panel) {
+    const candidates = Array.from(panel.children);
+
+    return candidates.find(element => {
+      const text = element.textContent || "";
+
+      return (
+        text.includes("검토 기준 안내") ||
+        text.includes("검토기준 안내") ||
+        text.includes("건축물 미술작품 공모 공고문과 첨부파일") ||
+        text.includes("지역, 일정, 설치 조건") ||
+        text.includes("제출 방식, 작품 규모")
+      );
+    });
+  }
+
   function renderBoard() {
     const panel = getArtPanel();
 
     if (!panel) return;
 
     const oldStandaloneBoards = panel.querySelectorAll(".nationwide-source-board");
+    const oldInlineBoards = panel.querySelectorAll(".nationwide-source-inline");
 
     oldStandaloneBoards.forEach(board => {
       board.remove();
     });
 
-    const intro = panel.querySelector(".native-tab-intro-wrap");
-    const oldInlineBoard = panel.querySelector(".nationwide-source-inline");
-    const wasOpen = oldInlineBoard ? oldInlineBoard.open : false;
+    let wasOpen = false;
 
-    if (oldInlineBoard) {
-      oldInlineBoard.remove();
-    }
+    oldInlineBoards.forEach(board => {
+      if (board.open) {
+        wasOpen = true;
+      }
+
+      board.remove();
+    });
 
     const wrapper = document.createElement("div");
     wrapper.innerHTML = createBoardHtml(getEnabledTargets(), wasOpen);
@@ -610,8 +629,17 @@
 
     if (!board) return;
 
+    const criteriaGuide = findCriteriaGuide(panel);
+
+    if (criteriaGuide) {
+      panel.insertBefore(board, criteriaGuide);
+      return;
+    }
+
+    const intro = panel.querySelector(".native-tab-intro-wrap");
+
     if (intro) {
-      intro.appendChild(board);
+      intro.insertAdjacentElement("afterend", board);
       return;
     }
 
