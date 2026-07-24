@@ -38,8 +38,8 @@
     "note": "경기도 건축물 미술작품 전용 페이지. 기존 경기 소스 고도화 대상.",
     "recommendedAction": "고정 게시판 구조를 확인한 뒤 크롤러 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "sh_notice",
@@ -80,8 +80,8 @@
     "note": "SH 사업지구 건축물 미술작품 공모 감시 소스.",
     "recommendedAction": "키워드 검색 URL 구조를 확인한 뒤 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "seoul_city_notice",
@@ -121,8 +121,8 @@
     "note": "서울 지역 공고 검색 보조 소스. SH 등 별도 기관 소스와 병행.",
     "recommendedAction": "키워드 검색 URL 구조를 확인한 뒤 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "incheon_city_art_commission",
@@ -163,8 +163,8 @@
     "note": "인천 지역 건축물 미술작품 공모 공고와 결과가 올라오는 전용 게시판.",
     "recommendedAction": "고정 게시판 구조를 확인한 뒤 크롤러 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "busan_city_notice",
@@ -205,8 +205,8 @@
     "note": "부산 지역 건축물 미술작품 제작·설치 공모 확인 대상.",
     "recommendedAction": "키워드 검색 URL 구조를 확인한 뒤 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "busan_dabom_art_commission",
@@ -247,8 +247,8 @@
     "note": "부산 건축물 미술작품 관련 보조 소스. 실제 세부 URL 검증 후 board 모드 전환 예정.",
     "recommendedAction": "키워드 검색 URL 구조를 확인한 뒤 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "artnuri_art_commission",
@@ -289,8 +289,8 @@
     "note": "전국 단위 건축물 미술작품 공모가 검색되는 포털형 소스. 우선 키워드 검색 방식으로 반영.",
     "recommendedAction": "키워드 검색 URL 구조를 확인한 뒤 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "lh_notice",
@@ -331,8 +331,8 @@
     "note": "LH 전국 사업지구 건축물 미술작품 공모 감시 소스.",
     "recommendedAction": "키워드 검색 URL 구조를 확인한 뒤 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "daejeon_city_notice",
@@ -373,8 +373,8 @@
     "note": "대전 지역 실제 건축물 미술작품 제작·설치 공모 사례가 확인된 소스.",
     "recommendedAction": "키워드 검색 URL 구조를 확인한 뒤 우선 적용",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "gangwon_development_corporation",
@@ -415,8 +415,8 @@
     "note": "강원 개발공사 사업지구 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "gyeongnam_development_corporation",
@@ -457,8 +457,8 @@
     "note": "경남 개발사업 관련 건축물 미술작품 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "gyeongnam_culture_portal",
@@ -499,8 +499,8 @@
     "note": "경남 지역 건축물 미술작품 관련 게시 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "gyeongbuk_notice",
@@ -540,8 +540,8 @@
     "note": "경북 지역 공모 후보 소스.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "gyeongbuk_development_corporation",
@@ -582,8 +582,8 @@
     "note": "경북 개발사업 관련 건축물 미술작품 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "daegu_city_notice",
@@ -624,8 +624,8 @@
     "note": "대구 지역 건축물 미술작품 공모 키워드 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "daegu_urban_development",
@@ -666,8 +666,8 @@
     "note": "대구 도시개발 사업지구 관련 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "busan_urban_corporation",
@@ -708,8 +708,8 @@
     "note": "부산 지역 개발공사 사업지구 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "ulsan_city_notice",
@@ -749,8 +749,8 @@
     "note": "울산 지역 건축물 미술작품 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "ulsan_urban_corporation",
@@ -791,8 +791,8 @@
     "note": "울산 도시공사 사업지구 관련 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "chungnam_development_corporation",
@@ -833,8 +833,8 @@
     "note": "충남 개발사업 관련 건축물 미술작품 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "chungnam_notice",
@@ -874,8 +874,8 @@
     "note": "충남 지역 공모 후보 소스.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "chungbuk_development_corporation",
@@ -916,8 +916,8 @@
     "note": "충북 개발사업 관련 건축물 미술작품 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "chungbuk_notice",
@@ -958,8 +958,8 @@
     "note": "충북 지역 심의·공고 관련 게시 감시. 공모 직접 게시 여부는 추가 검증.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "jeonnam_development_corporation",
@@ -1000,8 +1000,8 @@
     "note": "전남 개발사업 관련 건축물 미술작품 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "jeonnam_notice",
@@ -1042,8 +1042,8 @@
     "note": "전남 지역 공모 후보 소스.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "jeonbuk_development_corporation",
@@ -1084,8 +1084,8 @@
     "note": "전북 개발사업 관련 건축물 미술작품 공모 감시.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "jeonbuk_notice",
@@ -1125,8 +1125,8 @@
     "note": "전북 지역 심의·공모 후보 소스.",
     "recommendedAction": "1차 소스 안정화 후 확장 반영",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "gangwon_notice",
@@ -1167,8 +1167,8 @@
     "note": "강원 지역 공모 후보 소스. 초기에는 키워드 감시로 운영.",
     "recommendedAction": "공고 노출 빈도와 URL 구조를 먼저 검증",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "jeju_development_corporation",
@@ -1209,8 +1209,8 @@
     "note": "제주 개발공사 관련 건축물 미술작품 공모 감시.",
     "recommendedAction": "공고 노출 빈도와 URL 구조를 먼저 검증",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "jeju_notice",
@@ -1251,8 +1251,8 @@
     "note": "제주 지역 건축물 미술작품 공모 후보 소스.",
     "recommendedAction": "공고 노출 빈도와 URL 구조를 먼저 검증",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "sejong_city_notice",
@@ -1292,8 +1292,8 @@
     "note": "세종 지역 공모 후보 소스.",
     "recommendedAction": "공고 노출 빈도와 URL 구조를 먼저 검증",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   },
   {
     "id": "gwangju_city_notice",
@@ -1333,7 +1333,7 @@
     "note": "광주 지역 건축물 미술작품 공모 후보 소스.",
     "recommendedAction": "공고 노출 빈도와 URL 구조를 먼저 검증",
     "status": "source_registered",
-    "createdAt": "2026-07-23",
-    "updatedAt": "2026-07-23"
+    "createdAt": "2026-07-24",
+    "updatedAt": "2026-07-24"
   }
 ]
