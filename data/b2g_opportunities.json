@@ -53,7 +53,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 192000000,
-    "daysLeft": 5,
+    "daysLeft": 4,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
@@ -62,7 +62,7 @@
       "문화/관광/디자인 관련 기관",
       "단순 행사/운영성 키워드 중심"
     ],
-    "fitReason": "확장 검토 키워드 축제 중심. 계약 방식은 추가 확인 필요. 예산 192,000,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 5일 남음. 최종 등급 B.",
+    "fitReason": "확장 검토 키워드 축제 중심. 계약 방식은 추가 확인 필요. 예산 192,000,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 4일 남음. 최종 등급 B.",
     "recommendedAction": "조건 확인 후 저장/모니터링",
     "scoringVersion": "axoo_bid_fit_v3"
   },
@@ -116,7 +116,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 114168800,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
@@ -183,14 +183,14 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 948200000,
-    "daysLeft": 16,
+    "daysLeft": 15,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "대형 사업",
       "마감까지 10일 이상",
       "단순 행사/운영성 키워드 중심"
     ],
-    "fitReason": "확장 검토 키워드 콘텐츠 · 영상 중심. 계약 방식은 추가 확인 필요. 예산 948,200,000원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 16일 남음. 최종 등급 C.",
+    "fitReason": "확장 검토 키워드 콘텐츠 · 영상 중심. 계약 방식은 추가 확인 필요. 예산 948,200,000원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 15일 남음. 최종 등급 C.",
     "recommendedAction": "낮은 우선순위로 참고 보관",
     "scoringVersion": "axoo_bid_fit_v3"
   },
@@ -248,7 +248,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 300000000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "대형 사업",
@@ -314,7 +314,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 300000000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "대형 사업",
