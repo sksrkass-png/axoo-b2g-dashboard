@@ -1,6 +1,6 @@
 [
   {
-    "id": "arts-content-support-2026-07-26-4",
+    "id": "arts-content-support-2026-07-27-4",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "source": "예술경영지원센터",
@@ -20,11 +20,11 @@
     "axooFitScore": 55,
     "axooFitReason": "전시, 공공미술, 공간 콘텐츠 프로젝트와 연결 가능성이 높습니다.",
     "recommendedAction": "사업 목적과 AXOO 적용 가능성을 추가 확인하세요.",
-    "collectedAt": "2026-07-26",
-    "updatedAt": "2026-07-26"
+    "collectedAt": "2026-07-27",
+    "updatedAt": "2026-07-27"
   },
   {
-    "id": "arts-content-support-2026-07-26-2",
+    "id": "arts-content-support-2026-07-27-2",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "source": "KOCCA",
@@ -44,11 +44,11 @@
     "axooFitScore": 50,
     "axooFitReason": "콘텐츠 제작, IP 확장, 미디어 기반 프로젝트와 연결 가능성이 있습니다.",
     "recommendedAction": "사업 목적과 AXOO 적용 가능성을 추가 확인하세요.",
-    "collectedAt": "2026-07-26",
-    "updatedAt": "2026-07-26"
+    "collectedAt": "2026-07-27",
+    "updatedAt": "2026-07-27"
   },
   {
-    "id": "arts-content-support-2026-07-26-1",
+    "id": "arts-content-support-2026-07-27-1",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "source": "문화포털",
@@ -68,11 +68,11 @@
     "axooFitScore": 50,
     "axooFitReason": "콘텐츠 제작, IP 확장, 미디어 기반 프로젝트와 연결 가능성이 있습니다.",
     "recommendedAction": "사업 목적과 AXOO 적용 가능성을 추가 확인하세요.",
-    "collectedAt": "2026-07-26",
-    "updatedAt": "2026-07-26"
+    "collectedAt": "2026-07-27",
+    "updatedAt": "2026-07-27"
   },
   {
-    "id": "arts-content-support-2026-07-26-3",
+    "id": "arts-content-support-2026-07-27-3",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "source": "ARKO",
@@ -92,8 +92,32 @@
     "axooFitScore": 50,
     "axooFitReason": "전시, 공공미술, 공간 콘텐츠 프로젝트와 연결 가능성이 높습니다.",
     "recommendedAction": "사업 목적과 AXOO 적용 가능성을 추가 확인하세요.",
-    "collectedAt": "2026-07-26",
-    "updatedAt": "2026-07-26"
+    "collectedAt": "2026-07-27",
+    "updatedAt": "2026-07-27"
+  },
+  {
+    "sourceType": "나라장터",
+    "title": "AI 영상분석장치 구축 용역 수의시담 공고",
+    "agency": "대전교통공사",
+    "amount": 99778040,
+    "deadline": "2026-07-13",
+    "publishedDate": "",
+    "sourceUrl": "",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01627186&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
+    "matchedPriorityKeywords": [],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "3대 우선 카테고리와 AXOO 서브 핏에 해당하지 않는 일반 공고",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
+    "eventOperationKeywords": [],
+    "lowFitKeywords": [],
+    "nextAction": "우선순위 제외",
+    "searchText": "AI 영상분석장치 구축 용역 수의시담 공고 AI 영상분석장치 구축 용역 수의시담 공고 대전교통공사 대전교통공사 대전교통공사 기타",
+    "priorityVersion": "priority_kr_v1_4"
   },
   {
     "sourceType": "나라장터",
@@ -463,34 +487,6 @@
   },
   {
     "sourceType": "나라장터",
-    "title": "2026년 비관리 연안해역 특별순찰대 운영 용역",
-    "agency": "경상북도 경주시",
-    "amount": 68700000,
-    "deadline": "2026-07-16",
-    "publishedDate": "",
-    "sourceUrl": "",
-    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628507&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-    "priorityCategory": "excluded_event",
-    "priorityCategoryLabel": "우선순위 제외",
-    "priorityRank": 99,
-    "matchedPriorityKeywords": [
-      "운영 용역"
-    ],
-    "isPriority": false,
-    "isExcludedFromPriority": true,
-    "exclusionReason": "행사 운영대행성 공고로 우선순위에서 제외",
-    "grade": "HOLD",
-    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
-    "eventOperationKeywords": [
-      "운영 용역"
-    ],
-    "lowFitKeywords": [],
-    "nextAction": "우선순위 제외",
-    "searchText": "2026년 비관리 연안해역 특별순찰대 운영 용역 2026년 비관리 연안해역 특별순찰대 운영 용역 경상북도 경주시 경상북도 경주시 경상북도 경주시 기타",
-    "priorityVersion": "priority_kr_v1_4"
-  },
-  {
-    "sourceType": "나라장터",
     "title": "장기재직자 및 퇴직예정자 해외 역사·문화 탐방 연수",
     "agency": "한경국립대학교",
     "amount": 63000000,
@@ -511,58 +507,6 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "장기재직자 및 퇴직예정자 해외 역사·문화 탐방 연수 장기재직자 및 퇴직예정자 해외 역사·문화 탐방 연수 한경국립대학교 한경국립대학교 한경국립대학교 기타",
-    "priorityVersion": "priority_kr_v1_4"
-  },
-  {
-    "sourceType": "나라장터",
-    "title": "경주화백컨벤션센터 CRM 서버 및 홈페이지 구축 용역",
-    "agency": "경상북도 경주시",
-    "amount": 50000000,
-    "deadline": "2026-07-16",
-    "publishedDate": "",
-    "sourceUrl": "",
-    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628504&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-    "priorityCategory": "excluded_event",
-    "priorityCategoryLabel": "우선순위 제외",
-    "priorityRank": 99,
-    "matchedPriorityKeywords": [],
-    "isPriority": false,
-    "isExcludedFromPriority": true,
-    "exclusionReason": "3대 우선 카테고리와 AXOO 서브 핏에 해당하지 않는 일반 공고",
-    "grade": "HOLD",
-    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
-    "eventOperationKeywords": [],
-    "lowFitKeywords": [],
-    "nextAction": "우선순위 제외",
-    "searchText": "경주화백컨벤션센터 CRM 서버 및 홈페이지 구축 용역 경주화백컨벤션센터 CRM 서버 및 홈페이지 구축 용역 경상북도 경주시 경상북도 경주시 경상북도 경주시 기타",
-    "priorityVersion": "priority_kr_v1_4"
-  },
-  {
-    "sourceType": "나라장터",
-    "title": "동탄 게이트볼장 조성공사 폐기물처리용역",
-    "agency": "경기도 화성시",
-    "amount": 29641000,
-    "deadline": "2026-07-16",
-    "publishedDate": "",
-    "sourceUrl": "",
-    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628399&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-    "priorityCategory": "excluded_event",
-    "priorityCategoryLabel": "우선순위 제외",
-    "priorityRank": 99,
-    "matchedPriorityKeywords": [
-      "폐기물",
-      "폐기물처리",
-      "처리용역"
-    ],
-    "isPriority": false,
-    "isExcludedFromPriority": true,
-    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
-    "grade": "HOLD",
-    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
-    "eventOperationKeywords": [],
-    "lowFitKeywords": [],
-    "nextAction": "우선순위 제외",
-    "searchText": "동탄 게이트볼장 조성공사 폐기물처리용역 동탄 게이트볼장 조성공사 폐기물처리용역 경기도 화성시 경기도 화성시 경기도 화성시 기타",
     "priorityVersion": "priority_kr_v1_4"
   },
   {
@@ -807,6 +751,36 @@
   },
   {
     "sourceType": "나라장터",
+    "title": "2026년 와동공원 물놀이장 관리 및 운영 용역",
+    "agency": "경기도 안산시",
+    "amount": 42830000,
+    "deadline": "2026-07-20",
+    "publishedDate": "",
+    "sourceUrl": "",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628986&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
+    "matchedPriorityKeywords": [
+      "운영 용역",
+      "물놀이장"
+    ],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "행사 운영대행성 공고로 우선순위에서 제외",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
+    "eventOperationKeywords": [
+      "운영 용역",
+      "물놀이장"
+    ],
+    "lowFitKeywords": [],
+    "nextAction": "우선순위 제외",
+    "searchText": "2026년 와동공원 물놀이장 관리 및 운영 용역 2026년 와동공원 물놀이장 관리 및 운영 용역 경기도 안산시 경기도 안산시 경기도 안산시 기타",
+    "priorityVersion": "priority_kr_v1_4"
+  },
+  {
+    "sourceType": "나라장터",
     "title": "상갈초~보라초 통학로 지중화 도로포장공사 폐기물 처리용역",
     "agency": "경기도 용인시",
     "amount": 35294000,
@@ -859,6 +833,35 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "춘천계성학교 교사동2 외 2동 해체공사 특정폐기물 처리용역 춘천계성학교 교사동2 외 2동 해체공사 특정폐기물 처리용역 강원특별자치도교육청 강원특별자치도춘천교육지원청 강원특별자치도교육청 강원특별자치도춘천교육지원청 강원특별자치도교육청 강원특별자치도춘천교육지원청 기타",
+    "priorityVersion": "priority_kr_v1_4"
+  },
+  {
+    "sourceType": "나라장터",
+    "title": "춘포 오룡선 도로확포장공사(3차분) 건설폐기물 처리용역",
+    "agency": "전북특별자치도 익산시",
+    "amount": 22517000,
+    "deadline": "2026-07-20",
+    "publishedDate": "",
+    "sourceUrl": "",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628982&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
+    "matchedPriorityKeywords": [
+      "폐기물",
+      "폐기물 처리",
+      "건설폐기물",
+      "처리용역"
+    ],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "폐기물·보험·급식·시스템·연구·조사·투자운영·유지관리 등 AXOO 우선 검토 대상이 아닌 일반 용역",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
+    "eventOperationKeywords": [],
+    "lowFitKeywords": [],
+    "nextAction": "우선순위 제외",
+    "searchText": "춘포 오룡선 도로확포장공사(3차분) 건설폐기물 처리용역 춘포 오룡선 도로확포장공사(3차분) 건설폐기물 처리용역 전북특별자치도 익산시 전북특별자치도 익산시 전북특별자치도 익산시 기타",
     "priorityVersion": "priority_kr_v1_4"
   },
   {
@@ -1149,30 +1152,6 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "부산항 진해신항 남측 방파호안(1단계 2공구) 축조공사 건설폐기물(폐오탁방지막) 처리용역 부산항 진해신항 남측 방파호안(1단계 2공구) 축조공사 건설폐기물(폐오탁방지막) 처리용역 해양수산부 부산지방해양수산청 부산항건설사무소 해양수산부 부산지방해양수산청 부산항건설사무소 해양수산부 부산지방해양수산청 부산항건설사무소 기타",
-    "priorityVersion": "priority_kr_v1_4"
-  },
-  {
-    "sourceType": "나라장터",
-    "title": "2026년 해외 초·중등학교 한국어 교재 인쇄",
-    "agency": "재단법인 국제한국어교육재단",
-    "amount": 1550000000,
-    "deadline": "2026-07-23",
-    "publishedDate": "",
-    "sourceUrl": "",
-    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01626091&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-    "priorityCategory": "excluded_event",
-    "priorityCategoryLabel": "우선순위 제외",
-    "priorityRank": 99,
-    "matchedPriorityKeywords": [],
-    "isPriority": false,
-    "isExcludedFromPriority": true,
-    "exclusionReason": "3대 우선 카테고리와 AXOO 서브 핏에 해당하지 않는 일반 공고",
-    "grade": "HOLD",
-    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
-    "eventOperationKeywords": [],
-    "lowFitKeywords": [],
-    "nextAction": "우선순위 제외",
-    "searchText": "2026년 해외 초·중등학교 한국어 교재 인쇄 2026년 해외 초·중등학교 한국어 교재 인쇄 재단법인 국제한국어교육재단 재단법인 국제한국어교육재단 재단법인 국제한국어교육재단 기타",
     "priorityVersion": "priority_kr_v1_4"
   },
   {
@@ -1669,6 +1648,30 @@
   },
   {
     "sourceType": "나라장터",
+    "title": "메타버스 어린이병원 통합 환자안전 교육 플랫폼 개발",
+    "agency": "경북대학교 산학협력단",
+    "amount": 60000000,
+    "deadline": "2026-07-24",
+    "publishedDate": "",
+    "sourceUrl": "",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628954&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
+    "matchedPriorityKeywords": [],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "3대 우선 카테고리와 AXOO 서브 핏에 해당하지 않는 일반 공고",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
+    "eventOperationKeywords": [],
+    "lowFitKeywords": [],
+    "nextAction": "우선순위 제외",
+    "searchText": "메타버스 어린이병원 통합 환자안전 교육 플랫폼 개발 메타버스 어린이병원 통합 환자안전 교육 플랫폼 개발 경북대학교 산학협력단 경북대학교 산학협력단 경북대학교 산학협력단 기타",
+    "priorityVersion": "priority_kr_v1_4"
+  },
+  {
+    "sourceType": "나라장터",
     "title": "광주자동화설비마이스터고등학교 2026학년도 2학년 대면 국제교류 위탁용역(변경공고)",
     "agency": "전남광주통합특별시교육청 광주자동화설비마이스터고등학교",
     "amount": 59980170,
@@ -1921,36 +1924,6 @@
   },
   {
     "sourceType": "나라장터",
-    "title": "2026 온동네 돌봄·교육센터(온봄학교 돌봄교실) 위탁 운영 용역",
-    "agency": "경기도교육청 경기도동두천양주교육지원청",
-    "amount": 42000000,
-    "deadline": "2026-07-24",
-    "publishedDate": "",
-    "sourceUrl": "",
-    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628452&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-    "priorityCategory": "excluded_event",
-    "priorityCategoryLabel": "우선순위 제외",
-    "priorityRank": 99,
-    "matchedPriorityKeywords": [
-      "운영 용역",
-      "위탁 운영"
-    ],
-    "isPriority": false,
-    "isExcludedFromPriority": true,
-    "exclusionReason": "행사 운영대행성 공고로 우선순위에서 제외",
-    "grade": "HOLD",
-    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
-    "eventOperationKeywords": [
-      "운영 용역",
-      "위탁 운영"
-    ],
-    "lowFitKeywords": [],
-    "nextAction": "우선순위 제외",
-    "searchText": "2026 온동네 돌봄·교육센터(온봄학교 돌봄교실) 위탁 운영 용역 2026 온동네 돌봄·교육센터(온봄학교 돌봄교실) 위탁 운영 용역 경기도교육청 경기도동두천양주교육지원청 경기도교육청 경기도동두천양주교육지원청 경기도교육청 경기도동두천양주교육지원청 기타",
-    "priorityVersion": "priority_kr_v1_4"
-  },
-  {
-    "sourceType": "나라장터",
     "title": "2026 한국잡월드 온잡(ONJOB) 프로그램 운영 대행 사업",
     "agency": "한국잡월드",
     "amount": 40000000,
@@ -2107,7 +2080,7 @@
     "deadline": "2026-07-27",
     "publishedDate": "",
     "sourceUrl": "",
-    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628453&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628453&bidPbancOrd=001&fileType=&fileSeq=1&prcmBsneSeCd=03",
     "priorityCategory": "excluded_event",
     "priorityCategoryLabel": "우선순위 제외",
     "priorityRank": 99,
@@ -2364,6 +2337,36 @@
   },
   {
     "sourceType": "나라장터",
+    "title": "[긴급] KB스타즈 농구단 경기 운영.홍보 및 마케팅 부문 운영대행",
+    "agency": "한국여자농구연맹",
+    "amount": 166000000,
+    "deadline": "2026-07-31",
+    "publishedDate": "",
+    "sourceUrl": "",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628966&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
+    "matchedPriorityKeywords": [
+      "행사 운영",
+      "운영대행"
+    ],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "행사 운영대행성 공고로 우선순위에서 제외",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
+    "eventOperationKeywords": [
+      "행사 운영",
+      "운영대행"
+    ],
+    "lowFitKeywords": [],
+    "nextAction": "우선순위 제외",
+    "searchText": "[긴급] KB스타즈 농구단 경기 운영.홍보 및 마케팅 부문 운영대행 [긴급] KB스타즈 농구단 경기 운영.홍보 및 마케팅 부문 운영대행 한국여자농구연맹 한국여자농구연맹 한국여자농구연맹 문화행사 운영대행",
+    "priorityVersion": "priority_kr_v1_4"
+  },
+  {
+    "sourceType": "나라장터",
     "title": "2026년 서천교육지원청영재교육원 국외문화체험학습 위탁 용역",
     "agency": "충청남도교육청 충청남도서천교육지원청",
     "amount": 104638000,
@@ -2416,6 +2419,34 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "2026 블록체인 진흥주간 운영 용역 2026 블록체인 진흥주간 운영 용역 조달청 한국인터넷진흥원 한국인터넷진흥원 기타",
+    "priorityVersion": "priority_kr_v1_4"
+  },
+  {
+    "sourceType": "나라장터",
+    "title": "2026 경남콘텐츠페어 운영 용역",
+    "agency": "재단법인경남문화예술진흥원",
+    "amount": 550000000,
+    "deadline": "2026-08-07",
+    "publishedDate": "",
+    "sourceUrl": "",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01628823&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
+    "matchedPriorityKeywords": [
+      "운영 용역"
+    ],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "행사 운영대행성 공고로 우선순위에서 제외",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
+    "eventOperationKeywords": [
+      "운영 용역"
+    ],
+    "lowFitKeywords": [],
+    "nextAction": "우선순위 제외",
+    "searchText": "2026 경남콘텐츠페어 운영 용역 2026 경남콘텐츠페어 운영 용역 재단법인경남문화예술진흥원 재단법인경남문화예술진흥원 재단법인경남문화예술진흥원 기타",
     "priorityVersion": "priority_kr_v1_4"
   },
   {
