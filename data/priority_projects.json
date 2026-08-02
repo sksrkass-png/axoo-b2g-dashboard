@@ -1,6 +1,6 @@
 [
   {
-    "id": "arts-content-support-2026-08-01-4",
+    "id": "arts-content-support-2026-08-02-4",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "source": "예술경영지원센터",
@@ -20,11 +20,11 @@
     "axooFitScore": 55,
     "axooFitReason": "전시, 공공미술, 공간 콘텐츠 프로젝트와 연결 가능성이 높습니다.",
     "recommendedAction": "사업 목적과 AXOO 적용 가능성을 추가 확인하세요.",
-    "collectedAt": "2026-08-01",
-    "updatedAt": "2026-08-01"
+    "collectedAt": "2026-08-02",
+    "updatedAt": "2026-08-02"
   },
   {
-    "id": "arts-content-support-2026-08-01-2",
+    "id": "arts-content-support-2026-08-02-2",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "source": "KOCCA",
@@ -44,11 +44,11 @@
     "axooFitScore": 50,
     "axooFitReason": "콘텐츠 제작, IP 확장, 미디어 기반 프로젝트와 연결 가능성이 있습니다.",
     "recommendedAction": "사업 목적과 AXOO 적용 가능성을 추가 확인하세요.",
-    "collectedAt": "2026-08-01",
-    "updatedAt": "2026-08-01"
+    "collectedAt": "2026-08-02",
+    "updatedAt": "2026-08-02"
   },
   {
-    "id": "arts-content-support-2026-08-01-1",
+    "id": "arts-content-support-2026-08-02-1",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "source": "문화포털",
@@ -68,11 +68,11 @@
     "axooFitScore": 50,
     "axooFitReason": "콘텐츠 제작, IP 확장, 미디어 기반 프로젝트와 연결 가능성이 있습니다.",
     "recommendedAction": "사업 목적과 AXOO 적용 가능성을 추가 확인하세요.",
-    "collectedAt": "2026-08-01",
-    "updatedAt": "2026-08-01"
+    "collectedAt": "2026-08-02",
+    "updatedAt": "2026-08-02"
   },
   {
-    "id": "arts-content-support-2026-08-01-3",
+    "id": "arts-content-support-2026-08-02-3",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "source": "ARKO",
@@ -92,8 +92,8 @@
     "axooFitScore": 50,
     "axooFitReason": "전시, 공공미술, 공간 콘텐츠 프로젝트와 연결 가능성이 높습니다.",
     "recommendedAction": "사업 목적과 AXOO 적용 가능성을 추가 확인하세요.",
-    "collectedAt": "2026-08-01",
-    "updatedAt": "2026-08-01"
+    "collectedAt": "2026-08-02",
+    "updatedAt": "2026-08-02"
   },
   {
     "sourceType": "나라장터",
@@ -1109,34 +1109,6 @@
   },
   {
     "sourceType": "나라장터",
-    "title": "[한남대학교 산학협력단] 2026-06-01호 창업중심대학 지원사업 글로벌 진출형 창업 역량 강화 프로그램 운영 용역",
-    "agency": "한남대학교 산학협력단",
-    "amount": 99000000,
-    "deadline": "2026-07-29",
-    "publishedDate": "",
-    "sourceUrl": "",
-    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01623230&bidPbancOrd=001&fileType=&fileSeq=1&prcmBsneSeCd=03",
-    "priorityCategory": "excluded_event",
-    "priorityCategoryLabel": "우선순위 제외",
-    "priorityRank": 99,
-    "matchedPriorityKeywords": [
-      "운영 용역"
-    ],
-    "isPriority": false,
-    "isExcludedFromPriority": true,
-    "exclusionReason": "행사 운영대행성 공고로 우선순위에서 제외",
-    "grade": "HOLD",
-    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
-    "eventOperationKeywords": [
-      "운영 용역"
-    ],
-    "lowFitKeywords": [],
-    "nextAction": "우선순위 제외",
-    "searchText": "[한남대학교 산학협력단] 2026-06-01호 창업중심대학 지원사업 글로벌 진출형 창업 역량 강화 프로그램 운영 용역 [한남대학교 산학협력단] 2026-06-01호 창업중심대학 지원사업 글로벌 진출형 창업 역량 강화 프로그램 운영 용역 한남대학교 산학협력단 한남대학교 산학협력단 한남대학교 산학협력단 기타",
-    "priorityVersion": "priority_kr_v1_4"
-  },
-  {
-    "sourceType": "나라장터",
     "title": "AC DC Hybrid 배전망 테스트베드 구축을 위한 사용전검사 대응방안 도출",
     "agency": "한국전기연구원",
     "amount": 40000000,
@@ -1235,6 +1207,34 @@
     "lowFitKeywords": [],
     "nextAction": "우선순위 제외",
     "searchText": "암모니아 벙커링 실증 연계 훈련 시뮬레이터 암모니아 벙커링 실증 연계 훈련 시뮬레이터 (재)한국조선해양기자재연구원 (재)한국조선해양기자재연구원 (재)한국조선해양기자재연구원 기타",
+    "priorityVersion": "priority_kr_v1_4"
+  },
+  {
+    "sourceType": "나라장터",
+    "title": "안동국제탈춤페스티벌 2026 탈춤식당 운영 용역 입찰공고[긴급]",
+    "agency": "(재)한국정신문화재단",
+    "amount": 449922000,
+    "deadline": "2026-07-31",
+    "publishedDate": "",
+    "sourceUrl": "",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01638807&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "priorityCategory": "excluded_event",
+    "priorityCategoryLabel": "우선순위 제외",
+    "priorityRank": 99,
+    "matchedPriorityKeywords": [
+      "운영 용역"
+    ],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "행사 운영대행성 공고로 우선순위에서 제외",
+    "grade": "HOLD",
+    "gradeReason": "AXOO 우선 검토 대상이 아니거나 행사 운영대행·관리운영·일반 용역으로 분류되어 제외했습니다.",
+    "eventOperationKeywords": [
+      "운영 용역"
+    ],
+    "lowFitKeywords": [],
+    "nextAction": "우선순위 제외",
+    "searchText": "안동국제탈춤페스티벌 2026 탈춤식당 운영 용역 입찰공고[긴급] 안동국제탈춤페스티벌 2026 탈춤식당 운영 용역 입찰공고[긴급] (재)한국정신문화재단 (재)한국정신문화재단 (재)한국정신문화재단 기타",
     "priorityVersion": "priority_kr_v1_4"
   },
   {

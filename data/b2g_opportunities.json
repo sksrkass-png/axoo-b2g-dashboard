@@ -54,7 +54,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 75120000,
-    "daysLeft": 1,
+    "daysLeft": 0,
     "scoreReasons": [
       "AXOO 직접 핏 키워드 포함",
       "예산 규모 적합",
@@ -117,7 +117,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 70000000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "scoreReasons": [
       "일반 관련 키워드 포함",
       "예산 규모 적합",
@@ -178,7 +178,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 97000000,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
