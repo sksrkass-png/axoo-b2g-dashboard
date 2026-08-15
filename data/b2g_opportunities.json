@@ -49,14 +49,14 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 250000000,
-    "daysLeft": 6,
+    "daysLeft": 5,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "대형 사업",
       "검토 가능 기간 존재",
       "문화/관광/디자인 관련 기관"
     ],
-    "fitReason": "확장 검토 키워드 도시재생 중심. 계약 방식은 추가 확인 필요. 예산 250,000,000원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 6일 남음. 최종 등급 C.",
+    "fitReason": "확장 검토 키워드 도시재생 중심. 계약 방식은 추가 확인 필요. 예산 250,000,000원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 5일 남음. 최종 등급 C.",
     "recommendedAction": "낮은 우선순위로 참고 보관",
     "scoringVersion": "axoo_bid_fit_v3"
   },
@@ -112,14 +112,14 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 600000000,
-    "daysLeft": 6,
+    "daysLeft": 5,
     "scoreReasons": [
       "일반 관련 키워드 포함",
       "대형 사업",
       "서울/수도권 기관",
       "검토 가능 기간 존재"
     ],
-    "fitReason": "일반 관련 키워드 전시 확인. 계약 방식은 추가 확인 필요. 예산 600,000,000원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 6일 남음. 최종 등급 C.",
+    "fitReason": "일반 관련 키워드 전시 확인. 계약 방식은 추가 확인 필요. 예산 600,000,000원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 5일 남음. 최종 등급 C.",
     "recommendedAction": "낮은 우선순위로 참고 보관",
     "scoringVersion": "axoo_bid_fit_v3"
   },
@@ -181,7 +181,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 250000000,
-    "daysLeft": -4,
+    "daysLeft": -5,
     "scoreReasons": [
       "AXOO 직접 핏 키워드 포함",
       "대형 사업",
@@ -243,7 +243,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 681760000,
-    "daysLeft": 5,
+    "daysLeft": 4,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "대형 사업",
@@ -251,7 +251,7 @@
       "문화/관광/디자인 관련 기관",
       "단순 행사/운영성 키워드 중심"
     ],
-    "fitReason": "확장 검토 키워드 프로그램 운영 중심. 계약 방식은 추가 확인 필요. 예산 681,760,000원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 5일 남음. 최종 등급 C.",
+    "fitReason": "확장 검토 키워드 프로그램 운영 중심. 계약 방식은 추가 확인 필요. 예산 681,760,000원 기준 대형. 공고기관/수요기관 확인 가능. 마감까지 4일 남음. 최종 등급 C.",
     "recommendedAction": "낮은 우선순위로 참고 보관",
     "scoringVersion": "axoo_bid_fit_v3"
   }
