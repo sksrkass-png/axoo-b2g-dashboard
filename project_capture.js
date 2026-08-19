@@ -1,23 +1,53 @@
 (function () {
   "use strict";
 
-  const PRIORITY_URL = "data/priority_projects.json";
-  const ART_URL = "data/art_commissions.json";
+  const PRIORITY_URL =
+    "data/priority_projects.json";
+
+  const ART_URL =
+    "data/art_commissions.json";
 
   const APP_URL =
     "https://script.google.com/a/macros/axoocorp.com/s/AKfycbzLS5AW0DfLGIDersBlbL4IDEIhHqElPaaePi45bG5nrT6V_8FKwSjwta3lUS3VocW3/exec";
 
+  const STORAGE_KEY =
+    "axoo_b2g_registered_projects_v1";
+
   let priorityProjects = [];
   let artProjects = [];
 
+
+  /* ======================================================
+     BASIC
+  ====================================================== */
+
   function normalizeArray(data) {
     if (Array.isArray(data)) return data;
-    if (data && Array.isArray(data.projects)) return data.projects;
-    if (data && Array.isArray(data.items)) return data.items;
-    if (data && Array.isArray(data.data)) return data.data;
+
+    if (
+      data &&
+      Array.isArray(data.projects)
+    ) {
+      return data.projects;
+    }
+
+    if (
+      data &&
+      Array.isArray(data.items)
+    ) {
+      return data.items;
+    }
+
+    if (
+      data &&
+      Array.isArray(data.data)
+    ) {
+      return data.data;
+    }
 
     return [];
   }
+
 
   function normalizeText(value) {
     return String(value || "")
@@ -25,12 +55,15 @@
       .trim();
   }
 
-  function normalizeDate(value) {
-    const text = String(value || "").trim();
 
-    const match = text.match(
-      /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
-    );
+  function normalizeDate(value) {
+    const text =
+      String(value || "").trim();
+
+    const match =
+      text.match(
+        /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
+      );
 
     if (!match) {
       return "";
@@ -38,10 +71,21 @@
 
     return [
       match[1],
-      String(match[2]).padStart(2, "0"),
-      String(match[3]).padStart(2, "0")
+      String(match[2]).padStart(
+        2,
+        "0"
+      ),
+      String(match[3]).padStart(
+        2,
+        "0"
+      )
     ].join("-");
   }
+
+
+  /* ======================================================
+     PROJECT DATA
+  ====================================================== */
 
   function getTitle(project) {
     return (
@@ -51,6 +95,7 @@
       ""
     );
   }
+
 
   function getAgency(project) {
     return (
@@ -64,6 +109,7 @@
     );
   }
 
+
   function getDeadline(project) {
     return normalizeDate(
       project.deadline ||
@@ -76,6 +122,7 @@
     );
   }
 
+
   function getSourceUrl(project) {
     const values = [
       project.sourceUrl,
@@ -85,19 +132,32 @@
       project.documentUrl
     ];
 
-    const found = values.find(function (value) {
-      const url = String(value || "").trim();
+    const found =
+      values.find(
+        function (value) {
+          const url =
+            String(value || "")
+              .trim();
 
-      return (
-        url.startsWith("https://") ||
-        url.startsWith("http://")
+          return (
+            url.startsWith(
+              "https://"
+            ) ||
+            url.startsWith(
+              "http://"
+            )
+          );
+        }
       );
-    });
 
     return found || "";
   }
 
-  function getResearchId(project, type) {
+
+  function getResearchId(
+    project,
+    type
+  ) {
     const id =
       project.id ||
       project.bidNtceNo ||
@@ -111,28 +171,33 @@
 
     return [
       type,
-      normalizeText(getTitle(project)),
+      normalizeText(
+        getTitle(project)
+      ),
       getDeadline(project)
     ].join("::");
   }
 
+
   function getGrade(project) {
-    const grade = String(
-      project.grade || ""
-    )
-      .toUpperCase()
-      .trim();
+    const grade =
+      String(
+        project.grade || ""
+      )
+        .toUpperCase()
+        .trim();
 
     if (grade) {
       return grade;
     }
 
-    const score = Number(
-      project.axooFitScore ||
-      project.score ||
-      project.priorityScore ||
-      0
-    );
+    const score =
+      Number(
+        project.axooFitScore ||
+        project.score ||
+        project.priorityScore ||
+        0
+      );
 
     if (score >= 85) return "S";
     if (score >= 70) return "A";
@@ -141,12 +206,17 @@
     return "";
   }
 
-  function getPriority(project, type) {
+
+  function getPriority(
+    project,
+    type
+  ) {
     if (type === "art") {
       return "NORMAL";
     }
 
-    const grade = getGrade(project);
+    const grade =
+      getGrade(project);
 
     if (
       grade === "S" ||
@@ -162,7 +232,11 @@
     return "NORMAL";
   }
 
-  function getNextAction(project, type) {
+
+  function getNextAction(
+    project,
+    type
+  ) {
     if (type === "art") {
       return (
         project.recommendedAction ||
@@ -177,11 +251,126 @@
     );
   }
 
+
+  /* ======================================================
+     LOCAL REGISTERED STATE
+  ====================================================== */
+
+  function getRegisteredMap() {
+    try {
+      const raw =
+        localStorage.getItem(
+          STORAGE_KEY
+        );
+
+      if (!raw) {
+        return {};
+      }
+
+      const parsed =
+        JSON.parse(raw);
+
+      if (
+        !parsed ||
+        typeof parsed !==
+          "object"
+      ) {
+        return {};
+      }
+
+      return parsed;
+
+    } catch (error) {
+      console.warn(
+        "[AXOO Capture] storage read failed",
+        error
+      );
+
+      return {};
+    }
+  }
+
+
+  function saveRegisteredMap(map) {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(map)
+      );
+    } catch (error) {
+      console.warn(
+        "[AXOO Capture] storage write failed",
+        error
+      );
+    }
+  }
+
+
+  function markRegistered(
+    researchId,
+    data
+  ) {
+    if (!researchId) {
+      return;
+    }
+
+    const map =
+      getRegisteredMap();
+
+    map[researchId] = {
+      registered:
+        true,
+
+      projectId:
+        data &&
+        data.projectId
+          ? data.projectId
+          : "",
+
+      status:
+        data &&
+        data.status
+          ? data.status
+          : "REVIEW",
+
+      updatedAt:
+        new Date()
+          .toISOString()
+    };
+
+    saveRegisteredMap(map);
+
+    decorateAllCards();
+  }
+
+
+  function isRegistered(
+    researchId
+  ) {
+    const map =
+      getRegisteredMap();
+
+    return Boolean(
+      map[
+        researchId
+      ] &&
+      map[
+        researchId
+      ].registered
+    );
+  }
+
+
+  /* ======================================================
+     JSON LOAD
+  ====================================================== */
+
   async function loadJson(url) {
     try {
-      const response = await fetch(
-        `${url}?v=${Date.now()}`
-      );
+      const response =
+        await fetch(
+          `${url}?v=${Date.now()}`
+        );
 
       if (!response.ok) {
         throw new Error(
@@ -192,6 +381,7 @@
       return normalizeArray(
         await response.json()
       );
+
     } catch (error) {
       console.error(
         "[AXOO Capture]",
@@ -202,52 +392,85 @@
     }
   }
 
+
   async function loadData() {
     const [
       priority,
       art
-    ] = await Promise.all([
-      loadJson(PRIORITY_URL),
-      loadJson(ART_URL)
-    ]);
+    ] =
+      await Promise.all([
+        loadJson(
+          PRIORITY_URL
+        ),
+        loadJson(
+          ART_URL
+        )
+      ]);
 
-    priorityProjects = priority;
-    artProjects = art;
+    priorityProjects =
+      priority;
+
+    artProjects =
+      art;
   }
+
+
+  /* ======================================================
+     CARD MATCHING
+  ====================================================== */
 
   function getCardTitle(card) {
     const element =
-      card.querySelector(".accordion-body h2") ||
-      card.querySelector("h2") ||
-      card.querySelector(".summary-title");
+      card.querySelector(
+        ".accordion-body h2"
+      ) ||
+      card.querySelector(
+        "h2"
+      ) ||
+      card.querySelector(
+        ".summary-title"
+      );
 
     return element
-      ? normalizeText(element.textContent)
+      ? normalizeText(
+          element.textContent
+        )
       : "";
   }
 
-  function findByTitle(list, title) {
+
+  function findByTitle(
+    list,
+    title
+  ) {
     if (!title) {
       return null;
     }
 
     return (
-      list.find(function (project) {
-        return (
-          normalizeText(
-            getTitle(project)
-          ) === title
-        );
-      }) ||
+      list.find(
+        function (project) {
+          return (
+            normalizeText(
+              getTitle(project)
+            ) === title
+          );
+        }
+      ) ||
       null
     );
   }
+
 
   function findProject(card) {
     const title =
       getCardTitle(card);
 
-    if (card.closest("#artCards")) {
+    if (
+      card.closest(
+        "#artCards"
+      )
+    ) {
       const project =
         findByTitle(
           artProjects,
@@ -256,8 +479,10 @@
 
       return project
         ? {
-            project,
-            type: "art"
+            project:
+              project,
+            type:
+              "art"
           }
         : null;
     }
@@ -270,11 +495,18 @@
 
     return project
       ? {
-          project,
-          type: "priority"
+          project:
+            project,
+          type:
+            "priority"
         }
       : null;
   }
+
+
+  /* ======================================================
+     ADD URL
+  ====================================================== */
 
   function buildAddUrl(
     project,
@@ -339,6 +571,39 @@
     );
   }
 
+
+  /* ======================================================
+     BUTTON
+  ====================================================== */
+
+  function setButtonState(
+    button,
+    researchId
+  ) {
+    if (
+      isRegistered(
+        researchId
+      )
+    ) {
+      button.classList.add(
+        "registered"
+      );
+
+      button.textContent =
+        "✓ 지원 관리 등록됨";
+
+      return;
+    }
+
+    button.classList.remove(
+      "registered"
+    );
+
+    button.textContent =
+      "⭐ 지원 관리에 추가";
+  }
+
+
   function handleCapture(
     button,
     card
@@ -349,6 +614,30 @@
     if (!capture) {
       alert(
         "공고 데이터를 찾지 못했습니다."
+      );
+
+      return;
+    }
+
+    const researchId =
+      getResearchId(
+        capture.project,
+        capture.type
+      );
+
+    /*
+      이미 등록 표시된 경우에는
+      지원 관리 메인 화면을 연다.
+    */
+    if (
+      isRegistered(
+        researchId
+      )
+    ) {
+      window.open(
+        APP_URL,
+        "_blank",
+        "noopener"
       );
 
       return;
@@ -365,18 +654,73 @@
 
     window.open(
       url,
-      "_blank",
-      "noopener"
+      "_blank"
     );
 
     setTimeout(
       function () {
-        button.textContent =
-          "⭐ 지원 관리에 추가";
+        setButtonState(
+          button,
+          researchId
+        );
       },
       1200
     );
   }
+
+
+  /* ======================================================
+     POST MESSAGE
+  ====================================================== */
+
+  function listenForAppMessages() {
+    window.addEventListener(
+      "message",
+      function (event) {
+        const data =
+          event.data;
+
+        if (
+          !data ||
+          typeof data !==
+            "object"
+        ) {
+          return;
+        }
+
+        if (
+          data.type !==
+          "AXOO_B2G_REGISTERED"
+        ) {
+          return;
+        }
+
+        if (
+          !data.researchId
+        ) {
+          return;
+        }
+
+        markRegistered(
+          data.researchId,
+          {
+            projectId:
+              data.projectId ||
+              "",
+
+            status:
+              data.status ||
+              "REVIEW"
+          }
+        );
+      }
+    );
+  }
+
+
+  /* ======================================================
+     STYLES
+  ====================================================== */
 
   function injectStyles() {
     if (
@@ -388,7 +732,9 @@
     }
 
     const style =
-      document.createElement("style");
+      document.createElement(
+        "style"
+      );
 
     style.id =
       "axooProjectCaptureStyles";
@@ -418,10 +764,25 @@
         font-size: 12px;
         font-weight: 900;
         cursor: pointer;
+        transition:
+          background .15s ease,
+          color .15s ease,
+          border-color .15s ease;
       }
 
       .axoo-capture-button:hover {
         opacity: .82;
+      }
+
+      .axoo-capture-button.registered {
+        border-color: #d6d6d1;
+        background: #f1f1ee;
+        color: #555;
+      }
+
+      .axoo-capture-button.registered:hover {
+        opacity: 1;
+        background: #e9e9e4;
       }
 
       @media (max-width: 640px) {
@@ -443,14 +804,12 @@
     );
   }
 
-  function decorateCard(card) {
-    if (
-      card.dataset.axooCaptureReady ===
-      "true"
-    ) {
-      return;
-    }
 
+  /* ======================================================
+     DECORATE
+  ====================================================== */
+
+  function decorateCard(card) {
     const isPriority =
       card.classList.contains(
         "priority-accordion-card"
@@ -458,7 +817,9 @@
 
     const isArt =
       Boolean(
-        card.closest("#artCards")
+        card.closest(
+          "#artCards"
+        )
       );
 
     if (
@@ -470,10 +831,25 @@
 
     if (
       isArt &&
-      !card.querySelector(".review-box")
+      !card.querySelector(
+        ".review-box"
+      )
     ) {
       return;
     }
+
+    const capture =
+      findProject(card);
+
+    if (!capture) {
+      return;
+    }
+
+    const researchId =
+      getResearchId(
+        capture.project,
+        capture.type
+      );
 
     const body =
       isPriority
@@ -493,55 +869,83 @@
 
     if (!actions) {
       actions =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
       actions.className =
         "axoo-capture-actions";
 
       const link =
-        body.querySelector("a.link");
+        body.querySelector(
+          "a.link"
+        );
 
       if (link) {
-        link.parentNode.insertBefore(
-          actions,
+        link.parentNode
+          .insertBefore(
+            actions,
+            link
+          );
+
+        actions.appendChild(
           link
         );
 
-        actions.appendChild(link);
       } else {
-        body.appendChild(actions);
+        body.appendChild(
+          actions
+        );
       }
     }
 
-    const button =
-      document.createElement("button");
+    let button =
+      actions.querySelector(
+        ".axoo-capture-button"
+      );
 
-    button.type = "button";
-
-    button.className =
-      "axoo-capture-button";
-
-    button.textContent =
-      "⭐ 지원 관리에 추가";
-
-    button.addEventListener(
-      "click",
-      function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        handleCapture(
-          button,
-          card
+    if (!button) {
+      button =
+        document.createElement(
+          "button"
         );
-      }
-    );
 
-    actions.appendChild(button);
+      button.type =
+        "button";
+
+      button.className =
+        "axoo-capture-button";
+
+      button.addEventListener(
+        "click",
+        function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          handleCapture(
+            button,
+            card
+          );
+        }
+      );
+
+      actions.appendChild(
+        button
+      );
+    }
+
+    button.dataset.researchId =
+      researchId;
+
+    setButtonState(
+      button,
+      researchId
+    );
 
     card.dataset.axooCaptureReady =
       "true";
   }
+
 
   function decorateAllCards() {
     document
@@ -561,6 +965,11 @@
       );
   }
 
+
+  /* ======================================================
+     WATCH
+  ====================================================== */
+
   function watchDashboard() {
     const observer =
       new MutationObserver(
@@ -570,8 +979,10 @@
     observer.observe(
       document.body,
       {
-        childList: true,
-        subtree: true
+        childList:
+          true,
+        subtree:
+          true
       }
     );
 
@@ -581,8 +992,15 @@
     );
   }
 
+
+  /* ======================================================
+     INIT
+  ====================================================== */
+
   async function init() {
     injectStyles();
+
+    listenForAppMessages();
 
     await loadData();
 
@@ -590,6 +1008,7 @@
 
     watchDashboard();
   }
+
 
   if (
     document.readyState ===
@@ -602,4 +1021,5 @@
   } else {
     init();
   }
+
 })();
