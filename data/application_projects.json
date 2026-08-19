@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "P26-001",
+    "researchId": "arts-content-support-2026-08-19-4",
+    "title": "2026 예술기업 성장지원 샘플 공고",
+    "institution": "예술경영지원센터",
+    "status": "REVIEW",
+    "priority": "NORMAL",
+    "owner": "재형",
+    "deadline": "2026-08-25",
+    "internalDeadline": "2026-08-24",
+    "progress": 10,
+    "nextAction": "지원 자격 및 공고문 확인",
+    "nextActionDue": "2026-08-20",
+    "sourceUrl": "https://www.gokams.or.kr",
+    "driveUrl": ""
+  }
+]
