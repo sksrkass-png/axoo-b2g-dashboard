@@ -23,7 +23,6 @@
     if (data && Array.isArray(data.projects)) return data.projects;
     if (data && Array.isArray(data.items)) return data.items;
     if (data && Array.isArray(data.data)) return data.data;
-
     return [];
   }
 
@@ -143,9 +142,7 @@
         .toUpperCase()
         .trim();
 
-    if (grade) {
-      return grade;
-    }
+    if (grade) return grade;
 
     const score =
       Number(
@@ -213,9 +210,7 @@
           STORAGE_KEY
         );
 
-      if (!raw) {
-        return {};
-      }
+      if (!raw) return {};
 
       const parsed =
         JSON.parse(raw);
@@ -269,9 +264,7 @@
     researchId,
     data
   ) {
-    if (!researchId) {
-      return;
-    }
+    if (!researchId) return;
 
     const map =
       getRegisteredMap();
@@ -298,6 +291,80 @@
     saveRegisteredMap(map);
 
     refreshButtonStates();
+  }
+
+
+  /* =========================================
+     REGISTRATION CALLBACK
+  ========================================= */
+
+  function consumeRegistrationCallback() {
+    try {
+      const url =
+        new URL(
+          window.location.href
+        );
+
+      const researchId =
+        url.searchParams.get(
+          "registeredResearchId"
+        );
+
+      if (!researchId) {
+        return;
+      }
+
+      const projectId =
+        url.searchParams.get(
+          "projectId"
+        ) || "";
+
+      const status =
+        url.searchParams.get(
+          "status"
+        ) || "REVIEW";
+
+      markRegistered(
+        researchId,
+        {
+          projectId: projectId,
+          status: status
+        }
+      );
+
+      /*
+        등록용 파라미터를 주소에서 제거.
+      */
+      url.searchParams.delete(
+        "registeredResearchId"
+      );
+
+      url.searchParams.delete(
+        "projectId"
+      );
+
+      url.searchParams.delete(
+        "status"
+      );
+
+      window.history.replaceState(
+        {},
+        document.title,
+        url.pathname +
+        (
+          url.search
+            ? url.search
+            : ""
+        ) +
+        url.hash
+      );
+
+    } catch (error) {
+      console.warn(
+        "[AXOO Capture] callback parse failed",
+        error
+      );
+    }
   }
 
 
@@ -378,9 +445,7 @@
     list,
     title
   ) {
-    if (!title) {
-      return null;
-    }
+    if (!title) return null;
 
     return (
       list.find(function (project) {
@@ -515,9 +580,6 @@
         ? "✓ 지원 관리 등록됨"
         : "⭐ 지원 관리에 추가";
 
-    /*
-      같은 내용이면 DOM을 수정하지 않는다.
-    */
     if (
       button.textContent !==
       wantedText
@@ -585,74 +647,28 @@
           researchId
         );
       },
-      1600
+      1500
     );
   }
 
 
   /* =========================================
-     APP MESSAGE
+     STORAGE SYNC
   ========================================= */
 
-  function listenForAppMessages() {
+  function listenForStorageChanges() {
     window.addEventListener(
-      "message",
+      "storage",
       function (event) {
 
-        const origin =
-          String(
-            event.origin ||
-            ""
-          );
-
-        const allowed =
-          origin ===
-            "https://script.google.com" ||
-          origin ===
-            "https://script.googleusercontent.com" ||
-          origin.endsWith(
-            ".googleusercontent.com"
-          );
-
-        if (!allowed) {
-          return;
-        }
-
-        const data =
-          event.data;
-
         if (
-          !data ||
-          typeof data !== "object"
+          event.key !==
+          STORAGE_KEY
         ) {
           return;
         }
 
-        if (
-          data.type !==
-          "AXOO_B2G_REGISTERED"
-        ) {
-          return;
-        }
-
-        if (
-          !data.researchId
-        ) {
-          return;
-        }
-
-        markRegistered(
-          data.researchId,
-          {
-            projectId:
-              data.projectId ||
-              "",
-
-            status:
-              data.status ||
-              "REVIEW"
-          }
-        );
+        refreshButtonStates();
       }
     );
   }
@@ -917,8 +933,7 @@
 
 
   /*
-    MutationObserver 사용 안 함.
-    렌더 완료 이벤트 + 몇 번의 안전한 재검사만 실행.
+    MutationObserver 없음.
   */
   function scheduleSafeDecorations() {
     [
@@ -943,9 +958,11 @@
   ========================================= */
 
   async function init() {
+    consumeRegistrationCallback();
+
     injectStyles();
 
-    listenForAppMessages();
+    listenForStorageChanges();
 
     await loadData();
 
