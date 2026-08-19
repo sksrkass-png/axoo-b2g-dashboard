@@ -3,20 +3,19 @@
 
   const PRIORITY_URL = "data/priority_projects.json";
   const ART_URL = "data/art_commissions.json";
-  const APPLICATION_URL = "data/application_projects.json";
 
-  const GITHUB_EDIT_URL =
-    "https://github.com/sksrkass-png/axoo-b2g-dashboard/edit/main/data/application_projects.json";
+  const APP_URL =
+    "https://script.google.com/a/macros/axoocorp.com/s/AKfycbzLS5AW0DfLGIDersBlbL4IDEIhHqElPaaePi45bG5nrT6V_8FKwSjwta3lUS3VocW3/exec";
 
   let priorityProjects = [];
   let artProjects = [];
-  let applicationProjects = [];
 
   function normalizeArray(data) {
     if (Array.isArray(data)) return data;
     if (data && Array.isArray(data.projects)) return data.projects;
     if (data && Array.isArray(data.items)) return data.items;
     if (data && Array.isArray(data.data)) return data.data;
+
     return [];
   }
 
@@ -28,10 +27,6 @@
 
   function normalizeDate(value) {
     const text = String(value || "").trim();
-
-    if (!text || text === "9999-99-99") {
-      return "";
-    }
 
     const match = text.match(
       /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
@@ -45,43 +40,6 @@
       match[1],
       String(match[2]).padStart(2, "0"),
       String(match[3]).padStart(2, "0")
-    ].join("-");
-  }
-
-  function addDays(value, amount) {
-    const dateText = normalizeDate(value);
-
-    if (!dateText) {
-      return "";
-    }
-
-    const [year, month, day] =
-      dateText.split("-").map(Number);
-
-    const date = new Date(
-      year,
-      month - 1,
-      day
-    );
-
-    date.setDate(
-      date.getDate() + amount
-    );
-
-    return [
-      date.getFullYear(),
-      String(date.getMonth() + 1).padStart(2, "0"),
-      String(date.getDate()).padStart(2, "0")
-    ].join("-");
-  }
-
-  function todayString() {
-    const now = new Date();
-
-    return [
-      now.getFullYear(),
-      String(now.getMonth() + 1).padStart(2, "0"),
-      String(now.getDate()).padStart(2, "0")
     ].join("-");
   }
 
@@ -119,7 +77,7 @@
   }
 
   function getSourceUrl(project) {
-    const candidates = [
+    const values = [
       project.sourceUrl,
       project.originalUrl,
       project.url,
@@ -127,7 +85,7 @@
       project.documentUrl
     ];
 
-    const found = candidates.find(function (value) {
+    const found = values.find(function (value) {
       const url = String(value || "").trim();
 
       return (
@@ -136,19 +94,37 @@
       );
     });
 
-    return found
-      ? String(found).trim()
-      : "";
+    return found || "";
+  }
+
+  function getResearchId(project, type) {
+    const id =
+      project.id ||
+      project.bidNtceNo ||
+      project.noticeNo ||
+      project.noticeId ||
+      project.sourceId;
+
+    if (id) {
+      return String(id);
+    }
+
+    return [
+      type,
+      normalizeText(getTitle(project)),
+      getDeadline(project)
+    ].join("::");
   }
 
   function getGrade(project) {
-    const explicit =
-      String(project.grade || "")
-        .toUpperCase()
-        .trim();
+    const grade = String(
+      project.grade || ""
+    )
+      .toUpperCase()
+      .trim();
 
-    if (explicit) {
-      return explicit;
+    if (grade) {
+      return grade;
     }
 
     const score = Number(
@@ -166,10 +142,6 @@
   }
 
   function getPriority(project, type) {
-    /*
-      건축물 미술작품은 등급 체계와 별개이므로
-      기본 NORMAL로 등록.
-    */
     if (type === "art") {
       return "NORMAL";
     }
@@ -183,37 +155,11 @@
       return "HIGH";
     }
 
-    if (
-      grade === "C" ||
-      grade === "HOLD"
-    ) {
+    if (grade === "C") {
       return "LOW";
     }
 
     return "NORMAL";
-  }
-
-  function getResearchId(project, type) {
-    const existing =
-      project.id ||
-      project.bidNtceNo ||
-      project.noticeNo ||
-      project.noticeId ||
-      project.sourceId;
-
-    if (existing) {
-      return String(existing);
-    }
-
-    /*
-      건축물 미술작품 데이터는 별도 ID가
-      없는 경우도 있으므로 제목+마감으로 생성.
-    */
-    return [
-      type,
-      normalizeText(getTitle(project)),
-      getDeadline(project)
-    ].join("::");
   }
 
   function getNextAction(project, type) {
@@ -231,28 +177,6 @@
     );
   }
 
-  function nextProjectId(projects) {
-    let max = 0;
-
-    projects.forEach(function (project) {
-      const match =
-        String(project.id || "")
-          .match(/^P26-(\d+)$/);
-
-      if (!match) return;
-
-      max = Math.max(
-        max,
-        Number(match[1])
-      );
-    });
-
-    return (
-      "P26-" +
-      String(max + 1).padStart(3, "0")
-    );
-  }
-
   async function loadJson(url) {
     try {
       const response = await fetch(
@@ -261,7 +185,7 @@
 
       if (!response.ok) {
         throw new Error(
-          `${url} load failed: ${response.status}`
+          `${url} load failed`
         );
       }
 
@@ -278,20 +202,17 @@
     }
   }
 
-  async function loadAllData() {
+  async function loadData() {
     const [
       priority,
-      art,
-      applications
+      art
     ] = await Promise.all([
       loadJson(PRIORITY_URL),
-      loadJson(ART_URL),
-      loadJson(APPLICATION_URL)
+      loadJson(ART_URL)
     ]);
 
     priorityProjects = priority;
     artProjects = art;
-    applicationProjects = applications;
   }
 
   function getCardTitle(card) {
@@ -310,44 +231,22 @@
       return null;
     }
 
-    const exact =
-      list.find(function (project) {
-        return (
-          normalizeText(getTitle(project)) ===
-          title
-        );
-      });
-
-    if (exact) {
-      return exact;
-    }
-
     return (
       list.find(function (project) {
-        const projectTitle =
+        return (
           normalizeText(
             getTitle(project)
-          );
-
-        return (
-          projectTitle &&
-          (
-            title.includes(projectTitle) ||
-            projectTitle.includes(title)
-          )
+          ) === title
         );
       }) ||
       null
     );
   }
 
-  function findProjectByCard(card) {
+  function findProject(card) {
     const title =
       getCardTitle(card);
 
-    /*
-      건축물 미술작품 탭
-    */
     if (card.closest("#artCards")) {
       const project =
         findByTitle(
@@ -363,361 +262,120 @@
         : null;
     }
 
-    /*
-      벽화·조형물 / 전시 / 지원사업 /
-      기타 AXOO 핏
-    */
-    const priority =
+    const project =
       findByTitle(
         priorityProjects,
         title
       );
 
-    return priority
+    return project
       ? {
-          project: priority,
+          project,
           type: "priority"
         }
       : null;
   }
 
-  function alreadyExists(
+  function buildAddUrl(
     project,
-    type,
-    projects
+    type
   ) {
-    const researchId =
+    const params =
+      new URLSearchParams();
+
+    params.set(
+      "mode",
+      "add"
+    );
+
+    params.set(
+      "researchId",
       getResearchId(
         project,
         type
-      );
+      )
+    );
 
-    const title =
-      normalizeText(
-        getTitle(project)
-      );
+    params.set(
+      "title",
+      getTitle(project)
+    );
 
-    const deadline =
-      getDeadline(project);
+    params.set(
+      "institution",
+      getAgency(project)
+    );
 
-    return projects.some(
-      function (item) {
-        if (
-          researchId &&
-          String(
-            item.researchId || ""
-          ) === researchId
-        ) {
-          return true;
-        }
+    params.set(
+      "deadline",
+      getDeadline(project)
+    );
 
-        return (
-          normalizeText(item.title) ===
-            title &&
-          normalizeDate(item.deadline) ===
-            deadline
-        );
-      }
+    params.set(
+      "priority",
+      getPriority(
+        project,
+        type
+      )
+    );
+
+    params.set(
+      "nextAction",
+      getNextAction(
+        project,
+        type
+      )
+    );
+
+    params.set(
+      "sourceUrl",
+      getSourceUrl(project)
+    );
+
+    return (
+      APP_URL +
+      "?" +
+      params.toString()
     );
   }
 
-  function createApplicationProject(
-    project,
-    type,
-    existingProjects
-  ) {
-    const deadline =
-      getDeadline(project);
-
-    return {
-      id: nextProjectId(
-        existingProjects
-      ),
-
-      researchId:
-        getResearchId(
-          project,
-          type
-        ),
-
-      title:
-        getTitle(project) ||
-        "프로젝트명 미정",
-
-      institution:
-        getAgency(project) ||
-        "기관 미확인",
-
-      status: "REVIEW",
-
-      priority:
-        getPriority(
-          project,
-          type
-        ),
-
-      owner: "",
-
-      deadline,
-
-      internalDeadline:
-        deadline
-          ? addDays(
-              deadline,
-              -1
-            )
-          : "",
-
-      progress: 10,
-
-      nextAction:
-        getNextAction(
-          project,
-          type
-        ),
-
-      nextActionDue:
-        todayString(),
-
-      sourceUrl:
-        getSourceUrl(project),
-
-      driveUrl: ""
-    };
-  }
-
-  async function copyText(text) {
-    if (
-      navigator.clipboard &&
-      window.isSecureContext
-    ) {
-      await navigator.clipboard.writeText(
-        text
-      );
-
-      return;
-    }
-
-    const textarea =
-      document.createElement(
-        "textarea"
-      );
-
-    textarea.value = text;
-
-    textarea.style.position =
-      "fixed";
-
-    textarea.style.left =
-      "-9999px";
-
-    document.body.appendChild(
-      textarea
-    );
-
-    textarea.select();
-
-    document.execCommand(
-      "copy"
-    );
-
-    textarea.remove();
-  }
-
-  function showToast(
-    message,
-    type = "normal"
-  ) {
-    let toast =
-      document.getElementById(
-        "axooCaptureToast"
-      );
-
-    if (!toast) {
-      toast =
-        document.createElement(
-          "div"
-        );
-
-      toast.id =
-        "axooCaptureToast";
-
-      document.body.appendChild(
-        toast
-      );
-    }
-
-    toast.className =
-      "axoo-capture-toast";
-
-    if (type === "error") {
-      toast.classList.add(
-        "error"
-      );
-    }
-
-    toast.textContent =
-      message;
-
-    requestAnimationFrame(
-      function () {
-        toast.classList.add(
-          "show"
-        );
-      }
-    );
-
-    clearTimeout(
-      toast._timer
-    );
-
-    toast._timer =
-      setTimeout(function () {
-        toast.classList.remove(
-          "show"
-        );
-      }, 4000);
-  }
-
-  async function handleCapture(
+  function handleCapture(
     button,
     card
   ) {
-    if (button.disabled) {
+    const capture =
+      findProject(card);
+
+    if (!capture) {
+      alert(
+        "공고 데이터를 찾지 못했습니다."
+      );
+
       return;
     }
 
-    /*
-      사용자 클릭 순간 창을 먼저 열어
-      팝업 차단을 줄입니다.
-    */
-    const githubWindow =
-      window.open(
-        "about:blank",
-        "_blank"
+    const url =
+      buildAddUrl(
+        capture.project,
+        capture.type
       );
-
-    button.disabled = true;
 
     button.textContent =
-      "추가 준비 중...";
+      "지원 관리 열기...";
 
-    try {
-      /*
-        카드가 새로 렌더링된 직후일 수도
-        있으므로 최신 데이터를 다시 확보.
-      */
-      await loadAllData();
+    window.open(
+      url,
+      "_blank",
+      "noopener"
+    );
 
-      const capture =
-        findProjectByCard(card);
-
-      if (!capture) {
-        throw new Error(
-          "해당 공고 데이터를 찾지 못했습니다."
-        );
-      }
-
-      const {
-        project,
-        type
-      } = capture;
-
-      if (
-        alreadyExists(
-          project,
-          type,
-          applicationProjects
-        )
-      ) {
-        if (githubWindow) {
-          githubWindow.close();
-        }
-
-        button.disabled = true;
-
-        button.classList.add(
-          "added"
-        );
-
+    setTimeout(
+      function () {
         button.textContent =
-          "✓ 지원 관리 등록됨";
-
-        showToast(
-          "이미 지원 관리에 등록된 프로젝트입니다."
-        );
-
-        return;
-      }
-
-      const newProject =
-        createApplicationProject(
-          project,
-          type,
-          applicationProjects
-        );
-
-      const nextProjects = [
-        ...applicationProjects,
-        newProject
-      ];
-
-      const json =
-        JSON.stringify(
-          nextProjects,
-          null,
-          2
-        );
-
-      await copyText(json);
-
-      button.disabled = false;
-
-      button.textContent =
-        "✓ JSON 복사 완료";
-
-      showToast(
-        "지원 관리용 JSON을 복사했습니다. 열린 GitHub 화면에서 Ctrl+A → Ctrl+V → Commit 하면 됩니다."
-      );
-
-      if (githubWindow) {
-        githubWindow.location.href =
-          GITHUB_EDIT_URL;
-      } else {
-        window.open(
-          GITHUB_EDIT_URL,
-          "_blank"
-        );
-      }
-
-      setTimeout(
-        function () {
-          button.textContent =
-            "⭐ 지원 관리에 추가";
-        },
-        4500
-      );
-    } catch (error) {
-      console.error(
-        "[AXOO Capture]",
-        error
-      );
-
-      if (githubWindow) {
-        githubWindow.close();
-      }
-
-      button.disabled = false;
-
-      button.textContent =
-        "⭐ 지원 관리에 추가";
-
-      showToast(
-        error.message ||
-          "지원 관리 추가 중 오류가 발생했습니다.",
-        "error"
-      );
-    }
+          "⭐ 지원 관리에 추가";
+      },
+      1200
+    );
   }
 
   function injectStyles() {
@@ -730,9 +388,7 @@
     }
 
     const style =
-      document.createElement(
-        "style"
-      );
+      document.createElement("style");
 
     style.id =
       "axooProjectCaptureStyles";
@@ -740,8 +396,8 @@
     style.textContent = `
       .axoo-capture-actions {
         display: flex;
-        align-items: center;
         flex-wrap: wrap;
+        align-items: center;
         gap: 9px;
         margin-top: 12px;
       }
@@ -762,84 +418,22 @@
         font-size: 12px;
         font-weight: 900;
         cursor: pointer;
-        transition:
-          transform .15s ease,
-          opacity .15s ease;
       }
 
       .axoo-capture-button:hover {
-        transform:
-          translateY(-1px);
-      }
-
-      .axoo-capture-button:disabled {
-        opacity: .65;
-        cursor: default;
-        transform: none;
-      }
-
-      .axoo-capture-button.added {
-        border-color: #b9dfc8;
-        background: #eaf7ef;
-        color: #087445;
-      }
-
-      .axoo-capture-toast {
-        position: fixed;
-        z-index: 99999;
-        right: 24px;
-        bottom: 24px;
-        max-width:
-          min(
-            430px,
-            calc(100vw - 32px)
-          );
-        padding: 14px 17px;
-        border-radius: 13px;
-        background: #111;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 800;
-        line-height: 1.5;
-        box-shadow:
-          0 16px 45px
-          rgba(0,0,0,.2);
-        opacity: 0;
-        transform:
-          translateY(10px);
-        pointer-events: none;
-        transition:
-          .2s ease;
-      }
-
-      .axoo-capture-toast.show {
-        opacity: 1;
-        transform:
-          translateY(0);
-      }
-
-      .axoo-capture-toast.error {
-        background: #b72e24;
+        opacity: .82;
       }
 
       @media (max-width: 640px) {
         .axoo-capture-actions {
-          align-items: stretch;
           flex-direction: column;
+          align-items: stretch;
         }
 
         .axoo-capture-actions > .link,
         .axoo-capture-button {
           width: 100%;
-          box-sizing: border-box;
           text-align: center;
-          justify-content: center;
-        }
-
-        .axoo-capture-toast {
-          right: 16px;
-          left: 16px;
-          bottom: 16px;
         }
       }
     `;
@@ -851,8 +445,7 @@
 
   function decorateCard(card) {
     if (
-      card.dataset
-        .axooCaptureReady ===
+      card.dataset.axooCaptureReady ===
       "true"
     ) {
       return;
@@ -875,15 +468,9 @@
       return;
     }
 
-    /*
-      건축물 미술작품의 빈 상태 카드에는
-      review-box가 없으므로 버튼을 만들지 않음.
-    */
     if (
       isArt &&
-      !card.querySelector(
-        ".review-box"
-      )
+      !card.querySelector(".review-box")
     ) {
       return;
     }
@@ -906,17 +493,13 @@
 
     if (!actions) {
       actions =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
       actions.className =
         "axoo-capture-actions";
 
       const link =
-        body.querySelector(
-          "a.link"
-        );
+        body.querySelector("a.link");
 
       if (link) {
         link.parentNode.insertBefore(
@@ -924,20 +507,14 @@
           link
         );
 
-        actions.appendChild(
-          link
-        );
+        actions.appendChild(link);
       } else {
-        body.appendChild(
-          actions
-        );
+        body.appendChild(actions);
       }
     }
 
     const button =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
     button.type = "button";
 
@@ -960,37 +537,9 @@
       }
     );
 
-    actions.appendChild(
-      button
-    );
+    actions.appendChild(button);
 
-    /*
-      이미 application_projects.json에
-      들어간 공고라면 즉시 등록 상태 표시.
-    */
-    const capture =
-      findProjectByCard(card);
-
-    if (
-      capture &&
-      alreadyExists(
-        capture.project,
-        capture.type,
-        applicationProjects
-      )
-    ) {
-      button.disabled = true;
-
-      button.classList.add(
-        "added"
-      );
-
-      button.textContent =
-        "✓ 지원 관리 등록됨";
-    }
-
-    card.dataset
-      .axooCaptureReady =
+    card.dataset.axooCaptureReady =
       "true";
   }
 
@@ -1013,16 +562,9 @@
   }
 
   function watchDashboard() {
-    /*
-      기존 대시보드가 필터 변경 때
-      카드를 다시 생성하므로 MutationObserver로
-      새 카드에도 버튼 재부착.
-    */
     const observer =
       new MutationObserver(
-        function () {
-          decorateAllCards();
-        }
+        decorateAllCards
       );
 
     observer.observe(
@@ -1033,10 +575,6 @@
       }
     );
 
-    /*
-      app.js가 렌더 완료 시 발생시키는
-      커스텀 이벤트에도 대응.
-    */
     window.addEventListener(
       "axoo:rendered",
       decorateAllCards
@@ -1046,7 +584,7 @@
   async function init() {
     injectStyles();
 
-    await loadAllData();
+    await loadData();
 
     decorateAllCards();
 
