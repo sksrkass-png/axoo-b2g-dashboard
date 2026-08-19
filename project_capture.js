@@ -1,11 +1,8 @@
 (function () {
   "use strict";
 
-  const PRIORITY_URL =
-    "data/priority_projects.json";
-
-  const ART_URL =
-    "data/art_commissions.json";
+  const PRIORITY_URL = "data/priority_projects.json";
+  const ART_URL = "data/art_commissions.json";
 
   const APP_URL =
     "https://script.google.com/a/macros/axoocorp.com/s/AKfycbzLS5AW0DfLGIDersBlbL4IDEIhHqElPaaePi45bG5nrT6V_8FKwSjwta3lUS3VocW3/exec";
@@ -17,33 +14,15 @@
   let artProjects = [];
 
 
-  /* ======================================================
+  /* =========================================
      BASIC
-  ====================================================== */
+  ========================================= */
 
   function normalizeArray(data) {
     if (Array.isArray(data)) return data;
-
-    if (
-      data &&
-      Array.isArray(data.projects)
-    ) {
-      return data.projects;
-    }
-
-    if (
-      data &&
-      Array.isArray(data.items)
-    ) {
-      return data.items;
-    }
-
-    if (
-      data &&
-      Array.isArray(data.data)
-    ) {
-      return data.data;
-    }
+    if (data && Array.isArray(data.projects)) return data.projects;
+    if (data && Array.isArray(data.items)) return data.items;
+    if (data && Array.isArray(data.data)) return data.data;
 
     return [];
   }
@@ -65,27 +44,19 @@
         /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
       );
 
-    if (!match) {
-      return "";
-    }
+    if (!match) return "";
 
     return [
       match[1],
-      String(match[2]).padStart(
-        2,
-        "0"
-      ),
-      String(match[3]).padStart(
-        2,
-        "0"
-      )
+      String(match[2]).padStart(2, "0"),
+      String(match[3]).padStart(2, "0")
     ].join("-");
   }
 
 
-  /* ======================================================
+  /* =========================================
      PROJECT DATA
-  ====================================================== */
+  ========================================= */
 
   function getTitle(project) {
     return (
@@ -132,32 +103,21 @@
       project.documentUrl
     ];
 
-    const found =
-      values.find(
-        function (value) {
-          const url =
-            String(value || "")
-              .trim();
+    return (
+      values.find(function (value) {
+        const url =
+          String(value || "").trim();
 
-          return (
-            url.startsWith(
-              "https://"
-            ) ||
-            url.startsWith(
-              "http://"
-            )
-          );
-        }
-      );
-
-    return found || "";
+        return (
+          url.startsWith("https://") ||
+          url.startsWith("http://")
+        );
+      }) || ""
+    );
   }
 
 
-  function getResearchId(
-    project,
-    type
-  ) {
+  function getResearchId(project, type) {
     const id =
       project.id ||
       project.bidNtceNo ||
@@ -171,9 +131,7 @@
 
     return [
       type,
-      normalizeText(
-        getTitle(project)
-      ),
+      normalizeText(getTitle(project)),
       getDeadline(project)
     ].join("::");
   }
@@ -181,9 +139,7 @@
 
   function getGrade(project) {
     const grade =
-      String(
-        project.grade || ""
-      )
+      String(project.grade || "")
         .toUpperCase()
         .trim();
 
@@ -207,10 +163,7 @@
   }
 
 
-  function getPriority(
-    project,
-    type
-  ) {
+  function getPriority(project, type) {
     if (type === "art") {
       return "NORMAL";
     }
@@ -233,10 +186,7 @@
   }
 
 
-  function getNextAction(
-    project,
-    type
-  ) {
+  function getNextAction(project, type) {
     if (type === "art") {
       return (
         project.recommendedAction ||
@@ -252,9 +202,9 @@
   }
 
 
-  /* ======================================================
-     LOCAL REGISTERED STATE
-  ====================================================== */
+  /* =========================================
+     REGISTERED STATE
+  ========================================= */
 
   function getRegisteredMap() {
     try {
@@ -270,15 +220,12 @@
       const parsed =
         JSON.parse(raw);
 
-      if (
-        !parsed ||
-        typeof parsed !==
-          "object"
-      ) {
-        return {};
-      }
-
-      return parsed;
+      return (
+        parsed &&
+        typeof parsed === "object"
+      )
+        ? parsed
+        : {};
 
     } catch (error) {
       console.warn(
@@ -297,12 +244,24 @@
         STORAGE_KEY,
         JSON.stringify(map)
       );
+
     } catch (error) {
       console.warn(
         "[AXOO Capture] storage write failed",
         error
       );
     }
+  }
+
+
+  function isRegistered(researchId) {
+    const map =
+      getRegisteredMap();
+
+    return Boolean(
+      map[researchId] &&
+      map[researchId].registered
+    );
   }
 
 
@@ -318,8 +277,7 @@
       getRegisteredMap();
 
     map[researchId] = {
-      registered:
-        true,
+      registered: true,
 
       projectId:
         data &&
@@ -334,36 +292,18 @@
           : "REVIEW",
 
       updatedAt:
-        new Date()
-          .toISOString()
+        new Date().toISOString()
     };
 
     saveRegisteredMap(map);
 
-    decorateAllCards();
+    refreshButtonStates();
   }
 
 
-  function isRegistered(
-    researchId
-  ) {
-    const map =
-      getRegisteredMap();
-
-    return Boolean(
-      map[
-        researchId
-      ] &&
-      map[
-        researchId
-      ].registered
-    );
-  }
-
-
-  /* ======================================================
-     JSON LOAD
-  ====================================================== */
+  /* =========================================
+     DATA LOAD
+  ========================================= */
 
   async function loadJson(url) {
     try {
@@ -399,12 +339,8 @@
       art
     ] =
       await Promise.all([
-        loadJson(
-          PRIORITY_URL
-        ),
-        loadJson(
-          ART_URL
-        )
+        loadJson(PRIORITY_URL),
+        loadJson(ART_URL)
       ]);
 
     priorityProjects =
@@ -415,18 +351,17 @@
   }
 
 
-  /* ======================================================
-     CARD MATCHING
-  ====================================================== */
+  /* =========================================
+     CARD MATCH
+  ========================================= */
 
   function getCardTitle(card) {
     const element =
       card.querySelector(
         ".accordion-body h2"
       ) ||
-      card.querySelector(
-        "h2"
-      ) ||
+      card.querySelector("h2") ||
+      card.querySelector("h3") ||
       card.querySelector(
         ".summary-title"
       );
@@ -448,15 +383,13 @@
     }
 
     return (
-      list.find(
-        function (project) {
-          return (
-            normalizeText(
-              getTitle(project)
-            ) === title
-          );
-        }
-      ) ||
+      list.find(function (project) {
+        return (
+          normalizeText(
+            getTitle(project)
+          ) === title
+        );
+      }) ||
       null
     );
   }
@@ -467,9 +400,7 @@
       getCardTitle(card);
 
     if (
-      card.closest(
-        "#artCards"
-      )
+      card.closest("#artCards")
     ) {
       const project =
         findByTitle(
@@ -479,10 +410,8 @@
 
       return project
         ? {
-            project:
-              project,
-            type:
-              "art"
+            project: project,
+            type: "art"
           }
         : null;
     }
@@ -495,18 +424,16 @@
 
     return project
       ? {
-          project:
-            project,
-          type:
-            "priority"
+          project: project,
+          type: "priority"
         }
       : null;
   }
 
 
-  /* ======================================================
+  /* =========================================
      ADD URL
-  ====================================================== */
+  ========================================= */
 
   function buildAddUrl(
     project,
@@ -572,35 +499,37 @@
   }
 
 
-  /* ======================================================
+  /* =========================================
      BUTTON
-  ====================================================== */
+  ========================================= */
 
   function setButtonState(
     button,
     researchId
   ) {
+    const registered =
+      isRegistered(researchId);
+
+    const wantedText =
+      registered
+        ? "✓ 지원 관리 등록됨"
+        : "⭐ 지원 관리에 추가";
+
+    /*
+      같은 내용이면 DOM을 수정하지 않는다.
+    */
     if (
-      isRegistered(
-        researchId
-      )
+      button.textContent !==
+      wantedText
     ) {
-      button.classList.add(
-        "registered"
-      );
-
       button.textContent =
-        "✓ 지원 관리 등록됨";
-
-      return;
+        wantedText;
     }
 
-    button.classList.remove(
-      "registered"
+    button.classList.toggle(
+      "registered",
+      registered
     );
-
-    button.textContent =
-      "⭐ 지원 관리에 추가";
   }
 
 
@@ -625,10 +554,6 @@
         capture.type
       );
 
-    /*
-      이미 등록 표시된 경우에는
-      지원 관리 메인 화면을 연다.
-    */
     if (
       isRegistered(
         researchId
@@ -636,24 +561,20 @@
     ) {
       window.open(
         APP_URL,
-        "_blank",
-        "noopener"
+        "_blank"
       );
 
       return;
     }
 
-    const url =
-      buildAddUrl(
-        capture.project,
-        capture.type
-      );
-
     button.textContent =
       "지원 관리 열기...";
 
     window.open(
-      url,
+      buildAddUrl(
+        capture.project,
+        capture.type
+      ),
       "_blank"
     );
 
@@ -664,26 +585,45 @@
           researchId
         );
       },
-      1200
+      1600
     );
   }
 
 
-  /* ======================================================
-     POST MESSAGE
-  ====================================================== */
+  /* =========================================
+     APP MESSAGE
+  ========================================= */
 
   function listenForAppMessages() {
     window.addEventListener(
       "message",
       function (event) {
+
+        const origin =
+          String(
+            event.origin ||
+            ""
+          );
+
+        const allowed =
+          origin ===
+            "https://script.google.com" ||
+          origin ===
+            "https://script.googleusercontent.com" ||
+          origin.endsWith(
+            ".googleusercontent.com"
+          );
+
+        if (!allowed) {
+          return;
+        }
+
         const data =
           event.data;
 
         if (
           !data ||
-          typeof data !==
-            "object"
+          typeof data !== "object"
         ) {
           return;
         }
@@ -718,9 +658,9 @@
   }
 
 
-  /* ======================================================
-     STYLES
-  ====================================================== */
+  /* =========================================
+     STYLE
+  ========================================= */
 
   function injectStyles() {
     if (
@@ -741,60 +681,56 @@
 
     style.textContent = `
       .axoo-capture-actions {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 9px;
-        margin-top: 12px;
+        display:flex;
+        flex-wrap:wrap;
+        align-items:center;
+        gap:9px;
+        margin-top:12px;
       }
 
       .axoo-capture-actions > .link {
-        margin: 0 !important;
+        margin:0 !important;
       }
 
       .axoo-capture-button {
-        appearance: none;
-        min-height: 38px;
-        padding: 0 15px;
-        border: 1px solid #111;
-        border-radius: 999px;
-        background: #111;
-        color: #fff;
-        font: inherit;
-        font-size: 12px;
-        font-weight: 900;
-        cursor: pointer;
-        transition:
-          background .15s ease,
-          color .15s ease,
-          border-color .15s ease;
+        appearance:none;
+        min-height:38px;
+        padding:0 15px;
+        border:1px solid #111;
+        border-radius:999px;
+        background:#111;
+        color:#fff;
+        font:inherit;
+        font-size:12px;
+        font-weight:900;
+        cursor:pointer;
       }
 
       .axoo-capture-button:hover {
-        opacity: .82;
+        opacity:.82;
       }
 
       .axoo-capture-button.registered {
-        border-color: #d6d6d1;
-        background: #f1f1ee;
-        color: #555;
+        border-color:#d6d6d1;
+        background:#f1f1ee;
+        color:#555;
       }
 
       .axoo-capture-button.registered:hover {
-        opacity: 1;
-        background: #e9e9e4;
+        opacity:1;
+        background:#e9e9e4;
       }
 
-      @media (max-width: 640px) {
+      @media (max-width:640px) {
         .axoo-capture-actions {
-          flex-direction: column;
-          align-items: stretch;
+          flex-direction:column;
+          align-items:stretch;
         }
 
         .axoo-capture-actions > .link,
         .axoo-capture-button {
-          width: 100%;
-          text-align: center;
+          width:100%;
+          text-align:center;
         }
       }
     `;
@@ -805,9 +741,9 @@
   }
 
 
-  /* ======================================================
-     DECORATE
-  ====================================================== */
+  /* =========================================
+     CARD DECORATION
+  ========================================= */
 
   function decorateCard(card) {
     const isPriority =
@@ -817,9 +753,7 @@
 
     const isArt =
       Boolean(
-        card.closest(
-          "#artCards"
-        )
+        card.closest("#artCards")
       );
 
     if (
@@ -881,7 +815,10 @@
           "a.link"
         );
 
-      if (link) {
+      if (
+        link &&
+        link.parentNode
+      ) {
         link.parentNode
           .insertBefore(
             actions,
@@ -941,9 +878,6 @@
       button,
       researchId
     );
-
-    card.dataset.axooCaptureReady =
-      "true";
   }
 
 
@@ -966,36 +900,47 @@
   }
 
 
-  /* ======================================================
-     WATCH
-  ====================================================== */
-
-  function watchDashboard() {
-    const observer =
-      new MutationObserver(
-        decorateAllCards
+  function refreshButtonStates() {
+    document
+      .querySelectorAll(
+        ".axoo-capture-button[data-research-id]"
+      )
+      .forEach(
+        function (button) {
+          setButtonState(
+            button,
+            button.dataset.researchId
+          );
+        }
       );
+  }
 
-    observer.observe(
-      document.body,
-      {
-        childList:
-          true,
-        subtree:
-          true
+
+  /*
+    MutationObserver 사용 안 함.
+    렌더 완료 이벤트 + 몇 번의 안전한 재검사만 실행.
+  */
+  function scheduleSafeDecorations() {
+    [
+      250,
+      700,
+      1400,
+      2600,
+      4500
+    ].forEach(
+      function (delay) {
+        setTimeout(
+          decorateAllCards,
+          delay
+        );
       }
-    );
-
-    window.addEventListener(
-      "axoo:rendered",
-      decorateAllCards
     );
   }
 
 
-  /* ======================================================
+  /* =========================================
      INIT
-  ====================================================== */
+  ========================================= */
 
   async function init() {
     injectStyles();
@@ -1006,7 +951,17 @@
 
     decorateAllCards();
 
-    watchDashboard();
+    scheduleSafeDecorations();
+
+    window.addEventListener(
+      "axoo:rendered",
+      function () {
+        setTimeout(
+          decorateAllCards,
+          0
+        );
+      }
+    );
   }
 
 
@@ -1016,8 +971,12 @@
   ) {
     document.addEventListener(
       "DOMContentLoaded",
-      init
+      init,
+      {
+        once:true
+      }
     );
+
   } else {
     init();
   }
