@@ -7,7 +7,8 @@ const DATA_FILE = path.join(
   "art_commissions.json"
 );
 
-const NORMALIZER_VERSION = "1.0.0";
+const NORMALIZER_VERSION = "1.1.0";
+
 
 const PERIOD_KEYWORDS = [
   "응모작품 접수일시",
@@ -22,6 +23,7 @@ const PERIOD_KEYWORDS = [
   "접수일"
 ];
 
+
 const DEADLINE_KEYWORDS = [
   "접수마감",
   "제출마감",
@@ -32,6 +34,7 @@ const DEADLINE_KEYWORDS = [
   "제출기한",
   "접수기한"
 ];
+
 
 const PUBLISHED_KEYWORDS = [
   "등록일",
@@ -139,39 +142,55 @@ function yearFromDate(value) {
 
   if (parsed) {
     return Number(
-      parsed.slice(
-        0,
-        4
-      )
+      parsed.slice(0, 4)
     );
   }
 
-  return new Date()
-    .getFullYear();
+  return getKoreaTodayYear();
+}
+
+
+function getKoreaToday() {
+  const korea =
+    new Date(
+      Date.now() +
+      9 * 60 * 60 * 1000
+    );
+
+  return korea
+    .toISOString()
+    .slice(0, 10);
+}
+
+
+function getKoreaTodayYear() {
+  return Number(
+    getKoreaToday()
+      .slice(0, 4)
+  );
 }
 
 
 /* =========================================================
-   DATE TOKENS
+   DATE FINDER
 ========================================================= */
 
-function extractDateTokens(
-  segment,
+function findFirstDate(
+  text,
   baseYear
 ) {
-  const text =
-    cleanText(segment);
+  const source =
+    cleanText(text);
 
-  const tokens = [];
-  const occupied = [];
+  const candidates = [];
+
 
   /*
     2026년 8월 10일
     2026. 8. 10.
     2026-08-10
-    2026/08/10
   */
-  const fullDateRegex =
+  const fullRegex =
     /(20\d{2})\s*(?:년|[.\-/])\s*(\d{1,2})\s*(?:월|[.\-/])\s*(\d{1,2})\s*일?/g;
 
   let match;
@@ -179,87 +198,88 @@ function extractDateTokens(
   while (
     (
       match =
-        fullDateRegex.exec(text)
+        fullRegex.exec(source)
     ) !== null
   ) {
-    const iso =
+    const value =
       toISO(
         match[1],
         match[2],
         match[3]
       );
 
-    if (!iso) {
-      continue;
+    if (value) {
+      candidates.push({
+        index: match.index,
+        end: fullRegex.lastIndex,
+        value: value,
+        explicitYear: true
+      });
     }
-
-    tokens.push({
-      index: match.index,
-      end:
-        fullDateRegex.lastIndex,
-      iso: iso,
-      explicitYear: true
-    });
-
-    occupied.push([
-      match.index,
-      fullDateRegex.lastIndex
-    ]);
   }
+
 
   /*
     8월 29일
-    처럼 연도 생략
   */
-  const partialDateRegex =
+  const koreanPartialRegex =
     /(\d{1,2})\s*월\s*(\d{1,2})\s*일?/g;
 
   while (
     (
       match =
-        partialDateRegex.exec(text)
+        koreanPartialRegex.exec(
+          source
+        )
     ) !== null
   ) {
-    const start =
-      match.index;
-
-    const end =
-      partialDateRegex.lastIndex;
-
-    const overlaps =
-      occupied.some(
-        function (range) {
+    /*
+      이미 2026년 8월 29일 안에
+      포함된 부분 날짜인지 검사.
+    */
+    const insideFull =
+      candidates.some(
+        function (candidate) {
           return (
-            start < range[1] &&
-            end > range[0]
+            match.index >=
+              candidate.index &&
+            match.index <
+              candidate.end
           );
         }
       );
 
-    if (overlaps) {
+    if (insideFull) {
       continue;
     }
 
-    const iso =
+    const value =
       toISO(
         baseYear,
         match[1],
         match[2]
       );
 
-    if (!iso) {
-      continue;
-    }
+    if (value) {
+      candidates.push({
+        index:
+          match.index,
 
-    tokens.push({
-      index: start,
-      end: end,
-      iso: iso,
-      explicitYear: false
-    });
+        end:
+          koreanPartialRegex
+            .lastIndex,
+
+        value:
+          value,
+
+        explicitYear:
+          false
+      });
+    }
   }
 
-  tokens.sort(
+
+  candidates.sort(
     function (a, b) {
       return (
         a.index -
@@ -268,26 +288,168 @@ function extractDateTokens(
     }
   );
 
-  return tokens;
+  return (
+    candidates[0] ||
+    null
+  );
 }
 
 
-function getKeywordWindow(
-  text,
-  keyword,
-  length
-) {
-  const index =
-    text.indexOf(keyword);
+/* =========================================================
+   RANGE PARSER
+========================================================= */
 
-  if (index === -1) {
-    return "";
+function extractDateRange(
+  segment,
+  baseYear
+) {
+  const text =
+    cleanText(segment);
+
+
+  /*
+    CASE 1
+
+    2026년 8월 10일 ~ 8월 29일
+    2026.08.10 ~ 08.29
+    2026-08-10 ~ 2026-08-29
+
+    핵심:
+    날짜와 날짜 사이에 실제 "~"가 있을 때만
+    공모기간으로 인정한다.
+
+    10:00 ~ 17:00은 날짜 범위가 아니다.
+  */
+  let match =
+    text.match(
+      /(20\d{2})\s*(?:년|[.\-/])\s*(\d{1,2})\s*(?:월|[.\-/])\s*(\d{1,2})\s*일?\s*(?:\([^)]*\))?\s*[~∼～–—-]\s*(?:(20\d{2})\s*(?:년|[.\-/])\s*)?(\d{1,2})\s*(?:월|[.\-/])\s*(\d{1,2})\s*일?/
+    );
+
+  if (match) {
+    const startYear =
+      Number(match[1]);
+
+    const endHasYear =
+      Boolean(match[4]);
+
+    let endYear =
+      endHasYear
+        ? Number(match[4])
+        : startYear;
+
+    const start =
+      toISO(
+        startYear,
+        match[2],
+        match[3]
+      );
+
+    let end =
+      toISO(
+        endYear,
+        match[5],
+        match[6]
+      );
+
+    /*
+      2026.12.20 ~ 01.10
+      같은 연도 생략 처리.
+    */
+    if (
+      start &&
+      end &&
+      !endHasYear &&
+      end < start
+    ) {
+      endYear += 1;
+
+      end =
+        toISO(
+          endYear,
+          match[5],
+          match[6]
+        );
+    }
+
+    if (
+      start &&
+      end
+    ) {
+      return {
+        start: start,
+        end: end,
+        type: "date_range"
+      };
+    }
   }
 
-  return text.slice(
-    index,
-    index + length
-  );
+
+  /*
+    CASE 2
+
+    8월 10일 ~ 8월 29일
+  */
+  match =
+    text.match(
+      /(\d{1,2})\s*월\s*(\d{1,2})\s*일?\s*(?:\([^)]*\))?\s*[~∼～–—-]\s*(?:(20\d{2})\s*년\s*)?(\d{1,2})\s*월\s*(\d{1,2})\s*일?/
+    );
+
+  if (match) {
+    const startYear =
+      baseYear;
+
+    const endHasYear =
+      Boolean(match[3]);
+
+    let endYear =
+      endHasYear
+        ? Number(match[3])
+        : startYear;
+
+    const start =
+      toISO(
+        startYear,
+        match[1],
+        match[2]
+      );
+
+    let end =
+      toISO(
+        endYear,
+        match[4],
+        match[5]
+      );
+
+    if (
+      start &&
+      end &&
+      !endHasYear &&
+      end < start
+    ) {
+      endYear += 1;
+
+      end =
+        toISO(
+          endYear,
+          match[4],
+          match[5]
+        );
+    }
+
+    if (
+      start &&
+      end
+    ) {
+      return {
+        start: start,
+        end: end,
+        type: "date_range"
+      };
+    }
+  }
+
+
+  return null;
 }
 
 
@@ -296,39 +458,42 @@ function getKeywordWindow(
 ========================================================= */
 
 function extractPublishedDate(
-  text,
+  detailText,
   existingDates
 ) {
+  const text =
+    cleanText(detailText);
+
   /*
-    상세페이지의 등록일을
-    기존 데이터보다 우선한다.
+    상세페이지 등록일 최우선.
   */
   for (
     const keyword of
     PUBLISHED_KEYWORDS
   ) {
-    const segment =
-      getKeywordWindow(
-        text,
-        keyword,
-        120
-      );
+    const index =
+      text.indexOf(keyword);
 
-    if (!segment) {
+    if (index === -1) {
       continue;
     }
 
-    const tokens =
-      extractDateTokens(
-        segment,
-        new Date()
-          .getFullYear()
+    const segment =
+      text.slice(
+        index,
+        index + 120
       );
 
-    if (tokens.length) {
+    const date =
+      findFirstDate(
+        segment,
+        getKoreaTodayYear()
+      );
+
+    if (date) {
       return {
         value:
-          tokens[0].iso,
+          date.value,
 
         source:
           "detail_metadata"
@@ -336,26 +501,31 @@ function extractPublishedDate(
     }
   }
 
+
   /*
-    상세페이지에서 못 찾은 경우
-    기존 공식 데이터 유지.
+    상세 페이지에서 못 찾았으면
+    기존 공식 값 보존.
   */
   for (
     const candidate of
     existingDates
   ) {
-    const parsed =
+    const value =
       parseExistingDate(
         candidate
       );
 
-    if (parsed) {
+    if (value) {
       return {
-        value: parsed,
-        source: "existing"
+        value:
+          value,
+
+        source:
+          "existing"
       };
     }
   }
+
 
   return {
     value: "",
@@ -369,178 +539,104 @@ function extractPublishedDate(
 ========================================================= */
 
 function extractPeriod(
-  text,
+  detailText,
   publishedDate
 ) {
+  const text =
+    cleanText(detailText);
+
   const baseYear =
     yearFromDate(
       publishedDate
     );
 
+
   for (
     const keyword of
     PERIOD_KEYWORDS
   ) {
-    const segment =
-      getKeywordWindow(
-        text,
-        keyword,
-        320
-      );
+    const index =
+      text.indexOf(keyword);
 
-    if (!segment) {
+    if (index === -1) {
       continue;
     }
 
-    const tokens =
-      extractDateTokens(
+
+    /*
+      중요:
+      이전에는 너무 긴 텍스트를 잡아서
+      다음 항목의 날짜나 rawText 날짜를
+      공모 종료일로 잘못 인식할 수 있었다.
+
+      이제 해당 키워드 뒤 220자 안에서
+      "날짜 ~ 날짜" 형태를 먼저 검사한다.
+    */
+    const segment =
+      text.slice(
+        index,
+        index + 220
+      );
+
+
+    const range =
+      extractDateRange(
         segment,
         baseYear
       );
 
-    /*
-      예:
-      2026년 8월 10일
-      ~
-      8월 29일
-    */
-    if (
-      tokens.length >= 2
-    ) {
-      const start =
-        tokens[0].iso;
-
-      let end =
-        tokens[1].iso;
-
-      /*
-        12월 → 1월처럼
-        연도 생략된 경우
-      */
-      if (
-        !tokens[1].explicitYear &&
-        end < start
-      ) {
-        const parts =
-          end.split("-");
-
-        end =
-          toISO(
-            Number(
-              start.slice(
-                0,
-                4
-              )
-            ) + 1,
-            parts[1],
-            parts[2]
-          ) || end;
-      }
-
+    if (range) {
       return {
-        start: start,
-        end: end,
+        start:
+          range.start,
+
+        end:
+          range.end,
+
         source:
           "detail_body",
-        keyword: keyword
+
+        keyword:
+          keyword
       };
     }
 
+
     /*
-      예:
-      2026.08.10 ~ 08.29
+      하루 접수 공고
+
+      2026. 8. 24.(월)
+      10:00 ~ 17:00
+
+      "~"가 시간 사이에 있기 때문에
+      날짜 범위로 보면 안 된다.
     */
-    if (
-      tokens.length === 1
-    ) {
-      const first =
-        tokens[0];
+    const firstDate =
+      findFirstDate(
+        segment,
+        baseYear
+      );
 
-      const tail =
+    if (firstDate) {
+      const afterDate =
         segment.slice(
-          first.end
+          firstDate.end,
+          firstDate.end + 100
         );
 
-      const numericEnd =
-        tail.match(
-          /[~∼～–—]\s*(\d{1,2})\s*[.\-/]\s*(\d{1,2})(?!\d)/
-        );
-
-      if (numericEnd) {
-        let end =
-          toISO(
-            Number(
-              first.iso.slice(
-                0,
-                4
-              )
-            ),
-            numericEnd[1],
-            numericEnd[2]
+      const hasTimeRange =
+        /\d{1,2}\s*:\s*\d{2}\s*[~∼～–—-]\s*\d{1,2}\s*:\s*\d{2}/
+          .test(
+            afterDate
           );
 
-        if (
-          end &&
-          end < first.iso
-        ) {
-          end =
-            toISO(
-              Number(
-                first.iso.slice(
-                  0,
-                  4
-                )
-              ) + 1,
-              numericEnd[1],
-              numericEnd[2]
-            );
-        }
-
-        if (end) {
-          return {
-            start:
-              first.iso,
-
-            end: end,
-
-            source:
-              "detail_body",
-
-            keyword:
-              keyword
-          };
-        }
-      }
-
-      /*
-        하루 접수 공고
-
-        2026. 8. 24.(월)
-        10:00 ~ 17:00
-      */
-      const timeRange =
-        /\d{1,2}:\d{2}\s*[~∼～–—-]\s*\d{1,2}:\d{2}/
-          .test(tail);
-
-      const singleDayKeyword =
-        [
-          "접수일시",
-          "응모작품 접수일시",
-          "작품 접수일시",
-          "접수일",
-          "작품 접수"
-        ].includes(keyword);
-
-      if (
-        timeRange ||
-        singleDayKeyword
-      ) {
+      if (hasTimeRange) {
         return {
           start:
-            first.iso,
+            firstDate.value,
 
           end:
-            first.iso,
+            firstDate.value,
 
           source:
             "detail_body",
@@ -552,11 +648,11 @@ function extractPeriod(
     }
   }
 
+
   return {
     start: "",
     end: "",
-    source:
-      "not_found",
+    source: "not_found",
     keyword: ""
   };
 }
@@ -567,39 +663,47 @@ function extractPeriod(
 ========================================================= */
 
 function extractExplicitDeadline(
-  text,
+  detailText,
   publishedDate
 ) {
+  const text =
+    cleanText(detailText);
+
   const baseYear =
     yearFromDate(
       publishedDate
     );
 
+
   for (
     const keyword of
     DEADLINE_KEYWORDS
   ) {
-    const segment =
-      getKeywordWindow(
-        text,
-        keyword,
-        200
+    const index =
+      text.indexOf(
+        keyword
       );
 
-    if (!segment) {
+    if (index === -1) {
       continue;
     }
 
-    const tokens =
-      extractDateTokens(
+    const segment =
+      text.slice(
+        index,
+        index + 160
+      );
+
+    const date =
+      findFirstDate(
         segment,
         baseYear
       );
 
-    if (tokens.length) {
+    if (date) {
       return {
         value:
-          tokens[0].iso,
+          date.value,
 
         source:
           "explicit_deadline",
@@ -610,43 +714,34 @@ function extractExplicitDeadline(
     }
   }
 
+
   return {
     value: "",
-    source:
-      "not_found",
+    source: "not_found",
     keyword: ""
   };
 }
 
 
 /* =========================================================
-   DATE STATUS
+   STATUS
 ========================================================= */
 
-function dateStatus(
+function getDeadlineState(
   deadline
 ) {
   if (!deadline) {
     return {
-      isExpired: false,
+      isExpired:
+        false,
+
       deadlineStatus:
         "마감일 확인 필요"
     };
   }
 
-  const now =
-    new Date();
-
   const today =
-    [
-      now.getFullYear(),
-      String(
-        now.getMonth() + 1
-      ).padStart(2, "0"),
-      String(
-        now.getDate()
-      ).padStart(2, "0")
-    ].join("-");
+    getKoreaToday();
 
   const expired =
     deadline < today;
@@ -668,10 +763,23 @@ function dateStatus(
 ========================================================= */
 
 function normalizeItem(item) {
-  const sourceText =
+  /*
+    날짜 판독은 detailTextSample을
+    가장 신뢰한다.
+
+    중요:
+    detailTextSample 뒤에 rawText를 붙이지 않는다.
+    서로 다른 영역의 날짜가 섞이는 것을 방지.
+  */
+  const detailText =
+    cleanText(
+      item.detailTextSample
+    );
+
+
+  const fallbackText =
     cleanText(
       [
-        item.detailTextSample,
         item.rawText,
         item.summary,
         item.nextAction,
@@ -681,9 +789,15 @@ function normalizeItem(item) {
         .join(" | ")
     );
 
+
+  const extractionText =
+    detailText ||
+    fallbackText;
+
+
   const published =
     extractPublishedDate(
-      sourceText,
+      extractionText,
       [
         item.postedDate,
         item.publishedDate,
@@ -692,27 +806,32 @@ function normalizeItem(item) {
       ]
     );
 
+
   const period =
     extractPeriod(
-      sourceText,
+      extractionText,
       published.value
     );
 
+
   const explicitDeadline =
     extractExplicitDeadline(
-      sourceText,
+      extractionText,
       published.value
     );
+
 
   const existingPeriodStart =
     parseExistingDate(
       item.periodStart
     );
 
+
   const existingPeriodEnd =
     parseExistingDate(
       item.periodEnd
     );
+
 
   const existingDeadline =
     parseExistingDate(
@@ -721,58 +840,81 @@ function normalizeItem(item) {
       item.closeDate
     );
 
+
+  /*
+    상세페이지에서 새로 판독한 값이
+    기존 자동값보다 우선.
+  */
   const periodStart =
     period.start ||
     existingPeriodStart ||
     "";
+
 
   const periodEnd =
     period.end ||
     existingPeriodEnd ||
     "";
 
-  /*
-    마감일 우선순위
 
-    1. 명시적 마감일
-    2. 접수/공모기간 종료일
-    3. 기존 공식 데이터
+  /*
+    마감일 신뢰 우선순위
+
+    1. "접수마감 / 제출기한" 등
+       명시된 마감일
+
+    2. 상세페이지에서 읽은
+       접수/공모기간 종료일
+
+    3. 기존 데이터의 마감일
   */
   const deadline =
     explicitDeadline.value ||
-    periodEnd ||
+    period.end ||
     existingDeadline ||
+    periodEnd ||
     "";
+
 
   let deadlineSource =
     "not_found";
+
 
   if (
     explicitDeadline.value
   ) {
     deadlineSource =
-      explicitDeadline.source;
+      "explicit_deadline";
 
-  } else if (periodEnd) {
+  } else if (
+    period.end
+  ) {
     deadlineSource =
-      period.source ===
-      "detail_body"
-        ? "period_end"
-        : "existing_period_end";
+      "period_end";
 
   } else if (
     existingDeadline
   ) {
     deadlineSource =
-      item.deadlineSource &&
-      item.deadlineSource !==
-      "not_found"
+      (
+        item.deadlineSource &&
+        item.deadlineSource !==
+          "not_found"
+      )
         ? item.deadlineSource
         : "existing_deadline";
+
+  } else if (
+    existingPeriodEnd
+  ) {
+    deadlineSource =
+      "existing_period_end";
   }
+
 
   let confidence =
     "LOW";
+
 
   if (
     published.value &&
@@ -787,26 +929,49 @@ function normalizeItem(item) {
     confidence =
       "HIGH";
 
-  } else if (deadline) {
+  } else if (
+    deadline
+  ) {
     confidence =
       "MEDIUM";
   }
 
+
   const deadlineState =
-    dateStatus(
+    getDeadlineState(
       deadline
     );
 
-  const today =
-    new Date()
-      .toISOString()
-      .slice(
-        0,
-        10
-      );
+
+  /*
+    기존 상태가
+    "마감일 확인 필요"인데
+    날짜 보정에 성공했다면
+    상태도 현실에 맞게 정리.
+  */
+  let normalizedStatus =
+    item.status ||
+    "";
+
+
+  if (
+    deadline &&
+    normalizedStatus.includes(
+      "마감일 확인 필요"
+    )
+  ) {
+    normalizedStatus =
+      deadlineState.isExpired
+        ? "마감"
+        : "공모중";
+  }
+
 
   return {
     ...item,
+
+    status:
+      normalizedStatus,
 
     publishedDate:
       published.value ||
@@ -858,7 +1023,7 @@ function normalizeItem(item) {
       NORMALIZER_VERSION,
 
     dateNormalizedAt:
-      today,
+      getKoreaToday(),
 
     deadlineStatus:
       deadlineState.deadlineStatus,
@@ -870,11 +1035,13 @@ function normalizeItem(item) {
 
 
 /* =========================================================
-   FILE
+   JSON STRUCTURE
 ========================================================= */
 
 function getItems(data) {
-  if (Array.isArray(data)) {
+  if (
+    Array.isArray(data)
+  ) {
     return data;
   }
 
@@ -915,7 +1082,11 @@ function replaceItems(
   original,
   items
 ) {
-  if (Array.isArray(original)) {
+  if (
+    Array.isArray(
+      original
+    )
+  ) {
     return items;
   }
 
@@ -927,7 +1098,8 @@ function replaceItems(
   ) {
     return {
       ...original,
-      projects: items
+      projects:
+        items
     };
   }
 
@@ -939,7 +1111,8 @@ function replaceItems(
   ) {
     return {
       ...original,
-      items: items
+      items:
+        items
     };
   }
 
@@ -951,7 +1124,8 @@ function replaceItems(
   ) {
     return {
       ...original,
-      data: items
+      data:
+        items
     };
   }
 
@@ -974,6 +1148,7 @@ function main() {
     );
   }
 
+
   const original =
     JSON.parse(
       fs.readFileSync(
@@ -982,19 +1157,25 @@ function main() {
       )
     );
 
+
   const items =
-    getItems(original);
+    getItems(
+      original
+    );
+
 
   const normalized =
     items.map(
       normalizeItem
     );
 
+
   const output =
     replaceItems(
       original,
       normalized
     );
+
 
   fs.writeFileSync(
     DATA_FILE,
@@ -1006,42 +1187,42 @@ function main() {
     "utf8"
   );
 
-  const high =
-    normalized.filter(
-      function (item) {
-        return (
-          item.dateConfidence ===
-          "HIGH"
-        );
-      }
-    ).length;
 
-  const medium =
-    normalized.filter(
-      function (item) {
-        return (
-          item.dateConfidence ===
-          "MEDIUM"
-        );
-      }
-    ).length;
+  const summary = {
+    HIGH:
+      0,
 
-  const low =
-    normalized.filter(
-      function (item) {
-        return (
-          item.dateConfidence ===
-          "LOW"
-        );
+    MEDIUM:
+      0,
+
+    LOW:
+      0
+  };
+
+
+  normalized.forEach(
+    function (item) {
+      const key =
+        item.dateConfidence ||
+        "LOW";
+
+      if (
+        summary[key] !==
+        undefined
+      ) {
+        summary[key] += 1;
       }
-    ).length;
+    }
+  );
+
 
   console.log(
     "===================================="
   );
 
   console.log(
-    "AXOO ART DATE NORMALIZER"
+    "AXOO ART DATE NORMALIZER v" +
+    NORMALIZER_VERSION
   );
 
   console.log(
@@ -1051,17 +1232,17 @@ function main() {
 
   console.log(
     "HIGH:",
-    high
+    summary.HIGH
   );
 
   console.log(
     "MEDIUM:",
-    medium
+    summary.MEDIUM
   );
 
   console.log(
     "LOW:",
-    low
+    summary.LOW
   );
 
   console.log(
