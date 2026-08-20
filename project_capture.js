@@ -7,8 +7,7 @@
   const APP_URL =
     "https://script.google.com/a/macros/axoocorp.com/s/AKfycbzLS5AW0DfLGIDersBlbL4IDEIhHqElPaaePi45bG5nrT6V_8FKwSjwta3lUS3VocW3/exec";
 
-  const STORAGE_KEY =
-    "axoo_b2g_registered_projects_v1";
+  const STORAGE_KEY = "axoo_b2g_registered_projects_v1";
 
   let priorityProjects = [];
   let artProjects = [];
@@ -35,13 +34,8 @@
 
 
   function normalizeDate(value) {
-    const text =
-      String(value || "").trim();
-
-    const match =
-      text.match(
-        /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
-      );
+    const text = String(value || "").trim();
+    const match = text.match(/(\d{4})[-./](\d{1,2})[-./](\d{1,2})/);
 
     if (!match) return "";
 
@@ -50,6 +44,42 @@
       String(match[2]).padStart(2, "0"),
       String(match[3]).padStart(2, "0")
     ].join("-");
+  }
+
+
+  function clampProgress(value) {
+    const number = Number(value);
+
+    if (!Number.isFinite(number)) {
+      return 0;
+    }
+
+    return Math.max(
+      0,
+      Math.min(
+        100,
+        Math.round(number)
+      )
+    );
+  }
+
+
+  function statusLabel(status) {
+    const map = {
+      REVIEW: "검토중",
+      WORKING: "작성중",
+      REVIEW_REQUESTED: "검토요청",
+      READY: "제출준비",
+      SUBMITTED: "제출완료"
+    };
+
+    return (
+      map[
+        String(status || "")
+          .toUpperCase()
+      ] ||
+      String(status || "")
+    );
   }
 
 
@@ -103,20 +133,27 @@
     ];
 
     return (
-      values.find(function (value) {
-        const url =
-          String(value || "").trim();
+      values.find(
+        function (value) {
+          const url =
+            String(value || "")
+              .trim();
 
-        return (
-          url.startsWith("https://") ||
-          url.startsWith("http://")
-        );
-      }) || ""
+          return (
+            url.startsWith("https://") ||
+            url.startsWith("http://")
+          );
+        }
+      ) ||
+      ""
     );
   }
 
 
-  function getResearchId(project, type) {
+  function getResearchId(
+    project,
+    type
+  ) {
     const id =
       project.id ||
       project.bidNtceNo ||
@@ -130,7 +167,9 @@
 
     return [
       type,
-      normalizeText(getTitle(project)),
+      normalizeText(
+        getTitle(project)
+      ),
       getDeadline(project)
     ].join("::");
   }
@@ -142,7 +181,9 @@
         .toUpperCase()
         .trim();
 
-    if (grade) return grade;
+    if (grade) {
+      return grade;
+    }
 
     const score =
       Number(
@@ -160,7 +201,10 @@
   }
 
 
-  function getPriority(project, type) {
+  function getPriority(
+    project,
+    type
+  ) {
     if (type === "art") {
       return "NORMAL";
     }
@@ -183,7 +227,10 @@
   }
 
 
-  function getNextAction(project, type) {
+  function getNextAction(
+    project,
+    type
+  ) {
     if (type === "art") {
       return (
         project.recommendedAction ||
@@ -200,7 +247,7 @@
 
 
   /* =========================================
-     REGISTERED STATE
+     REGISTERED / SYNC STATE
   ========================================= */
 
   function getRegisteredMap() {
@@ -210,7 +257,9 @@
           STORAGE_KEY
         );
 
-      if (!raw) return {};
+      if (!raw) {
+        return {};
+      }
 
       const parsed =
         JSON.parse(raw);
@@ -249,13 +298,30 @@
   }
 
 
-  function isRegistered(researchId) {
+  function getRegisteredState(
+    researchId
+  ) {
     const map =
       getRegisteredMap();
 
+    return (
+      map[researchId] ||
+      null
+    );
+  }
+
+
+  function isRegistered(
+    researchId
+  ) {
+    const state =
+      getRegisteredState(
+        researchId
+      );
+
     return Boolean(
-      map[researchId] &&
-      map[researchId].registered
+      state &&
+      state.registered
     );
   }
 
@@ -264,28 +330,94 @@
     researchId,
     data
   ) {
-    if (!researchId) return;
+    if (!researchId) {
+      return;
+    }
 
     const map =
       getRegisteredMap();
+
+    const previous =
+      map[researchId] ||
+      {};
+
+    const nextStatus =
+      data &&
+      data.status
+        ? data.status
+        : previous.status ||
+          "REVIEW";
 
     map[researchId] = {
       registered: true,
 
       projectId:
         data &&
-        data.projectId
-          ? data.projectId
-          : "",
+        data.projectId !== undefined
+          ? String(
+              data.projectId ||
+              ""
+            )
+          : String(
+              previous.projectId ||
+              ""
+            ),
 
       status:
+        nextStatus,
+
+      statusLabel:
         data &&
-        data.status
-          ? data.status
-          : "REVIEW",
+        data.statusLabel
+          ? String(
+              data.statusLabel
+            )
+          : previous.statusLabel ||
+            statusLabel(
+              nextStatus
+            ),
+
+      progress:
+        data &&
+        data.progress !== undefined &&
+        data.progress !== null &&
+        data.progress !== ""
+          ? clampProgress(
+              data.progress
+            )
+          : (
+              previous.progress !== undefined
+                ? clampProgress(
+                    previous.progress
+                  )
+                : null
+            ),
+
+      sheetUpdatedAt:
+        data &&
+        data.updatedAt !== undefined
+          ? String(
+              data.updatedAt ||
+              ""
+            )
+          : String(
+              previous.sheetUpdatedAt ||
+              ""
+            ),
+
+      syncedAt:
+        data &&
+        data.synced
+          ? new Date()
+              .toISOString()
+          : String(
+              previous.syncedAt ||
+              ""
+            ),
 
       updatedAt:
-        new Date().toISOString()
+        new Date()
+          .toISOString()
     };
 
     saveRegisteredMap(map);
@@ -295,8 +427,33 @@
 
 
   /* =========================================
-     REGISTRATION CALLBACK
+     CALLBACKS FROM APPS SCRIPT
   ========================================= */
+
+  function cleanUrlParams(
+    url,
+    names
+  ) {
+    names.forEach(
+      function (name) {
+        url.searchParams.delete(
+          name
+        );
+      }
+    );
+
+    window.history.replaceState(
+      {},
+      document.title,
+      url.pathname +
+      (
+        url.search ||
+        ""
+      ) +
+      url.hash
+    );
+  }
+
 
   function consumeRegistrationCallback() {
     try {
@@ -314,54 +471,137 @@
         return;
       }
 
-      const projectId =
-        url.searchParams.get(
-          "projectId"
-        ) || "";
-
-      const status =
-        url.searchParams.get(
-          "status"
-        ) || "REVIEW";
-
       markRegistered(
         researchId,
         {
-          projectId: projectId,
-          status: status
+          projectId:
+            url.searchParams.get(
+              "projectId"
+            ) ||
+            "",
+
+          status:
+            url.searchParams.get(
+              "status"
+            ) ||
+            "REVIEW"
         }
       );
 
-      /*
-        등록용 파라미터를 주소에서 제거.
-      */
-      url.searchParams.delete(
-        "registeredResearchId"
-      );
-
-      url.searchParams.delete(
-        "projectId"
-      );
-
-      url.searchParams.delete(
-        "status"
-      );
-
-      window.history.replaceState(
-        {},
-        document.title,
-        url.pathname +
-        (
-          url.search
-            ? url.search
-            : ""
-        ) +
-        url.hash
+      cleanUrlParams(
+        url,
+        [
+          "registeredResearchId",
+          "projectId",
+          "status"
+        ]
       );
 
     } catch (error) {
       console.warn(
-        "[AXOO Capture] callback parse failed",
+        "[AXOO Capture] registration callback failed",
+        error
+      );
+    }
+  }
+
+
+  function consumeSyncCallback() {
+    try {
+      const url =
+        new URL(
+          window.location.href
+        );
+
+      if (
+        url.searchParams.get(
+          "syncResult"
+        ) !== "1"
+      ) {
+        return;
+      }
+
+      const found =
+        url.searchParams.get(
+          "syncFound"
+        ) === "1";
+
+      const researchId =
+        url.searchParams.get(
+          "researchId"
+        ) ||
+        "";
+
+      if (
+        found &&
+        researchId
+      ) {
+        markRegistered(
+          researchId,
+          {
+            projectId:
+              url.searchParams.get(
+                "projectId"
+              ) ||
+              "",
+
+            status:
+              url.searchParams.get(
+                "status"
+              ) ||
+              "REVIEW",
+
+            statusLabel:
+              url.searchParams.get(
+                "statusLabel"
+              ) ||
+              "",
+
+            progress:
+              url.searchParams.get(
+                "progress"
+              ),
+
+            updatedAt:
+              url.searchParams.get(
+                "updatedAt"
+              ) ||
+              "",
+
+            synced:
+              true
+          }
+        );
+      }
+
+      cleanUrlParams(
+        url,
+        [
+          "syncResult",
+          "syncFound",
+          "researchId",
+          "projectId",
+          "status",
+          "statusLabel",
+          "progress",
+          "updatedAt"
+        ]
+      );
+
+      if (!found) {
+        setTimeout(
+          function () {
+            alert(
+              "Google Sheet에서 해당 지원 프로젝트를 찾지 못했습니다."
+            );
+          },
+          250
+        );
+      }
+
+    } catch (error) {
+      console.warn(
+        "[AXOO Capture] sync callback failed",
         error
       );
     }
@@ -427,8 +667,12 @@
       card.querySelector(
         ".accordion-body h2"
       ) ||
-      card.querySelector("h2") ||
-      card.querySelector("h3") ||
+      card.querySelector(
+        "h2"
+      ) ||
+      card.querySelector(
+        "h3"
+      ) ||
       card.querySelector(
         ".summary-title"
       );
@@ -445,16 +689,20 @@
     list,
     title
   ) {
-    if (!title) return null;
+    if (!title) {
+      return null;
+    }
 
     return (
-      list.find(function (project) {
-        return (
-          normalizeText(
-            getTitle(project)
-          ) === title
-        );
-      }) ||
+      list.find(
+        function (project) {
+          return (
+            normalizeText(
+              getTitle(project)
+            ) === title
+          );
+        }
+      ) ||
       null
     );
   }
@@ -465,7 +713,9 @@
       getCardTitle(card);
 
     if (
-      card.closest("#artCards")
+      card.closest(
+        "#artCards"
+      )
     ) {
       const project =
         findByTitle(
@@ -497,7 +747,7 @@
 
 
   /* =========================================
-     ADD URL
+     URL BUILDERS
   ========================================= */
 
   function buildAddUrl(
@@ -564,21 +814,130 @@
   }
 
 
+  function buildSyncUrl(
+    project,
+    type
+  ) {
+    const researchId =
+      getResearchId(
+        project,
+        type
+      );
+
+    const state =
+      getRegisteredState(
+        researchId
+      ) ||
+      {};
+
+    const params =
+      new URLSearchParams();
+
+    params.set(
+      "mode",
+      "sync"
+    );
+
+    params.set(
+      "researchId",
+      researchId
+    );
+
+    if (
+      state.projectId
+    ) {
+      params.set(
+        "projectId",
+        state.projectId
+      );
+    }
+
+    params.set(
+      "title",
+      getTitle(project)
+    );
+
+    params.set(
+      "deadline",
+      getDeadline(project)
+    );
+
+    return (
+      APP_URL +
+      "?" +
+      params.toString()
+    );
+  }
+
+
   /* =========================================
-     BUTTON
+     BUTTON STATE
   ========================================= */
+
+  function registeredButtonText(
+    researchId
+  ) {
+    const state =
+      getRegisteredState(
+        researchId
+      );
+
+    if (
+      !state ||
+      !state.registered
+    ) {
+      return (
+        "⭐ 지원 관리에 추가"
+      );
+    }
+
+    const label =
+      state.statusLabel ||
+      statusLabel(
+        state.status
+      );
+
+    const hasProgress =
+      state.progress !== null &&
+      state.progress !== undefined &&
+      state.progress !== "";
+
+    if (
+      label &&
+      hasProgress
+    ) {
+      return (
+        `✓ 지원 관리 등록됨 · ${label} · ${clampProgress(
+          state.progress
+        )}%`
+      );
+    }
+
+    if (label) {
+      return (
+        `✓ 지원 관리 등록됨 · ${label}`
+      );
+    }
+
+    return (
+      "✓ 지원 관리 등록됨"
+    );
+  }
+
 
   function setButtonState(
     button,
     researchId
   ) {
     const registered =
-      isRegistered(researchId);
+      isRegistered(
+        researchId
+      );
 
     const wantedText =
-      registered
-        ? "✓ 지원 관리 등록됨"
-        : "⭐ 지원 관리에 추가";
+      registeredButtonText(
+        researchId
+      );
 
     if (
       button.textContent !==
@@ -592,6 +951,29 @@
       "registered",
       registered
     );
+  }
+
+
+  function setSyncButtonState(
+    button,
+    researchId
+  ) {
+    const registered =
+      isRegistered(
+        researchId
+      );
+
+    button.hidden =
+      !registered;
+
+    if (
+      registered &&
+      button.textContent !==
+      "↻ 상태 동기화"
+    ) {
+      button.textContent =
+        "↻ 상태 동기화";
+    }
   }
 
 
@@ -652,6 +1034,50 @@
   }
 
 
+  function handleSync(
+    button,
+    card
+  ) {
+    const capture =
+      findProject(card);
+
+    if (!capture) {
+      alert(
+        "공고 데이터를 찾지 못했습니다."
+      );
+
+      return;
+    }
+
+    const researchId =
+      getResearchId(
+        capture.project,
+        capture.type
+      );
+
+    if (
+      !isRegistered(
+        researchId
+      )
+    ) {
+      alert(
+        "먼저 지원 관리에 등록해 주세요."
+      );
+
+      return;
+    }
+
+    button.textContent =
+      "동기화 중...";
+
+    window.location.href =
+      buildSyncUrl(
+        capture.project,
+        capture.type
+      );
+  }
+
+
   /* =========================================
      STORAGE SYNC
   ========================================= */
@@ -708,18 +1134,22 @@
         margin:0 !important;
       }
 
-      .axoo-capture-button {
+      .axoo-capture-button,
+      .axoo-sync-button {
         appearance:none;
         min-height:38px;
         padding:0 15px;
-        border:1px solid #111;
         border-radius:999px;
-        background:#111;
-        color:#fff;
         font:inherit;
         font-size:12px;
         font-weight:900;
         cursor:pointer;
+      }
+
+      .axoo-capture-button {
+        border:1px solid #111;
+        background:#111;
+        color:#fff;
       }
 
       .axoo-capture-button:hover {
@@ -729,12 +1159,27 @@
       .axoo-capture-button.registered {
         border-color:#d6d6d1;
         background:#f1f1ee;
-        color:#555;
+        color:#444;
       }
 
       .axoo-capture-button.registered:hover {
         opacity:1;
         background:#e9e9e4;
+      }
+
+      .axoo-sync-button {
+        border:1px solid #111;
+        background:#fff;
+        color:#111;
+      }
+
+      .axoo-sync-button:hover {
+        background:#111;
+        color:#fff;
+      }
+
+      .axoo-sync-button[hidden] {
+        display:none !important;
       }
 
       @media (max-width:640px) {
@@ -744,7 +1189,8 @@
         }
 
         .axoo-capture-actions > .link,
-        .axoo-capture-button {
+        .axoo-capture-button,
+        .axoo-sync-button {
           width:100%;
           text-align:center;
         }
@@ -769,7 +1215,9 @@
 
     const isArt =
       Boolean(
-        card.closest("#artCards")
+        card.closest(
+          "#artCards"
+        )
       );
 
     if (
@@ -852,46 +1300,89 @@
       }
     }
 
-    let button =
+    let captureButton =
       actions.querySelector(
         ".axoo-capture-button"
       );
 
-    if (!button) {
-      button =
+    if (!captureButton) {
+      captureButton =
         document.createElement(
           "button"
         );
 
-      button.type =
+      captureButton.type =
         "button";
 
-      button.className =
+      captureButton.className =
         "axoo-capture-button";
 
-      button.addEventListener(
+      captureButton.addEventListener(
         "click",
         function (event) {
           event.preventDefault();
           event.stopPropagation();
 
           handleCapture(
-            button,
+            captureButton,
             card
           );
         }
       );
 
       actions.appendChild(
-        button
+        captureButton
       );
     }
 
-    button.dataset.researchId =
+    captureButton.dataset.researchId =
       researchId;
 
     setButtonState(
-      button,
+      captureButton,
+      researchId
+    );
+
+    let syncButton =
+      actions.querySelector(
+        ".axoo-sync-button"
+      );
+
+    if (!syncButton) {
+      syncButton =
+        document.createElement(
+          "button"
+        );
+
+      syncButton.type =
+        "button";
+
+      syncButton.className =
+        "axoo-sync-button";
+
+      syncButton.addEventListener(
+        "click",
+        function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          handleSync(
+            syncButton,
+            card
+          );
+        }
+      );
+
+      actions.appendChild(
+        syncButton
+      );
+    }
+
+    syncButton.dataset.researchId =
+      researchId;
+
+    setSyncButtonState(
+      syncButton,
       researchId
     );
   }
@@ -929,12 +1420,28 @@
           );
         }
       );
+
+    document
+      .querySelectorAll(
+        ".axoo-sync-button[data-research-id]"
+      )
+      .forEach(
+        function (button) {
+          setSyncButtonState(
+            button,
+            button.dataset.researchId
+          );
+        }
+      );
   }
 
 
   /*
-    MutationObserver 없음.
+    MutationObserver는 사용하지 않는다.
+    기존 대시보드 렌더 타이밍에 맞춰
+    안전하게 여러 번 재시도한다.
   */
+
   function scheduleSafeDecorations() {
     [
       250,
@@ -959,6 +1466,8 @@
 
   async function init() {
     consumeRegistrationCallback();
+
+    consumeSyncCallback();
 
     injectStyles();
 
@@ -990,7 +1499,7 @@
       "DOMContentLoaded",
       init,
       {
-        once:true
+        once: true
       }
     );
 
