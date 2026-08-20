@@ -7,15 +7,16 @@
   const APP_URL =
     "https://script.google.com/a/macros/axoocorp.com/s/AKfycbzLS5AW0DfLGIDersBlbL4IDEIhHqElPaaePi45bG5nrT6V_8FKwSjwta3lUS3VocW3/exec";
 
-  const STORAGE_KEY = "axoo_b2g_registered_projects_v1";
+  const STORAGE_KEY =
+    "axoo_b2g_registered_projects_v1";
 
   let priorityProjects = [];
   let artProjects = [];
 
 
-  /* =========================================
+  /* =====================================================
      BASIC
-  ========================================= */
+  ===================================================== */
 
   function normalizeArray(data) {
     if (Array.isArray(data)) return data;
@@ -34,8 +35,13 @@
 
 
   function normalizeDate(value) {
-    const text = String(value || "").trim();
-    const match = text.match(/(\d{4})[-./](\d{1,2})[-./](\d{1,2})/);
+    const text =
+      String(value || "").trim();
+
+    const match =
+      text.match(
+        /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
+      );
 
     if (!match) return "";
 
@@ -48,7 +54,8 @@
 
 
   function clampProgress(value) {
-    const number = Number(value);
+    const number =
+      Number(value);
 
     if (!Number.isFinite(number)) {
       return 0;
@@ -73,19 +80,18 @@
       SUBMITTED: "제출완료"
     };
 
-    return (
-      map[
-        String(status || "")
-          .toUpperCase()
-      ] ||
+    const key =
       String(status || "")
-    );
+        .toUpperCase()
+        .trim();
+
+    return map[key] || key;
   }
 
 
-  /* =========================================
+  /* =====================================================
      PROJECT DATA
-  ========================================= */
+  ===================================================== */
 
   function getTitle(project) {
     return (
@@ -133,18 +139,15 @@
     ];
 
     return (
-      values.find(
-        function (value) {
-          const url =
-            String(value || "")
-              .trim();
+      values.find(function (value) {
+        const url =
+          String(value || "").trim();
 
-          return (
-            url.startsWith("https://") ||
-            url.startsWith("http://")
-          );
-        }
-      ) ||
+        return (
+          url.startsWith("https://") ||
+          url.startsWith("http://")
+        );
+      }) ||
       ""
     );
   }
@@ -246,9 +249,9 @@
   }
 
 
-  /* =========================================
-     REGISTERED / SYNC STATE
-  ========================================= */
+  /* =====================================================
+     LOCAL STORAGE
+  ===================================================== */
 
   function getRegisteredMap() {
     try {
@@ -273,7 +276,7 @@
 
     } catch (error) {
       console.warn(
-        "[AXOO Capture] storage read failed",
+        "[AXOO B2G] localStorage read error",
         error
       );
 
@@ -291,7 +294,7 @@
 
     } catch (error) {
       console.warn(
-        "[AXOO Capture] storage write failed",
+        "[AXOO B2G] localStorage save error",
         error
       );
     }
@@ -342,82 +345,84 @@
       {};
 
     const nextStatus =
+      (
+        data &&
+        data.status
+      ) ||
+      previous.status ||
+      "REVIEW";
+
+    let progress =
+      previous.progress;
+
+    if (
       data &&
-      data.status
-        ? data.status
-        : previous.status ||
-          "REVIEW";
+      data.progress !== undefined &&
+      data.progress !== null &&
+      data.progress !== ""
+    ) {
+      progress =
+        clampProgress(
+          data.progress
+        );
+    }
 
     map[researchId] = {
       registered: true,
 
       projectId:
-        data &&
-        data.projectId !== undefined
+        (
+          data &&
+          data.projectId !== undefined
+        )
           ? String(
-              data.projectId ||
-              ""
+              data.projectId || ""
             )
           : String(
-              previous.projectId ||
-              ""
+              previous.projectId || ""
             ),
 
       status:
         nextStatus,
 
       statusLabel:
-        data &&
-        data.statusLabel
+        (
+          data &&
+          data.statusLabel
+        )
           ? String(
               data.statusLabel
             )
-          : previous.statusLabel ||
-            statusLabel(
-              nextStatus
+          : (
+              previous.statusLabel ||
+              statusLabel(nextStatus)
             ),
 
       progress:
-        data &&
-        data.progress !== undefined &&
-        data.progress !== null &&
-        data.progress !== ""
-          ? clampProgress(
-              data.progress
-            )
-          : (
-              previous.progress !== undefined
-                ? clampProgress(
-                    previous.progress
-                  )
-                : null
-            ),
+        progress,
 
       sheetUpdatedAt:
-        data &&
-        data.updatedAt !== undefined
+        (
+          data &&
+          data.updatedAt !== undefined
+        )
           ? String(
-              data.updatedAt ||
-              ""
+              data.updatedAt || ""
             )
           : String(
-              previous.sheetUpdatedAt ||
-              ""
+              previous.sheetUpdatedAt || ""
             ),
 
       syncedAt:
         data &&
         data.synced
-          ? new Date()
-              .toISOString()
+          ? new Date().toISOString()
           : String(
-              previous.syncedAt ||
-              ""
+              previous.syncedAt || ""
             ),
 
       updatedAt:
-        new Date()
-          .toISOString()
+        new Date().toISOString()
     };
 
     saveRegisteredMap(map);
@@ -426,9 +431,27 @@
   }
 
 
-  /* =========================================
-     CALLBACKS FROM APPS SCRIPT
-  ========================================= */
+  function markNotRegistered(
+    researchId
+  ) {
+    if (!researchId) {
+      return;
+    }
+
+    const map =
+      getRegisteredMap();
+
+    delete map[researchId];
+
+    saveRegisteredMap(map);
+
+    refreshButtonStates();
+  }
+
+
+  /* =====================================================
+     CALLBACK
+  ===================================================== */
 
   function cleanUrlParams(
     url,
@@ -477,14 +500,12 @@
           projectId:
             url.searchParams.get(
               "projectId"
-            ) ||
-            "",
+            ) || "",
 
           status:
             url.searchParams.get(
               "status"
-            ) ||
-            "REVIEW"
+            ) || "REVIEW"
         }
       );
 
@@ -499,7 +520,7 @@
 
     } catch (error) {
       console.warn(
-        "[AXOO Capture] registration callback failed",
+        "[AXOO B2G] registration callback error",
         error
       );
     }
@@ -529,8 +550,7 @@
       const researchId =
         url.searchParams.get(
           "researchId"
-        ) ||
-        "";
+        ) || "";
 
       if (
         found &&
@@ -542,20 +562,17 @@
             projectId:
               url.searchParams.get(
                 "projectId"
-              ) ||
-              "",
+              ) || "",
 
             status:
               url.searchParams.get(
                 "status"
-              ) ||
-              "REVIEW",
+              ) || "REVIEW",
 
             statusLabel:
               url.searchParams.get(
                 "statusLabel"
-              ) ||
-              "",
+              ) || "",
 
             progress:
               url.searchParams.get(
@@ -565,12 +582,16 @@
             updatedAt:
               url.searchParams.get(
                 "updatedAt"
-              ) ||
-              "",
+              ) || "",
 
             synced:
               true
           }
+        );
+
+      } else if (researchId) {
+        markNotRegistered(
+          researchId
         );
       }
 
@@ -592,36 +613,39 @@
         setTimeout(
           function () {
             alert(
-              "Google Sheet에서 해당 지원 프로젝트를 찾지 못했습니다."
+              "Google Sheet에서 등록된 지원 프로젝트를 찾지 못했습니다."
             );
           },
-          250
+          200
         );
       }
 
     } catch (error) {
       console.warn(
-        "[AXOO Capture] sync callback failed",
+        "[AXOO B2G] sync callback error",
         error
       );
     }
   }
 
 
-  /* =========================================
+  /* =====================================================
      DATA LOAD
-  ========================================= */
+  ===================================================== */
 
   async function loadJson(url) {
     try {
       const response =
         await fetch(
-          `${url}?v=${Date.now()}`
+          url +
+          "?v=" +
+          Date.now()
         );
 
       if (!response.ok) {
         throw new Error(
-          `${url} load failed`
+          url +
+          " load failed"
         );
       }
 
@@ -631,7 +655,7 @@
 
     } catch (error) {
       console.error(
-        "[AXOO Capture]",
+        "[AXOO B2G]",
         error
       );
 
@@ -641,38 +665,31 @@
 
 
   async function loadData() {
-    const [
-      priority,
-      art
-    ] =
+    const results =
       await Promise.all([
         loadJson(PRIORITY_URL),
         loadJson(ART_URL)
       ]);
 
     priorityProjects =
-      priority;
+      results[0];
 
     artProjects =
-      art;
+      results[1];
   }
 
 
-  /* =========================================
+  /* =====================================================
      CARD MATCH
-  ========================================= */
+  ===================================================== */
 
   function getCardTitle(card) {
     const element =
       card.querySelector(
         ".accordion-body h2"
       ) ||
-      card.querySelector(
-        "h2"
-      ) ||
-      card.querySelector(
-        "h3"
-      ) ||
+      card.querySelector("h2") ||
+      card.querySelector("h3") ||
       card.querySelector(
         ".summary-title"
       );
@@ -694,15 +711,13 @@
     }
 
     return (
-      list.find(
-        function (project) {
-          return (
-            normalizeText(
-              getTitle(project)
-            ) === title
-          );
-        }
-      ) ||
+      list.find(function (project) {
+        return (
+          normalizeText(
+            getTitle(project)
+          ) === title
+        );
+      }) ||
       null
     );
   }
@@ -746,9 +761,9 @@
   }
 
 
-  /* =========================================
-     URL BUILDERS
-  ========================================= */
+  /* =====================================================
+     URL
+  ===================================================== */
 
   function buildAddUrl(
     project,
@@ -827,8 +842,7 @@
     const state =
       getRegisteredState(
         researchId
-      ) ||
-      {};
+      ) || {};
 
     const params =
       new URLSearchParams();
@@ -843,9 +857,14 @@
       researchId
     );
 
-    if (
-      state.projectId
-    ) {
+    /*
+      localStorage가 살아 있다면
+      Project ID도 같이 전달.
+
+      없어도 title + deadline으로
+      Apps Script가 다시 찾을 수 있다.
+    */
+    if (state.projectId) {
       params.set(
         "projectId",
         state.projectId
@@ -870,11 +889,11 @@
   }
 
 
-  /* =========================================
-     BUTTON STATE
-  ========================================= */
+  /* =====================================================
+     BUTTON TEXT
+  ===================================================== */
 
-  function registeredButtonText(
+  function getCaptureButtonText(
     researchId
   ) {
     const state =
@@ -898,8 +917,8 @@
       );
 
     const hasProgress =
-      state.progress !== null &&
       state.progress !== undefined &&
+      state.progress !== null &&
       state.progress !== "";
 
     if (
@@ -907,15 +926,20 @@
       hasProgress
     ) {
       return (
-        `✓ 지원 관리 등록됨 · ${label} · ${clampProgress(
+        "✓ 지원 관리 등록됨 · " +
+        label +
+        " · " +
+        clampProgress(
           state.progress
-        )}%`
+        ) +
+        "%"
       );
     }
 
     if (label) {
       return (
-        `✓ 지원 관리 등록됨 · ${label}`
+        "✓ 지원 관리 등록됨 · " +
+        label
       );
     }
 
@@ -925,7 +949,7 @@
   }
 
 
-  function setButtonState(
+  function setCaptureButtonState(
     button,
     researchId
   ) {
@@ -934,18 +958,10 @@
         researchId
       );
 
-    const wantedText =
-      registeredButtonText(
+    button.textContent =
+      getCaptureButtonText(
         researchId
       );
-
-    if (
-      button.textContent !==
-      wantedText
-    ) {
-      button.textContent =
-        wantedText;
-    }
 
     button.classList.toggle(
       "registered",
@@ -954,6 +970,16 @@
   }
 
 
+  /*
+    중요 수정:
+    동기화 버튼을 더 이상 숨기지 않는다.
+
+    미등록 상태:
+    ↻ 지원 상태 확인
+
+    등록 상태:
+    ↻ 상태 동기화
+  */
   function setSyncButtonState(
     button,
     researchId
@@ -964,18 +990,18 @@
       );
 
     button.hidden =
-      !registered;
+      false;
 
-    if (
-      registered &&
-      button.textContent !==
-      "↻ 상태 동기화"
-    ) {
-      button.textContent =
-        "↻ 상태 동기화";
-    }
+    button.textContent =
+      registered
+        ? "↻ 상태 동기화"
+        : "↻ 지원 상태 확인";
   }
 
+
+  /* =====================================================
+     BUTTON ACTION
+  ===================================================== */
 
   function handleCapture(
     button,
@@ -1024,16 +1050,20 @@
 
     setTimeout(
       function () {
-        setButtonState(
+        setCaptureButtonState(
           button,
           researchId
         );
       },
-      1500
+      1200
     );
   }
 
 
+  /*
+    중요 수정:
+    등록 여부와 무관하게 Sheet 검색 가능.
+  */
   function handleSync(
     button,
     card
@@ -1049,26 +1079,8 @@
       return;
     }
 
-    const researchId =
-      getResearchId(
-        capture.project,
-        capture.type
-      );
-
-    if (
-      !isRegistered(
-        researchId
-      )
-    ) {
-      alert(
-        "먼저 지원 관리에 등록해 주세요."
-      );
-
-      return;
-    }
-
     button.textContent =
-      "동기화 중...";
+      "확인 중...";
 
     window.location.href =
       buildSyncUrl(
@@ -1078,15 +1090,14 @@
   }
 
 
-  /* =========================================
-     STORAGE SYNC
-  ========================================= */
+  /* =====================================================
+     STORAGE EVENT
+  ===================================================== */
 
   function listenForStorageChanges() {
     window.addEventListener(
       "storage",
       function (event) {
-
         if (
           event.key !==
           STORAGE_KEY
@@ -1100,9 +1111,9 @@
   }
 
 
-  /* =========================================
+  /* =====================================================
      STYLE
-  ========================================= */
+  ===================================================== */
 
   function injectStyles() {
     if (
@@ -1168,18 +1179,15 @@
       }
 
       .axoo-sync-button {
-        border:1px solid #111;
+        border:1px solid #d6d6d1;
         background:#fff;
         color:#111;
       }
 
       .axoo-sync-button:hover {
+        border-color:#111;
         background:#111;
         color:#fff;
-      }
-
-      .axoo-sync-button[hidden] {
-        display:none !important;
       }
 
       @media (max-width:640px) {
@@ -1203,9 +1211,9 @@
   }
 
 
-  /* =========================================
-     CARD DECORATION
-  ========================================= */
+  /* =====================================================
+     DECORATE CARD
+  ===================================================== */
 
   function decorateCard(card) {
     const isPriority =
@@ -1283,11 +1291,10 @@
         link &&
         link.parentNode
       ) {
-        link.parentNode
-          .insertBefore(
-            actions,
-            link
-          );
+        link.parentNode.insertBefore(
+          actions,
+          link
+        );
 
         actions.appendChild(
           link
@@ -1299,6 +1306,9 @@
         );
       }
     }
+
+
+    /* 지원관리 버튼 */
 
     let captureButton =
       actions.querySelector(
@@ -1338,10 +1348,13 @@
     captureButton.dataset.researchId =
       researchId;
 
-    setButtonState(
+    setCaptureButtonState(
       captureButton,
       researchId
     );
+
+
+    /* 상태 확인 / 동기화 버튼 */
 
     let syncButton =
       actions.querySelector(
@@ -1414,7 +1427,7 @@
       )
       .forEach(
         function (button) {
-          setButtonState(
+          setCaptureButtonState(
             button,
             button.dataset.researchId
           );
@@ -1438,17 +1451,16 @@
 
   /*
     MutationObserver는 사용하지 않는다.
-    기존 대시보드 렌더 타이밍에 맞춰
-    안전하게 여러 번 재시도한다.
+    기존에 페이지가 멈췄던 문제 방지.
   */
-
   function scheduleSafeDecorations() {
     [
-      250,
-      700,
-      1400,
-      2600,
-      4500
+      200,
+      500,
+      900,
+      1500,
+      2500,
+      4000
     ].forEach(
       function (delay) {
         setTimeout(
@@ -1460,23 +1472,24 @@
   }
 
 
-  /* =========================================
+  /* =====================================================
      INIT
-  ========================================= */
+  ===================================================== */
 
   async function init() {
+    /*
+      Apps Script에서 GitHub로 복귀했을 때
+      먼저 URL 상태값을 localStorage에 저장.
+    */
     consumeRegistrationCallback();
-
     consumeSyncCallback();
 
     injectStyles();
-
     listenForStorageChanges();
 
     await loadData();
 
     decorateAllCards();
-
     scheduleSafeDecorations();
 
     window.addEventListener(
@@ -1492,14 +1505,13 @@
 
 
   if (
-    document.readyState ===
-    "loading"
+    document.readyState === "loading"
   ) {
     document.addEventListener(
       "DOMContentLoaded",
       init,
       {
-        once: true
+        once:true
       }
     );
 
