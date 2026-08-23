@@ -25,7 +25,18 @@
     "grade": "A",
     "isExpired": false,
     "isStaleCandidate": false,
-    "deadlineStatus": "진행중"
+    "deadlineStatus": "진행중",
+    "postedDate": "2026-08-10",
+    "periodEnd": "",
+    "endDate": "2026-09-01",
+    "publishedDateSource": "existing",
+    "periodSource": "not_found",
+    "periodKeyword": "",
+    "deadlineSource": "existing_deadline",
+    "deadlineKeyword": "",
+    "dateConfidence": "MEDIUM",
+    "dateNormalizationVersion": "1.1.0",
+    "dateNormalizedAt": "2026-08-23"
   },
   {
     "id": "external-74fe83e93a95ff12",
@@ -53,6 +64,17 @@
     "grade": "A",
     "isExpired": false,
     "isStaleCandidate": false,
-    "deadlineStatus": "진행중"
+    "deadlineStatus": "진행중",
+    "postedDate": "2026-08-10",
+    "periodEnd": "",
+    "endDate": "2026-09-01",
+    "publishedDateSource": "existing",
+    "periodSource": "not_found",
+    "periodKeyword": "",
+    "deadlineSource": "existing_deadline",
+    "deadlineKeyword": "",
+    "dateConfidence": "MEDIUM",
+    "dateNormalizationVersion": "1.1.0",
+    "dateNormalizedAt": "2026-08-23"
   }
 ]
