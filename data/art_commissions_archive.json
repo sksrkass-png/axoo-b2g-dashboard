@@ -1,0 +1,32 @@
+[
+  {
+    "id": "external-8880286e9173908d",
+    "source": "경기도 건축물 미술작품",
+    "title": "『용인 반도체클러스터 일반산업단지 D1-1BL 공동주택 신축공사』 미술작품 공모 공고",
+    "agency": "경기도",
+    "region": "경기",
+    "category": "미술작품 공모",
+    "status": "마감",
+    "publishedDate": "2026-07-31",
+    "postedDate": "2026-07-31",
+    "periodStart": "2026-08-20",
+    "periodEnd": "2026-08-20",
+    "deadline": "2026-08-20",
+    "endDate": "2026-08-20",
+    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110904102&menuId=3865",
+    "recommendedAction": "공고 원문 및 제출 조건 확인 / 작품제출: 2026-08-20",
+    "deadlineSource": "detail_body",
+    "periodSource": "detail_body",
+    "periodKeyword": "작품제출",
+    "publishedDateSource": "detail_metadata",
+    "dateConfidence": "HIGH",
+    "detailFetchStatus": "ok",
+    "dateNormalizationVersion": "archive-seed-1.0",
+    "dateNormalizedAt": "2026-08-24",
+    "deadlineStatus": "마감",
+    "isExpired": true,
+    "archiveFirstSeenAt": "2026-08-24",
+    "archiveLastSeenAt": "2026-08-24",
+    "archiveIsCurrent": false
+  }
+]
