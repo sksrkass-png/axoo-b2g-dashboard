@@ -1,8 +1,11 @@
 (function () {
   "use strict";
 
-  const PRIORITY_URL = "data/priority_projects.json";
-  const ART_URL = "data/art_commissions.json";
+  const PRIORITY_URL =
+    "data/priority_projects.json";
+
+  const ART_URL =
+    "data/art_commissions.json";
 
   const APP_URL =
     "https://script.google.com/a/macros/axoocorp.com/s/AKfycbzLS5AW0DfLGIDersBlbL4IDEIhHqElPaaePi45bG5nrT6V_8FKwSjwta3lUS3VocW3/exec";
@@ -19,10 +22,31 @@
   ===================================================== */
 
   function normalizeArray(data) {
-    if (Array.isArray(data)) return data;
-    if (data && Array.isArray(data.projects)) return data.projects;
-    if (data && Array.isArray(data.items)) return data.items;
-    if (data && Array.isArray(data.data)) return data.data;
+    if (Array.isArray(data)) {
+      return data;
+    }
+
+    if (
+      data &&
+      Array.isArray(data.projects)
+    ) {
+      return data.projects;
+    }
+
+    if (
+      data &&
+      Array.isArray(data.items)
+    ) {
+      return data.items;
+    }
+
+    if (
+      data &&
+      Array.isArray(data.data)
+    ) {
+      return data.data;
+    }
+
     return [];
   }
 
@@ -36,19 +60,24 @@
 
   function normalizeDate(value) {
     const text =
-      String(value || "").trim();
+      String(value || "")
+        .trim();
 
     const match =
       text.match(
         /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
       );
 
-    if (!match) return "";
+    if (!match) {
+      return "";
+    }
 
     return [
       match[1],
-      String(match[2]).padStart(2, "0"),
-      String(match[3]).padStart(2, "0")
+      String(match[2])
+        .padStart(2, "0"),
+      String(match[3])
+        .padStart(2, "0")
     ].join("-");
   }
 
@@ -57,7 +86,9 @@
     const number =
       Number(value);
 
-    if (!Number.isFinite(number)) {
+    if (
+      !Number.isFinite(number)
+    ) {
       return 0;
     }
 
@@ -85,7 +116,10 @@
         .toUpperCase()
         .trim();
 
-    return map[key] || key;
+    return (
+      map[key] ||
+      key
+    );
   }
 
 
@@ -119,6 +153,7 @@
   function getDeadline(project) {
     return normalizeDate(
       project.deadline ||
+      project.periodEnd ||
       project.endDate ||
       project.bidNtceEndDt ||
       project.bidClseDt ||
@@ -139,15 +174,22 @@
     ];
 
     return (
-      values.find(function (value) {
-        const url =
-          String(value || "").trim();
+      values.find(
+        function (value) {
+          const url =
+            String(value || "")
+              .trim();
 
-        return (
-          url.startsWith("https://") ||
-          url.startsWith("http://")
-        );
-      }) ||
+          return (
+            url.startsWith(
+              "https://"
+            ) ||
+            url.startsWith(
+              "http://"
+            )
+          );
+        }
+      ) ||
       ""
     );
   }
@@ -180,7 +222,9 @@
 
   function getGrade(project) {
     const grade =
-      String(project.grade || "")
+      String(
+        project.grade || ""
+      )
         .toUpperCase()
         .trim();
 
@@ -196,9 +240,17 @@
         0
       );
 
-    if (score >= 85) return "S";
-    if (score >= 70) return "A";
-    if (score >= 50) return "B";
+    if (score >= 85) {
+      return "S";
+    }
+
+    if (score >= 70) {
+      return "A";
+    }
+
+    if (score >= 50) {
+      return "B";
+    }
 
     return "";
   }
@@ -208,7 +260,9 @@
     project,
     type
   ) {
-    if (type === "art") {
+    if (
+      type === "art"
+    ) {
       return "NORMAL";
     }
 
@@ -222,7 +276,9 @@
       return "HIGH";
     }
 
-    if (grade === "C") {
+    if (
+      grade === "C"
+    ) {
       return "LOW";
     }
 
@@ -234,9 +290,12 @@
     project,
     type
   ) {
-    if (type === "art") {
+    if (
+      type === "art"
+    ) {
       return (
         project.recommendedAction ||
+        project.nextAction ||
         "공고문 확인 후 접수 기간, 설치 조건, 작품 규모, 제출 서류 검토"
       );
     }
@@ -269,7 +328,8 @@
 
       return (
         parsed &&
-        typeof parsed === "object"
+        typeof parsed ===
+          "object"
       )
         ? parsed
         : {};
@@ -357,8 +417,10 @@
 
     if (
       data &&
-      data.progress !== undefined &&
-      data.progress !== null &&
+      data.progress !==
+        undefined &&
+      data.progress !==
+        null &&
       data.progress !== ""
     ) {
       progress =
@@ -373,13 +435,16 @@
       projectId:
         (
           data &&
-          data.projectId !== undefined
+          data.projectId !==
+            undefined
         )
           ? String(
-              data.projectId || ""
+              data.projectId ||
+              ""
             )
           : String(
-              previous.projectId || ""
+              previous.projectId ||
+              ""
             ),
 
       status:
@@ -395,7 +460,9 @@
             )
           : (
               previous.statusLabel ||
-              statusLabel(nextStatus)
+              statusLabel(
+                nextStatus
+              )
             ),
 
       progress:
@@ -404,25 +471,32 @@
       sheetUpdatedAt:
         (
           data &&
-          data.updatedAt !== undefined
+          data.updatedAt !==
+            undefined
         )
           ? String(
-              data.updatedAt || ""
+              data.updatedAt ||
+              ""
             )
           : String(
-              previous.sheetUpdatedAt || ""
+              previous
+                .sheetUpdatedAt ||
+              ""
             ),
 
       syncedAt:
         data &&
         data.synced
-          ? new Date().toISOString()
+          ? new Date()
+              .toISOString()
           : String(
-              previous.syncedAt || ""
+              previous.syncedAt ||
+              ""
             ),
 
       updatedAt:
-        new Date().toISOString()
+        new Date()
+          .toISOString()
     };
 
     saveRegisteredMap(map);
@@ -465,16 +539,17 @@
       }
     );
 
-    window.history.replaceState(
-      {},
-      document.title,
-      url.pathname +
-      (
-        url.search ||
-        ""
-      ) +
-      url.hash
-    );
+    window.history
+      .replaceState(
+        {},
+        document.title,
+        url.pathname +
+        (
+          url.search ||
+          ""
+        ) +
+        url.hash
+      );
   }
 
 
@@ -505,7 +580,8 @@
           status:
             url.searchParams.get(
               "status"
-            ) || "REVIEW"
+            ) ||
+            "REVIEW"
         }
       );
 
@@ -567,7 +643,8 @@
             status:
               url.searchParams.get(
                 "status"
-              ) || "REVIEW",
+              ) ||
+              "REVIEW",
 
             statusLabel:
               url.searchParams.get(
@@ -589,7 +666,9 @@
           }
         );
 
-      } else if (researchId) {
+      } else if (
+        researchId
+      ) {
         markNotRegistered(
           researchId
         );
@@ -667,8 +746,13 @@
   async function loadData() {
     const results =
       await Promise.all([
-        loadJson(PRIORITY_URL),
-        loadJson(ART_URL)
+        loadJson(
+          PRIORITY_URL
+        ),
+
+        loadJson(
+          ART_URL
+        )
       ]);
 
     priorityProjects =
@@ -711,13 +795,15 @@
     }
 
     return (
-      list.find(function (project) {
-        return (
-          normalizeText(
-            getTitle(project)
-          ) === title
-        );
-      }) ||
+      list.find(
+        function (project) {
+          return (
+            normalizeText(
+              getTitle(project)
+            ) === title
+          );
+        }
+      ) ||
       null
     );
   }
@@ -740,8 +826,11 @@
 
       return project
         ? {
-            project: project,
-            type: "art"
+            project:
+              project,
+
+            type:
+              "art"
           }
         : null;
     }
@@ -754,8 +843,11 @@
 
     return project
       ? {
-          project: project,
-          type: "priority"
+          project:
+            project,
+
+          type:
+            "priority"
         }
       : null;
   }
@@ -829,6 +921,15 @@
   }
 
 
+  /*
+    최신 리서치 정보를
+    Apps Script의 sync 모드로 함께 전달한다.
+
+    Apps Script 쪽에서는
+    기존 프로젝트를 찾은 뒤
+    기관 / 공식마감 / NEXT ACTION /
+    공고 URL을 최신값으로 갱신하게 된다.
+  */
   function buildSyncUrl(
     project,
     type
@@ -857,29 +958,69 @@
       researchId
     );
 
-    /*
-      localStorage가 살아 있다면
-      Project ID도 같이 전달.
 
-      없어도 title + deadline으로
-      Apps Script가 다시 찾을 수 있다.
+    /*
+      localStorage에 Project ID가 있으면
+      가장 정확하게 해당 행을 찾도록 전달.
     */
-    if (state.projectId) {
+    if (
+      state.projectId
+    ) {
       params.set(
         "projectId",
         state.projectId
       );
     }
 
+
+    /*
+      프로젝트 식별용
+    */
     params.set(
       "title",
       getTitle(project)
+    );
+
+
+    /*
+      최신 리서치 정보
+    */
+    params.set(
+      "institution",
+      getAgency(project)
     );
 
     params.set(
       "deadline",
       getDeadline(project)
     );
+
+    params.set(
+      "nextAction",
+      getNextAction(
+        project,
+        type
+      )
+    );
+
+    params.set(
+      "sourceUrl",
+      getSourceUrl(project)
+    );
+
+
+    /*
+      필요할 경우 Apps Script에서
+      우선순위도 참고 가능.
+    */
+    params.set(
+      "priority",
+      getPriority(
+        project,
+        type
+      )
+    );
+
 
     return (
       APP_URL +
@@ -917,8 +1058,10 @@
       );
 
     const hasProgress =
-      state.progress !== undefined &&
-      state.progress !== null &&
+      state.progress !==
+        undefined &&
+      state.progress !==
+        null &&
       state.progress !== "";
 
     if (
@@ -970,16 +1113,6 @@
   }
 
 
-  /*
-    중요 수정:
-    동기화 버튼을 더 이상 숨기지 않는다.
-
-    미등록 상태:
-    ↻ 지원 상태 확인
-
-    등록 상태:
-    ↻ 상태 동기화
-  */
   function setSyncButtonState(
     button,
     researchId
@@ -1061,8 +1194,11 @@
 
 
   /*
-    중요 수정:
-    등록 여부와 무관하게 Sheet 검색 가능.
+    등록 여부와 무관하게
+    Apps Script에서 Sheet 검색.
+
+    동시에 GitHub의 최신
+    공고 데이터도 전달한다.
   */
   function handleSync(
     button,
@@ -1080,7 +1216,7 @@
     }
 
     button.textContent =
-      "확인 중...";
+      "동기화 중...";
 
     window.location.href =
       buildSyncUrl(
@@ -1205,9 +1341,10 @@
       }
     `;
 
-    document.head.appendChild(
-      style
-    );
+    document.head
+      .appendChild(
+        style
+      );
   }
 
 
@@ -1291,10 +1428,11 @@
         link &&
         link.parentNode
       ) {
-        link.parentNode.insertBefore(
-          actions,
-          link
-        );
+        link.parentNode
+          .insertBefore(
+            actions,
+            link
+          );
 
         actions.appendChild(
           link
@@ -1308,7 +1446,7 @@
     }
 
 
-    /* 지원관리 버튼 */
+    /* 지원 관리 버튼 */
 
     let captureButton =
       actions.querySelector(
@@ -1327,25 +1465,27 @@
       captureButton.className =
         "axoo-capture-button";
 
-      captureButton.addEventListener(
-        "click",
-        function (event) {
-          event.preventDefault();
-          event.stopPropagation();
+      captureButton
+        .addEventListener(
+          "click",
+          function (event) {
+            event.preventDefault();
+            event.stopPropagation();
 
-          handleCapture(
-            captureButton,
-            card
-          );
-        }
-      );
+            handleCapture(
+              captureButton,
+              card
+            );
+          }
+        );
 
       actions.appendChild(
         captureButton
       );
     }
 
-    captureButton.dataset.researchId =
+    captureButton.dataset
+      .researchId =
       researchId;
 
     setCaptureButtonState(
@@ -1373,25 +1513,27 @@
       syncButton.className =
         "axoo-sync-button";
 
-      syncButton.addEventListener(
-        "click",
-        function (event) {
-          event.preventDefault();
-          event.stopPropagation();
+      syncButton
+        .addEventListener(
+          "click",
+          function (event) {
+            event.preventDefault();
+            event.stopPropagation();
 
-          handleSync(
-            syncButton,
-            card
-          );
-        }
-      );
+            handleSync(
+              syncButton,
+              card
+            );
+          }
+        );
 
       actions.appendChild(
         syncButton
       );
     }
 
-    syncButton.dataset.researchId =
+    syncButton.dataset
+      .researchId =
       researchId;
 
     setSyncButtonState(
@@ -1429,7 +1571,8 @@
         function (button) {
           setCaptureButtonState(
             button,
-            button.dataset.researchId
+            button.dataset
+              .researchId
           );
         }
       );
@@ -1442,7 +1585,8 @@
         function (button) {
           setSyncButtonState(
             button,
-            button.dataset.researchId
+            button.dataset
+              .researchId
           );
         }
       );
@@ -1451,7 +1595,7 @@
 
   /*
     MutationObserver는 사용하지 않는다.
-    기존에 페이지가 멈췄던 문제 방지.
+    기존 페이지 정지 문제 방지.
   */
   function scheduleSafeDecorations() {
     [
@@ -1478,8 +1622,8 @@
 
   async function init() {
     /*
-      Apps Script에서 GitHub로 복귀했을 때
-      먼저 URL 상태값을 localStorage에 저장.
+      Apps Script에서 GitHub로
+      돌아왔을 때 URL callback 처리
     */
     consumeRegistrationCallback();
     consumeSyncCallback();
@@ -1505,13 +1649,14 @@
 
 
   if (
-    document.readyState === "loading"
+    document.readyState ===
+    "loading"
   ) {
     document.addEventListener(
       "DOMContentLoaded",
       init,
       {
-        once:true
+        once: true
       }
     );
 
