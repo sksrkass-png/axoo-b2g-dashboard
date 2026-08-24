@@ -1,366 +1,1054 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AXOO B2G Dashboard</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-  <link rel="stylesheet" href="style.css?v=133" />
+  <title>
+    AXOO B2G Dashboard
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css?v=133"
+  />
+
 </head>
 
+
 <body>
+
   <header class="site-header">
+
     <div class="container header-inner">
+
       <div>
-        <p class="eyebrow">AXOO B2G ENGINE</p>
-        <h1>공공 프로젝트 자동 리서치 대시보드</h1>
-        <p class="subtitle">
-          건축물 미술작품, 벽화·조형물, 전시 콘텐츠 기획 운영 중심으로 AXOO 우선 검토 프로젝트를 관리합니다.
+
+        <p class="eyebrow">
+          AXOO B2G ENGINE
         </p>
+
+        <h1>
+          공공 프로젝트 자동 리서치 대시보드
+        </h1>
+
+        <p class="subtitle">
+          건축물 미술작품, 벽화·조형물,
+          전시 콘텐츠 기획 운영 중심으로
+          AXOO 우선 검토 프로젝트를 관리합니다.
+        </p>
+
       </div>
+
 
       <div class="header-update-card">
-        <span id="lastUpdatedAt">최근 업데이트 : -</span>
+
+        <span id="lastUpdatedAt">
+          최근 업데이트 : -
+        </span>
+
       </div>
+
     </div>
+
   </header>
 
+
   <main class="container">
+
     <section class="summary-panel">
+
       <div class="summary-panel-head">
-        <h2>현황 요약</h2>
+
+        <h2>
+          현황 요약
+        </h2>
+
       </div>
 
-      <!--
-        화면 표시용 요약 카드.
-        실제 숫자는 dashboard_priority_update.js에서 priority_projects.json 기준으로 다시 채웁니다.
-      -->
+
       <section class="meta-bar">
-        <div class="meta-card priority-meta-card" data-tab-target="art">
-          <div class="meta-label">1. 건축물 미술작품</div>
-          <div class="meta-value" id="priorityMetaArtCount">0</div>
+
+        <div
+          class="meta-card priority-meta-card"
+          data-tab-target="art"
+        >
+
+          <div class="meta-label">
+            1. 건축물 미술작품
+          </div>
+
+          <div
+            class="meta-value"
+            id="priorityMetaArtCount"
+          >
+            0
+          </div>
+
         </div>
 
-        <div class="meta-card priority-meta-card" data-tab-target="mural">
-          <div class="meta-label">2. 벽화 &amp; 조형물</div>
-          <div class="meta-value" id="priorityMetaMuralCount">0</div>
+
+        <div
+          class="meta-card priority-meta-card"
+          data-tab-target="mural"
+        >
+
+          <div class="meta-label">
+            2. 벽화 &amp; 조형물
+          </div>
+
+          <div
+            class="meta-value"
+            id="priorityMetaMuralCount"
+          >
+            0
+          </div>
+
         </div>
 
-        <div class="meta-card priority-meta-card" data-tab-target="exhibition">
-          <div class="meta-label">3. 전시 콘텐츠 기획 운영</div>
-          <div class="meta-value" id="priorityMetaExhibitionCount">0</div>
+
+        <div
+          class="meta-card priority-meta-card"
+          data-tab-target="exhibition"
+        >
+
+          <div class="meta-label">
+            3. 전시 콘텐츠 기획 운영
+          </div>
+
+          <div
+            class="meta-value"
+            id="priorityMetaExhibitionCount"
+          >
+            0
+          </div>
+
         </div>
 
-        <div class="meta-card priority-meta-card" data-tab-target="other">
-          <div class="meta-label">기타 전체 공고</div>
-          <div class="meta-value" id="priorityMetaOtherCount">0</div>
+
+        <div
+          class="meta-card priority-meta-card"
+          data-tab-target="other"
+        >
+
+          <div class="meta-label">
+            기타 전체 공고
+          </div>
+
+          <div
+            class="meta-value"
+            id="priorityMetaOtherCount"
+          >
+            0
+          </div>
+
         </div>
+
       </section>
 
-      <!--
-        기존 app.js / dashboard_ui_update.js가 참조하는 기존 카운트 ID.
-        화면에는 보이지 않지만 기존 스크립트 오류 방지를 위해 유지합니다.
-      -->
-      <div class="legacy-metrics" hidden>
-        <span id="metaOpportunityCount">0</span>
-        <span id="metaArtCount">0</span>
-        <span id="metaLocalCount">0</span>
-        <span id="metaAgencyCount">0</span>
+
+      <div
+        class="legacy-metrics"
+        hidden
+      >
+        <span id="metaOpportunityCount">
+          0
+        </span>
+
+        <span id="metaArtCount">
+          0
+        </span>
+
+        <span id="metaLocalCount">
+          0
+        </span>
+
+        <span id="metaAgencyCount">
+          0
+        </span>
       </div>
+
 
       <section class="summary-grid">
-        <div class="summary-card">
-          <span>현재 표시</span>
-          <strong id="totalCount">0</strong>
-        </div>
 
         <div class="summary-card">
-          <span>S등급</span>
-          <strong id="sCount">0</strong>
+
+          <span>
+            현재 표시
+          </span>
+
+          <strong id="totalCount">
+            0
+          </strong>
+
         </div>
 
-        <div class="summary-card">
-          <span>A등급</span>
-          <strong id="aCount">0</strong>
-        </div>
 
         <div class="summary-card">
-          <span>B/C등급</span>
-          <strong id="bCount">0</strong>
+
+          <span>
+            S등급
+          </span>
+
+          <strong id="sCount">
+            0
+          </strong>
+
         </div>
+
+
+        <div class="summary-card">
+
+          <span>
+            A등급
+          </span>
+
+          <strong id="aCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="summary-card">
+
+          <span>
+            B/C등급
+          </span>
+
+          <strong id="bCount">
+            0
+          </strong>
+
+        </div>
+
       </section>
+
     </section>
+
 
     <nav class="tabs">
-      <button class="tab-button active" data-tab="art">💙 건축물 미술작품</button>
-      <button class="tab-button" data-tab="mural">🧱 벽화 &amp; 조형물</button>
-      <button class="tab-button" data-tab="exhibition">🖼️ 전시 콘텐츠 기획 운영</button>
-      <button class="tab-button" data-tab="other">📂 기타 전체 공고</button>
 
-      <span class="priority-tab-separator">참고</span>
-      <button class="tab-button" data-tab="agencies">🎯 기관 타깃</button>
+      <button
+        class="tab-button active"
+        data-tab="art"
+      >
+        💙 건축물 미술작품
+      </button>
 
-      <!-- 기존 app.js 호환용 숨김 버튼 -->
-      <button class="tab-button" data-tab="opportunities" style="display:none;">❤️ 나라장터 공고</button>
-      <button class="tab-button" data-tab="local" style="display:none;">🧩 로컬 프로젝트</button>
+
+      <button
+        class="tab-button"
+        data-tab="mural"
+      >
+        🧱 벽화 &amp; 조형물
+      </button>
+
+
+      <button
+        class="tab-button"
+        data-tab="exhibition"
+      >
+        🖼️ 전시 콘텐츠 기획 운영
+      </button>
+
+
+      <button
+        class="tab-button"
+        data-tab="other"
+      >
+        📂 기타 전체 공고
+      </button>
+
+
+      <span class="priority-tab-separator">
+        참고
+      </span>
+
+
+      <button
+        class="tab-button"
+        data-tab="agencies"
+      >
+        🎯 기관 타깃
+      </button>
+
+
+      <button
+        class="tab-button"
+        data-tab="opportunities"
+        style="display:none;"
+      >
+        ❤️ 나라장터 공고
+      </button>
+
+
+      <button
+        class="tab-button"
+        data-tab="local"
+        style="display:none;"
+      >
+        🧩 로컬 프로젝트
+      </button>
+
     </nav>
 
-    <!-- 1. 건축물 미술작품 -->
-    <section id="artTab" class="tab-panel active">
+
+    <!-- =====================================
+         1. 건축물 미술작품
+    ====================================== -->
+
+    <section
+      id="artTab"
+      class="tab-panel active"
+    >
+
       <section class="filters">
-        <input id="artSearchInput" type="text" placeholder="공모명, 기관명, 키워드 검색" />
+
+        <input
+          id="artSearchInput"
+          type="text"
+          placeholder="공모명, 기관명, 키워드 검색"
+        />
+
 
         <select id="artSourceFilter">
-          <option value="all">전체 출처</option>
-          <option value="서울">서울</option>
-          <option value="경기도">경기도</option>
-          <option value="LH/SH">LH/SH</option>
+
+          <option value="all">
+            전체 출처
+          </option>
+
+          <option value="서울">
+            서울
+          </option>
+
+          <option value="경기도">
+            경기도
+          </option>
+
+          <option value="LH/SH">
+            LH/SH
+          </option>
+
         </select>
+
 
         <select id="artReviewFilter">
-          <option value="all">전체 상태</option>
-          <option value="new">미검토</option>
-          <option value="reviewing">검토중</option>
-          <option value="proposal">제안 준비</option>
-          <option value="hold">보류</option>
-          <option value="done">제안 완료</option>
+
+          <option value="all">
+            전체 상태
+          </option>
+
+          <option value="new">
+            미검토
+          </option>
+
+          <option value="reviewing">
+            검토중
+          </option>
+
+          <option value="proposal">
+            제안 준비
+          </option>
+
+          <option value="hold">
+            보류
+          </option>
+
+          <option value="done">
+            제안 완료
+          </option>
+
         </select>
+
       </section>
 
+
       <div class="list-head">
-        <span>출처</span>
-        <span>공모명</span>
-        <span>게재기간</span>
-        <span>마감일</span>
+
+        <span>
+          출처
+        </span>
+
+        <span>
+          공모명
+        </span>
+
+        <span>
+          공고일
+        </span>
+
+        <span>
+          마감일
+        </span>
+
       </div>
 
-      <section id="artCards" class="cards"></section>
+
+      <section
+        id="artCards"
+        class="cards"
+      ></section>
+
     </section>
 
-    <!-- 2. 벽화 & 조형물 / JS에서 priority_projects.json 기준으로 렌더링 -->
-    <section id="muralTab" class="tab-panel priority-tab-panel">
+
+    <!-- =====================================
+         2. 벽화 & 조형물
+    ====================================== -->
+
+    <section
+      id="muralTab"
+      class="tab-panel priority-tab-panel"
+    >
+
       <div class="priority-empty">
-        벽화 &amp; 조형물 데이터를 불러오는 중입니다.
+        벽화 &amp; 조형물 데이터를
+        불러오는 중입니다.
       </div>
+
     </section>
 
-    <!-- 3. 전시 콘텐츠 기획 운영 / JS에서 priority_projects.json 기준으로 렌더링 -->
-    <section id="exhibitionTab" class="tab-panel priority-tab-panel">
+
+    <!-- =====================================
+         3. 전시 콘텐츠 기획 운영
+    ====================================== -->
+
+    <section
+      id="exhibitionTab"
+      class="tab-panel priority-tab-panel"
+    >
+
       <div class="priority-empty">
-        전시 콘텐츠 기획 운영 데이터를 불러오는 중입니다.
+        전시 콘텐츠 기획 운영 데이터를
+        불러오는 중입니다.
       </div>
+
     </section>
 
-    <!-- 4. 기타 전체 공고 / JS에서 priority_projects.json 기준으로 렌더링 -->
-    <section id="otherTab" class="tab-panel priority-tab-panel">
+
+    <!-- =====================================
+         4. 기타 전체 공고
+    ====================================== -->
+
+    <section
+      id="otherTab"
+      class="tab-panel priority-tab-panel"
+    >
+
       <div class="priority-empty">
-        기타 전체 공고 데이터를 불러오는 중입니다.
+        기타 전체 공고 데이터를
+        불러오는 중입니다.
       </div>
+
     </section>
 
-    <!-- 기존 나라장터 공고 패널: 새 구조에서는 기타 전체 공고로 통합되지만 기존 app.js 호환을 위해 유지 -->
-    <section id="opportunitiesTab" class="tab-panel">
+
+    <!-- =====================================
+         기존 나라장터 공고
+    ====================================== -->
+
+    <section
+      id="opportunitiesTab"
+      class="tab-panel"
+    >
+
       <section class="filters">
-        <input id="searchInput" type="text" placeholder="공고명, 기관명, 키워드 검색" />
+
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="공고명, 기관명, 키워드 검색"
+        />
+
 
         <select id="gradeFilter">
-          <option value="all">전체 등급</option>
-          <option value="S">S등급</option>
-          <option value="A">A등급</option>
-          <option value="B">B등급</option>
-          <option value="C">C등급</option>
+
+          <option value="all">
+            전체 등급
+          </option>
+
+          <option value="S">
+            S등급
+          </option>
+
+          <option value="A">
+            A등급
+          </option>
+
+          <option value="B">
+            B등급
+          </option>
+
+          <option value="C">
+            C등급
+          </option>
+
         </select>
+
 
         <select id="categoryFilter">
-          <option value="all">전체 분야</option>
-          <option value="public_art">공공미술</option>
-          <option value="media_art">미디어아트</option>
-          <option value="exhibition">전시</option>
-          <option value="festival">문화행사</option>
-          <option value="design">공공디자인</option>
-          <option value="tourism">관광콘텐츠</option>
-          <option value="general">기타</option>
+
+          <option value="all">
+            전체 분야
+          </option>
+
+          <option value="public_art">
+            공공미술
+          </option>
+
+          <option value="media_art">
+            미디어아트
+          </option>
+
+          <option value="exhibition">
+            전시
+          </option>
+
+          <option value="festival">
+            문화행사
+          </option>
+
+          <option value="design">
+            공공디자인
+          </option>
+
+          <option value="tourism">
+            관광콘텐츠
+          </option>
+
+          <option value="general">
+            기타
+          </option>
+
         </select>
+
 
         <select id="reviewFilter">
-          <option value="all">전체 상태</option>
-          <option value="new">미검토</option>
-          <option value="reviewing">검토중</option>
-          <option value="proposal">제안 준비</option>
-          <option value="hold">보류</option>
-          <option value="done">제안 완료</option>
+
+          <option value="all">
+            전체 상태
+          </option>
+
+          <option value="new">
+            미검토
+          </option>
+
+          <option value="reviewing">
+            검토중
+          </option>
+
+          <option value="proposal">
+            제안 준비
+          </option>
+
+          <option value="hold">
+            보류
+          </option>
+
+          <option value="done">
+            제안 완료
+          </option>
+
         </select>
+
       </section>
+
 
       <div class="list-head">
+
         <span class="list-source-grade">
-          <em>출처</em>
-          <em>공고등급</em>
+
+          <em>
+            출처
+          </em>
+
+          <em>
+            공고등급
+          </em>
+
         </span>
-        <span>공모명</span>
-        <span>게재기간</span>
-        <span>마감일</span>
+
+        <span>
+          공모명
+        </span>
+
+        <span>
+          게재기간
+        </span>
+
+        <span>
+          마감일
+        </span>
+
       </div>
 
-      <section id="cards" class="cards"></section>
 
-      <p id="emptyMessage" class="empty-message">
+      <section
+        id="cards"
+        class="cards"
+      ></section>
+
+
+      <p
+        id="emptyMessage"
+        class="empty-message"
+      >
         조건에 맞는 공고가 없습니다.
       </p>
+
     </section>
 
-    <!-- 기존 로컬 프로젝트 패널: 새 구조에서는 우선순위/기타 전체 공고로 통합되지만 기존 app.js 호환을 위해 유지 -->
-    <section id="localTab" class="tab-panel">
+
+    <!-- =====================================
+         기존 로컬 프로젝트
+    ====================================== -->
+
+    <section
+      id="localTab"
+      class="tab-panel"
+    >
+
       <section class="filters local-filters">
-        <input id="localSearchInput" type="text" placeholder="프로젝트명, 기관명, 키워드 검색" />
+
+        <input
+          id="localSearchInput"
+          type="text"
+          placeholder="프로젝트명, 기관명, 키워드 검색"
+        />
+
 
         <select id="localRegionFilter">
-          <option value="all">전체 지역</option>
-          <option value="서울">서울</option>
-          <option value="경기">경기</option>
-          <option value="인천">인천</option>
-          <option value="기타">기타</option>
+
+          <option value="all">
+            전체 지역
+          </option>
+
+          <option value="서울">
+            서울
+          </option>
+
+          <option value="경기">
+            경기
+          </option>
+
+          <option value="인천">
+            인천
+          </option>
+
+          <option value="기타">
+            기타
+          </option>
+
         </select>
+
 
         <select id="localTypeFilter">
-          <option value="all">전체 유형</option>
-          <option value="벽화/공공미술">벽화/공공미술</option>
-          <option value="경관개선">경관개선</option>
-          <option value="공공디자인">공공디자인</option>
-          <option value="도시재생">도시재생</option>
-          <option value="문화행사">문화행사</option>
-          <option value="전시/콘텐츠">전시/콘텐츠</option>
-          <option value="주민참여/예술교육">주민참여/예술교육</option>
-          <option value="기타">기타</option>
+
+          <option value="all">
+            전체 유형
+          </option>
+
+          <option value="벽화/공공미술">
+            벽화/공공미술
+          </option>
+
+          <option value="경관개선">
+            경관개선
+          </option>
+
+          <option value="공공디자인">
+            공공디자인
+          </option>
+
+          <option value="도시재생">
+            도시재생
+          </option>
+
+          <option value="문화행사">
+            문화행사
+          </option>
+
+          <option value="전시/콘텐츠">
+            전시/콘텐츠
+          </option>
+
+          <option value="주민참여/예술교육">
+            주민참여/예술교육
+          </option>
+
+          <option value="기타">
+            기타
+          </option>
+
         </select>
+
 
         <select id="localGradeFilter">
-          <option value="all">전체 등급</option>
-          <option value="S">S등급</option>
-          <option value="A">A등급</option>
-          <option value="B">B등급</option>
-          <option value="C">C등급</option>
+
+          <option value="all">
+            전체 등급
+          </option>
+
+          <option value="S">
+            S등급
+          </option>
+
+          <option value="A">
+            A등급
+          </option>
+
+          <option value="B">
+            B등급
+          </option>
+
+          <option value="C">
+            C등급
+          </option>
+
         </select>
+
 
         <select id="localReviewFilter">
-          <option value="all">전체 상태</option>
-          <option value="new">미검토</option>
-          <option value="reviewing">검토중</option>
-          <option value="proposal">제안 준비</option>
-          <option value="hold">보류</option>
-          <option value="done">제안 완료</option>
+
+          <option value="all">
+            전체 상태
+          </option>
+
+          <option value="new">
+            미검토
+          </option>
+
+          <option value="reviewing">
+            검토중
+          </option>
+
+          <option value="proposal">
+            제안 준비
+          </option>
+
+          <option value="hold">
+            보류
+          </option>
+
+          <option value="done">
+            제안 완료
+          </option>
+
         </select>
+
 
         <select id="localDeadlineStatusFilter">
-          <option value="active">진행 중</option>
-          <option value="all">전체</option>
-          <option value="soon">7일 내 마감</option>
-          <option value="closed">마감</option>
-          <option value="unknown">마감일 확인 필요</option>
+
+          <option value="active">
+            진행 중
+          </option>
+
+          <option value="all">
+            전체
+          </option>
+
+          <option value="soon">
+            7일 내 마감
+          </option>
+
+          <option value="closed">
+            마감
+          </option>
+
+          <option value="unknown">
+            마감일 확인 필요
+          </option>
+
         </select>
+
       </section>
+
 
       <div class="list-head local-list-head">
+
         <span class="list-source-grade">
-          <em>출처</em>
-          <em>등급</em>
+
+          <em>
+            출처
+          </em>
+
+          <em>
+            등급
+          </em>
+
         </span>
-        <span>프로젝트명</span>
-        <span>게재기간</span>
-        <span>마감일</span>
+
+        <span>
+          프로젝트명
+        </span>
+
+        <span>
+          게재기간
+        </span>
+
+        <span>
+          마감일
+        </span>
+
       </div>
 
-      <section id="localCards" class="cards"></section>
 
-      <p id="localEmptyMessage" class="empty-message">
+      <section
+        id="localCards"
+        class="cards"
+      ></section>
+
+
+      <p
+        id="localEmptyMessage"
+        class="empty-message"
+      >
         조건에 맞는 로컬 프로젝트가 없습니다.
       </p>
+
     </section>
 
-    <!-- 5. 참고용 기관 타깃 -->
-    <section id="agenciesTab" class="tab-panel">
+
+    <!-- =====================================
+         5. 기관 타깃
+    ====================================== -->
+
+    <section
+      id="agenciesTab"
+      class="tab-panel"
+    >
+
       <section class="filters agency-filters">
-        <input id="agencySearchInput" type="text" placeholder="기관명, 지역, 키워드 검색" />
+
+        <input
+          id="agencySearchInput"
+          type="text"
+          placeholder="기관명, 지역, 키워드 검색"
+        />
+
 
         <select id="agencyRegionFilter">
-          <option value="all">전체 지역</option>
-          <option value="서울">서울</option>
-          <option value="경기">경기</option>
-          <option value="인천">인천</option>
-          <option value="부산">부산</option>
-          <option value="대전">대전</option>
-          <option value="광주">광주</option>
-          <option value="대구">대구</option>
-          <option value="울산">울산</option>
-          <option value="세종">세종</option>
-          <option value="기타">기타</option>
+
+          <option value="all">
+            전체 지역
+          </option>
+
+          <option value="서울">
+            서울
+          </option>
+
+          <option value="경기">
+            경기
+          </option>
+
+          <option value="인천">
+            인천
+          </option>
+
+          <option value="부산">
+            부산
+          </option>
+
+          <option value="대전">
+            대전
+          </option>
+
+          <option value="광주">
+            광주
+          </option>
+
+          <option value="대구">
+            대구
+          </option>
+
+          <option value="울산">
+            울산
+          </option>
+
+          <option value="세종">
+            세종
+          </option>
+
+          <option value="기타">
+            기타
+          </option>
+
         </select>
+
 
         <select id="agencyGradeFilter">
-          <option value="all">전체 등급</option>
-          <option value="S">S등급</option>
-          <option value="A">A등급</option>
-          <option value="B">B등급</option>
-          <option value="C">C등급</option>
+
+          <option value="all">
+            전체 등급
+          </option>
+
+          <option value="S">
+            S등급
+          </option>
+
+          <option value="A">
+            A등급
+          </option>
+
+          <option value="B">
+            B등급
+          </option>
+
+          <option value="C">
+            C등급
+          </option>
+
         </select>
+
 
         <select id="agencyReviewFilter">
-          <option value="all">전체 상태</option>
-          <option value="new">미검토</option>
-          <option value="reviewing">검토중</option>
-          <option value="proposal">제안 준비</option>
-          <option value="hold">보류</option>
-          <option value="done">제안 완료</option>
+
+          <option value="all">
+            전체 상태
+          </option>
+
+          <option value="new">
+            미검토
+          </option>
+
+          <option value="reviewing">
+            검토중
+          </option>
+
+          <option value="proposal">
+            제안 준비
+          </option>
+
+          <option value="hold">
+            보류
+          </option>
+
+          <option value="done">
+            제안 완료
+          </option>
+
         </select>
 
-        <label class="filter-check">
-          <input id="agencyAwardOnly" type="checkbox" />
-          <span>낙찰 있음</span>
-        </label>
 
         <label class="filter-check">
-          <input id="agencyPlanOnly" type="checkbox" />
-          <span>발주계획 있음</span>
+
+          <input
+            id="agencyAwardOnly"
+            type="checkbox"
+          />
+
+          <span>
+            낙찰 있음
+          </span>
+
         </label>
+
+
+        <label class="filter-check">
+
+          <input
+            id="agencyPlanOnly"
+            type="checkbox"
+          />
+
+          <span>
+            발주계획 있음
+          </span>
+
+        </label>
+
       </section>
 
+
       <div class="list-head agency-list-head">
-        <span>구분</span>
-        <span>기관명</span>
-        <span>지역</span>
-        <span>관련 이력</span>
+
+        <span>
+          구분
+        </span>
+
+        <span>
+          기관명
+        </span>
+
+        <span>
+          지역
+        </span>
+
+        <span>
+          관련 이력
+        </span>
+
       </div>
 
-      <section id="agencyCards" class="cards"></section>
 
-      <p id="agencyEmptyMessage" class="empty-message">
+      <section
+        id="agencyCards"
+        class="cards"
+      ></section>
+
+
+      <p
+        id="agencyEmptyMessage"
+        class="empty-message"
+      >
         조건에 맞는 기관 타깃이 없습니다.
       </p>
+
     </section>
+
   </main>
 
-   <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-eyebrow">AXOO B2G ENGINE</p>
-      <h2>공공 프로젝트 리서치 운영 메모</h2>
-      <p>
-        이 대시보드는 건축물 미술작품, 벽화·조형물, 전시 콘텐츠 기획 운영을 중심으로
-        AXOO가 우선 검토할 수 있는 공공/B2G 프로젝트를 자동 수집하고 분류하기 위해 운영됩니다.
-      </p>
-      <p>
-        행사 운영대행, 폐기물 처리, 시설관리, 보험, 임차, 시스템 유지보수 등
-        AXOO의 직접 실행 가능성이 낮은 일반 용역은 우선 검토 대상에서 제외됩니다.
-      </p>
-    </div>
-   </footer>
 
-<script src="app.js?v=112"></script>
-<script src="dashboard_ui_update.js?v=31"></script>
-<script src="dashboard_priority_update.js?v=7"></script>
-<script src="art_commission_sources_ui.js?v=4"></script>
-<script src="my_projects.js?v=2"></script>
-<script src="project_capture.js?v=6"></script>
-<script src="art_date_finalizer.js?v=1"></script>
+  <footer class="site-footer">
+
+    <div class="container footer-inner">
+
+      <p class="footer-eyebrow">
+        AXOO B2G ENGINE
+      </p>
+
+      <h2>
+        공공 프로젝트 리서치 운영 메모
+      </h2>
+
+      <p>
+        이 대시보드는 건축물 미술작품,
+        벽화·조형물, 전시 콘텐츠 기획 운영을 중심으로
+        AXOO가 우선 검토할 수 있는 공공/B2G 프로젝트를
+        자동 수집하고 분류하기 위해 운영됩니다.
+      </p>
+
+      <p>
+        행사 운영대행, 폐기물 처리, 시설관리,
+        보험, 임차, 시스템 유지보수 등
+        AXOO의 직접 실행 가능성이 낮은 일반 용역은
+        우선 검토 대상에서 제외됩니다.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <script src="app.js?v=113"></script>
+
+  <script src="dashboard_ui_update.js?v=32"></script>
+
+  <script src="dashboard_priority_update.js?v=7"></script>
+
+  <script src="art_commission_sources_ui.js?v=4"></script>
+
+  <script src="my_projects.js?v=2"></script>
+
+  <script src="project_capture.js?v=6"></script>
+
 </body>
+
 </html>
