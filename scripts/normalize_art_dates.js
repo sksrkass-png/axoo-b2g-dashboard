@@ -7,8 +7,7 @@ const DATA_FILE = path.join(
   "art_commissions.json"
 );
 
-const NORMALIZER_VERSION = "1.1.0";
-
+const NORMALIZER_VERSION = "1.2.0";
 
 const PERIOD_KEYWORDS = [
   "응모작품 접수일시",
@@ -23,7 +22,6 @@ const PERIOD_KEYWORDS = [
   "접수일"
 ];
 
-
 const DEADLINE_KEYWORDS = [
   "접수마감",
   "제출마감",
@@ -34,7 +32,6 @@ const DEADLINE_KEYWORDS = [
   "제출기한",
   "접수기한"
 ];
-
 
 const PUBLISHED_KEYWORDS = [
   "등록일",
@@ -55,6 +52,62 @@ function cleanText(value) {
     .replace(/[\t\r\n]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+
+function decodeHtmlEntities(value) {
+  return String(value || "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(
+      /&#(\d+);/g,
+      function (_, code) {
+        return String.fromCharCode(
+          Number(code)
+        );
+      }
+    )
+    .replace(
+      /&#x([0-9a-f]+);/gi,
+      function (_, code) {
+        return String.fromCharCode(
+          parseInt(code, 16)
+        );
+      }
+    );
+}
+
+
+function htmlToText(html) {
+  return cleanText(
+    decodeHtmlEntities(
+      String(html || "")
+        .replace(
+          /<!--[\s\S]*?-->/g,
+          " "
+        )
+        .replace(
+          /<script[\s\S]*?<\/script>/gi,
+          " "
+        )
+        .replace(
+          /<style[\s\S]*?<\/style>/gi,
+          " "
+        )
+        .replace(
+          /<(br|\/p|\/div|\/li|\/tr|\/h\d)>/gi,
+          " "
+        )
+        .replace(
+          /<[^>]+>/g,
+          " "
+        )
+    )
+  );
 }
 
 
@@ -136,20 +189,6 @@ function parseExistingDate(value) {
 }
 
 
-function yearFromDate(value) {
-  const parsed =
-    parseExistingDate(value);
-
-  if (parsed) {
-    return Number(
-      parsed.slice(0, 4)
-    );
-  }
-
-  return getKoreaTodayYear();
-}
-
-
 function getKoreaToday() {
   const korea =
     new Date(
@@ -163,11 +202,120 @@ function getKoreaToday() {
 }
 
 
-function getKoreaTodayYear() {
+function getKoreaYear() {
   return Number(
     getKoreaToday()
       .slice(0, 4)
   );
+}
+
+
+function yearFromDate(value) {
+  const parsed =
+    parseExistingDate(value);
+
+  if (parsed) {
+    return Number(
+      parsed.slice(0, 4)
+    );
+  }
+
+  return getKoreaYear();
+}
+
+
+/* =========================================================
+   DETAIL PAGE FETCH
+========================================================= */
+
+async function fetchDetailText(url) {
+  const sourceUrl =
+    String(url || "")
+      .trim();
+
+  if (
+    !sourceUrl ||
+    !/^https?:\/\//i.test(
+      sourceUrl
+    )
+  ) {
+    return {
+      ok: false,
+      text: "",
+      reason: "no_url"
+    };
+  }
+
+  try {
+    console.log(
+      "FETCH:",
+      sourceUrl
+    );
+
+    const response =
+      await fetch(
+        sourceUrl,
+        {
+          redirect: "follow",
+
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 AXOO-B2G-DateVerifier/1.2",
+
+            "Accept":
+              "text/html,application/xhtml+xml"
+          }
+        }
+      );
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        text: "",
+        reason:
+          "HTTP_" +
+          response.status
+      };
+    }
+
+    const html =
+      await response.text();
+
+    const text =
+      htmlToText(html);
+
+    if (
+      text.length < 50
+    ) {
+      return {
+        ok: false,
+        text: text,
+        reason:
+          "empty_body"
+      };
+    }
+
+    return {
+      ok: true,
+      text: text,
+      reason: ""
+    };
+
+  } catch (error) {
+    console.warn(
+      "DETAIL FETCH ERROR:",
+      sourceUrl,
+      error.message
+    );
+
+    return {
+      ok: false,
+      text: "",
+      reason:
+        error.message ||
+        "fetch_error"
+    };
+  }
 }
 
 
@@ -185,11 +333,6 @@ function findFirstDate(
   const candidates = [];
 
 
-  /*
-    2026년 8월 10일
-    2026. 8. 10.
-    2026-08-10
-  */
   const fullRegex =
     /(20\d{2})\s*(?:년|[.\-/])\s*(\d{1,2})\s*(?:월|[.\-/])\s*(\d{1,2})\s*일?/g;
 
@@ -210,33 +353,31 @@ function findFirstDate(
 
     if (value) {
       candidates.push({
-        index: match.index,
-        end: fullRegex.lastIndex,
-        value: value,
-        explicitYear: true
+        index:
+          match.index,
+
+        end:
+          fullRegex.lastIndex,
+
+        value:
+          value,
+
+        explicitYear:
+          true
       });
     }
   }
 
 
-  /*
-    8월 29일
-  */
-  const koreanPartialRegex =
+  const partialRegex =
     /(\d{1,2})\s*월\s*(\d{1,2})\s*일?/g;
 
   while (
     (
       match =
-        koreanPartialRegex.exec(
-          source
-        )
+        partialRegex.exec(source)
     ) !== null
   ) {
-    /*
-      이미 2026년 8월 29일 안에
-      포함된 부분 날짜인지 검사.
-    */
     const insideFull =
       candidates.some(
         function (candidate) {
@@ -266,8 +407,7 @@ function findFirstDate(
           match.index,
 
         end:
-          koreanPartialRegex
-            .lastIndex,
+          partialRegex.lastIndex,
 
         value:
           value,
@@ -296,7 +436,7 @@ function findFirstDate(
 
 
 /* =========================================================
-   RANGE PARSER
+   DATE RANGE
 ========================================================= */
 
 function extractDateRange(
@@ -308,17 +448,9 @@ function extractDateRange(
 
 
   /*
-    CASE 1
-
     2026년 8월 10일 ~ 8월 29일
     2026.08.10 ~ 08.29
     2026-08-10 ~ 2026-08-29
-
-    핵심:
-    날짜와 날짜 사이에 실제 "~"가 있을 때만
-    공모기간으로 인정한다.
-
-    10:00 ~ 17:00은 날짜 범위가 아니다.
   */
   let match =
     text.match(
@@ -329,11 +461,8 @@ function extractDateRange(
     const startYear =
       Number(match[1]);
 
-    const endHasYear =
-      Boolean(match[4]);
-
     let endYear =
-      endHasYear
+      match[4]
         ? Number(match[4])
         : startYear;
 
@@ -351,14 +480,10 @@ function extractDateRange(
         match[6]
       );
 
-    /*
-      2026.12.20 ~ 01.10
-      같은 연도 생략 처리.
-    */
     if (
       start &&
       end &&
-      !endHasYear &&
+      !match[4] &&
       end < start
     ) {
       endYear += 1;
@@ -377,16 +502,13 @@ function extractDateRange(
     ) {
       return {
         start: start,
-        end: end,
-        type: "date_range"
+        end: end
       };
     }
   }
 
 
   /*
-    CASE 2
-
     8월 10일 ~ 8월 29일
   */
   match =
@@ -398,11 +520,8 @@ function extractDateRange(
     const startYear =
       baseYear;
 
-    const endHasYear =
-      Boolean(match[3]);
-
     let endYear =
-      endHasYear
+      match[3]
         ? Number(match[3])
         : startYear;
 
@@ -423,7 +542,7 @@ function extractDateRange(
     if (
       start &&
       end &&
-      !endHasYear &&
+      !match[3] &&
       end < start
     ) {
       endYear += 1;
@@ -442,8 +561,7 @@ function extractDateRange(
     ) {
       return {
         start: start,
-        end: end,
-        type: "date_range"
+        end: end
       };
     }
   }
@@ -458,36 +576,34 @@ function extractDateRange(
 ========================================================= */
 
 function extractPublishedDate(
-  detailText,
+  text,
   existingDates
 ) {
-  const text =
-    cleanText(detailText);
+  const source =
+    cleanText(text);
 
-  /*
-    상세페이지 등록일 최우선.
-  */
+
   for (
     const keyword of
     PUBLISHED_KEYWORDS
   ) {
     const index =
-      text.indexOf(keyword);
+      source.indexOf(keyword);
 
     if (index === -1) {
       continue;
     }
 
     const segment =
-      text.slice(
+      source.slice(
         index,
-        index + 120
+        index + 140
       );
 
     const date =
       findFirstDate(
         segment,
-        getKoreaTodayYear()
+        getKoreaYear()
       );
 
     if (date) {
@@ -502,23 +618,19 @@ function extractPublishedDate(
   }
 
 
-  /*
-    상세 페이지에서 못 찾았으면
-    기존 공식 값 보존.
-  */
   for (
     const candidate of
     existingDates
   ) {
-    const value =
+    const parsed =
       parseExistingDate(
         candidate
       );
 
-    if (value) {
+    if (parsed) {
       return {
         value:
-          value,
+          parsed,
 
         source:
           "existing"
@@ -529,7 +641,8 @@ function extractPublishedDate(
 
   return {
     value: "",
-    source: "not_found"
+    source:
+      "not_found"
   };
 }
 
@@ -539,11 +652,11 @@ function extractPublishedDate(
 ========================================================= */
 
 function extractPeriod(
-  detailText,
+  text,
   publishedDate
 ) {
-  const text =
-    cleanText(detailText);
+  const source =
+    cleanText(text);
 
   const baseYear =
     yearFromDate(
@@ -556,26 +669,16 @@ function extractPeriod(
     PERIOD_KEYWORDS
   ) {
     const index =
-      text.indexOf(keyword);
+      source.indexOf(keyword);
 
     if (index === -1) {
       continue;
     }
 
-
-    /*
-      중요:
-      이전에는 너무 긴 텍스트를 잡아서
-      다음 항목의 날짜나 rawText 날짜를
-      공모 종료일로 잘못 인식할 수 있었다.
-
-      이제 해당 키워드 뒤 220자 안에서
-      "날짜 ~ 날짜" 형태를 먼저 검사한다.
-    */
     const segment =
-      text.slice(
+      source.slice(
         index,
-        index + 220
+        index + 260
       );
 
 
@@ -603,13 +706,8 @@ function extractPeriod(
 
 
     /*
-      하루 접수 공고
-
-      2026. 8. 24.(월)
-      10:00 ~ 17:00
-
-      "~"가 시간 사이에 있기 때문에
-      날짜 범위로 보면 안 된다.
+      하루 접수:
+      2026. 8. 24.(월) 10:00 ~ 17:00
     */
     const firstDate =
       findFirstDate(
@@ -621,14 +719,12 @@ function extractPeriod(
       const afterDate =
         segment.slice(
           firstDate.end,
-          firstDate.end + 100
+          firstDate.end + 120
         );
 
       const hasTimeRange =
         /\d{1,2}\s*:\s*\d{2}\s*[~∼～–—-]\s*\d{1,2}\s*:\s*\d{2}/
-          .test(
-            afterDate
-          );
+          .test(afterDate);
 
       if (hasTimeRange) {
         return {
@@ -652,7 +748,8 @@ function extractPeriod(
   return {
     start: "",
     end: "",
-    source: "not_found",
+    source:
+      "not_found",
     keyword: ""
   };
 }
@@ -663,11 +760,11 @@ function extractPeriod(
 ========================================================= */
 
 function extractExplicitDeadline(
-  detailText,
+  text,
   publishedDate
 ) {
-  const text =
-    cleanText(detailText);
+  const source =
+    cleanText(text);
 
   const baseYear =
     yearFromDate(
@@ -680,18 +777,16 @@ function extractExplicitDeadline(
     DEADLINE_KEYWORDS
   ) {
     const index =
-      text.indexOf(
-        keyword
-      );
+      source.indexOf(keyword);
 
     if (index === -1) {
       continue;
     }
 
     const segment =
-      text.slice(
+      source.slice(
         index,
-        index + 160
+        index + 180
       );
 
     const date =
@@ -717,7 +812,8 @@ function extractExplicitDeadline(
 
   return {
     value: "",
-    source: "not_found",
+    source:
+      "not_found",
     keyword: ""
   };
 }
@@ -740,11 +836,9 @@ function getDeadlineState(
     };
   }
 
-  const today =
-    getKoreaToday();
-
   const expired =
-    deadline < today;
+    deadline <
+    getKoreaToday();
 
   return {
     isExpired:
@@ -759,22 +853,47 @@ function getDeadlineState(
 
 
 /* =========================================================
-   NORMALIZE ONE ITEM
+   NORMALIZE ITEM
 ========================================================= */
 
-function normalizeItem(item) {
-  /*
-    날짜 판독은 detailTextSample을
-    가장 신뢰한다.
-
-    중요:
-    detailTextSample 뒤에 rawText를 붙이지 않는다.
-    서로 다른 영역의 날짜가 섞이는 것을 방지.
-  */
-  const detailText =
+async function normalizeItem(item) {
+  let detailText =
     cleanText(
       item.detailTextSample
     );
+
+  let detailFetchStatus =
+    item.detailFetchStatus ||
+    "";
+
+
+  /*
+    상세 본문이 없거나 지나치게 짧으면
+    공고 URL을 직접 다시 연다.
+  */
+  if (
+    detailText.length < 100
+  ) {
+    const fetched =
+      await fetchDetailText(
+        item.sourceUrl ||
+        item.originalUrl ||
+        item.url
+      );
+
+    if (fetched.ok) {
+      detailText =
+        fetched.text;
+
+      detailFetchStatus =
+        "ok";
+
+    } else {
+      detailFetchStatus =
+        fetched.reason ||
+        "failed";
+    }
+  }
 
 
   const fallbackText =
@@ -783,6 +902,7 @@ function normalizeItem(item) {
         item.rawText,
         item.summary,
         item.nextAction,
+        item.recommendedAction,
         item.title
       ]
         .filter(Boolean)
@@ -841,16 +961,16 @@ function normalizeItem(item) {
     );
 
 
-  /*
-    상세페이지에서 새로 판독한 값이
-    기존 자동값보다 우선.
-  */
   const periodStart =
     period.start ||
     existingPeriodStart ||
     "";
 
 
+  /*
+    상세 원문에서 종료일을 찾았다면
+    기존 periodEnd보다 무조건 우선.
+  */
   const periodEnd =
     period.end ||
     existingPeriodEnd ||
@@ -858,15 +978,11 @@ function normalizeItem(item) {
 
 
   /*
-    마감일 신뢰 우선순위
+    신뢰 우선순위
 
-    1. "접수마감 / 제출기한" 등
-       명시된 마감일
-
-    2. 상세페이지에서 읽은
-       접수/공모기간 종료일
-
-    3. 기존 데이터의 마감일
+    1. 명시된 접수/제출 마감
+    2. 원문 접수기간 종료일
+    3. 기존 JSON 마감일
   */
   const deadline =
     explicitDeadline.value ||
@@ -896,13 +1012,7 @@ function normalizeItem(item) {
     existingDeadline
   ) {
     deadlineSource =
-      (
-        item.deadlineSource &&
-        item.deadlineSource !==
-          "not_found"
-      )
-        ? item.deadlineSource
-        : "existing_deadline";
+      "existing_deadline";
 
   } else if (
     existingPeriodEnd
@@ -943,12 +1053,6 @@ function normalizeItem(item) {
     );
 
 
-  /*
-    기존 상태가
-    "마감일 확인 필요"인데
-    날짜 보정에 성공했다면
-    상태도 현실에 맞게 정리.
-  */
   let normalizedStatus =
     item.status ||
     "";
@@ -965,6 +1069,32 @@ function normalizeItem(item) {
         ? "마감"
         : "공모중";
   }
+
+
+  const recommendedBase =
+    String(
+      item.recommendedAction ||
+      item.nextAction ||
+      "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토"
+    )
+      .replace(
+        /\s*\/\s*공모기간\s*:[^/]+$/i,
+        ""
+      )
+      .trim();
+
+
+  const recommendedAction =
+    recommendedBase +
+    (
+      periodStart &&
+      periodEnd
+        ? " / 공모기간: " +
+          periodStart +
+          " ~ " +
+          periodEnd
+        : ""
+    );
 
 
   return {
@@ -994,16 +1124,31 @@ function normalizeItem(item) {
     endDate:
       deadline,
 
+    recommendedAction:
+      recommendedAction,
+
+    detailFetchStatus:
+      detailFetchStatus,
+
+    /*
+      근거 보존.
+      다음 실행에서 다시 URL을 열 필요가 없도록 한다.
+    */
+    detailTextSample:
+      detailText
+        ? detailText.slice(
+            0,
+            12000
+          )
+        : "",
+
     publishedDateSource:
       published.source,
 
     periodSource:
       period.start
         ? period.source
-        : (
-            item.periodSource ||
-            "not_found"
-          ),
+        : "not_found",
 
     periodKeyword:
       period.keyword ||
@@ -1035,13 +1180,11 @@ function normalizeItem(item) {
 
 
 /* =========================================================
-   JSON STRUCTURE
+   JSON
 ========================================================= */
 
 function getItems(data) {
-  if (
-    Array.isArray(data)
-  ) {
+  if (Array.isArray(data)) {
     return data;
   }
 
@@ -1082,11 +1225,7 @@ function replaceItems(
   original,
   items
 ) {
-  if (
-    Array.isArray(
-      original
-    )
-  ) {
+  if (Array.isArray(original)) {
     return items;
   }
 
@@ -1137,7 +1276,7 @@ function replaceItems(
    RUN
 ========================================================= */
 
-function main() {
+async function main() {
   if (
     !fs.existsSync(
       DATA_FILE
@@ -1159,15 +1298,29 @@ function main() {
 
 
   const items =
-    getItems(
-      original
-    );
+    getItems(original);
 
 
-  const normalized =
-    items.map(
-      normalizeItem
+  const normalized = [];
+
+
+  /*
+    공공사이트 과부하 방지를 위해
+    순차적으로 검증.
+  */
+  for (
+    const item of
+    items
+  ) {
+    const result =
+      await normalizeItem(
+        item
+      );
+
+    normalized.push(
+      result
     );
+  }
 
 
   const output =
@@ -1189,14 +1342,9 @@ function main() {
 
 
   const summary = {
-    HIGH:
-      0,
-
-    MEDIUM:
-      0,
-
-    LOW:
-      0
+    HIGH: 0,
+    MEDIUM: 0,
+    LOW: 0
   };
 
 
@@ -1251,4 +1399,13 @@ function main() {
 }
 
 
-main();
+main()
+  .catch(
+    function (error) {
+      console.error(
+        error
+      );
+
+      process.exit(1);
+    }
+  );
