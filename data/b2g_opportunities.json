@@ -54,7 +54,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 52000000,
-    "daysLeft": 29,
+    "daysLeft": 28,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
@@ -62,7 +62,7 @@
       "문화/관광/디자인 관련 기관",
       "단순 행사/운영성 키워드 중심"
     ],
-    "fitReason": "확장 검토 키워드 문화관광 · 마케팅 중심. 계약 방식은 추가 확인 필요. 예산 52,000,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 29일 남음. 최종 등급 C.",
+    "fitReason": "확장 검토 키워드 문화관광 · 마케팅 중심. 계약 방식은 추가 확인 필요. 예산 52,000,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 28일 남음. 최종 등급 C.",
     "recommendedAction": "낮은 우선순위로 참고 보관",
     "scoringVersion": "axoo_bid_fit_v3"
   },
@@ -116,7 +116,7 @@
     "hardExcludeKeywords": [],
     "nonAxooExhibitionPenaltyKeywords": [],
     "budgetAmount": 90000000,
-    "daysLeft": 15,
+    "daysLeft": 14,
     "scoreReasons": [
       "AXOO 확장 검토 키워드 포함",
       "예산 규모 적합",
@@ -124,7 +124,7 @@
       "문화/관광/디자인 관련 기관",
       "단순 행사/운영성 키워드 중심"
     ],
-    "fitReason": "확장 검토 키워드 문화예술 중심. 계약 방식은 추가 확인 필요. 예산 90,000,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 15일 남음. 최종 등급 C.",
+    "fitReason": "확장 검토 키워드 문화예술 중심. 계약 방식은 추가 확인 필요. 예산 90,000,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 14일 남음. 최종 등급 C.",
     "recommendedAction": "낮은 우선순위로 참고 보관",
     "scoringVersion": "axoo_bid_fit_v3"
   }
