@@ -2,11 +2,17 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
 const DATA_FILE = path.join(
   process.cwd(),
   "data",
   "art_commissions.json"
 );
+
 
 const ARCHIVE_FILE = path.join(
   process.cwd(),
@@ -14,31 +20,78 @@ const ARCHIVE_FILE = path.join(
   "art_commissions_archive.json"
 );
 
+
 const SOURCE_NAME =
   "경기도 건축물 미술작품";
+
+
+const SOURCE_ID =
+  "gyeonggi_public_art";
+
 
 const SOURCE_MAIN_URL =
   "https://www.gg.go.kr/publicart/main.do";
 
+
 const COLLECTION_VERSION =
-  "1.0.0";
+  "1.1.0";
+
 
 const FETCH_TIMEOUT_MS =
   15000;
 
 
+/*
+  제목에 아래 단어가 하나라도 있으면
+  공모 후보에서 강제로 제외.
+*/
+
 const EXCLUDE_KEYWORDS = [
+
   "선정결과",
   "선정 결과",
+
   "공모결과",
   "공모 결과",
+
+  "결과공고",
   "결과 공고",
+
+  "심의결과",
   "심의 결과",
+
   "심의위원",
+  "위원 모집",
+
   "회의록",
+
   "조례",
-  "행정예고"
+
+  "행정예고",
+
+  "신청서",
+
+  "서식",
+
+  "설치완료",
+
+  "설치 완료",
+
+  "준공",
+
+  "확인서",
+
+  "제출서류",
+
+  "작성양식",
+
+  "양식 다운로드",
+
+  "업무 안내",
+
+  "제도 안내"
 ];
+
 
 
 /* =========================================================
@@ -54,6 +107,7 @@ function readArray(
       filePath
     )
   ) {
+
     return [];
   }
 
@@ -68,6 +122,7 @@ function readArray(
 
 
   if (!raw) {
+
     return [];
   }
 
@@ -95,6 +150,7 @@ function readArray(
 }
 
 
+
 function writeArray(
   filePath,
   items
@@ -112,6 +168,7 @@ function writeArray(
     "utf8"
   );
 }
+
 
 
 /* =========================================================
@@ -174,6 +231,7 @@ function decodeHtmlEntities(
 }
 
 
+
 function cleanText(
   value
 ) {
@@ -194,6 +252,7 @@ function cleanText(
 
     .trim();
 }
+
 
 
 /* =========================================================
@@ -258,9 +317,34 @@ function canonicalizeBoardUrl(
 }
 
 
+
 /* =========================================================
-   TITLE FILTER
+   TITLE FILTER v1.1
 ========================================================= */
+
+function hasExcludedKeyword(
+  title
+) {
+
+  const text =
+    cleanText(
+      title
+    );
+
+
+  return EXCLUDE_KEYWORDS.some(
+    function (
+      keyword
+    ) {
+
+      return text.includes(
+        keyword
+      );
+    }
+  );
+}
+
+
 
 function isCandidateTitle(
   title
@@ -273,20 +357,19 @@ function isCandidateTitle(
 
 
   if (!text) {
+
     return false;
   }
 
 
-  if (
-    EXCLUDE_KEYWORDS.some(
-      function (
-        keyword
-      ) {
+  /*
+    제외 키워드가 있으면
+    즉시 탈락.
+  */
 
-        return text.includes(
-          keyword
-        );
-      }
+  if (
+    hasExcludedKeyword(
+      text
     )
   ) {
 
@@ -294,16 +377,45 @@ function isCandidateTitle(
   }
 
 
+  /*
+    실제 공모 후보는 반드시:
+
+    1. 미술작품
+    2. 공모
+
+    두 단어가 모두 있어야 한다.
+  */
+
   const hasArt =
     text.includes(
       "미술작품"
     );
 
 
-  const hasCommissionWord =
+  const hasCompetition =
+    text.includes(
+      "공모"
+    );
+
+
+  if (
+    !hasArt ||
+    !hasCompetition
+  ) {
+
+    return false;
+  }
+
+
+  /*
+    공모 게시물로 볼 수 있는
+    최소한의 표현 확인.
+  */
+
+  const hasRelevantWord =
     (
       text.includes(
-        "공모"
+        "공고"
       ) ||
 
       text.includes(
@@ -312,15 +424,94 @@ function isCandidateTitle(
 
       text.includes(
         "설치"
+      ) ||
+
+      text.includes(
+        "신축"
+      ) ||
+
+      text.includes(
+        "공동주택"
       )
     );
 
 
+  return hasRelevantWord;
+}
+
+
+
+/* =========================================================
+   MANAGED ITEM
+========================================================= */
+
+function isManagedGyeonggiItem(
+  item
+) {
+
+  if (!item) {
+
+    return false;
+  }
+
+
+  if (
+    item.collectionSourceId ===
+    SOURCE_ID
+  ) {
+
+    return true;
+  }
+
+
   return (
-    hasArt &&
-    hasCommissionWord
+    item.source ===
+      SOURCE_NAME &&
+
+    String(
+      item.sourceUrl || ""
+    ).includes(
+      "gg.go.kr/publicart"
+    )
   );
 }
+
+
+
+/*
+  자동 수집기가 만든 경기도 항목 중
+  현재 필터 기준으로 공모가 아닌 항목 제거.
+
+  사용자가 직접 등록한 다른 데이터에는
+  영향을 주지 않는다.
+*/
+
+function cleanFalsePositives(
+  items
+) {
+
+  return items.filter(
+    function (
+      item
+    ) {
+
+      if (
+        !isManagedGyeonggiItem(
+          item
+        )
+      ) {
+
+        return true;
+      }
+
+
+      return isCandidateTitle(
+        item.title
+      );
+    }
+  );
+}
+
 
 
 /* =========================================================
@@ -358,6 +549,7 @@ function stableId(
 }
 
 
+
 /* =========================================================
    HTML PARSER
 ========================================================= */
@@ -367,6 +559,7 @@ function extractBoardItems(
 ) {
 
   const found = [];
+
 
   const seen =
     new Set();
@@ -407,6 +600,7 @@ function extractBoardItems(
 
 
     if (!sourceUrl) {
+
       continue;
     }
 
@@ -416,6 +610,7 @@ function extractBoardItems(
         "/publicart/bbs/boardView.do"
       )
     ) {
+
       continue;
     }
 
@@ -425,6 +620,7 @@ function extractBoardItems(
         "bsIdx=825"
       )
     ) {
+
       continue;
     }
 
@@ -434,6 +630,7 @@ function extractBoardItems(
         title
       )
     ) {
+
       continue;
     }
 
@@ -443,6 +640,7 @@ function extractBoardItems(
         sourceUrl
       )
     ) {
+
       continue;
     }
 
@@ -519,7 +717,7 @@ function extractBoardItems(
         false,
 
       collectionSourceId:
-        "gyeonggi_public_art",
+        SOURCE_ID,
 
       collectionVersion:
         COLLECTION_VERSION
@@ -529,6 +727,7 @@ function extractBoardItems(
 
   return found;
 }
+
 
 
 /* =========================================================
@@ -567,7 +766,7 @@ async function fetchText(
           headers: {
 
             "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.0)",
+              "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.1)",
 
             "Accept":
               "text/html,application/xhtml+xml,*/*"
@@ -598,6 +797,7 @@ async function fetchText(
 }
 
 
+
 /* =========================================================
    ITEM URL
 ========================================================= */
@@ -616,6 +816,42 @@ function getItemUrl(
     )
   );
 }
+
+
+
+/* =========================================================
+   ARCHIVE CLEANUP
+========================================================= */
+
+function cleanArchive(
+  archive
+) {
+
+  const cleaned =
+    cleanFalsePositives(
+      archive
+    );
+
+
+  const removed =
+    archive.length -
+    cleaned.length;
+
+
+  if (
+    removed > 0
+  ) {
+
+    console.log(
+      "[ARCHIVE CLEANUP] 오탐 제거:",
+      removed
+    );
+  }
+
+
+  return cleaned;
+}
+
 
 
 /* =========================================================
@@ -670,11 +906,22 @@ function mergeWithExisting(
 
 
   /*
+    기존 live 데이터에서 먼저
+    자동 수집 오탐을 제거.
+  */
+
+  const cleanedExisting =
+    cleanFalsePositives(
+      existing
+    );
+
+
+  /*
     현재 live 데이터 중
     아직 마감되지 않은 항목은 보존.
   */
 
-  existing.forEach(
+  cleanedExisting.forEach(
     function (
       item
     ) {
@@ -701,6 +948,7 @@ function mergeWithExisting(
           url,
           {
             ...item,
+
             sourceUrl:
               url
           }
@@ -719,7 +967,8 @@ function mergeWithExisting(
 
 
   /*
-    신규 발견 공고 병합.
+    이번 수집에서 발견된
+    신규 공고 병합.
   */
 
   discovered.forEach(
@@ -734,14 +983,15 @@ function mergeWithExisting(
 
 
       if (!url) {
+
         return;
       }
 
 
       /*
-        이미 과거 Archive에서
-        마감으로 확정된 URL이면
-        다시 live에 넣지 않는다.
+        Archive에서 이미
+        마감 처리된 공고라면
+        live에 다시 넣지 않는다.
       */
 
       if (
@@ -795,7 +1045,7 @@ function mergeWithExisting(
               url,
 
             collectionSourceId:
-              "gyeonggi_public_art",
+              SOURCE_ID,
 
             collectionVersion:
               COLLECTION_VERSION
@@ -807,7 +1057,9 @@ function mergeWithExisting(
         byUrl.set(
           url,
           {
+
             ...item,
+
             sourceUrl:
               url
           }
@@ -870,22 +1122,57 @@ function mergeWithExisting(
 }
 
 
+
 /* =========================================================
    COLLECT
 ========================================================= */
 
 async function collect() {
 
-  const existing =
+  const originalExisting =
     readArray(
       DATA_FILE
     );
 
 
-  const archive =
+  const originalArchive =
     readArray(
       ARCHIVE_FILE
     );
+
+
+  /*
+    기존 잘못 수집된 경기도 항목
+    live / archive 양쪽에서 정리.
+  */
+
+  const existing =
+    cleanFalsePositives(
+      originalExisting
+    );
+
+
+  const archive =
+    cleanArchive(
+      originalArchive
+    );
+
+
+  /*
+    Archive 청소 결과를
+    바로 저장.
+  */
+
+  if (
+    archive.length !==
+    originalArchive.length
+  ) {
+
+    writeArray(
+      ARCHIVE_FILE,
+      archive
+    );
+  }
 
 
   const html =
@@ -902,8 +1189,12 @@ async function collect() {
 
   /*
     안전장치:
-    사이트 구조 변경으로 링크를 못 읽으면
-    기존 JSON을 비우지 않고 실패 처리.
+
+    사이트 HTML 구조가 바뀌어
+    정상적인 공모 링크를 하나도 찾지 못하면
+
+    기존 live 데이터를 지우지 않고
+    실패 처리한다.
   */
 
   if (
@@ -912,7 +1203,7 @@ async function collect() {
   ) {
 
     throw new Error(
-      "경기도 공모공고 링크를 1건도 찾지 못했습니다. " +
+      "경기도 미술작품 공모 링크를 1건도 찾지 못했습니다. " +
       "사이트 구조 변경 가능성이 있어 기존 데이터를 유지하고 종료합니다."
     );
   }
@@ -930,6 +1221,11 @@ async function collect() {
     DATA_FILE,
     merged
   );
+
+
+  const removedLive =
+    originalExisting.length -
+    existing.length;
 
 
   console.log(
@@ -952,6 +1248,19 @@ async function collect() {
   console.log(
     "발견:",
     discovered.length
+  );
+
+
+  console.log(
+    "LIVE 오탐 제거:",
+    removedLive
+  );
+
+
+  console.log(
+    "ARCHIVE 오탐 제거:",
+    originalArchive.length -
+    archive.length
   );
 
 
@@ -984,6 +1293,7 @@ async function collect() {
 }
 
 
+
 /* =========================================================
    PRUNE EXPIRED
 ========================================================= */
@@ -996,8 +1306,19 @@ function pruneExpired() {
     );
 
 
+  /*
+    만약 이전 버전에서 남은
+    오탐이 있다면 여기서도 한 번 더 제거.
+  */
+
+  const cleaned =
+    cleanFalsePositives(
+      items
+    );
+
+
   const active =
-    items.filter(
+    cleaned.filter(
       function (
         item
       ) {
@@ -1033,7 +1354,7 @@ function pruneExpired() {
 
 
   console.log(
-    "마감 제거:",
+    "마감 / 오탐 제거:",
     removed
   );
 
@@ -1048,6 +1369,7 @@ function pruneExpired() {
     "===================================="
   );
 }
+
 
 
 /* =========================================================
