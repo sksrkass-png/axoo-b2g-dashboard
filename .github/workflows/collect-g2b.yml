@@ -42,22 +42,8 @@ jobs:
       # --------------------------------------------------
       # 3. G2B 수집
       #
-      # collect_g2b_opportunities.js 내부에서도
-      # API 호출을 최대 3회 재시도함.
-      #
-      # 여기서는 스크립트 전체를 한 번 더 재실행.
-      #
-      # 즉 일시적인 data.go.kr 장애 시:
-      #
-      # 1차 실행
-      #   └ API 최대 3회
-      #
-      # 30초 대기
-      #
-      # 2차 실행
-      #   └ API 최대 3회
-      #
-      # 최대 6번의 연결 기회 확보.
+      # Collector 내부 최대 3회 재시도
+      # Workflow 전체 최대 2회
       # --------------------------------------------------
 
       - name: Collect G2B opportunities
@@ -101,7 +87,22 @@ jobs:
 
 
       # --------------------------------------------------
-      # 4. 변경 여부 확인
+      # 4. 메인 대시보드 Priority 데이터 생성
+      #
+      # b2g_opportunities.json
+      #       ↓
+      # priority_projects.json
+      #
+      # 기존 지원사업 데이터는 유지하고
+      # 나라장터 부분만 최신 데이터로 교체.
+      # --------------------------------------------------
+
+      - name: Build dashboard priority projects
+        run: node scripts/build_priority_projects.js
+
+
+      # --------------------------------------------------
+      # 5. 변경 여부 확인
       # --------------------------------------------------
 
       - name: Check changes
@@ -111,6 +112,7 @@ jobs:
         run: |
           if git diff --quiet -- \
             data/b2g_opportunities.json \
+            data/priority_projects.json \
             data/dashboard_meta.json; then
 
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -123,7 +125,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 5. 변경된 경우만 Commit
+      # 6. 변경된 경우만 Commit
       # --------------------------------------------------
 
       - name: Commit G2B opportunities
@@ -140,6 +142,7 @@ jobs:
 
           git add \
             data/b2g_opportunities.json \
+            data/priority_projects.json \
             data/dashboard_meta.json
 
 
