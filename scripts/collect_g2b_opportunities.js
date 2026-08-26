@@ -1,271 +1,516 @@
 const fs = require("fs");
 const path = require("path");
 
-const DATA_FILE = path.join(process.cwd(), "data", "b2g_opportunities.json");
-const META_FILE = path.join(process.cwd(), "data", "dashboard_meta.json");
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const DATA_FILE = path.join(
+  process.cwd(),
+  "data",
+  "b2g_opportunities.json"
+);
+
+const META_FILE = path.join(
+  process.cwd(),
+  "data",
+  "dashboard_meta.json"
+);
+
 const API_URL =
   "https://apis.data.go.kr/1230000/ad/BidPublicInfoService/getBidPblancListInfoServc";
-const SERVICE_KEY = String(process.env.G2B_SERVICE_KEY || "").trim();
 
-const COLLECTOR_VERSION = "1.1.0";
-const SCORING_VERSION = "axoo_bid_fit_v5";
-const NUM_OF_ROWS = 999;
-const LOOKBACK_DAYS = 2;
-const MAX_PAGES = 20;
-const FETCH_TIMEOUT_MS = 25000;
-const MAX_FETCH_ATTEMPTS = 3;
-const MAX_OUTPUT_ITEMS = 60;
-const GRADE_ORDER = { S: 0, A: 1, B: 2, C: 3 };
+const SERVICE_KEY =
+  String(
+    process.env.G2B_SERVICE_KEY || ""
+  ).trim();
+
+
+const COLLECTOR_VERSION =
+  "1.2.0";
+
+const SCORING_VERSION =
+  "axoo_bid_fit_v6";
+
+
+const NUM_OF_ROWS =
+  999;
+
+const LOOKBACK_DAYS =
+  2;
+
+const MAX_PAGES =
+  20;
+
+const FETCH_TIMEOUT_MS =
+  25000;
+
+const MAX_FETCH_ATTEMPTS =
+  3;
+
+const MAX_OUTPUT_ITEMS =
+  60;
+
 
 /*
-  FIT v5 핵심 원칙
-  1) S/A는 AXOO 핵심 수행영역이 제목에 명확해야 함.
-  2) 예산/마감/협상계약/기관은 등급을 올리지 않음.
-  3) B는 인접 검토, C는 파일에서 제거.
+  명시된 사업비가 이 금액보다 작으면
+  후보 단계에서 바로 제외.
 */
 
+const MIN_PROJECT_BUDGET =
+  50000000;
+
+
+const GRADE_ORDER = {
+  S: 0,
+  A: 1,
+  B: 2,
+  C: 3
+};
+
+
+/* =========================================================
+   AXOO FIT v6
+
+   핵심 원칙
+
+   1. HARD FILTER를 먼저 통과해야 한다.
+   2. 시각예술 관련성이 없는 사업은 제외한다.
+   3. 사업비 5천만원 미만은 제외한다.
+   4. 행사대행 / 시상식 / 팝업운영 등은 제외한다.
+   5. 전시관·홍보관·부스 제작설치는 제외한다.
+   6. 남은 사업만 S/A/B 적합도 평가.
+========================================================= */
+
+
+/* =========================================================
+   VISUAL ART GATE
+
+   아래 키워드 중 최소 1개가 제목에 있어야
+   AXOO 후보 심사로 진입할 수 있다.
+
+   단순 "콘텐츠", "행사", "디자인", "전시"만으로는
+   통과시키지 않는다.
+========================================================= */
+
+const VISUAL_ART_KEYWORDS = [
+
+  "시각예술",
+  "시각 예술",
+
+  "미디어아트",
+  "미디어 아트",
+
+  "미디어파사드",
+  "미디어 파사드",
+
+  "공공미술",
+  "공공 미술",
+
+  "미술작품",
+  "미술 작품",
+
+  "미술전시",
+  "미술 전시",
+
+  "예술전시",
+  "예술 전시",
+
+  "아트프로젝트",
+  "아트 프로젝트",
+
+  "아트전시",
+  "아트 전시",
+
+  "아티스트 협업",
+  "작가 협업",
+  "예술가 협업",
+
+  "조형예술",
+  "조형 예술",
+
+  "조형물",
+  "상징조형물",
+
+  "벽화",
+  "아트월",
+
+  "전시기획",
+  "전시 기획",
+
+  "기획전시",
+  "기획 전시",
+
+  "전시연출",
+  "전시 연출",
+
+  "전시콘텐츠",
+  "전시 콘텐츠",
+
+  "전시 조성",
+  "전시공간 조성",
+  "전시 공간 조성",
+
+  "공간연출",
+  "공간 연출",
+
+  "공간브랜딩",
+  "공간 브랜딩",
+
+  "공공디자인",
+  "공공 디자인",
+
+  "경관디자인",
+  "경관 디자인",
+
+  "환경디자인",
+  "환경 디자인",
+
+  "실감콘텐츠",
+  "실감 콘텐츠",
+
+  "인터랙티브 아트",
+  "인터랙티브아트",
+
+  "xr 콘텐츠",
+  "ar 콘텐츠",
+  "vr 콘텐츠"
+];
+
+
+/* =========================================================
+   STRONG FIT CONCEPTS
+========================================================= */
+
 const STRONG_CONCEPTS = [
+
   {
     id: "media_art",
     label: "미디어아트",
     weight: 65,
-    keywords: ["미디어아트", "미디어 아트"]
+
+    keywords: [
+      "미디어아트",
+      "미디어 아트"
+    ]
   },
+
   {
     id: "media_facade",
     label: "미디어파사드",
     weight: 65,
-    keywords: ["미디어파사드", "미디어 파사드"]
+
+    keywords: [
+      "미디어파사드",
+      "미디어 파사드"
+    ]
   },
+
   {
     id: "public_art",
     label: "공공미술·미술작품",
     weight: 65,
-    keywords: ["공공미술", "공공 미술", "미술작품", "미술 작품"]
+
+    keywords: [
+      "공공미술",
+      "공공 미술",
+
+      "미술작품",
+      "미술 작품"
+    ]
   },
+
   {
     id: "mural_sculpture",
     label: "벽화·조형물",
     weight: 60,
-    keywords: ["벽화", "조형물", "상징조형물", "상징물", "아트월"]
+
+    keywords: [
+      "벽화",
+      "조형물",
+      "상징조형물",
+      "아트월"
+    ]
   },
+
   {
     id: "exhibition_planning",
     label: "전시기획·전시연출",
     weight: 60,
+
     keywords: [
       "전시기획",
       "전시 기획",
+
+      "기획전시",
+      "기획 전시",
+
       "전시연출",
-      "전시 연출",
-      "전시디자인",
-      "전시 디자인"
+      "전시 연출"
     ]
   },
+
+  {
+    id: "exhibition_content",
+    label: "전시 콘텐츠",
+    weight: 60,
+
+    keywords: [
+      "전시콘텐츠",
+      "전시 콘텐츠"
+    ]
+  },
+
   {
     id: "exhibition_build",
-    label: "전시 조성·제작·설치",
+    label: "전시 조성·제작",
     weight: 58,
+
     keywords: [
       "전시 조성",
+
       "전시공간 조성",
       "전시 공간 조성",
+
       "전시물 제작",
       "전시물 설치",
+
       "전시 제작",
       "전시 설치"
     ]
   },
+
   {
     id: "space_creative",
-    label: "공간연출·공간디자인",
+    label: "공간연출·공간브랜딩",
     weight: 60,
+
     keywords: [
       "공간연출",
       "공간 연출",
-      "공간디자인",
-      "공간 디자인",
+
       "공간브랜딩",
       "공간 브랜딩",
+
       "vmd"
     ]
   },
+
   {
     id: "immersive",
     label: "실감·인터랙티브 콘텐츠",
     weight: 60,
+
     keywords: [
       "실감콘텐츠",
       "실감 콘텐츠",
-      "인터랙티브",
+
+      "인터랙티브 아트",
+      "인터랙티브아트",
+
       "xr 콘텐츠",
       "ar 콘텐츠",
       "vr 콘텐츠"
     ]
   },
+
   {
     id: "public_design",
     label: "공공·경관·환경디자인",
     weight: 60,
+
     keywords: [
       "공공디자인",
       "공공 디자인",
+
       "경관디자인",
       "경관 디자인",
+
       "환경디자인",
       "환경 디자인"
     ]
   },
+
   {
     id: "visual_design",
     label: "시각·그래픽디자인",
     weight: 40,
+
     keywords: [
       "시각디자인",
       "시각 디자인",
+
       "그래픽디자인",
       "그래픽 디자인"
     ]
   },
+
   {
-    id: "goods_design",
-    label: "굿즈 디자인·제작",
-    weight: 40,
-    keywords: ["굿즈 디자인", "굿즈 제작"]
-  },
-  {
-    id: "artist_collab",
+    id: "artist_collaboration",
     label: "아티스트 협업",
-    weight: 50,
-    keywords: ["아티스트 협업", "작가 협업", "예술가 협업"]
+    weight: 55,
+
+    keywords: [
+      "아티스트 협업",
+      "작가 협업",
+      "예술가 협업"
+    ]
   }
 ];
 
+
+/* =========================================================
+   MEDIUM FIT
+========================================================= */
+
 const MEDIUM_CONCEPTS = [
+
   {
     id: "generic_exhibition",
     label: "전시",
-    weight: 10,
-    keywords: ["전시"]
+    weight: 8,
+
+    keywords: [
+      "전시"
+    ]
   },
+
   {
     id: "branding",
     label: "브랜딩",
-    weight: 15,
-    keywords: ["브랜딩", "브랜드 캠페인"]
+    weight: 12,
+
+    keywords: [
+      "브랜딩",
+      "브랜드 캠페인"
+    ]
   },
+
   {
     id: "content_production",
     label: "콘텐츠 제작",
     weight: 10,
-    keywords: ["콘텐츠 제작", "콘텐츠제작"]
+
+    keywords: [
+      "콘텐츠 제작",
+      "콘텐츠제작"
+    ]
   },
+
   {
     id: "video_content",
     label: "영상 콘텐츠",
     weight: 8,
-    keywords: ["영상콘텐츠", "영상 콘텐츠", "영상 제작", "영상제작"]
+
+    keywords: [
+      "영상콘텐츠",
+      "영상 콘텐츠",
+
+      "영상 제작",
+      "영상제작"
+    ]
   },
+
   {
-    id: "festival_event",
-    label: "축제·페스티벌",
-    weight: 6,
-    keywords: ["축제", "페스티벌"]
-  },
-  {
-    id: "goods",
-    label: "굿즈·기념품",
-    weight: 8,
-    keywords: ["굿즈", "기념품"]
-  },
-  {
-    id: "tourism_content",
-    label: "관광 콘텐츠",
-    weight: 8,
-    keywords: ["관광콘텐츠", "관광 콘텐츠"]
-  },
-  {
-    id: "experience_content",
-    label: "체험 콘텐츠",
-    weight: 10,
-    keywords: ["체험콘텐츠", "체험 콘텐츠", "체험형 콘텐츠"]
+    id: "festival",
+    label: "페스티벌",
+    weight: 5,
+
+    keywords: [
+      "페스티벌"
+    ]
   }
 ];
 
+
+/* =========================================================
+   FIT PENALTY
+
+   HARD FILTER까지는 아니지만
+   사업의 본질이 기술/연구 쪽이면 감점한다.
+
+   중요:
+   "네트워크" 단독 키워드는 사용하지 않는다.
+
+   예:
+   "예술마실섬 네트워크 구축사업 미디어파사드 콘텐츠"
+   같은 정상 사업을 잘못 죽이지 않기 위함.
+========================================================= */
+
 const HARD_NEGATIVE_KEYWORDS = [
+
   "연구용역",
   "연구 용역",
+
   "학술연구",
   "학술 연구",
+
   "실태조사",
   "실태 조사",
+
   "타당성 조사",
 
-  "시스템 구축",
-  "시스템구축",
-  "시스템 유지보수",
-  "시스템유지보수",
   "정보시스템",
   "정보 시스템",
 
+  "시스템 유지보수",
+  "시스템유지보수",
+
   "소프트웨어",
+
   "데이터베이스",
+
   "db 구축",
   "db구축",
+
   "전산",
+
   "서버",
-  "네트워크",
+
   "보안",
 
   "감리",
+
   "안전진단",
   "정밀진단",
-  "검사 용역",
+
   "측량",
 
   "보험",
+
   "청소",
+
   "경비",
+
   "폐기물",
-  "식자재",
-  "차량 임차",
-  "버스 임차",
 
   "회계",
-  "법률",
 
-  "교육 용역",
-  "교육운영",
-  "교육 운영",
-  "연수 운영"
+  "법률"
 ];
 
-const GENERIC_OPERATION_KEYWORDS = [
-  "행사 운영",
-  "행사운영",
-  "행사 대행",
-  "행사대행",
 
-  "축제 운영",
-  "축제운영",
+/* =========================================================
+   CULTURE AGENCY
 
-  "홍보 대행",
-  "홍보대행",
-
-  "sns 운영",
-  "채널 운영",
-  "홈페이지 운영"
-];
+   등급을 올리는 용도가 아니라
+   executionScore 참고값으로만 사용.
+========================================================= */
 
 const CULTURE_AGENCY_KEYWORDS = [
+
   "문화재단",
   "관광재단",
+
   "문화산업진흥원",
   "콘텐츠진흥원",
+
   "예술경영지원센터",
 
   "미술관",
   "박물관",
+
   "문화원",
 
   "문화",
@@ -276,69 +521,147 @@ const CULTURE_AGENCY_KEYWORDS = [
 
 
 /* =========================================================
+   HARD FILTER STATISTICS
+========================================================= */
+
+function createFilterStats() {
+
+  return {
+
+    totalChecked: 0,
+
+    passed: 0,
+
+    budgetUnder50m: 0,
+
+    eventAgency: 0,
+
+    awardCeremony: 0,
+
+    popupOperation: 0,
+
+    experienceCenterBuild: 0,
+
+    exhibitionFacilityBuild: 0,
+
+    noVisualArt: 0
+  };
+}
+
+
+/* =========================================================
    BASIC
 ========================================================= */
 
-function readJson(filePath, fallback) {
-  if (!fs.existsSync(filePath)) return fallback;
+function readJson(
+  filePath,
+  fallback
+) {
 
-  const raw = fs.readFileSync(
-    filePath,
-    "utf8"
-  );
+  if (
+    !fs.existsSync(
+      filePath
+    )
+  ) {
+
+    return fallback;
+  }
+
+
+  const raw =
+    fs.readFileSync(
+      filePath,
+      "utf8"
+    );
+
 
   return raw.trim()
-    ? JSON.parse(raw)
+    ? JSON.parse(
+        raw
+      )
     : fallback;
 }
 
 
-function writeJson(filePath, value) {
+function writeJson(
+  filePath,
+  value
+) {
+
   fs.writeFileSync(
     filePath,
+
     JSON.stringify(
       value,
       null,
       2
     ) + "\n",
+
     "utf8"
   );
 }
 
 
-function text(value) {
+function text(
+  value
+) {
+
   return String(
     value == null
       ? ""
       : value
   )
-    .replace(/\s+/g, " ")
+    .replace(
+      /\s+/g,
+      " "
+    )
     .trim();
 }
 
 
-function lower(value) {
-  return text(value)
-    .toLowerCase();
+function lower(
+  value
+) {
+
+  return text(
+    value
+  ).toLowerCase();
 }
 
 
-function numeric(value) {
-  const n = Number(
-    String(value || "")
-      .replace(/,/g, "")
-  );
+function numeric(
+  value
+) {
 
-  return Number.isFinite(n)
+  const n =
+    Number(
+      String(
+        value || ""
+      )
+        .replace(
+          /,/g,
+          ""
+        )
+    );
+
+
+  return Number.isFinite(
+    n
+  )
     ? n
     : 0;
 }
 
 
-function unique(values) {
+function unique(
+  values
+) {
+
   return [
     ...new Set(
-      values.filter(Boolean)
+      values.filter(
+        Boolean
+      )
     )
   ];
 }
@@ -348,13 +671,19 @@ function includesAny(
   source,
   keywords
 ) {
+
   const haystack =
-    lower(source);
+    lower(
+      source
+    );
+
 
   return keywords.some(
     keyword =>
       haystack.includes(
-        lower(keyword)
+        lower(
+          keyword
+        )
       )
   );
 }
@@ -364,14 +693,20 @@ function matchedKeywords(
   source,
   keywords
 ) {
+
   const haystack =
-    lower(source);
+    lower(
+      source
+    );
+
 
   return unique(
     keywords.filter(
       keyword =>
         haystack.includes(
-          lower(keyword)
+          lower(
+            keyword
+          )
         )
     )
   );
@@ -385,9 +720,11 @@ function matchedKeywords(
 function getKoreaDateParts(
   date = new Date()
 ) {
+
   const parts =
     new Intl.DateTimeFormat(
       "en-CA",
+
       {
         timeZone:
           "Asia/Seoul",
@@ -415,14 +752,18 @@ function getKoreaDateParts(
         date
       );
 
+
   const map = {};
+
 
   parts.forEach(
     part => {
+
       if (
         part.type !==
         "literal"
       ) {
+
         map[
           part.type
         ] =
@@ -431,6 +772,7 @@ function getKoreaDateParts(
     }
   );
 
+
   return map;
 }
 
@@ -438,10 +780,12 @@ function getKoreaDateParts(
 function koreaDateString(
   date = new Date()
 ) {
+
   const p =
     getKoreaDateParts(
       date
     );
+
 
   return (
     p.year +
@@ -456,10 +800,12 @@ function koreaDateString(
 function koreaTimestamp(
   date = new Date()
 ) {
+
   const p =
     getKoreaDateParts(
       date
     );
+
 
   return (
     p.year +
@@ -475,27 +821,37 @@ function koreaTimestamp(
 }
 
 
-function shiftKoreaDate(days) {
+function shiftKoreaDate(
+  days
+) {
+
   const [
-    y,
-    m,
-    d
+    year,
+    month,
+    day
   ] =
     koreaDateString()
       .split("-")
-      .map(Number);
+      .map(
+        Number
+      );
 
-  return koreaDateString(
+
+  const utc =
     new Date(
       Date.UTC(
-        y,
-        m - 1,
-        d + days,
+        year,
+        month - 1,
+        day + days,
         3,
         0,
         0
       )
-    )
+    );
+
+
+  return koreaDateString(
+    utc
   );
 }
 
@@ -504,9 +860,13 @@ function compactDateTime(
   dateString,
   endOfDay
 ) {
+
   return (
     dateString
-      .replace(/-/g, "") +
+      .replace(
+        /-/g,
+        ""
+      ) +
     (
       endOfDay
         ? "2359"
@@ -516,42 +876,68 @@ function compactDateTime(
 }
 
 
-function dateOnly(value) {
+function dateOnly(
+  value
+) {
+
   const match =
-    text(value)
+    text(
+      value
+    )
       .match(
         /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
       );
 
-  if (!match) {
+
+  if (
+    !match
+  ) {
+
     return "";
   }
 
+
   return [
+
     match[1],
+
     String(
       match[2]
-    ).padStart(
-      2,
-      "0"
-    ),
+    )
+      .padStart(
+        2,
+        "0"
+      ),
+
     String(
       match[3]
-    ).padStart(
-      2,
-      "0"
     )
+      .padStart(
+        2,
+        "0"
+      )
+
   ].join("-");
 }
 
 
-function daysUntil(value) {
-  const target =
-    dateOnly(value);
+function daysUntil(
+  value
+) {
 
-  if (!target) {
+  const target =
+    dateOnly(
+      value
+    );
+
+
+  if (
+    !target
+  ) {
+
     return 9999;
   }
+
 
   const targetMs =
     Date.parse(
@@ -559,11 +945,13 @@ function daysUntil(value) {
       "T00:00:00+09:00"
     );
 
+
   const todayMs =
     Date.parse(
       koreaDateString() +
       "T00:00:00+09:00"
     );
+
 
   return Math.round(
     (
@@ -575,19 +963,30 @@ function daysUntil(value) {
 }
 
 
-function timestampValue(value) {
-  const raw =
-    text(value);
+function timestampValue(
+  value
+) {
 
-  if (!raw) {
+  const raw =
+    text(
+      value
+    );
+
+
+  if (
+    !raw
+  ) {
+
     return 0;
   }
+
 
   const normalized =
     raw.replace(
       " ",
       "T"
     );
+
 
   const parsed =
     Date.parse(
@@ -599,6 +998,7 @@ function timestampValue(value) {
           "+09:00"
     );
 
+
   return Number.isFinite(
     parsed
   )
@@ -608,10 +1008,66 @@ function timestampValue(value) {
 
 
 /* =========================================================
+   PROJECT BUDGET
+
+   asignBdgtAmt가 "0"인 경우에도
+   presmptPrce가 실제 금액일 수 있으므로
+   유효한 값 중 가장 큰 금액을 사용한다.
+========================================================= */
+
+function getProjectBudget(
+  item
+) {
+
+  const candidates = [
+
+    numeric(
+      item.asignBdgtAmt
+    ),
+
+    numeric(
+      item.presmptPrce
+    ),
+
+    numeric(
+      item.budgetAmount
+    ),
+
+    numeric(
+      item.amount
+    )
+  ];
+
+
+  const valid =
+    candidates.filter(
+      amount =>
+        amount > 0
+    );
+
+
+  if (
+    valid.length === 0
+  ) {
+
+    return 0;
+  }
+
+
+  return Math.max(
+    ...valid
+  );
+}
+
+
+/* =========================================================
    FETCH
 ========================================================= */
 
-function sleep(ms) {
+function sleep(
+  ms
+) {
+
   return new Promise(
     resolve =>
       setTimeout(
@@ -627,8 +1083,10 @@ async function fetchJson(
   begin,
   end
 ) {
+
   let lastError =
     null;
+
 
   for (
     let attempt = 1;
@@ -640,6 +1098,7 @@ async function fetchJson(
     const controller =
       new AbortController();
 
+
     const timer =
       setTimeout(
         () =>
@@ -647,12 +1106,14 @@ async function fetchJson(
         FETCH_TIMEOUT_MS
       );
 
+
     try {
 
       const url =
         new URL(
           API_URL
         );
+
 
       url.searchParams.set(
         "serviceKey",
@@ -693,9 +1154,11 @@ async function fetchJson(
         end
       );
 
+
       const response =
         await fetch(
           url,
+
           {
             signal:
               controller.signal,
@@ -707,35 +1170,47 @@ async function fetchJson(
           }
         );
 
+
       if (
         !response.ok
       ) {
+
         throw new Error(
           "HTTP " +
           response.status
         );
       }
 
+
       const raw =
         await response.text();
 
+
       let data;
 
+
       try {
+
         data =
           JSON.parse(
             raw
           );
 
-      } catch (_) {
+      } catch (
+        error
+      ) {
 
         throw new Error(
           "JSON 응답이 아닙니다."
         );
       }
 
+
       const header =
-        data?.response?.header;
+        data
+          ?.response
+          ?.header;
+
 
       if (
         header &&
@@ -743,34 +1218,43 @@ async function fetchJson(
           header.resultCode
         ) !== "00"
       ) {
+
         throw new Error(
           "G2B API 오류 " +
-          header.resultCode +
+          String(
+            header.resultCode
+          ) +
           ": " +
-          (
+          String(
             header.resultMsg ||
             "unknown"
           )
         );
       }
 
+
       return data;
 
-    } catch (error) {
+    } catch (
+      error
+    ) {
 
       lastError =
         error;
+
 
       if (
         attempt <
         MAX_FETCH_ATTEMPTS
       ) {
+
         console.log(
           "[G2B] API 재시도 " +
           attempt +
           "/" +
           MAX_FETCH_ATTEMPTS
         );
+
 
         await sleep(
           attempt *
@@ -786,6 +1270,7 @@ async function fetchJson(
     }
   }
 
+
   throw (
     lastError ||
     new Error(
@@ -795,44 +1280,61 @@ async function fetchJson(
 }
 
 
-function extractItems(data) {
+/* =========================================================
+   RESPONSE
+========================================================= */
+
+function extractItems(
+  data
+) {
+
   const items =
     data
       ?.response
       ?.body
       ?.items;
 
+
   if (
     Array.isArray(
       items
     )
   ) {
+
     return items;
   }
+
 
   if (
     Array.isArray(
       items?.item
     )
   ) {
+
     return items.item;
   }
+
 
   if (
     items?.item &&
     typeof items.item ===
       "object"
   ) {
+
     return [
       items.item
     ];
   }
 
+
   return [];
 }
 
 
-function extractTotalCount(data) {
+function extractTotalCount(
+  data
+) {
+
   return numeric(
     data
       ?.response
@@ -846,15 +1348,25 @@ function extractTotalCount(data) {
    NOTICE CLEANUP
 ========================================================= */
 
-function isCancelledNotice(item) {
+function isCancelledNotice(
+  item
+) {
+
   return includesAny(
     [
+
       item?.ntceKindNm,
+
       item?.chgNtceRsn,
+
       item?.bidNtceNm,
+
       item?.title
+
     ]
-      .filter(Boolean)
+      .filter(
+        Boolean
+      )
       .join(" "),
 
     [
@@ -865,14 +1377,20 @@ function isCancelledNotice(item) {
 }
 
 
-function noticeOrder(item) {
+function noticeOrder(
+  item
+) {
+
   return numeric(
     item?.bidNtceOrd
   );
 }
 
 
-function noticeDateValue(item) {
+function noticeDateValue(
+  item
+) {
+
   return timestampValue(
     item?.bidNtceDt ||
     item?.rgstDt ||
@@ -884,20 +1402,29 @@ function noticeDateValue(item) {
 function collapseNoticeVersions(
   items
 ) {
+
   const groups =
     new Map();
 
-  const noNumber = [];
+
+  const noNumber =
+    [];
+
 
   items.forEach(
     item => {
+
       const noticeNo =
         text(
           item.bidNtceNo ||
           item.noticeNo
         );
 
-      if (!noticeNo) {
+
+      if (
+        !noticeNo
+      ) {
+
         noNumber.push(
           item
         );
@@ -905,16 +1432,19 @@ function collapseNoticeVersions(
         return;
       }
 
+
       if (
         !groups.has(
           noticeNo
         )
       ) {
+
         groups.set(
           noticeNo,
           []
         );
       }
+
 
       groups
         .get(
@@ -926,7 +1456,10 @@ function collapseNoticeVersions(
     }
   );
 
-  const output = [];
+
+  const output =
+    [];
+
 
   groups.forEach(
     group => {
@@ -936,26 +1469,45 @@ function collapseNoticeVersions(
           a,
           b
         ) =>
-          noticeOrder(b) -
-          noticeOrder(a) ||
-          noticeDateValue(b) -
-          noticeDateValue(a)
+
+          noticeOrder(
+            b
+          ) -
+          noticeOrder(
+            a
+          ) ||
+
+          noticeDateValue(
+            b
+          ) -
+          noticeDateValue(
+            a
+          )
       );
+
+
+      const latest =
+        group[0];
+
 
       if (
         !isCancelledNotice(
-          group[0]
+          latest
         )
       ) {
+
         output.push(
-          group[0]
+          latest
         );
       }
     }
   );
 
+
   return [
+
     ...output,
+
     ...noNumber.filter(
       item =>
         !isCancelledNotice(
@@ -969,7 +1521,10 @@ function collapseNoticeVersions(
 function canonicalProjectTitle(
   value
 ) {
-  return text(value)
+
+  return text(
+    value
+  )
 
     .replace(
       /\[\s*(재공고|변경공고|취소공고)\s*\]/gi,
@@ -992,6 +1547,7 @@ function canonicalProjectTitle(
     )
 
     .trim()
+
     .toLowerCase();
 }
 
@@ -999,8 +1555,10 @@ function canonicalProjectTitle(
 function dedupeSameProjects(
   items
 ) {
+
   const map =
     new Map();
+
 
   items.forEach(
     item => {
@@ -1011,6 +1569,15 @@ function dedupeSameProjects(
           item.title
         );
 
+
+      if (
+        !titleKey
+      ) {
+
+        return;
+      }
+
+
       const agencyKey =
         lower(
           item.dminsttNm ||
@@ -1019,43 +1586,69 @@ function dedupeSameProjects(
           item.agency
         );
 
-      if (!titleKey) {
-        return;
-      }
 
       const key =
         titleKey +
         "|" +
         agencyKey;
 
+
       const previous =
         map.get(
           key
         );
 
+
       if (
-        !previous ||
-        noticeDateValue(
+        !previous
+      ) {
+
+        map.set(
+          key,
           item
-        ) >
+        );
+
+        return;
+      }
+
+
+      const previousDate =
         noticeDateValue(
           previous
-        ) ||
-        (
-          noticeDateValue(
-            item
-          ) ===
-          noticeDateValue(
-            previous
-          ) &&
-          noticeOrder(
-            item
-          ) >
-          noticeOrder(
-            previous
-          )
+        );
+
+
+      const currentDate =
+        noticeDateValue(
+          item
+        );
+
+
+      if (
+        currentDate >
+        previousDate
+      ) {
+
+        map.set(
+          key,
+          item
+        );
+
+        return;
+      }
+
+
+      if (
+        currentDate ===
+          previousDate &&
+        noticeOrder(
+          item
+        ) >
+        noticeOrder(
+          previous
         )
       ) {
+
         map.set(
           key,
           item
@@ -1063,6 +1656,7 @@ function dedupeSameProjects(
       }
     }
   );
+
 
   return [
     ...map.values()
@@ -1081,8 +1675,10 @@ async function collectRecentNotices() {
       -LOOKBACK_DAYS
     );
 
+
   const endDate =
     koreaDateString();
+
 
   const begin =
     compactDateTime(
@@ -1090,15 +1686,21 @@ async function collectRecentNotices() {
       false
     );
 
+
   const end =
     compactDateTime(
       endDate,
       true
     );
 
-  const all = [];
 
-  let page = 1;
+  const all =
+    [];
+
+
+  let page =
+    1;
+
 
   console.log(
     "[G2B] 조회 기간:",
@@ -1106,6 +1708,7 @@ async function collectRecentNotices() {
     "~",
     endDate
   );
+
 
   while (
     page <=
@@ -1117,6 +1720,7 @@ async function collectRecentNotices() {
       page
     );
 
+
     const data =
       await fetchJson(
         page,
@@ -1124,19 +1728,23 @@ async function collectRecentNotices() {
         end
       );
 
+
     const items =
       extractItems(
         data
       );
+
 
     const totalCount =
       extractTotalCount(
         data
       );
 
+
     all.push(
       ...items
     );
+
 
     console.log(
       "[G2B] 수신:",
@@ -1145,48 +1753,455 @@ async function collectRecentNotices() {
       totalCount
     );
 
+
     if (
       items.length === 0 ||
       (
         totalCount > 0 &&
         all.length >=
-        totalCount
+          totalCount
       ) ||
       items.length <
         NUM_OF_ROWS
     ) {
+
       break;
     }
 
+
     page += 1;
   }
+
 
   const collapsed =
     collapseNoticeVersions(
       all
     );
 
+
   const deduped =
     dedupeSameProjects(
       collapsed
     );
+
 
   console.log(
     "[G2B] 원본:",
     all.length
   );
 
+
   console.log(
     "[G2B] 취소·변경 차수 정리 후:",
     collapsed.length
   );
+
 
   console.log(
     "[G2B] 동일 사업 중복 정리 후:",
     deduped.length
   );
 
+
   return deduped;
+}
+
+
+/* =========================================================
+   HARD FILTER
+========================================================= */
+
+function isEventAgencyProject(
+  title
+) {
+
+  return includesAny(
+    title,
+
+    [
+      "행사 대행",
+      "행사대행",
+
+      "행사 운영 대행",
+      "행사운영 대행",
+
+      "축제 대행",
+      "축제대행",
+
+      "이벤트 대행",
+      "이벤트대행"
+    ]
+  );
+}
+
+
+function isAwardCeremonyProject(
+  title
+) {
+
+  return includesAny(
+    title,
+
+    [
+      "시상식",
+      "시상 행사",
+      "시상행사",
+      "수상식"
+    ]
+  );
+}
+
+
+/*
+  팝업스토어에 "운영"이 포함되면 제외.
+
+  따라서:
+  팝업스토어 조성 및 운영 → 제외
+  팝업스토어 운영 → 제외
+
+  반면:
+  아트 팝업 공간 디자인 → 운영이 없으면
+  다른 조건에 따라 검토 가능.
+*/
+
+function isPopupOperationProject(
+  title
+) {
+
+  const popup =
+    includesAny(
+      title,
+
+      [
+        "팝업스토어",
+        "팝업 스토어",
+        "팝업"
+      ]
+    );
+
+
+  if (
+    !popup
+  ) {
+
+    return false;
+  }
+
+
+  return includesAny(
+    title,
+
+    [
+      "운영",
+      "운영대행",
+      "운영 대행",
+
+      "유치",
+
+      "판매운영",
+      "판매 운영",
+
+      "매장운영",
+      "매장 운영"
+    ]
+  );
+}
+
+
+/*
+  체험관 구축/조성/설치/제작은 제외.
+*/
+
+function isExperienceCenterBuild(
+  title
+) {
+
+  const facility =
+    includesAny(
+      title,
+
+      [
+        "체험관",
+
+        "체험센터",
+        "체험 센터"
+      ]
+    );
+
+
+  if (
+    !facility
+  ) {
+
+    return false;
+  }
+
+
+  return includesAny(
+    title,
+
+    [
+      "구축",
+      "조성",
+      "설치",
+      "제작",
+      "시공"
+    ]
+  );
+}
+
+
+/*
+  전시관·홍보관·전시부스·단체관 등
+  하드웨어 디자인/설치형 사업 제외.
+*/
+
+function isExhibitionFacilityBuild(
+  title
+) {
+
+  const facility =
+    includesAny(
+      title,
+
+      [
+        "전시관",
+        "홍보관",
+
+        "전시부스",
+        "전시 부스",
+
+        "홍보부스",
+        "홍보 부스",
+
+        "박람회부스",
+        "박람회 부스",
+
+        "단체관"
+      ]
+    );
+
+
+  if (
+    !facility
+  ) {
+
+    return false;
+  }
+
+
+  return includesAny(
+    title,
+
+    [
+      "디자인",
+      "제작",
+      "설치",
+      "시공",
+      "구축",
+      "조성"
+    ]
+  );
+}
+
+
+function evaluateHardFilter(
+  item
+) {
+
+  const title =
+    text(
+      item.bidNtceNm ||
+      item.title
+    );
+
+
+  const budget =
+    getProjectBudget(
+      item
+    );
+
+
+  /*
+    명시 금액 5천만원 미만 → 제외
+
+    budget=0은 API 미기재 가능성이 있으므로
+    일단 다른 조건을 계속 심사.
+  */
+
+  if (
+    budget > 0 &&
+    budget <
+      MIN_PROJECT_BUDGET
+  ) {
+
+    return {
+
+      pass: false,
+
+      code:
+        "budget_under_50m",
+
+      reason:
+        "사업비 5천만원 미만",
+
+      visualArtKeywords:
+        []
+    };
+  }
+
+
+  if (
+    isEventAgencyProject(
+      title
+    )
+  ) {
+
+    return {
+
+      pass: false,
+
+      code:
+        "event_agency",
+
+      reason:
+        "행사 대행 용역",
+
+      visualArtKeywords:
+        []
+    };
+  }
+
+
+  if (
+    isAwardCeremonyProject(
+      title
+    )
+  ) {
+
+    return {
+
+      pass: false,
+
+      code:
+        "award_ceremony",
+
+      reason:
+        "시상식·시상행사",
+
+      visualArtKeywords:
+        []
+    };
+  }
+
+
+  if (
+    isPopupOperationProject(
+      title
+    )
+  ) {
+
+    return {
+
+      pass: false,
+
+      code:
+        "popup_operation",
+
+      reason:
+        "팝업스토어 운영 사업",
+
+      visualArtKeywords:
+        []
+    };
+  }
+
+
+  if (
+    isExperienceCenterBuild(
+      title
+    )
+  ) {
+
+    return {
+
+      pass: false,
+
+      code:
+        "experience_center_build",
+
+      reason:
+        "체험관 구축·조성 사업",
+
+      visualArtKeywords:
+        []
+    };
+  }
+
+
+  if (
+    isExhibitionFacilityBuild(
+      title
+    )
+  ) {
+
+    return {
+
+      pass: false,
+
+      code:
+        "exhibition_facility_build",
+
+      reason:
+        "전시관·홍보관·부스 디자인/제작/설치 사업",
+
+      visualArtKeywords:
+        []
+    };
+  }
+
+
+  const visualArtKeywords =
+    matchedKeywords(
+      title,
+      VISUAL_ART_KEYWORDS
+    );
+
+
+  if (
+    visualArtKeywords.length ===
+      0
+  ) {
+
+    return {
+
+      pass: false,
+
+      code:
+        "no_visual_art",
+
+      reason:
+        "시각예술 직접 관련성 없음",
+
+      visualArtKeywords:
+        []
+    };
+  }
+
+
+  return {
+
+    pass: true,
+
+    code:
+      "pass",
+
+    reason:
+      "",
+
+    visualArtKeywords:
+      visualArtKeywords
+  };
 }
 
 
@@ -1198,6 +2213,7 @@ function matchConcepts(
   source,
   concepts
 ) {
+
   return concepts.flatMap(
     concept => {
 
@@ -1207,176 +2223,52 @@ function matchConcepts(
           concept.keywords
         );
 
-      return keywords.length
-        ? [
-            {
-              ...concept,
-              keywords
-            }
-          ]
-        : [];
+
+      if (
+        keywords.length ===
+          0
+      ) {
+
+        return [];
+      }
+
+
+      return [
+
+        {
+          ...concept,
+          keywords
+        }
+      ];
     }
   );
 }
 
 
-function detectPopupBuild(title) {
-
-  const hasPopup =
-    includesAny(
-      title,
-      [
-        "팝업스토어",
-        "팝업 스토어",
-        "팝업"
-      ]
-    );
-
-  const hasBuild =
-    includesAny(
-      title,
-      [
-        "조성",
-        "디자인",
-        "연출",
-        "공간",
-        "제작",
-        "설치"
-      ]
-    );
-
-  return (
-    hasPopup &&
-    hasBuild
-  )
-    ? {
-        id:
-          "popup_build",
-
-        label:
-          "팝업 공간 조성·디자인",
-
-        weight:
-          62,
-
-        keywords: [
-          "팝업",
-          "조성/디자인/연출"
-        ]
-      }
-    : null;
-}
-
-
-function detectExhibitionFacility(
-  title
+function getProcurementFit(
+  item
 ) {
-
-  const hasFacility =
-    includesAny(
-      title,
-      [
-        "전시관",
-        "홍보관",
-        "체험관"
-      ]
-    );
-
-  const hasCreative =
-    includesAny(
-      title,
-      [
-        "조성",
-        "디자인",
-        "연출",
-        "전시",
-        "콘텐츠",
-        "제작",
-        "설치"
-      ]
-    );
-
-  return (
-    hasFacility &&
-    hasCreative
-  )
-    ? {
-        id:
-          "exhibition_facility",
-
-        label:
-          "전시관·홍보관 조성",
-
-        weight:
-          55,
-
-        keywords: [
-          "전시관/홍보관",
-          "조성/콘텐츠"
-        ]
-      }
-    : null;
-}
-
-
-function detectPopupOperation(
-  title
-) {
-
-  const hasPopup =
-    includesAny(
-      title,
-      [
-        "팝업스토어",
-        "팝업 스토어",
-        "팝업"
-      ]
-    );
-
-  const hasOperation =
-    includesAny(
-      title,
-      [
-        "운영",
-        "유치"
-      ]
-    );
-
-  const hasBuild =
-    includesAny(
-      title,
-      [
-        "조성",
-        "디자인",
-        "연출",
-        "공간",
-        "제작",
-        "설치"
-      ]
-    );
-
-  return (
-    hasPopup &&
-    hasOperation &&
-    !hasBuild
-  );
-}
-
-
-function getProcurementFit(item) {
 
   const source =
     [
+
       item.pubPrcrmntLrgClsfcNm,
+
       item.pubPrcrmntMidClsfcNm,
+
       item.pubPrcrmntClsfcNm
+
     ]
-      .filter(Boolean)
+      .filter(
+        Boolean
+      )
       .join(" ");
+
 
   if (
     includesAny(
       source,
+
       [
         "전시회기획및대행서비스",
         "전시회 기획",
@@ -1384,12 +2276,10 @@ function getProcurementFit(item) {
       ]
     )
   ) {
-    return {
-      score:
-        12,
 
-      strong:
-        true,
+    return {
+
+      score: 12,
 
       labels: [
         "전시회 기획·대행 서비스"
@@ -1397,9 +2287,11 @@ function getProcurementFit(item) {
     };
   }
 
+
   if (
     includesAny(
       source,
+
       [
         "디자인서비스",
         "디자인 서비스",
@@ -1407,12 +2299,10 @@ function getProcurementFit(item) {
       ]
     )
   ) {
-    return {
-      score:
-        10,
 
-      strong:
-        true,
+    return {
+
+      score: 8,
 
       labels: [
         "디자인·전시 서비스 분류"
@@ -1420,43 +2310,41 @@ function getProcurementFit(item) {
     };
   }
 
+
   if (
     includesAny(
       source,
+
       [
         "미술",
-        "조형",
-        "전시"
+        "조형"
       ]
     )
   ) {
-    return {
-      score:
-        8,
 
-      strong:
-        true,
+    return {
+
+      score: 8,
 
       labels: [
-        "미술·전시 관련 조달 분류"
+        "미술·조형 관련 조달 분류"
       ]
     };
   }
 
+
   return {
-    score:
-      0,
 
-    strong:
-      false,
+    score: 0,
 
-    labels:
-      []
+    labels: []
   };
 }
 
 
-function evaluateFit(item) {
+function evaluateFit(
+  item
+) {
 
   const title =
     text(
@@ -1464,47 +2352,13 @@ function evaluateFit(item) {
       item.title
     );
 
+
   const strong =
     matchConcepts(
       title,
       STRONG_CONCEPTS
     );
 
-  const popupBuild =
-    detectPopupBuild(
-      title
-    );
-
-  const facility =
-    detectExhibitionFacility(
-      title
-    );
-
-  if (
-    popupBuild &&
-    !strong.some(
-      x =>
-        x.id ===
-        popupBuild.id
-    )
-  ) {
-    strong.push(
-      popupBuild
-    );
-  }
-
-  if (
-    facility &&
-    !strong.some(
-      x =>
-        x.id ===
-        facility.id
-    )
-  ) {
-    strong.push(
-      facility
-    );
-  }
 
   const medium =
     matchConcepts(
@@ -1512,26 +2366,31 @@ function evaluateFit(item) {
       MEDIUM_CONCEPTS
     );
 
-  const hardNegatives =
+
+  const negatives =
     matchedKeywords(
       title,
       HARD_NEGATIVE_KEYWORDS
     );
 
-  const genericOperations =
-    matchedKeywords(
-      title,
-      GENERIC_OPERATION_KEYWORDS
-    );
 
   const procurement =
     getProcurementFit(
       item
     );
 
-  let fitScore = 0;
 
-  const reasons = [];
+  let fitScore =
+    0;
+
+
+  const reasons =
+    [];
+
+
+  /*
+    핵심 수행영역
+  */
 
   if (
     strong.length
@@ -1540,8 +2399,8 @@ function evaluateFit(item) {
     const weights =
       strong
         .map(
-          x =>
-            x.weight
+          concept =>
+            concept.weight
         )
         .sort(
           (
@@ -1551,13 +2410,21 @@ function evaluateFit(item) {
             b - a
         );
 
+
     fitScore +=
       weights[0] ||
       0;
 
+
+    /*
+      두 번째 핵심 영역이 있으면
+      복합 프로젝트로 추가 인정.
+    */
+
     if (
       weights[1]
     ) {
+
       fitScore +=
         Math.min(
           28,
@@ -1566,9 +2433,11 @@ function evaluateFit(item) {
         );
     }
 
+
     if (
       weights[2]
     ) {
+
       fitScore +=
         Math.min(
           10,
@@ -1577,16 +2446,22 @@ function evaluateFit(item) {
         );
     }
 
+
     reasons.push(
       "핵심 수행영역: " +
       strong
         .map(
-          x =>
-            x.label
+          concept =>
+            concept.label
         )
         .join(", ")
     );
   }
+
+
+  /*
+    보조 키워드는 영향 작게.
+  */
 
   if (
     medium.length
@@ -1594,42 +2469,37 @@ function evaluateFit(item) {
 
     fitScore +=
       Math.min(
-        18,
+        15,
+
         medium.reduce(
           (
             sum,
-            x
+            concept
           ) =>
             sum +
-            x.weight,
+            concept.weight,
+
           0
         )
       );
+
 
     reasons.push(
       "보조 적합요소: " +
       medium
         .map(
-          x =>
-            x.label
+          concept =>
+            concept.label
         )
         .join(", ")
     );
   }
 
-  if (
-    detectPopupOperation(
-      title
-    )
-  ) {
 
-    fitScore +=
-      22;
-
-    reasons.push(
-      "팝업 운영형 사업 — 공간 조성·디자인 명시 없음"
-    );
-  }
+  /*
+    나라장터 자체 분류는
+    보조 증거로만 활용.
+  */
 
   if (
     procurement.score
@@ -1638,76 +2508,92 @@ function evaluateFit(item) {
     fitScore +=
       procurement.score;
 
+
     reasons.push(
       "조달 분류: " +
-      procurement.labels
-        .join(", ")
+      procurement.labels.join(
+        ", "
+      )
     );
   }
 
+
+  /*
+    연구·시스템 등 비핵심 성격 감점.
+  */
+
   if (
-    genericOperations.length &&
-    strong.length === 0
+    negatives.length
   ) {
 
     fitScore -=
-      12;
+      25;
 
-    reasons.push(
-      "단순 행사·홍보 운영 성격 감점"
-    );
-  }
-
-  if (
-    hardNegatives.length
-  ) {
-
-    fitScore =
-      strong.length === 0
-        ? Math.min(
-            fitScore,
-            15
-          )
-        : fitScore -
-          25;
 
     reasons.push(
       "비핵심 용역 성격 감점: " +
-      hardNegatives
-        .join(", ")
+      negatives.join(
+        ", "
+      )
     );
   }
+
 
   fitScore =
     Math.max(
       0,
+
       Math.min(
         100,
+
         Math.round(
           fitScore
         )
       )
     );
 
-  let grade = "C";
+
+  let grade =
+    "C";
+
+
+  /*
+    S:
+    핵심 수행영역 2개 이상 +
+    FIT 85 이상
+  */
 
   if (
     fitScore >= 85 &&
     strong.length >= 2 &&
-    !hardNegatives.length
+    negatives.length === 0
   ) {
 
     grade =
       "S";
 
+
+  /*
+    A:
+    핵심 수행영역 최소 1개 +
+    FIT 60 이상
+  */
+
   } else if (
     fitScore >= 60 &&
     strong.length >= 1 &&
-    !hardNegatives.length
+    negatives.length === 0
   ) {
 
     grade =
       "A";
+
+
+  /*
+    B:
+    시각예술 HARD FILTER는 통과했지만
+    수행범위 추가 확인 필요.
+  */
 
   } else if (
     fitScore >= 35
@@ -1717,7 +2603,9 @@ function evaluateFit(item) {
       "B";
   }
 
+
   return {
+
     fitScore:
       fitScore,
 
@@ -1726,51 +2614,48 @@ function evaluateFit(item) {
 
     strongFitConcepts:
       strong.map(
-        x =>
-          x.id
+        concept =>
+          concept.id
       ),
 
     strongFitLabels:
       strong.map(
-        x =>
-          x.label
+        concept =>
+          concept.label
       ),
 
     strongFitKeywords:
       unique(
         strong.flatMap(
-          x =>
-            x.keywords ||
+          concept =>
+            concept.keywords ||
             []
         )
       ),
 
     mediumFitConcepts:
       medium.map(
-        x =>
-          x.id
+        concept =>
+          concept.id
       ),
 
     mediumFitLabels:
       medium.map(
-        x =>
-          x.label
+        concept =>
+          concept.label
       ),
 
     mediumFitKeywords:
       unique(
         medium.flatMap(
-          x =>
-            x.keywords ||
+          concept =>
+            concept.keywords ||
             []
         )
       ),
 
     hardExcludeKeywords:
-      hardNegatives,
-
-    genericOperationKeywords:
-      genericOperations,
+      negatives,
 
     procurementFitLabels:
       procurement.labels,
@@ -1785,6 +2670,12 @@ function evaluateFit(item) {
 
 /* =========================================================
    EXECUTION SCORE
+
+   중요:
+   executionScore는 S/A/B 등급을 결정하지 않는다.
+
+   예산 / 마감 / 협상계약 등은
+   같은 FIT 사업 중 먼저 볼 순서를 정하는 용도.
 ========================================================= */
 
 function evaluateExecution(
@@ -1793,14 +2684,19 @@ function evaluateExecution(
   budget
 ) {
 
-  let score = 0;
+  let score =
+    0;
 
-  const reasons = [];
+
+  const reasons =
+    [];
+
 
   const left =
     daysUntil(
       deadline
     );
+
 
   const contract =
     text(
@@ -1810,6 +2706,7 @@ function evaluateExecution(
       item.contractMethod
     );
 
+
   const agency =
     text(
       item.dminsttNm ||
@@ -1817,6 +2714,7 @@ function evaluateExecution(
       item.ntceInsttNm ||
       item.agency
     );
+
 
   if (
     budget >=
@@ -1830,6 +2728,7 @@ function evaluateExecution(
       "3억원 이상"
     );
 
+
   } else if (
     budget >=
     100000000
@@ -1842,18 +2741,20 @@ function evaluateExecution(
       "1억원 이상"
     );
 
+
   } else if (
     budget >=
-    30000000
+    MIN_PROJECT_BUDGET
   ) {
 
     score +=
       12;
 
     reasons.push(
-      "3천만원 이상"
+      "5천만원 이상"
     );
   }
+
 
   if (
     left >= 7 &&
@@ -1867,6 +2768,7 @@ function evaluateExecution(
       "검토·제안 준비기간 적정"
     );
 
+
   } else if (
     left >= 4 &&
     left <= 30
@@ -1878,6 +2780,7 @@ function evaluateExecution(
     reasons.push(
       "검토 가능한 마감 일정"
     );
+
 
   } else if (
     left >= 0 &&
@@ -1892,6 +2795,7 @@ function evaluateExecution(
     );
   }
 
+
   if (
     contract.includes(
       "협상"
@@ -1905,6 +2809,7 @@ function evaluateExecution(
       "협상에 의한 계약"
     );
   }
+
 
   if (
     includesAny(
@@ -1921,6 +2826,7 @@ function evaluateExecution(
     );
   }
 
+
   if (
     numeric(
       item.techAbltEvlRt
@@ -1936,7 +2842,9 @@ function evaluateExecution(
     );
   }
 
+
   return {
+
     executionScore:
       Math.max(
         0,
@@ -1963,29 +2871,26 @@ function detectCategory(
   fit
 ) {
 
-  const c =
+  const concepts =
     new Set(
       fit.strongFitConcepts
     );
 
-  const title =
-    lower(
-      item.bidNtceNm ||
-      item.title
-    );
 
   if (
-    c.has(
+    concepts.has(
       "media_art"
     ) ||
-    c.has(
+    concepts.has(
       "media_facade"
     ) ||
-    c.has(
+    concepts.has(
       "immersive"
     )
   ) {
+
     return {
+
       category:
         "media_art",
 
@@ -1994,15 +2899,18 @@ function detectCategory(
     };
   }
 
+
   if (
-    c.has(
+    concepts.has(
       "public_art"
     ) ||
-    c.has(
+    concepts.has(
       "mural_sculpture"
     )
   ) {
+
     return {
+
       category:
         "public_art",
 
@@ -2011,38 +2919,44 @@ function detectCategory(
     };
   }
 
+
   if (
-    c.has(
+    concepts.has(
       "exhibition_planning"
     ) ||
-    c.has(
-      "exhibition_build"
+    concepts.has(
+      "exhibition_content"
     ) ||
-    c.has(
-      "exhibition_facility"
+    concepts.has(
+      "exhibition_build"
     )
   ) {
+
     return {
+
       category:
         "exhibition",
 
       categoryLabel:
-        "전시"
+        "전시 콘텐츠"
     };
   }
 
+
   if (
-    c.has(
+    concepts.has(
       "space_creative"
     ) ||
-    c.has(
+    concepts.has(
       "public_design"
     ) ||
-    c.has(
+    concepts.has(
       "visual_design"
     )
   ) {
+
     return {
+
       category:
         "design",
 
@@ -2051,29 +2965,15 @@ function detectCategory(
     };
   }
 
-  if (
-    c.has(
-      "popup_build"
-    ) ||
-    title.includes(
-      "팝업"
-    )
-  ) {
-    return {
-      category:
-        "exhibition",
-
-      categoryLabel:
-        "팝업·공간"
-    };
-  }
 
   if (
-    c.has(
-      "artist_collab"
+    concepts.has(
+      "artist_collaboration"
     )
   ) {
+
     return {
+
       category:
         "arts_content_support",
 
@@ -2082,21 +2982,9 @@ function detectCategory(
     };
   }
 
-  if (
-    c.has(
-      "goods_design"
-    )
-  ) {
-    return {
-      category:
-        "design",
-
-      categoryLabel:
-        "굿즈·IP"
-    };
-  }
 
   return {
+
     category:
       "general",
 
@@ -2118,21 +3006,27 @@ function projectScale(
     budget >=
     300000000
   ) {
+
     return "대형";
   }
 
+
   if (
     budget >=
-    50000000
+    MIN_PROJECT_BUDGET
   ) {
+
     return "중형";
   }
+
 
   if (
     budget > 0
   ) {
+
     return "소형";
   }
+
 
   return "금액 미확인";
 }
@@ -2146,26 +3040,147 @@ function recommendedAction(
   if (
     grade === "S"
   ) {
+
     return "최우선 검토 — 공고문·과업지시서·참가자격 즉시 확인";
   }
+
 
   if (
     grade === "A"
   ) {
 
-    return (
-      executionScore >=
-      55
-    )
+    return executionScore >= 55
+
       ? "우선 검토 — 수행범위·예산·참가자격 확인"
-      : "적합도 높음 — 실행조건 확인 후 지원 여부 결정";
+
+      : "AXOO 적합도 높음 — 과업지시서 확인 후 지원 판단";
   }
 
-  return "인접 영역 — 과업 범위를 읽고 AXOO 수행 가능 여부 확인";
+
+  return "시각예술 관련 인접 사업 — 과업 범위 확인";
 }
 
 
-function normalizeItem(raw) {
+function registerFilterFailure(
+  stats,
+  code
+) {
+
+  if (
+    !stats
+  ) {
+
+    return;
+  }
+
+
+  if (
+    code ===
+    "budget_under_50m"
+  ) {
+
+    stats.budgetUnder50m +=
+      1;
+
+
+  } else if (
+    code ===
+    "event_agency"
+  ) {
+
+    stats.eventAgency +=
+      1;
+
+
+  } else if (
+    code ===
+    "award_ceremony"
+  ) {
+
+    stats.awardCeremony +=
+      1;
+
+
+  } else if (
+    code ===
+    "popup_operation"
+  ) {
+
+    stats.popupOperation +=
+      1;
+
+
+  } else if (
+    code ===
+    "experience_center_build"
+  ) {
+
+    stats.experienceCenterBuild +=
+      1;
+
+
+  } else if (
+    code ===
+    "exhibition_facility_build"
+  ) {
+
+    stats.exhibitionFacilityBuild +=
+      1;
+
+
+  } else if (
+    code ===
+    "no_visual_art"
+  ) {
+
+    stats.noVisualArt +=
+      1;
+  }
+}
+
+
+function normalizeItem(
+  raw,
+  filterStats
+) {
+
+  if (
+    filterStats
+  ) {
+
+    filterStats.totalChecked +=
+      1;
+  }
+
+
+  const hardFilter =
+    evaluateHardFilter(
+      raw
+    );
+
+
+  if (
+    !hardFilter.pass
+  ) {
+
+    registerFilterFailure(
+      filterStats,
+      hardFilter.code
+    );
+
+
+    return null;
+  }
+
+
+  if (
+    filterStats
+  ) {
+
+    filterStats.passed +=
+      1;
+  }
+
 
   const title =
     text(
@@ -2173,17 +3188,20 @@ function normalizeItem(raw) {
       raw.title
     );
 
+
   const agency =
     text(
       raw.ntceInsttNm ||
       raw.agency
     );
 
+
   const demandAgency =
     text(
       raw.dminsttNm ||
       raw.demandAgency
     );
+
 
   const deadline =
     dateOnly(
@@ -2193,6 +3211,7 @@ function normalizeItem(raw) {
       raw.deadlineDate
     );
 
+
   const posted =
     dateOnly(
       raw.bidNtceDt ||
@@ -2200,22 +3219,24 @@ function normalizeItem(raw) {
       raw.postedDate
     );
 
+
   const budget =
-    numeric(
-      raw.asignBdgtAmt ||
-      raw.presmptPrce ||
-      raw.budgetAmount
+    getProjectBudget(
+      raw
     );
+
 
   const left =
     daysUntil(
       deadline
     );
 
+
   const fit =
     evaluateFit(
       raw
     );
+
 
   const execution =
     evaluateExecution(
@@ -2224,11 +3245,13 @@ function normalizeItem(raw) {
       budget
     );
 
+
   const category =
     detectCategory(
       raw,
       fit
     );
+
 
   const sourceUrl =
     text(
@@ -2239,6 +3262,7 @@ function normalizeItem(raw) {
       ""
     );
 
+
   const contractMethod =
     text(
       raw.sucsfbidMthdNm ||
@@ -2246,6 +3270,7 @@ function normalizeItem(raw) {
       raw.bidMethdNm ||
       raw.contractMethod
     );
+
 
   const priorityScore =
     Math.round(
@@ -2255,29 +3280,39 @@ function normalizeItem(raw) {
       0.2
     );
 
+
   return {
+
     ...raw,
+
 
     sourceType:
       "입찰공고",
 
+
     sourceUrl:
       sourceUrl,
+
 
     title:
       title,
 
+
     agency:
       agency,
+
 
     noticeAgency:
       agency,
 
+
     demandAgency:
       demandAgency,
 
+
     contractMethod:
       contractMethod,
+
 
     noticeNo:
       text(
@@ -2285,120 +3320,181 @@ function normalizeItem(raw) {
         raw.noticeNo
       ),
 
+
     publishedDate:
       posted,
+
 
     postedDate:
       posted,
 
+
     noticeDate:
       posted,
+
 
     deadline:
       deadline,
 
+
     deadlineDate:
       deadline,
 
+
     opportunityStatus:
       left < 0
+
         ? "마감"
+
         : left <= 3
+
           ? "임박"
+
           : "진행중",
+
 
     projectScale:
       projectScale(
         budget
       ),
 
+
+    budgetAmount:
+      budget,
+
+
+    daysLeft:
+      left,
+
+
+    /*
+      S/A/B는 FIT 점수 기준.
+    */
+
     score:
       fit.fitScore,
+
 
     fitScore:
       fit.fitScore,
 
+
     grade:
       fit.grade,
+
+
+    /*
+      실행조건 별도.
+    */
 
     executionScore:
       execution.executionScore,
 
+
     priorityScore:
       priorityScore,
+
 
     category:
       category.category,
 
+
     categoryLabel:
       category.categoryLabel,
+
 
     matchedCategories: [
       category.category
     ],
 
+
+    /*
+      HARD FILTER 통과 근거
+    */
+
+    visualArtKeywords:
+      hardFilter.visualArtKeywords,
+
+
+    hardFilterPassed:
+      true,
+
+
+    hardFilterVersion:
+      "axoo_hard_filter_v1",
+
+
     strongFitConcepts:
       fit.strongFitConcepts,
+
 
     strongFitLabels:
       fit.strongFitLabels,
 
+
     strongFitKeywords:
       fit.strongFitKeywords,
+
 
     mediumFitConcepts:
       fit.mediumFitConcepts,
 
+
     mediumFitLabels:
       fit.mediumFitLabels,
+
 
     mediumFitKeywords:
       fit.mediumFitKeywords,
 
+
     matchedKeywords:
       unique([
+
         ...fit.strongFitKeywords,
+
         ...fit.mediumFitKeywords
       ]),
+
 
     directFitKeywords:
       fit.strongFitKeywords,
 
+
     supportFitKeywords:
       fit.mediumFitKeywords,
+
 
     hardExcludeKeywords:
       fit.hardExcludeKeywords,
 
-    genericOperationKeywords:
-      fit.genericOperationKeywords,
 
     procurementFitLabels:
       fit.procurementFitLabels,
 
-    budgetAmount:
-      budget,
-
-    daysLeft:
-      left,
 
     scoreReasons:
       fit.fitReasons,
 
+
     executionReasons:
       execution.executionReasons,
+
 
     fitReason:
       fit.fitReasons.join(
         ". "
       ) +
+
       ". AXOO FIT " +
       fit.fitScore +
       "점 / " +
       fit.grade +
       "등급." +
+
       (
         execution.executionReasons.length
+
           ? " 실행조건 " +
             execution.executionScore +
             "점 (" +
@@ -2406,8 +3502,10 @@ function normalizeItem(raw) {
               ", "
             ) +
             ")."
+
           : ""
       ),
+
 
     recommendedAction:
       recommendedAction(
@@ -2415,18 +3513,23 @@ function normalizeItem(raw) {
         execution.executionScore
       ),
 
+
     scoringVersion:
       SCORING_VERSION,
+
 
     collectionSourceId:
       "g2b_bid_public_info_servc",
 
+
     collectionVersion:
       COLLECTOR_VERSION,
+
 
     collectedAt:
       raw.collectedAt ||
       koreaDateString(),
+
 
     updatedAt:
       koreaDateString()
@@ -2438,7 +3541,9 @@ function normalizeItem(raw) {
    MERGE
 ========================================================= */
 
-function isActive(item) {
+function isActive(
+  item
+) {
 
   const deadline =
     dateOnly(
@@ -2447,8 +3552,16 @@ function isActive(item) {
       item.opengDt
     );
 
+
+  if (
+    !deadline
+  ) {
+
+    return true;
+  }
+
+
   return (
-    !deadline ||
     daysUntil(
       deadline
     ) >= 0
@@ -2456,7 +3569,9 @@ function isActive(item) {
 }
 
 
-function isVisibleFit(item) {
+function isVisibleFit(
+  item
+) {
 
   return (
     item.grade === "S" ||
@@ -2468,41 +3583,59 @@ function isVisibleFit(item) {
 
 function mergeItems(
   existing,
-  discovered
+  discovered,
+  filterStats
 ) {
 
+  /*
+    먼저 변경/취소/중복을 정리하고,
+    그 다음 HARD FILTER를 적용.
+
+    이렇게 해야 같은 공고의 여러 차수 때문에
+    제외 통계가 부풀지 않는다.
+  */
+
   const combined =
-    [
-      ...existing,
-      ...discovered
-    ]
-      .map(
-        item => {
-
-          try {
-
-            return normalizeItem(
-              item
-            );
-
-          } catch (error) {
-
-            console.warn(
-              "[G2B] normalize skip:",
-              error.message
-            );
-
-            return null;
-          }
-        }
+    dedupeSameProjects(
+      collapseNoticeVersions(
+        [
+          ...existing,
+          ...discovered
+        ]
       )
-      .filter(Boolean);
+    );
 
-  return dedupeSameProjects(
-    collapseNoticeVersions(
-      combined
+
+  return combined
+
+    .map(
+      item => {
+
+        try {
+
+          return normalizeItem(
+            item,
+            filterStats
+          );
+
+        } catch (
+          error
+        ) {
+
+          console.warn(
+            "[G2B] normalize skip:",
+            error.message
+          );
+
+
+          return null;
+        }
+      }
     )
-  )
+
+    .filter(
+      Boolean
+    )
 
     .filter(
       item =>
@@ -2539,11 +3672,15 @@ function mergeItems(
             9
           );
 
+
         if (
-          gradeDiff
+          gradeDiff !==
+          0
         ) {
+
           return gradeDiff;
         }
+
 
         const fitDiff =
           numeric(
@@ -2555,11 +3692,15 @@ function mergeItems(
             a.score
           );
 
+
         if (
-          fitDiff
+          fitDiff !==
+          0
         ) {
+
           return fitDiff;
         }
+
 
         const priorityDiff =
           numeric(
@@ -2569,11 +3710,15 @@ function mergeItems(
             a.priorityScore
           );
 
+
         if (
-          priorityDiff
+          priorityDiff !==
+          0
         ) {
+
           return priorityDiff;
         }
+
 
         return (
           numeric(
@@ -2609,6 +3754,7 @@ function updateDashboardMeta(
       {}
     );
 
+
   const important =
     opportunities.filter(
       item =>
@@ -2616,19 +3762,26 @@ function updateDashboardMeta(
         item.grade === "A"
     ).length;
 
+
   writeJson(
     META_FILE,
+
     {
+
       ...current,
+
 
       lastUpdatedAt:
         koreaTimestamp(),
 
+
       timezone:
         "KST",
 
+
       opportunityCount:
         opportunities.length,
+
 
       importantOpportunityCount:
         important
@@ -2646,32 +3799,39 @@ async function main() {
   if (
     !SERVICE_KEY
   ) {
+
     throw new Error(
       "G2B_SERVICE_KEY GitHub Secret이 설정되지 않았습니다."
     );
   }
 
+
   console.log(
     "===================================="
   );
+
 
   console.log(
     "AXOO G2B COLLECTOR v" +
     COLLECTOR_VERSION
   );
 
+
   console.log(
     "Scoring: " +
     SCORING_VERSION
   );
 
+
   console.log(
-    "등급 기준: AXOO FIT only / 실행조건 별도"
+    "HARD FILTER: visual art + 50M+"
   );
+
 
   console.log(
     "===================================="
   );
+
 
   const existing =
     readJson(
@@ -2679,98 +3839,192 @@ async function main() {
       []
     );
 
+
   if (
     !Array.isArray(
       existing
     )
   ) {
+
     throw new Error(
       "data/b2g_opportunities.json 은 배열이어야 합니다."
     );
   }
 
-  const raw =
+
+  const discovered =
     await collectRecentNotices();
+
+
+  const filterStats =
+    createFilterStats();
+
 
   const output =
     mergeItems(
       existing,
-      raw
+      discovered,
+      filterStats
     );
+
 
   writeJson(
     DATA_FILE,
     output
   );
 
+
   updateDashboardMeta(
     output
   );
 
-  const counts = {
+
+  const grades = {
+
     S: 0,
     A: 0,
     B: 0
   };
 
+
   output.forEach(
     item => {
 
       if (
-        counts[
+        grades[
           item.grade
         ] !== undefined
       ) {
-        counts[
+
+        grades[
           item.grade
         ] += 1;
       }
     }
   );
 
+
   console.log(
-    "------------------------------------"
+    ""
   );
+
+
+  console.log(
+    "========== HARD FILTER =========="
+  );
+
+
+  console.log(
+    "심사 대상:",
+    filterStats.totalChecked
+  );
+
+
+  console.log(
+    "HARD FILTER 통과:",
+    filterStats.passed
+  );
+
+
+  console.log(
+    "5천만원 미만 제외:",
+    filterStats.budgetUnder50m
+  );
+
+
+  console.log(
+    "행사 대행 제외:",
+    filterStats.eventAgency
+  );
+
+
+  console.log(
+    "시상식 제외:",
+    filterStats.awardCeremony
+  );
+
+
+  console.log(
+    "팝업 운영 제외:",
+    filterStats.popupOperation
+  );
+
+
+  console.log(
+    "체험관 구축 제외:",
+    filterStats.experienceCenterBuild
+  );
+
+
+  console.log(
+    "전시관/부스 설치 제외:",
+    filterStats.exhibitionFacilityBuild
+  );
+
+
+  console.log(
+    "시각예술 관련 없음 제외:",
+    filterStats.noVisualArt
+  );
+
+
+  console.log(
+    "================================="
+  );
+
+
+  console.log(
+    ""
+  );
+
+
+  console.log(
+    "========== FINAL RESULT ========="
+  );
+
 
   console.log(
     "기존 후보:",
     existing.length
   );
 
+
   console.log(
     "최종 표시 후보:",
     output.length
   );
 
+
   console.log(
     "S:",
-    counts.S
+    grades.S
   );
+
 
   console.log(
     "A:",
-    counts.A
+    grades.A
   );
+
 
   console.log(
     "B:",
-    counts.B
+    grades.B
   );
+
 
   console.log(
     "C: 저장 안 함"
   );
 
-  console.log(
-    "------------------------------------"
-  );
 
   console.log(
-    "✅ G2B FIT v5 수집 완료"
+    "================================="
   );
 
+
   console.log(
-    "===================================="
+    "✅ G2B FIT v6 수집 완료"
   );
 }
 
@@ -2783,6 +4037,7 @@ main()
         "[AXOO G2B COLLECTOR]",
         error
       );
+
 
       process.exitCode =
         1;
