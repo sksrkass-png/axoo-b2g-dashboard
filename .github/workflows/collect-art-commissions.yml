@@ -15,19 +15,22 @@ concurrency:
   group: collect-art-commissions
   cancel-in-progress: false
 
-
 jobs:
-
   collect:
-
     runs-on: ubuntu-latest
 
-
     steps:
+      # --------------------------------------------------
+      # 1. Repository
+      # --------------------------------------------------
 
       - name: Checkout repository
         uses: actions/checkout@v4
 
+
+      # --------------------------------------------------
+      # 2. Node
+      # --------------------------------------------------
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -37,27 +40,17 @@ jobs:
 
 
       # --------------------------------------------------
-      # 1. 경기도
+      # 3. 경기 + 서울 + 인천
+      #
+      # run_art_collectors.js가
+      # 각 소스를 최대 3회 재시도.
+      #
+      # 한 지역 실패 시에도
+      # 다른 지역은 계속 수집.
       # --------------------------------------------------
 
-      - name: Collect Gyeonggi art commissions
-        run: node scripts/collect_art_commissions.js
-
-
-      # --------------------------------------------------
-      # 2. 서울특별시
-      # --------------------------------------------------
-
-      - name: Collect Seoul art commissions
-        run: node scripts/collect_seoul_art_commissions.js
-
-
-      # --------------------------------------------------
-      # 3. 인천광역시
-      # --------------------------------------------------
-
-      - name: Collect Incheon art commissions
-        run: node scripts/collect_incheon_art_commissions.js
+      - name: Collect regional art commissions
+        run: node scripts/run_art_collectors.js
 
 
       # --------------------------------------------------
@@ -93,7 +86,6 @@ jobs:
         shell: bash
 
         run: |
-
           if git diff --quiet -- \
             data/art_commissions.json \
             data/art_commissions_archive.json; then
@@ -116,20 +108,16 @@ jobs:
         shell: bash
 
         run: |
-
           git config user.name "github-actions[bot]"
 
           git config user.email \
             "41898282+github-actions[bot]@users.noreply.github.com"
 
-
           git add \
             data/art_commissions.json \
             data/art_commissions_archive.json
 
-
           git commit \
             -m "Collect current art commissions"
-
 
           git push
