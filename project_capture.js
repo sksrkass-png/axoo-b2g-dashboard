@@ -1,8 +1,13 @@
 (function () {
   "use strict";
 
-  const PRIORITY_URL =
-    "data/priority_projects.json";
+
+  /* =====================================================
+     CONFIG
+
+     PROJECT CONTROL은
+     건축물 미술작품 공모만 연결한다.
+  ===================================================== */
 
   const ART_URL =
     "data/art_commissions.json";
@@ -11,9 +16,8 @@
     "https://script.google.com/a/macros/axoocorp.com/s/AKfycbzLS5AW0DfLGIDersBlbL4IDEIhHqElPaaePi45bG5nrT6V_8FKwSjwta3lUS3VocW3/exec";
 
   const STORAGE_KEY =
-    "axoo_b2g_registered_projects_v1";
+    "axoo_b2g_registered_art_projects_v2";
 
-  let priorityProjects = [];
   let artProjects = [];
 
 
@@ -59,12 +63,12 @@
 
 
   function normalizeDate(value) {
-    const text =
+    const raw =
       String(value || "")
         .trim();
 
     const match =
-      text.match(
+      raw.match(
         /(\d{4})[-./](\d{1,2})[-./](\d{1,2})/
       );
 
@@ -104,11 +108,23 @@
 
   function statusLabel(status) {
     const map = {
-      REVIEW: "검토중",
-      WORKING: "작성중",
-      REVIEW_REQUESTED: "검토요청",
-      READY: "제출준비",
-      SUBMITTED: "제출완료"
+      REVIEW:
+        "검토중",
+
+      WORKING:
+        "작성중",
+
+      REVIEW_REQUESTED:
+        "검토요청",
+
+      READY:
+        "제출준비",
+
+      SUBMITTED:
+        "제출완료",
+
+      ARCHIVED:
+        "보관"
     };
 
     const key =
@@ -124,13 +140,13 @@
 
 
   /* =====================================================
-     PROJECT DATA
+     ART PROJECT DATA
   ===================================================== */
 
   function getTitle(project) {
     return (
       project.title ||
-      project.bidNtceNm ||
+      project.noticeTitle ||
       project.projectName ||
       ""
     );
@@ -141,10 +157,8 @@
     return (
       project.agency ||
       project.organization ||
-      project.ntceInsttNm ||
-      project.dminsttNm ||
-      project.noticeAgency ||
-      project.demandAgency ||
+      project.institution ||
+      project.source ||
       ""
     );
   }
@@ -155,8 +169,6 @@
       project.deadline ||
       project.periodEnd ||
       project.endDate ||
-      project.bidNtceEndDt ||
-      project.bidClseDt ||
       project.deadlineDate ||
       project.closeDate ||
       ""
@@ -169,8 +181,8 @@
       project.sourceUrl,
       project.originalUrl,
       project.url,
-      project.ntceSpecDocUrl1,
-      project.documentUrl
+      project.detailUrl,
+      project.noticeUrl
     ];
 
     return (
@@ -195,23 +207,27 @@
   }
 
 
-  function getResearchId(
-    project,
-    type
-  ) {
+  /*
+    RESEARCH_ID는 건축물 미술작품의
+    원본 리서치 ID를 그대로 사용.
+
+    기존 Sheet와 연결할 때
+    가장 중요한 식별값이다.
+  */
+
+  function getResearchId(project) {
     const id =
       project.id ||
-      project.bidNtceNo ||
-      project.noticeNo ||
       project.noticeId ||
-      project.sourceId;
+      project.sourceId ||
+      project.researchId;
 
     if (id) {
       return String(id);
     }
 
     return [
-      type,
+      "art",
       normalizeText(
         getTitle(project)
       ),
@@ -220,90 +236,24 @@
   }
 
 
-  function getGrade(project) {
-    const grade =
-      String(
-        project.grade || ""
-      )
-        .toUpperCase()
-        .trim();
+  function getPriority() {
+    /*
+      Project Control 등록 시
+      최초 기본 우선순위.
 
-    if (grade) {
-      return grade;
-    }
-
-    const score =
-      Number(
-        project.axooFitScore ||
-        project.score ||
-        project.priorityScore ||
-        0
-      );
-
-    if (score >= 85) {
-      return "S";
-    }
-
-    if (score >= 70) {
-      return "A";
-    }
-
-    if (score >= 50) {
-      return "B";
-    }
-
-    return "";
-  }
-
-
-  function getPriority(
-    project,
-    type
-  ) {
-    if (
-      type === "art"
-    ) {
-      return "NORMAL";
-    }
-
-    const grade =
-      getGrade(project);
-
-    if (
-      grade === "S" ||
-      grade === "A"
-    ) {
-      return "HIGH";
-    }
-
-    if (
-      grade === "C"
-    ) {
-      return "LOW";
-    }
+      필요하면 Sheet에서
+      HIGH / NORMAL / LOW로 조정.
+    */
 
     return "NORMAL";
   }
 
 
-  function getNextAction(
-    project,
-    type
-  ) {
-    if (
-      type === "art"
-    ) {
-      return (
-        project.recommendedAction ||
-        project.nextAction ||
-        "공고문 확인 후 접수 기간, 설치 조건, 작품 규모, 제출 서류 검토"
-      );
-    }
-
+  function getNextAction(project) {
     return (
       project.recommendedAction ||
       project.nextAction ||
-      "공고문 및 지원 조건 확인"
+      "공고문 확인 후 접수기간, 설치조건, 작품규모, 참가자격 및 제출서류 검토"
     );
   }
 
@@ -336,7 +286,7 @@
 
     } catch (error) {
       console.warn(
-        "[AXOO B2G] localStorage read error",
+        "[AXOO PROJECT CONTROL] localStorage read error",
         error
       );
 
@@ -354,7 +304,7 @@
 
     } catch (error) {
       console.warn(
-        "[AXOO B2G] localStorage save error",
+        "[AXOO PROJECT CONTROL] localStorage save error",
         error
       );
     }
@@ -417,10 +367,8 @@
 
     if (
       data &&
-      data.progress !==
-        undefined &&
-      data.progress !==
-        null &&
+      data.progress !== undefined &&
+      data.progress !== null &&
       data.progress !== ""
     ) {
       progress =
@@ -430,13 +378,13 @@
     }
 
     map[researchId] = {
-      registered: true,
+      registered:
+        true,
 
       projectId:
         (
           data &&
-          data.projectId !==
-            undefined
+          data.projectId !== undefined
         )
           ? String(
               data.projectId ||
@@ -471,16 +419,14 @@
       sheetUpdatedAt:
         (
           data &&
-          data.updatedAt !==
-            undefined
+          data.updatedAt !== undefined
         )
           ? String(
               data.updatedAt ||
               ""
             )
           : String(
-              previous
-                .sheetUpdatedAt ||
+              previous.sheetUpdatedAt ||
               ""
             ),
 
@@ -553,6 +499,11 @@
   }
 
 
+  /*
+    Apps Script에서
+    프로젝트 생성 후 돌아왔을 때 처리.
+  */
+
   function consumeRegistrationCallback() {
     try {
       const url =
@@ -596,12 +547,18 @@
 
     } catch (error) {
       console.warn(
-        "[AXOO B2G] registration callback error",
+        "[AXOO PROJECT CONTROL] registration callback error",
         error
       );
     }
   }
 
+
+  /*
+    Apps Script에서
+    Google Sheet 상태 확인 후
+    돌아왔을 때 처리.
+  */
 
   function consumeSyncCallback() {
     try {
@@ -692,7 +649,7 @@
         setTimeout(
           function () {
             alert(
-              "Google Sheet에서 등록된 지원 프로젝트를 찾지 못했습니다."
+              "Project Control에서 등록된 건축물 미술작품 프로젝트를 찾지 못했습니다."
             );
           },
           200
@@ -701,7 +658,7 @@
 
     } catch (error) {
       console.warn(
-        "[AXOO B2G] sync callback error",
+        "[AXOO PROJECT CONTROL] sync callback error",
         error
       );
     }
@@ -710,56 +667,43 @@
 
   /* =====================================================
      DATA LOAD
+
+     중요:
+     priority_projects.json을 로드하지 않는다.
+
+     즉 나라장터 / 전시 콘텐츠 /
+     일반 지원사업은 Project Control과
+     완전히 분리된다.
   ===================================================== */
 
-  async function loadJson(url) {
+  async function loadArtProjects() {
     try {
       const response =
         await fetch(
-          url +
+          ART_URL +
           "?v=" +
           Date.now()
         );
 
       if (!response.ok) {
         throw new Error(
-          url +
-          " load failed"
+          "art_commissions.json load failed"
         );
       }
 
-      return normalizeArray(
-        await response.json()
-      );
+      artProjects =
+        normalizeArray(
+          await response.json()
+        );
 
     } catch (error) {
       console.error(
-        "[AXOO B2G]",
+        "[AXOO PROJECT CONTROL]",
         error
       );
 
-      return [];
+      artProjects = [];
     }
-  }
-
-
-  async function loadData() {
-    const results =
-      await Promise.all([
-        loadJson(
-          PRIORITY_URL
-        ),
-
-        loadJson(
-          ART_URL
-        )
-      ]);
-
-    priorityProjects =
-      results[0];
-
-    artProjects =
-      results[1];
   }
 
 
@@ -770,12 +714,19 @@
   function getCardTitle(card) {
     const element =
       card.querySelector(
+        ".summary-title"
+      ) ||
+      card.querySelector(
         ".accordion-body h2"
       ) ||
-      card.querySelector("h2") ||
-      card.querySelector("h3") ||
       card.querySelector(
-        ".summary-title"
+        ".accordion-body h3"
+      ) ||
+      card.querySelector(
+        "h2"
+      ) ||
+      card.querySelector(
+        "h3"
       );
 
     return element
@@ -786,16 +737,30 @@
   }
 
 
-  function findByTitle(
-    list,
-    title
-  ) {
+  function findArtProject(card) {
+    /*
+      안전장치:
+      #artCards 안의 카드가 아니면
+      절대 프로젝트 컨트롤 대상으로 보지 않는다.
+    */
+
+    if (
+      !card.closest(
+        "#artCards"
+      )
+    ) {
+      return null;
+    }
+
+    const title =
+      getCardTitle(card);
+
     if (!title) {
       return null;
     }
 
     return (
-      list.find(
+      artProjects.find(
         function (project) {
           return (
             normalizeText(
@@ -809,58 +774,11 @@
   }
 
 
-  function findProject(card) {
-    const title =
-      getCardTitle(card);
-
-    if (
-      card.closest(
-        "#artCards"
-      )
-    ) {
-      const project =
-        findByTitle(
-          artProjects,
-          title
-        );
-
-      return project
-        ? {
-            project:
-              project,
-
-            type:
-              "art"
-          }
-        : null;
-    }
-
-    const project =
-      findByTitle(
-        priorityProjects,
-        title
-      );
-
-    return project
-      ? {
-          project:
-            project,
-
-          type:
-            "priority"
-        }
-      : null;
-  }
-
-
   /* =====================================================
-     URL
+     APPS SCRIPT URL
   ===================================================== */
 
-  function buildAddUrl(
-    project,
-    type
-  ) {
+  function buildAddUrl(project) {
     const params =
       new URLSearchParams();
 
@@ -872,45 +790,48 @@
     params.set(
       "researchId",
       getResearchId(
-        project,
-        type
+        project
       )
     );
 
     params.set(
       "title",
-      getTitle(project)
+      getTitle(
+        project
+      )
     );
 
     params.set(
       "institution",
-      getAgency(project)
+      getAgency(
+        project
+      )
     );
 
     params.set(
       "deadline",
-      getDeadline(project)
+      getDeadline(
+        project
+      )
     );
 
     params.set(
       "priority",
-      getPriority(
-        project,
-        type
-      )
+      getPriority()
     );
 
     params.set(
       "nextAction",
       getNextAction(
-        project,
-        type
+        project
       )
     );
 
     params.set(
       "sourceUrl",
-      getSourceUrl(project)
+      getSourceUrl(
+        project
+      )
     );
 
     return (
@@ -921,23 +842,10 @@
   }
 
 
-  /*
-    최신 리서치 정보를
-    Apps Script의 sync 모드로 함께 전달한다.
-
-    Apps Script 쪽에서는
-    기존 프로젝트를 찾은 뒤
-    기관 / 공식마감 / NEXT ACTION /
-    공고 URL을 최신값으로 갱신하게 된다.
-  */
-  function buildSyncUrl(
-    project,
-    type
-  ) {
+  function buildSyncUrl(project) {
     const researchId =
       getResearchId(
-        project,
-        type
+        project
       );
 
     const state =
@@ -958,11 +866,6 @@
       researchId
     );
 
-
-    /*
-      localStorage에 Project ID가 있으면
-      가장 정확하게 해당 행을 찾도록 전달.
-    */
     if (
       state.projectId
     ) {
@@ -972,55 +875,45 @@
       );
     }
 
-
-    /*
-      프로젝트 식별용
-    */
     params.set(
       "title",
-      getTitle(project)
+      getTitle(
+        project
+      )
     );
 
-
-    /*
-      최신 리서치 정보
-    */
     params.set(
       "institution",
-      getAgency(project)
+      getAgency(
+        project
+      )
     );
 
     params.set(
       "deadline",
-      getDeadline(project)
+      getDeadline(
+        project
+      )
     );
 
     params.set(
       "nextAction",
       getNextAction(
-        project,
-        type
+        project
       )
     );
 
     params.set(
       "sourceUrl",
-      getSourceUrl(project)
-    );
-
-
-    /*
-      필요할 경우 Apps Script에서
-      우선순위도 참고 가능.
-    */
-    params.set(
-      "priority",
-      getPriority(
-        project,
-        type
+      getSourceUrl(
+        project
       )
     );
 
+    params.set(
+      "priority",
+      getPriority()
+    );
 
     return (
       APP_URL +
@@ -1031,7 +924,7 @@
 
 
   /* =====================================================
-     BUTTON TEXT
+     BUTTON STATE
   ===================================================== */
 
   function getCaptureButtonText(
@@ -1047,7 +940,7 @@
       !state.registered
     ) {
       return (
-        "⭐ 지원 관리에 추가"
+        "⭐ 프로젝트 컨트롤에 추가"
       );
     }
 
@@ -1058,10 +951,8 @@
       );
 
     const hasProgress =
-      state.progress !==
-        undefined &&
-      state.progress !==
-        null &&
+      state.progress !== undefined &&
+      state.progress !== null &&
       state.progress !== "";
 
     if (
@@ -1069,7 +960,7 @@
       hasProgress
     ) {
       return (
-        "✓ 지원 관리 등록됨 · " +
+        "✓ 프로젝트 등록됨 · " +
         label +
         " · " +
         clampProgress(
@@ -1081,13 +972,13 @@
 
     if (label) {
       return (
-        "✓ 지원 관리 등록됨 · " +
+        "✓ 프로젝트 등록됨 · " +
         label
       );
     }
 
     return (
-      "✓ 지원 관리 등록됨"
+      "✓ 프로젝트 컨트롤 등록됨"
     );
   }
 
@@ -1122,13 +1013,10 @@
         researchId
       );
 
-    button.hidden =
-      false;
-
     button.textContent =
       registered
-        ? "↻ 상태 동기화"
-        : "↻ 지원 상태 확인";
+        ? "↻ 프로젝트 상태 동기화"
+        : "↻ 프로젝트 등록 확인";
   }
 
 
@@ -1140,12 +1028,14 @@
     button,
     card
   ) {
-    const capture =
-      findProject(card);
+    const project =
+      findArtProject(
+        card
+      );
 
-    if (!capture) {
+    if (!project) {
       alert(
-        "공고 데이터를 찾지 못했습니다."
+        "건축물 미술작품 공고 데이터를 찾지 못했습니다."
       );
 
       return;
@@ -1153,9 +1043,14 @@
 
     const researchId =
       getResearchId(
-        capture.project,
-        capture.type
+        project
       );
+
+    /*
+      이미 등록된 프로젝트라면
+      새 프로젝트를 중복 생성하지 않고
+      기존 Project Control을 연다.
+    */
 
     if (
       isRegistered(
@@ -1171,12 +1066,11 @@
     }
 
     button.textContent =
-      "지원 관리 열기...";
+      "프로젝트 컨트롤 열기...";
 
     window.open(
       buildAddUrl(
-        capture.project,
-        capture.type
+        project
       ),
       "_blank"
     );
@@ -1193,23 +1087,18 @@
   }
 
 
-  /*
-    등록 여부와 무관하게
-    Apps Script에서 Sheet 검색.
-
-    동시에 GitHub의 최신
-    공고 데이터도 전달한다.
-  */
   function handleSync(
     button,
     card
   ) {
-    const capture =
-      findProject(card);
+    const project =
+      findArtProject(
+        card
+      );
 
-    if (!capture) {
+    if (!project) {
       alert(
-        "공고 데이터를 찾지 못했습니다."
+        "건축물 미술작품 공고 데이터를 찾지 못했습니다."
       );
 
       return;
@@ -1220,8 +1109,7 @@
 
     window.location.href =
       buildSyncUrl(
-        capture.project,
-        capture.type
+        project
       );
   }
 
@@ -1254,7 +1142,7 @@
   function injectStyles() {
     if (
       document.getElementById(
-        "axooProjectCaptureStyles"
+        "axooProjectControlStyles"
       )
     ) {
       return;
@@ -1266,23 +1154,23 @@
       );
 
     style.id =
-      "axooProjectCaptureStyles";
+      "axooProjectControlStyles";
 
     style.textContent = `
-      .axoo-capture-actions {
+      .axoo-project-control-actions {
         display:flex;
         flex-wrap:wrap;
         align-items:center;
         gap:9px;
-        margin-top:12px;
+        margin-top:14px;
       }
 
-      .axoo-capture-actions > .link {
+      .axoo-project-control-actions > .link {
         margin:0 !important;
       }
 
-      .axoo-capture-button,
-      .axoo-sync-button {
+      .axoo-project-control-button,
+      .axoo-project-sync-button {
         appearance:none;
         min-height:38px;
         padding:0 15px;
@@ -1293,48 +1181,48 @@
         cursor:pointer;
       }
 
-      .axoo-capture-button {
+      .axoo-project-control-button {
         border:1px solid #111;
         background:#111;
         color:#fff;
       }
 
-      .axoo-capture-button:hover {
+      .axoo-project-control-button:hover {
         opacity:.82;
       }
 
-      .axoo-capture-button.registered {
+      .axoo-project-control-button.registered {
         border-color:#d6d6d1;
         background:#f1f1ee;
         color:#444;
       }
 
-      .axoo-capture-button.registered:hover {
+      .axoo-project-control-button.registered:hover {
         opacity:1;
         background:#e9e9e4;
       }
 
-      .axoo-sync-button {
+      .axoo-project-sync-button {
         border:1px solid #d6d6d1;
         background:#fff;
         color:#111;
       }
 
-      .axoo-sync-button:hover {
+      .axoo-project-sync-button:hover {
         border-color:#111;
         background:#111;
         color:#fff;
       }
 
       @media (max-width:640px) {
-        .axoo-capture-actions {
+        .axoo-project-control-actions {
           flex-direction:column;
           align-items:stretch;
         }
 
-        .axoo-capture-actions > .link,
-        .axoo-capture-button,
-        .axoo-sync-button {
+        .axoo-project-control-actions > .link,
+        .axoo-project-control-button,
+        .axoo-project-sync-button {
           width:100%;
           text-align:center;
         }
@@ -1349,144 +1237,130 @@
 
 
   /* =====================================================
-     DECORATE CARD
+     DECORATE ART CARD
+
+     핵심 안전장치:
+     #artCards 내부에만 버튼을 생성한다.
+
+     priority-accordion-card,
+     exhibitionTab,
+     muralTab,
+     otherTab에는
+     절대 버튼을 생성하지 않는다.
   ===================================================== */
 
-  function decorateCard(card) {
-    const isPriority =
-      card.classList.contains(
-        "priority-accordion-card"
-      );
-
-    const isArt =
-      Boolean(
-        card.closest(
-          "#artCards"
-        )
-      );
-
+  function decorateArtCard(card) {
     if (
-      !isPriority &&
-      !isArt
-    ) {
-      return;
-    }
-
-    if (
-      isArt &&
-      !card.querySelector(
-        ".review-box"
+      !card.closest(
+        "#artCards"
       )
     ) {
       return;
     }
 
-    const capture =
-      findProject(card);
+    const project =
+      findArtProject(
+        card
+      );
 
-    if (!capture) {
+    if (!project) {
       return;
     }
 
     const researchId =
       getResearchId(
-        capture.project,
-        capture.type
+        project
       );
 
-    const body =
-      isPriority
-        ? card.querySelector(
-            ".accordion-body"
-          )
-        : card;
+    /*
+      이미 만들어졌으면
+      중복 생성하지 않는다.
+    */
 
-    if (!body) {
+    if (
+      card.querySelector(
+        ".axoo-project-control-actions"
+      )
+    ) {
       return;
     }
 
-    let actions =
-      body.querySelector(
-        ".axoo-capture-actions"
+    const actions =
+      document.createElement(
+        "div"
       );
 
-    if (!actions) {
-      actions =
-        document.createElement(
-          "div"
-        );
-
-      actions.className =
-        "axoo-capture-actions";
-
-      const link =
-        body.querySelector(
-          "a.link"
-        );
-
-      if (
-        link &&
-        link.parentNode
-      ) {
-        link.parentNode
-          .insertBefore(
-            actions,
-            link
-          );
-
-        actions.appendChild(
-          link
-        );
-
-      } else {
-        body.appendChild(
-          actions
-        );
-      }
-    }
+    actions.className =
+      "axoo-project-control-actions";
 
 
-    /* 지원 관리 버튼 */
+    /*
+      기존 공고 보기 버튼이 있으면
+      같은 액션 영역 안으로 이동.
+    */
 
-    let captureButton =
-      actions.querySelector(
-        ".axoo-capture-button"
+    const existingLink =
+      card.querySelector(
+        "a.link"
       );
 
-    if (!captureButton) {
-      captureButton =
-        document.createElement(
-          "button"
-        );
-
-      captureButton.type =
-        "button";
-
-      captureButton.className =
-        "axoo-capture-button";
-
-      captureButton
-        .addEventListener(
-          "click",
-          function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            handleCapture(
-              captureButton,
-              card
-            );
-          }
+    if (
+      existingLink &&
+      existingLink.parentNode
+    ) {
+      existingLink.parentNode
+        .insertBefore(
+          actions,
+          existingLink
         );
 
       actions.appendChild(
-        captureButton
+        existingLink
+      );
+
+    } else {
+      card.appendChild(
+        actions
       );
     }
+
+
+    /*
+      PROJECT CONTROL 등록 버튼
+    */
+
+    const captureButton =
+      document.createElement(
+        "button"
+      );
+
+    captureButton.type =
+      "button";
+
+    captureButton.className =
+      "axoo-project-control-button";
 
     captureButton.dataset
       .researchId =
       researchId;
+
+    captureButton
+      .addEventListener(
+        "click",
+        function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          handleCapture(
+            captureButton,
+            card
+          );
+        }
+      );
+
+    actions.appendChild(
+      captureButton
+    );
 
     setCaptureButtonState(
       captureButton,
@@ -1494,47 +1368,42 @@
     );
 
 
-    /* 상태 확인 / 동기화 버튼 */
+    /*
+      PROJECT CONTROL 상태 확인
+    */
 
-    let syncButton =
-      actions.querySelector(
-        ".axoo-sync-button"
+    const syncButton =
+      document.createElement(
+        "button"
       );
 
-    if (!syncButton) {
-      syncButton =
-        document.createElement(
-          "button"
-        );
+    syncButton.type =
+      "button";
 
-      syncButton.type =
-        "button";
-
-      syncButton.className =
-        "axoo-sync-button";
-
-      syncButton
-        .addEventListener(
-          "click",
-          function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            handleSync(
-              syncButton,
-              card
-            );
-          }
-        );
-
-      actions.appendChild(
-        syncButton
-      );
-    }
+    syncButton.className =
+      "axoo-project-sync-button";
 
     syncButton.dataset
       .researchId =
       researchId;
+
+    syncButton
+      .addEventListener(
+        "click",
+        function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          handleSync(
+            syncButton,
+            card
+          );
+        }
+      );
+
+    actions.appendChild(
+      syncButton
+    );
 
     setSyncButtonState(
       syncButton,
@@ -1543,21 +1412,13 @@
   }
 
 
-  function decorateAllCards() {
-    document
-      .querySelectorAll(
-        ".priority-accordion-card"
-      )
-      .forEach(
-        decorateCard
-      );
-
+  function decorateAllArtCards() {
     document
       .querySelectorAll(
         "#artCards > .card"
       )
       .forEach(
-        decorateCard
+        decorateArtCard
       );
   }
 
@@ -1565,7 +1426,7 @@
   function refreshButtonStates() {
     document
       .querySelectorAll(
-        ".axoo-capture-button[data-research-id]"
+        ".axoo-project-control-button[data-research-id]"
       )
       .forEach(
         function (button) {
@@ -1579,7 +1440,7 @@
 
     document
       .querySelectorAll(
-        ".axoo-sync-button[data-research-id]"
+        ".axoo-project-sync-button[data-research-id]"
       )
       .forEach(
         function (button) {
@@ -1594,21 +1455,23 @@
 
 
   /*
-    MutationObserver는 사용하지 않는다.
-    기존 페이지 정지 문제 방지.
+    기존 대시보드 렌더 타이밍이 여러 단계라
+    MutationObserver 대신 안전하게
+    몇 차례만 재검사한다.
   */
+
   function scheduleSafeDecorations() {
     [
-      200,
-      500,
-      900,
-      1500,
-      2500,
-      4000
+      150,
+      350,
+      700,
+      1200,
+      2000,
+      3500
     ].forEach(
       function (delay) {
         setTimeout(
-          decorateAllCards,
+          decorateAllArtCards,
           delay
         );
       }
@@ -1621,26 +1484,29 @@
   ===================================================== */
 
   async function init() {
-    /*
-      Apps Script에서 GitHub로
-      돌아왔을 때 URL callback 처리
-    */
     consumeRegistrationCallback();
     consumeSyncCallback();
 
     injectStyles();
+
     listenForStorageChanges();
 
-    await loadData();
+    await loadArtProjects();
 
-    decorateAllCards();
+    decorateAllArtCards();
+
     scheduleSafeDecorations();
+
+    /*
+      app.js / art UI에서
+      데이터 재렌더 후 보내는 이벤트 대응.
+    */
 
     window.addEventListener(
       "axoo:rendered",
       function () {
         setTimeout(
-          decorateAllCards,
+          decorateAllArtCards,
           0
         );
       }
