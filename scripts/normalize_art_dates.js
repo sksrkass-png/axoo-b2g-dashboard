@@ -13,7 +13,7 @@ const ARCHIVE_FILE = path.join(
   "art_commissions_archive.json"
 );
 
-const NORMALIZER_VERSION = "1.3.0";
+const NORMALIZER_VERSION = "1.3.1";
 const DETAIL_TEXT_LIMIT = 12000;
 const FETCH_TIMEOUT_MS = 15000;
 
@@ -28,6 +28,9 @@ const PERIOD_KEYWORDS = [
   "접수일시",
   "접수기간",
   "공모기간",
+  "공모 기간",
+  "공고기간",
+  "공고 기간",
   "응모기간",
   "신청기간",
   "제출기간",
@@ -148,6 +151,67 @@ function getKoreaYear() {
 }
 
 
+/*
+  공공기관 게시물의 명백한 연도 오타 보정.
+
+  예:
+  20266. 8. 21 -> 2026. 8. 21
+  20255. 3. 10 -> 2025. 3. 10
+
+  안전장치:
+  1. 20xx 형태의 4자리 연도 뒤에 숫자가 하나 더 붙은 경우만
+  2. 추가 숫자가 정상 연도의 마지막 숫자와 동일해야 함
+  3. 현재 연도 기준 ±2년 범위에서만 허용
+
+  즉 임의의 5자리 숫자를 연도로 바꾸지 않는다.
+*/
+
+function repairLikelyYearTypos(value) {
+  const currentYear = getKoreaYear();
+
+  return String(value || "")
+    .replace(
+      /\b(20\d{2})(\d)(?=\s*(?:년|[-./]))/g,
+      function (
+        full,
+        fourDigitYear,
+        extraDigit
+      ) {
+        const year = Number(
+          fourDigitYear
+        );
+
+        const lastDigit =
+          fourDigitYear.slice(-1);
+
+        const repeatedLastDigit =
+          lastDigit === extraDigit;
+
+        const nearCurrentYear =
+          Math.abs(
+            year - currentYear
+          ) <= 2;
+
+        if (
+          repeatedLastDigit &&
+          nearCurrentYear
+        ) {
+          return fourDigitYear;
+        }
+
+        return full;
+      }
+    );
+}
+
+
+function normalizeDateText(value) {
+  return repairLikelyYearTypos(
+    cleanText(value)
+  );
+}
+
+
 function yearFromDate(value) {
   const match = String(value || "")
     .match(/^(\d{4})-/);
@@ -198,8 +262,9 @@ function toISO(year, month, day) {
 
 
 function parseExistingDate(value) {
-  const text = String(value || "")
-    .trim();
+  const text = normalizeDateText(
+    value
+  );
 
   const match = text.match(
     /(\d{4})\s*(?:년|[-./])\s*(\d{1,2})\s*(?:월|[-./])\s*(\d{1,2})/
@@ -233,6 +298,7 @@ async function fetchDetailText(url) {
   }
 
   const controller = new AbortController();
+
   const timer = setTimeout(
     function () {
       controller.abort();
@@ -248,7 +314,8 @@ async function fetchDetailText(url) {
         redirect: "follow",
         headers: {
           "User-Agent":
-            "Mozilla/5.0 (compatible; AXOO-B2G-DateNormalizer/1.3; +https://github.com/sksrkass-png/axoo-b2g-dashboard)",
+            "Mozilla/5.0 (compatible; AXOO-B2G-DateNormalizer/1.3.1; +https://github.com/sksrkass-png/axoo-b2g-dashboard)",
+
           "Accept-Language":
             "ko-KR,ko;q=0.9,en;q=0.7"
         }
@@ -264,8 +331,11 @@ async function fetchDetailText(url) {
       };
     }
 
-    const html = await response.text();
-    const text = htmlToText(html);
+    const html =
+      await response.text();
+
+    const text =
+      htmlToText(html);
 
     if (text.length < 30) {
       return {
@@ -284,10 +354,13 @@ async function fetchDetailText(url) {
   } catch (error) {
     return {
       ok: false,
+
       reason:
-        error && error.name === "AbortError"
+        error &&
+        error.name === "AbortError"
           ? "timeout"
           : "fetch_failed",
+
       text: ""
     };
 
@@ -302,12 +375,14 @@ async function fetchDetailText(url) {
 ========================================================= */
 
 function findDateMatches(text, baseYear) {
-  const source = String(text || "");
+  const source =
+    normalizeDateText(text);
 
   const regex =
     /(?:(\d{4})\s*(?:년|[-./])\s*)?(\d{1,2})\s*(?:월|[-./])\s*(\d{1,2})\s*(?:일)?/g;
 
   const matches = [];
+
   let match;
 
   while (
@@ -315,7 +390,10 @@ function findDateMatches(text, baseYear) {
   ) {
     const year = match[1]
       ? Number(match[1])
-      : Number(baseYear || getKoreaYear());
+      : Number(
+          baseYear ||
+          getKoreaYear()
+        );
 
     const value = toISO(
       year,
@@ -330,10 +408,18 @@ function findDateMatches(text, baseYear) {
     matches.push({
       value: value,
       year: year,
-      hasExplicitYear: Boolean(match[1]),
-      start: match.index,
-      end: regex.lastIndex,
-      raw: match[0]
+
+      hasExplicitYear:
+        Boolean(match[1]),
+
+      start:
+        match.index,
+
+      end:
+        regex.lastIndex,
+
+      raw:
+        match[0]
     });
   }
 
@@ -355,12 +441,15 @@ function findFirstDate(text, baseYear) {
 
 function hasDateRangeConnector(value) {
   return /[~∼～–—]|\b부터\b|\b까지\b|\s-\s/
-    .test(String(value || ""));
+    .test(
+      String(value || "")
+    );
 }
 
 
 function hasTimeRange(value) {
-  const source = String(value || "");
+  const source =
+    String(value || "");
 
   const colonRange =
     /\d{1,2}\s*:\s*\d{2}\s*[~∼～–—-]\s*\d{1,2}\s*:\s*\d{2}/;
@@ -376,7 +465,15 @@ function hasTimeRange(value) {
 
 
 function extractDateRange(text, baseYear) {
-  const source = String(text || "");
+  /*
+    findDateMatches와 source가 반드시
+    동일하게 보정된 문자열이어야
+    match.index가 어긋나지 않는다.
+  */
+
+  const source =
+    normalizeDateText(text);
+
   const dates = findDateMatches(
     source,
     baseYear
@@ -388,21 +485,28 @@ function extractDateRange(text, baseYear) {
       index < dates.length - 1;
       index += 1
     ) {
-      const first = dates[index];
-      const second = dates[index + 1];
+      const first =
+        dates[index];
 
-      const between = source.slice(
-        first.end,
-        second.start
-      );
+      const second =
+        dates[index + 1];
+
+      const between =
+        source.slice(
+          first.end,
+          second.start
+        );
 
       if (
-        !hasDateRangeConnector(between)
+        !hasDateRangeConnector(
+          between
+        )
       ) {
         continue;
       }
 
-      let end = second.value;
+      let end =
+        second.value;
 
       if (
         !second.hasExplicitYear &&
@@ -410,30 +514,46 @@ function extractDateRange(text, baseYear) {
       ) {
         end = toISO(
           first.year + 1,
-          Number(end.slice(5, 7)),
-          Number(end.slice(8, 10))
+          Number(
+            end.slice(5, 7)
+          ),
+          Number(
+            end.slice(8, 10)
+          )
         );
       }
 
       return {
-        start: first.value,
-        end: end
+        start:
+          first.value,
+
+        end:
+          end
       };
     }
   }
 
   if (dates.length >= 1) {
-    const first = dates[0];
+    const first =
+      dates[0];
 
-    const afterDate = source.slice(
-      first.end,
-      first.end + 140
-    );
+    const afterDate =
+      source.slice(
+        first.end,
+        first.end + 140
+      );
 
-    if (hasTimeRange(afterDate)) {
+    if (
+      hasTimeRange(
+        afterDate
+      )
+    ) {
       return {
-        start: first.value,
-        end: first.value
+        start:
+          first.value,
+
+        end:
+          first.value
       };
     }
   }
@@ -452,13 +572,17 @@ function keywordSegments(
   segmentLength
 ) {
   const segments = [];
+
   let offset = 0;
 
-  while (offset < source.length) {
-    const index = source.indexOf(
-      keyword,
-      offset
-    );
+  while (
+    offset < source.length
+  ) {
+    const index =
+      source.indexOf(
+        keyword,
+        offset
+      );
 
     if (index === -1) {
       break;
@@ -471,7 +595,9 @@ function keywordSegments(
       )
     );
 
-    offset = index + keyword.length;
+    offset =
+      index +
+      keyword.length;
   }
 
   return segments;
@@ -482,45 +608,57 @@ function extractPublishedDate(
   text,
   existingDates
 ) {
-  const source = cleanText(text);
+  const source =
+    normalizeDateText(text);
 
   for (
-    const keyword of PUBLISHED_KEYWORDS
+    const keyword of
+    PUBLISHED_KEYWORDS
   ) {
-    const segments = keywordSegments(
-      source,
-      keyword,
-      160
-    );
+    const segments =
+      keywordSegments(
+        source,
+        keyword,
+        160
+      );
 
     for (
       const segment of segments
     ) {
-      const date = findFirstDate(
-        segment,
-        getKoreaYear()
-      );
+      const date =
+        findFirstDate(
+          segment,
+          getKoreaYear()
+        );
 
       if (date) {
         return {
-          value: date.value,
-          source: "detail_metadata"
+          value:
+            date.value,
+
+          source:
+            "detail_metadata"
         };
       }
     }
   }
 
   for (
-    const candidate of existingDates
+    const candidate of
+    existingDates
   ) {
-    const parsed = parseExistingDate(
-      candidate
-    );
+    const parsed =
+      parseExistingDate(
+        candidate
+      );
 
     if (parsed) {
       return {
-        value: parsed,
-        source: "existing"
+        value:
+          parsed,
+
+        source:
+          "existing"
       };
     }
   }
@@ -540,54 +678,80 @@ function extractPeriod(
   text,
   publishedDate
 ) {
-  const source = cleanText(text);
-  const baseYear = yearFromDate(
-    publishedDate
-  );
+  const source =
+    normalizeDateText(text);
+
+  const baseYear =
+    yearFromDate(
+      publishedDate
+    );
 
   for (
-    const keyword of PERIOD_KEYWORDS
+    const keyword of
+    PERIOD_KEYWORDS
   ) {
-    const segments = keywordSegments(
-      source,
-      keyword,
-      300
-    );
+    const segments =
+      keywordSegments(
+        source,
+        keyword,
+        300
+      );
 
     for (
       const segment of segments
     ) {
-      const range = extractDateRange(
-        segment,
-        baseYear
-      );
+      const range =
+        extractDateRange(
+          segment,
+          baseYear
+        );
 
       if (range) {
         return {
-          start: range.start,
-          end: range.end,
-          source: "detail_body",
-          keyword: keyword
+          start:
+            range.start,
+
+          end:
+            range.end,
+
+          source:
+            "detail_body",
+
+          keyword:
+            keyword
         };
       }
 
-      const firstDate = findFirstDate(
-        segment,
-        baseYear
-      );
-
-      if (firstDate) {
-        const afterDate = segment.slice(
-          firstDate.end,
-          firstDate.end + 140
+      const firstDate =
+        findFirstDate(
+          segment,
+          baseYear
         );
 
-        if (hasTimeRange(afterDate)) {
+      if (firstDate) {
+        const afterDate =
+          segment.slice(
+            firstDate.end,
+            firstDate.end + 140
+          );
+
+        if (
+          hasTimeRange(
+            afterDate
+          )
+        ) {
           return {
-            start: firstDate.value,
-            end: firstDate.value,
-            source: "detail_body",
-            keyword: keyword
+            start:
+              firstDate.value,
+
+            end:
+              firstDate.value,
+
+            source:
+              "detail_body",
+
+            keyword:
+              keyword
           };
         }
       }
@@ -611,33 +775,44 @@ function extractExplicitDeadline(
   text,
   publishedDate
 ) {
-  const source = cleanText(text);
-  const baseYear = yearFromDate(
-    publishedDate
-  );
+  const source =
+    normalizeDateText(text);
+
+  const baseYear =
+    yearFromDate(
+      publishedDate
+    );
 
   for (
-    const keyword of DEADLINE_KEYWORDS
+    const keyword of
+    DEADLINE_KEYWORDS
   ) {
-    const segments = keywordSegments(
-      source,
-      keyword,
-      200
-    );
+    const segments =
+      keywordSegments(
+        source,
+        keyword,
+        200
+      );
 
     for (
       const segment of segments
     ) {
-      const date = findFirstDate(
-        segment,
-        baseYear
-      );
+      const date =
+        findFirstDate(
+          segment,
+          baseYear
+        );
 
       if (date) {
         return {
-          value: date.value,
-          source: "explicit_deadline",
-          keyword: keyword
+          value:
+            date.value,
+
+          source:
+            "explicit_deadline",
+
+          keyword:
+            keyword
         };
       }
     }
@@ -659,16 +834,20 @@ function getDeadlineState(deadline) {
   if (!deadline) {
     return {
       isExpired: false,
+
       deadlineStatus:
         "마감일 확인 필요"
     };
   }
 
   const expired =
-    deadline < getKoreaToday();
+    deadline <
+    getKoreaToday();
 
   return {
-    isExpired: expired,
+    isExpired:
+      expired,
+
     deadlineStatus:
       expired
         ? "마감"
@@ -682,58 +861,71 @@ function getDeadlineState(deadline) {
 ========================================================= */
 
 async function normalizeItem(item) {
-  let detailText = cleanText(
-    item.detailTextSample
-  );
+  let detailText =
+    cleanText(
+      item.detailTextSample
+    );
 
   let detailFetchStatus =
     item.detailFetchStatus || "";
 
-  if (detailText.length < 100) {
-    const fetched = await fetchDetailText(
-      item.sourceUrl ||
-      item.originalUrl ||
-      item.url
-    );
+  if (
+    detailText.length < 100
+  ) {
+    const fetched =
+      await fetchDetailText(
+        item.sourceUrl ||
+        item.originalUrl ||
+        item.url
+      );
 
     if (fetched.ok) {
-      detailText = fetched.text;
-      detailFetchStatus = "ok";
+      detailText =
+        fetched.text;
+
+      detailFetchStatus =
+        "ok";
+
     } else {
       detailFetchStatus =
-        fetched.reason || "failed";
+        fetched.reason ||
+        "failed";
     }
   }
 
-  const fallbackText = cleanText(
-    [
-      item.rawText,
-      item.summary,
-      item.nextAction,
-      item.recommendedAction,
-      item.title
-    ]
-      .filter(Boolean)
-      .join(" | ")
-  );
+  const fallbackText =
+    cleanText(
+      [
+        item.rawText,
+        item.summary,
+        item.nextAction,
+        item.recommendedAction,
+        item.title
+      ]
+        .filter(Boolean)
+        .join(" | ")
+    );
 
   const extractionText =
-    detailText || fallbackText;
+    detailText ||
+    fallbackText;
 
-  const published = extractPublishedDate(
-    extractionText,
-    [
-      item.postedDate,
-      item.publishedDate,
-      item.noticeDate,
-      item.createdDate
-    ]
-  );
+  const published =
+    extractPublishedDate(
+      extractionText,
+      [
+        item.postedDate,
+        item.publishedDate,
+        item.noticeDate,
+        item.createdDate
+      ]
+    );
 
-  const period = extractPeriod(
-    extractionText,
-    published.value
-  );
+  const period =
+    extractPeriod(
+      extractionText,
+      published.value
+    );
 
   const explicitDeadline =
     extractExplicitDeadline(
@@ -775,23 +967,36 @@ async function normalizeItem(item) {
     periodEnd ||
     "";
 
-  let deadlineSource = "not_found";
+  let deadlineSource =
+    "not_found";
 
-  if (explicitDeadline.value) {
+  if (
+    explicitDeadline.value
+  ) {
     deadlineSource =
       "explicit_deadline";
-  } else if (period.end) {
+
+  } else if (
+    period.end
+  ) {
     deadlineSource =
       "period_end";
-  } else if (existingDeadline) {
+
+  } else if (
+    existingDeadline
+  ) {
     deadlineSource =
       "existing_deadline";
-  } else if (existingPeriodEnd) {
+
+  } else if (
+    existingPeriodEnd
+  ) {
     deadlineSource =
       "existing_period_end";
   }
 
-  let confidence = "LOW";
+  let confidence =
+    "LOW";
 
   if (
     published.value &&
@@ -799,17 +1004,25 @@ async function normalizeItem(item) {
     (
       deadlineSource ===
         "explicit_deadline" ||
+
       deadlineSource ===
         "period_end"
     )
   ) {
-    confidence = "HIGH";
-  } else if (deadline) {
-    confidence = "MEDIUM";
+    confidence =
+      "HIGH";
+
+  } else if (
+    deadline
+  ) {
+    confidence =
+      "MEDIUM";
   }
 
   const deadlineState =
-    getDeadlineState(deadline);
+    getDeadlineState(
+      deadline
+    );
 
   let normalizedStatus =
     item.status || "";
@@ -826,31 +1039,35 @@ async function normalizeItem(item) {
         : "공모중";
   }
 
-  const recommendedBase = String(
-    item.recommendedAction ||
-    item.nextAction ||
-    "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토"
-  )
-    .replace(
-      /\s*\/\s*공모기간\s*:[^/]+$/i,
-      ""
+  const recommendedBase =
+    String(
+      item.recommendedAction ||
+      item.nextAction ||
+      "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토"
     )
-    .replace(
-      /\s*\/\s*작품제출\s*:[^/]+$/i,
-      ""
-    )
-    .trim();
+      .replace(
+        /\s*\/\s*공모기간\s*:[^/]+$/i,
+        ""
+      )
+      .replace(
+        /\s*\/\s*작품제출\s*:[^/]+$/i,
+        ""
+      )
+      .trim();
 
-  let periodLabel = "";
+  let periodLabel =
+    "";
 
   if (
     periodStart &&
     periodEnd
   ) {
     periodLabel =
-      periodStart === periodEnd
+      periodStart ===
+      periodEnd
         ? " / 공모기간: " +
           periodStart
+
         : " / 공모기간: " +
           periodStart +
           " ~ " +
@@ -884,7 +1101,8 @@ async function normalizeItem(item) {
       deadline,
 
     recommendedAction:
-      recommendedBase + periodLabel,
+      recommendedBase +
+      periodLabel,
 
     detailFetchStatus:
       detailFetchStatus,
@@ -912,7 +1130,8 @@ async function normalizeItem(item) {
       deadlineSource,
 
     deadlineKeyword:
-      explicitDeadline.keyword || "",
+      explicitDeadline.keyword ||
+      "",
 
     dateConfidence:
       confidence,
@@ -943,21 +1162,27 @@ function getItems(data) {
 
   if (
     data &&
-    Array.isArray(data.projects)
+    Array.isArray(
+      data.projects
+    )
   ) {
     return data.projects;
   }
 
   if (
     data &&
-    Array.isArray(data.items)
+    Array.isArray(
+      data.items
+    )
   ) {
     return data.items;
   }
 
   if (
     data &&
-    Array.isArray(data.data)
+    Array.isArray(
+      data.data
+    )
   ) {
     return data.data;
   }
@@ -972,13 +1197,19 @@ function replaceItems(
   original,
   items
 ) {
-  if (Array.isArray(original)) {
+  if (
+    Array.isArray(
+      original
+    )
+  ) {
     return items;
   }
 
   if (
     original &&
-    Array.isArray(original.projects)
+    Array.isArray(
+      original.projects
+    )
   ) {
     return {
       ...original,
@@ -988,7 +1219,9 @@ function replaceItems(
 
   if (
     original &&
-    Array.isArray(original.items)
+    Array.isArray(
+      original.items
+    )
   ) {
     return {
       ...original,
@@ -998,7 +1231,9 @@ function replaceItems(
 
   if (
     original &&
-    Array.isArray(original.data)
+    Array.isArray(
+      original.data
+    )
   ) {
     return {
       ...original,
@@ -1011,22 +1246,32 @@ function replaceItems(
 
 
 function readArchive() {
-  if (!fs.existsSync(ARCHIVE_FILE)) {
+  if (
+    !fs.existsSync(
+      ARCHIVE_FILE
+    )
+  ) {
     return [];
   }
 
-  const raw = fs.readFileSync(
-    ARCHIVE_FILE,
-    "utf8"
-  );
+  const raw =
+    fs.readFileSync(
+      ARCHIVE_FILE,
+      "utf8"
+    );
 
   if (!raw.trim()) {
     return [];
   }
 
-  const parsed = JSON.parse(raw);
+  const parsed =
+    JSON.parse(raw);
 
-  if (!Array.isArray(parsed)) {
+  if (
+    !Array.isArray(
+      parsed
+    )
+  ) {
     throw new Error(
       "data/art_commissions_archive.json 은 배열 형식이어야 합니다."
     );
@@ -1063,8 +1308,11 @@ function getStrongId(item) {
 
 
 function sameArchiveItem(a, b) {
-  const aId = getStrongId(a);
-  const bId = getStrongId(b);
+  const aId =
+    getStrongId(a);
+
+  const bId =
+    getStrongId(b);
 
   if (
     aId &&
@@ -1074,8 +1322,11 @@ function sameArchiveItem(a, b) {
     return true;
   }
 
-  const aUrl = getSourceUrl(a);
-  const bUrl = getSourceUrl(b);
+  const aUrl =
+    getSourceUrl(a);
+
+  const bUrl =
+    getSourceUrl(b);
 
   if (
     aUrl &&
@@ -1085,13 +1336,15 @@ function sameArchiveItem(a, b) {
     return true;
   }
 
-  const aBid = String(
-    a.bidNtceNo || ""
-  ).trim();
+  const aBid =
+    String(
+      a.bidNtceNo || ""
+    ).trim();
 
-  const bBid = String(
-    b.bidNtceNo || ""
-  ).trim();
+  const bBid =
+    String(
+      b.bidNtceNo || ""
+    ).trim();
 
   if (
     aBid &&
@@ -1101,25 +1354,31 @@ function sameArchiveItem(a, b) {
     return true;
   }
 
-  const aTitle = normalizeText(
-    a.title || a.projectName
-  );
+  const aTitle =
+    normalizeText(
+      a.title ||
+      a.projectName
+    );
 
-  const bTitle = normalizeText(
-    b.title || b.projectName
-  );
+  const bTitle =
+    normalizeText(
+      b.title ||
+      b.projectName
+    );
 
-  const aAgency = normalizeText(
-    a.agency ||
-    a.organization ||
-    a.noticeAgency
-  );
+  const aAgency =
+    normalizeText(
+      a.agency ||
+      a.organization ||
+      a.noticeAgency
+    );
 
-  const bAgency = normalizeText(
-    b.agency ||
-    b.organization ||
-    b.noticeAgency
-  );
+  const bAgency =
+    normalizeText(
+      b.agency ||
+      b.organization ||
+      b.noticeAgency
+    );
 
   return Boolean(
     aTitle &&
@@ -1138,30 +1397,37 @@ function upsertArchive(
   existingArchive,
   normalizedItems
 ) {
-  const today = getKoreaToday();
+  const today =
+    getKoreaToday();
 
-  const archive = existingArchive.map(
-    function (item) {
-      return {
-        ...item,
-        archiveIsCurrent: false
-      };
-    }
-  );
+  const archive =
+    existingArchive.map(
+      function (item) {
+        return {
+          ...item,
+          archiveIsCurrent:
+            false
+        };
+      }
+    );
 
   normalizedItems.forEach(
     function (item) {
-      const index = archive.findIndex(
-        function (archived) {
-          return sameArchiveItem(
-            archived,
-            item
-          );
-        }
-      );
+      const index =
+        archive.findIndex(
+          function (
+            archived
+          ) {
+            return sameArchiveItem(
+              archived,
+              item
+            );
+          }
+        );
 
       if (index >= 0) {
-        const previous = archive[index];
+        const previous =
+          archive[index];
 
         archive[index] = {
           ...previous,
@@ -1211,14 +1477,19 @@ function upsertArchive(
         "";
 
       if (aDate !== bDate) {
-        return bDate.localeCompare(aDate);
+        return bDate.localeCompare(
+          aDate
+        );
       }
 
-      return String(a.title || "")
-        .localeCompare(
-          String(b.title || ""),
-          "ko"
-        );
+      return String(
+        a.title || ""
+      ).localeCompare(
+        String(
+          b.title || ""
+        ),
+        "ko"
+      );
     }
   );
 
@@ -1231,21 +1502,29 @@ function upsertArchive(
 ========================================================= */
 
 async function main() {
-  if (!fs.existsSync(DATA_FILE)) {
+  if (
+    !fs.existsSync(
+      DATA_FILE
+    )
+  ) {
     throw new Error(
       "data/art_commissions.json 파일을 찾을 수 없습니다."
     );
   }
 
-  const original = JSON.parse(
-    fs.readFileSync(
-      DATA_FILE,
-      "utf8"
-    )
-  );
+  const original =
+    JSON.parse(
+      fs.readFileSync(
+        DATA_FILE,
+        "utf8"
+      )
+    );
 
-  const items = getItems(original);
-  const normalized = [];
+  const items =
+    getItems(original);
+
+  const normalized =
+    [];
 
   /*
     공공사이트 과부하 방지를 위해
@@ -1253,45 +1532,56 @@ async function main() {
 
     Archive의 과거 공고는 매번 다시 fetch하지 않는다.
   */
+
   for (
     const item of items
   ) {
-    const result = await normalizeItem(
-      item
-    );
+    const result =
+      await normalizeItem(
+        item
+      );
 
-    normalized.push(result);
+    normalized.push(
+      result
+    );
   }
 
-  const output = replaceItems(
-    original,
-    normalized
-  );
+  const output =
+    replaceItems(
+      original,
+      normalized
+    );
 
   fs.writeFileSync(
     DATA_FILE,
+
     JSON.stringify(
       output,
       null,
       2
     ) + "\n",
+
     "utf8"
   );
 
-  const existingArchive = readArchive();
+  const existingArchive =
+    readArchive();
 
-  const archive = upsertArchive(
-    existingArchive,
-    normalized
-  );
+  const archive =
+    upsertArchive(
+      existingArchive,
+      normalized
+    );
 
   fs.writeFileSync(
     ARCHIVE_FILE,
+
     JSON.stringify(
       archive,
       null,
       2
     ) + "\n",
+
     "utf8"
   );
 
@@ -1304,10 +1594,12 @@ async function main() {
   normalized.forEach(
     function (item) {
       const key =
-        item.dateConfidence || "LOW";
+        item.dateConfidence ||
+        "LOW";
 
       if (
-        summary[key] !== undefined
+        summary[key] !==
+        undefined
       ) {
         summary[key] += 1;
       }
