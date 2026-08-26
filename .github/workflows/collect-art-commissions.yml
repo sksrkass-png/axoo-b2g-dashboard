@@ -15,35 +15,82 @@ concurrency:
   group: collect-art-commissions
   cancel-in-progress: false
 
+
 jobs:
+
   collect:
+
     runs-on: ubuntu-latest
 
+
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
+
         with:
           node-version: "20"
 
-      - name: Collect current art commissions
+
+      # --------------------------------------------------
+      # 1. 경기도
+      # --------------------------------------------------
+
+      - name: Collect Gyeonggi art commissions
         run: node scripts/collect_art_commissions.js
+
+
+      # --------------------------------------------------
+      # 2. 서울특별시
+      # --------------------------------------------------
+
+      - name: Collect Seoul art commissions
+        run: node scripts/collect_seoul_art_commissions.js
+
+
+      # --------------------------------------------------
+      # 3. 원문 기준 날짜 검증
+      # --------------------------------------------------
 
       - name: Normalize collected dates
         run: node scripts/normalize_art_dates.js
 
+
+      # --------------------------------------------------
+      # 4. 마감 공고 LIVE 제거
+      #
+      # 현재 Gyeonggi collector의 prune 기능은
+      # source 구분 없이 isExpired=true 항목을
+      # LIVE feed에서 제거한다.
+      # Archive 데이터는 유지된다.
+      # --------------------------------------------------
+
       - name: Remove expired items from live feed
         run: node scripts/collect_art_commissions.js --prune-expired
+
+
+      # --------------------------------------------------
+      # 5. Archive의 current flag 재계산
+      # --------------------------------------------------
 
       - name: Refresh archive current flags
         run: node scripts/normalize_art_dates.js
 
+
+      # --------------------------------------------------
+      # 6. 변경 여부 확인
+      # --------------------------------------------------
+
       - name: Check changes
         id: changes
         shell: bash
+
         run: |
+
           if git diff --quiet -- \
             data/art_commissions.json \
             data/art_commissions_archive.json; then
@@ -56,17 +103,30 @@ jobs:
 
           fi
 
+
+      # --------------------------------------------------
+      # 7. 변경된 경우만 Commit
+      # --------------------------------------------------
+
       - name: Commit collected art commissions
         if: steps.changes.outputs.changed == 'true'
         shell: bash
+
         run: |
+
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
 
           git add \
             data/art_commissions.json \
             data/art_commissions_archive.json
 
-          git commit -m "Collect current art commissions"
+
+          git commit \
+            -m "Collect current art commissions"
+
 
           git push
