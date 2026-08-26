@@ -3,6 +3,11 @@ name: Collect G2B Opportunities
 on:
   workflow_dispatch:
 
+  schedule:
+    # GitHub Actions cron = UTC
+    # 00:20 UTC = 한국시간 오전 09:20
+    - cron: "20 0 * * *"
+
 permissions:
   contents: write
 
@@ -35,16 +40,64 @@ jobs:
 
 
       # --------------------------------------------------
-      # 3. G2B API
+      # 3. G2B 수집
       #
-      # Secret 값은 로그에 출력하지 않는다.
+      # collect_g2b_opportunities.js 내부에서도
+      # API 호출을 최대 3회 재시도함.
+      #
+      # 여기서는 스크립트 전체를 한 번 더 재실행.
+      #
+      # 즉 일시적인 data.go.kr 장애 시:
+      #
+      # 1차 실행
+      #   └ API 최대 3회
+      #
+      # 30초 대기
+      #
+      # 2차 실행
+      #   └ API 최대 3회
+      #
+      # 최대 6번의 연결 기회 확보.
       # --------------------------------------------------
 
       - name: Collect G2B opportunities
+        shell: bash
+
         env:
           G2B_SERVICE_KEY: ${{ secrets.G2B_SERVICE_KEY }}
 
-        run: node scripts/collect_g2b_opportunities.js
+        run: |
+          for attempt in 1 2; do
+
+            echo "===================================="
+            echo "G2B WORKFLOW ATTEMPT ${attempt}/2"
+            echo "===================================="
+
+            if node scripts/collect_g2b_opportunities.js; then
+
+              echo "✅ G2B collection succeeded"
+              exit 0
+
+            fi
+
+
+            if [ "$attempt" -lt 2 ]; then
+
+              echo ""
+              echo "⚠️ G2B collection failed."
+              echo "30초 후 전체 수집을 다시 시도합니다."
+
+              sleep 30
+
+            fi
+
+          done
+
+
+          echo ""
+          echo "❌ G2B collection failed after 2 workflow attempts."
+
+          exit 1
 
 
       # --------------------------------------------------
@@ -78,16 +131,20 @@ jobs:
         shell: bash
 
         run: |
-          git config user.name "github-actions[bot]"
+          git config user.name \
+            "github-actions[bot]"
 
           git config user.email \
             "41898282+github-actions[bot]@users.noreply.github.com"
+
 
           git add \
             data/b2g_opportunities.json \
             data/dashboard_meta.json
 
+
           git commit \
             -m "Collect G2B opportunities"
+
 
           git push
