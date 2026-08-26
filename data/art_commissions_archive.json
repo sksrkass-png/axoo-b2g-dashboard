@@ -280,7 +280,7 @@
     "deadlineStatus": "마감",
     "archiveFirstSeenAt": "2026-08-26",
     "archiveLastSeenAt": "2026-08-26",
-    "archiveIsCurrent": true
+    "archiveIsCurrent": false
   },
   {
     "id": "external-0bb9c7c86446980a",
