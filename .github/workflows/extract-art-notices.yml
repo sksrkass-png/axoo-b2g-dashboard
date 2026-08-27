@@ -22,35 +22,126 @@ jobs:
     env:
       ART_NOTICE_ID: ${{ inputs.research_id }}
 
+      AXOO_BRIDGE_URL: ${{ secrets.AXOO_BRIDGE_URL }}
+
+      AXOO_BRIDGE_TOKEN: ${{ secrets.AXOO_BRIDGE_TOKEN }}
+
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
+
         with:
-          node-version: "20"
+          node-version: "24"
+
 
       - name: Setup Python
         uses: actions/setup-python@v5
+
         with:
           python-version: "3.12"
+
 
       - name: Install document parsers
         run: |
           python -m pip install --upgrade pip
           pip install olefile pypdf
 
-      - name: Collect notice attachments
+
+      # ======================================================
+      # Google Drive
+      # → Apps Script Bridge
+      # → 임시 HWP/HWPX/PDF 다운로드
+      # ======================================================
+
+      - name: Download notice files from Drive Bridge
         run: |
           node scripts/extract_art_notice_attachments.js
+
+
+      # ======================================================
+      # HWP / HWPX / PDF
+      # → Text
+      # ======================================================
 
       - name: Extract document text
         run: |
           python scripts/extract_art_notice_text.py
 
+
+      # ======================================================
+      # GitHub Runner의 file:// 임시 경로 제거
+      # ======================================================
+
+      - name: Sanitize extracted JSON
+        shell: bash
+
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          research_id = os.environ["ART_NOTICE_ID"]
+
+          path = (
+              Path("data")
+              / "art_notice_text"
+              / f"{research_id}.json"
+          )
+
+          if not path.exists():
+              raise SystemExit(
+                  f"Result not found: {path}"
+              )
+
+          data = json.loads(
+              path.read_text(
+                  encoding="utf-8"
+              )
+          )
+
+          data["source"] = (
+              "apps_script_bridge"
+          )
+
+          data["sourceUrl"] = ""
+
+          for doc in data.get(
+              "documents",
+              []
+          ):
+              doc.pop(
+                  "url",
+                  None
+              )
+
+              doc["source"] = (
+                  "apps_script_bridge"
+              )
+
+          path.write_text(
+              json.dumps(
+                  data,
+                  ensure_ascii=False,
+                  indent=2
+              ) + "\n",
+              encoding="utf-8"
+          )
+          PY
+
+
+      # ======================================================
+      # 실제 성공 여부 검증
+      # ======================================================
+
       - name: Validate extraction result
         shell: bash
+
         run: |
           python - <<'PY'
           import json
@@ -79,37 +170,42 @@ jobs:
               (
                   item
                   for item in attachments
-                  if item.get("researchId")
-                  == research_id
+                  if item.get(
+                      "researchId"
+                  ) == research_id
               ),
               None
           )
 
           if not target:
               raise SystemExit(
-                  "Attachment result missing"
+                  "Bridge attachment result missing"
               )
 
-          if target.get("status") != "ok":
+          if (
+              target.get("status")
+              != "ok"
+          ):
               raise SystemExit(
-                  "Attachment extraction failed: "
-                  + str(
-                      target.get("status")
-                  )
-                  + " / "
-                  + str(
-                      target.get("error", "")
-                  )
+                  "Bridge download failed"
               )
 
-          if not target.get("attachments"):
+          attachment_count = len(
+              target.get(
+                  "attachments",
+                  []
+              )
+          )
+
+          if attachment_count < 1:
               raise SystemExit(
-                  "No attachments found"
+                  "No notice files received"
               )
 
           if not text_path.exists():
               raise SystemExit(
-                  f"Result file not found: {text_path}"
+                  f"Result file not found: "
+                  f"{text_path}"
               )
 
           data = json.loads(
@@ -119,55 +215,128 @@ jobs:
           )
 
           document_count = int(
-              data.get("documentCount") or 0
+              data.get(
+                  "documentCount"
+              ) or 0
           )
 
           success_count = int(
-              data.get("successCount") or 0
+              data.get(
+                  "successCount"
+              ) or 0
           )
 
           print("")
-          print("========================================")
-          print("AXOO ART NOTICE EXTRACTION RESULT")
-          print("========================================")
-          print("Research ID:", data.get("researchId"))
-          print("Title:", data.get("title"))
-          print("Status:", data.get("status"))
-          print("Documents:", document_count)
-          print("Success:", success_count)
+          print(
+              "========================================"
+          )
+          print(
+              "AXOO DRIVE BRIDGE EXTRACTION RESULT"
+          )
+          print(
+              "========================================"
+          )
+
+          print(
+              "Research ID:",
+              data.get(
+                  "researchId"
+              )
+          )
+
+          print(
+              "Title:",
+              data.get(
+                  "title"
+              )
+          )
+
+          print(
+              "Bridge files:",
+              attachment_count
+          )
+
+          print(
+              "Documents:",
+              document_count
+          )
+
+          print(
+              "Success:",
+              success_count
+          )
+
           print("")
 
-          for doc in data.get("documents", []):
+          for doc in data.get(
+              "documents",
+              []
+          ):
               print(
                   "-",
-                  doc.get("name"),
+                  doc.get(
+                      "name"
+                  ),
                   "|",
-                  doc.get("status"),
+                  doc.get(
+                      "status"
+                  ),
                   "|",
-                  doc.get("textLength"),
+                  doc.get(
+                      "textLength"
+                  ),
                   "chars"
               )
 
           if document_count < 1:
               raise SystemExit(
-                  "No documents were processed"
+                  "No documents processed"
               )
 
-          if success_count != document_count:
+          if (
+              success_count !=
+              document_count
+          ):
               raise SystemExit(
                   f"Text extraction incomplete: "
-                  f"{success_count}/{document_count}"
+                  f"{success_count}/"
+                  f"{document_count}"
               )
 
-          print("========================================")
+          print(
+              "========================================"
+          )
           PY
 
-      - name: Check generated files
+
+      # ======================================================
+      # 임시 HWP + runtime manifest 제거
+      #
+      # 원본 HWP 바이너리는 GitHub에 저장하지 않는다.
+      # ======================================================
+
+      - name: Cleanup runtime files
+        if: always()
+        shell: bash
+
+        run: |
+          rm -rf .tmp
+
+          git restore \
+            data/art_notice_attachments.json \
+            2>/dev/null || true
+
+
+      # ======================================================
+      # Text JSON만 Commit
+      # ======================================================
+
+      - name: Check generated text
         id: changes
         shell: bash
+
         run: |
           if [ -n "$(git status --porcelain -- \
-            data/art_notice_attachments.json \
             data/art_notice_text)" ]; then
 
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -178,20 +347,24 @@ jobs:
 
           fi
 
-      - name: Commit extracted notice data
+
+      - name: Commit extracted notice text
         if: steps.changes.outputs.changed == 'true'
         shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
 
-          git config user.email \
+        run: |
+          git config \
+            user.name \
+            "github-actions[bot]"
+
+          git config \
+            user.email \
             "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add \
-            data/art_notice_attachments.json \
             data/art_notice_text
 
           git commit \
-            -m "Extract art notice documents"
+            -m "Extract art notice text via Drive bridge"
 
           git push
