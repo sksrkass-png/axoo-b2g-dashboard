@@ -28,6 +28,10 @@ jobs:
 
     steps:
 
+      # ======================================================
+      # SETUP
+      # ======================================================
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -53,9 +57,10 @@ jobs:
 
 
       # ======================================================
+      # STEP 1
       # Google Drive
       # → Apps Script Bridge
-      # → 임시 HWP/HWPX/PDF 다운로드
+      # → HWP / HWPX / PDF
       # ======================================================
 
       - name: Download notice files from Drive Bridge
@@ -64,8 +69,9 @@ jobs:
 
 
       # ======================================================
+      # STEP 2
       # HWP / HWPX / PDF
-      # → Text
+      # → Raw Text JSON
       # ======================================================
 
       - name: Extract document text
@@ -74,7 +80,7 @@ jobs:
 
 
       # ======================================================
-      # GitHub Runner의 file:// 임시 경로 제거
+      # GitHub Runner 임시 file:// URL 제거
       # ======================================================
 
       - name: Sanitize extracted JSON
@@ -136,7 +142,7 @@ jobs:
 
 
       # ======================================================
-      # 실제 성공 여부 검증
+      # TEXT 추출 검증
       # ======================================================
 
       - name: Validate extraction result
@@ -182,10 +188,9 @@ jobs:
                   "Bridge attachment result missing"
               )
 
-          if (
-              target.get("status")
-              != "ok"
-          ):
+          if target.get(
+              "status"
+          ) != "ok":
               raise SystemExit(
                   "Bridge download failed"
               )
@@ -231,7 +236,7 @@ jobs:
               "========================================"
           )
           print(
-              "AXOO DRIVE BRIDGE EXTRACTION RESULT"
+              "AXOO TEXT EXTRACTION RESULT"
           )
           print(
               "========================================"
@@ -239,16 +244,7 @@ jobs:
 
           print(
               "Research ID:",
-              data.get(
-                  "researchId"
-              )
-          )
-
-          print(
-              "Title:",
-              data.get(
-                  "title"
-              )
+              research_id
           )
 
           print(
@@ -266,25 +262,17 @@ jobs:
               success_count
           )
 
-          print("")
-
           for doc in data.get(
               "documents",
               []
           ):
               print(
                   "-",
-                  doc.get(
-                      "name"
-                  ),
+                  doc.get("name"),
                   "|",
-                  doc.get(
-                      "status"
-                  ),
+                  doc.get("status"),
                   "|",
-                  doc.get(
-                      "textLength"
-                  ),
+                  doc.get("textLength"),
                   "chars"
               )
 
@@ -310,9 +298,196 @@ jobs:
 
 
       # ======================================================
-      # 임시 HWP + runtime manifest 제거
+      # STEP 3
+      # Raw Text
+      # → Structured Analysis
+      # ======================================================
+
+      - name: Build structured notice analysis
+        run: |
+          python scripts/build_art_notice_analysis.py
+
+
+      # ======================================================
+      # 구조화 결과 검증 + 로그 출력
+      # ======================================================
+
+      - name: Validate structured analysis
+        shell: bash
+
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          research_id = os.environ["ART_NOTICE_ID"]
+
+          path = (
+              Path("data")
+              / "art_notice_analysis"
+              / f"{research_id}.json"
+          )
+
+          if not path.exists():
+              raise SystemExit(
+                  f"Analysis file not found: "
+                  f"{path}"
+              )
+
+          data = json.loads(
+              path.read_text(
+                  encoding="utf-8"
+              )
+          )
+
+          if data.get("status") != "ok":
+              raise SystemExit(
+                  "Analysis status is not OK"
+              )
+
+          fields = data.get(
+              "fields",
+              {}
+          )
+
+          summary = data.get(
+              "analysisSummary",
+              {}
+          )
+
+          field_count = int(
+              summary.get(
+                  "fieldCount"
+              ) or 0
+          )
+
+          found_count = int(
+              summary.get(
+                  "foundCount"
+              ) or 0
+          )
+
+          print("")
+          print(
+              "========================================"
+          )
+          print(
+              "AXOO STRUCTURED NOTICE ANALYSIS"
+          )
+          print(
+              "========================================"
+          )
+
+          print(
+              "Research ID:",
+              data.get("researchId")
+          )
+
+          print(
+              "Title:",
+              data.get("title")
+          )
+
+          print(
+              "Fields:",
+              found_count,
+              "/",
+              field_count
+          )
+
+          print("")
+
+          labels = {
+              "eligibility":
+                  "참가자격",
+
+              "artBudget":
+                  "작품비",
+
+              "artworkCount":
+                  "작품수",
+
+              "installationDate":
+                  "설치예정일",
+
+              "installationConditions":
+                  "설치조건",
+
+              "artworkScale":
+                  "작품규모/하중",
+
+              "applicationPeriod":
+                  "접수기간",
+
+              "judgingAnnouncement":
+                  "심사발표",
+
+              "submissionDocuments":
+                  "제출서류",
+
+              "submissionMethod":
+                  "접수방식",
+
+              "judgingCriteria":
+                  "심사기준",
+
+              "cautions":
+                  "유의사항"
+          }
+
+          for key, label in labels.items():
+
+              field = fields.get(
+                  key,
+                  {}
+              )
+
+              value = str(
+                  field.get(
+                      "value",
+                      ""
+                  )
+              )
+
+              if len(value) > 160:
+                  value = (
+                      value[:160]
+                      + "..."
+                  )
+
+              print(
+                  f"[{label}]"
+              )
+
+              print(
+                  value
+                  if value
+                  else "(미검출)"
+              )
+
+              print("")
+
+          if field_count < 1:
+              raise SystemExit(
+                  "No analysis fields"
+              )
+
+          if found_count < 1:
+              raise SystemExit(
+                  "No structured values detected"
+              )
+
+          print(
+              "========================================"
+          )
+          PY
+
+
+      # ======================================================
+      # Runtime 파일 삭제
       #
-      # 원본 HWP 바이너리는 GitHub에 저장하지 않는다.
+      # 원본 HWP 바이너리는 GitHub에 Commit하지 않는다.
       # ======================================================
 
       - name: Cleanup runtime files
@@ -328,16 +503,17 @@ jobs:
 
 
       # ======================================================
-      # Text JSON만 Commit
+      # Text + Analysis 변경 확인
       # ======================================================
 
-      - name: Check generated text
+      - name: Check generated data
         id: changes
         shell: bash
 
         run: |
           if [ -n "$(git status --porcelain -- \
-            data/art_notice_text)" ]; then
+            data/art_notice_text \
+            data/art_notice_analysis)" ]; then
 
             echo "changed=true" >> "$GITHUB_OUTPUT"
 
@@ -348,7 +524,11 @@ jobs:
           fi
 
 
-      - name: Commit extracted notice text
+      # ======================================================
+      # 결과 Commit
+      # ======================================================
+
+      - name: Commit extracted notice data
         if: steps.changes.outputs.changed == 'true'
         shell: bash
 
@@ -362,9 +542,10 @@ jobs:
             "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add \
-            data/art_notice_text
+            data/art_notice_text \
+            data/art_notice_analysis
 
           git commit \
-            -m "Extract art notice text via Drive bridge"
+            -m "Extract and analyze art notice"
 
           git push
