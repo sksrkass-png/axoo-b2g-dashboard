@@ -1,51 +1,24 @@
 const fs = require("fs");
 const path = require("path");
+const { execFileSync } = require("child_process");
 
+const ROOT_DIR = path.resolve(__dirname, "..");
 
-// ========================================================
-// AXOO B2G
-// 건축물 미술작품 공고 첨부파일 URL 수집기
-//
-// INPUT
-// data/art_commissions_archive.json
-//
-// OUTPUT
-// data/art_notice_attachments.json
-//
-// TEST
-// ART_NOTICE_ID=external-10a9592b4d5eec3a
-// ========================================================
+const ARCHIVE_PATH = path.join(
+  ROOT_DIR,
+  "data",
+  "art_commissions_archive.json"
+);
 
+const OUTPUT_PATH = path.join(
+  ROOT_DIR,
+  "data",
+  "art_notice_attachments.json"
+);
 
-const ROOT_DIR =
-  path.resolve(
-    __dirname,
-    ".."
-  );
-
-
-const ARCHIVE_PATH =
-  path.join(
-    ROOT_DIR,
-    "data",
-    "art_commissions_archive.json"
-  );
-
-
-const OUTPUT_PATH =
-  path.join(
-    ROOT_DIR,
-    "data",
-    "art_notice_attachments.json"
-  );
-
-
-const TARGET_ID =
-  String(
-    process.env.ART_NOTICE_ID ||
-    ""
-  ).trim();
-
+const TARGET_ID = String(
+  process.env.ART_NOTICE_ID || ""
+).trim();
 
 const ALLOWED_EXTENSIONS = [
   ".hwp",
@@ -53,227 +26,111 @@ const ALLOWED_EXTENSIONS = [
   ".pdf"
 ];
 
+const FETCH_ATTEMPTS = 3;
 
-// --------------------------------------------------------
-// 기본 유틸
-// --------------------------------------------------------
 
-function decodeHtml(
-  value
-) {
-
-  return String(
-    value || ""
-  )
-    .replace(
-      /&amp;/gi,
-      "&"
-    )
-    .replace(
-      /&quot;/gi,
-      "\""
-    )
-    .replace(
-      /&#39;/gi,
-      "'"
-    )
-    .replace(
-      /&lt;/gi,
-      "<"
-    )
-    .replace(
-      /&gt;/gi,
-      ">"
-    )
-    .replace(
-      /&nbsp;/gi,
-      " "
-    );
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
 
 
+function decodeHtml(value) {
+  return String(value || "")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, "\"")
+    .replace(/&#39;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&nbsp;/gi, " ");
+}
 
-function stripTags(
-  value
-) {
 
+function stripTags(value) {
   return decodeHtml(
-    String(
-      value || ""
-    )
-      .replace(
-        /<br\s*\/?>/gi,
-        "\n"
-      )
-      .replace(
-        /<[^>]+>/g,
-        " "
-      )
+    String(value || "")
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<[^>]+>/g, " ")
   )
-    .replace(
-      /\s+/g,
-      " "
-    )
+    .replace(/\s+/g, " ")
     .trim();
 }
 
 
-
-function getExtension(
-  fileName
-) {
-
-  const lower =
-    String(
-      fileName || ""
-    )
-      .toLowerCase()
-      .trim();
-
+function getExtension(fileName) {
+  const lower = String(fileName || "")
+    .toLowerCase()
+    .trim();
 
   return ALLOWED_EXTENSIONS.find(
-    function (
-      ext
-    ) {
-
-      return lower.endsWith(
-        ext
-      );
-    }
+    (ext) => lower.endsWith(ext)
   ) || "";
 }
 
 
-
-function normalizeUrl(
-  href,
-  baseUrl
-) {
-
-  if (
-    !href
-  ) {
-
+function normalizeUrl(href, baseUrl) {
+  if (!href) {
     return "";
   }
-
 
   try {
-
     return new URL(
-      decodeHtml(
-        href
-      ),
+      decodeHtml(href),
       baseUrl
     ).toString();
-
-  } catch (
-    error
-  ) {
-
+  } catch (error) {
     return "";
   }
 }
 
 
+function uniqueAttachments(attachments) {
+  const seen = new Set();
 
-function uniqueAttachments(
-  attachments
-) {
+  return attachments.filter((item) => {
+    const key = [
+      item.name,
+      item.url
+    ].join("||");
 
-  const seen =
-    new Set();
-
-
-  return attachments.filter(
-    function (
-      item
-    ) {
-
-      const key =
-        [
-          item.name,
-          item.url
-        ].join(
-          "||"
-        );
-
-
-      if (
-        seen.has(
-          key
-        )
-      ) {
-
-        return false;
-      }
-
-
-      seen.add(
-        key
-      );
-
-
-      return true;
+    if (seen.has(key)) {
+      return false;
     }
-  );
+
+    seen.add(key);
+    return true;
+  });
 }
 
-
-// --------------------------------------------------------
-// HTML에서 첨부파일 검색
-// --------------------------------------------------------
 
 function extractAnchorAttachments(
   html,
   pageUrl
 ) {
-
   const result = [];
-
 
   const anchorRegex =
     /<a\b([^>]*?)href\s*=\s*["']([^"']+)["']([^>]*)>([\s\S]*?)<\/a>/gi;
 
-
   let match;
-
 
   while (
     (
       match =
-        anchorRegex.exec(
-          html
-        )
+        anchorRegex.exec(html)
     )
   ) {
-
-    const href =
-      match[2];
-
-
-    const label =
-      stripTags(
-        match[4]
-      );
-
+    const href = match[2];
+    const label = stripTags(match[4]);
 
     const extension =
-      getExtension(
-        label
-      ) ||
-      getExtension(
-        href
-      );
+      getExtension(label) ||
+      getExtension(href);
 
-
-    if (
-      !extension
-    ) {
-
+    if (!extension) {
       continue;
     }
-
 
     const url =
       normalizeUrl(
@@ -281,213 +138,279 @@ function extractAnchorAttachments(
         pageUrl
       );
 
-
-    if (
-      !url
-    ) {
-
+    if (!url) {
       continue;
     }
-
 
     result.push({
       name:
         label ||
         path.basename(
-          new URL(
-            url
-          ).pathname
+          new URL(url).pathname
         ),
-
-      extension:
-        extension,
-
-      url:
-        url
+      extension,
+      url
     });
   }
 
-
   return result;
 }
-
 
 
 function extractScriptAttachments(
   html,
   pageUrl
 ) {
-
   const result = [];
-
-
-  /*
-    경기도 사이트 예:
-
-    previewAjax(
-      'https://www.gg.go.kr/publicart/cmmn/download.do?idx=...',
-      '공모지침서.hwp'
-    )
-  */
-
 
   const scriptRegex =
     /(?:previewAjax|preListen)\s*\(\s*['"]([^'"]+)['"]\s*,\s*['"]([^'"]+\.(?:hwp|hwpx|pdf))['"]/gi;
 
-
   let match;
-
 
   while (
     (
       match =
-        scriptRegex.exec(
-          html
-        )
+        scriptRegex.exec(html)
     )
   ) {
-
     const url =
       normalizeUrl(
         match[1],
         pageUrl
       );
 
-
     const name =
       decodeHtml(
         match[2]
       ).trim();
 
-
     const extension =
-      getExtension(
-        name
-      );
+      getExtension(name);
 
-
-    if (
-      !url ||
-      !extension
-    ) {
-
+    if (!url || !extension) {
       continue;
     }
 
-
     result.push({
-      name:
-        name,
-
-      extension:
-        extension,
-
-      url:
-        url
+      name,
+      extension,
+      url
     });
   }
 
-
   return result;
 }
-
 
 
 function extractAttachments(
   html,
   pageUrl
 ) {
-
   return uniqueAttachments([
     ...extractAnchorAttachments(
       html,
       pageUrl
     ),
-
     ...extractScriptAttachments(
       html,
       pageUrl
     )
-  ])
-    .sort(
-      function (
-        a,
-        b
-      ) {
-
-        return a.name.localeCompare(
-          b.name,
-          "ko"
-        );
-      }
-    );
+  ]).sort((a, b) =>
+    a.name.localeCompare(
+      b.name,
+      "ko"
+    )
+  );
 }
 
 
-// --------------------------------------------------------
-// 페이지 요청
-// --------------------------------------------------------
+function describeError(error) {
+  const parts = [];
 
-async function fetchHtml(
-  url
-) {
+  if (error && error.message) {
+    parts.push(error.message);
+  }
 
-  const response =
-    await fetch(
-      url,
-      {
-        redirect:
-          "follow",
+  if (error && error.cause) {
+    if (error.cause.code) {
+      parts.push(
+        String(error.cause.code)
+      );
+    }
 
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 AXOO-B2G-Research/1.0",
+    if (error.cause.message) {
+      parts.push(
+        String(error.cause.message)
+      );
+    }
+  }
 
-          "Accept":
-            "text/html,application/xhtml+xml",
+  return parts.join(" | ") ||
+    "unknown fetch error";
+}
 
-          "Accept-Language":
-            "ko-KR,ko;q=0.9,en;q=0.8"
-        }
-      }
+
+async function fetchWithNativeFetch(url) {
+  const controller =
+    new AbortController();
+
+  const timer =
+    setTimeout(
+      () => controller.abort(),
+      20000
     );
 
+  try {
+    const response =
+      await fetch(
+        url,
+        {
+          redirect: "follow",
+          signal:
+            controller.signal,
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.1)",
+            "Accept":
+              "text/html,application/xhtml+xml,*/*",
+            "Accept-Language":
+              "ko-KR,ko;q=0.9,en;q=0.7",
+            "Cache-Control":
+              "no-cache"
+          }
+        }
+      );
 
-  if (
-    !response.ok
+    if (!response.ok) {
+      throw new Error(
+        "HTTP " +
+        response.status
+      );
+    }
+
+    return await response.text();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+
+function fetchWithCurl(url) {
+  return execFileSync(
+    "curl",
+    [
+      "-L",
+      "--fail",
+      "--silent",
+      "--show-error",
+      "--retry",
+      "3",
+      "--retry-delay",
+      "2",
+      "--connect-timeout",
+      "15",
+      "--max-time",
+      "45",
+      "-A",
+      "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.1)",
+      "-H",
+      "Accept-Language: ko-KR,ko;q=0.9,en;q=0.7",
+      url
+    ],
+    {
+      encoding: "utf8",
+      maxBuffer:
+        20 *
+        1024 *
+        1024
+    }
+  );
+}
+
+
+async function fetchHtml(url) {
+  const errors = [];
+
+  for (
+    let attempt = 1;
+    attempt <= FETCH_ATTEMPTS;
+    attempt += 1
   ) {
+    try {
+      const html =
+        await fetchWithNativeFetch(
+          url
+        );
+
+      if (
+        html &&
+        html.length > 100
+      ) {
+        return html;
+      }
+
+      throw new Error(
+        "empty html response"
+      );
+    } catch (error) {
+      const message =
+        "fetch attempt " +
+        attempt +
+        ": " +
+        describeError(error);
+
+      errors.push(message);
+      console.warn(message);
+
+      if (
+        attempt < FETCH_ATTEMPTS
+      ) {
+        await sleep(
+          attempt * 1500
+        );
+      }
+    }
+  }
+
+  try {
+    console.warn(
+      "Native fetch failed. Trying curl fallback."
+    );
+
+    const html =
+      fetchWithCurl(url);
+
+    if (
+      html &&
+      html.length > 100
+    ) {
+      return html;
+    }
 
     throw new Error(
-      "HTTP " +
-      response.status +
-      " " +
-      response.statusText
+      "curl returned empty html"
+    );
+  } catch (error) {
+    errors.push(
+      "curl: " +
+      describeError(error)
     );
   }
 
-
-  return await response.text();
+  throw new Error(
+    errors.join(" || ")
+  );
 }
 
 
-// --------------------------------------------------------
-// Main
-// --------------------------------------------------------
-
 async function main() {
-
-  if (
-    !fs.existsSync(
-      ARCHIVE_PATH
-    )
-  ) {
-
+  if (!fs.existsSync(ARCHIVE_PATH)) {
     throw new Error(
       "Archive not found: " +
       ARCHIVE_PATH
     );
   }
-
 
   const archive =
     JSON.parse(
@@ -497,106 +420,85 @@ async function main() {
       )
     );
 
-
   let targets =
-    archive.filter(
-      function (
-        item
-      ) {
-
-        return Boolean(
-          item &&
-          item.id &&
-          (
-            item.sourceUrl ||
-            item.url ||
-            item.originalUrl
-          )
-        );
-      }
+    archive.filter((item) =>
+      Boolean(
+        item &&
+        item.id &&
+        (
+          item.sourceUrl ||
+          item.url ||
+          item.originalUrl
+        )
+      )
     );
 
-
-  // LIVE/current 공고 우선
   targets =
     targets.filter(
-      function (
-        item
-      ) {
-
-        return item.archiveIsCurrent !==
-          false;
-      }
+      (item) =>
+        item.archiveIsCurrent !==
+        false
     );
 
-
-  // 특정 공고 테스트
-  if (
-    TARGET_ID
-  ) {
-
+  if (TARGET_ID) {
     targets =
       targets.filter(
-        function (
-          item
-        ) {
-
-          return item.id ===
-            TARGET_ID;
-        }
+        (item) =>
+          item.id === TARGET_ID
       );
   }
 
+  if (
+    TARGET_ID &&
+    targets.length === 0
+  ) {
+    throw new Error(
+      "Research ID not found: " +
+      TARGET_ID
+    );
+  }
 
   console.log(
     "========================================"
   );
-
   console.log(
     "AXOO ART NOTICE ATTACHMENT EXTRACTOR"
   );
-
   console.log(
     "Targets:",
     targets.length
   );
-
   console.log(
     "========================================"
   );
 
-
   const output = [];
 
-
-  for (
-    const item
-    of targets
-  ) {
-
+  for (const item of targets) {
     const sourceUrl =
       item.sourceUrl ||
       item.originalUrl ||
       item.url;
 
-
     console.log(
       "\n[NOTICE]",
       item.id
     );
-
     console.log(
       item.title
     );
 
-
     try {
-
       const html =
         await fetchHtml(
           sourceUrl
         );
 
+      console.log(
+        "HTML:",
+        html.length,
+        "chars"
+      );
 
       const attachments =
         extractAttachments(
@@ -604,106 +506,75 @@ async function main() {
           sourceUrl
         );
 
-
       console.log(
         "Attachments:",
         attachments.length
       );
 
-
       attachments.forEach(
-        function (
-          attachment
-        ) {
-
+        (attachment) => {
           console.log(
             " -",
-            attachment.name
+            attachment.name,
+            "=>",
+            attachment.url
           );
         }
       );
 
-
       output.push({
         researchId:
           item.id,
-
         title:
           item.title || "",
-
         source:
           item.source || "",
-
-        sourceUrl:
-          sourceUrl,
-
+        sourceUrl,
         status:
           attachments.length
             ? "ok"
             : "no_attachments",
-
-        attachments:
-          attachments
+        attachments
       });
-
-    } catch (
-      error
-    ) {
+    } catch (error) {
+      const message =
+        describeError(error);
 
       console.error(
         "ERROR:",
-        error.message
+        message
       );
-
 
       output.push({
         researchId:
           item.id,
-
         title:
           item.title || "",
-
         source:
           item.source || "",
-
-        sourceUrl:
-          sourceUrl,
-
+        sourceUrl,
         status:
           "fetch_error",
-
         error:
-          error.message,
-
+          message,
         attachments: []
       });
     }
   }
 
-
   output.sort(
-    function (
-      a,
-      b
-    ) {
-
-      return a.researchId.localeCompare(
+    (a, b) =>
+      a.researchId.localeCompare(
         b.researchId
-      );
-    }
+      )
   );
-
 
   fs.mkdirSync(
-    path.dirname(
-      OUTPUT_PATH
-    ),
+    path.dirname(OUTPUT_PATH),
     {
-      recursive:
-        true
+      recursive: true
     }
   );
-
 
   fs.writeFileSync(
     OUTPUT_PATH,
@@ -715,40 +586,47 @@ async function main() {
     "utf8"
   );
 
-
   console.log(
-    "\n========================================"
-  );
-
-  console.log(
-    "Saved:"
-  );
-
-  console.log(
+    "\nSaved:",
     path.relative(
       ROOT_DIR,
       OUTPUT_PATH
     )
   );
 
-  console.log(
-    "========================================"
-  );
+  if (TARGET_ID) {
+    const targetResult =
+      output.find(
+        (item) =>
+          item.researchId ===
+          TARGET_ID
+      );
+
+    if (
+      !targetResult ||
+      targetResult.status !== "ok" ||
+      !targetResult.attachments.length
+    ) {
+      throw new Error(
+        "Target attachment extraction failed: " +
+        TARGET_ID +
+        " / status=" +
+        (
+          targetResult
+            ? targetResult.status
+            : "missing"
+        )
+      );
+    }
+  }
 }
 
 
+main().catch((error) => {
+  console.error(
+    "\nFATAL:",
+    describeError(error)
+  );
 
-main().catch(
-  function (
-    error
-  ) {
-
-    console.error(
-      error
-    );
-
-    process.exit(
-      1
-    );
-  }
-);
+  process.exit(1);
+});
