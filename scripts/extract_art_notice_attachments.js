@@ -1,24 +1,75 @@
 const fs = require("fs");
 const path = require("path");
-const { execFileSync } = require("child_process");
+const crypto = require("crypto");
+const {
+  pathToFileURL
+} = require("url");
 
-const ROOT_DIR = path.resolve(__dirname, "..");
 
-const ARCHIVE_PATH = path.join(
-  ROOT_DIR,
-  "data",
-  "art_commissions_archive.json"
-);
+/**
+ * ============================================================
+ * AXOO B2G
+ * ART NOTICE DRIVE BRIDGE DOWNLOADER
+ * ============================================================
+ *
+ * Apps Script Bridge
+ *   → PROJECTS Sheet
+ *   → Project Drive / 01_공고문
+ *   → HWP / HWPX / PDF
+ *   → GitHub Actions 임시 폴더
+ *
+ * OUTPUT
+ * data/art_notice_attachments.json
+ *
+ * 실제 바이너리는 .tmp 아래에만 저장하며
+ * GitHub Repository에는 Commit하지 않는다.
+ * ============================================================
+ */
 
-const OUTPUT_PATH = path.join(
-  ROOT_DIR,
-  "data",
-  "art_notice_attachments.json"
-);
 
-const TARGET_ID = String(
-  process.env.ART_NOTICE_ID || ""
-).trim();
+const ROOT_DIR =
+  path.resolve(
+    __dirname,
+    ".."
+  );
+
+
+const OUTPUT_PATH =
+  path.join(
+    ROOT_DIR,
+    "data",
+    "art_notice_attachments.json"
+  );
+
+
+const TEMP_ROOT =
+  path.join(
+    ROOT_DIR,
+    ".tmp",
+    "art_notice_raw"
+  );
+
+
+const TARGET_ID =
+  String(
+    process.env.ART_NOTICE_ID ||
+    ""
+  ).trim();
+
+
+const BRIDGE_URL =
+  String(
+    process.env.AXOO_BRIDGE_URL ||
+    ""
+  ).trim();
+
+
+const BRIDGE_TOKEN =
+  String(
+    process.env.AXOO_BRIDGE_TOKEN ||
+    ""
+  ).trim();
+
 
 const ALLOWED_EXTENSIONS = [
   ".hwp",
@@ -26,555 +77,663 @@ const ALLOWED_EXTENSIONS = [
   ".pdf"
 ];
 
-const FETCH_ATTEMPTS = 3;
+
+const MAX_FILE_BYTES =
+  15 * 1024 * 1024;
 
 
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
+/* ============================================================
+   BASIC
+============================================================ */
 
-
-function decodeHtml(value) {
-  return String(value || "")
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, "\"")
-    .replace(/&#39;/gi, "'")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/&nbsp;/gi, " ");
-}
-
-
-function stripTags(value) {
-  return decodeHtml(
-    String(value || "")
-      .replace(/<br\s*\/?>/gi, "\n")
-      .replace(/<[^>]+>/g, " ")
-  )
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-
-function getExtension(fileName) {
-  const lower = String(fileName || "")
-    .toLowerCase()
-    .trim();
-
-  return ALLOWED_EXTENSIONS.find(
-    (ext) => lower.endsWith(ext)
-  ) || "";
-}
-
-
-function normalizeUrl(href, baseUrl) {
-  if (!href) {
-    return "";
-  }
-
-  try {
-    return new URL(
-      decodeHtml(href),
-      baseUrl
-    ).toString();
-  } catch (error) {
-    return "";
-  }
-}
-
-
-function uniqueAttachments(attachments) {
-  const seen = new Set();
-
-  return attachments.filter((item) => {
-    const key = [
-      item.name,
-      item.url
-    ].join("||");
-
-    if (seen.has(key)) {
-      return false;
-    }
-
-    seen.add(key);
-    return true;
-  });
-}
-
-
-function extractAnchorAttachments(
-  html,
-  pageUrl
+function getExtension(
+  fileName
 ) {
-  const result = [];
 
-  const anchorRegex =
-    /<a\b([^>]*?)href\s*=\s*["']([^"']+)["']([^>]*)>([\s\S]*?)<\/a>/gi;
-
-  let match;
-
-  while (
-    (
-      match =
-        anchorRegex.exec(html)
+  const lower =
+    String(
+      fileName || ""
     )
-  ) {
-    const href = match[2];
-    const label = stripTags(match[4]);
-
-    const extension =
-      getExtension(label) ||
-      getExtension(href);
-
-    if (!extension) {
-      continue;
-    }
-
-    const url =
-      normalizeUrl(
-        href,
-        pageUrl
-      );
-
-    if (!url) {
-      continue;
-    }
-
-    result.push({
-      name:
-        label ||
-        path.basename(
-          new URL(url).pathname
-        ),
-      extension,
-      url
-    });
-  }
-
-  return result;
-}
+      .trim()
+      .toLowerCase();
 
 
-function extractScriptAttachments(
-  html,
-  pageUrl
-) {
-  const result = [];
+  return (
+    ALLOWED_EXTENSIONS.find(
+      function (
+        extension
+      ) {
 
-  const scriptRegex =
-    /(?:previewAjax|preListen)\s*\(\s*['"]([^'"]+)['"]\s*,\s*['"]([^'"]+\.(?:hwp|hwpx|pdf))['"]/gi;
-
-  let match;
-
-  while (
-    (
-      match =
-        scriptRegex.exec(html)
-    )
-  ) {
-    const url =
-      normalizeUrl(
-        match[1],
-        pageUrl
-      );
-
-    const name =
-      decodeHtml(
-        match[2]
-      ).trim();
-
-    const extension =
-      getExtension(name);
-
-    if (!url || !extension) {
-      continue;
-    }
-
-    result.push({
-      name,
-      extension,
-      url
-    });
-  }
-
-  return result;
-}
-
-
-function extractAttachments(
-  html,
-  pageUrl
-) {
-  return uniqueAttachments([
-    ...extractAnchorAttachments(
-      html,
-      pageUrl
-    ),
-    ...extractScriptAttachments(
-      html,
-      pageUrl
-    )
-  ]).sort((a, b) =>
-    a.name.localeCompare(
-      b.name,
-      "ko"
-    )
+        return lower.endsWith(
+          extension
+        );
+      }
+    ) || ""
   );
 }
 
 
-function describeError(error) {
-  const parts = [];
+function safeFileName(
+  fileName
+) {
 
-  if (error && error.message) {
-    parts.push(error.message);
+  const base =
+    path.basename(
+      String(
+        fileName || ""
+      )
+    );
+
+
+  if (
+    !base ||
+    base === "." ||
+    base === ".."
+  ) {
+
+    throw new Error(
+      "Invalid file name"
+    );
   }
 
-  if (error && error.cause) {
-    if (error.cause.code) {
-      parts.push(
-        String(error.cause.code)
-      );
-    }
 
-    if (error.cause.message) {
-      parts.push(
-        String(error.cause.message)
-      );
-    }
-  }
-
-  return parts.join(" | ") ||
-    "unknown fetch error";
+  return base;
 }
 
 
-async function fetchWithNativeFetch(url) {
+function sha256(
+  buffer
+) {
+
+  return crypto
+    .createHash(
+      "sha256"
+    )
+    .update(
+      buffer
+    )
+    .digest(
+      "hex"
+    );
+}
+
+
+function ensureConfig() {
+
+  if (!TARGET_ID) {
+
+    throw new Error(
+      "ART_NOTICE_ID가 없습니다."
+    );
+  }
+
+
+  if (!BRIDGE_URL) {
+
+    throw new Error(
+      "AXOO_BRIDGE_URL Secret이 없습니다."
+    );
+  }
+
+
+  if (!BRIDGE_TOKEN) {
+
+    throw new Error(
+      "AXOO_BRIDGE_TOKEN Secret이 없습니다."
+    );
+  }
+}
+
+
+/* ============================================================
+   BRIDGE REQUEST
+============================================================ */
+
+async function callBridge(
+  payload
+) {
+
   const controller =
     new AbortController();
 
+
   const timer =
     setTimeout(
-      () => controller.abort(),
-      20000
+      function () {
+
+        controller.abort();
+
+      },
+      120000
     );
 
+
   try {
+
     const response =
       await fetch(
-        url,
+        BRIDGE_URL,
         {
-          redirect: "follow",
+          method:
+            "POST",
+
+          redirect:
+            "follow",
+
           signal:
             controller.signal,
+
           headers: {
-            "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.1)",
+            "Content-Type":
+              "application/json",
+
             "Accept":
-              "text/html,application/xhtml+xml,*/*",
-            "Accept-Language":
-              "ko-KR,ko;q=0.9,en;q=0.7",
-            "Cache-Control":
-              "no-cache"
-          }
+              "application/json",
+
+            "User-Agent":
+              "AXOO-B2G-GitHub-Bridge/1.0"
+          },
+
+          body:
+            JSON.stringify({
+              ...payload,
+              token:
+                BRIDGE_TOKEN
+            })
         }
       );
 
+
+    const text =
+      await response.text();
+
+
     if (!response.ok) {
+
       throw new Error(
-        "HTTP " +
+        "Bridge HTTP " +
         response.status
       );
     }
 
-    return await response.text();
-  } finally {
-    clearTimeout(timer);
-  }
-}
+
+    let data;
 
 
-function fetchWithCurl(url) {
-  return execFileSync(
-    "curl",
-    [
-      "-L",
-      "--fail",
-      "--silent",
-      "--show-error",
-      "--retry",
-      "3",
-      "--retry-delay",
-      "2",
-      "--connect-timeout",
-      "15",
-      "--max-time",
-      "45",
-      "-A",
-      "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.1)",
-      "-H",
-      "Accept-Language: ko-KR,ko;q=0.9,en;q=0.7",
-      url
-    ],
-    {
-      encoding: "utf8",
-      maxBuffer:
-        20 *
-        1024 *
-        1024
-    }
-  );
-}
-
-
-async function fetchHtml(url) {
-  const errors = [];
-
-  for (
-    let attempt = 1;
-    attempt <= FETCH_ATTEMPTS;
-    attempt += 1
-  ) {
     try {
-      const html =
-        await fetchWithNativeFetch(
-          url
+
+      data =
+        JSON.parse(
+          text
         );
 
-      if (
-        html &&
-        html.length > 100
-      ) {
-        return html;
-      }
+    } catch (error) {
+
+      const preview =
+        text
+          .slice(
+            0,
+            200
+          )
+          .replace(
+            /\s+/g,
+            " "
+          );
+
 
       throw new Error(
-        "empty html response"
+        "Bridge JSON 응답이 아닙니다: " +
+        preview
       );
-    } catch (error) {
-      const message =
-        "fetch attempt " +
-        attempt +
-        ": " +
-        describeError(error);
-
-      errors.push(message);
-      console.warn(message);
-
-      if (
-        attempt < FETCH_ATTEMPTS
-      ) {
-        await sleep(
-          attempt * 1500
-        );
-      }
     }
-  }
 
-  try {
-    console.warn(
-      "Native fetch failed. Trying curl fallback."
-    );
-
-    const html =
-      fetchWithCurl(url);
 
     if (
-      html &&
-      html.length > 100
+      !data ||
+      data.ok !== true
     ) {
-      return html;
+
+      throw new Error(
+        "Bridge error: " +
+        (
+          data &&
+          data.error
+            ? data.error
+            : "unknown error"
+        )
+      );
     }
 
-    throw new Error(
-      "curl returned empty html"
-    );
-  } catch (error) {
-    errors.push(
-      "curl: " +
-      describeError(error)
+
+    return data;
+
+  } finally {
+
+    clearTimeout(
+      timer
     );
   }
-
-  throw new Error(
-    errors.join(" || ")
-  );
 }
 
 
-async function main() {
-  if (!fs.existsSync(ARCHIVE_PATH)) {
-    throw new Error(
-      "Archive not found: " +
-      ARCHIVE_PATH
-    );
-  }
+/* ============================================================
+   LIST
+============================================================ */
 
-  const archive =
-    JSON.parse(
-      fs.readFileSync(
-        ARCHIVE_PATH,
-        "utf8"
-      )
-    );
+async function getFileList() {
 
-  let targets =
-    archive.filter((item) =>
-      Boolean(
-        item &&
-        item.id &&
-        (
-          item.sourceUrl ||
-          item.url ||
-          item.originalUrl
-        )
-      )
-    );
+  console.log(
+    "Bridge LIST 요청"
+  );
 
-  targets =
-    targets.filter(
-      (item) =>
-        item.archiveIsCurrent !==
-        false
-    );
 
-  if (TARGET_ID) {
-    targets =
-      targets.filter(
-        (item) =>
-          item.id === TARGET_ID
-      );
-  }
+  const result =
+    await callBridge({
+      action:
+        "list",
+
+      researchId:
+        TARGET_ID
+    });
+
 
   if (
-    TARGET_ID &&
-    targets.length === 0
+    !Array.isArray(
+      result.files
+    )
   ) {
+
     throw new Error(
-      "Research ID not found: " +
+      "Bridge files 응답이 올바르지 않습니다."
+    );
+  }
+
+
+  const files =
+    result.files.filter(
+      function (
+        file
+      ) {
+
+        return Boolean(
+          getExtension(
+            file.name
+          )
+        );
+      }
+    );
+
+
+  if (
+    files.length === 0
+  ) {
+
+    throw new Error(
+      "01_공고문에 HWP/HWPX/PDF가 없습니다."
+    );
+  }
+
+
+  return {
+    projectId:
+      result.projectId || "",
+
+    projectTitle:
+      result.projectTitle || "",
+
+    files:
+      files
+  };
+}
+
+
+/* ============================================================
+   DOWNLOAD ONE FILE
+============================================================ */
+
+async function downloadFile(
+  fileInfo,
+  targetDirectory
+) {
+
+  const fileName =
+    safeFileName(
+      fileInfo.name
+    );
+
+
+  const extension =
+    getExtension(
+      fileName
+    );
+
+
+  if (!extension) {
+
+    throw new Error(
+      "지원하지 않는 확장자: " +
+      fileName
+    );
+  }
+
+
+  const expectedSize =
+    Number(
+      fileInfo.size || 0
+    );
+
+
+  if (
+    expectedSize >
+    MAX_FILE_BYTES
+  ) {
+
+    throw new Error(
+      "파일 크기 제한 초과: " +
+      fileName
+    );
+  }
+
+
+  console.log(
+    "[DOWNLOAD]",
+    fileName
+  );
+
+
+  const result =
+    await callBridge({
+      action:
+        "file",
+
+      researchId:
+        TARGET_ID,
+
+      fileName:
+        fileName
+    });
+
+
+  if (
+    !result.file ||
+    result.file.encoding !==
+      "base64" ||
+    !result.file.data
+  ) {
+
+    throw new Error(
+      "Bridge 파일 데이터가 올바르지 않습니다: " +
+      fileName
+    );
+  }
+
+
+  const buffer =
+    Buffer.from(
+      result.file.data,
+      "base64"
+    );
+
+
+  if (
+    buffer.length === 0
+  ) {
+
+    throw new Error(
+      "빈 파일입니다: " +
+      fileName
+    );
+  }
+
+
+  if (
+    buffer.length >
+    MAX_FILE_BYTES
+  ) {
+
+    throw new Error(
+      "다운로드 파일 크기 제한 초과: " +
+      fileName
+    );
+  }
+
+
+  if (
+    result.file.size &&
+    Number(
+      result.file.size
+    ) !==
+      buffer.length
+  ) {
+
+    throw new Error(
+      "파일 크기 검증 실패: " +
+      fileName
+    );
+  }
+
+
+  const actualHash =
+    sha256(
+      buffer
+    );
+
+
+  if (
+    result.file.sha256 &&
+    String(
+      result.file.sha256
+    ).toLowerCase() !==
+      actualHash
+  ) {
+
+    throw new Error(
+      "SHA256 검증 실패: " +
+      fileName
+    );
+  }
+
+
+  const localPath =
+    path.join(
+      targetDirectory,
+      fileName
+    );
+
+
+  fs.writeFileSync(
+    localPath,
+    buffer
+  );
+
+
+  console.log(
+    "  bytes:",
+    buffer.length
+  );
+
+
+  return {
+    name:
+      fileName,
+
+    extension:
+      extension,
+
+    mimeType:
+      result.file.mimeType ||
+      fileInfo.mimeType ||
+      "",
+
+    size:
+      buffer.length,
+
+    modifiedTime:
+      fileInfo.modifiedTime ||
+      "",
+
+    sha256:
+      actualHash,
+
+    source:
+      "apps_script_bridge",
+
+    // Python extractor가 현재 URL 입력 구조라
+    // 로컬 임시파일을 file:// URL로 전달한다.
+    url:
+      pathToFileURL(
+        localPath
+      ).href
+  };
+}
+
+
+/* ============================================================
+   MAIN
+============================================================ */
+
+async function main() {
+
+  ensureConfig();
+
+
+  console.log(
+    "========================================"
+  );
+
+  console.log(
+    "AXOO ART NOTICE DRIVE BRIDGE"
+  );
+
+  console.log(
+    "Research ID:",
+    TARGET_ID
+  );
+
+  console.log(
+    "========================================"
+  );
+
+
+  const targetDirectory =
+    path.join(
+      TEMP_ROOT,
       TARGET_ID
     );
-  }
 
-  console.log(
-    "========================================"
-  );
-  console.log(
-    "AXOO ART NOTICE ATTACHMENT EXTRACTOR"
-  );
-  console.log(
-    "Targets:",
-    targets.length
-  );
-  console.log(
-    "========================================"
-  );
 
-  const output = [];
+  fs.rmSync(
+    targetDirectory,
+    {
+      recursive:
+        true,
 
-  for (const item of targets) {
-    const sourceUrl =
-      item.sourceUrl ||
-      item.originalUrl ||
-      item.url;
-
-    console.log(
-      "\n[NOTICE]",
-      item.id
-    );
-    console.log(
-      item.title
-    );
-
-    try {
-      const html =
-        await fetchHtml(
-          sourceUrl
-        );
-
-      console.log(
-        "HTML:",
-        html.length,
-        "chars"
-      );
-
-      const attachments =
-        extractAttachments(
-          html,
-          sourceUrl
-        );
-
-      console.log(
-        "Attachments:",
-        attachments.length
-      );
-
-      attachments.forEach(
-        (attachment) => {
-          console.log(
-            " -",
-            attachment.name,
-            "=>",
-            attachment.url
-          );
-        }
-      );
-
-      output.push({
-        researchId:
-          item.id,
-        title:
-          item.title || "",
-        source:
-          item.source || "",
-        sourceUrl,
-        status:
-          attachments.length
-            ? "ok"
-            : "no_attachments",
-        attachments
-      });
-    } catch (error) {
-      const message =
-        describeError(error);
-
-      console.error(
-        "ERROR:",
-        message
-      );
-
-      output.push({
-        researchId:
-          item.id,
-        title:
-          item.title || "",
-        source:
-          item.source || "",
-        sourceUrl,
-        status:
-          "fetch_error",
-        error:
-          message,
-        attachments: []
-      });
+      force:
+        true
     }
-  }
-
-  output.sort(
-    (a, b) =>
-      a.researchId.localeCompare(
-        b.researchId
-      )
   );
+
 
   fs.mkdirSync(
-    path.dirname(OUTPUT_PATH),
+    targetDirectory,
     {
-      recursive: true
+      recursive:
+        true
     }
   );
+
+
+  const listing =
+    await getFileList();
+
+
+  console.log(
+    "Project:",
+    listing.projectId,
+    listing.projectTitle
+  );
+
+
+  console.log(
+    "Files:",
+    listing.files.length
+  );
+
+
+  listing.files.forEach(
+    function (
+      file
+    ) {
+
+      console.log(
+        " -",
+        file.name,
+        "|",
+        file.size,
+        "bytes"
+      );
+    }
+  );
+
+
+  const attachments =
+    [];
+
+
+  for (
+    const fileInfo
+    of listing.files
+  ) {
+
+    const attachment =
+      await downloadFile(
+        fileInfo,
+        targetDirectory
+      );
+
+
+    attachments.push(
+      attachment
+    );
+  }
+
+
+  const output = [
+    {
+      researchId:
+        TARGET_ID,
+
+      projectId:
+        listing.projectId,
+
+      title:
+        listing.projectTitle,
+
+      source:
+        "apps_script_bridge",
+
+      sourceUrl:
+        "",
+
+      status:
+        "ok",
+
+      attachments:
+        attachments
+    }
+  ];
+
+
+  fs.mkdirSync(
+    path.dirname(
+      OUTPUT_PATH
+    ),
+    {
+      recursive:
+        true
+    }
+  );
+
 
   fs.writeFileSync(
     OUTPUT_PATH,
@@ -586,47 +745,58 @@ async function main() {
     "utf8"
   );
 
+
   console.log(
-    "\nSaved:",
+    ""
+  );
+
+  console.log(
+    "========================================"
+  );
+
+  console.log(
+    "Bridge download complete"
+  );
+
+  console.log(
+    "Files:",
+    attachments.length
+  );
+
+  console.log(
+    "Runtime manifest:",
     path.relative(
       ROOT_DIR,
       OUTPUT_PATH
     )
   );
 
-  if (TARGET_ID) {
-    const targetResult =
-      output.find(
-        (item) =>
-          item.researchId ===
-          TARGET_ID
-      );
-
-    if (
-      !targetResult ||
-      targetResult.status !== "ok" ||
-      !targetResult.attachments.length
-    ) {
-      throw new Error(
-        "Target attachment extraction failed: " +
-        TARGET_ID +
-        " / status=" +
-        (
-          targetResult
-            ? targetResult.status
-            : "missing"
-        )
-      );
-    }
-  }
+  console.log(
+    "========================================"
+  );
 }
 
 
-main().catch((error) => {
-  console.error(
-    "\nFATAL:",
-    describeError(error)
-  );
+main().catch(
+  function (
+    error
+  ) {
 
-  process.exit(1);
-});
+    console.error(
+      ""
+    );
+
+    console.error(
+      "FATAL:",
+      error &&
+      error.message
+        ? error.message
+        : error
+    );
+
+
+    process.exit(
+      1
+    );
+  }
+);
