@@ -321,5 +321,48 @@
     "collectionVersion": "1.2.0",
     "scoringVersion": "axoo_bid_fit_v6",
     "priorityVersion": "priority_from_g2b_v1.0"
+  },
+  {
+    "id": "R26BK01701016",
+    "bidNtceNo": "R26BK01701016",
+    "sourceType": "나라장터 입찰공고",
+    "title": "해남군 경관계획 및 공공디자인 기본계획 재정비 용역",
+    "bidNtceNm": "해남군 경관계획 및 공공디자인 기본계획 재정비 용역",
+    "agency": "전남광주통합특별시 해남군",
+    "organization": "전남광주통합특별시 해남군",
+    "noticeAgency": "전남광주통합특별시 해남군",
+    "demandAgency": "전남광주통합특별시 해남군",
+    "amount": 300000000,
+    "budgetAmount": 300000000,
+    "deadline": "2026-09-15",
+    "deadlineDate": "2026-09-15",
+    "publishedDate": "2026-08-27",
+    "sourceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01701016&bidPbancOrd=000",
+    "documentUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01701016&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "category": "design",
+    "categoryLabel": "공간·공공디자인",
+    "priorityCategory": "other",
+    "priorityCategoryLabel": "기타 AXOO 핏",
+    "priorityRank": 3,
+    "matchedPriorityKeywords": [
+      "공공디자인"
+    ],
+    "matchedKeywords": [
+      "공공디자인"
+    ],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "A",
+    "score": 60,
+    "gradeReason": "핵심 수행영역: 공공·경관·환경디자인. AXOO FIT 60점 / A등급. 실행조건 90점 (3억원 이상, 검토·제안 준비기간 적정, 협상에 의한 계약, 기술평가 비중 80% 이상).",
+    "nextAction": "우선 검토 — 수행범위·예산·참가자격 확인",
+    "recommendedAction": "우선 검토 — 수행범위·예산·참가자격 확인",
+    "contractMethod": "협상에의한계약-협상에 의한 낙찰자 결정",
+    "searchText": "해남군 경관계획 및 공공디자인 기본계획 재정비 용역 전남광주통합특별시 해남군 전남광주통합특별시 해남군 기타 AXOO 핏 공간·공공디자인 공공디자인",
+    "collectionSourceId": "g2b_bid_public_info_servc",
+    "collectionVersion": "1.2.0",
+    "scoringVersion": "axoo_bid_fit_v6",
+    "priorityVersion": "priority_from_g2b_v1.0"
   }
 ]
