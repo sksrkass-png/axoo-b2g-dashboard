@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "id": "external-10a9592b4d5eec3a",
+    "source": "경기도 건축물 미술작품",
+    "title": "남양주왕숙2A-1 신축공사 內 미술작품 제작 및 설치 공모 공고",
+    "agency": "경기도",
+    "region": "경기",
+    "category": "미술작품 공모",
+    "status": "마감임박",
+    "publishedDate": "2026-08-10",
+    "periodStart": "2026-08-10",
+    "deadline": "2026-09-01",
+    "budget": 0,
+    "keywords": [
+      "미술작품",
+      "공모",
+      "공고",
+      "제작",
+      "설치"
+    ],
+    "recommendedAction": "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토 / 공모기간: 2026-08-10 ~ 2026-09-01",
+    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110904626&menuId=3865",
+    "bidNtceNo": "",
+    "score": 85,
+    "grade": "A",
+    "isExpired": false,
+    "isStaleCandidate": false,
+    "deadlineStatus": "진행중"
+  },
+  {
+    "id": "external-74fe83e93a95ff12",
+    "source": "경기도 건축물 미술작품",
+    "title": "평택고덕A63BL 신축공사 內 미술작품 제작 및 설치 공모 공고",
+    "agency": "경기도",
+    "region": "경기",
+    "category": "미술작품 공모",
+    "status": "마감임박",
+    "publishedDate": "2026-08-10",
+    "periodStart": "2026-08-10",
+    "deadline": "2026-09-01",
+    "budget": 0,
+    "keywords": [
+      "미술작품",
+      "공모",
+      "공고",
+      "제작",
+      "설치"
+    ],
+    "recommendedAction": "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토 / 공모기간: 2026-08-10 ~ 2026-09-01",
+    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110904625&menuId=3865",
+    "bidNtceNo": "",
+    "score": 85,
+    "grade": "A",
+    "isExpired": false,
+    "isStaleCandidate": false,
+    "deadlineStatus": "진행중"
+  }
+]
