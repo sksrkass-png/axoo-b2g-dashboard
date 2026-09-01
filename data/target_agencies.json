@@ -2,6 +2,116 @@
   {
     "grade": "S",
     "score": 90,
+    "activityScore": 32,
+    "priorityBoost": 18,
+    "gradeFloor": "S",
+    "gradeCeiling": "S",
+    "agencyPriority": "핵심",
+    "priorityReason": "문화예술기관은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관",
+    "fitLevel": "core",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "전시"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "한국콘텐츠진흥원",
+    "agencyType": "문화예술기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "전시"
+    ],
+    "relatedCount": 2,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 2,
+    "orderPlanCount": 0,
+    "estimatedAmount": 904500000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 904500000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
+    "nextAction": "메인 타깃으로 분류하고 담당부서 확인 후 1P 맞춤 제안서 준비",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 904,500,000원 규모의 근거가 확인되었습니다. 문화예술기관은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관. 기관 유형 보정 +18점. 기관 유형과 사업 근거를 반영해 S등급 기준이 적용되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "[긴급] 2026 콘텐츠IP 라이선싱 해외마켓 전시 및 운영 위탁용역",
+        "sourceType": "낙찰정보",
+        "amount": 754600000,
+        "date": "2026-04-08",
+        "sourceUrl": "",
+        "id": "R26BK01328369"
+      },
+      {
+        "title": "[긴급] 2026 한국 우수 웹툰 도쿄 전시 개최 위탁용역",
+        "sourceType": "낙찰정보",
+        "amount": 149900000,
+        "date": "2025-11-25",
+        "sourceUrl": "",
+        "id": "R25BK01099769"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "S",
+    "score": 90,
+    "activityScore": 32,
+    "priorityBoost": 18,
+    "gradeFloor": "S",
+    "gradeCeiling": "S",
+    "agencyPriority": "핵심",
+    "priorityReason": "문화예술기관은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관",
+    "fitLevel": "core",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "운영대행",
+      "행사 운영"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "한국공예디자인문화진흥원",
+    "agencyType": "문화예술기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "운영대행",
+      "행사 운영"
+    ],
+    "relatedCount": 2,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 2,
+    "orderPlanCount": 0,
+    "estimatedAmount": 310000000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 310000000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "운영대행 · 행사 운영 관련 악수 협업 제안",
+    "nextAction": "메인 타깃으로 분류하고 담당부서 확인 후 1P 맞춤 제안서 준비",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 310,000,000원 규모의 근거가 확인되었습니다. 문화예술기관은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관. 기관 유형 보정 +18점. 기관 유형과 사업 근거를 반영해 S등급 기준이 적용되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "2026년 국제행사 연계 해외 한복 행사 운영대행",
+        "sourceType": "낙찰정보",
+        "amount": 201000000,
+        "date": "2025-12-29",
+        "sourceUrl": "",
+        "id": "R25BK01163295"
+      },
+      {
+        "title": "2026년 한복문화캠페인 행사 운영대행",
+        "sourceType": "낙찰정보",
+        "amount": 109000000,
+        "date": "2026-03-30",
+        "sourceUrl": "",
+        "id": "R26BK01312727"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "S",
+    "score": 90,
     "activityScore": 45,
     "priorityBoost": 14,
     "gradeFloor": "S",
@@ -90,146 +200,6 @@
         "date": "2026-08-28",
         "sourceUrl": "",
         "id": "R26BK01611068"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "S",
-    "score": 90,
-    "activityScore": 27,
-    "priorityBoost": 18,
-    "gradeFloor": "S",
-    "gradeCeiling": "S",
-    "agencyPriority": "핵심",
-    "priorityReason": "문화예술기관은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관",
-    "fitLevel": "core",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "운영대행",
-      "행사 운영"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "한국공예디자인문화진흥원",
-    "agencyType": "문화예술기관",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "운영대행",
-      "행사 운영"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 201000000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 201000000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "운영대행 · 행사 운영 관련 악수 협업 제안",
-    "nextAction": "메인 타깃으로 분류하고 담당부서 확인 후 1P 맞춤 제안서 준비",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 201,000,000원 규모의 근거가 확인되었습니다. 문화예술기관은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관. 기관 유형 보정 +18점. 기관 유형과 사업 근거를 반영해 S등급 기준이 적용되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "2026년 국제행사 연계 해외 한복 행사 운영대행",
-        "sourceType": "낙찰정보",
-        "amount": 201000000,
-        "date": "2025-12-29",
-        "sourceUrl": "",
-        "id": "R25BK01163295"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "S",
-    "score": 90,
-    "activityScore": 27,
-    "priorityBoost": 18,
-    "gradeFloor": "S",
-    "gradeCeiling": "S",
-    "agencyPriority": "핵심",
-    "priorityReason": "문화예술기관은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관",
-    "fitLevel": "core",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "전시"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "한국콘텐츠진흥원",
-    "agencyType": "문화예술기관",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "전시"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 149900000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 149900000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
-    "nextAction": "메인 타깃으로 분류하고 담당부서 확인 후 1P 맞춤 제안서 준비",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 149,900,000원 규모의 근거가 확인되었습니다. 문화예술기관은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관. 기관 유형 보정 +18점. 기관 유형과 사업 근거를 반영해 S등급 기준이 적용되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "[긴급] 2026 한국 우수 웹툰 도쿄 전시 개최 위탁용역",
-        "sourceType": "낙찰정보",
-        "amount": 149900000,
-        "date": "2025-11-25",
-        "sourceUrl": "",
-        "id": "R25BK01099769"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "S",
-    "score": 90,
-    "activityScore": 27,
-    "priorityBoost": 18,
-    "gradeFloor": "S",
-    "gradeCeiling": "S",
-    "agencyPriority": "핵심",
-    "priorityReason": "관광재단은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관",
-    "fitLevel": "core",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "축제"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "서울관광재단",
-    "agencyType": "관광재단",
-    "region": "서울",
-    "mainKeywords": [
-      "축제"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 139970000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 139970000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "축제 기반 아티스트 협업형 행사 운영 제안",
-    "nextAction": "메인 타깃으로 분류하고 담당부서 확인 후 1P 맞춤 제안서 준비",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 139,970,000원 규모의 근거가 확인되었습니다. 관광재단은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관. 기관 유형 보정 +18점. 기관 유형과 사업 근거를 반영해 S등급 기준이 적용되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "2025 서울빛초롱축제 및 광화문 마켓 홍보 용역",
-        "sourceType": "낙찰정보",
-        "amount": 139970000,
-        "date": "2025-10-13",
-        "sourceUrl": "",
-        "id": "R25BK01019324"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -388,58 +358,56 @@
   {
     "grade": "A",
     "score": 70,
-    "activityScore": 29,
-    "priorityBoost": 16,
+    "activityScore": 35,
+    "priorityBoost": 14,
     "gradeFloor": "A",
     "gradeCeiling": "A",
-    "agencyPriority": "핵심",
-    "priorityReason": "미술관·박물관·문예회관 등 문화시설은 전시·공간 협업 가능성이 높은 기관",
-    "fitLevel": "core",
+    "agencyPriority": "상위",
+    "priorityReason": "국가부처는 정책·공공사업 파급력이 큰 메인급 기관",
+    "fitLevel": "strategic",
     "directFitKeywords": [
-      "전시 연출",
-      "기획전"
+      "전시연출"
     ],
     "supportFitKeywords": [
       "전시"
     ],
     "lowFitEvidenceCount": 0,
-    "agencyName": "서울특별시 서울공예박물관",
-    "agencyType": "문화시설",
-    "region": "서울",
+    "agencyName": "국가유산청 국립해양유산연구소",
+    "agencyType": "국가부처",
+    "region": "전국/기타",
     "mainKeywords": [
       "전시",
-      "전시 연출",
-      "기획전"
+      "전시연출"
     ],
     "relatedCount": 2,
     "bidCount": 0,
     "contractCount": 0,
     "awardCount": 2,
     "orderPlanCount": 0,
-    "estimatedAmount": 94050000,
+    "estimatedAmount": 178900000,
     "bidAmount": 0,
     "contractAmount": 0,
-    "awardAmount": 94050000,
+    "awardAmount": 178900000,
     "orderPlanAmount": 0,
-    "recommendedProposal": "전시 · 전시 연출 · 기획전 기반 기획전·공간 연출 제안",
+    "recommendedProposal": "전시 · 전시연출 기반 기획전·공간 연출 제안",
     "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 94,050,000원 규모의 근거가 확인되었습니다. 미술관·박물관·문예회관 등 문화시설은 전시·공간 협업 가능성이 높은 기관. 기관 유형 보정 +16점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 178,900,000원 규모의 근거가 확인되었습니다. 국가부처는 정책·공공사업 파급력이 큰 메인급 기관. 기관 유형 보정 +14점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
     "evidenceSources": [
       {
-        "title": "제2회 서울시 유리지공에상 기념전시 연출 용역",
+        "title": "태안해양유물전시관 특별전 ‘서해 중부해역, 역사를 채우다(가제)’ 전시연출 및 보조물 제작·설치",
         "sourceType": "낙찰정보",
-        "amount": 52250000,
-        "date": "2026-04-23",
+        "amount": 147000000,
+        "date": "2026-09-01",
         "sourceUrl": "",
-        "id": "R26BK01481110"
+        "id": "R26BK01662866"
       },
       {
-        "title": "2026 어린이박물관×키즈카페 기획전시 연출 용역",
+        "title": "조선통신사선 선상박물관 전시개편 용역",
         "sourceType": "낙찰정보",
-        "amount": 41800000,
-        "date": "2026-08-26",
+        "amount": 31900000,
+        "date": "2026-06-10",
         "sourceUrl": "",
-        "id": "R26BK01697630"
+        "id": "R26BK01569480"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -915,52 +883,6 @@
   {
     "grade": "A",
     "score": 70,
-    "activityScore": 27,
-    "priorityBoost": 18,
-    "gradeFloor": "A",
-    "gradeCeiling": "A",
-    "agencyPriority": "핵심",
-    "priorityReason": "문화재단은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관",
-    "fitLevel": "core",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "축제"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "강남문화재단",
-    "agencyType": "문화재단",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "축제"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 165800000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 165800000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "축제 기반 아티스트 협업형 행사 운영 제안",
-    "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 165,800,000원 규모의 근거가 확인되었습니다. 문화재단은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관. 기관 유형 보정 +18점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "[강남문화재단] 2026 강남생활문화축제 운영 대행 용역 업체 선정",
-        "sourceType": "낙찰정보",
-        "amount": 165800000,
-        "date": "2026-08-25",
-        "sourceUrl": "",
-        "id": "R26BK01564690"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "A",
-    "score": 70,
     "activityScore": 35,
     "priorityBoost": 16,
     "gradeFloor": "A",
@@ -1107,52 +1029,6 @@
   {
     "grade": "A",
     "score": 70,
-    "activityScore": 27,
-    "priorityBoost": 18,
-    "gradeFloor": "A",
-    "gradeCeiling": "A",
-    "agencyPriority": "핵심",
-    "priorityReason": "문화재단은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관",
-    "fitLevel": "core",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "행사대행"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "대구광역시 중구 도심재생문화재단",
-    "agencyType": "문화재단",
-    "region": "대구",
-    "mainKeywords": [
-      "행사대행"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 135400000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 135400000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "행사대행 관련 악수 협업 제안",
-    "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 135,400,000원 규모의 근거가 확인되었습니다. 문화재단은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관. 기관 유형 보정 +18점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "「2026년 제12회 김광석 나의 노래 다시 부르기 대회」 행사대행 용역",
-        "sourceType": "낙찰정보",
-        "amount": 135400000,
-        "date": "2026-08-25",
-        "sourceUrl": "",
-        "id": "R26BK01619871"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "A",
-    "score": 70,
     "activityScore": 35,
     "priorityBoost": 14,
     "gradeFloor": "A",
@@ -1250,45 +1126,48 @@
   {
     "grade": "A",
     "score": 70,
-    "activityScore": 21,
-    "priorityBoost": 14,
+    "activityScore": 29,
+    "priorityBoost": 16,
     "gradeFloor": "A",
     "gradeCeiling": "A",
-    "agencyPriority": "상위",
-    "priorityReason": "광역지자체는 정책·공공사업 파급력이 큰 메인급 기관",
-    "fitLevel": "strategic",
-    "directFitKeywords": [],
+    "agencyPriority": "핵심",
+    "priorityReason": "미술관·박물관·문예회관 등 문화시설은 전시·공간 협업 가능성이 높은 기관",
+    "fitLevel": "core",
+    "directFitKeywords": [
+      "전시 연출"
+    ],
     "supportFitKeywords": [
       "전시"
     ],
     "lowFitEvidenceCount": 0,
-    "agencyName": "세종특별자치시",
-    "agencyType": "광역지자체",
-    "region": "전국/기타",
+    "agencyName": "서울특별시 서울공예박물관",
+    "agencyType": "문화시설",
+    "region": "서울",
     "mainKeywords": [
-      "전시"
+      "전시",
+      "전시 연출"
     ],
     "relatedCount": 1,
     "bidCount": 0,
     "contractCount": 0,
     "awardCount": 1,
     "orderPlanCount": 0,
-    "estimatedAmount": 78400000,
+    "estimatedAmount": 52250000,
     "bidAmount": 0,
     "contractAmount": 0,
-    "awardAmount": 78400000,
+    "awardAmount": 52250000,
     "orderPlanAmount": 0,
-    "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
+    "recommendedProposal": "전시 · 전시 연출 기반 기획전·공간 연출 제안",
     "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 78,400,000원 규모의 근거가 확인되었습니다. 광역지자체는 정책·공공사업 파급력이 큰 메인급 기관. 기관 유형 보정 +14점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 52,250,000원 규모의 근거가 확인되었습니다. 미술관·박물관·문예회관 등 문화시설은 전시·공간 협업 가능성이 높은 기관. 기관 유형 보정 +16점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
     "evidenceSources": [
       {
-        "title": "2025 대한민국 지방시대 엑스포 세종시 전시관 설치·운영 용역(긴급)",
+        "title": "제2회 서울시 유리지공에상 기념전시 연출 용역",
         "sourceType": "낙찰정보",
-        "amount": 78400000,
-        "date": "2025-10-24",
+        "amount": 52250000,
+        "date": "2026-04-23",
         "sourceUrl": "",
-        "id": "R25BK01058223"
+        "id": "R26BK01481110"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -1336,6 +1215,53 @@
         "date": "2026-06-04",
         "sourceUrl": "",
         "id": "R26BK01558333"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "A",
+    "score": 70,
+    "activityScore": 21,
+    "priorityBoost": 14,
+    "gradeFloor": "A",
+    "gradeCeiling": "A",
+    "agencyPriority": "상위",
+    "priorityReason": "국가부처는 정책·공공사업 파급력이 큰 메인급 기관",
+    "fitLevel": "strategic",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "전시"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "국가유산청 국립문화유산연구원",
+    "agencyType": "국가부처",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "전시",
+      "전시부스"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 47743000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 47743000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "전시 · 전시부스 기반 기획전·공간 연출 제안",
+    "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 47,743,000원 규모의 근거가 확인되었습니다. 국가부처는 정책·공공사업 파급력이 큰 메인급 기관. 기관 유형 보정 +14점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "2026 세계국가유산산업전 R&D 기술전시관 전시부스 제작설치",
+        "sourceType": "낙찰정보",
+        "amount": 47743000,
+        "date": "2026-08-27",
+        "sourceUrl": "",
+        "id": "R26BK01699997"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -1436,52 +1362,6 @@
     "grade": "A",
     "score": 70,
     "activityScore": 21,
-    "priorityBoost": 14,
-    "gradeFloor": "A",
-    "gradeCeiling": "A",
-    "agencyPriority": "상위",
-    "priorityReason": "국가부처는 정책·공공사업 파급력이 큰 메인급 기관",
-    "fitLevel": "strategic",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "전시"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "국가유산청 국립해양유산연구소",
-    "agencyType": "국가부처",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "전시"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 31900000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 31900000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
-    "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 31,900,000원 규모의 근거가 확인되었습니다. 국가부처는 정책·공공사업 파급력이 큰 메인급 기관. 기관 유형 보정 +14점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "조선통신사선 선상박물관 전시개편 용역",
-        "sourceType": "낙찰정보",
-        "amount": 31900000,
-        "date": "2026-06-10",
-        "sourceUrl": "",
-        "id": "R26BK01569480"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "A",
-    "score": 70,
-    "activityScore": 21,
     "priorityBoost": 16,
     "gradeFloor": "A",
     "gradeCeiling": "A",
@@ -1520,52 +1400,6 @@
         "date": "2026-02-02",
         "sourceUrl": "",
         "id": "R26BK01306848"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "A",
-    "score": 70,
-    "activityScore": 21,
-    "priorityBoost": 14,
-    "gradeFloor": "A",
-    "gradeCeiling": "A",
-    "agencyPriority": "상위",
-    "priorityReason": "국가부처는 정책·공공사업 파급력이 큰 메인급 기관",
-    "fitLevel": "strategic",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "전시"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "국가유산청 현충사관리소",
-    "agencyType": "국가부처",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "전시"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 21700000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 21700000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
-    "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 21,700,000원 규모의 근거가 확인되었습니다. 국가부처는 정책·공공사업 파급력이 큰 메인급 기관. 기관 유형 보정 +14점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "2026년 현충사 특별전시 및 체험 프로그램 운영",
-        "sourceType": "낙찰정보",
-        "amount": 21700000,
-        "date": "2026-04-01",
-        "sourceUrl": "",
-        "id": "R26BK01428535"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -1665,62 +1499,6 @@
   {
     "grade": "A",
     "score": 70,
-    "activityScore": 28,
-    "priorityBoost": 18,
-    "gradeFloor": "A",
-    "gradeCeiling": "A",
-    "agencyPriority": "핵심",
-    "priorityReason": "문화재단은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관",
-    "fitLevel": "core",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "전시",
-      "행사대행"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "하남문화재단",
-    "agencyType": "문화재단",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "전시",
-      "행사대행"
-    ],
-    "relatedCount": 2,
-    "bidCount": 2,
-    "contractCount": 0,
-    "awardCount": 0,
-    "orderPlanCount": 0,
-    "estimatedAmount": 260000000,
-    "bidAmount": 260000000,
-    "contractAmount": 0,
-    "awardAmount": 0,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "전시 · 행사대행 기반 기획전·공간 연출 제안",
-    "nextAction": "유사 계약·공고 근거 확인 후 제안 가능성 검토",
-    "note": "최근 수집 기준 입찰공고 2건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 260,000,000원 규모의 근거가 확인되었습니다. 문화재단은 AXOO의 아트·전시·공간 협업과 직접 연결되는 핵심 기관. 기관 유형 보정 +18점. 기관 유형과 사업 근거를 반영해 A등급 기준이 적용되었습니다.",
-    "evidenceSources": [
-      {
-        "title": "하남역사박물관 상설전 고려실Ⅱ 개편 전시 용역",
-        "sourceType": "입찰공고",
-        "amount": 140000000,
-        "date": "2026-09-09 10:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684847&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-        "id": "R26BK01684847"
-      },
-      {
-        "title": "2026 글로벌 케이팝댄스챌린지인하남 행사대행 용역",
-        "sourceType": "입찰공고",
-        "amount": 120000000,
-        "date": "2026-09-02 10:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684564&bidPbancOrd=000&fileType=&fileSeq=2&prcmBsneSeCd=03",
-        "id": "R26BK01684564"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "A",
-    "score": 70,
     "activityScore": 36,
     "priorityBoost": 14,
     "gradeFloor": "A",
@@ -1763,6 +1541,65 @@
         "date": "2026-09-08 11:00:00",
         "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684339&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
         "id": "R26BK01684339"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "B",
+    "score": 51,
+    "activityScore": 45,
+    "priorityBoost": 6,
+    "gradeFloor": "B",
+    "gradeCeiling": "A",
+    "agencyPriority": "중간",
+    "priorityReason": "공공기관 중 AXOO 직접 핏 키워드가 확인되어 후속 검토 가치 있음",
+    "fitLevel": "direct",
+    "directFitKeywords": [
+      "미디어아트"
+    ],
+    "supportFitKeywords": [
+      "아트",
+      "운영대행"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "국가유산진흥원",
+    "agencyType": "공공기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "미디어아트",
+      "아트",
+      "운영대행"
+    ],
+    "relatedCount": 2,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 2,
+    "orderPlanCount": 0,
+    "estimatedAmount": 1564816000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 1564816000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "미디어아트 · 아트 · 운영대행 기반 도시 브랜딩/공간 콘텐츠 제안",
+    "nextAction": "기관 저장 후 예산 시즌 또는 관련 공고 발생 시 재접촉",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 1,564,816,000원 규모의 근거가 확인되었습니다. 공공기관 중 AXOO 직접 핏 키워드가 확인되어 후속 검토 가치 있음. 기관 유형 보정 +6점. 후속 검토 가치가 있어 B~A 범위에서 평가했습니다.",
+    "evidenceSources": [
+      {
+        "title": "2026년 사회적 배려 대상자 전통혼례 및 돌잔치 지원 운영대행 용역",
+        "sourceType": "낙찰정보",
+        "amount": 878416000,
+        "date": "2026-01-13",
+        "sourceUrl": "",
+        "id": "R25BK01196048"
+      },
+      {
+        "title": "2026년 세계유산축전 및 국가유산 미디어아트 종합 홍보 대행",
+        "sourceType": "낙찰정보",
+        "amount": 686400000,
+        "date": "2026-04-03",
+        "sourceUrl": "",
+        "id": "R26BK01276433"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -1812,6 +1649,62 @@
         "date": "2025-12-11",
         "sourceUrl": "",
         "id": "R25BK01218733"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "B",
+    "score": 45,
+    "activityScore": 32,
+    "priorityBoost": 4,
+    "gradeFloor": "B",
+    "gradeCeiling": "B",
+    "agencyPriority": "중간",
+    "priorityReason": "공사은 공간·도시·관광 사업과 연결 가능성이 있으나 실제 사업 핏을 함께 확인해야 하는 기관",
+    "fitLevel": "infrastructure",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "전시",
+      "운영대행"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "서울주택도시개발공사",
+    "agencyType": "공사",
+    "region": "서울",
+    "mainKeywords": [
+      "전시",
+      "운영대행"
+    ],
+    "relatedCount": 2,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 2,
+    "orderPlanCount": 0,
+    "estimatedAmount": 696100000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 696100000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "전시 · 운영대행 기반 기획전·공간 연출 제안",
+    "nextAction": "기관 저장 후 예산 시즌 또는 관련 공고 발생 시 재접촉",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 696,100,000원 규모의 근거가 확인되었습니다. 공사은 공간·도시·관광 사업과 연결 가능성이 있으나 실제 사업 핏을 함께 확인해야 하는 기관. 기관 유형 보정 +4점. 기관 유형과 사업 근거를 반영해 B등급 기준이 적용되었습니다.",
+    "evidenceSources": [
+      {
+        "title": "SLW 2026 S-DBC 전시체험관 기획 및 설치용역",
+        "sourceType": "낙찰정보",
+        "amount": 484200000,
+        "date": "2026-09-01",
+        "sourceUrl": "",
+        "id": "R26BK01654801"
+      },
+      {
+        "title": "2025년 주민참여공연 운영대행용역",
+        "sourceType": "낙찰정보",
+        "amount": 211900000,
+        "date": "2025-10-30",
+        "sourceUrl": "",
+        "id": "R25BK01059411"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -2617,52 +2510,6 @@
     "grade": "B",
     "score": 45,
     "activityScore": 21,
-    "priorityBoost": 10,
-    "gradeFloor": "B",
-    "gradeCeiling": "A",
-    "agencyPriority": "상위",
-    "priorityReason": "기초지자체·자치구는 축제·공공미술·도시공간 사업 발주 가능성이 있는 지역 타깃",
-    "fitLevel": "local",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "행사대행"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "경상북도 성주군",
-    "agencyType": "기초지자체/자치구",
-    "region": "경북",
-    "mainKeywords": [
-      "행사대행"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 77576510,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 77576510,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "행사대행 관련 악수 협업 제안",
-    "nextAction": "기관 저장 후 예산 시즌 또는 관련 공고 발생 시 재접촉",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 77,576,510원 규모의 근거가 확인되었습니다. 기초지자체·자치구는 축제·공공미술·도시공간 사업 발주 가능성이 있는 지역 타깃. 기관 유형 보정 +10점. 후속 검토 가치가 있어 B~A 범위에서 평가했습니다.",
-    "evidenceSources": [
-      {
-        "title": "2026 성주참외 가요제  행사대행 용역",
-        "sourceType": "낙찰정보",
-        "amount": 77576510,
-        "date": "2026-04-06",
-        "sourceUrl": "",
-        "id": "R26BK01326900"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "B",
-    "score": 45,
-    "activityScore": 21,
     "priorityBoost": 2,
     "gradeFloor": "B",
     "gradeCeiling": "B",
@@ -2702,6 +2549,55 @@
         "date": "2026-04-06",
         "sourceUrl": "",
         "id": "R26BK01394904"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "B",
+    "score": 45,
+    "activityScore": 29,
+    "priorityBoost": 4,
+    "gradeFloor": "B",
+    "gradeCeiling": "A",
+    "agencyPriority": "일반",
+    "priorityReason": "산하기관·사업소는 실제 사업명이 AXOO 서비스와 직접 연결될 때만 상위 평가",
+    "fitLevel": "sub_org",
+    "directFitKeywords": [
+      "기획전"
+    ],
+    "supportFitKeywords": [
+      "전시"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "서울특별시 서울아리수본부 뚝도아리수정수센터",
+    "agencyType": "행정산하기관",
+    "region": "서울",
+    "mainKeywords": [
+      "전시",
+      "기획전"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 52195000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 52195000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "전시 · 기획전 기반 기획전·공간 연출 제안",
+    "nextAction": "기관 저장 후 추가 이력 모니터링",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 52,195,000원 규모의 근거가 확인되었습니다. 산하기관·사업소는 실제 사업명이 AXOO 서비스와 직접 연결될 때만 상위 평가. 기관 유형 보정 +4점. 후속 검토 가치가 있어 B~A 범위에서 평가했습니다.",
+    "evidenceSources": [
+      {
+        "title": "수도박물관 기획전시 공간조성 용역",
+        "sourceType": "낙찰정보",
+        "amount": 52195000,
+        "date": "2026-08-31",
+        "sourceUrl": "",
+        "id": "R26BK01680262"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -3167,7 +3063,7 @@
   {
     "grade": "B",
     "score": 45,
-    "activityScore": 28,
+    "activityScore": 22,
     "priorityBoost": 4,
     "gradeFloor": "B",
     "gradeCeiling": "B",
@@ -3175,37 +3071,33 @@
     "priorityReason": "공사은 공간·도시·관광 사업과 연결 가능성이 있으나 실제 사업 핏을 함께 확인해야 하는 기관",
     "fitLevel": "infrastructure",
     "directFitKeywords": [],
-    "supportFitKeywords": [
-      "행사대행"
-    ],
+    "supportFitKeywords": [],
     "lowFitEvidenceCount": 0,
-    "agencyName": "주택도시보증공사",
+    "agencyName": "인천관광공사",
     "agencyType": "공사",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "행사대행"
-    ],
+    "region": "인천",
+    "mainKeywords": [],
     "relatedCount": 1,
     "bidCount": 1,
     "contractCount": 0,
     "awardCount": 0,
     "orderPlanCount": 0,
-    "estimatedAmount": 202837600,
-    "bidAmount": 202837600,
+    "estimatedAmount": 180000000,
+    "bidAmount": 180000000,
     "contractAmount": 0,
     "awardAmount": 0,
     "orderPlanAmount": 0,
-    "recommendedProposal": "행사대행 관련 악수 협업 제안",
+    "recommendedProposal": "문화예술 관련 악수 협업 제안",
     "nextAction": "기관 저장 후 예산 시즌 또는 관련 공고 발생 시 재접촉",
-    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 202,837,600원 규모의 근거가 확인되었습니다. 공사은 공간·도시·관광 사업과 연결 가능성이 있으나 실제 사업 핏을 함께 확인해야 하는 기관. 기관 유형 보정 +4점. 기관 유형과 사업 근거를 반영해 B등급 기준이 적용되었습니다.",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 180,000,000원 규모의 근거가 확인되었습니다. 공사은 공간·도시·관광 사업과 연결 가능성이 있으나 실제 사업 핏을 함께 확인해야 하는 기관. 기관 유형 보정 +4점. 기관 유형과 사업 근거를 반영해 B등급 기준이 적용되었습니다.",
     "evidenceSources": [
       {
-        "title": "제11회 도시재생 한마당 행사대행 용역",
+        "title": "2026 인천 송도 ICCZ 환대서비스 운영",
         "sourceType": "입찰공고",
-        "amount": 202837600,
-        "date": "2026-09-01 11:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684510&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-        "id": "R26BK01684510"
+        "amount": 180000000,
+        "date": "2026-09-11 13:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684978&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01684978"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -3256,40 +3148,44 @@
     "grade": "B",
     "score": 45,
     "activityScore": 22,
-    "priorityBoost": 4,
+    "priorityBoost": 10,
     "gradeFloor": "B",
-    "gradeCeiling": "B",
-    "agencyPriority": "중간",
-    "priorityReason": "공단은 공간·도시·관광 사업과 연결 가능성이 있으나 실제 사업 핏을 함께 확인해야 하는 기관",
-    "fitLevel": "infrastructure",
+    "gradeCeiling": "A",
+    "agencyPriority": "상위",
+    "priorityReason": "기초지자체·자치구는 축제·공공미술·도시공간 사업 발주 가능성이 있는 지역 타깃",
+    "fitLevel": "local",
     "directFitKeywords": [],
-    "supportFitKeywords": [],
+    "supportFitKeywords": [
+      "축제"
+    ],
     "lowFitEvidenceCount": 0,
-    "agencyName": "서울올림픽기념국민체육진흥공단 경륜경정총괄본부",
-    "agencyType": "공단",
-    "region": "서울",
-    "mainKeywords": [],
+    "agencyName": "전북특별자치도 전주시",
+    "agencyType": "기초지자체/자치구",
+    "region": "전북",
+    "mainKeywords": [
+      "축제"
+    ],
     "relatedCount": 1,
     "bidCount": 1,
     "contractCount": 0,
     "awardCount": 0,
     "orderPlanCount": 0,
-    "estimatedAmount": 100000000,
-    "bidAmount": 100000000,
+    "estimatedAmount": 94000000,
+    "bidAmount": 94000000,
     "contractAmount": 0,
     "awardAmount": 0,
     "orderPlanAmount": 0,
-    "recommendedProposal": "문화예술 관련 악수 협업 제안",
+    "recommendedProposal": "축제 기반 아티스트 협업형 행사 운영 제안",
     "nextAction": "기관 저장 후 예산 시즌 또는 관련 공고 발생 시 재접촉",
-    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 100,000,000원 규모의 근거가 확인되었습니다. 공단은 공간·도시·관광 사업과 연결 가능성이 있으나 실제 사업 핏을 함께 확인해야 하는 기관. 기관 유형 보정 +4점. 기관 유형과 사업 근거를 반영해 B등급 기준이 적용되었습니다.",
+    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 94,000,000원 규모의 근거가 확인되었습니다. 기초지자체·자치구는 축제·공공미술·도시공간 사업 발주 가능성이 있는 지역 타깃. 기관 유형 보정 +10점. 후속 검토 가치가 있어 B~A 범위에서 평가했습니다.",
     "evidenceSources": [
       {
-        "title": "시니어 특화 스피드온 UX·UI 혁신 컨설팅 용역",
+        "title": "제6회 전주 골목상권 드림축제 운영 대행 용역",
         "sourceType": "입찰공고",
-        "amount": 100000000,
-        "date": "2026-09-02 11:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684243&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-        "id": "R26BK01684243"
+        "amount": 94000000,
+        "date": "2026-09-01 18:00:00",
+        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684937&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+        "id": "R26BK01684937"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -3448,58 +3344,12 @@
     "fitLevel": "support",
     "directFitKeywords": [],
     "supportFitKeywords": [
-      "운영대행"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "국가유산진흥원",
-    "agencyType": "공공기관",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "운영대행"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 878416000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 878416000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "운영대행 관련 악수 협업 제안",
-    "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 878,416,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
-    "evidenceSources": [
-      {
-        "title": "2026년 사회적 배려 대상자 전통혼례 및 돌잔치 지원 운영대행 용역",
-        "sourceType": "낙찰정보",
-        "amount": 878416000,
-        "date": "2026-01-13",
-        "sourceUrl": "",
-        "id": "R25BK01196048"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "C",
-    "score": 34,
-    "activityScore": 32,
-    "priorityBoost": 2,
-    "gradeFloor": "C",
-    "gradeCeiling": "B",
-    "agencyPriority": "일반",
-    "priorityReason": "공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함",
-    "fitLevel": "support",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
       "전시"
     ],
     "lowFitEvidenceCount": 0,
-    "agencyName": "한국의료기기협동조합",
+    "agencyName": "경기도경제과학진흥원",
     "agencyType": "공공기관",
-    "region": "전국/기타",
+    "region": "경기",
     "mainKeywords": [
       "전시"
     ],
@@ -3508,22 +3358,22 @@
     "contractCount": 0,
     "awardCount": 1,
     "orderPlanCount": 0,
-    "estimatedAmount": 548686569,
+    "estimatedAmount": 594044000,
     "bidAmount": 0,
     "contractAmount": 0,
-    "awardAmount": 548686569,
+    "awardAmount": 594044000,
     "orderPlanAmount": 0,
     "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
     "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 548,686,569원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 594,044,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
     "evidenceSources": [
       {
-        "title": "2026 독일 뒤셀도르프 의료기기전시회(MEDICA 2026) 한국관 전시디자인설치공사 입찰",
+        "title": "G-FAIR KOREA 2026 전시장 조성 및 관리 용역",
         "sourceType": "낙찰정보",
-        "amount": 548686569,
-        "date": "2026-08-26",
+        "amount": 594044000,
+        "date": "2026-08-27",
         "sourceUrl": "",
-        "id": "R26BK01643866"
+        "id": "R26BK01654156"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -3678,83 +3528,36 @@
     "fitLevel": "support",
     "directFitKeywords": [],
     "supportFitKeywords": [
-      "전시"
+      "행사대행"
     ],
     "lowFitEvidenceCount": 0,
-    "agencyName": "중소기업융합중앙회",
+    "agencyName": "전남광주통합특별시 무안청사",
     "agencyType": "공공기관",
-    "region": "전국/기타",
+    "region": "광주",
     "mainKeywords": [
-      "전시",
-      "전시부스"
+      "행사대행"
     ],
     "relatedCount": 1,
     "bidCount": 0,
     "contractCount": 0,
     "awardCount": 1,
     "orderPlanCount": 0,
-    "estimatedAmount": 218600000,
+    "estimatedAmount": 216300000,
     "bidAmount": 0,
     "contractAmount": 0,
-    "awardAmount": 218600000,
+    "awardAmount": 216300000,
     "orderPlanAmount": 0,
-    "recommendedProposal": "전시 · 전시부스 기반 기획전·공간 연출 제안",
+    "recommendedProposal": "행사대행 관련 악수 협업 제안",
     "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 218,600,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 216,300,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
     "evidenceSources": [
       {
-        "title": "2026년 중소기업융합대전 기획운영 및 성과전시부스 설치 용역",
+        "title": "2026 전남광주통합특별시 직거래장터 큰잔치 행사대행 용역",
         "sourceType": "낙찰정보",
-        "amount": 218600000,
-        "date": "2026-08-26",
+        "amount": 216300000,
+        "date": "2026-08-31",
         "sourceUrl": "",
-        "id": "R26BK01675535"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "C",
-    "score": 29,
-    "activityScore": 27,
-    "priorityBoost": 2,
-    "gradeFloor": "C",
-    "gradeCeiling": "B",
-    "agencyPriority": "일반",
-    "priorityReason": "공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함",
-    "fitLevel": "support",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "행사 운영"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "전남테크노파크",
-    "agencyType": "공공기관",
-    "region": "전남",
-    "mainKeywords": [
-      "행사 운영"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 180600000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 180600000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "행사 운영 관련 악수 협업 제안",
-    "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 180,600,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
-    "evidenceSources": [
-      {
-        "title": "2025 전남 벤처·스타트업 페스티벌 행사 운영 용역",
-        "sourceType": "낙찰정보",
-        "amount": 180600000,
-        "date": "2025-10-13",
-        "sourceUrl": "",
-        "id": "R25BK01045312"
+        "id": "R26BK01628307"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -3801,62 +3604,6 @@
         "date": "2025-11-20",
         "sourceUrl": "",
         "id": "R25BK01074398"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "C",
-    "score": 27,
-    "activityScore": 27,
-    "priorityBoost": 0,
-    "gradeFloor": "C",
-    "gradeCeiling": "B",
-    "agencyPriority": "일반",
-    "priorityReason": "산하기관·사업소는 실제 사업명이 AXOO 서비스와 직접 연결될 때만 상위 평가",
-    "fitLevel": "sub_org",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "행사 운영",
-      "축제"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "경상북도교육청 경상북도교육청과학원",
-    "agencyType": "행정산하기관",
-    "region": "경북",
-    "mainKeywords": [
-      "행사 운영",
-      "축제"
-    ],
-    "relatedCount": 2,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 2,
-    "orderPlanCount": 0,
-    "estimatedAmount": 272048000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 272048000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "행사 운영 · 축제 기반 아티스트 협업형 행사 운영 제안",
-    "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 2건, 발주계획 0건, 총 272,048,000원 규모의 근거가 확인되었습니다. 산하기관·사업소는 실제 사업명이 AXOO 서비스와 직접 연결될 때만 상위 평가. 기관 유형 보정 +0점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
-    "evidenceSources": [
-      {
-        "title": "2026 경북창의과학한마당 행사 운영 용역",
-        "sourceType": "낙찰정보",
-        "amount": 163548000,
-        "date": "2026-08-25",
-        "sourceUrl": "",
-        "id": "R26BK01652748"
-      },
-      {
-        "title": "경상북도교육청 수학문화관 개관식 및 개관기념 수학 축제  행사 운영 대행 용역 2단계(가격규격동시)긴급 입찰",
-        "sourceType": "낙찰정보",
-        "amount": 108500000,
-        "date": "2025-09-18",
-        "sourceUrl": "",
-        "id": "R25BK01045124"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -3961,6 +3708,103 @@
     "activityScore": 27,
     "priorityBoost": 0,
     "gradeFloor": "C",
+    "gradeCeiling": "B",
+    "agencyPriority": "일반",
+    "priorityReason": "산하기관·사업소는 실제 사업명이 AXOO 서비스와 직접 연결될 때만 상위 평가",
+    "fitLevel": "sub_org",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "축제",
+      "행사 운영"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "경상북도교육청 경상북도교육청과학원",
+    "agencyType": "행정산하기관",
+    "region": "경북",
+    "mainKeywords": [
+      "축제",
+      "행사 운영"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 108500000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 108500000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "축제 · 행사 운영 기반 아티스트 협업형 행사 운영 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 108,500,000원 규모의 근거가 확인되었습니다. 산하기관·사업소는 실제 사업명이 AXOO 서비스와 직접 연결될 때만 상위 평가. 기관 유형 보정 +0점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
+    "evidenceSources": [
+      {
+        "title": "경상북도교육청 수학문화관 개관식 및 개관기념 수학 축제  행사 운영 대행 용역 2단계(가격규격동시)긴급 입찰",
+        "sourceType": "낙찰정보",
+        "amount": 108500000,
+        "date": "2025-09-18",
+        "sourceUrl": "",
+        "id": "R25BK01045124"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "C",
+    "score": 27,
+    "activityScore": 25,
+    "priorityBoost": 2,
+    "gradeFloor": "C",
+    "gradeCeiling": "B",
+    "agencyPriority": "일반",
+    "priorityReason": "공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함",
+    "fitLevel": "support",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "전시",
+      "축제"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "광주과학기술원",
+    "agencyType": "공공기관",
+    "region": "광주",
+    "mainKeywords": [
+      "전시",
+      "전시부스",
+      "축제"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 20300000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 20300000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "전시 · 전시부스 · 축제 기반 기획전·공간 연출 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 20,300,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
+    "evidenceSources": [
+      {
+        "title": "2026 대한민국 과학축제 GIST 전시부스 제작 및 설치",
+        "sourceType": "낙찰정보",
+        "amount": 20300000,
+        "date": "2026-04-03",
+        "sourceUrl": "",
+        "id": "R26BK01365170"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "C",
+    "score": 27,
+    "activityScore": 27,
+    "priorityBoost": 0,
+    "gradeFloor": "C",
     "gradeCeiling": "S",
     "agencyPriority": "일반",
     "priorityReason": "일반 공공기관 기준으로 평가",
@@ -4049,100 +3893,6 @@
   },
   {
     "grade": "C",
-    "score": 24,
-    "activityScore": 22,
-    "priorityBoost": 2,
-    "gradeFloor": "C",
-    "gradeCeiling": "B",
-    "agencyPriority": "일반",
-    "priorityReason": "공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함",
-    "fitLevel": "support",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "축제",
-      "문화관광"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "중앙시장 문화관광형시장 육성사업단",
-    "agencyType": "공공기관",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "축제",
-      "문화관광"
-    ],
-    "relatedCount": 1,
-    "bidCount": 1,
-    "contractCount": 0,
-    "awardCount": 0,
-    "orderPlanCount": 0,
-    "estimatedAmount": 80000000,
-    "bidAmount": 80000000,
-    "contractAmount": 0,
-    "awardAmount": 0,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "축제 · 문화관광 기반 아티스트 협업형 행사 운영 제안",
-    "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 0건, 발주계획 0건, 총 80,000,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
-    "evidenceSources": [
-      {
-        "title": "청주중앙시장 문화축제 및 별별야시장 운영 용역",
-        "sourceType": "입찰공고",
-        "amount": 80000000,
-        "date": "2026-08-31 16:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684332&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-        "id": "R26BK01684332"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "C",
-    "score": 23,
-    "activityScore": 21,
-    "priorityBoost": 2,
-    "gradeFloor": "C",
-    "gradeCeiling": "B",
-    "agencyPriority": "일반",
-    "priorityReason": "공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함",
-    "fitLevel": "support",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "행사 운영"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "소방청",
-    "agencyType": "공공기관",
-    "region": "전국/기타",
-    "mainKeywords": [
-      "행사 운영"
-    ],
-    "relatedCount": 1,
-    "bidCount": 0,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 98500000,
-    "bidAmount": 0,
-    "contractAmount": 0,
-    "awardAmount": 98500000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "행사 운영 관련 악수 협업 제안",
-    "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 98,500,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
-    "evidenceSources": [
-      {
-        "title": "제3회 119메모리얼데이 추모문화제 행사 운영 용역(수의시담)",
-        "sourceType": "낙찰정보",
-        "amount": 98500000,
-        "date": "2026-08-25",
-        "sourceUrl": "",
-        "id": "R26BK01672295"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "C",
     "score": 23,
     "activityScore": 21,
     "priorityBoost": 2,
@@ -4183,6 +3933,52 @@
         "date": "2026-07-14",
         "sourceUrl": "",
         "id": "R26BK01527325"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "C",
+    "score": 23,
+    "activityScore": 21,
+    "priorityBoost": 2,
+    "gradeFloor": "C",
+    "gradeCeiling": "B",
+    "agencyPriority": "일반",
+    "priorityReason": "공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함",
+    "fitLevel": "support",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "전시"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "국채보상운동기념사업회",
+    "agencyType": "공공기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "전시"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 78005000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 78005000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "전시 기반 기획전·공간 연출 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 78,005,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
+    "evidenceSources": [
+      {
+        "title": "국채보상운동 AI 기반 전시·체험·관광프로그램 설계 및 제작",
+        "sourceType": "낙찰정보",
+        "amount": 78005000,
+        "date": "2026-06-11",
+        "sourceUrl": "",
+        "id": "R26BK01544976"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
@@ -4493,6 +4289,52 @@
         "date": "2026-09-08 11:00:00",
         "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01684926&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
         "id": "R26BK01684926"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "C",
+    "score": 21,
+    "activityScore": 21,
+    "priorityBoost": 0,
+    "gradeFloor": "C",
+    "gradeCeiling": "B",
+    "agencyPriority": "일반",
+    "priorityReason": "산하기관·사업소는 실제 사업명이 AXOO 서비스와 직접 연결될 때만 상위 평가",
+    "fitLevel": "sub_org",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "행사대행"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "기상청 국립기상과학원",
+    "agencyType": "행정산하기관",
+    "region": "전국/기타",
+    "mainKeywords": [
+      "행사대행"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 38000000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 38000000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "행사대행 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 38,000,000원 규모의 근거가 확인되었습니다. 산하기관·사업소는 실제 사업명이 AXOO 서비스와 직접 연결될 때만 상위 평가. 기관 유형 보정 +0점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
+    "evidenceSources": [
+      {
+        "title": "제7차 NIMS-CAMS 국제공동워크숍 행사대행",
+        "sourceType": "낙찰정보",
+        "amount": 38000000,
+        "date": "2026-09-01",
+        "sourceUrl": "",
+        "id": "R26BK01650755"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
