@@ -23,6 +23,12 @@ const COLLECTORS = [
     id: "incheon",
     label: "인천광역시",
     script: "scripts/collect_incheon_art_commissions.js"
+  },
+
+  {
+    id: "busan",
+    label: "부산광역시",
+    script: "scripts/collect_busan_art_commissions.js"
   }
 
 ];
