@@ -319,9 +319,10 @@ function todayKst() {
 
 
   const parts =
-    formatter.formatToParts(
-      new Date()
-    );
+    formatter
+      .formatToParts(
+        new Date()
+      );
 
 
   const values =
@@ -1008,7 +1009,7 @@ function buildItem(
 
 
 /* =========================================================
-   SOURCE CRAWL
+   SOURCE CRAWL + DIAGNOSTICS
 ========================================================= */
 
 async function crawlSource(
@@ -1027,10 +1028,6 @@ async function crawlSource(
     );
 
 
-  /*
-    items=0 원인을 분리하기 위한
-    소스 단위 진단 정보
-  */
   const diagnostics = {
 
     htmlBytes:
@@ -1182,7 +1179,7 @@ async function crawlSource(
 
 
     /*
-      HTML 자체를 받았는지 확인
+      받은 HTML 총 용량
     */
     diagnostics.htmlBytes +=
       Buffer.byteLength(
@@ -1192,7 +1189,7 @@ async function crawlSource(
 
 
     /*
-      HTML 안에 존재하는 전체 <a> 개수
+      HTML 원문 안의 전체 <a> 태그
     */
     diagnostics.rawAnchors +=
       (
@@ -1203,11 +1200,8 @@ async function crawlSource(
 
 
     /*
-      javascript: 기반 링크 개수
-
-      현재 extractAnchors()에서는
-      javascript: 링크를 제외하므로
-      이 숫자가 크면 전용 Adapter가 필요할 가능성이 높다.
+      javascript: 링크 수
+      현재 일반 Anchor Parser에서 제외되는 링크.
     */
     diagnostics.javascriptAnchors +=
       (
@@ -1229,7 +1223,7 @@ async function crawlSource(
 
 
     /*
-      공모 후보 추출
+      공모 후보 탐지
     */
     anchors.forEach(
       function (
@@ -1257,11 +1251,12 @@ async function crawlSource(
 
 
         /*
-          실제 게시판에 미술 / 작품 / 공모 등의
-          관련 문구가 존재하는지 샘플 저장
+          실제 페이지에 어떤 관련 라벨이 있는지
+          최대 5개까지만 로그 샘플로 남긴다.
         */
         if (
-          diagnostics.sampleLabels.size < 5 &&
+          diagnostics.sampleLabels.size <
+            5 &&
           /미술|예술|작품|공모|art/i.test(
             label
           )
@@ -1323,7 +1318,7 @@ async function crawlSource(
 
 
     /*
-      내부 게시판 / 고시공고 링크 탐색
+      게시판 / 고시공고 내부 탐색
     */
     if (
       current.depth >=
@@ -1421,7 +1416,7 @@ async function crawlSource(
 
 
   /*
-    items=0 진단 출력
+    items=0 원인 진단 출력
   */
   if (
     pagesFetched > 0
@@ -1505,255 +1500,6 @@ async function crawlSource(
 }
 
 
-  const queued =
-    new Set(
-      [
-        rootUrl
-      ]
-    );
-
-
-  const visited =
-    new Set();
-
-
-  const found =
-    new Map();
-
-
-  let pagesFetched =
-    0;
-
-
-  while (
-    queue.length &&
-    pagesFetched <
-      MAX_PAGES_PER_SOURCE &&
-    (
-      Date.now() -
-      startedAt
-    ) <
-      MAX_SOURCE_BUDGET_MS
-  ) {
-
-    const current =
-      queue.shift();
-
-
-    if (
-      !current ||
-      visited.has(
-        current.url
-      )
-    ) {
-
-      continue;
-    }
-
-
-    visited.add(
-      current.url
-    );
-
-
-    let html;
-
-
-    try {
-
-      html =
-        await fetchText(
-          current.url
-        );
-
-
-      pagesFetched++;
-
-
-    } catch (
-      error
-    ) {
-
-      console.warn(
-        "   ⚠️ FETCH",
-        current.url,
-        error.message
-      );
-
-
-      continue;
-    }
-
-
-    const anchors =
-      extractAnchors(
-        html,
-        current.url
-      );
-
-
-    /*
-      공모 후보 추출
-    */
-    anchors.forEach(
-      function (
-        anchor
-      ) {
-
-        if (
-          !sameOrigin(
-            source.sourceUrl,
-            anchor.url
-          )
-        ) {
-
-          return;
-        }
-
-
-        if (
-          !isCandidateTitle(
-            anchor.label
-          )
-        ) {
-
-          return;
-        }
-
-
-        found.set(
-          anchor.url,
-
-          buildItem(
-            region,
-            source,
-            anchor.label,
-            anchor.url
-          )
-        );
-      }
-    );
-
-
-    /*
-      내부 게시판 / 고시공고 링크 탐색
-    */
-    if (
-      current.depth >=
-      MAX_DEPTH
-    ) {
-
-      continue;
-    }
-
-
-    const followCandidates =
-      anchors
-
-        .filter(
-          function (
-            anchor
-          ) {
-
-            if (
-              !sameOrigin(
-                source.sourceUrl,
-                anchor.url
-              )
-            ) {
-
-              return false;
-            }
-
-
-            if (
-              visited.has(
-                anchor.url
-              ) ||
-              queued.has(
-                anchor.url
-              )
-            ) {
-
-              return false;
-            }
-
-
-            return (
-              followScore(
-                anchor
-              ) > 0
-            );
-          }
-        )
-
-        .sort(
-          function (
-            a,
-            b
-          ) {
-
-            return (
-              followScore(b) -
-              followScore(a)
-            );
-          }
-        );
-
-
-    followCandidates
-      .slice(
-        0,
-        MAX_PAGES_PER_SOURCE
-      )
-      .forEach(
-        function (
-          anchor
-        ) {
-
-          queued.add(
-            anchor.url
-          );
-
-
-          queue.push({
-
-            url:
-              anchor.url,
-
-            depth:
-              current.depth + 1
-          });
-        }
-      );
-  }
-
-
-  return {
-
-    sourceId:
-      source.id,
-
-    sourceName:
-      source.sourceName,
-
-    region:
-      region.name,
-
-    accessOk:
-      pagesFetched > 0,
-
-    pagesFetched:
-      pagesFetched,
-
-    items:
-      Array.from(
-        found.values()
-      )
-  };
-}
-
-
 /* =========================================================
    DATA MERGE
 ========================================================= */
@@ -1800,8 +1546,8 @@ function mergeData(
 
 
   /*
-    이미 마감된 공고 URL은
-    다시 LIVE에 올리지 않는다.
+    이미 마감된 공고는
+    다시 LIVE로 올리지 않는다.
   */
   const expiredUrls =
     new Set(
@@ -1912,7 +1658,7 @@ function mergeData(
       if (previous) {
 
         /*
-          기존 날짜 검증 정보는 보존.
+          기존에 날짜 검증된 정보는 보존.
         */
         liveByUrl.set(
           url,
@@ -2362,9 +2108,6 @@ async function main() {
 
   /* ---------------------------------------------------------
      2. 전국 공통 백업
-
-     지역별 공식 소스에서 놓친 공모를
-     아트누리 / LH 등 전국 소스로 다시 확인한다.
   --------------------------------------------------------- */
 
   const nationalRegion = {
@@ -2420,10 +2163,6 @@ async function main() {
 
   /* ---------------------------------------------------------
      3. URL 기준 중복 제거
-
-     지역 소스를 먼저 수집하므로
-     같은 URL이 전국 백업에서도 발견되면
-     지역 레코드를 우선 보존한다.
   --------------------------------------------------------- */
 
   const unique =
@@ -2605,5 +2344,7 @@ module.exports = {
 
   followScore,
 
-  canonicalUrl
+  canonicalUrl,
+
+  crawlSource
 };
