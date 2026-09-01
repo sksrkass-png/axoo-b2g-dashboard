@@ -42,6 +42,15 @@ const MAX_NAV_SAMPLES =
 const MAX_CANDIDATE_SAMPLES =
   10;
 
+const MAX_FORM_SAMPLES =
+  10;
+
+const MAX_FIELD_SAMPLES =
+  80;
+
+const MAX_SCRIPT_SAMPLES =
+  20;
+
 
 const PRIMARY_KEYWORDS = [
   "미술작품",
@@ -114,6 +123,107 @@ function formatBoolean(
   return value
     ? "YES"
     : "NO";
+}
+
+
+function decodeAttribute(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+
+    .replace(
+      /&amp;/gi,
+      "&"
+    )
+
+    .replace(
+      /&quot;/gi,
+      "\""
+    )
+
+    .replace(
+      /&#39;/gi,
+      "'"
+    )
+
+    .replace(
+      /&lt;/gi,
+      "<"
+    )
+
+    .replace(
+      /&gt;/gi,
+      ">"
+    );
+}
+
+
+function getAttribute(
+  text,
+  name
+) {
+
+  const regex =
+    new RegExp(
+      name +
+      "\\s*=\\s*[\"']([^\"']*)[\"']",
+      "i"
+    );
+
+
+  const match =
+    String(
+      text || ""
+    ).match(
+      regex
+    );
+
+
+  return match
+    ? decodeAttribute(
+        match[1]
+      )
+    : "";
+}
+
+
+function shorten(
+  value,
+  maxLength
+) {
+
+  const text =
+    String(
+      value || ""
+    )
+
+      .replace(
+        /\s+/g,
+        " "
+      )
+
+      .trim();
+
+
+  if (
+    text.length <=
+    maxLength
+  ) {
+
+    return text;
+  }
+
+
+  return (
+    text.slice(
+      0,
+      maxLength
+    ) +
+    "..."
+  );
 }
 
 
@@ -353,7 +463,7 @@ async function fetchPage(
           headers: {
 
             "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.1)",
+              "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.2)",
 
             "Accept":
               "text/html,application/xhtml+xml,*/*",
@@ -407,6 +517,290 @@ async function fetchPage(
 
 
 /* =========================================================
+   FORM DIAGNOSTICS
+========================================================= */
+
+function extractFormDiagnostics(
+  html,
+  pageUrl
+) {
+
+  const forms =
+    [];
+
+
+  const formRegex =
+    /<form\b([^>]*)>([\s\S]*?)<\/form>/gi;
+
+
+  let formMatch;
+
+
+  while (
+    (
+      formMatch =
+        formRegex.exec(
+          html
+        )
+    ) !== null &&
+    forms.length <
+      MAX_FORM_SAMPLES
+  ) {
+
+    const attrs =
+      formMatch[1] ||
+      "";
+
+
+    const body =
+      formMatch[2] ||
+      "";
+
+
+    const method =
+      (
+        getAttribute(
+          attrs,
+          "method"
+        ) ||
+        "GET"
+      )
+        .toUpperCase();
+
+
+    const rawAction =
+      getAttribute(
+        attrs,
+        "action"
+      );
+
+
+    const action =
+      rawAction
+        ? canonicalUrl(
+            rawAction,
+            pageUrl
+          )
+        : pageUrl;
+
+
+    const form = {
+
+      id:
+        getAttribute(
+          attrs,
+          "id"
+        ),
+
+      name:
+        getAttribute(
+          attrs,
+          "name"
+        ),
+
+      method:
+        method,
+
+      action:
+        action,
+
+      onsubmit:
+        getAttribute(
+          attrs,
+          "onsubmit"
+        ),
+
+      fields:
+        []
+    };
+
+
+    const fieldRegex =
+      /<(input|select|textarea|button)\b([^>]*)>/gi;
+
+
+    let fieldMatch;
+
+
+    while (
+      (
+        fieldMatch =
+          fieldRegex.exec(
+            body
+          )
+      ) !== null &&
+      form.fields.length <
+        MAX_FIELD_SAMPLES
+    ) {
+
+      const tag =
+        String(
+          fieldMatch[1] ||
+          ""
+        )
+          .toLowerCase();
+
+
+      const fieldAttrs =
+        fieldMatch[2] ||
+        "";
+
+
+      const field = {
+
+        tag:
+          tag,
+
+        type:
+          getAttribute(
+            fieldAttrs,
+            "type"
+          ),
+
+        name:
+          getAttribute(
+            fieldAttrs,
+            "name"
+          ),
+
+        id:
+          getAttribute(
+            fieldAttrs,
+            "id"
+          ),
+
+        value:
+          getAttribute(
+            fieldAttrs,
+            "value"
+          ),
+
+        placeholder:
+          getAttribute(
+            fieldAttrs,
+            "placeholder"
+          ),
+
+        onclick:
+          getAttribute(
+            fieldAttrs,
+            "onclick"
+          )
+      };
+
+
+      /*
+        검색 구조 분석에 의미 있는 필드만 출력
+      */
+      if (
+        field.name ||
+        field.id ||
+        field.placeholder ||
+        field.onclick ||
+        field.type ===
+          "submit"
+      ) {
+
+        form.fields.push(
+          field
+        );
+      }
+    }
+
+
+    forms.push(
+      form
+    );
+  }
+
+
+  return forms;
+}
+
+
+/* =========================================================
+   SCRIPT DIAGNOSTICS
+========================================================= */
+
+function extractSearchScriptSamples(
+  html
+) {
+
+  const result =
+    [];
+
+
+  const patterns = [
+
+    /function\s+[A-Za-z0-9_$]*(search|Search|srch|Srch)[A-Za-z0-9_$]*\s*\([^)]*\)\s*\{[\s\S]{0,1600}?\}/g,
+
+    /(?:search|Search|srch|Srch)[A-Za-z0-9_$]*\s*=\s*function\s*\([^)]*\)\s*\{[\s\S]{0,1600}?\}/g,
+
+    /(?:onclick|onsubmit)\s*=\s*["'][^"']*(?:search|Search|srch|Srch)[^"']*["']/g,
+
+    /(?:ajax|fetch|\$\.ajax)[\s\S]{0,500}?(?:search|crawler|info)[\s\S]{0,1000}?/gi
+
+  ];
+
+
+  patterns.forEach(
+    function (
+      regex
+    ) {
+
+      const matches =
+        html.match(
+          regex
+        ) ||
+        [];
+
+
+      matches.forEach(
+        function (
+          match
+        ) {
+
+          const sample =
+            shorten(
+              match,
+              1600
+            );
+
+
+          if (
+            !sample ||
+            result.includes(
+              sample
+            )
+          ) {
+
+            return;
+          }
+
+
+          if (
+            result.length >=
+            MAX_SCRIPT_SAMPLES
+          ) {
+
+            return;
+          }
+
+
+          result.push(
+            sample
+          );
+        }
+      );
+    }
+  );
+
+
+  return result;
+}
+
+
+/* =========================================================
    ANALYZE
 ========================================================= */
 
@@ -449,10 +843,6 @@ function analyzePage(
     );
 
 
-  /*
-    Collector가 허용하는 Origin 기준과 동일하게
-    원래 Source 또는 최종 페이지 Origin을 허용한다.
-  */
   const allowedAnchors =
     anchors.filter(
       function (
@@ -468,34 +858,6 @@ function analyzePage(
             pageUrl,
             anchor.url
           )
-        );
-      }
-    );
-
-
-  const sourceOriginAnchors =
-    anchors.filter(
-      function (
-        anchor
-      ) {
-
-        return sameOrigin(
-          source.sourceUrl,
-          anchor.url
-        );
-      }
-    );
-
-
-  const finalOriginAnchors =
-    anchors.filter(
-      function (
-        anchor
-      ) {
-
-        return sameOrigin(
-          pageUrl,
-          anchor.url
         );
       }
     );
@@ -663,12 +1025,6 @@ function analyzePage(
     allowedAnchors:
       allowedAnchors.length,
 
-    sourceOriginAnchors:
-      sourceOriginAnchors.length,
-
-    finalOriginAnchors:
-      finalOriginAnchors.length,
-
     primaryAnchors:
       primaryAnchors,
 
@@ -682,8 +1038,229 @@ function analyzePage(
       navigationAnchors,
 
     relatedLabels:
-      relatedLabels
+      relatedLabels,
+
+    forms:
+      extractFormDiagnostics(
+        html,
+        pageUrl
+      ),
+
+    searchScripts:
+      extractSearchScriptSamples(
+        html
+      )
   };
+}
+
+
+/* =========================================================
+   FORM PRINT
+========================================================= */
+
+function printFormDiagnostics(
+  forms
+) {
+
+  console.log(
+    ""
+  );
+
+  console.log(
+    "------------------------------------"
+  );
+
+  console.log(
+    "FORM DIAGNOSTICS"
+  );
+
+  console.log(
+    "------------------------------------"
+  );
+
+
+  console.log(
+    "FORMS:",
+    forms.length
+  );
+
+
+  forms.forEach(
+    function (
+      form,
+      index
+    ) {
+
+      console.log(
+        ""
+      );
+
+
+      console.log(
+        "FORM #" +
+        (
+          index +
+          1
+        )
+      );
+
+
+      console.log(
+        "   id:",
+        form.id ||
+        "-"
+      );
+
+
+      console.log(
+        "   name:",
+        form.name ||
+        "-"
+      );
+
+
+      console.log(
+        "   method:",
+        form.method
+      );
+
+
+      console.log(
+        "   action:",
+        form.action ||
+        "-"
+      );
+
+
+      console.log(
+        "   onsubmit:",
+        form.onsubmit ||
+        "-"
+      );
+
+
+      console.log(
+        "   fields:",
+        form.fields.length
+      );
+
+
+      form.fields.forEach(
+        function (
+          field
+        ) {
+
+          console.log(
+            "      -",
+            [
+              "tag=" +
+                (
+                  field.tag ||
+                  "-"
+                ),
+
+              "type=" +
+                (
+                  field.type ||
+                  "-"
+                ),
+
+              "name=" +
+                (
+                  field.name ||
+                  "-"
+                ),
+
+              "id=" +
+                (
+                  field.id ||
+                  "-"
+                ),
+
+              "value=" +
+                (
+                  field.value ||
+                  "-"
+                ),
+
+              "placeholder=" +
+                (
+                  field.placeholder ||
+                  "-"
+                ),
+
+              "onclick=" +
+                (
+                  field.onclick ||
+                  "-"
+                )
+            ].join(
+              " | "
+            )
+          );
+        }
+      );
+    }
+  );
+}
+
+
+/* =========================================================
+   SCRIPT PRINT
+========================================================= */
+
+function printScriptDiagnostics(
+  samples
+) {
+
+  console.log(
+    ""
+  );
+
+  console.log(
+    "------------------------------------"
+  );
+
+  console.log(
+    "SEARCH SCRIPT DIAGNOSTICS"
+  );
+
+  console.log(
+    "------------------------------------"
+  );
+
+
+  console.log(
+    "SAMPLES:",
+    samples.length
+  );
+
+
+  samples.forEach(
+    function (
+      sample,
+      index
+    ) {
+
+      console.log(
+        ""
+      );
+
+
+      console.log(
+        "SCRIPT #" +
+        (
+          index +
+          1
+        )
+      );
+
+
+      console.log(
+        sample
+      );
+    }
+  );
 }
 
 
@@ -893,53 +1470,6 @@ function printSeedResult(
         }
       );
   }
-
-
-  if (
-    analysis.navigationAnchors.length >
-    0
-  ) {
-
-    console.log(
-      ""
-    );
-
-
-    console.log(
-      "TOP NAVIGATION SAMPLE:"
-    );
-
-
-    analysis.navigationAnchors
-
-      .slice(
-        0,
-        MAX_NAV_SAMPLES
-      )
-
-      .forEach(
-        function (
-          anchor
-        ) {
-
-          console.log(
-            "   [" +
-            followScore(
-              anchor
-            ) +
-            "]",
-            anchor.label ||
-              "(NO LABEL)"
-          );
-
-
-          console.log(
-            "     ",
-            anchor.url
-          );
-        }
-      );
-  }
 }
 
 
@@ -953,10 +1483,6 @@ function buildCombinedResult(
 
   const candidateMap =
     new Map();
-
-
-  const relatedLabelSet =
-    new Set();
 
 
   let htmlBytes =
@@ -1033,19 +1559,6 @@ function buildCombinedResult(
             }
           }
         );
-
-
-      analysis.relatedLabels
-        .forEach(
-          function (
-            label
-          ) {
-
-            relatedLabelSet.add(
-              label
-            );
-          }
-        );
     }
   );
 
@@ -1079,12 +1592,7 @@ function buildCombinedResult(
       ),
 
     navigationAnchors:
-      navigationAnchors,
-
-    relatedLabels:
-      Array.from(
-        relatedLabelSet
-      )
+      navigationAnchors
   };
 }
 
@@ -1185,56 +1693,6 @@ function printInterpretation(
   );
 
 
-  if (
-    combined.candidateAnchors.length >
-    0
-  ) {
-
-    console.log(
-      ""
-    );
-
-
-    console.log(
-      "===================================="
-    );
-
-    console.log(
-      "🎯 UNIQUE CANDIDATES"
-    );
-
-    console.log(
-      "===================================="
-    );
-
-
-    combined.candidateAnchors
-
-      .slice(
-        0,
-        MAX_CANDIDATE_SAMPLES
-      )
-
-      .forEach(
-        function (
-          anchor
-        ) {
-
-          console.log(
-            "-",
-            anchor.label
-          );
-
-
-          console.log(
-            " ",
-            anchor.url
-          );
-        }
-      );
-  }
-
-
   console.log(
     ""
   );
@@ -1262,55 +1720,18 @@ function printInterpretation(
     );
 
 
-    console.log(
-      "→ 네트워크 또는 Source URL 자체를 확인해야 합니다."
-    );
-
-
-  } else if (
-    combined.rawAnchors ===
-    0
-  ) {
-
-    console.log(
-      "⚠️ HTML은 받았지만 <a> 링크가 없습니다."
-    );
-
-
-    console.log(
-      "→ JavaScript 렌더링/API 기반 Adapter가 필요합니다."
-    );
-
-
   } else if (
     combined.primaryAnchors ===
       0
   ) {
 
     console.log(
-      "⚠️ 검색 Adapter를 적용했지만 미술작품 관련 제목이 발견되지 않았습니다."
+      "⚠️ 검색 Seed GET 파라미터로는 검색 결과가 반영되지 않습니다."
     );
 
 
     console.log(
-      "→ 검색 파라미터가 실제 사이트 검색에 반영되는지 확인해야 합니다."
-    );
-
-
-  } else if (
-    combined.primaryAnchors >
-      0 &&
-    combined.candidateAnchors.length ===
-      0
-  ) {
-
-    console.log(
-      "⚠️ 미술작품 관련 결과는 발견했지만 Candidate Filter를 통과한 공고가 없습니다."
-    );
-
-
-    console.log(
-      "→ 결과 제목 패턴과 Candidate Filter를 비교해야 합니다."
+      "→ FORM DIAGNOSTICS의 method/action/name을 기준으로 실제 검색 요청을 구현하세요."
     );
 
 
@@ -1320,24 +1741,14 @@ function printInterpretation(
   ) {
 
     console.log(
-      "✅ Adapter를 통해 실제 공모 후보 탐지에 성공했습니다."
-    );
-
-
-    console.log(
-      "→ 다음 단계는 상세페이지 정보 추출과 지역 판별입니다."
+      "✅ 실제 공모 후보 탐지에 성공했습니다."
     );
 
 
   } else {
 
     console.log(
-      "ℹ️ HTML 및 링크 탐색은 정상입니다."
-    );
-
-
-    console.log(
-      "→ 게시판 상세 탐색 구조를 추가 확인하세요."
+      "ℹ️ 관련 결과는 있으나 Candidate Filter를 추가 확인해야 합니다."
     );
   }
 
@@ -1416,26 +1827,8 @@ async function probeSource(
 
 
   console.log(
-    "TYPE:",
-    source.sourceType
-  );
-
-
-  console.log(
-    "CRAWL MODE:",
-    source.crawlMode ||
-      ""
-  );
-
-
-  console.log(
     "SOURCE URL:",
     source.sourceUrl
-  );
-
-
-  console.log(
-    ""
   );
 
 
@@ -1454,46 +1847,9 @@ async function probeSource(
 
 
   console.log(
-    "ADAPTER LABEL:",
-    adapterInfo.adapterLabel
-  );
-
-
-  console.log(
-    "ADAPTER MODE:",
-    adapterInfo.mode
-  );
-
-
-  console.log(
     "SEED COUNT:",
     seedUrls.length
   );
-
-
-  console.log(
-    "TIMEOUT / SEED:",
-    FETCH_TIMEOUT_MS +
-      "ms"
-  );
-
-
-  if (
-    seedUrls.length ===
-    0
-  ) {
-
-    console.error(
-      "❌ Probe 가능한 Seed URL이 없습니다."
-    );
-
-
-    process.exitCode =
-      1;
-
-
-    return;
-  }
 
 
   const analyses =
@@ -1520,12 +1876,9 @@ async function probeSource(
       ];
 
 
-    let fetchResult;
-
-
     try {
 
-      fetchResult =
+      const fetchResult =
         await fetchPage(
           seedUrl
         );
@@ -1555,12 +1908,22 @@ async function probeSource(
       );
 
 
+      /*
+        첫 Seed에서만 FORM / SCRIPT 구조 출력.
+        동일 페이지 구조가 반복되므로 로그 폭주 방지.
+      */
       if (
-        !fetchResult.ok
+        index ===
+        0
       ) {
 
-        console.log(
-          "   ⚠️ HTTP 응답이 성공 상태가 아닙니다."
+        printFormDiagnostics(
+          analysis.forms
+        );
+
+
+        printScriptDiagnostics(
+          analysis.searchScripts
         );
       }
 
@@ -1578,22 +1941,12 @@ async function probeSource(
 
 
       console.log(
-        "------------------------------------"
-      );
-
-
-      console.log(
         "SEED #" +
         (
           index +
           1
         ) +
         " FAILED"
-      );
-
-
-      console.log(
-        "------------------------------------"
       );
 
 
@@ -1659,46 +2012,6 @@ async function main() {
     printSourceList();
 
 
-    if (
-      !argument
-    ) {
-
-      console.log(
-        ""
-      );
-
-
-      console.log(
-        "사용법:"
-      );
-
-
-      console.log(
-        "node scripts/probe_art_source.js <SOURCE_ID>"
-      );
-
-
-      console.log(
-        ""
-      );
-
-
-      console.log(
-        "예:"
-      );
-
-
-      console.log(
-        "node scripts/probe_art_source.js daejeon_city_notice"
-      );
-
-
-      console.log(
-        "node scripts/probe_art_source.js artnuri_art_commission"
-      );
-    }
-
-
     return;
   }
 
@@ -1715,14 +2028,6 @@ async function main() {
       "❌ SOURCE ID를 찾을 수 없습니다:",
       argument
     );
-
-
-    console.log(
-      ""
-    );
-
-
-    printSourceList();
 
 
     process.exitCode =
