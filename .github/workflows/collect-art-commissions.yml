@@ -45,6 +45,23 @@ jobs:
         with:
           node-version: "20"
 
+  # --------------------------------------------------
+      # 3. Collector JavaScript 문법 사전 검증
+      #
+      # 실제 크롤링 전에 SyntaxError를 즉시 차단.
+      # --------------------------------------------------
+
+      - name: Validate collector JavaScript syntax
+        run: |
+          node --check scripts/art_region_scope.js
+          node --check scripts/art_commission_sources.js
+          node --check scripts/run_art_collectors.js
+          node --check scripts/collect_art_commissions.js
+          node --check scripts/collect_seoul_art_commissions.js
+          node --check scripts/collect_incheon_art_commissions.js
+          node --check scripts/collect_busan_art_commissions.js
+          node --check scripts/collect_remaining_art_commissions.js
+          node --check scripts/normalize_art_dates.js
 
       # --------------------------------------------------
       # 3. 전국 17개 시도 Source Registry 검증
