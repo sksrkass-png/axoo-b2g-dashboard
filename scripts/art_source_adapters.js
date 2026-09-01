@@ -3,21 +3,23 @@
 
    목적
    ---------------------------------------------------------
-   Generic Collector가 단순 sourceUrl만 방문해서는
-   실제 공모 목록을 찾을 수 없는 사이트를 위한
-   Source별 진입 URL Adapter.
+   사이트마다 실제 공모 목록으로 진입하는 방식이 다르므로
+   Generic Collector가 사용할 Request를 생성한다.
 
-   구조
+   지원 방식
    ---------------------------------------------------------
-   SOURCE
-   → ADAPTER 확인
-   → 검색/게시판 Seed URL 생성
-   → Generic Collector가 Seed URL부터 탐색
+   1. GET
+      일반 게시판 / 일반 URL
 
-   주의
+   2. POST FORM
+      검색폼을 POST로 제출해야 하는 사이트
+
+   현재 Adapter
    ---------------------------------------------------------
+   - artnuri_art_commission
+     → POST keyword search
+
    이 파일 자체는 네트워크 요청을 하지 않는다.
-   LIVE / ARCHIVE 데이터도 수정하지 않는다.
 ========================================================= */
 
 
@@ -25,17 +27,13 @@
    CONFIG
 ========================================================= */
 
-const DEFAULT_MAX_SEEDS =
+const DEFAULT_MAX_REQUESTS =
   4;
 
 
 /*
-  아트누리는 일반적인 "미술작품 공모"까지 검색하면
-  건축물 미술작품과 관계없는 순수미술 공모가
-  다수 섞일 수 있다.
-
-  따라서 건축물 미술작품 공모 Recall을 위한
-  상대적으로 강한 검색어만 사용한다.
+  건축물 미술작품 공모에 집중하기 위해
+  너무 넓은 "미술작품 공모"는 사용하지 않는다.
 */
 const ARTNURI_SEARCH_TERMS = [
 
@@ -91,8 +89,86 @@ function canonicalUrl(
 }
 
 
-function uniqueUrls(
-  values
+/* =========================================================
+   REQUEST NORMALIZE
+========================================================= */
+
+function normalizeRequest(
+  request,
+  fallbackUrl
+) {
+
+  if (!request) {
+
+    return null;
+  }
+
+
+  const method =
+    String(
+      request.method ||
+      "GET"
+    )
+      .trim()
+      .toUpperCase();
+
+
+  const url =
+    canonicalUrl(
+      request.url ||
+      fallbackUrl,
+      fallbackUrl
+    );
+
+
+  if (!url) {
+
+    return null;
+  }
+
+
+  const headers = {
+
+    ...(
+      request.headers ||
+      {}
+    )
+  };
+
+
+  const body =
+    request.body == null
+      ? null
+      : String(
+          request.body
+        );
+
+
+  return {
+
+    method:
+      method,
+
+    url:
+      url,
+
+    headers:
+      headers,
+
+    body:
+      body,
+
+    label:
+      String(
+        request.label ||
+        ""
+      )
+  };
+}
+
+
+function uniqueRequests(
+  requests
 ) {
 
   const result =
@@ -103,22 +179,34 @@ function uniqueUrls(
     new Set();
 
 
-  values.forEach(
+  requests.forEach(
     function (
-      value
+      request
     ) {
 
-      const url =
-        canonicalUrl(
-          value,
-          value
-        );
+      if (!request) {
+
+        return;
+      }
+
+
+      const key = [
+
+        request.method,
+
+        request.url,
+
+        request.body ||
+        ""
+
+      ].join(
+        "::"
+      );
 
 
       if (
-        !url ||
         seen.has(
-          url
+          key
         )
       ) {
 
@@ -127,12 +215,12 @@ function uniqueUrls(
 
 
       seen.add(
-        url
+        key
       );
 
 
       result.push(
-        url
+        request
       );
     }
   );
@@ -143,10 +231,10 @@ function uniqueUrls(
 
 
 /* =========================================================
-   DEFAULT ADAPTER
+   DEFAULT REQUEST
 ========================================================= */
 
-function buildDefaultSeeds(
+function buildDefaultRequests(
   source
 ) {
 
@@ -159,17 +247,36 @@ function buildDefaultSeeds(
   }
 
 
-  return [
-    source.sourceUrl
-  ];
+  const request =
+    normalizeRequest(
+      {
+
+        method:
+          "GET",
+
+        url:
+          source.sourceUrl,
+
+        label:
+          "기본 Source URL"
+      },
+      source.sourceUrl
+    );
+
+
+  return request
+    ? [
+        request
+      ]
+    : [];
 }
 
 
 /* =========================================================
-   ARTNURI ADAPTER
+   ARTNURI POST ADAPTER
 ========================================================= */
 
-function buildArtnuriSeeds(
+function buildArtnuriRequests(
   source
 ) {
 
@@ -182,90 +289,160 @@ function buildArtnuriSeeds(
   }
 
 
-  const seeds =
-    [];
+  /*
+    FORM DIAGNOSTICS에서 확인된 실제 지원사업 검색폼:
+
+    form name = frm
+    method    = POST
+
+    주요 필드:
+    key=2301170002
+    pageSetting
+    recordCountPerPage=30
+    pageIndex=1
+    sw=<검색어>
+
+    버튼:
+    fn_egov_link_page(1)
+  */
 
 
-  ARTNURI_SEARCH_TERMS.forEach(
-    function (
-      searchTerm
-    ) {
+  const endpoint =
+    canonicalUrl(
+      "/crawler/info/search.do",
+      source.sourceUrl
+    );
 
-      try {
 
-        const url =
-          new URL(
-            source.sourceUrl
-          );
+  if (!endpoint) {
+
+    return [];
+  }
+
+
+  return ARTNURI_SEARCH_TERMS
+    .map(
+      function (
+        searchTerm
+      ) {
+
+        const params =
+          new URLSearchParams();
 
 
         /*
-          아트누리 지원사업 찾기 페이지 식별값
+          기존 FORM hidden fields
         */
-        url.searchParams.set(
-          "key",
-          "2301170002"
+        params.set(
+          "docid",
+          ""
         );
 
 
-        /*
-          항상 첫 검색 결과 페이지부터 시작
-        */
-        url.searchParams.set(
-          "pageIndex",
-          "1"
+        params.set(
+          "source",
+          ""
         );
 
 
-        /*
-          가능한 한 한 번에 많은 결과 확인
-        */
-        url.searchParams.set(
-          "recordCountPerPage",
-          "30"
-        );
-
-
-        /*
-          리스트 표시 기본값
-        */
-        url.searchParams.set(
+        params.set(
           "pageSetting",
           "1"
         );
 
 
+        params.set(
+          "sc_seNo",
+          ""
+        );
+
+
+        params.set(
+          "key",
+          "2301170002"
+        );
+
+
+        params.set(
+          "sc_orderBy",
+          ""
+        );
+
+
+        params.set(
+          "recordCountPerPage",
+          "30"
+        );
+
+
+        params.set(
+          "pageIndex",
+          "1"
+        );
+
+
+        params.set(
+          "sc_hash",
+          ""
+        );
+
+
+        params.set(
+          "sc_list",
+          ""
+        );
+
+
+        params.set(
+          "seNo",
+          ""
+        );
+
+
         /*
-          실제 검색어
+          실제 검색어 필드
         */
-        url.searchParams.set(
+        params.set(
           "sw",
           searchTerm
         );
 
 
-        seeds.push(
-          url.toString()
-        );
+        return normalizeRequest(
+          {
 
+            method:
+              "POST",
 
-      } catch (
-        error
-      ) {
+            url:
+              endpoint,
 
-        console.warn(
-          "[ARTNURI ADAPTER]",
-          searchTerm,
-          error.message
+            headers: {
+
+              "Content-Type":
+                "application/x-www-form-urlencoded",
+
+              "Origin":
+                "https://artnuri.or.kr",
+
+              "Referer":
+                source.sourceUrl
+            },
+
+            body:
+              params.toString(),
+
+            label:
+              "아트누리 검색: " +
+              searchTerm
+          },
+          endpoint
         );
       }
-    }
-  );
-
-
-  return uniqueUrls(
-    seeds
-  );
+    )
+    .filter(
+      Boolean
+    );
 }
 
 
@@ -278,16 +455,16 @@ const SOURCE_ADAPTERS = {
   artnuri_art_commission: {
 
     id:
-      "artnuri_keyword_search",
+      "artnuri_post_keyword_search",
 
     label:
-      "아트누리 키워드 검색",
+      "아트누리 POST 키워드 검색",
 
     mode:
-      "keyword_search",
+      "post_keyword_search",
 
-    buildSeeds:
-      buildArtnuriSeeds
+    buildRequests:
+      buildArtnuriRequests
   }
 
 };
@@ -332,22 +509,23 @@ function hasSourceAdapter(
 
 
 /* =========================================================
-   SEED BUILDER
+   REQUEST BUILDER
 ========================================================= */
 
-function getSourceSeedUrls(
+function getSourceRequests(
   source,
   options
 ) {
 
   const config =
-    options || {};
+    options ||
+    {};
 
 
-  const maxSeeds =
+  const maxRequests =
     Number(
-      config.maxSeeds ||
-      DEFAULT_MAX_SEEDS
+      config.maxRequests ||
+      DEFAULT_MAX_REQUESTS
     );
 
 
@@ -357,37 +535,78 @@ function getSourceSeedUrls(
     );
 
 
-  let seeds;
+  let requests;
 
 
   if (
     adapter &&
-    typeof adapter.buildSeeds ===
+    typeof adapter.buildRequests ===
       "function"
   ) {
 
-    seeds =
-      adapter.buildSeeds(
+    requests =
+      adapter.buildRequests(
         source
       );
 
 
   } else {
 
-    seeds =
-      buildDefaultSeeds(
+    requests =
+      buildDefaultRequests(
         source
       );
   }
 
 
-  return uniqueUrls(
-    seeds
+  return uniqueRequests(
+    requests
   )
     .slice(
       0,
-      maxSeeds
+      maxRequests
     );
+}
+
+
+/* =========================================================
+   BACKWARD COMPATIBILITY
+
+   기존 Collector / Probe가 아직
+   getSourceSeedUrls()를 호출하는 동안 깨지지 않도록 유지.
+
+   POST Request의 경우 URL만 반환하면 실제 검색은 안 되므로,
+   다음 단계에서 Collector / Probe를
+   getSourceRequests() 방식으로 교체한다.
+========================================================= */
+
+function getSourceSeedUrls(
+  source,
+  options
+) {
+
+  const requests =
+    getSourceRequests(
+      source,
+      {
+
+        maxRequests:
+          options &&
+          options.maxSeeds
+            ? options.maxSeeds
+            : DEFAULT_MAX_REQUESTS
+      }
+    );
+
+
+  return requests.map(
+    function (
+      request
+    ) {
+
+      return request.url;
+    }
+  );
 }
 
 
@@ -401,6 +620,12 @@ function describeSourceAdapter(
 
   const adapter =
     getSourceAdapter(
+      source
+    );
+
+
+  const requests =
+    getSourceRequests(
       source
     );
 
@@ -424,9 +649,20 @@ function describeSourceAdapter(
           ? source.crawlMode
           : "generic_board_discovery",
 
+      requestCount:
+        requests.length,
+
+      requests:
+        requests,
+
       seedUrls:
-        getSourceSeedUrls(
-          source
+        requests.map(
+          function (
+            request
+          ) {
+
+            return request.url;
+          }
         )
     };
   }
@@ -446,11 +682,89 @@ function describeSourceAdapter(
     mode:
       adapter.mode,
 
+    requestCount:
+      requests.length,
+
+    requests:
+      requests,
+
     seedUrls:
-      getSourceSeedUrls(
-        source
+      requests.map(
+        function (
+          request
+        ) {
+
+          return request.url;
+        }
       )
   };
+}
+
+
+/* =========================================================
+   SAFE REQUEST PRINT
+========================================================= */
+
+function describeRequest(
+  request
+) {
+
+  if (!request) {
+
+    return "";
+  }
+
+
+  let searchTerm =
+    "";
+
+
+  if (
+    request.body
+  ) {
+
+    try {
+
+      const params =
+        new URLSearchParams(
+          request.body
+        );
+
+
+      searchTerm =
+        params.get(
+          "sw"
+        ) ||
+        "";
+
+    } catch (
+      error
+    ) {
+
+      searchTerm =
+        "";
+    }
+  }
+
+
+  return [
+
+    request.method,
+
+    request.url,
+
+    searchTerm
+      ? "sw=" +
+        searchTerm
+      : ""
+
+  ]
+    .filter(
+      Boolean
+    )
+    .join(
+      " | "
+    );
 }
 
 
@@ -486,13 +800,16 @@ function runSelfTest() {
     ""
   );
 
+
   console.log(
     "===================================="
   );
 
+
   console.log(
     "AXOO ART SOURCE ADAPTER TEST"
   );
+
 
   console.log(
     "===================================="
@@ -524,14 +841,14 @@ function runSelfTest() {
 
 
   console.log(
-    "SEEDS:",
-    result.seedUrls.length
+    "REQUESTS:",
+    result.requests.length
   );
 
 
-  result.seedUrls.forEach(
+  result.requests.forEach(
     function (
-      url,
+      request,
       index
     ) {
 
@@ -550,7 +867,9 @@ function runSelfTest() {
 
 
       console.log(
-        url
+        describeRequest(
+          request
+        )
       );
     }
   );
@@ -560,19 +879,22 @@ function runSelfTest() {
     ""
   );
 
+
   console.log(
     "===================================="
   );
 
 
+  /*
+    검증 1
+    Adapter가 실제 적용되어야 한다.
+  */
   if (
-    !result.applied ||
-    result.seedUrls.length !==
-      ARTNURI_SEARCH_TERMS.length
+    !result.applied
   ) {
 
     console.error(
-      "❌ ARTNURI ADAPTER SELF TEST FAILED"
+      "❌ ARTNURI ADAPTER NOT APPLIED"
     );
 
 
@@ -584,22 +906,84 @@ function runSelfTest() {
   }
 
 
-  const everySeedHasSearchWord =
-    result.seedUrls.every(
+  /*
+    검증 2
+    검색어 수만큼 Request가 있어야 한다.
+  */
+  if (
+    result.requests.length !==
+    ARTNURI_SEARCH_TERMS.length
+  ) {
+
+    console.error(
+      "❌ ARTNURI REQUEST COUNT TEST FAILED"
+    );
+
+
+    process.exitCode =
+      1;
+
+
+    return;
+  }
+
+
+  /*
+    검증 3
+    모두 POST여야 한다.
+  */
+  const everyRequestIsPost =
+    result.requests.every(
       function (
-        value
+        request
+      ) {
+
+        return (
+          request.method ===
+          "POST"
+        );
+      }
+    );
+
+
+  if (
+    !everyRequestIsPost
+  ) {
+
+    console.error(
+      "❌ ARTNURI POST METHOD TEST FAILED"
+    );
+
+
+    process.exitCode =
+      1;
+
+
+    return;
+  }
+
+
+  /*
+    검증 4
+    모든 POST body에 sw가 있어야 한다.
+  */
+  const everyRequestHasSearchWord =
+    result.requests.every(
+      function (
+        request
       ) {
 
         try {
 
-          const url =
-            new URL(
-              value
+          const params =
+            new URLSearchParams(
+              request.body ||
+              ""
             );
 
 
           return Boolean(
-            url.searchParams.get(
+            params.get(
               "sw"
             )
           );
@@ -616,11 +1000,63 @@ function runSelfTest() {
 
 
   if (
-    !everySeedHasSearchWord
+    !everyRequestHasSearchWord
   ) {
 
     console.error(
-      "❌ ARTNURI SEARCH PARAMETER TEST FAILED"
+      "❌ ARTNURI SEARCH WORD TEST FAILED"
+    );
+
+
+    process.exitCode =
+      1;
+
+
+    return;
+  }
+
+
+  /*
+    검증 5
+    key와 pageIndex 확인
+  */
+  const everyRequestHasRequiredFields =
+    result.requests.every(
+      function (
+        request
+      ) {
+
+        const params =
+          new URLSearchParams(
+            request.body ||
+            ""
+          );
+
+
+        return (
+          params.get(
+            "key"
+          ) ===
+            "2301170002" &&
+          params.get(
+            "pageIndex"
+          ) ===
+            "1" &&
+          params.get(
+            "recordCountPerPage"
+          ) ===
+            "30"
+        );
+      }
+    );
+
+
+  if (
+    !everyRequestHasRequiredFields
+  ) {
+
+    console.error(
+      "❌ ARTNURI REQUIRED FIELD TEST FAILED"
     );
 
 
@@ -633,7 +1069,7 @@ function runSelfTest() {
 
 
   console.log(
-    "✅ ARTNURI ADAPTER SELF TEST PASSED"
+    "✅ ARTNURI POST ADAPTER SELF TEST PASSED"
   );
 }
 
@@ -665,10 +1101,14 @@ module.exports = {
 
   hasSourceAdapter,
 
+  getSourceRequests,
+
   getSourceSeedUrls,
 
   describeSourceAdapter,
 
-  buildArtnuriSeeds
+  describeRequest,
+
+  buildArtnuriRequests
 
 };
