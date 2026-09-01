@@ -4,10 +4,8 @@
  * NATIONWIDE ART COMMISSION REGION SCOPE
  * ============================================================
  *
- * 대표 요청 기준
- *
- * 대한민국 전국 단위 검색
- * 제주특별자치도 제외
+ * 대한민국 17개 광역시·도
+ * 건축물 미술작품 공모 전국 수집 기준
  *
  * 이 파일을 전국 공공미술 공고 수집의
  * Geographic Single Source of Truth로 사용한다.
@@ -111,33 +109,20 @@ const TARGET_ART_REGIONS = [
     id: "gyeongnam",
     name: "경남",
     fullName: "경상남도"
+  },
+
+  {
+    id: "jeju",
+    name: "제주",
+    fullName: "제주특별자치도"
   }
 
 ];
 
 
-/*
- * ------------------------------------------------------------
- * 명시적 제외 지역
- * ------------------------------------------------------------
- */
-
-const EXCLUDED_ART_REGIONS = [
-
-  "제주",
-
-  "제주도",
-
-  "제주특별자치도"
-
-];
-
-
-/*
- * ------------------------------------------------------------
- * TARGET ID
- * ------------------------------------------------------------
- */
+/* ============================================================
+   TARGET ID
+============================================================ */
 
 const TARGET_ART_REGION_IDS =
   TARGET_ART_REGIONS.map(
@@ -148,25 +133,37 @@ const TARGET_ART_REGION_IDS =
   );
 
 
-/*
- * ------------------------------------------------------------
- * 제주 여부
- * ------------------------------------------------------------
- */
+/* ============================================================
+   REGION NORMALIZE
+============================================================ */
 
-function isExcludedArtRegion(
+function normalizeArtRegionText(
+  value
+) {
+
+  return String(
+    value || ""
+  )
+    .trim()
+    .replace(
+      /\s+/g,
+      ""
+    );
+}
+
+
+/* ============================================================
+   TARGET REGION CHECK
+============================================================ */
+
+function isTargetArtRegion(
   value
 ) {
 
   const text =
-    String(
-      value || ""
-    )
-      .trim()
-      .replace(
-        /\s+/g,
-        ""
-      );
+    normalizeArtRegionText(
+      value
+    );
 
 
   if (!text) {
@@ -175,26 +172,52 @@ function isExcludedArtRegion(
   }
 
 
-  return EXCLUDED_ART_REGIONS.some(
+  return TARGET_ART_REGIONS.some(
     function (region) {
 
+      const name =
+        normalizeArtRegionText(
+          region.name
+        );
+
+      const fullName =
+        normalizeArtRegionText(
+          region.fullName
+        );
+
+      const id =
+        normalizeArtRegionText(
+          region.id
+        );
+
+
       return (
+
+        text === name ||
+
+        text === fullName ||
+
+        text === id ||
+
         text.includes(
-          region
+          fullName
+        ) ||
+
+        text.includes(
+          name
         )
+
       );
     }
   );
 }
 
 
-/*
- * ------------------------------------------------------------
- * 공고 데이터 제주 여부
- * ------------------------------------------------------------
- */
+/* ============================================================
+   NOTICE REGION CHECK
+============================================================ */
 
-function isExcludedArtNotice(
+function isTargetArtNotice(
   item
 ) {
 
@@ -208,7 +231,13 @@ function isExcludedArtNotice(
 
     item.region,
 
+    item.regionName,
+
+    item.regionLabel,
+
     item.agency,
+
+    item.organization,
 
     item.institution,
 
@@ -224,7 +253,7 @@ function isExcludedArtNotice(
   return values.some(
     function (value) {
 
-      return isExcludedArtRegion(
+      return isTargetArtRegion(
         value
       );
     }
@@ -232,68 +261,73 @@ function isExcludedArtNotice(
 }
 
 
-/*
- * ------------------------------------------------------------
- * 전국 검색 대상 여부
- * ------------------------------------------------------------
- */
+/* ============================================================
+   REGION LOOKUP
+============================================================ */
 
-function isTargetArtRegion(
+function findTargetArtRegion(
   value
 ) {
 
   const text =
-    String(
-      value || ""
-    )
-      .trim();
+    normalizeArtRegionText(
+      value
+    );
 
 
   if (!text) {
 
-    return false;
+    return null;
   }
 
 
-  if (
-    isExcludedArtRegion(
-      text
-    )
-  ) {
+  return (
+    TARGET_ART_REGIONS.find(
+      function (region) {
 
-    return false;
-  }
+        const name =
+          normalizeArtRegionText(
+            region.name
+          );
+
+        const fullName =
+          normalizeArtRegionText(
+            region.fullName
+          );
+
+        const id =
+          normalizeArtRegionText(
+            region.id
+          );
 
 
-  return TARGET_ART_REGIONS.some(
-    function (region) {
+        return (
 
-      return (
+          text === name ||
 
-        text ===
-          region.name ||
+          text === fullName ||
 
-        text ===
-          region.fullName ||
+          text === id ||
 
-        text ===
-          region.id ||
+          text.includes(
+            fullName
+          ) ||
 
-        text.includes(
-          region.fullName
-        )
+          text.includes(
+            name
+          )
 
-      );
-    }
+        );
+      }
+    ) ||
+    null
   );
 }
 
 
-/*
- * ------------------------------------------------------------
- * EXPORT
- * ------------------------------------------------------------
- */
+/* ============================================================
+   EXPORT
+============================================================ */
 
 module.exports = {
 
@@ -301,12 +335,12 @@ module.exports = {
 
   TARGET_ART_REGION_IDS,
 
-  EXCLUDED_ART_REGIONS,
+  normalizeArtRegionText,
 
-  isExcludedArtRegion,
+  isTargetArtRegion,
 
-  isExcludedArtNotice,
+  isTargetArtNotice,
 
-  isTargetArtRegion
+  findTargetArtRegion
 
 };
