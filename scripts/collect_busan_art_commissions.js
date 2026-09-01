@@ -1126,20 +1126,13 @@ function mergeLive(
 
   return [
 
-    ...withoutUrl,
+  ...withoutUrl,
 
-    ...Array.from(
-      byUrl.values()
-    )
+  ...Array.from(
+    byUrl.values()
+  )
 
-  ].filter(
-    function (item) {
-
-      return !isExcludedArtNotice(
-        item
-      );
-    }
-  );
+];
 }
 
 
@@ -1273,6 +1266,7 @@ return Array.from(
   byKey.values()
 );
 
+}
 
 
 /* =========================================================
