@@ -1027,6 +1027,44 @@ async function crawlSource(
     );
 
 
+  /*
+    items=0 원인을 분리하기 위한
+    소스 단위 진단 정보
+  */
+  const diagnostics = {
+
+    htmlBytes:
+      0,
+
+    rawAnchors:
+      0,
+
+    extractedAnchors:
+      0,
+
+    javascriptAnchors:
+      0,
+
+    sameOriginAnchors:
+      0,
+
+    primaryKeywordAnchors:
+      0,
+
+    actionKeywordAnchors:
+      0,
+
+    candidateAnchors:
+      0,
+
+    navigationCandidates:
+      0,
+
+    sampleLabels:
+      new Set()
+  };
+
+
   if (!rootUrl) {
 
     return {
@@ -1061,6 +1099,410 @@ async function crawlSource(
         0
     }
   ];
+
+
+  const queued =
+    new Set(
+      [
+        rootUrl
+      ]
+    );
+
+
+  const visited =
+    new Set();
+
+
+  const found =
+    new Map();
+
+
+  let pagesFetched =
+    0;
+
+
+  while (
+    queue.length &&
+    pagesFetched <
+      MAX_PAGES_PER_SOURCE &&
+    (
+      Date.now() -
+      startedAt
+    ) <
+      MAX_SOURCE_BUDGET_MS
+  ) {
+
+    const current =
+      queue.shift();
+
+
+    if (
+      !current ||
+      visited.has(
+        current.url
+      )
+    ) {
+
+      continue;
+    }
+
+
+    visited.add(
+      current.url
+    );
+
+
+    let html;
+
+
+    try {
+
+      html =
+        await fetchText(
+          current.url
+        );
+
+
+      pagesFetched++;
+
+
+    } catch (
+      error
+    ) {
+
+      console.warn(
+        "   ⚠️ FETCH",
+        current.url,
+        error.message
+      );
+
+
+      continue;
+    }
+
+
+    /*
+      HTML 자체를 받았는지 확인
+    */
+    diagnostics.htmlBytes +=
+      Buffer.byteLength(
+        html,
+        "utf8"
+      );
+
+
+    /*
+      HTML 안에 존재하는 전체 <a> 개수
+    */
+    diagnostics.rawAnchors +=
+      (
+        html.match(
+          /<a\b/gi
+        ) || []
+      ).length;
+
+
+    /*
+      javascript: 기반 링크 개수
+
+      현재 extractAnchors()에서는
+      javascript: 링크를 제외하므로
+      이 숫자가 크면 전용 Adapter가 필요할 가능성이 높다.
+    */
+    diagnostics.javascriptAnchors +=
+      (
+        html.match(
+          /href\s*=\s*["']\s*javascript:/gi
+        ) || []
+      ).length;
+
+
+    const anchors =
+      extractAnchors(
+        html,
+        current.url
+      );
+
+
+    diagnostics.extractedAnchors +=
+      anchors.length;
+
+
+    /*
+      공모 후보 추출
+    */
+    anchors.forEach(
+      function (
+        anchor
+      ) {
+
+        if (
+          !sameOrigin(
+            source.sourceUrl,
+            anchor.url
+          )
+        ) {
+
+          return;
+        }
+
+
+        diagnostics.sameOriginAnchors++;
+
+
+        const label =
+          cleanText(
+            anchor.label
+          );
+
+
+        /*
+          실제 게시판에 미술 / 작품 / 공모 등의
+          관련 문구가 존재하는지 샘플 저장
+        */
+        if (
+          diagnostics.sampleLabels.size < 5 &&
+          /미술|예술|작품|공모|art/i.test(
+            label
+          )
+        ) {
+
+          diagnostics.sampleLabels.add(
+            label
+          );
+        }
+
+
+        if (
+          hasAnyKeyword(
+            label,
+            PRIMARY_KEYWORDS
+          )
+        ) {
+
+          diagnostics.primaryKeywordAnchors++;
+        }
+
+
+        if (
+          hasAnyKeyword(
+            label,
+            ACTION_KEYWORDS
+          )
+        ) {
+
+          diagnostics.actionKeywordAnchors++;
+        }
+
+
+        if (
+          !isCandidateTitle(
+            label
+          )
+        ) {
+
+          return;
+        }
+
+
+        diagnostics.candidateAnchors++;
+
+
+        found.set(
+          anchor.url,
+
+          buildItem(
+            region,
+            source,
+            label,
+            anchor.url
+          )
+        );
+      }
+    );
+
+
+    /*
+      내부 게시판 / 고시공고 링크 탐색
+    */
+    if (
+      current.depth >=
+      MAX_DEPTH
+    ) {
+
+      continue;
+    }
+
+
+    const followCandidates =
+      anchors
+
+        .filter(
+          function (
+            anchor
+          ) {
+
+            if (
+              !sameOrigin(
+                source.sourceUrl,
+                anchor.url
+              )
+            ) {
+
+              return false;
+            }
+
+
+            if (
+              visited.has(
+                anchor.url
+              ) ||
+              queued.has(
+                anchor.url
+              )
+            ) {
+
+              return false;
+            }
+
+
+            return (
+              followScore(
+                anchor
+              ) > 0
+            );
+          }
+        )
+
+        .sort(
+          function (
+            a,
+            b
+          ) {
+
+            return (
+              followScore(b) -
+              followScore(a)
+            );
+          }
+        );
+
+
+    diagnostics.navigationCandidates +=
+      followCandidates.length;
+
+
+    followCandidates
+      .slice(
+        0,
+        MAX_PAGES_PER_SOURCE
+      )
+      .forEach(
+        function (
+          anchor
+        ) {
+
+          queued.add(
+            anchor.url
+          );
+
+
+          queue.push({
+
+            url:
+              anchor.url,
+
+            depth:
+              current.depth + 1
+          });
+        }
+      );
+  }
+
+
+  /*
+    items=0 진단 출력
+  */
+  if (
+    pagesFetched > 0
+  ) {
+
+    console.log(
+      "   🔎 DIAG" +
+      " | htmlKB=" +
+      Math.round(
+        diagnostics.htmlBytes /
+        1024
+      ) +
+      " | rawA=" +
+      diagnostics.rawAnchors +
+      " | parsedA=" +
+      diagnostics.extractedAnchors +
+      " | jsHref=" +
+      diagnostics.javascriptAnchors +
+      " | sameOrigin=" +
+      diagnostics.sameOriginAnchors +
+      " | primary=" +
+      diagnostics.primaryKeywordAnchors +
+      " | action=" +
+      diagnostics.actionKeywordAnchors +
+      " | candidate=" +
+      diagnostics.candidateAnchors +
+      " | nav=" +
+      diagnostics.navigationCandidates
+    );
+
+
+    if (
+      diagnostics.sampleLabels.size >
+      0
+    ) {
+
+      console.log(
+        "   🔎 LABEL SAMPLE:"
+      );
+
+
+      Array.from(
+        diagnostics.sampleLabels
+      ).forEach(
+        function (
+          label
+        ) {
+
+          console.log(
+            "      -",
+            label
+          );
+        }
+      );
+    }
+  }
+
+
+  return {
+
+    sourceId:
+      source.id,
+
+    sourceName:
+      source.sourceName,
+
+    region:
+      region.name,
+
+    accessOk:
+      pagesFetched > 0,
+
+    pagesFetched:
+      pagesFetched,
+
+    items:
+      Array.from(
+        found.values()
+      )
+  };
+}
 
 
   const queued =
