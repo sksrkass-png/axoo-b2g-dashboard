@@ -3,7 +3,8 @@ const path = require("path");
 const crypto = require("crypto");
 
 const {
-  getRegionalSources
+  getRegionalSources,
+  getNationalSources
 } = require("./art_commission_sources");
 
 
