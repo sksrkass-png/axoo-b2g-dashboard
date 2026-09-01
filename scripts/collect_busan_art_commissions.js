@@ -2,10 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
-const {
-  isExcludedArtNotice
-} = require("./art_region_scope");
-
 
 /* =========================================================
    CONFIG
@@ -1273,17 +1269,9 @@ function mergeArchive(
   );
 
 
-  return Array.from(
-    byKey.values()
-  ).filter(
-    function (item) {
-
-      return !isExcludedArtNotice(
-        item
-      );
-    }
-  );
-}
+return Array.from(
+  byKey.values()
+);
 
 
 
