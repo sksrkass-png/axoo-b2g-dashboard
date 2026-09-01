@@ -45,6 +45,26 @@ const COLLECTORS = [
     timeoutMs: 90000
   }
 
+     ,
+
+  {
+    id: "remaining-regions",
+    label: "나머지 13개 시도",
+    script: "scripts/collect_remaining_art_commissions.js",
+
+    /*
+      13개 지역을 내부에서 자체적으로 순회하므로
+      Manager에서는 재시도하지 않는다.
+    */
+    maxAttempts: 1,
+
+    /*
+      지역별 사이트 장애는 내부 Collector가 격리한다.
+      전국 순회 전체에는 최대 13분 허용.
+    */
+    timeoutMs: 780000
+  }
+   
 ];
 
 
