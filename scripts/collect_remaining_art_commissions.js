@@ -1223,20 +1223,32 @@ async function crawlSource(
   }
 
 
-  return {
+  const accessOk =
+  pagesFetched > 0;
 
-    sourceId:
-      source.id,
 
-    pagesFetched:
-      pagesFetched,
+return {
 
-    items:
-      Array.from(
-        found.values()
-      )
-  };
-}
+  sourceId:
+    source.id,
+
+  sourceName:
+    source.sourceName,
+
+  region:
+    region.name,
+
+  accessOk:
+    accessOk,
+
+  pagesFetched:
+    pagesFetched,
+
+  items:
+    Array.from(
+      found.values()
+    )
+};
 
 
 /* =========================================================
@@ -1722,36 +1734,49 @@ async function main() {
           );
 
 
-        successfulSources++;
+        if (
+  result.accessOk
+) {
+
+  successfulSources++;
 
 
-        console.log(
-          "   ✅ pages=" +
-          result.pagesFetched +
-          " / items=" +
-          result.items.length
-        );
+  console.log(
+    "   ✅ ACCESS OK" +
+    " | pages=" +
+    result.pagesFetched +
+    " | items=" +
+    result.items.length
+  );
 
 
-        discovered.push(
-          ...result.items
-        );
+} else {
+
+  failedSources++;
 
 
-      } catch (
-        error
-      ) {
+  console.log(
+    "   ❌ ACCESS FAILED" +
+    " | pages=0" +
+    " | items=0"
+  );
+}
 
-        failedSources++;
+
+if (
+  result.items.length > 0
+) {
+
+  console.log(
+    "   🎯 ITEMS FOUND:",
+    result.items.length
+  );
 
 
-        console.warn(
-          "   ⚠️ SOURCE FAILED:",
-          error.message
-        );
-      }
-    }
-  }
+  discovered.push(
+    ...result.items
+  );
+}
 
 
   /*
