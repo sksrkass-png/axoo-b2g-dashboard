@@ -10,37 +10,43 @@ const COLLECTORS = [
   {
     id: "gyeonggi",
     label: "경기도",
-    script: "scripts/collect_art_commissions.js"
+    script: "scripts/collect_art_commissions.js",
+    maxAttempts: 3,
+    timeoutMs: 45000
   },
 
   {
     id: "seoul",
     label: "서울특별시",
-    script: "scripts/collect_seoul_art_commissions.js"
+    script: "scripts/collect_seoul_art_commissions.js",
+    maxAttempts: 3,
+    timeoutMs: 60000
   },
 
   {
     id: "incheon",
     label: "인천광역시",
-    script: "scripts/collect_incheon_art_commissions.js"
+    script: "scripts/collect_incheon_art_commissions.js",
+    maxAttempts: 3,
+    timeoutMs: 45000
   },
 
   {
     id: "busan",
     label: "부산광역시",
-    script: "scripts/collect_busan_art_commissions.js"
+    script: "scripts/collect_busan_art_commissions.js",
+
+    /*
+      부산은 최대 40페이지를 조회하므로
+      사이트 연결 장애 시 전체 workflow가
+      장시간 붙잡히지 않도록 1회만 실행한다.
+    */
+    maxAttempts: 1,
+    timeoutMs: 90000
   }
 
 ];
 
-
-const MAX_ATTEMPTS = 3;
-
-
-/*
-  1차 실패 → 5초 대기
-  2차 실패 → 10초 대기
-*/
 
 const RETRY_DELAYS_MS = [
   5000,
@@ -92,8 +98,32 @@ function runCollector(
 
         env: {
           ...process.env
-        }
+        },
+
+        /*
+          중요:
+          개별 지역 수집기가 멈춰도
+          전체 GitHub Actions를 붙잡지 않는다.
+        */
+        timeout:
+          collector.timeoutMs,
+
+        killSignal:
+          "SIGTERM",
+
+        maxBuffer:
+          10 * 1024 * 1024
       }
+    );
+
+
+  const timedOut =
+    Boolean(
+      result.error &&
+      (
+        result.error.code === "ETIMEDOUT" ||
+        result.error.code === "ERR_CHILD_PROCESS_STDIO_MAXBUFFER"
+      )
     );
 
 
@@ -102,8 +132,14 @@ function runCollector(
     success:
       result.status === 0,
 
+    timedOut:
+      timedOut,
+
     status:
       result.status,
+
+    signal:
+      result.signal || null,
 
     stdout:
       String(
@@ -173,9 +209,7 @@ function printHeader(
   attempt
 ) {
 
-  console.log(
-    ""
-  );
+  console.log("");
 
   console.log(
     "===================================="
@@ -190,7 +224,7 @@ function printHeader(
     "시도: " +
     attempt +
     "/" +
-    MAX_ATTEMPTS
+    collector.maxAttempts
   );
 
   console.log(
@@ -199,10 +233,17 @@ function printHeader(
   );
 
   console.log(
+    "제한시간: " +
+    Math.round(
+      collector.timeoutMs / 1000
+    ) +
+    "초"
+  );
+
+  console.log(
     "===================================="
   );
 }
-
 
 
 /* =========================================================
@@ -219,7 +260,7 @@ async function runWithRetry(
 
   for (
     let attempt = 1;
-    attempt <= MAX_ATTEMPTS;
+    attempt <= collector.maxAttempts;
     attempt += 1
   ) {
 
@@ -248,9 +289,7 @@ async function runWithRetry(
       result.success
     ) {
 
-      console.log(
-        ""
-      );
+      console.log("");
 
       console.log(
         "✅ " +
@@ -270,24 +309,39 @@ async function runWithRetry(
           attempt,
 
         status:
-          result.status
+          result.status,
+
+        timedOut:
+          false
       };
     }
 
 
-    console.log(
-      ""
-    );
+    console.log("");
 
-    console.log(
-      "⚠️ " +
-      collector.label +
-      " 수집 실패 (" +
-      attempt +
-      "/" +
-      MAX_ATTEMPTS +
-      ")"
-    );
+
+    if (
+      result.timedOut
+    ) {
+
+      console.log(
+        "⏱️ " +
+        collector.label +
+        " 수집 제한시간 초과"
+      );
+
+    } else {
+
+      console.log(
+        "⚠️ " +
+        collector.label +
+        " 수집 실패 (" +
+        attempt +
+        "/" +
+        collector.maxAttempts +
+        ")"
+      );
+    }
 
 
     if (
@@ -303,12 +357,15 @@ async function runWithRetry(
 
     if (
       attempt <
-      MAX_ATTEMPTS
+      collector.maxAttempts
     ) {
 
       const delay =
         RETRY_DELAYS_MS[
-          attempt - 1
+          Math.min(
+            attempt - 1,
+            RETRY_DELAYS_MS.length - 1
+          )
         ];
 
 
@@ -327,24 +384,15 @@ async function runWithRetry(
   }
 
 
-  /*
-    중요:
-    한 지역이 3번 모두 실패해도
-    전체 수집 프로세스를 죽이지 않는다.
+  console.log("");
 
-    다음 지역으로 계속 진행한다.
-  */
-
-  console.log(
-    ""
-  );
 
   console.log(
     "::warning title=" +
     collector.label +
     " 수집 실패::" +
     collector.label +
-    " 공식 사이트 연결에 3회 실패했습니다. " +
+    " 수집에 실패했습니다. " +
     "기존 데이터는 유지하고 다음 지역 수집을 계속합니다."
   );
 
@@ -357,15 +405,19 @@ async function runWithRetry(
       false,
 
     attempts:
-      MAX_ATTEMPTS,
+      collector.maxAttempts,
 
     status:
       lastResult
         ? lastResult.status
-        : null
+        : null,
+
+    timedOut:
+      lastResult
+        ? lastResult.timedOut
+        : false
   };
 }
-
 
 
 /* =========================================================
@@ -376,9 +428,7 @@ function printSummary(
   results
 ) {
 
-  console.log(
-    ""
-  );
+  console.log("");
 
   console.log(
     "===================================="
@@ -398,6 +448,26 @@ function printSummary(
       result
     ) {
 
+      let state =
+        "FAILED";
+
+
+      if (
+        result.success
+      ) {
+
+        state =
+          "SUCCESS";
+
+      } else if (
+        result.timedOut
+      ) {
+
+        state =
+          "TIMEOUT";
+      }
+
+
       console.log(
         (
           result.success
@@ -406,11 +476,7 @@ function printSummary(
         ) +
         result.label +
         " | " +
-        (
-          result.success
-            ? "SUCCESS"
-            : "FAILED"
-        ) +
+        state +
         " | attempts=" +
         result.attempts
       );
@@ -464,7 +530,6 @@ function printSummary(
 }
 
 
-
 /* =========================================================
    RUN
 ========================================================= */
@@ -499,13 +564,13 @@ async function main() {
 
 
   /*
-    3개 지역이 모두 실패한 경우만
+    모든 지역이 실패한 경우에만
     전체 workflow를 실패시킨다.
 
-    1개 또는 2개 지역만 실패한 경우:
-    → 기존 데이터 유지
-    → 나머지 지역 정상 수집
-    → workflow 계속 진행
+    일부 지역만 실패하면:
+    → 해당 지역 기존 데이터 유지
+    → 정상 지역 데이터 사용
+    → 후속 정리/커밋 단계 계속 실행
   */
 
   if (
@@ -513,7 +578,7 @@ async function main() {
   ) {
 
     throw new Error(
-      "경기·서울·인천 모든 수집원이 실패했습니다. 전체 수집을 중단합니다."
+      "모든 지역 공공미술 수집원이 실패했습니다. 전체 수집을 중단합니다."
     );
   }
 
@@ -522,9 +587,7 @@ async function main() {
     summary.failureCount > 0
   ) {
 
-    console.log(
-      ""
-    );
+    console.log("");
 
     console.log(
       "⚠️ 일부 수집원이 실패했지만 " +
@@ -533,9 +596,7 @@ async function main() {
   }
 
 
-  console.log(
-    ""
-  );
+  console.log("");
 
   console.log(
     "✅ 수집 단계 완료"
