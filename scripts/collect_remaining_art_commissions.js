@@ -47,7 +47,7 @@ const COLLECTION_VERSION =
   한 HTTP 요청 최대 시간
 */
 const FETCH_TIMEOUT_MS =
-  7000;
+  12000;
 
 
 /*
