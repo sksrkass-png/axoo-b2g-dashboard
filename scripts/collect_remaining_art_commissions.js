@@ -746,68 +746,128 @@ async function fetchText(
   url
 ) {
 
-  const controller =
-    new AbortController();
+  const MAX_ATTEMPTS =
+    2;
 
 
-  const timer =
-    setTimeout(
-      function () {
-
-        controller.abort();
-
-      },
-      FETCH_TIMEOUT_MS
-    );
+  let lastError =
+    null;
 
 
-  try {
+  for (
+    let attempt = 1;
+    attempt <= MAX_ATTEMPTS;
+    attempt++
+  ) {
 
-    const response =
-      await fetch(
-        url,
-        {
+    const controller =
+      new AbortController();
 
-          signal:
-            controller.signal,
 
-          redirect:
-            "follow",
+    const timer =
+      setTimeout(
+        function () {
 
-          headers: {
+          controller.abort();
 
-            "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.0)",
-
-            "Accept":
-              "text/html,application/xhtml+xml,*/*",
-
-            "Accept-Language":
-              "ko-KR,ko;q=0.9,en;q=0.6"
-          }
-        }
+        },
+        FETCH_TIMEOUT_MS
       );
 
 
-    if (
-      !response.ok
+    try {
+
+      const response =
+        await fetch(
+          url,
+          {
+
+            signal:
+              controller.signal,
+
+            redirect:
+              "follow",
+
+            headers: {
+
+              "User-Agent":
+                "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.0)",
+
+              "Accept":
+                "text/html,application/xhtml+xml,*/*",
+
+              "Accept-Language":
+                "ko-KR,ko;q=0.9,en;q=0.6"
+            }
+          }
+        );
+
+
+      if (
+        !response.ok
+      ) {
+
+        throw new Error(
+          "HTTP " +
+          response.status
+        );
+      }
+
+
+      return await response.text();
+
+
+    } catch (
+      error
     ) {
 
-      throw new Error(
-        "HTTP " +
-        response.status
+      lastError =
+        error;
+
+
+      if (
+        attempt <
+        MAX_ATTEMPTS
+      ) {
+
+        console.log(
+          "   ↻ FETCH RETRY" +
+          " | attempt=" +
+          (attempt + 1) +
+          "/" +
+          MAX_ATTEMPTS +
+          " | " +
+          url
+        );
+
+
+        await new Promise(
+          function (
+            resolve
+          ) {
+
+            setTimeout(
+              resolve,
+              800
+            );
+          }
+        );
+      }
+
+
+    } finally {
+
+      clearTimeout(
+        timer
       );
     }
-
-
-    return await response.text();
-
-  } finally {
-
-    clearTimeout(
-      timer
-    );
   }
+
+
+  throw lastError ||
+    new Error(
+      "FETCH FAILED"
+    );
 }
 
 
