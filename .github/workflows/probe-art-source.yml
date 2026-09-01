@@ -1,0 +1,78 @@
+name: Probe Art Source
+
+on:
+  workflow_dispatch:
+
+    inputs:
+
+      source_id:
+        description: "진단할 Source ID (예: daejeon_city_notice)"
+        required: true
+        default: "artnuri_art_commission"
+        type: string
+
+
+jobs:
+
+  probe:
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 2
+
+
+    steps:
+
+      # --------------------------------------------------
+      # 1. Repository
+      # --------------------------------------------------
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      # --------------------------------------------------
+      # 2. Node
+      # --------------------------------------------------
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+        with:
+          node-version: "20"
+
+
+      # --------------------------------------------------
+      # 3. Syntax
+      # --------------------------------------------------
+
+      - name: Validate probe JavaScript syntax
+        run: |
+          node --check scripts/art_commission_sources.js
+          node --check scripts/collect_remaining_art_commissions.js
+          node --check scripts/probe_art_source.js
+
+
+      # --------------------------------------------------
+      # 4. Source Probe
+      #
+      # 외부 소스 1개만 진단한다.
+      # LIVE / ARCHIVE 데이터는 수정하지 않는다.
+      # --------------------------------------------------
+
+      - name: Probe selected art source
+        env:
+
+          SOURCE_ID: ${{ inputs.source_id }}
+
+        run: |
+
+          echo ""
+          echo "===================================="
+          echo "AXOO ART SOURCE PROBE ACTION"
+          echo "===================================="
+          echo "SOURCE ID: $SOURCE_ID"
+          echo "===================================="
+          echo ""
+
+          node scripts/probe_art_source.js "$SOURCE_ID"
