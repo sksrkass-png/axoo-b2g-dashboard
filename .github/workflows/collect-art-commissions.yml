@@ -80,7 +80,21 @@ jobs:
       # 현재 활성화된 Collector를 실행.
       # 각 지역 실패는 run_art_collectors.js에서 격리.
       # --------------------------------------------------
+      
+      - name: Diagnose Korean public site network
+        run: |
+          echo "=== GYEONGGI IPv4 ==="
+          curl -4 -I -L --connect-timeout 10 --max-time 20 https://www.gg.go.kr/publicart/main.do || true
 
+          echo "=== INCHEON IPv4 ==="
+          curl -4 -I -L --connect-timeout 10 --max-time 20 https://www.incheon.go.kr/culture/CU070302 || true
+
+          echo "=== BUSAN IPv4 ==="
+          curl -4 -I -L --connect-timeout 10 --max-time 20 https://www.busan.go.kr/nbgosi || true
+
+          echo "=== GYEONGGI NORMAL ==="
+          curl -I -L --connect-timeout 10 --max-time 20 https://www.gg.go.kr/publicart/main.do || true
+          
       - name: Collect regional art commissions
         run: node scripts/run_art_collectors.js
 
