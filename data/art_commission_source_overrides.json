@@ -1,0 +1,67 @@
+{
+  "daegu_city_notice": {
+    "sourceUrl": "https://daegu.go.kr/index.do?menu_id=00940170",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "대구광역시 공식 고시공고 목록"
+  },
+
+  "daejeon_city_notice": {
+    "sourceUrl": "https://www.daejeon.go.kr/drh/depart/board/boardNormalList.do?boardId=normal_0167&menuSeq=1453",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "건축물 미술작품 제작·설치 공모 게시가 실제 확인된 대전광역시 게시판"
+  },
+
+  "ulsan_city_notice": {
+    "sourceUrl": "https://www.ulsan.go.kr/u/rep/transfer/notice/list.ulsan?mId=001004002000000000",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "울산광역시 공식 고시공고 게시판"
+  },
+
+  "gangwon_notice": {
+    "sourceUrl": "https://state.gwd.go.kr/portal/bulletin/notification",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "강원특별자치도 공식 공고/고시 목록"
+  },
+
+  "chungbuk_notice": {
+    "sourceUrl": "https://www.chungbuk.go.kr/www/selectGosiPblancList.do?key=422",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "충청북도 공식 고시/공고 목록"
+  },
+
+  "chungnam_notice": {
+    "sourceUrl": "https://www.chungnam.go.kr/cnportal/province/province/list.do?menuNo=500487",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "충청남도 공식 도 및 산하기관 고시·공고"
+  },
+
+  "jeonnam_notice": {
+    "sourceUrl": "https://www.jeonnam.go.kr/J0203/boardList.do?menuId=jeonnam0203000000",
+    "crawlMode": "board",
+    "verified": true,
+    "legacy": true,
+    "note": "구 전라남도 공식 고시/공고. 2026-06-30 이전 데이터용"
+  },
+
+  "gyeongbuk_notice": {
+    "sourceUrl": "https://care.gb.go.kr/Main/page.do?BD_CODE=gosi_notice&URL=%2Fcommon%2Fboard%2Fboard.do&cmd=1&mnu_uid=6789",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "경상북도 공식 고시공고 공용 게시판"
+  },
+
+  "gyeongnam_culture_portal": {
+    "sourceUrl": "https://minwon.gyeongnam.go.kr/citynet/jsp/sap/SAPGosiBizProcess.do?command=searchList&flag=gosiGL&svp=Y",
+    "sourceName": "경상남도 고시공고",
+    "sourceType": "official_notice",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "경상남도 공식 고시/공고 조회 시스템"
+  }
+}
