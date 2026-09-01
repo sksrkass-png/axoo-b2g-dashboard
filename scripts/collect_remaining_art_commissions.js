@@ -1681,7 +1681,7 @@ async function main() {
     0;
 
 
-  for (
+    for (
     const region of
     targetRegions
   ) {
@@ -1711,7 +1711,6 @@ async function main() {
         "   ⚠️ 등록된 소스 없음"
       );
 
-
       continue;
     }
 
@@ -1737,53 +1736,73 @@ async function main() {
 
 
         if (
-  result.accessOk
-) {
+          result.accessOk
+        ) {
 
-  successfulSources++;
-
-
-  console.log(
-    "   ✅ ACCESS OK" +
-    " | pages=" +
-    result.pagesFetched +
-    " | items=" +
-    result.items.length
-  );
+          successfulSources++;
 
 
-} else {
+          console.log(
+            "   ✅ ACCESS OK" +
+            " | pages=" +
+            result.pagesFetched +
+            " | items=" +
+            result.items.length
+          );
 
-  failedSources++;
+        } else {
 
-
-  console.log(
-    "   ❌ ACCESS FAILED" +
-    " | pages=0" +
-    " | items=0"
-  );
-}
-
-
-if (
-  result.items.length > 0
-) {
-
-  console.log(
-    "   🎯 ITEMS FOUND:",
-    result.items.length
-  );
+          failedSources++;
 
 
-  discovered.push(
-    ...result.items
-  );
-}
+          console.log(
+            "   ❌ ACCESS FAILED" +
+            " | pages=0" +
+            " | items=0"
+          );
+        }
+
+
+        if (
+          result.items.length > 0
+        ) {
+
+          console.log(
+            "   🎯 ITEMS FOUND:",
+            result.items.length
+          );
+
+
+          discovered.push(
+            ...result.items
+          );
+        }
+
+
+      } catch (
+        error
+      ) {
+
+        failedSources++;
+
+
+        console.warn(
+          "   ⚠️ SOURCE FAILED:",
+          source.sourceName,
+          "|",
+          error.message
+        );
+      }
+
+    }
+
+  }
 
 
   /*
     URL 기준 중복 제거
   */
+  
   const unique =
     new Map();
 
