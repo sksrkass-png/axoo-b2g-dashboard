@@ -2125,19 +2125,43 @@ async function main() {
    START
 ========================================================= */
 
-main()
-  .catch(
-    function (
-      error
-    ) {
+if (
+  require.main ===
+  module
+) {
 
-      console.error(
-        "[AXOO REMAINING COLLECTOR]",
+  main()
+    .catch(
+      function (
         error
-      );
+      ) {
+
+        console.error(
+          "[AXOO REMAINING COLLECTOR]",
+          error
+        );
 
 
-      process.exitCode =
-        1;
-    }
-  );
+        process.exitCode =
+          1;
+      }
+    );
+}
+
+
+/* =========================================================
+   TEST EXPORT
+========================================================= */
+
+module.exports = {
+
+  isCandidateTitle,
+
+  cleanText,
+
+  extractAnchors,
+
+  followScore,
+
+  canonicalUrl
+};
