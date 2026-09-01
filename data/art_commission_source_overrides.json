@@ -41,6 +41,13 @@
     "note": "충청남도 공식 도 및 산하기관 고시·공고"
   },
 
+    "chungnam_development_corporation": {
+    "sourceUrl": "https://www.cndc.kr/bbs/list.do?key=2404080002",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "충청남도개발공사 공식 공지사항 목록"
+  },
+  
   "jeonnam_notice": {
     "sourceUrl": "https://www.jeonnam.go.kr/J0203/boardList.do?menuId=jeonnam0203000000",
     "crawlMode": "board",
