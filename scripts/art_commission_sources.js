@@ -7,7 +7,7 @@ const {
 
 
 /* =========================================================
-   CONFIG
+   FILES
 ========================================================= */
 
 const SOURCE_FILE =
@@ -17,6 +17,18 @@ const SOURCE_FILE =
     "art_commission_source_targets.json"
   );
 
+
+const OVERRIDE_FILE =
+  path.join(
+    process.cwd(),
+    "data",
+    "art_commission_source_overrides.json"
+  );
+
+
+/* =========================================================
+   SOURCE TYPE ORDER
+========================================================= */
 
 const PREFERRED_SOURCE_TYPES = [
   "official_portal",
@@ -42,26 +54,52 @@ function clean(value) {
 }
 
 
-function loadSourceTargets() {
+function readJson(
+  filePath,
+  fallback
+) {
 
   if (
     !fs.existsSync(
-      SOURCE_FILE
+      filePath
     )
   ) {
 
-    throw new Error(
-      "art_commission_source_targets.json 파일을 찾을 수 없습니다."
-    );
+    return fallback;
   }
 
 
-  const parsed =
-    JSON.parse(
-      fs.readFileSync(
-        SOURCE_FILE,
+  const raw =
+    fs
+      .readFileSync(
+        filePath,
         "utf8"
       )
+      .trim();
+
+
+  if (!raw) {
+
+    return fallback;
+  }
+
+
+  return JSON.parse(
+    raw
+  );
+}
+
+
+/* =========================================================
+   BASE SOURCES
+========================================================= */
+
+function loadBaseSourceTargets() {
+
+  const parsed =
+    readJson(
+      SOURCE_FILE,
+      []
     );
 
 
@@ -80,6 +118,119 @@ function loadSourceTargets() {
   return parsed;
 }
 
+
+/* =========================================================
+   OVERRIDES
+========================================================= */
+
+function loadSourceOverrides() {
+
+  const parsed =
+    readJson(
+      OVERRIDE_FILE,
+      {}
+    );
+
+
+  if (
+    !parsed ||
+    Array.isArray(
+      parsed
+    ) ||
+    typeof parsed !==
+      "object"
+  ) {
+
+    throw new Error(
+      "art_commission_source_overrides.json 형식이 객체가 아닙니다."
+    );
+  }
+
+
+  return parsed;
+}
+
+
+/* =========================================================
+   APPLY OVERRIDE
+========================================================= */
+
+function applySourceOverrides(
+  targets
+) {
+
+  const overrides =
+    loadSourceOverrides();
+
+
+  return targets.map(
+    function (
+      source
+    ) {
+
+      if (
+        !source ||
+        !source.id
+      ) {
+
+        return source;
+      }
+
+
+      const override =
+        overrides[
+          source.id
+        ];
+
+
+      if (
+        !override
+      ) {
+
+        return source;
+      }
+
+
+      return {
+
+        ...source,
+
+        ...override,
+
+        id:
+          source.id,
+
+        overrideApplied:
+          true,
+
+        baseSourceUrl:
+          source.sourceUrl,
+
+        sourceUrl:
+          override.sourceUrl ||
+          source.sourceUrl
+
+      };
+    }
+  );
+}
+
+
+/* =========================================================
+   FINAL SOURCE TARGETS
+========================================================= */
+
+function loadSourceTargets() {
+
+  return applySourceOverrides(
+    loadBaseSourceTargets()
+  );
+}
+
+
+/* =========================================================
+   SOURCE TYPE RANK
+========================================================= */
 
 function sourceTypeRank(
   sourceType
@@ -116,12 +267,14 @@ function getRegionalSources() {
 
       const sources =
         targets
+
           .filter(
             function (
               source
             ) {
 
               return (
+                source &&
                 source.enabled !== false &&
                 clean(
                   source.region
@@ -130,6 +283,7 @@ function getRegionalSources() {
               );
             }
           )
+
           .sort(
             function (
               a,
@@ -191,19 +345,23 @@ function getRegionalSources() {
 function getNationalSources() {
 
   return loadSourceTargets()
+
     .filter(
       function (
         source
       ) {
 
         return (
+          source &&
           source.enabled !== false &&
           clean(
             source.region
-          ) === "전국"
+          ) ===
+            "전국"
         );
       }
     )
+
     .sort(
       function (
         a,
@@ -240,10 +398,31 @@ function validateRegionalSources() {
       ) {
 
         return (
-          region.sources.length === 0
+          region.sources.length ===
+          0
         );
       }
     );
+
+
+  const overrides =
+    loadSourceOverrides();
+
+
+  const appliedOverrideSources =
+    loadSourceTargets()
+      .filter(
+        function (
+          source
+        ) {
+
+          return (
+            source &&
+            source.overrideApplied ===
+              true
+          );
+        }
+      );
 
 
   return {
@@ -269,7 +448,18 @@ function validateRegionalSources() {
       registry,
 
     nationalSources:
-      getNationalSources()
+      getNationalSources(),
+
+    overrideCount:
+      Object.keys(
+        overrides
+      ).length,
+
+    appliedOverrideCount:
+      appliedOverrideSources.length,
+
+    appliedOverrideSources:
+      appliedOverrideSources
   };
 }
 
@@ -282,9 +472,7 @@ function printSummary(
   result
 ) {
 
-  console.log(
-    ""
-  );
+  console.log("");
 
   console.log(
     "===================================="
@@ -321,13 +509,26 @@ function printSummary(
           source
         ) {
 
+          const overrideLabel =
+            source.overrideApplied
+              ? " | OVERRIDE"
+              : "";
+
+
           console.log(
             "   - " +
             source.sourceName +
             " | " +
             source.sourceType +
             " | priority=" +
-            source.priority
+            source.priority +
+            overrideLabel
+          );
+
+
+          console.log(
+            "     " +
+            source.sourceUrl
           );
         }
       );
@@ -338,6 +539,7 @@ function printSummary(
   console.log(
     "------------------------------------"
   );
+
 
   console.log(
     "지역:",
@@ -350,6 +552,18 @@ function printSummary(
   console.log(
     "전국 공통 소스:",
     result.nationalSources.length
+  );
+
+
+  console.log(
+    "등록 Override:",
+    result.overrideCount
+  );
+
+
+  console.log(
+    "적용 Override:",
+    result.appliedOverrideCount
   );
 
 
@@ -368,6 +582,17 @@ function printSummary(
 
     console.log(
       "✅ 17개 시도 Source Registry 준비 완료"
+    );
+  }
+
+
+  if (
+    result.overrideCount !==
+    result.appliedOverrideCount
+  ) {
+
+    console.log(
+      "⚠️ 일부 Override ID가 기존 Source Registry와 일치하지 않습니다."
     );
   }
 
@@ -406,6 +631,16 @@ if (
     }
 
 
+    if (
+      result.overrideCount !==
+      result.appliedOverrideCount
+    ) {
+
+      process.exitCode =
+        1;
+    }
+
+
   } catch (
     error
   ) {
@@ -428,6 +663,12 @@ if (
 
 module.exports = {
 
+  loadBaseSourceTargets,
+
+  loadSourceOverrides,
+
+  applySourceOverrides,
+
   loadSourceTargets,
 
   getRegionalSources,
@@ -435,4 +676,5 @@ module.exports = {
   getNationalSources,
 
   validateRegionalSources
+
 };
