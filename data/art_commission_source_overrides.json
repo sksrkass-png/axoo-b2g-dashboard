@@ -64,11 +64,10 @@
   },
 
   "gyeongnam_culture_portal": {
-    "sourceUrl": "https://minwon.gyeongnam.go.kr/citynet/jsp/sap/SAPGosiBizProcess.do?command=searchList&flag=gosiGL&svp=Y",
-    "sourceName": "경상남도 고시공고",
-    "sourceType": "official_notice",
-    "crawlMode": "board",
+    "sourceUrl": "https://www.gyeongnam.go.kr/culture/index.do?siteCd=001",
+    "sourceName": "경상남도 문화예술 정보플랫폼",
+    "sourceType": "local_art_portal",
+    "crawlMode": "generic_board_discovery",
     "verified": true,
-    "note": "경상남도 공식 고시/공고 조회 시스템"
+    "note": "경상남도 공식 문화예술 정보플랫폼. 건축물 미술작품 관련 공지 확인 가능"
   }
-}
