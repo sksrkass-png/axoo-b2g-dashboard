@@ -7,6 +7,12 @@ const {
   getNationalSources
 } = require("./art_commission_sources");
 
+const {
+  getSourceSeedUrls,
+  describeSourceAdapter
+} = require("./art_source_adapters");
+
+
 /* =========================================================
    CONFIG
 ========================================================= */
@@ -31,7 +37,7 @@ const SPECIALIZED_REGION_IDS = new Set([
 ]);
 
 const COLLECTION_VERSION =
-  "nationwide-generic-1.1.0";
+  "nationwide-generic-1.2.0";
 
 const FETCH_TIMEOUT_MS =
   12000;
@@ -53,6 +59,9 @@ const MAX_SOURCE_BUDGET_MS =
 
 const MAX_DEPTH =
   2;
+
+const MAX_SEEDS_PER_SOURCE =
+  3;
 
 
 /* =========================================================
@@ -408,6 +417,7 @@ function canonicalUrl(
 
     return url.toString();
 
+
   } catch (
     error
   ) {
@@ -425,9 +435,14 @@ function sameOrigin(
   try {
 
     return (
-      new URL(first).origin ===
-      new URL(second).origin
+      new URL(
+        first
+      ).origin ===
+      new URL(
+        second
+      ).origin
     );
+
 
   } catch (
     error
@@ -484,7 +499,9 @@ function hasAnyKeyword(
       keyword
     ) {
 
-      return text.includes(
+      return String(
+        text || ""
+      ).includes(
         keyword
       );
     }
@@ -768,7 +785,7 @@ async function fetchText(
             headers: {
 
               "User-Agent":
-                "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.1)",
+                "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.2)",
 
               "Accept":
                 "text/html,application/xhtml+xml,*/*",
@@ -791,7 +808,14 @@ async function fetchText(
       }
 
 
-      return await response.text();
+      return {
+
+        html:
+          await response.text(),
+
+        finalUrl:
+          response.url
+      };
 
 
     } catch (
@@ -810,7 +834,10 @@ async function fetchText(
         console.log(
           "   ↻ FETCH RETRY" +
           " | attempt=" +
-          (attempt + 1) +
+          (
+            attempt +
+            1
+          ) +
           "/" +
           FETCH_MAX_ATTEMPTS +
           " | " +
@@ -958,7 +985,8 @@ function buildItem(
       "generic_board_discovery",
 
     priority:
-      source.priority || 3,
+      source.priority ||
+      3,
 
     priorityLabel:
       source.priorityLabel ||
@@ -1009,7 +1037,7 @@ function buildItem(
 
 
 /* =========================================================
-   SOURCE CRAWL + DIAGNOSTICS
+   SOURCE CRAWL + ADAPTER + DIAGNOSTICS
 ========================================================= */
 
 async function crawlSource(
@@ -1021,14 +1049,130 @@ async function crawlSource(
     Date.now();
 
 
-  const rootUrl =
-    canonicalUrl(
-      source.sourceUrl,
-      source.sourceUrl
+  const adapterInfo =
+    describeSourceAdapter(
+      source
     );
 
 
+  const seedUrls =
+    getSourceSeedUrls(
+      source,
+      {
+        maxSeeds:
+          MAX_SEEDS_PER_SOURCE
+      }
+    );
+
+
+  if (
+    seedUrls.length ===
+    0
+  ) {
+
+    return {
+
+      sourceId:
+        source.id,
+
+      sourceName:
+        source.sourceName,
+
+      region:
+        region.name,
+
+      accessOk:
+        false,
+
+      pagesFetched:
+        0,
+
+      items:
+        []
+    };
+  }
+
+
+  console.log(
+    "   🧩 ADAPTER" +
+    " | id=" +
+    adapterInfo.adapterId +
+    " | applied=" +
+    adapterInfo.applied +
+    " | mode=" +
+    adapterInfo.mode +
+    " | seeds=" +
+    seedUrls.length
+  );
+
+
+  if (
+    adapterInfo.applied
+  ) {
+
+    seedUrls.forEach(
+      function (
+        seedUrl,
+        index
+      ) {
+
+        console.log(
+          "      SEED #" +
+          (
+            index +
+            1
+          ) +
+          ": " +
+          seedUrl
+        );
+      }
+    );
+  }
+
+
+  const queue =
+    seedUrls.map(
+      function (
+        seedUrl
+      ) {
+
+        return {
+
+          url:
+            seedUrl,
+
+          depth:
+            0,
+
+          seed:
+            true
+        };
+      }
+    );
+
+
+  const queued =
+    new Set(
+      seedUrls
+    );
+
+
+  const visited =
+    new Set();
+
+
+  const found =
+    new Map();
+
+
+  let pagesFetched =
+    0;
+
+
   const diagnostics = {
+
+    seedCount:
+      seedUrls.length,
 
     htmlBytes:
       0,
@@ -1057,65 +1201,12 @@ async function crawlSource(
     navigationCandidates:
       0,
 
+    redirectedPages:
+      0,
+
     sampleLabels:
       new Set()
   };
-
-
-  if (!rootUrl) {
-
-    return {
-
-      sourceId:
-        source.id,
-
-      sourceName:
-        source.sourceName,
-
-      region:
-        region.name,
-
-      accessOk:
-        false,
-
-      pagesFetched:
-        0,
-
-      items:
-        []
-    };
-  }
-
-
-  const queue = [
-    {
-      url:
-        rootUrl,
-
-      depth:
-        0
-    }
-  ];
-
-
-  const queued =
-    new Set(
-      [
-        rootUrl
-      ]
-    );
-
-
-  const visited =
-    new Set();
-
-
-  const found =
-    new Map();
-
-
-  let pagesFetched =
-    0;
 
 
   while (
@@ -1149,12 +1240,12 @@ async function crawlSource(
     );
 
 
-    let html;
+    let fetchResult;
 
 
     try {
 
-      html =
+      fetchResult =
         await fetchText(
           current.url
         );
@@ -1178,9 +1269,29 @@ async function crawlSource(
     }
 
 
-    /*
-      받은 HTML 총 용량
-    */
+    const html =
+      fetchResult.html ||
+      "";
+
+
+    const finalUrl =
+      canonicalUrl(
+        fetchResult.finalUrl ||
+          current.url,
+        current.url
+      ) ||
+      current.url;
+
+
+    if (
+      finalUrl !==
+      current.url
+    ) {
+
+      diagnostics.redirectedPages++;
+    }
+
+
     diagnostics.htmlBytes +=
       Buffer.byteLength(
         html,
@@ -1188,9 +1299,6 @@ async function crawlSource(
       );
 
 
-    /*
-      HTML 원문 안의 전체 <a> 태그
-    */
     diagnostics.rawAnchors +=
       (
         html.match(
@@ -1199,10 +1307,6 @@ async function crawlSource(
       ).length;
 
 
-    /*
-      javascript: 링크 수
-      현재 일반 Anchor Parser에서 제외되는 링크.
-    */
     diagnostics.javascriptAnchors +=
       (
         html.match(
@@ -1214,7 +1318,7 @@ async function crawlSource(
     const anchors =
       extractAnchors(
         html,
-        current.url
+        finalUrl
       );
 
 
@@ -1223,18 +1327,31 @@ async function crawlSource(
 
 
     /*
-      공모 후보 탐지
+      실제 공모 후보 탐지
     */
     anchors.forEach(
       function (
         anchor
       ) {
 
-        if (
-          !sameOrigin(
+        /*
+          Source가 redirect된 경우를 고려해
+          원래 Source Origin 또는 현재 페이지 Origin
+          둘 중 하나와 일치하면 허용한다.
+        */
+        const originAllowed =
+          sameOrigin(
             source.sourceUrl,
             anchor.url
-          )
+          ) ||
+          sameOrigin(
+            finalUrl,
+            anchor.url
+          );
+
+
+        if (
+          !originAllowed
         ) {
 
           return;
@@ -1250,10 +1367,6 @@ async function crawlSource(
           );
 
 
-        /*
-          실제 페이지에 어떤 관련 라벨이 있는지
-          최대 5개까지만 로그 샘플로 남긴다.
-        */
         if (
           diagnostics.sampleLabels.size <
             5 &&
@@ -1318,7 +1431,7 @@ async function crawlSource(
 
 
     /*
-      게시판 / 고시공고 내부 탐색
+      depth 제한
     */
     if (
       current.depth >=
@@ -1329,6 +1442,10 @@ async function crawlSource(
     }
 
 
+    /*
+      검색 Seed가 여러 개인 경우에도
+      각 Seed 결과 페이지에서 유력한 상세/게시판 링크를 탐색.
+    */
     const followCandidates =
       anchors
 
@@ -1337,11 +1454,19 @@ async function crawlSource(
             anchor
           ) {
 
-            if (
-              !sameOrigin(
+            const originAllowed =
+              sameOrigin(
                 source.sourceUrl,
                 anchor.url
-              )
+              ) ||
+              sameOrigin(
+                finalUrl,
+                anchor.url
+              );
+
+
+            if (
+              !originAllowed
             ) {
 
               return false;
@@ -1371,13 +1496,17 @@ async function crawlSource(
 
         .sort(
           function (
-            a,
-            b
+            first,
+            second
           ) {
 
             return (
-              followScore(b) -
-              followScore(a)
+              followScore(
+                second
+              ) -
+              followScore(
+                first
+              )
             );
           }
         );
@@ -1387,6 +1516,10 @@ async function crawlSource(
       followCandidates.length;
 
 
+    /*
+      전체 Source의 최대 페이지 수는 그대로 유지한다.
+      Adapter가 Seed를 여러 개 생성해도 무한 탐색하지 않는다.
+    */
     followCandidates
       .slice(
         0,
@@ -1408,7 +1541,11 @@ async function crawlSource(
               anchor.url,
 
             depth:
-              current.depth + 1
+              current.depth +
+              1,
+
+            seed:
+              false
           });
         }
       );
@@ -1416,14 +1553,17 @@ async function crawlSource(
 
 
   /*
-    items=0 원인 진단 출력
+    items=0 원인 진단
   */
   if (
-    pagesFetched > 0
+    pagesFetched >
+    0
   ) {
 
     console.log(
       "   🔎 DIAG" +
+      " | seeds=" +
+      diagnostics.seedCount +
       " | htmlKB=" +
       Math.round(
         diagnostics.htmlBytes /
@@ -1444,7 +1584,9 @@ async function crawlSource(
       " | candidate=" +
       diagnostics.candidateAnchors +
       " | nav=" +
-      diagnostics.navigationCandidates
+      diagnostics.navigationCandidates +
+      " | redirects=" +
+      diagnostics.redirectedPages
     );
 
 
@@ -1487,7 +1629,8 @@ async function crawlSource(
       region.name,
 
     accessOk:
-      pagesFetched > 0,
+      pagesFetched >
+      0,
 
     pagesFetched:
       pagesFetched,
@@ -1546,8 +1689,8 @@ function mergeData(
 
 
   /*
-    이미 마감된 공고는
-    다시 LIVE로 올리지 않는다.
+    이미 마감된 공고 URL은
+    다시 LIVE에 올리지 않는다.
   */
   const expiredUrls =
     new Set(
@@ -1609,6 +1752,7 @@ function mergeData(
           item
         );
 
+
       } else {
 
         liveWithoutUrl.push(
@@ -1657,9 +1801,6 @@ function mergeData(
 
       if (previous) {
 
-        /*
-          기존에 날짜 검증된 정보는 보존.
-        */
         liveByUrl.set(
           url,
           {
@@ -1694,6 +1835,7 @@ function mergeData(
           }
         );
 
+
       } else {
 
         liveByUrl.set(
@@ -1718,6 +1860,12 @@ function mergeData(
       item
     ) {
 
+      if (!item) {
+
+        return;
+      }
+
+
       const url =
         itemUrl(
           item
@@ -1730,6 +1878,7 @@ function mergeData(
           url,
           item
         );
+
 
       } else {
 
@@ -1876,7 +2025,8 @@ async function runSourceGroup(
 ) {
 
   const sources =
-    options.sources || [];
+    options.sources ||
+    [];
 
 
   const region =
@@ -1941,7 +2091,8 @@ async function runSourceGroup(
 
 
       if (
-        result.items.length > 0
+        result.items.length >
+        0
       ) {
 
         console.log(
@@ -2024,6 +2175,12 @@ async function main() {
 
 
   console.log(
+    "VERSION:",
+    COLLECTION_VERSION
+  );
+
+
+  console.log(
     "대상 지역:",
     targetRegions.length
   );
@@ -2077,7 +2234,8 @@ async function main() {
 
 
     if (
-      sources.length === 0
+      sources.length ===
+      0
     ) {
 
       console.log(
@@ -2134,7 +2292,8 @@ async function main() {
 
 
   if (
-    nationalSources.length === 0
+    nationalSources.length ===
+    0
   ) {
 
     console.log(
@@ -2163,6 +2322,9 @@ async function main() {
 
   /* ---------------------------------------------------------
      3. URL 기준 중복 제거
+
+     지역 Source가 먼저 들어왔으므로
+     같은 URL이면 지역 Source를 우선 유지한다.
   --------------------------------------------------------- */
 
   const unique =
@@ -2202,6 +2364,10 @@ async function main() {
     );
 
 
+  /* ---------------------------------------------------------
+     4. LIVE + ARCHIVE MERGE
+  --------------------------------------------------------- */
+
   const merged =
     mergeData(
       items
@@ -2209,7 +2375,7 @@ async function main() {
 
 
   /* ---------------------------------------------------------
-     4. SUMMARY
+     5. SUMMARY
   --------------------------------------------------------- */
 
   console.log(
@@ -2280,7 +2446,8 @@ async function main() {
 
 
   if (
-    counters.failed > 0
+    counters.failed >
+    0
   ) {
 
     console.log(
