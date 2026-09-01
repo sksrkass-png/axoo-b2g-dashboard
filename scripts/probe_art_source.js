@@ -15,6 +15,13 @@ const {
   "./collect_remaining_art_commissions"
 );
 
+const {
+  getSourceSeedUrls,
+  describeSourceAdapter
+} = require(
+  "./art_source_adapters"
+);
+
 
 /* =========================================================
    CONFIG
@@ -22,6 +29,9 @@ const {
 
 const FETCH_TIMEOUT_MS =
   8000;
+
+const MAX_SEEDS_PER_SOURCE =
+  3;
 
 const MAX_LABEL_SAMPLES =
   10;
@@ -87,6 +97,7 @@ function sameOrigin(
       ).origin
     );
 
+
   } catch (
     error
   ) {
@@ -133,6 +144,7 @@ function loadAllSources() {
           result.push({
 
             region: {
+
               id:
                 region.id,
 
@@ -207,7 +219,7 @@ function findSource(
 
 
 /* =========================================================
-   LIST
+   SOURCE LIST
 ========================================================= */
 
 function printSourceList() {
@@ -238,24 +250,46 @@ function printSourceList() {
       entry
     ) {
 
+      const adapterInfo =
+        describeSourceAdapter(
+          entry.source
+        );
+
+
       console.log(
         entry.source.id
       );
+
 
       console.log(
         "   지역:",
         entry.region.name
       );
 
+
       console.log(
         "   소스:",
         entry.source.sourceName
       );
 
+
       console.log(
         "   URL:",
         entry.source.sourceUrl
       );
+
+
+      console.log(
+        "   Adapter:",
+        adapterInfo.adapterId
+      );
+
+
+      console.log(
+        "   Seeds:",
+        adapterInfo.seedUrls.length
+      );
+
 
       console.log(
         ""
@@ -268,6 +302,7 @@ function printSourceList() {
     "TOTAL:",
     sources.length
   );
+
 
   console.log(
     "===================================="
@@ -318,7 +353,7 @@ async function fetchPage(
           headers: {
 
             "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.0)",
+              "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.1)",
 
             "Accept":
               "text/html,application/xhtml+xml,*/*",
@@ -377,16 +412,18 @@ async function fetchPage(
 
 function analyzePage(
   source,
+  seedUrl,
   fetchResult
 ) {
 
   const html =
-    fetchResult.html || "";
+    fetchResult.html ||
+    "";
 
 
   const pageUrl =
     fetchResult.finalUrl ||
-    source.sourceUrl;
+    seedUrl;
 
 
   const rawAnchors =
@@ -412,7 +449,31 @@ function analyzePage(
     );
 
 
-  const sameOriginAnchors =
+  /*
+    Collector가 허용하는 Origin 기준과 동일하게
+    원래 Source 또는 최종 페이지 Origin을 허용한다.
+  */
+  const allowedAnchors =
+    anchors.filter(
+      function (
+        anchor
+      ) {
+
+        return (
+          sameOrigin(
+            source.sourceUrl,
+            anchor.url
+          ) ||
+          sameOrigin(
+            pageUrl,
+            anchor.url
+          )
+        );
+      }
+    );
+
+
+  const sourceOriginAnchors =
     anchors.filter(
       function (
         anchor
@@ -441,7 +502,7 @@ function analyzePage(
 
 
   const primaryAnchors =
-    sameOriginAnchors.filter(
+    allowedAnchors.filter(
       function (
         anchor
       ) {
@@ -457,7 +518,7 @@ function analyzePage(
 
 
   const actionAnchors =
-    sameOriginAnchors.filter(
+    allowedAnchors.filter(
       function (
         anchor
       ) {
@@ -473,7 +534,7 @@ function analyzePage(
 
 
   const candidateAnchors =
-    sameOriginAnchors.filter(
+    allowedAnchors.filter(
       function (
         anchor
       ) {
@@ -486,7 +547,7 @@ function analyzePage(
 
 
   const navigationAnchors =
-    sameOriginAnchors
+    allowedAnchors
 
       .filter(
         function (
@@ -523,7 +584,7 @@ function analyzePage(
     [];
 
 
-  sameOriginAnchors.forEach(
+  allowedAnchors.forEach(
     function (
       anchor
     ) {
@@ -534,9 +595,7 @@ function analyzePage(
         );
 
 
-      if (
-        !label
-      ) {
+      if (!label) {
 
         return;
       }
@@ -580,6 +639,12 @@ function analyzePage(
 
   return {
 
+    seedUrl:
+      seedUrl,
+
+    pageUrl:
+      pageUrl,
+
     htmlBytes:
       Buffer.byteLength(
         html,
@@ -595,10 +660,13 @@ function analyzePage(
     javascriptAnchors:
       javascriptAnchors,
 
-    collectorSameOriginAnchors:
-      sameOriginAnchors.length,
+    allowedAnchors:
+      allowedAnchors.length,
 
-    finalPageSameOriginAnchors:
+    sourceOriginAnchors:
+      sourceOriginAnchors.length,
+
+    finalOriginAnchors:
       finalOriginAnchors.length,
 
     primaryAnchors:
@@ -620,41 +688,20 @@ function analyzePage(
 
 
 /* =========================================================
-   RESULT PRINT
+   SEED RESULT
 ========================================================= */
 
-function printResult(
-  target,
+function printSeedResult(
+  index,
+  seedUrl,
   fetchResult,
   analysis
 ) {
 
-  const source =
-    target.source;
-
-
-  const region =
-    target.region;
-
-
-  const originalUrl =
-    canonicalUrl(
-      source.sourceUrl,
-      source.sourceUrl
-    );
-
-
-  const finalUrl =
-    canonicalUrl(
-      fetchResult.finalUrl,
-      fetchResult.finalUrl
-    );
-
-
   const originChanged =
     !sameOrigin(
-      originalUrl,
-      finalUrl
+      seedUrl,
+      fetchResult.finalUrl
     );
 
 
@@ -663,46 +710,33 @@ function printResult(
   );
 
   console.log(
-    "===================================="
+    "------------------------------------"
   );
 
   console.log(
-    "AXOO ART SOURCE PROBE"
+    "SEED #" +
+    (
+      index +
+      1
+    )
   );
 
   console.log(
-    "===================================="
+    "------------------------------------"
   );
 
-  console.log(
-    "SOURCE ID:",
-    source.id
-  );
 
   console.log(
-    "REGION:",
-    region.name
+    "SEED URL:",
+    seedUrl
   );
 
-  console.log(
-    "SOURCE:",
-    source.sourceName
-  );
-
-  console.log(
-    "TYPE:",
-    source.sourceType
-  );
-
-  console.log(
-    "URL:",
-    source.sourceUrl
-  );
 
   console.log(
     "FINAL URL:",
     fetchResult.finalUrl
   );
+
 
   console.log(
     "ORIGIN CHANGED:",
@@ -711,16 +745,19 @@ function printResult(
     )
   );
 
+
   console.log(
     "HTTP:",
     fetchResult.status,
     fetchResult.statusText
   );
 
+
   console.log(
     "CONTENT TYPE:",
     fetchResult.contentType
   );
+
 
   console.log(
     "TIME:",
@@ -730,22 +767,6 @@ function printResult(
 
 
   console.log(
-    ""
-  );
-
-  console.log(
-    "------------------------------------"
-  );
-
-  console.log(
-    "HTML / LINK DIAGNOSTICS"
-  );
-
-  console.log(
-    "------------------------------------"
-  );
-
-  console.log(
     "HTML KB:",
     Math.round(
       analysis.htmlBytes /
@@ -753,45 +774,48 @@ function printResult(
     )
   );
 
+
   console.log(
     "RAW <a>:",
     analysis.rawAnchors
   );
+
 
   console.log(
     "PARSED <a>:",
     analysis.parsedAnchors
   );
 
+
   console.log(
     "JAVASCRIPT HREF:",
     analysis.javascriptAnchors
   );
 
-  console.log(
-    "COLLECTOR SAME ORIGIN:",
-    analysis.collectorSameOriginAnchors
-  );
 
   console.log(
-    "FINAL PAGE SAME ORIGIN:",
-    analysis.finalPageSameOriginAnchors
+    "ALLOWED ORIGIN:",
+    analysis.allowedAnchors
   );
+
 
   console.log(
     "PRIMARY KEYWORD:",
     analysis.primaryAnchors.length
   );
 
+
   console.log(
     "ACTION KEYWORD:",
     analysis.actionAnchors.length
   );
 
+
   console.log(
     "CANDIDATE:",
     analysis.candidateAnchors.length
   );
+
 
   console.log(
     "NAVIGATION:",
@@ -808,16 +832,9 @@ function printResult(
       ""
     );
 
-    console.log(
-      "------------------------------------"
-    );
 
     console.log(
-      "RELATED LABEL SAMPLE"
-    );
-
-    console.log(
-      "------------------------------------"
+      "RELATED LABEL SAMPLE:"
     );
 
 
@@ -828,7 +845,7 @@ function printResult(
         ) {
 
           console.log(
-            "-",
+            "   -",
             label
           );
         }
@@ -845,36 +862,32 @@ function printResult(
       ""
     );
 
-    console.log(
-      "------------------------------------"
-    );
 
     console.log(
-      "CANDIDATE SAMPLE"
-    );
-
-    console.log(
-      "------------------------------------"
+      "🎯 CANDIDATE SAMPLE:"
     );
 
 
     analysis.candidateAnchors
+
       .slice(
         0,
         MAX_CANDIDATE_SAMPLES
       )
+
       .forEach(
         function (
           anchor
         ) {
 
           console.log(
-            "🎯",
+            "   -",
             anchor.label
           );
 
+
           console.log(
-            "   ",
+            "     ",
             anchor.url
           );
         }
@@ -891,40 +904,330 @@ function printResult(
       ""
     );
 
-    console.log(
-      "------------------------------------"
-    );
 
     console.log(
-      "TOP NAVIGATION SAMPLE"
-    );
-
-    console.log(
-      "------------------------------------"
+      "TOP NAVIGATION SAMPLE:"
     );
 
 
     analysis.navigationAnchors
+
       .slice(
         0,
         MAX_NAV_SAMPLES
       )
+
       .forEach(
         function (
           anchor
         ) {
 
           console.log(
-            "[" +
+            "   [" +
             followScore(
               anchor
             ) +
             "]",
-            anchor.label || "(NO LABEL)"
+            anchor.label ||
+              "(NO LABEL)"
           );
 
+
           console.log(
-            "   ",
+            "     ",
+            anchor.url
+          );
+        }
+      );
+  }
+}
+
+
+/* =========================================================
+   COMBINED RESULT
+========================================================= */
+
+function buildCombinedResult(
+  analyses
+) {
+
+  const candidateMap =
+    new Map();
+
+
+  const relatedLabelSet =
+    new Set();
+
+
+  let htmlBytes =
+    0;
+
+  let rawAnchors =
+    0;
+
+  let parsedAnchors =
+    0;
+
+  let javascriptAnchors =
+    0;
+
+  let allowedAnchors =
+    0;
+
+  let primaryAnchors =
+    0;
+
+  let actionAnchors =
+    0;
+
+  let navigationAnchors =
+    0;
+
+
+  analyses.forEach(
+    function (
+      analysis
+    ) {
+
+      htmlBytes +=
+        analysis.htmlBytes;
+
+      rawAnchors +=
+        analysis.rawAnchors;
+
+      parsedAnchors +=
+        analysis.parsedAnchors;
+
+      javascriptAnchors +=
+        analysis.javascriptAnchors;
+
+      allowedAnchors +=
+        analysis.allowedAnchors;
+
+      primaryAnchors +=
+        analysis.primaryAnchors.length;
+
+      actionAnchors +=
+        analysis.actionAnchors.length;
+
+      navigationAnchors +=
+        analysis.navigationAnchors.length;
+
+
+      analysis.candidateAnchors
+        .forEach(
+          function (
+            anchor
+          ) {
+
+            if (
+              !candidateMap.has(
+                anchor.url
+              )
+            ) {
+
+              candidateMap.set(
+                anchor.url,
+                anchor
+              );
+            }
+          }
+        );
+
+
+      analysis.relatedLabels
+        .forEach(
+          function (
+            label
+          ) {
+
+            relatedLabelSet.add(
+              label
+            );
+          }
+        );
+    }
+  );
+
+
+  return {
+
+    htmlBytes:
+      htmlBytes,
+
+    rawAnchors:
+      rawAnchors,
+
+    parsedAnchors:
+      parsedAnchors,
+
+    javascriptAnchors:
+      javascriptAnchors,
+
+    allowedAnchors:
+      allowedAnchors,
+
+    primaryAnchors:
+      primaryAnchors,
+
+    actionAnchors:
+      actionAnchors,
+
+    candidateAnchors:
+      Array.from(
+        candidateMap.values()
+      ),
+
+    navigationAnchors:
+      navigationAnchors,
+
+    relatedLabels:
+      Array.from(
+        relatedLabelSet
+      )
+  };
+}
+
+
+/* =========================================================
+   INTERPRETATION
+========================================================= */
+
+function printInterpretation(
+  successfulSeeds,
+  failedSeeds,
+  combined
+) {
+
+  console.log(
+    ""
+  );
+
+  console.log(
+    "===================================="
+  );
+
+  console.log(
+    "PROBE SUMMARY"
+  );
+
+  console.log(
+    "===================================="
+  );
+
+
+  console.log(
+    "SUCCESSFUL SEEDS:",
+    successfulSeeds
+  );
+
+
+  console.log(
+    "FAILED SEEDS:",
+    failedSeeds
+  );
+
+
+  console.log(
+    "HTML KB:",
+    Math.round(
+      combined.htmlBytes /
+      1024
+    )
+  );
+
+
+  console.log(
+    "RAW <a>:",
+    combined.rawAnchors
+  );
+
+
+  console.log(
+    "PARSED <a>:",
+    combined.parsedAnchors
+  );
+
+
+  console.log(
+    "JAVASCRIPT HREF:",
+    combined.javascriptAnchors
+  );
+
+
+  console.log(
+    "ALLOWED ORIGIN:",
+    combined.allowedAnchors
+  );
+
+
+  console.log(
+    "PRIMARY KEYWORD:",
+    combined.primaryAnchors
+  );
+
+
+  console.log(
+    "ACTION KEYWORD:",
+    combined.actionAnchors
+  );
+
+
+  console.log(
+    "UNIQUE CANDIDATE:",
+    combined.candidateAnchors.length
+  );
+
+
+  console.log(
+    "NAVIGATION:",
+    combined.navigationAnchors
+  );
+
+
+  if (
+    combined.candidateAnchors.length >
+    0
+  ) {
+
+    console.log(
+      ""
+    );
+
+
+    console.log(
+      "===================================="
+    );
+
+    console.log(
+      "🎯 UNIQUE CANDIDATES"
+    );
+
+    console.log(
+      "===================================="
+    );
+
+
+    combined.candidateAnchors
+
+      .slice(
+        0,
+        MAX_CANDIDATE_SAMPLES
+      )
+
+      .forEach(
+        function (
+          anchor
+        ) {
+
+          console.log(
+            "-",
+            anchor.label
+          );
+
+
+          console.log(
+            " ",
             anchor.url
           );
         }
@@ -950,7 +1253,22 @@ function printResult(
 
 
   if (
-    analysis.rawAnchors ===
+    successfulSeeds ===
+    0
+  ) {
+
+    console.log(
+      "❌ 모든 Seed URL 접근에 실패했습니다."
+    );
+
+
+    console.log(
+      "→ 네트워크 또는 Source URL 자체를 확인해야 합니다."
+    );
+
+
+  } else if (
+    combined.rawAnchors ===
     0
   ) {
 
@@ -958,91 +1276,68 @@ function printResult(
       "⚠️ HTML은 받았지만 <a> 링크가 없습니다."
     );
 
+
     console.log(
-      "→ JavaScript 렌더링/API 기반 페이지 가능성이 높습니다."
+      "→ JavaScript 렌더링/API 기반 Adapter가 필요합니다."
     );
 
 
   } else if (
-    analysis.javascriptAnchors >
-      0 &&
-    analysis.parsedAnchors <
-      analysis.rawAnchors * 0.5
-  ) {
-
-    console.log(
-      "⚠️ javascript: 링크 비중이 높습니다."
-    );
-
-    console.log(
-      "→ JavaScript Board Adapter 후보입니다."
-    );
-
-
-  } else if (
-    analysis.collectorSameOriginAnchors ===
-      0 &&
-    analysis.finalPageSameOriginAnchors >
+    combined.primaryAnchors ===
       0
   ) {
 
     console.log(
-      "⚠️ 리다이렉트 후 Origin이 달라졌습니다."
+      "⚠️ 검색 Adapter를 적용했지만 미술작품 관련 제목이 발견되지 않았습니다."
     );
 
+
     console.log(
-      "→ Collector sameOrigin 기준 수정이 필요할 수 있습니다."
+      "→ 검색 파라미터가 실제 사이트 검색에 반영되는지 확인해야 합니다."
     );
 
 
   } else if (
-    analysis.primaryAnchors.length ===
-    0
-  ) {
-
-    console.log(
-      "ℹ️ 첫 페이지에 미술작품/공공미술 제목이 없습니다."
-    );
-
-    console.log(
-      "→ 게시판 내부 탐색 또는 검색 Adapter가 필요할 수 있습니다."
-    );
-
-
-  } else if (
-    analysis.primaryAnchors.length >
+    combined.primaryAnchors >
       0 &&
-    analysis.candidateAnchors.length ===
+    combined.candidateAnchors.length ===
       0
   ) {
 
     console.log(
-      "⚠️ 미술작품 관련 제목은 있지만 후보 필터를 통과하지 못했습니다."
+      "⚠️ 미술작품 관련 결과는 발견했지만 Candidate Filter를 통과한 공고가 없습니다."
     );
 
+
     console.log(
-      "→ 제목 패턴/필터 조건을 점검해야 합니다."
+      "→ 결과 제목 패턴과 Candidate Filter를 비교해야 합니다."
     );
 
 
   } else if (
-    analysis.candidateAnchors.length >
-    0
+    combined.candidateAnchors.length >
+      0
   ) {
 
     console.log(
-      "✅ 첫 페이지에서 실제 공모 후보 탐지 성공."
+      "✅ Adapter를 통해 실제 공모 후보 탐지에 성공했습니다."
+    );
+
+
+    console.log(
+      "→ 다음 단계는 상세페이지 정보 추출과 지역 판별입니다."
     );
 
 
   } else {
 
     console.log(
-      "ℹ️ 일반 HTML 링크는 정상 추출되고 있습니다."
+      "ℹ️ HTML 및 링크 탐색은 정상입니다."
     );
 
+
     console.log(
-      "→ 다음 단계에서 게시판 탐색 경로를 확인하세요."
+      "→ 게시판 상세 탐색 구조를 추가 확인하세요."
     );
   }
 
@@ -1050,6 +1345,295 @@ function printResult(
   console.log(
     "===================================="
   );
+}
+
+
+/* =========================================================
+   PROBE
+========================================================= */
+
+async function probeSource(
+  target
+) {
+
+  const source =
+    target.source;
+
+
+  const region =
+    target.region;
+
+
+  const adapterInfo =
+    describeSourceAdapter(
+      source
+    );
+
+
+  const seedUrls =
+    getSourceSeedUrls(
+      source,
+      {
+        maxSeeds:
+          MAX_SEEDS_PER_SOURCE
+      }
+    );
+
+
+  console.log(
+    ""
+  );
+
+  console.log(
+    "===================================="
+  );
+
+  console.log(
+    "AXOO ART SOURCE PROBE"
+  );
+
+  console.log(
+    "===================================="
+  );
+
+
+  console.log(
+    "SOURCE ID:",
+    source.id
+  );
+
+
+  console.log(
+    "REGION:",
+    region.name
+  );
+
+
+  console.log(
+    "SOURCE:",
+    source.sourceName
+  );
+
+
+  console.log(
+    "TYPE:",
+    source.sourceType
+  );
+
+
+  console.log(
+    "CRAWL MODE:",
+    source.crawlMode ||
+      ""
+  );
+
+
+  console.log(
+    "SOURCE URL:",
+    source.sourceUrl
+  );
+
+
+  console.log(
+    ""
+  );
+
+
+  console.log(
+    "ADAPTER APPLIED:",
+    formatBoolean(
+      adapterInfo.applied
+    )
+  );
+
+
+  console.log(
+    "ADAPTER ID:",
+    adapterInfo.adapterId
+  );
+
+
+  console.log(
+    "ADAPTER LABEL:",
+    adapterInfo.adapterLabel
+  );
+
+
+  console.log(
+    "ADAPTER MODE:",
+    adapterInfo.mode
+  );
+
+
+  console.log(
+    "SEED COUNT:",
+    seedUrls.length
+  );
+
+
+  console.log(
+    "TIMEOUT / SEED:",
+    FETCH_TIMEOUT_MS +
+      "ms"
+  );
+
+
+  if (
+    seedUrls.length ===
+    0
+  ) {
+
+    console.error(
+      "❌ Probe 가능한 Seed URL이 없습니다."
+    );
+
+
+    process.exitCode =
+      1;
+
+
+    return;
+  }
+
+
+  const analyses =
+    [];
+
+
+  let successfulSeeds =
+    0;
+
+
+  let failedSeeds =
+    0;
+
+
+  for (
+    let index = 0;
+    index < seedUrls.length;
+    index++
+  ) {
+
+    const seedUrl =
+      seedUrls[
+        index
+      ];
+
+
+    let fetchResult;
+
+
+    try {
+
+      fetchResult =
+        await fetchPage(
+          seedUrl
+        );
+
+
+      successfulSeeds++;
+
+
+      const analysis =
+        analyzePage(
+          source,
+          seedUrl,
+          fetchResult
+        );
+
+
+      analyses.push(
+        analysis
+      );
+
+
+      printSeedResult(
+        index,
+        seedUrl,
+        fetchResult,
+        analysis
+      );
+
+
+      if (
+        !fetchResult.ok
+      ) {
+
+        console.log(
+          "   ⚠️ HTTP 응답이 성공 상태가 아닙니다."
+        );
+      }
+
+
+    } catch (
+      error
+    ) {
+
+      failedSeeds++;
+
+
+      console.log(
+        ""
+      );
+
+
+      console.log(
+        "------------------------------------"
+      );
+
+
+      console.log(
+        "SEED #" +
+        (
+          index +
+          1
+        ) +
+        " FAILED"
+      );
+
+
+      console.log(
+        "------------------------------------"
+      );
+
+
+      console.log(
+        "URL:",
+        seedUrl
+      );
+
+
+      console.log(
+        "ERROR:",
+        error.name,
+        "|",
+        error.message
+      );
+    }
+  }
+
+
+  const combined =
+    buildCombinedResult(
+      analyses
+    );
+
+
+  printInterpretation(
+    successfulSeeds,
+    failedSeeds,
+    combined
+  );
+
+
+  if (
+    successfulSeeds ===
+    0
+  ) {
+
+    process.exitCode =
+      1;
+  }
 }
 
 
@@ -1068,7 +1652,8 @@ async function main() {
 
   if (
     !argument ||
-    argument === "--list"
+    argument ===
+      "--list"
   ) {
 
     printSourceList();
@@ -1082,25 +1667,31 @@ async function main() {
         ""
       );
 
+
       console.log(
         "사용법:"
       );
+
 
       console.log(
         "node scripts/probe_art_source.js <SOURCE_ID>"
       );
 
+
       console.log(
         ""
       );
+
 
       console.log(
         "예:"
       );
 
+
       console.log(
         "node scripts/probe_art_source.js daejeon_city_notice"
       );
+
 
       console.log(
         "node scripts/probe_art_source.js artnuri_art_commission"
@@ -1146,114 +1737,21 @@ async function main() {
     ""
   );
 
+
   console.log(
     "🔎 SOURCE PROBE START"
   );
+
 
   console.log(
     "SOURCE ID:",
     target.source.id
   );
 
-  console.log(
-    "TIMEOUT:",
-    FETCH_TIMEOUT_MS +
-      "ms"
+
+  await probeSource(
+    target
   );
-
-
-  let fetchResult;
-
-
-  try {
-
-    fetchResult =
-      await fetchPage(
-        target.source.sourceUrl
-      );
-
-
-  } catch (
-    error
-  ) {
-
-    console.error(
-      ""
-    );
-
-    console.error(
-      "===================================="
-    );
-
-    console.error(
-      "SOURCE PROBE FAILED"
-    );
-
-    console.error(
-      "===================================="
-    );
-
-    console.error(
-      "SOURCE ID:",
-      target.source.id
-    );
-
-    console.error(
-      "REGION:",
-      target.region.name
-    );
-
-    console.error(
-      "SOURCE:",
-      target.source.sourceName
-    );
-
-    console.error(
-      "URL:",
-      target.source.sourceUrl
-    );
-
-    console.error(
-      "ERROR:",
-      error.name,
-      "|",
-      error.message
-    );
-
-    console.error(
-      "===================================="
-    );
-
-
-    process.exitCode =
-      1;
-
-
-    return;
-  }
-
-
-  const analysis =
-    analyzePage(
-      target.source,
-      fetchResult
-    );
-
-
-  printResult(
-    target,
-    fetchResult,
-    analysis
-  );
-
-
-  if (
-    !fetchResult.ok
-  ) {
-
-    process.exitCode =
-      1;
-  }
 }
 
 
