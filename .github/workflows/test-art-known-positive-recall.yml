@@ -1,4 +1,4 @@
-name: Test Art Known Positive Recall
+name: Test Art Collector Safety
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 jobs:
-  recall-test:
+  collector-safety-test:
     runs-on: ubuntu-24.04
 
     timeout-minutes: 5
@@ -25,7 +25,7 @@ jobs:
         run: |
           echo ""
           echo "===================================="
-          echo "AXOO ART KNOWN-POSITIVE RECALL TEST"
+          echo "AXOO ART COLLECTOR SAFETY TEST"
           echo "===================================="
           node --version
           echo "===================================="
@@ -33,17 +33,41 @@ jobs:
 
       - name: Validate JavaScript syntax
         run: |
+          node --check scripts/art_region_scope.js
           node --check scripts/art_commission_sources.js
           node --check scripts/art_source_adapters.js
           node --check scripts/collect_remaining_art_commissions.js
           node --check scripts/test_art_known_positive_recall.js
+          node --check scripts/test_art_region_inference.js
 
       - name: Run known-positive recall test
         run: |
           echo ""
           echo "===================================="
-          echo "KNOWN-POSITIVE RECALL TEST START"
+          echo "1/2 KNOWN-POSITIVE RECALL TEST"
           echo "===================================="
           echo ""
 
           node scripts/test_art_known_positive_recall.js
+
+      - name: Run region inference regression test
+        run: |
+          echo ""
+          echo "===================================="
+          echo "2/2 REGION INFERENCE TEST"
+          echo "===================================="
+          echo ""
+
+          node scripts/test_art_region_inference.js
+
+      - name: Safety test summary
+        run: |
+          echo ""
+          echo "===================================="
+          echo "AXOO ART COLLECTOR SAFETY"
+          echo "===================================="
+          echo "KNOWN-POSITIVE RECALL : PASS"
+          echo "REGION INFERENCE      : PASS"
+          echo "===================================="
+          echo ""
+          echo "✅ ART COLLECTOR SAFETY TEST PASSED"
