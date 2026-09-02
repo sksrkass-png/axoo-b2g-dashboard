@@ -1,0 +1,49 @@
+name: Test Art Known Positive Recall
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recall-test:
+    runs-on: ubuntu-24.04
+
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Show environment
+        run: |
+          echo ""
+          echo "===================================="
+          echo "AXOO ART KNOWN-POSITIVE RECALL TEST"
+          echo "===================================="
+          node --version
+          echo "===================================="
+          echo ""
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check scripts/art_commission_sources.js
+          node --check scripts/art_source_adapters.js
+          node --check scripts/collect_remaining_art_commissions.js
+          node --check scripts/test_art_known_positive_recall.js
+
+      - name: Run known-positive recall test
+        run: |
+          echo ""
+          echo "===================================="
+          echo "KNOWN-POSITIVE RECALL TEST START"
+          echo "===================================="
+          echo ""
+
+          node scripts/test_art_known_positive_recall.js
