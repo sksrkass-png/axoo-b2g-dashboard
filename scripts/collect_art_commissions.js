@@ -2,40 +2,71 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
+const {
+  extractArtDetail,
+  mergeArtDetailIntoItem
+} = require("./art_detail_extractor");
+
 
 /* =========================================================
    CONFIG
 ========================================================= */
 
-const DATA_FILE = path.join(
-  process.cwd(),
-  "data",
-  "art_commissions.json"
-);
+const DATA_FILE =
+  path.join(
+    process.cwd(),
+    "data",
+    "art_commissions.json"
+  );
 
-const ARCHIVE_FILE = path.join(
-  process.cwd(),
-  "data",
-  "art_commissions_archive.json"
-);
+
+const ARCHIVE_FILE =
+  path.join(
+    process.cwd(),
+    "data",
+    "art_commissions_archive.json"
+  );
+
 
 const SOURCE_NAME =
   "경기도 건축물 미술작품";
 
+
 const SOURCE_ID =
   "gyeonggi_public_art";
+
 
 const SOURCE_MAIN_URL =
   "https://www.gg.go.kr/publicart/main.do";
 
+
+const FETCH_BRIDGE_URL =
+  process.env.AXOO_B2G_FETCH_BRIDGE_URL ||
+  "https://script.google.com/macros/s/AKfycbzu4m0lNbY5RzXFuKTR3C6H2hd_swAfLTdyZeERGqM3XrChjBrT46cWdiWTQGWSn9-4aQ/exec";
+
+
 const COLLECTION_VERSION =
-  "1.1.0";
+  "1.2.0";
+
 
 const FETCH_TIMEOUT_MS =
   15000;
 
 
+const DETAIL_BRIDGE_TIMEOUT_MS =
+  30000;
+
+
+const DETAIL_DIRECT_FALLBACK_TIMEOUT_MS =
+  8000;
+
+
+const MIN_HTML_BYTES =
+  1000;
+
+
 const EXCLUDE_KEYWORDS = [
+
   "선정결과",
   "선정 결과",
 
@@ -84,32 +115,53 @@ const EXCLUDE_KEYWORDS = [
    JSON
 ========================================================= */
 
-function readArray(filePath) {
+function readArray(
+  filePath
+) {
 
-  if (!fs.existsSync(filePath)) {
+  if (
+    !fs.existsSync(
+      filePath
+    )
+  ) {
+
     return [];
   }
 
-  const raw = fs
-    .readFileSync(
-      filePath,
-      "utf8"
-    )
-    .trim();
+
+  const raw =
+    fs
+      .readFileSync(
+        filePath,
+        "utf8"
+      )
+      .trim();
+
 
   if (!raw) {
+
     return [];
   }
 
-  const parsed =
-    JSON.parse(raw);
 
-  if (!Array.isArray(parsed)) {
+  const parsed =
+    JSON.parse(
+      raw
+    );
+
+
+  if (
+    !Array.isArray(
+      parsed
+    )
+  ) {
+
     throw new Error(
       filePath +
       " 은 배열 형식이어야 합니다."
     );
   }
+
 
   return parsed;
 }
@@ -126,7 +178,8 @@ function writeArray(
       items,
       null,
       2
-    ) + "\n",
+    ) +
+    "\n",
     "utf8"
   );
 }
@@ -136,9 +189,14 @@ function writeArray(
    TEXT
 ========================================================= */
 
-function decodeHtmlEntities(value) {
+function decodeHtmlEntities(
+  value
+) {
 
-  return String(value || "")
+  return String(
+    value ||
+    ""
+  )
 
     .replace(
       /&amp;/gi,
@@ -172,17 +230,25 @@ function decodeHtmlEntities(value) {
 
     .replace(
       /&#(\d+);/g,
-      function (_, code) {
+      function (
+        _,
+        code
+      ) {
 
         return String.fromCharCode(
-          Number(code)
+          Number(
+            code
+          )
         );
       }
     )
 
     .replace(
       /&#x([0-9a-f]+);/gi,
-      function (_, code) {
+      function (
+        _,
+        code
+      ) {
 
         return String.fromCharCode(
           parseInt(
@@ -195,7 +261,9 @@ function decodeHtmlEntities(value) {
 }
 
 
-function cleanText(value) {
+function cleanText(
+  value
+) {
 
   return decodeHtmlEntities(
     value
@@ -229,7 +297,9 @@ function cleanText(value) {
    URL
 ========================================================= */
 
-function canonicalizeBoardUrl(value) {
+function canonicalizeBoardUrl(
+  value
+) {
 
   try {
 
@@ -244,13 +314,16 @@ function canonicalizeBoardUrl(value) {
       url.pathname.includes(
         "/publicart/bbs/boardView.do"
       ) &&
-      url.searchParams.get("bIdx")
+      url.searchParams.get(
+        "bIdx"
+      )
     ) {
 
       const bIdx =
         url.searchParams.get(
           "bIdx"
         );
+
 
       return (
         "https://www.gg.go.kr/publicart/bbs/boardView.do" +
@@ -264,19 +337,92 @@ function canonicalizeBoardUrl(value) {
     }
 
 
-    url.hash = "";
+    url.hash =
+      "";
+
 
     return url.toString();
 
-  } catch (error) {
+
+  } catch (
+    error
+  ) {
 
     return "";
   }
 }
 
 
+function getGyeonggiBIdx(
+  value
+) {
+
+  try {
+
+    const url =
+      new URL(
+        value,
+        SOURCE_MAIN_URL
+      );
+
+
+    const bIdx =
+      String(
+        url.searchParams.get(
+          "bIdx"
+        ) ||
+        ""
+      )
+        .trim();
+
+
+    if (
+      !/^\d{1,20}$/.test(
+        bIdx
+      )
+    ) {
+
+      return "";
+    }
+
+
+    return bIdx;
+
+
+  } catch (
+    error
+  ) {
+
+    return "";
+  }
+}
+
+
+function getItemUrl(
+  item
+) {
+
+  if (!item) {
+
+    return "";
+  }
+
+
+  return canonicalizeBoardUrl(
+
+    item.sourceUrl ||
+
+    item.originalUrl ||
+
+    item.url ||
+
+    ""
+  );
+}
+
+
 /* =========================================================
-   TITLE FILTER
+   FILTER
 ========================================================= */
 
 function hasExcludedKeyword(
@@ -284,10 +430,16 @@ function hasExcludedKeyword(
 ) {
 
   const text =
-    cleanText(title);
+    cleanText(
+      title
+    );
+
 
   return EXCLUDE_KEYWORDS.some(
-    function (keyword) {
+
+    function (
+      keyword
+    ) {
 
       return text.includes(
         keyword
@@ -302,50 +454,58 @@ function isCandidateTitle(
 ) {
 
   const text =
-    cleanText(title);
+    cleanText(
+      title
+    );
 
 
   if (!text) {
+
     return false;
   }
 
 
   if (
-    hasExcludedKeyword(text)
+    hasExcludedKeyword(
+      text
+    )
   ) {
+
     return false;
   }
 
-
-  /*
-    반드시:
-    미술작품 + 공모
-  */
 
   if (
     !text.includes(
       "미술작품"
     ) ||
+
     !text.includes(
       "공모"
     )
   ) {
+
     return false;
   }
 
 
-  /*
-    실제 공모 게시물 신호
-  */
-
   return [
+
     "공고",
+
     "제작",
+
     "설치",
+
     "신축",
+
     "공동주택"
+
   ].some(
-    function (keyword) {
+
+    function (
+      keyword
+    ) {
 
       return text.includes(
         keyword
@@ -364,6 +524,7 @@ function isManagedGyeonggiItem(
 ) {
 
   if (!item) {
+
     return false;
   }
 
@@ -372,22 +533,29 @@ function isManagedGyeonggiItem(
     item.collectionSourceId ===
     SOURCE_ID
   ) {
+
     return true;
   }
 
 
   const sourceUrl =
     String(
+
       item.sourceUrl ||
+
       item.originalUrl ||
+
       item.url ||
+
       ""
     );
 
 
   return (
+
     item.source ===
       SOURCE_NAME &&
+
     sourceUrl.includes(
       "gg.go.kr/publicart"
     )
@@ -400,18 +568,17 @@ function cleanFalsePositives(
 ) {
 
   return items.filter(
-    function (item) {
 
-      /*
-        다른 지역 데이터는
-        절대 건드리지 않는다.
-      */
+    function (
+      item
+    ) {
 
       if (
         !isManagedGyeonggiItem(
           item
         )
       ) {
+
         return true;
       }
 
@@ -457,14 +624,16 @@ function stableId(
 
 
 /* =========================================================
-   HTML PARSER
+   LIST PARSER
 ========================================================= */
 
 function extractBoardItems(
   html
 ) {
 
-  const found = [];
+  const found =
+    [];
+
 
   const seen =
     new Set();
@@ -483,7 +652,8 @@ function extractBoardItems(
         anchorRegex.exec(
           html
         )
-    ) !== null
+    ) !==
+    null
   ) {
 
     const href =
@@ -505,6 +675,7 @@ function extractBoardItems(
 
 
     if (!sourceUrl) {
+
       continue;
     }
 
@@ -514,6 +685,7 @@ function extractBoardItems(
         "/publicart/bbs/boardView.do"
       )
     ) {
+
       continue;
     }
 
@@ -523,6 +695,7 @@ function extractBoardItems(
         "bsIdx=825"
       )
     ) {
+
       continue;
     }
 
@@ -532,6 +705,7 @@ function extractBoardItems(
         title
       )
     ) {
+
       continue;
     }
 
@@ -541,6 +715,7 @@ function extractBoardItems(
         sourceUrl
       )
     ) {
+
       continue;
     }
 
@@ -566,6 +741,9 @@ function extractBoardItems(
       agency:
         "경기도",
 
+      organization:
+        "경기도",
+
       region:
         "경기",
 
@@ -578,14 +756,35 @@ function extractBoardItems(
       publishedDate:
         "",
 
+      postedDate:
+        "",
+
       periodStart:
         "",
 
       deadline:
         "",
 
+      endDate:
+        "",
+
+      amount:
+        "",
+
+      amountNumeric:
+        null,
+
       budget:
-        0,
+        "",
+
+      location:
+        "",
+
+      installationLocation:
+        "",
+
+      eligibility:
+        "",
 
       keywords: [
         "미술작품",
@@ -599,6 +798,9 @@ function extractBoardItems(
         "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토",
 
       sourceUrl:
+        sourceUrl,
+
+      originalUrl:
         sourceUrl,
 
       bidNtceNo:
@@ -620,7 +822,19 @@ function extractBoardItems(
         SOURCE_ID,
 
       collectionVersion:
-        COLLECTION_VERSION
+        COLLECTION_VERSION,
+
+      detailFetchStatus:
+        "pending",
+
+      detailFetchTransport:
+        "",
+
+      detailFetchError:
+        "",
+
+      detailHtmlBytes:
+        0
     });
   }
 
@@ -630,12 +844,18 @@ function extractBoardItems(
 
 
 /* =========================================================
-   FETCH
+   DIRECT FETCH
 ========================================================= */
 
-async function fetchText(
-  url
+async function fetchTextDirect(
+  url,
+  timeoutMs
 ) {
+
+  const timeout =
+    timeoutMs ||
+    FETCH_TIMEOUT_MS;
+
 
   const controller =
     new AbortController();
@@ -643,12 +863,14 @@ async function fetchText(
 
   const timer =
     setTimeout(
+
       function () {
 
         controller.abort();
 
       },
-      FETCH_TIMEOUT_MS
+
+      timeout
     );
 
 
@@ -662,10 +884,13 @@ async function fetchText(
           signal:
             controller.signal,
 
+          redirect:
+            "follow",
+
           headers: {
 
             "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.1)",
+              "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.2)",
 
             "Accept":
               "text/html,application/xhtml+xml,*/*",
@@ -677,7 +902,9 @@ async function fetchText(
       );
 
 
-    if (!response.ok) {
+    if (
+      !response.ok
+    ) {
 
       throw new Error(
         "HTTP " +
@@ -686,7 +913,44 @@ async function fetchText(
     }
 
 
-    return await response.text();
+    const html =
+      await response.text();
+
+
+    const bytes =
+      Buffer.byteLength(
+        html,
+        "utf8"
+      );
+
+
+    if (
+      bytes <
+      MIN_HTML_BYTES
+    ) {
+
+      throw new Error(
+        "HTML_TOO_SMALL"
+      );
+    }
+
+
+    return {
+
+      html:
+        html,
+
+      transport:
+        "direct",
+
+      status:
+        response.status,
+
+      finalUrl:
+        response.url ||
+        url
+    };
+
 
   } finally {
 
@@ -698,27 +962,625 @@ async function fetchText(
 
 
 /* =========================================================
-   ITEM URL
+   FETCH BRIDGE
 ========================================================= */
 
-function getItemUrl(
-  item
+async function fetchBridgeHtml(
+  params,
+  timeoutMs
 ) {
 
-  if (!item) {
-    return "";
+  const timeout =
+    timeoutMs ||
+    DETAIL_BRIDGE_TIMEOUT_MS;
+
+
+  const controller =
+    new AbortController();
+
+
+  const timer =
+    setTimeout(
+
+      function () {
+
+        controller.abort();
+
+      },
+
+      timeout
+    );
+
+
+  try {
+
+    const url =
+      new URL(
+        FETCH_BRIDGE_URL
+      );
+
+
+    Object.keys(
+      params ||
+      {}
+    ).forEach(
+
+      function (
+        key
+      ) {
+
+        url.searchParams.set(
+
+          key,
+
+          String(
+            params[key]
+          )
+        );
+      }
+    );
+
+
+    const response =
+      await fetch(
+        url.toString(),
+        {
+
+          signal:
+            controller.signal,
+
+          redirect:
+            "follow",
+
+          headers: {
+
+            "User-Agent":
+              "Mozilla/5.0 (compatible; AXOO-B2G-Collector/1.2)",
+
+            "Accept":
+              "application/json,text/plain,*/*"
+          }
+        }
+      );
+
+
+    if (
+      !response.ok
+    ) {
+
+      throw new Error(
+        "BRIDGE_HTTP_" +
+        response.status
+      );
+    }
+
+
+    const text =
+      await response.text();
+
+
+    let payload;
+
+
+    try {
+
+      payload =
+        JSON.parse(
+          text
+        );
+
+
+    } catch (
+      error
+    ) {
+
+      throw new Error(
+        "BRIDGE_JSON_PARSE_FAILED: " +
+        error.message
+      );
+    }
+
+
+    if (
+      !payload ||
+      payload.ok !==
+        true
+    ) {
+
+      throw new Error(
+
+        "BRIDGE_UPSTREAM_FAILED: " +
+
+        String(
+          (
+            payload &&
+            (
+              payload.message ||
+              payload.error
+            )
+          ) ||
+          "unknown"
+        )
+      );
+    }
+
+
+    const htmlBase64 =
+      String(
+        payload.htmlBase64 ||
+        ""
+      );
+
+
+    if (
+      !htmlBase64
+    ) {
+
+      throw new Error(
+        "BRIDGE_HTML_EMPTY"
+      );
+    }
+
+
+    const html =
+      Buffer
+        .from(
+          htmlBase64,
+          "base64"
+        )
+        .toString(
+          "utf8"
+        );
+
+
+    const bytes =
+      Buffer.byteLength(
+        html,
+        "utf8"
+      );
+
+
+    if (
+      bytes <
+      MIN_HTML_BYTES
+    ) {
+
+      throw new Error(
+        "BRIDGE_HTML_TOO_SMALL"
+      );
+    }
+
+
+    return {
+
+      html:
+        html,
+
+      transport:
+        "apps-script-bridge",
+
+      status:
+        Number(
+          payload.upstreamStatus
+        ) ||
+        0,
+
+      finalUrl:
+        payload.upstreamUrl ||
+        "",
+
+      bridgeMeta: {
+
+        target:
+          payload.target ||
+          "",
+
+        chars:
+          payload.chars ||
+          0,
+
+        bytes:
+          payload.bytes ||
+          0,
+
+        truncated:
+          payload.truncated ===
+          true,
+
+        hasArtKeyword:
+          payload.hasArtKeyword ===
+          true
+      }
+    };
+
+
+  } finally {
+
+    clearTimeout(
+      timer
+    );
+  }
+}
+
+
+/* =========================================================
+   MAIN FETCH
+========================================================= */
+
+async function fetchSourceMainViaBridge() {
+
+  return fetchBridgeHtml(
+    {
+
+      action:
+        "fetch",
+
+      target:
+        "gyeonggi_main"
+    },
+
+    DETAIL_BRIDGE_TIMEOUT_MS
+  );
+}
+
+
+async function fetchSourceMainHtml() {
+
+  try {
+
+    return await fetchTextDirect(
+      SOURCE_MAIN_URL,
+      FETCH_TIMEOUT_MS
+    );
+
+
+  } catch (
+    directError
+  ) {
+
+    console.log(
+      "⚠️ 경기 MAIN direct fetch 실패 → Fetch Bridge fallback"
+    );
+
+
+    console.log(
+      "   direct error:",
+      directError.message
+    );
+
+
+    return fetchSourceMainViaBridge();
+  }
+}
+
+
+/* =========================================================
+   DETAIL FETCH
+========================================================= */
+
+async function fetchGyeonggiDetailHtml(
+  sourceUrl
+) {
+
+  const bIdx =
+    getGyeonggiBIdx(
+      sourceUrl
+    );
+
+
+  if (!bIdx) {
+
+    throw new Error(
+      "BIDX_NOT_FOUND"
+    );
   }
 
 
-  const raw =
-    item.sourceUrl ||
-    item.originalUrl ||
-    item.url ||
-    "";
+  /*
+    GitHub Runner에서 경기도 상세페이지 직접 접근은
+    TCP Connect Timeout이 반복 확인되었다.
+
+    따라서 상세페이지는
+    Apps Script Fetch Bridge를 1순위로 사용한다.
+
+    Bridge 장애 시에만 direct를 짧게 재시도한다.
+  */
+
+  try {
+
+    return await fetchBridgeHtml(
+      {
+
+        action:
+          "fetchGyeonggiDetail",
+
+        bIdx:
+          bIdx
+      },
+
+      DETAIL_BRIDGE_TIMEOUT_MS
+    );
 
 
-  return canonicalizeBoardUrl(
-    raw
+  } catch (
+    bridgeError
+  ) {
+
+    console.log(
+      "⚠️ 경기 DETAIL Bridge 실패 → direct fallback | bIdx=" +
+      bIdx
+    );
+
+
+    console.log(
+      "   bridge error:",
+      bridgeError.message
+    );
+
+
+    try {
+
+      return await fetchTextDirect(
+        sourceUrl,
+        DETAIL_DIRECT_FALLBACK_TIMEOUT_MS
+      );
+
+
+    } catch (
+      directError
+    ) {
+
+      throw new Error(
+
+        "DETAIL_FETCH_FAILED | bridge=" +
+
+        bridgeError.message +
+
+        " | direct=" +
+
+        directError.message
+      );
+    }
+  }
+}
+
+
+/* =========================================================
+   DETAIL ENRICHMENT
+========================================================= */
+
+function shouldSkipDetailFetch(
+  item,
+  existingUrls,
+  expiredArchiveUrls
+) {
+
+  const url =
+    getItemUrl(
+      item
+    );
+
+
+  if (!url) {
+
+    return true;
+  }
+
+
+  return (
+
+    expiredArchiveUrls.has(
+      url
+    ) &&
+
+    !existingUrls.has(
+      url
+    )
+  );
+}
+
+
+async function enrichOneDetail(
+  item
+) {
+
+  const sourceUrl =
+    getItemUrl(
+      item
+    );
+
+
+  try {
+
+    const fetched =
+      await fetchGyeonggiDetailHtml(
+        sourceUrl
+      );
+
+
+    const detail =
+      extractArtDetail(
+        fetched.html,
+        {
+
+          sourceUrl:
+            fetched.finalUrl ||
+            sourceUrl,
+
+          title:
+            item.title
+        }
+      );
+
+
+    const merged =
+      mergeArtDetailIntoItem(
+        item,
+        detail
+      );
+
+
+    return {
+
+      ...merged,
+
+      sourceUrl:
+        sourceUrl,
+
+      originalUrl:
+        sourceUrl,
+
+      detailFetchStatus:
+        "ok",
+
+      detailFetchTransport:
+        fetched.transport,
+
+      detailFetchError:
+        "",
+
+      detailHtmlBytes:
+        Buffer.byteLength(
+          fetched.html,
+          "utf8"
+        ),
+
+      collectionVersion:
+        COLLECTION_VERSION
+    };
+
+
+  } catch (
+    error
+  ) {
+
+    return {
+
+      ...item,
+
+      sourceUrl:
+        sourceUrl,
+
+      originalUrl:
+        sourceUrl,
+
+      detailFetchStatus:
+        "failed",
+
+      detailFetchTransport:
+        "",
+
+      detailFetchError:
+        String(
+          error &&
+          error.message
+            ? error.message
+            : error
+        ).slice(
+          0,
+          1000
+        ),
+
+      detailHtmlBytes:
+        0,
+
+      collectionVersion:
+        COLLECTION_VERSION
+    };
+  }
+}
+
+
+async function enrichDiscoveredItems(
+  discovered,
+  existing,
+  archive
+) {
+
+  const existingUrls =
+    new Set(
+
+      existing
+
+        .map(
+          getItemUrl
+        )
+
+        .filter(
+          Boolean
+        )
+    );
+
+
+  const expiredArchiveUrls =
+    new Set(
+
+      archive
+
+        .filter(
+
+          function (
+            item
+          ) {
+
+            return (
+              item &&
+              item.isExpired ===
+                true
+            );
+          }
+        )
+
+        .map(
+          getItemUrl
+        )
+
+        .filter(
+          Boolean
+        )
+    );
+
+
+  return Promise.all(
+
+    discovered.map(
+
+      async function (
+        item
+      ) {
+
+        if (
+          shouldSkipDetailFetch(
+            item,
+            existingUrls,
+            expiredArchiveUrls
+          )
+        ) {
+
+          return {
+
+            ...item,
+
+            detailFetchStatus:
+              "skipped_archived",
+
+            detailFetchTransport:
+              "",
+
+            detailFetchError:
+              "",
+
+            detailHtmlBytes:
+              0
+          };
+        }
+
+
+        return enrichOneDetail(
+          item
+        );
+      }
+    )
   );
 }
 
@@ -743,7 +1605,8 @@ function cleanArchive(
 
 
   if (
-    removed > 0
+    removed >
+    0
   ) {
 
     console.log(
@@ -758,6 +1621,218 @@ function cleanArchive(
 
 
 /* =========================================================
+   DETAIL MERGE POLICY
+========================================================= */
+
+function hasFreshEvidence(
+  item,
+  field
+) {
+
+  const evidence =
+
+    item &&
+
+    item.detailExtractionEvidence &&
+
+    item.detailExtractionEvidence[
+      field
+    ];
+
+
+  return Boolean(
+    evidence &&
+    evidence.value
+  );
+}
+
+
+function mergeFreshDetailFields(
+  target,
+  fresh
+) {
+
+  const result = {
+
+    ...target
+  };
+
+
+  if (
+    fresh.detailFetchStatus !==
+    "ok"
+  ) {
+
+    return result;
+  }
+
+
+  if (
+    hasFreshEvidence(
+      fresh,
+      "deadline"
+    )
+  ) {
+
+    result.deadline =
+      fresh.deadline ||
+      "";
+
+
+    result.endDate =
+      fresh.endDate ||
+      fresh.deadline ||
+      "";
+  }
+
+
+  if (
+    hasFreshEvidence(
+      fresh,
+      "publishedDate"
+    )
+  ) {
+
+    result.publishedDate =
+      fresh.publishedDate ||
+      "";
+
+
+    result.postedDate =
+      fresh.postedDate ||
+      fresh.publishedDate ||
+      "";
+  }
+
+
+  if (
+    hasFreshEvidence(
+      fresh,
+      "agency"
+    )
+  ) {
+
+    result.agency =
+      fresh.agency ||
+      "";
+
+
+    result.organization =
+      fresh.organization ||
+      fresh.agency ||
+      "";
+  }
+
+
+  if (
+    hasFreshEvidence(
+      fresh,
+      "amount"
+    )
+  ) {
+
+    result.amount =
+      fresh.amount ||
+      "";
+
+
+    result.amountNumeric =
+      fresh.amountNumeric !==
+      undefined
+        ? fresh.amountNumeric
+        : null;
+
+
+    result.budget =
+      fresh.budget ||
+      fresh.amount ||
+      "";
+  }
+
+
+  if (
+    hasFreshEvidence(
+      fresh,
+      "location"
+    )
+  ) {
+
+    result.location =
+      fresh.location ||
+      "";
+
+
+    result.installationLocation =
+      fresh.installationLocation ||
+      fresh.location ||
+      "";
+  }
+
+
+  if (
+    hasFreshEvidence(
+      fresh,
+      "eligibility"
+    )
+  ) {
+
+    result.eligibility =
+      fresh.eligibility ||
+      "";
+  }
+
+
+  result.detailExtractionStatus =
+    fresh.detailExtractionStatus ||
+    result.detailExtractionStatus ||
+    "";
+
+
+  result.detailExtractionCount =
+    fresh.detailExtractionCount !==
+    undefined
+      ? fresh.detailExtractionCount
+      : (
+          result.detailExtractionCount ||
+          0
+        );
+
+
+  result.detailExtractionVersion =
+    fresh.detailExtractionVersion ||
+    result.detailExtractionVersion ||
+    "";
+
+
+  result.detailExtractionEvidence =
+    fresh.detailExtractionEvidence ||
+    result.detailExtractionEvidence ||
+    {};
+
+
+  result.detailFetchStatus =
+    fresh.detailFetchStatus;
+
+
+  result.detailFetchTransport =
+    fresh.detailFetchTransport ||
+    "";
+
+
+  result.detailFetchError =
+    "";
+
+
+  result.detailHtmlBytes =
+    fresh.detailHtmlBytes ||
+    0;
+
+
+  return result;
+}
+
+
+/* =========================================================
    MERGE
 ========================================================= */
 
@@ -767,22 +1842,21 @@ function mergeWithExisting(
   discovered
 ) {
 
-  /*
-    Archive에서 이미 마감된 공고는
-    게시판에 남아 있어도 LIVE 복귀 금지.
-  */
-
   const expiredUrls =
     new Set(
 
       archive
 
         .filter(
-          function (item) {
+
+          function (
+            item
+          ) {
 
             return (
               item &&
-              item.isExpired === true
+              item.isExpired ===
+                true
             );
           }
         )
@@ -811,17 +1885,18 @@ function mergeWithExisting(
     );
 
 
-  /*
-    현재 살아 있는 모든 지역 데이터 보존.
-  */
-
   cleanedExisting.forEach(
-    function (item) {
+
+    function (
+      item
+    ) {
 
       if (
         !item ||
-        item.isExpired === true
+        item.isExpired ===
+          true
       ) {
+
         return;
       }
 
@@ -839,6 +1914,7 @@ function mergeWithExisting(
           item
         );
 
+
       } else if (
         item.id
       ) {
@@ -851,12 +1927,11 @@ function mergeWithExisting(
   );
 
 
-  /*
-    신규 경기도 공고 병합.
-  */
-
   discovered.forEach(
-    function (item) {
+
+    function (
+      item
+    ) {
 
       const url =
         getItemUrl(
@@ -865,6 +1940,7 @@ function mergeWithExisting(
 
 
       if (!url) {
+
         return;
       }
 
@@ -873,10 +1949,12 @@ function mergeWithExisting(
         expiredUrls.has(
           url
         ) &&
+
         !byUrl.has(
           url
         )
       ) {
+
         return;
       }
 
@@ -887,7 +1965,7 @@ function mergeWithExisting(
         );
 
 
-      if (previous) {
+      if (!previous) {
 
         byUrl.set(
           url,
@@ -895,25 +1973,10 @@ function mergeWithExisting(
 
             ...item,
 
-            ...previous,
-
-            title:
-              item.title ||
-              previous.title,
-
-            source:
-              SOURCE_NAME,
-
-            agency:
-              "경기도",
-
-            region:
-              "경기",
-
-            category:
-              "미술작품 공모",
-
             sourceUrl:
+              url,
+
+            originalUrl:
               url,
 
             collectionSourceId:
@@ -924,43 +1987,124 @@ function mergeWithExisting(
           }
         );
 
-      } else {
 
-        byUrl.set(
-          url,
-          {
-            ...item,
-            sourceUrl:
-              url
-          }
-        );
+        return;
       }
+
+
+      let combined = {
+
+        ...item,
+
+        ...previous,
+
+        title:
+          item.title ||
+          previous.title,
+
+        source:
+          SOURCE_NAME,
+
+        region:
+          "경기",
+
+        category:
+          "미술작품 공모",
+
+        sourceUrl:
+          url,
+
+        originalUrl:
+          url,
+
+        collectionSourceId:
+          SOURCE_ID,
+
+        collectionVersion:
+          COLLECTION_VERSION
+      };
+
+
+      combined =
+        mergeFreshDetailFields(
+          combined,
+          item
+        );
+
+
+      if (
+        item.detailFetchStatus ===
+        "failed"
+      ) {
+
+        combined.detailFetchStatus =
+          previous.detailFetchStatus ||
+          "failed";
+
+
+        combined.detailFetchTransport =
+          previous.detailFetchTransport ||
+          "";
+
+
+        combined.detailFetchError =
+          item.detailFetchError ||
+          previous.detailFetchError ||
+          "";
+
+
+        combined.detailHtmlBytes =
+          previous.detailHtmlBytes ||
+          0;
+      }
+
+
+      byUrl.set(
+        url,
+        combined
+      );
     }
   );
 
 
   return [
+
     ...byUrl.values(),
+
     ...withoutUrl
+
   ].sort(
-    function (a, b) {
+
+    function (
+      a,
+      b
+    ) {
 
       const aDate =
+
         a.publishedDate ||
+
         a.postedDate ||
+
         a.deadline ||
+
         "";
 
 
       const bDate =
+
         b.publishedDate ||
+
         b.postedDate ||
+
         b.deadline ||
+
         "";
 
 
       if (
-        aDate !== bDate
+        aDate !==
+        bDate
       ) {
 
         return bDate.localeCompare(
@@ -970,11 +2114,15 @@ function mergeWithExisting(
 
 
       return String(
-        a.title || ""
+        a.title ||
+        ""
       ).localeCompare(
+
         String(
-          b.title || ""
+          b.title ||
+          ""
         ),
+
         "ko"
       );
     }
@@ -1013,40 +2161,92 @@ async function collect() {
 
 
   /*
-    여기서는 아직 파일을 저장하지 않는다.
+    1.
+    경기도 메인 페이지 수집
 
-    공식 사이트 연결 자체가 실패하면
-    기존 JSON을 그대로 유지하기 위함.
+    direct 실패 시 Bridge 자동 fallback.
   */
 
-
-  const html =
-    await fetchText(
-      SOURCE_MAIN_URL
-    );
+  let mainFetch =
+    await fetchSourceMainHtml();
 
 
-  const discovered =
+  let discoveredBase =
     extractBoardItems(
-      html
+      mainFetch.html
     );
 
 
   /*
-    경기도 게시판은 현재 정상 공모가
-    실제로 존재하므로 0건은 구조 변경으로 본다.
+    direct 응답 자체는 성공했지만
+    후보가 0건이면 차단 페이지일 가능성이 있으므로
+    Bridge로 한 번 더 확인한다.
   */
 
   if (
-    discovered.length === 0
+    discoveredBase.length ===
+      0 &&
+
+    mainFetch.transport ===
+      "direct"
+  ) {
+
+    console.log(
+      "⚠️ 경기 MAIN direct 후보 0건 → Fetch Bridge 재확인"
+    );
+
+
+    mainFetch =
+      await fetchSourceMainViaBridge();
+
+
+    discoveredBase =
+      extractBoardItems(
+        mainFetch.html
+      );
+  }
+
+
+  /*
+    direct + Bridge 모두 확인했는데도 0건이면
+    기존 JSON 보호를 위해 저장하지 않는다.
+  */
+
+  if (
+    discoveredBase.length ===
+    0
   ) {
 
     throw new Error(
+
       "경기도 미술작품 공모 링크를 1건도 찾지 못했습니다. " +
-      "사이트 구조 변경 가능성이 있어 기존 데이터를 유지하고 종료합니다."
+
+      "direct/Bridge 확인 후에도 0건이므로 기존 데이터를 유지하고 종료합니다."
     );
   }
 
+
+  /*
+    2.
+    신규/활성 후보의 상세페이지 수집
+
+    Bridge
+    → Detail Extractor
+    → 핵심 필드 병합
+  */
+
+  const discovered =
+    await enrichDiscoveredItems(
+      discoveredBase,
+      existing,
+      archive
+    );
+
+
+  /*
+    3.
+    기존 LIVE와 병합
+  */
 
   const merged =
     mergeWithExisting(
@@ -1057,7 +2257,8 @@ async function collect() {
 
 
   /*
-    정상 수집 성공 후에만 저장.
+    4.
+    정상 수집 후에만 저장
   */
 
   writeArray(
@@ -1078,6 +2279,51 @@ async function collect() {
   }
 
 
+  const detailOk =
+    discovered.filter(
+
+      function (
+        item
+      ) {
+
+        return (
+          item.detailFetchStatus ===
+          "ok"
+        );
+      }
+    ).length;
+
+
+  const detailFailed =
+    discovered.filter(
+
+      function (
+        item
+      ) {
+
+        return (
+          item.detailFetchStatus ===
+          "failed"
+        );
+      }
+    ).length;
+
+
+  const detailSkipped =
+    discovered.filter(
+
+      function (
+        item
+      ) {
+
+        return (
+          item.detailFetchStatus ===
+          "skipped_archived"
+        );
+      }
+    ).length;
+
+
   console.log(
     "===================================="
   );
@@ -1096,8 +2342,32 @@ async function collect() {
 
 
   console.log(
+    "MAIN transport:",
+    mainFetch.transport
+  );
+
+
+  console.log(
     "발견:",
     discovered.length
+  );
+
+
+  console.log(
+    "DETAIL 성공:",
+    detailOk
+  );
+
+
+  console.log(
+    "DETAIL 실패:",
+    detailFailed
+  );
+
+
+  console.log(
+    "DETAIL archive skip:",
+    detailSkipped
   );
 
 
@@ -1121,6 +2391,47 @@ async function collect() {
   );
 
 
+  discovered.forEach(
+
+    function (
+      item
+    ) {
+
+      if (
+        item.detailFetchStatus !==
+        "ok"
+      ) {
+
+        return;
+      }
+
+
+      console.log(
+
+        "📄 DETAIL",
+
+        "| transport=" +
+        item.detailFetchTransport,
+
+        "| fields=" +
+        (
+          item.detailExtractionCount ||
+          0
+        ),
+
+        "| deadline=" +
+        (
+          item.deadline ||
+          "-"
+        ),
+
+        "| title=" +
+        item.title
+      );
+    }
+  );
+
+
   console.log(
     "===================================="
   );
@@ -1139,14 +2450,6 @@ function pruneExpired() {
     );
 
 
-  /*
-    경기도 오탐 청소 후,
-    지역과 관계없이 isExpired=true 제거.
-
-    서울/인천의 마감 공고도
-    동일하게 LIVE에서 제거된다.
-  */
-
   const cleaned =
     cleanFalsePositives(
       items
@@ -1155,11 +2458,15 @@ function pruneExpired() {
 
   const active =
     cleaned.filter(
-      function (item) {
+
+      function (
+        item
+      ) {
 
         return (
           item &&
-          item.isExpired !== true
+          item.isExpired !==
+            true
         );
       }
     );
@@ -1216,16 +2523,22 @@ if (
 
   pruneExpired();
 
+
 } else {
 
   collect()
+
     .catch(
-      function (error) {
+
+      function (
+        error
+      ) {
 
         console.error(
           "[AXOO ART COMMISSION COLLECTOR]",
           error
         );
+
 
         process.exitCode =
           1;
