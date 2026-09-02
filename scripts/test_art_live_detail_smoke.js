@@ -13,29 +13,23 @@ const {
 
 /* ============================================================
    AXOO ART LIVE DETAIL SMOKE TEST
-   VERSION: 1.1.0
+   VERSION: 1.2.0
 ============================================================
 
    목적
    ------------------------------------------------------------
    실제 공공기관 상세페이지
-   → GitHub Actions 네트워크 접근
-   → HTML 수신
+   → 실제 HTML 수신
    → Detail Extractor 실행
    → 실제 공고일 / 마감일 검증
 
-   전송 전략
+   네트워크 전략
    ------------------------------------------------------------
-   1. Node fetch 시도
-   2. Node/Undici 연결 실패 시
-      curl IPv4 GET으로 자동 fallback
+   1. Node fetch
+   2. curl IPv4
+   3. AXOO B2G Fetch Bridge
 
-   중요
-   ------------------------------------------------------------
-   - LIVE JSON 수정 안 함
-   - ARCHIVE JSON 수정 안 함
-   - GitHub Commit 안 함
-   - 읽기 전용 Smoke Test
+   데이터는 절대 수정하지 않는다.
 ============================================================ */
 
 
@@ -60,6 +54,18 @@ const EXPECTED_DEADLINE =
 
 
 /* ============================================================
+   FETCH BRIDGE
+============================================================ */
+
+const FETCH_BRIDGE_URL =
+  "https://script.google.com/macros/s/AKfycbzu4m0lNbY5RzXFuKTR3C6H2hd_swAfLTdyZeERGqM3XrChjBrT46cWdiWTQGWSn9-4aQ/exec";
+
+
+const FETCH_BRIDGE_TARGET =
+  "gyeonggi_known_detail";
+
+
+/* ============================================================
    CONFIG
 ============================================================ */
 
@@ -75,6 +81,10 @@ const CURL_MAX_TIME_SECONDS =
   45;
 
 
+const BRIDGE_TIMEOUT_MS =
+  30000;
+
+
 const MIN_HTML_BYTES =
   1000;
 
@@ -86,7 +96,7 @@ const USER_AGENT =
 
 
 /* ============================================================
-   TEST RESULT
+   RESULT COUNTERS
 ============================================================ */
 
 let passCount =
@@ -248,19 +258,10 @@ async function fetchWithNode(
               USER_AGENT,
 
             "Accept":
-              "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              "text/html,application/xhtml+xml,*/*",
 
             "Accept-Language":
-              "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
-
-            "Cache-Control":
-              "no-cache",
-
-            "Pragma":
-              "no-cache",
-
-            "Referer":
-              "https://www.gg.go.kr/publicart/main.do"
+              "ko-KR,ko;q=0.9,en;q=0.7"
           }
         }
       );
@@ -338,7 +339,7 @@ async function fetchWithNode(
 
 
 /* ============================================================
-   CURL IPv4 FALLBACK
+   CURL IPv4
 ============================================================ */
 
 function fetchWithCurlIPv4(
@@ -373,19 +374,10 @@ function fetchWithCurlIPv4(
     USER_AGENT,
 
     "--header",
-    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept: text/html,application/xhtml+xml,*/*",
 
     "--header",
-    "Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
-
-    "--header",
-    "Cache-Control: no-cache",
-
-    "--header",
-    "Pragma: no-cache",
-
-    "--header",
-    "Referer: https://www.gg.go.kr/publicart/main.do",
+    "Accept-Language: ko-KR,ko;q=0.9,en;q=0.7",
 
     "--write-out",
     "\n__AXOO_HTTP_STATUS__:%{http_code}\n" +
@@ -466,23 +458,15 @@ function fetchWithCurlIPv4(
       );
 
 
-  const httpOk =
-    status >=
-      200 &&
-    status <
-      400;
-
-
-  const processOk =
-    result.status ===
-      0;
-
-
   return {
 
     success:
-      processOk &&
-      httpOk,
+      result.status ===
+        0 &&
+      status >=
+        200 &&
+      status <
+        400,
 
     transport:
       "curl-ipv4",
@@ -497,14 +481,7 @@ function fetchWithCurlIPv4(
       html,
 
     error:
-      stderr ||
-      (
-        result.error
-          ? String(
-              result.error
-            )
-          : ""
-      ),
+      stderr,
 
     exitCode:
       result.status
@@ -513,12 +490,365 @@ function fetchWithCurlIPv4(
 
 
 /* ============================================================
-   FETCH WITH FALLBACK
+   APPS SCRIPT BRIDGE
+============================================================ */
+
+async function fetchWithBridge() {
+
+  const controller =
+    new AbortController();
+
+
+  const timer =
+    setTimeout(
+      function () {
+
+        controller.abort();
+
+      },
+      BRIDGE_TIMEOUT_MS
+    );
+
+
+  try {
+
+    const url =
+      new URL(
+        FETCH_BRIDGE_URL
+      );
+
+
+    url.searchParams.set(
+      "action",
+      "fetch"
+    );
+
+
+    url.searchParams.set(
+      "target",
+      FETCH_BRIDGE_TARGET
+    );
+
+
+    const response =
+      await fetch(
+        url.toString(),
+        {
+
+          signal:
+            controller.signal,
+
+          redirect:
+            "follow",
+
+          headers: {
+
+            "User-Agent":
+              USER_AGENT,
+
+            "Accept":
+              "application/json,text/plain,*/*"
+          }
+        }
+      );
+
+
+    const text =
+      await response.text();
+
+
+    if (
+      !response.ok
+    ) {
+
+      return {
+
+        success:
+          false,
+
+        transport:
+          "apps-script-bridge",
+
+        status:
+          response.status,
+
+        finalUrl:
+          TARGET_URL,
+
+        html:
+          "",
+
+        error:
+          "Bridge HTTP " +
+          response.status
+      };
+    }
+
+
+    let payload;
+
+
+    try {
+
+      payload =
+        JSON.parse(
+          text
+        );
+
+
+    } catch (
+      error
+    ) {
+
+      return {
+
+        success:
+          false,
+
+        transport:
+          "apps-script-bridge",
+
+        status:
+          response.status,
+
+        finalUrl:
+          TARGET_URL,
+
+        html:
+          "",
+
+        error:
+          "Bridge JSON parse failed: " +
+          error.message
+      };
+    }
+
+
+    if (
+      !payload ||
+      payload.ok !==
+        true
+    ) {
+
+      return {
+
+        success:
+          false,
+
+        transport:
+          "apps-script-bridge",
+
+        status:
+          payload &&
+          payload.upstreamStatus
+            ? payload.upstreamStatus
+            : response.status,
+
+        finalUrl:
+          payload &&
+          payload.upstreamUrl
+            ? payload.upstreamUrl
+            : TARGET_URL,
+
+        html:
+          "",
+
+        error:
+          (
+            payload &&
+            (
+              payload.message ||
+              payload.error
+            )
+          ) ||
+          "Bridge returned ok=false"
+      };
+    }
+
+
+    const base64 =
+      String(
+        payload.htmlBase64 ||
+        ""
+      );
+
+
+    if (
+      !base64
+    ) {
+
+      return {
+
+        success:
+          false,
+
+        transport:
+          "apps-script-bridge",
+
+        status:
+          payload.upstreamStatus ||
+          0,
+
+        finalUrl:
+          payload.upstreamUrl ||
+          TARGET_URL,
+
+        html:
+          "",
+
+        error:
+          "htmlBase64 is empty"
+      };
+    }
+
+
+    let html;
+
+
+    try {
+
+      html =
+        Buffer
+          .from(
+            base64,
+            "base64"
+          )
+          .toString(
+            "utf8"
+          );
+
+
+    } catch (
+      error
+    ) {
+
+      return {
+
+        success:
+          false,
+
+        transport:
+          "apps-script-bridge",
+
+        status:
+          payload.upstreamStatus ||
+          0,
+
+        finalUrl:
+          payload.upstreamUrl ||
+          TARGET_URL,
+
+        html:
+          "",
+
+        error:
+          "Base64 decode failed: " +
+          error.message
+      };
+    }
+
+
+    return {
+
+      success:
+        payload.upstreamStatus >=
+          200 &&
+        payload.upstreamStatus <
+          400 &&
+        html.length >
+          0,
+
+      transport:
+        "apps-script-bridge",
+
+      status:
+        payload.upstreamStatus,
+
+      finalUrl:
+        payload.upstreamUrl ||
+        TARGET_URL,
+
+      html:
+        html,
+
+      error:
+        "",
+
+      bridgeMeta: {
+
+        chars:
+          payload.chars,
+
+        bytes:
+          payload.bytes,
+
+        truncated:
+          payload.truncated,
+
+        hasArtKeyword:
+          payload.hasArtKeyword,
+
+        hasTargetTitle:
+          payload.hasTargetTitle
+      }
+    };
+
+
+  } catch (
+    error
+  ) {
+
+    return {
+
+      success:
+        false,
+
+      transport:
+        "apps-script-bridge",
+
+      status:
+        0,
+
+      finalUrl:
+        TARGET_URL,
+
+      html:
+        "",
+
+      error:
+        (
+          error &&
+          (
+            error.stack ||
+            error.message
+          )
+        ) ||
+        String(
+          error
+        )
+    };
+
+
+  } finally {
+
+    clearTimeout(
+      timer
+    );
+  }
+}
+
+
+/* ============================================================
+   NETWORK FALLBACK CHAIN
 ============================================================ */
 
 async function fetchLivePage(
   url
 ) {
+
+  /* ----------------------------------------------------------
+     STEP 1
+  ---------------------------------------------------------- */
 
   console.log(
     "NETWORK STEP 1:",
@@ -542,9 +872,7 @@ async function fetchLivePage(
   ) {
 
     console.log(
-      "✅ NODE FETCH SUCCESS",
-      "| HTTP",
-      nodeResult.status
+      "✅ NODE FETCH SUCCESS"
     );
 
 
@@ -554,13 +882,6 @@ async function fetchLivePage(
 
   console.log(
     "⚠️ NODE FETCH FAILED"
-  );
-
-
-  console.log(
-    "   status:",
-    nodeResult.status ||
-      "-"
   );
 
 
@@ -577,6 +898,10 @@ async function fetchLivePage(
     );
   }
 
+
+  /* ----------------------------------------------------------
+     STEP 2
+  ---------------------------------------------------------- */
 
   console.log(
     ""
@@ -596,53 +921,145 @@ async function fetchLivePage(
 
 
   if (
-    curlResult.success
+    curlResult.success &&
+    Buffer.byteLength(
+      curlResult.html,
+      "utf8"
+    ) >=
+      MIN_HTML_BYTES
   ) {
 
     console.log(
-      "✅ CURL IPv4 SUCCESS",
+      "✅ CURL IPv4 SUCCESS"
+    );
+
+
+    return curlResult;
+  }
+
+
+  console.log(
+    "⚠️ CURL IPv4 FAILED"
+  );
+
+
+  console.log(
+    "   exitCode:",
+    curlResult.exitCode
+  );
+
+
+  console.log(
+    "   httpStatus:",
+    curlResult.status ||
+      "-"
+  );
+
+
+  if (
+    curlResult.error
+  ) {
+
+    console.log(
+      "   error:",
+      curlResult.error
+        .trim()
+        .split(
+          "\n"
+        )[0]
+    );
+  }
+
+
+  /* ----------------------------------------------------------
+     STEP 3
+  ---------------------------------------------------------- */
+
+  console.log(
+    ""
+  );
+
+
+  console.log(
+    "NETWORK STEP 3:",
+    "AXOO B2G Fetch Bridge"
+  );
+
+
+  const bridgeResult =
+    await fetchWithBridge();
+
+
+  if (
+    bridgeResult.success
+  ) {
+
+    console.log(
+      "✅ FETCH BRIDGE SUCCESS",
       "| HTTP",
-      curlResult.status
-    );
-
-
-  } else {
-
-    console.log(
-      "❌ CURL IPv4 FAILED"
-    );
-
-
-    console.log(
-      "   exitCode:",
-      curlResult.exitCode
-    );
-
-
-    console.log(
-      "   httpStatus:",
-      curlResult.status ||
-        "-"
+      bridgeResult.status
     );
 
 
     if (
-      curlResult.error
+      bridgeResult.bridgeMeta
     ) {
 
       console.log(
-        "   error:",
-        curlResult.error
-          .trim()
-          .split(
-            "\n"
-          )[0]
+        "   chars:",
+        bridgeResult.bridgeMeta.chars
+      );
+
+
+      console.log(
+        "   bytes:",
+        bridgeResult.bridgeMeta.bytes
+      );
+
+
+      console.log(
+        "   truncated:",
+        bridgeResult.bridgeMeta.truncated
+      );
+
+
+      console.log(
+        "   hasArtKeyword:",
+        bridgeResult.bridgeMeta.hasArtKeyword
+      );
+
+
+      console.log(
+        "   hasTargetTitle:",
+        bridgeResult.bridgeMeta.hasTargetTitle
       );
     }
+
+
+    return bridgeResult;
   }
 
 
-  return curlResult;
+  console.log(
+    "❌ FETCH BRIDGE FAILED"
+  );
+
+
+  console.log(
+    "   status:",
+    bridgeResult.status ||
+      "-"
+  );
+
+
+  console.log(
+    "   error:",
+    bridgeResult.error ||
+      "-"
+  );
+
+
+  return bridgeResult;
 }
 
 
@@ -674,7 +1091,7 @@ async function runLiveSmoke() {
 
   console.log(
     "VERSION:",
-    "1.1.0"
+    "1.2.0"
   );
 
 
@@ -774,22 +1191,12 @@ async function runLiveSmoke() {
     );
 
 
-    if (
-      fetched.error
-    ) {
-
-      console.error(
-        fetched.error
-      );
-    }
-
-
     return;
   }
 
 
   /* ----------------------------------------------------------
-     NETWORK ASSERT
+     NETWORK CHECK
   ---------------------------------------------------------- */
 
   assertTrue(
@@ -825,6 +1232,15 @@ async function runLiveSmoke() {
       "미술작품"
     ),
     "미술작품"
+  );
+
+
+  assertTrue(
+    "상세페이지 제목 확인",
+    fetched.html.includes(
+      "남양주왕숙2A-1"
+    ),
+    "남양주왕숙2A-1"
   );
 
 
@@ -923,11 +1339,6 @@ async function runLiveSmoke() {
 
   console.log(
     "------------------------------------"
-  );
-
-
-  console.log(
-    ""
   );
 
 
