@@ -1,7 +1,8 @@
 (() => {
   "use strict";
 
-  const ART_DATA_URL = "data/art_commissions.json";
+  const ART_DATA_URL =
+    "data/art_commissions.json";
 
   const LEGACY_SELECTORS = [
     ".native-tab-intro-wrap",
@@ -10,8 +11,12 @@
   ];
 
   let artData = [];
-  let scheduled = false;
-  let applying = false;
+
+  let scheduled =
+    false;
+
+  let applying =
+    false;
 
 
   /* =====================================================
@@ -19,7 +24,10 @@
   ===================================================== */
 
   function esc(value) {
-    return String(value ?? "").replace(
+
+    return String(
+      value ?? ""
+    ).replace(
       /[&<>"']/g,
       ch => ({
         "&": "&amp;",
@@ -36,21 +44,36 @@
     value,
     fallback = "-"
   ) {
+
     const result =
-      String(value ?? "")
-        .replace(/\s+/g, " ")
+      String(
+        value ?? ""
+      )
+        .replace(
+          /\s+/g,
+          " "
+        )
         .trim();
 
-    return result || fallback;
+    return (
+      result ||
+      fallback
+    );
   }
 
 
-  function normalizeTitle(value) {
+  function normalizeTitle(
+    value
+  ) {
+
     return clean(
       value,
       ""
     )
-      .replace(/\s+/g, " ")
+      .replace(
+        /\s+/g,
+        " "
+      )
       .trim();
   }
 
@@ -59,6 +82,7 @@
     element,
     value
   ) {
+
     if (!element) {
       return;
     }
@@ -70,6 +94,7 @@
       element.textContent !==
       next
     ) {
+
       element.textContent =
         next;
     }
@@ -81,29 +106,216 @@
   ===================================================== */
 
   async function loadArtData() {
+
     try {
+
       const response =
         await fetch(
           `${ART_DATA_URL}?ui2=${Date.now()}`
         );
 
       if (!response.ok) {
-        return;
+
+        throw new Error(
+          `HTTP ${response.status}`
+        );
       }
+
 
       const data =
         await response.json();
+
 
       artData =
         Array.isArray(data)
           ? data
           : [];
 
-    } catch (error) {
+
+    } catch (
+      error
+    ) {
+
       console.warn(
         "[AXOO UI v2] art data load failed",
         error
       );
+
+      artData =
+        [];
+    }
+  }
+
+
+  /* =====================================================
+     LIVE COUNT
+  ===================================================== */
+
+  function syncLiveArtCount() {
+
+    const count =
+      artData.length;
+
+
+    /*
+      RESEARCH 카테고리 카드.
+
+      중요:
+      dashboard_meta.json의 오래된 수치를
+      사용하지 않고 실제 LIVE JSON 길이를 사용한다.
+    */
+
+    setText(
+      document.getElementById(
+        "priorityMetaArtCount"
+      ),
+      count
+    );
+
+
+    /*
+      Legacy 호환 ID.
+      다른 스크립트가 참조하더라도
+      동일한 LIVE 수치를 반환하도록 유지.
+    */
+
+    setText(
+      document.getElementById(
+        "metaArtCount"
+      ),
+      count
+    );
+  }
+
+
+  /* =====================================================
+     EMPTY STATE
+  ===================================================== */
+
+  function syncArtEmptyState() {
+
+    if (
+      artData.length !==
+      0
+    ) {
+
+      return;
+    }
+
+
+    const cards =
+      document.getElementById(
+        "artCards"
+      );
+
+
+    if (!cards) {
+
+      return;
+    }
+
+
+    let card =
+      cards.querySelector(
+        ".card"
+      );
+
+
+    if (!card) {
+
+      card =
+        document.createElement(
+          "article"
+        );
+
+      card.className =
+        "card";
+
+      cards.appendChild(
+        card
+      );
+    }
+
+
+    const title =
+      card.querySelector(
+        "h2"
+      );
+
+
+    const titleText =
+      clean(
+        title?.textContent,
+        ""
+      );
+
+
+    const shouldReplace =
+      !titleText ||
+
+      titleText.includes(
+        "조건에 맞는"
+      ) ||
+
+      titleText.includes(
+        "데이터가 없습니다"
+      ) ||
+
+      titleText.includes(
+        "불러오는 중"
+      );
+
+
+    if (
+      !shouldReplace
+    ) {
+
+      return;
+    }
+
+
+    card.classList.remove(
+      "card-as-accordion"
+    );
+
+
+    const expectedHtml = `
+      <h2>
+        현재 진행 중인 건축물 미술작품 공모가 없습니다.
+      </h2>
+
+      <p class="reason">
+        자동 수집 시스템은 정상 운영 중입니다.
+        신규 LIVE 공고가 발견되면 이 영역에 자동으로 표시됩니다.
+      </p>
+    `;
+
+
+    const current =
+      card.innerHTML
+        .replace(
+          /\s+/g,
+          " "
+        )
+        .trim();
+
+
+    const expected =
+      expectedHtml
+        .replace(
+          /\s+/g,
+          " "
+        )
+        .trim();
+
+
+    if (
+      current !==
+      expected
+    ) {
+
+      card.innerHTML =
+        expectedHtml;
     }
   }
 
@@ -113,21 +325,26 @@
   ===================================================== */
 
   function ensureRuntimeStyle() {
+
     if (
       document.getElementById(
         "axooDashboardUiV2RuntimeStyle"
       )
     ) {
+
       return;
     }
+
 
     const style =
       document.createElement(
         "style"
       );
 
+
     style.id =
       "axooDashboardUiV2RuntimeStyle";
+
 
     style.textContent = `
       .native-tab-intro-wrap,
@@ -137,6 +354,7 @@
       }
     `;
 
+
     document.head.appendChild(
       style
     );
@@ -144,6 +362,7 @@
 
 
   function removeLegacyUi() {
+
     LEGACY_SELECTORS.forEach(
       selector => {
 
@@ -165,6 +384,7 @@
   ===================================================== */
 
   function getActiveTab() {
+
     return (
       document
         .querySelector(
@@ -172,12 +392,14 @@
         )
         ?.dataset
         ?.tab ||
+
       "art"
     );
   }
 
 
   function getActivePanel() {
+
     return document
       .getElementById(
         `${getActiveTab()}Tab`
@@ -193,23 +415,31 @@
     card,
     labels
   ) {
+
     const wanted =
-      Array.isArray(labels)
+      Array.isArray(
+        labels
+      )
         ? labels
         : [labels];
+
 
     const rows =
       card.querySelectorAll(
         ".meta div"
       );
 
+
     for (
-      const row of rows
+      const row of
+      rows
     ) {
+
       const labelNode =
         row.querySelector(
           "span"
         );
+
 
       const label =
         clean(
@@ -217,15 +447,19 @@
           ""
         );
 
+
       if (
         !wanted.includes(
           label
         )
       ) {
+
         continue;
       }
 
+
       return clean(
+
         clean(
           row.textContent,
           ""
@@ -233,9 +467,11 @@
           label,
           ""
         ),
+
         "-"
       );
     }
+
 
     return "-";
   }
@@ -245,8 +481,12 @@
      CARD
   ===================================================== */
 
-  function getCardTitle(card) {
+  function getCardTitle(
+    card
+  ) {
+
     return clean(
+
       card
         .querySelector(
           ".accordion-body h2"
@@ -276,16 +516,21 @@
   }
 
 
-  function isEmptyCard(card) {
+  function isEmptyCard(
+    card
+  ) {
+
     const title =
       getCardTitle(
         card
       );
 
+
     return [
       "데이터가 없습니다",
       "조건에 맞는",
-      "불러오는 중"
+      "불러오는 중",
+      "현재 진행 중인 건축물 미술작품 공모가 없습니다"
     ].some(
       keyword =>
         title.includes(
@@ -298,7 +543,9 @@
   function getGradeFromDom(
     card
   ) {
+
     const values = [
+
       card
         .querySelector(
           ".priority-grade"
@@ -321,6 +568,7 @@
           node =>
             node.textContent
         )
+
     ]
       .map(
         value =>
@@ -330,20 +578,25 @@
           )
       );
 
+
     for (
       const value of
       values
     ) {
+
       const match =
         value.match(
           /\b(S|A|B|C)\b/i
         );
 
+
       if (match) {
+
         return match[1]
           .toUpperCase();
       }
     }
+
 
     return "";
   }
@@ -353,7 +606,10 @@
      ART MATCH
   ===================================================== */
 
-  function findArtItem(card) {
+  function findArtItem(
+    card
+  ) {
+
     const title =
       normalizeTitle(
         getCardTitle(
@@ -361,13 +617,18 @@
         )
       );
 
+
     if (!title) {
+
       return null;
     }
 
+
     return (
+
       artData.find(
         item =>
+
           normalizeTitle(
             item.title ||
             item.noticeTitle ||
@@ -375,25 +636,33 @@
           ) ===
           title
       ) ||
+
       null
     );
   }
 
 
-  function getGrade(card) {
+  function getGrade(
+    card
+  ) {
+
     const domGrade =
       getGradeFromDom(
         card
       );
 
+
     if (domGrade) {
+
       return domGrade;
     }
+
 
     const item =
       findArtItem(
         card
       );
+
 
     return clean(
       item?.grade,
@@ -407,12 +676,16 @@
      SOURCE
   ===================================================== */
 
-  function normalizeSource(value) {
+  function normalizeSource(
+    value
+  ) {
+
     const source =
       clean(
         value,
         "-"
       );
+
 
     const regions = [
       "서울",
@@ -434,18 +707,22 @@
       "제주"
     ];
 
+
     for (
       const region of
       regions
     ) {
+
       if (
         source.includes(
           region
         )
       ) {
+
         return region;
       }
     }
+
 
     return source;
   }
@@ -458,13 +735,16 @@
   function buildArtSummary(
     card
   ) {
+
     const item =
       findArtItem(
         card
       );
 
+
     const source =
       normalizeSource(
+
         item?.region ||
 
         getMetaValue(
@@ -482,7 +762,9 @@
           ?.textContent
       );
 
+
     return {
+
       source:
         source,
 
@@ -501,6 +783,7 @@
 
       period:
         clean(
+
           item?.publishedDate ||
           item?.postedDate ||
 
@@ -518,6 +801,7 @@
 
       deadline:
         clean(
+
           item?.deadline ||
           item?.periodEnd ||
           item?.endDate ||
@@ -535,11 +819,14 @@
     card,
     tab
   ) {
+
     if (
       tab ===
       "agencies"
     ) {
+
       return {
+
         source:
           clean(
             getMetaValue(
@@ -591,7 +878,9 @@
       tab ===
       "local"
     ) {
+
       return {
+
         source:
           clean(
             getMetaValue(
@@ -642,10 +931,13 @@
 
 
     return {
+
       source:
         tab ===
         "opportunities"
+
           ? "나라장터"
+
           : clean(
               card
                 .querySelector(
@@ -700,11 +992,16 @@
     card,
     tab
   ) {
+
     return (
-      tab === "art"
+
+      tab ===
+      "art"
+
         ? buildArtSummary(
             card
           )
+
         : buildGenericSummary(
             card,
             tab
@@ -721,17 +1018,22 @@
     card,
     tab
   ) {
+
     if (
       !card ||
+
       isEmptyCard(
         card
       ) ||
+
       card.classList.contains(
         "card-as-accordion"
       )
     ) {
+
       return;
     }
+
 
     const info =
       getSummary(
@@ -739,18 +1041,22 @@
         tab
       );
 
+
     const details =
       document.createElement(
         "details"
       );
+
 
     const body =
       document.createElement(
         "div"
       );
 
+
     details.className =
       "accordion-card";
+
 
     body.className =
       "accordion-body";
@@ -759,6 +1065,7 @@
     while (
       card.firstChild
     ) {
+
       body.appendChild(
         card.firstChild
       );
@@ -830,6 +1137,7 @@
       tab ===
       "art"
     ) {
+
       details.open =
         false;
     }
@@ -839,6 +1147,7 @@
       "card-as-accordion"
     );
 
+
     card.appendChild(
       details
     );
@@ -846,7 +1155,9 @@
 
 
   function setupAccordions() {
+
     const map = {
+
       art:
         "artCards",
 
@@ -876,7 +1187,9 @@
             id
           );
 
+
         if (!container) {
+
           return;
         }
 
@@ -889,11 +1202,13 @@
             card => {
 
               if (
-                card.classList
+                card
+                  .classList
                   ?.contains(
                     "card"
                   )
               ) {
+
                 convertCardToAccordion(
                   card,
                   tab
@@ -911,20 +1226,30 @@
   ===================================================== */
 
   function normalizeArtListHead() {
+
     const head =
       document.querySelector(
         "#artTab .list-head"
       );
 
+
     if (!head) {
+
       return;
     }
 
 
     const html = `
       <span class="list-source-grade">
-        <em>출처</em>
-        <em>우선순위</em>
+
+        <em>
+          출처
+        </em>
+
+        <em>
+          우선순위
+        </em>
+
       </span>
 
       <span>
@@ -941,21 +1266,29 @@
     `;
 
 
-    if (
+    const current =
       head.innerHTML
         .replace(
           /\s+/g,
           " "
         )
-        .trim() !==
+        .trim();
 
+
+    const expected =
       html
         .replace(
           /\s+/g,
           " "
         )
-        .trim()
+        .trim();
+
+
+    if (
+      current !==
+      expected
     ) {
+
       head.innerHTML =
         html;
     }
@@ -966,28 +1299,43 @@
      DATE
   ===================================================== */
 
-  function parseDate(value) {
+  function parseDate(
+    value
+  ) {
+
     const raw =
       clean(
         value,
         ""
       );
 
+
     const match =
       raw.match(
         /(20\d{2})[-./년\s]+(\d{1,2})[-./월\s]+(\d{1,2})/
       );
 
+
     if (!match) {
+
       return null;
     }
 
 
     const date =
       new Date(
-        Number(match[1]),
-        Number(match[2]) - 1,
-        Number(match[3])
+
+        Number(
+          match[1]
+        ),
+
+        Number(
+          match[2]
+        ) - 1,
+
+        Number(
+          match[3]
+        )
       );
 
 
@@ -995,7 +1343,9 @@
       Number.isNaN(
         date.getTime()
       )
+
         ? null
+
         : date
     );
   }
@@ -1004,6 +1354,7 @@
   function getDeadlineDays(
     card
   ) {
+
     const item =
       findArtItem(
         card
@@ -1011,6 +1362,7 @@
 
 
     const raw =
+
       item?.deadline ||
 
       card
@@ -1034,7 +1386,9 @@
         raw
       );
 
+
     if (!deadline) {
+
       return null;
     }
 
@@ -1060,10 +1414,12 @@
 
 
     return Math.ceil(
+
       (
         deadline.getTime() -
         today.getTime()
       ) /
+
       86400000
     );
   }
@@ -1074,10 +1430,13 @@
   ===================================================== */
 
   function getVisibleCards() {
+
     const panel =
       getActivePanel();
 
+
     if (!panel) {
+
       return [];
     }
 
@@ -1096,6 +1455,7 @@
               card
             )
           ) {
+
             return false;
           }
 
@@ -1107,6 +1467,7 @@
 
 
           return (
+
             style.display !==
               "none" &&
 
@@ -1119,7 +1480,9 @@
 
 
   function updateToday() {
+
     const labels = [
+
       [
         "진행중",
         "ACTIVE"
@@ -1157,7 +1520,9 @@
               index
             ];
 
+
           if (!config) {
+
             return;
           }
 
@@ -1193,10 +1558,17 @@
               card
             );
 
+
           return (
-            days !== null &&
-            days >= 0 &&
-            days <= 7
+
+            days !==
+              null &&
+
+            days >=
+              0 &&
+
+            days <=
+              7
           );
         }
       ).length;
@@ -1205,6 +1577,7 @@
     const high =
       cards.filter(
         card =>
+
           [
             "S",
             "A"
@@ -1219,6 +1592,7 @@
     const reviewing =
       cards.filter(
         card =>
+
           card
             .querySelector(
               ".review-select"
@@ -1266,18 +1640,37 @@
   ===================================================== */
 
   function applyV2() {
+
     if (applying) {
+
       return;
     }
+
 
     applying =
       true;
 
 
     try {
+
       ensureRuntimeStyle();
 
       removeLegacyUi();
+
+      /*
+        실제 LIVE 데이터 기준 숫자를
+        구형 메타값보다 항상 우선한다.
+      */
+
+      syncLiveArtCount();
+
+
+      /*
+        LIVE 0건일 때 운영형 Empty State 적용.
+      */
+
+      syncArtEmptyState();
+
 
       normalizeArtListHead();
 
@@ -1285,7 +1678,9 @@
 
       updateToday();
 
+
     } finally {
+
       applying =
         false;
     }
@@ -1295,7 +1690,9 @@
   function scheduleApply(
     delay = 80
   ) {
+
     if (scheduled) {
+
       return;
     }
 
@@ -1323,11 +1720,13 @@
   ===================================================== */
 
   function bindEvents() {
+
     document.addEventListener(
       "click",
       event => {
 
         if (
+
           event.target.closest(
             ".tab-button[data-tab]"
           ) ||
@@ -1336,9 +1735,11 @@
             ".meta-card[data-tab-target]"
           )
         ) {
+
           scheduleApply(
             120
           );
+
 
           setTimeout(
             applyV2,
@@ -1358,6 +1759,7 @@
             ".filters"
           )
         ) {
+
           scheduleApply(
             160
           );
@@ -1371,6 +1773,7 @@
       event => {
 
         if (
+
           event.target.closest(
             ".filters"
           ) ||
@@ -1381,6 +1784,7 @@
               "review-select"
             )
         ) {
+
           scheduleApply(
             160
           );
@@ -1412,10 +1816,12 @@
   ===================================================== */
 
   function startObserver() {
+
     if (
       window
         .__axooUiV2Observer
     ) {
+
       return;
     }
 
@@ -1427,8 +1833,10 @@
           const added =
             mutations.some(
               mutation =>
+
                 mutation.type ===
                   "childList" &&
+
                 mutation
                   .addedNodes
                   .length >
@@ -1437,6 +1845,7 @@
 
 
           if (added) {
+
             scheduleApply(
               90
             );
@@ -1448,6 +1857,7 @@
     observer.observe(
       document.body,
       {
+
         childList:
           true,
 
@@ -1468,6 +1878,7 @@
   ===================================================== */
 
   async function init() {
+
     ensureRuntimeStyle();
 
     bindEvents();
@@ -1480,6 +1891,12 @@
 
     applyV2();
 
+
+    /*
+      기존 priority/meta 패치가 초기 몇 초간
+      숫자를 덮어쓸 수 있으므로
+      v2 LIVE 값을 마지막에 다시 확정한다.
+    */
 
     [
       350,
@@ -1501,12 +1918,15 @@
     document.readyState ===
     "loading"
   ) {
+
     document.addEventListener(
       "DOMContentLoaded",
       init
     );
 
+
   } else {
+
     init();
   }
 
