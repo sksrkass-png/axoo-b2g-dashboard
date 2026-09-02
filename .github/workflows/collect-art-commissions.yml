@@ -8,31 +8,28 @@ on:
     # 00:00 UTC = 한국시간 오전 09:00
     - cron: "0 0 * * *"
 
-
 permissions:
   contents: write
-
 
 concurrency:
   group: collect-art-commissions
   cancel-in-progress: false
 
-
 jobs:
-
   collect:
-
     runs-on: ubuntu-latest
 
-
     steps:
-
       # --------------------------------------------------
       # 1. Repository
       # --------------------------------------------------
 
       - name: Checkout repository
         uses: actions/checkout@v4
+
+        with:
+          ref: main
+          fetch-depth: 0
 
 
       # --------------------------------------------------
@@ -45,10 +42,9 @@ jobs:
         with:
           node-version: "20"
 
-  # --------------------------------------------------
+
+      # --------------------------------------------------
       # 3. Collector JavaScript 문법 사전 검증
-      #
-      # 실제 크롤링 전에 SyntaxError를 즉시 차단.
       # --------------------------------------------------
 
       - name: Validate collector JavaScript syntax
@@ -63,11 +59,9 @@ jobs:
           node --check scripts/collect_remaining_art_commissions.js
           node --check scripts/normalize_art_dates.js
 
+
       # --------------------------------------------------
-      # 3. 전국 17개 시도 Source Registry 검증
-      #
-      # 누락 지역이 있으면 여기서 중단.
-      # 아직 실제 수집을 시작하기 전 단계.
+      # 4. 전국 17개 시도 Source Registry 검증
       # --------------------------------------------------
 
       - name: Validate nationwide art source registry
@@ -75,32 +69,49 @@ jobs:
 
 
       # --------------------------------------------------
-      # 4. 지역별 건축물 미술작품 수집
-      #
-      # 현재 활성화된 Collector를 실행.
-      # 각 지역 실패는 run_art_collectors.js에서 격리.
+      # 5. 주요 공공사이트 네트워크 진단
       # --------------------------------------------------
-      
+
       - name: Diagnose Korean public site network
         run: |
-          echo "=== GYEONGGI IPv4 ==="
-          curl -4 -I -L --connect-timeout 10 --max-time 20 https://www.gg.go.kr/publicart/main.do || true
+          echo "=== GYEONGGI PUBLIC ART BOARD ==="
+          curl -4 -I -L \
+            --connect-timeout 10 \
+            --max-time 20 \
+            "https://www.gg.go.kr/publicart/bbs/board.do?bsIdx=825&menuId=3865" \
+            || true
 
           echo "=== INCHEON IPv4 ==="
-          curl -4 -I -L --connect-timeout 10 --max-time 20 https://www.incheon.go.kr/culture/CU070302 || true
+          curl -4 -I -L \
+            --connect-timeout 10 \
+            --max-time 20 \
+            "https://www.incheon.go.kr/culture/CU070302" \
+            || true
 
           echo "=== BUSAN IPv4 ==="
-          curl -4 -I -L --connect-timeout 10 --max-time 20 https://www.busan.go.kr/nbgosi || true
+          curl -4 -I -L \
+            --connect-timeout 10 \
+            --max-time 20 \
+            "https://www.busan.go.kr/nbgosi" \
+            || true
 
-          echo "=== GYEONGGI NORMAL ==="
-          curl -I -L --connect-timeout 10 --max-time 20 https://www.gg.go.kr/publicart/main.do || true
-          
+
+      # --------------------------------------------------
+      # 6. 지역별 건축물 미술작품 수집
+      # --------------------------------------------------
+
       - name: Collect regional art commissions
         run: node scripts/run_art_collectors.js
 
 
       # --------------------------------------------------
-      # 5. 원문 날짜 검증
+      # 7. 원문 날짜 정규화
+      #
+      # v1.4.0:
+      # - 2자리 연도 지원
+      # - 실제 접수/제출일 우선
+      # - 비정상 장기 공모기간 방어
+      # - 오래된 마감일 미확인 공고 stale 판정
       # --------------------------------------------------
 
       - name: Normalize collected dates
@@ -108,7 +119,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 6. 마감 공고 LIVE 제거
+      # 8. 마감 공고 LIVE 제거
       # --------------------------------------------------
 
       - name: Remove expired items from live feed
@@ -116,7 +127,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 7. Archive current flag 재계산
+      # 9. Archive current flag 재계산
       # --------------------------------------------------
 
       - name: Refresh archive current flags
@@ -124,7 +135,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 8. 변경 여부 확인
+      # 10. 변경 여부 확인
       # --------------------------------------------------
 
       - name: Check changes
@@ -146,7 +157,11 @@ jobs:
 
 
       # --------------------------------------------------
-      # 9. 변경된 경우만 Commit
+      # 11. 변경된 경우만 Commit + Rebase + Push
+      #
+      # 실행 중 원격 main에 다른 커밋이 추가되더라도
+      # fetch first 오류가 나지 않도록 push 직전
+      # 최신 main을 rebase 한다.
       # --------------------------------------------------
 
       - name: Commit collected art commissions
@@ -166,4 +181,12 @@ jobs:
           git commit \
             -m "Collect current art commissions"
 
-          git push
+          echo "=== Sync latest main before push ==="
+
+          git fetch origin main
+
+          git rebase origin/main
+
+          echo "=== Push collected data ==="
+
+          git push origin HEAD:main
