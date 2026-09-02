@@ -1,9 +1,9 @@
 {
   "daegu_city_notice": {
-    "sourceUrl": "https://daegu.go.kr/index.do?menu_id=00940170",
+    "sourceUrl": "https://www.daegu.go.kr/index.do?menu_id=00940170",
     "crawlMode": "board",
     "verified": true,
-    "note": "대구광역시 공식 고시공고 목록"
+    "note": "대구광역시 공식 고시공고 목록. www 호스트 기준으로 정규화."
   },
 
   "daejeon_city_notice": {
@@ -17,7 +17,7 @@
     "sourceUrl": "https://www.ulsan.go.kr/u/rep/transfer/notice/list.ulsan?mId=001004002000000000",
     "crawlMode": "board",
     "verified": true,
-    "note": "울산광역시 공식 고시공고 게시판"
+    "note": "울산광역시 공식 고시공고 게시판. TRACER 접근제어가 있어 Runner transport fallback 필요."
   },
 
   "gangwon_notice": {
@@ -35,32 +35,32 @@
   },
 
   "chungnam_notice": {
-    "sourceUrl": "https://www.chungnam.go.kr/cnportal/province/province/list.do?menuNo=500487",
+    "sourceUrl": "https://cncms.chungnam.go.kr/cnportal/province/province/list.do?menuNo=500487",
     "crawlMode": "board",
     "verified": true,
-    "note": "충청남도 공식 도 및 산하기관 고시·공고"
+    "note": "충청남도 공식 도 및 산하기관 고시·공고. 현행 cncms 호스트 기준."
   },
 
-    "chungnam_development_corporation": {
+  "chungnam_development_corporation": {
     "sourceUrl": "https://www.cndc.kr/bbs/list.do?key=2404080002",
     "crawlMode": "board",
     "verified": true,
     "note": "충청남도개발공사 공식 공지사항 목록"
   },
-  
+
   "jeonnam_notice": {
     "sourceUrl": "https://www.jeonnam.go.kr/J0203/boardList.do?menuId=jeonnam0203000000",
     "crawlMode": "board",
     "verified": true,
     "legacy": true,
-    "note": "구 전라남도 공식 고시/공고. 2026-06-30 이전 데이터용"
+    "note": "구 전라남도 공식 고시/공고. 2026-06-30 이전 데이터용. 2026-07-01 이후 현행 통합특별시 소스는 별도 확인 필요."
   },
 
   "gyeongbuk_notice": {
-    "sourceUrl": "https://care.gb.go.kr/Main/page.do?BD_CODE=gosi_notice&URL=%2Fcommon%2Fboard%2Fboard.do&cmd=1&mnu_uid=6789",
+    "sourceUrl": "https://www.gb.go.kr/Main/page.do?BD_CODE=gosi_notice&URL=%2Fcommon%2Fboard%2Fboard.do&cmd=1&mnu_uid=6789",
     "crawlMode": "board",
     "verified": true,
-    "note": "경상북도 공식 고시공고 공용 게시판"
+    "note": "경상북도 공식 고시공고 현행 www.gb.go.kr 게시판."
   },
 
   "gyeongnam_culture_portal": {
