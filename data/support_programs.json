@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "id": "kams-2830",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "예술경영지원센터",
+    "sourceCode": "KAMS",
+    "sourceType": "지원사업",
+    "title": "2026 예술산업보증 9월(6차) 공모 안내(9.1.(화)~9.10.(목), 16:00)",
+    "organization": "예술경영지원센터",
+    "agency": "예술경영지원센터",
+    "status": "진행중",
+    "postedDate": "",
+    "publishedDate": "",
+    "startDate": "",
+    "endDate": "2026-09-10",
+    "deadline": "2026-09-10",
+    "budget": null,
+    "supportAmount": null,
+    "originalUrl": "https://www.gokams.or.kr/introduction_view.aspx?Idx=2830&page=1&txtKeyword=&ddlKeyfield=45",
+    "sourceUrl": "https://www.gokams.or.kr/introduction_view.aspx?Idx=2830&page=1&txtKeyword=&ddlKeyfield=45",
+    "documentUrl": "",
+    "field": "예술산업",
+    "matchedKeywords": [
+      "예술산업"
+    ],
+    "matchedPriorityKeywords": [
+      "예술산업"
+    ],
+    "axooFitScore": 51,
+    "score": 51,
+    "grade": "B",
+    "axooFitReason": "예술산업 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다.",
+    "gradeReason": "예술산업 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다.",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-09-02",
+    "updatedAt": "2026-09-02",
+    "collectionVersion": "support_programs_kams_v1.1"
+  }
+]
