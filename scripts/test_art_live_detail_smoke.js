@@ -1,4 +1,10 @@
 const {
+  spawnSync
+} = require(
+  "child_process"
+);
+
+const {
   extractArtDetail
 } = require(
   "./art_detail_extractor"
@@ -7,6 +13,7 @@ const {
 
 /* ============================================================
    AXOO ART LIVE DETAIL SMOKE TEST
+   VERSION: 1.1.0
 ============================================================
 
    목적
@@ -16,6 +23,12 @@ const {
    → HTML 수신
    → Detail Extractor 실행
    → 실제 공고일 / 마감일 검증
+
+   전송 전략
+   ------------------------------------------------------------
+   1. Node fetch 시도
+   2. Node/Undici 연결 실패 시
+      curl IPv4 GET으로 자동 fallback
 
    중요
    ------------------------------------------------------------
@@ -27,7 +40,7 @@ const {
 
 
 /* ============================================================
-   KNOWN LIVE TARGET
+   TARGET
 ============================================================ */
 
 const TARGET_TITLE =
@@ -38,13 +51,6 @@ const TARGET_URL =
   "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110904626&menuId=3865";
 
 
-/*
-  기존 실제 수집 데이터에서 이미 확인된 값.
-
-  이 값은 Fixture 가공값이 아니라
-  기존 Collector가 해당 실제 상세페이지에서
-  추출·정규화해 ARCHIVE에 저장했던 값이다.
-*/
 const EXPECTED_PUBLISHED_DATE =
   "2026-08-10";
 
@@ -57,12 +63,26 @@ const EXPECTED_DEADLINE =
    CONFIG
 ============================================================ */
 
-const FETCH_TIMEOUT_MS =
-  20000;
+const NODE_FETCH_TIMEOUT_MS =
+  15000;
+
+
+const CURL_CONNECT_TIMEOUT_SECONDS =
+  20;
+
+
+const CURL_MAX_TIME_SECONDS =
+  45;
 
 
 const MIN_HTML_BYTES =
   1000;
+
+
+const USER_AGENT =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+  "AppleWebKit/537.36 (KHTML, like Gecko) " +
+  "Chrome/151.0.0.0 Safari/537.36";
 
 
 /* ============================================================
@@ -187,10 +207,10 @@ function assertTrue(
 
 
 /* ============================================================
-   FETCH
+   NODE FETCH
 ============================================================ */
 
-async function fetchLivePage(
+async function fetchWithNode(
   url
 ) {
 
@@ -205,7 +225,7 @@ async function fetchLivePage(
         controller.abort();
 
       },
-      FETCH_TIMEOUT_MS
+      NODE_FETCH_TIMEOUT_MS
     );
 
 
@@ -225,13 +245,22 @@ async function fetchLivePage(
           headers: {
 
             "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-LiveDetailSmoke/1.0)",
+              USER_AGENT,
 
             "Accept":
-              "text/html,application/xhtml+xml,*/*",
+              "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 
             "Accept-Language":
-              "ko-KR,ko;q=0.9,en;q=0.6"
+              "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+
+            "Cache-Control":
+              "no-cache",
+
+            "Pragma":
+              "no-cache",
+
+            "Referer":
+              "https://www.gg.go.kr/publicart/main.do"
           }
         }
       );
@@ -243,17 +272,59 @@ async function fetchLivePage(
 
     return {
 
-      ok:
+      success:
         response.ok,
+
+      transport:
+        "node-fetch",
 
       status:
         response.status,
 
       finalUrl:
-        response.url,
+        response.url ||
+        url,
 
       html:
-        html
+        html,
+
+      error:
+        ""
+    };
+
+
+  } catch (
+    error
+  ) {
+
+    return {
+
+      success:
+        false,
+
+      transport:
+        "node-fetch",
+
+      status:
+        0,
+
+      finalUrl:
+        url,
+
+      html:
+        "",
+
+      error:
+        (
+          error &&
+          (
+            error.stack ||
+            error.message
+          )
+        ) ||
+        String(
+          error
+        )
     };
 
 
@@ -263,6 +334,315 @@ async function fetchLivePage(
       timer
     );
   }
+}
+
+
+/* ============================================================
+   CURL IPv4 FALLBACK
+============================================================ */
+
+function fetchWithCurlIPv4(
+  url
+) {
+
+  const args = [
+
+    "-4",
+
+    "--http1.1",
+
+    "--location",
+
+    "--silent",
+
+    "--show-error",
+
+    "--compressed",
+
+    "--connect-timeout",
+    String(
+      CURL_CONNECT_TIMEOUT_SECONDS
+    ),
+
+    "--max-time",
+    String(
+      CURL_MAX_TIME_SECONDS
+    ),
+
+    "--user-agent",
+    USER_AGENT,
+
+    "--header",
+    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+
+    "--header",
+    "Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+
+    "--header",
+    "Cache-Control: no-cache",
+
+    "--header",
+    "Pragma: no-cache",
+
+    "--header",
+    "Referer: https://www.gg.go.kr/publicart/main.do",
+
+    "--write-out",
+    "\n__AXOO_HTTP_STATUS__:%{http_code}\n" +
+    "__AXOO_FINAL_URL__:%{url_effective}\n",
+
+    url
+  ];
+
+
+  const result =
+    spawnSync(
+      "curl",
+      args,
+      {
+
+        encoding:
+          "utf8",
+
+        maxBuffer:
+          20 *
+          1024 *
+          1024
+      }
+    );
+
+
+  const stdout =
+    String(
+      result.stdout ||
+      ""
+    );
+
+
+  const stderr =
+    String(
+      result.stderr ||
+      ""
+    );
+
+
+  const statusMatch =
+    stdout.match(
+      /\n__AXOO_HTTP_STATUS__:(\d{3})\n/
+    );
+
+
+  const finalUrlMatch =
+    stdout.match(
+      /\n__AXOO_FINAL_URL__:(.+)\n?$/
+    );
+
+
+  const status =
+    statusMatch
+      ? Number(
+          statusMatch[1]
+        )
+      : 0;
+
+
+  const finalUrl =
+    finalUrlMatch
+      ? finalUrlMatch[1].trim()
+      : url;
+
+
+  const html =
+    stdout
+
+      .replace(
+        /\n__AXOO_HTTP_STATUS__:\d{3}\n/,
+        "\n"
+      )
+
+      .replace(
+        /\n__AXOO_FINAL_URL__:.+\n?$/,
+        ""
+      );
+
+
+  const httpOk =
+    status >=
+      200 &&
+    status <
+      400;
+
+
+  const processOk =
+    result.status ===
+      0;
+
+
+  return {
+
+    success:
+      processOk &&
+      httpOk,
+
+    transport:
+      "curl-ipv4",
+
+    status:
+      status,
+
+    finalUrl:
+      finalUrl,
+
+    html:
+      html,
+
+    error:
+      stderr ||
+      (
+        result.error
+          ? String(
+              result.error
+            )
+          : ""
+      ),
+
+    exitCode:
+      result.status
+  };
+}
+
+
+/* ============================================================
+   FETCH WITH FALLBACK
+============================================================ */
+
+async function fetchLivePage(
+  url
+) {
+
+  console.log(
+    "NETWORK STEP 1:",
+    "Node fetch"
+  );
+
+
+  const nodeResult =
+    await fetchWithNode(
+      url
+    );
+
+
+  if (
+    nodeResult.success &&
+    Buffer.byteLength(
+      nodeResult.html,
+      "utf8"
+    ) >=
+      MIN_HTML_BYTES
+  ) {
+
+    console.log(
+      "✅ NODE FETCH SUCCESS",
+      "| HTTP",
+      nodeResult.status
+    );
+
+
+    return nodeResult;
+  }
+
+
+  console.log(
+    "⚠️ NODE FETCH FAILED"
+  );
+
+
+  console.log(
+    "   status:",
+    nodeResult.status ||
+      "-"
+  );
+
+
+  if (
+    nodeResult.error
+  ) {
+
+    console.log(
+      "   error:",
+      nodeResult.error
+        .split(
+          "\n"
+        )[0]
+    );
+  }
+
+
+  console.log(
+    ""
+  );
+
+
+  console.log(
+    "NETWORK STEP 2:",
+    "curl IPv4 GET fallback"
+  );
+
+
+  const curlResult =
+    fetchWithCurlIPv4(
+      url
+    );
+
+
+  if (
+    curlResult.success
+  ) {
+
+    console.log(
+      "✅ CURL IPv4 SUCCESS",
+      "| HTTP",
+      curlResult.status
+    );
+
+
+  } else {
+
+    console.log(
+      "❌ CURL IPv4 FAILED"
+    );
+
+
+    console.log(
+      "   exitCode:",
+      curlResult.exitCode
+    );
+
+
+    console.log(
+      "   httpStatus:",
+      curlResult.status ||
+        "-"
+    );
+
+
+    if (
+      curlResult.error
+    ) {
+
+      console.log(
+        "   error:",
+        curlResult.error
+          .trim()
+          .split(
+            "\n"
+          )[0]
+      );
+    }
+  }
+
+
+  return curlResult;
 }
 
 
@@ -293,6 +673,12 @@ async function runLiveSmoke() {
 
 
   console.log(
+    "VERSION:",
+    "1.1.0"
+  );
+
+
+  console.log(
     "TITLE:",
     TARGET_TITLE
   );
@@ -315,32 +701,87 @@ async function runLiveSmoke() {
   );
 
 
-  let fetched;
+  const fetched =
+    await fetchLivePage(
+      TARGET_URL
+    );
 
 
-  try {
-
-    fetched =
-      await fetchLivePage(
-        TARGET_URL
-      );
+  console.log(
+    ""
+  );
 
 
-  } catch (
-    error
+  console.log(
+    "------------------------------------"
+  );
+
+
+  console.log(
+    "NETWORK RESULT"
+  );
+
+
+  console.log(
+    "------------------------------------"
+  );
+
+
+  console.log(
+    "transport:",
+    fetched.transport
+  );
+
+
+  console.log(
+    "status:",
+    fetched.status ||
+      "-"
+  );
+
+
+  console.log(
+    "finalUrl:",
+    fetched.finalUrl ||
+      "-"
+  );
+
+
+  console.log(
+    "htmlBytes:",
+    Buffer.byteLength(
+      fetched.html ||
+      "",
+      "utf8"
+    )
+  );
+
+
+  console.log(
+    "------------------------------------"
+  );
+
+
+  if (
+    !fetched.success
   ) {
 
     failCount++;
 
 
     console.error(
-      "❌ LIVE FETCH FAILED"
+      "❌ LIVE PAGE NETWORK ACCESS FAILED"
     );
 
 
-    console.error(
-      error
-    );
+    if (
+      fetched.error
+    ) {
+
+      console.error(
+        fetched.error
+      );
+    }
 
 
     return;
@@ -348,28 +789,32 @@ async function runLiveSmoke() {
 
 
   /* ----------------------------------------------------------
-     1. NETWORK
+     NETWORK ASSERT
   ---------------------------------------------------------- */
 
   assertTrue(
     "HTTP 응답 성공",
-    fetched.ok,
+    fetched.status >=
+      200 &&
+    fetched.status <
+      400,
     "HTTP " +
       fetched.status
   );
 
 
+  const htmlBytes =
+    Buffer.byteLength(
+      fetched.html,
+      "utf8"
+    );
+
+
   assertTrue(
     "실제 HTML 수신",
-    Buffer.byteLength(
-      fetched.html,
-      "utf8"
-    ) >=
+    htmlBytes >=
       MIN_HTML_BYTES,
-    Buffer.byteLength(
-      fetched.html,
-      "utf8"
-    ) +
+    htmlBytes +
       " bytes"
   );
 
@@ -384,7 +829,7 @@ async function runLiveSmoke() {
 
 
   /* ----------------------------------------------------------
-     2. DETAIL EXTRACTION
+     DETAIL EXTRACTION
   ---------------------------------------------------------- */
 
   const detail =
@@ -471,6 +916,12 @@ async function runLiveSmoke() {
 
 
   console.log(
+    "detailVersion:",
+    detail.detailExtractionVersion
+  );
+
+
+  console.log(
     "------------------------------------"
   );
 
@@ -481,7 +932,7 @@ async function runLiveSmoke() {
 
 
   /* ----------------------------------------------------------
-     3. KNOWN REAL VALUES
+     KNOWN REAL VALUES
   ---------------------------------------------------------- */
 
   assertEqual(
@@ -498,15 +949,6 @@ async function runLiveSmoke() {
   );
 
 
-  /*
-    페이지 구조에 따라 기관/작품비/설치장소/참가자격이
-    HTML 본문에 모두 존재하지 않을 수 있으므로
-    이번 Smoke Test에서는 값 자체를 강제하지 않는다.
-
-    하지만 최소 날짜 정보가 추출돼야
-    Detail Extractor가 실제 페이지에서도
-    동작한다고 판단한다.
-  */
   assertTrue(
     "실제 상세페이지 핵심 필드 2개 이상 추출",
     detail.detailExtractionCount >=
