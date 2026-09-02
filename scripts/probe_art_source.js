@@ -9,15 +9,15 @@ const {
   isCandidateTitle,
   cleanText,
   extractAnchors,
-  followScore,
-  canonicalUrl
+  followScore
 } = require(
   "./collect_remaining_art_commissions"
 );
 
 const {
-  getSourceSeedUrls,
-  describeSourceAdapter
+  getSourceRequests,
+  describeSourceAdapter,
+  describeRequest
 } = require(
   "./art_source_adapters"
 );
@@ -30,26 +30,17 @@ const {
 const FETCH_TIMEOUT_MS =
   8000;
 
-const MAX_SEEDS_PER_SOURCE =
+const MAX_REQUESTS_PER_SOURCE =
   3;
 
 const MAX_LABEL_SAMPLES =
-  10;
+  15;
+
+const MAX_CANDIDATE_SAMPLES =
+  15;
 
 const MAX_NAV_SAMPLES =
   10;
-
-const MAX_CANDIDATE_SAMPLES =
-  10;
-
-const MAX_FORM_SAMPLES =
-  10;
-
-const MAX_FIELD_SAMPLES =
-  80;
-
-const MAX_SCRIPT_SAMPLES =
-  20;
 
 
 const PRIMARY_KEYWORDS = [
@@ -75,14 +66,18 @@ function hasAnyKeyword(
   keywords
 ) {
 
+  const value =
+    String(
+      text || ""
+    );
+
+
   return keywords.some(
     function (
       keyword
     ) {
 
-      return String(
-        text || ""
-      ).includes(
+      return value.includes(
         keyword
       );
     }
@@ -116,114 +111,41 @@ function sameOrigin(
 }
 
 
-function formatBoolean(
-  value
+function getRequestSearchTerm(
+  request
 ) {
-
-  return value
-    ? "YES"
-    : "NO";
-}
-
-
-function decodeAttribute(
-  value
-) {
-
-  return String(
-    value || ""
-  )
-
-    .replace(
-      /&amp;/gi,
-      "&"
-    )
-
-    .replace(
-      /&quot;/gi,
-      "\""
-    )
-
-    .replace(
-      /&#39;/gi,
-      "'"
-    )
-
-    .replace(
-      /&lt;/gi,
-      "<"
-    )
-
-    .replace(
-      /&gt;/gi,
-      ">"
-    );
-}
-
-
-function getAttribute(
-  text,
-  name
-) {
-
-  const regex =
-    new RegExp(
-      name +
-      "\\s*=\\s*[\"']([^\"']*)[\"']",
-      "i"
-    );
-
-
-  const match =
-    String(
-      text || ""
-    ).match(
-      regex
-    );
-
-
-  return match
-    ? decodeAttribute(
-        match[1]
-      )
-    : "";
-}
-
-
-function shorten(
-  value,
-  maxLength
-) {
-
-  const text =
-    String(
-      value || ""
-    )
-
-      .replace(
-        /\s+/g,
-        " "
-      )
-
-      .trim();
-
 
   if (
-    text.length <=
-    maxLength
+    !request ||
+    !request.body
   ) {
 
-    return text;
+    return "";
   }
 
 
-  return (
-    text.slice(
-      0,
-      maxLength
-    ) +
-    "..."
-  );
+  try {
+
+    const params =
+      new URLSearchParams(
+        request.body
+      );
+
+
+    return (
+      params.get(
+        "sw"
+      ) ||
+      ""
+    );
+
+
+  } catch (
+    error
+  ) {
+
+    return "";
+  }
 }
 
 
@@ -237,41 +159,38 @@ function loadAllSources() {
     [];
 
 
-  const regional =
-    getRegionalSources();
+  getRegionalSources()
+    .forEach(
+      function (
+        region
+      ) {
 
+        region.sources.forEach(
+          function (
+            source
+          ) {
 
-  regional.forEach(
-    function (
-      region
-    ) {
+            result.push({
 
-      region.sources.forEach(
-        function (
-          source
-        ) {
+              region: {
 
-          result.push({
+                id:
+                  region.id,
 
-            region: {
+                name:
+                  region.name,
 
-              id:
-                region.id,
+                fullName:
+                  region.fullName
+              },
 
-              name:
-                region.name,
-
-              fullName:
-                region.fullName
-            },
-
-            source:
-              source
-          });
-        }
-      );
-    }
-  );
+              source:
+                source
+            });
+          }
+        );
+      }
+    );
 
 
   const nationalRegion = {
@@ -334,84 +253,47 @@ function findSource(
 
 function printSourceList() {
 
-  const sources =
-    loadAllSources();
-
-
   console.log(
     ""
   );
 
+
   console.log(
     "===================================="
   );
+
 
   console.log(
     "AXOO ART SOURCE LIST"
   );
 
+
   console.log(
     "===================================="
   );
 
 
-  sources.forEach(
-    function (
-      entry
-    ) {
+  loadAllSources()
+    .forEach(
+      function (
+        entry
+      ) {
 
-      const adapterInfo =
-        describeSourceAdapter(
-          entry.source
+        const adapter =
+          describeSourceAdapter(
+            entry.source
+          );
+
+
+        console.log(
+          entry.source.id +
+          " | " +
+          entry.region.name +
+          " | " +
+          adapter.adapterId
         );
-
-
-      console.log(
-        entry.source.id
-      );
-
-
-      console.log(
-        "   지역:",
-        entry.region.name
-      );
-
-
-      console.log(
-        "   소스:",
-        entry.source.sourceName
-      );
-
-
-      console.log(
-        "   URL:",
-        entry.source.sourceUrl
-      );
-
-
-      console.log(
-        "   Adapter:",
-        adapterInfo.adapterId
-      );
-
-
-      console.log(
-        "   Seeds:",
-        adapterInfo.seedUrls.length
-      );
-
-
-      console.log(
-        ""
-      );
-    }
-  );
-
-
-  console.log(
-    "TOTAL:",
-    sources.length
-  );
+      }
+    );
 
 
   console.log(
@@ -421,11 +303,11 @@ function printSourceList() {
 
 
 /* =========================================================
-   FETCH
+   FETCH REQUEST
 ========================================================= */
 
-async function fetchPage(
-  url
+async function fetchRequest(
+  request
 ) {
 
   const controller =
@@ -449,29 +331,58 @@ async function fetchPage(
 
   try {
 
+    const headers = {
+
+      "User-Agent":
+        "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.3)",
+
+      "Accept":
+        "text/html,application/xhtml+xml,*/*",
+
+      "Accept-Language":
+        "ko-KR,ko;q=0.9,en;q=0.6",
+
+      ...(
+        request.headers ||
+        {}
+      )
+    };
+
+
+    const options = {
+
+      method:
+        request.method ||
+        "GET",
+
+      headers:
+        headers,
+
+      signal:
+        controller.signal,
+
+      redirect:
+        "follow"
+    };
+
+
+    if (
+      request.method !==
+        "GET" &&
+      request.method !==
+        "HEAD" &&
+      request.body != null
+    ) {
+
+      options.body =
+        request.body;
+    }
+
+
     const response =
       await fetch(
-        url,
-        {
-
-          signal:
-            controller.signal,
-
-          redirect:
-            "follow",
-
-          headers: {
-
-            "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.2)",
-
-            "Accept":
-              "text/html,application/xhtml+xml,*/*",
-
-            "Accept-Language":
-              "ko-KR,ko;q=0.9,en;q=0.6"
-          }
-        }
+        request.url,
+        options
       );
 
 
@@ -517,307 +428,23 @@ async function fetchPage(
 
 
 /* =========================================================
-   FORM DIAGNOSTICS
+   ANALYSIS
 ========================================================= */
 
-function extractFormDiagnostics(
-  html,
-  pageUrl
-) {
-
-  const forms =
-    [];
-
-
-  const formRegex =
-    /<form\b([^>]*)>([\s\S]*?)<\/form>/gi;
-
-
-  let formMatch;
-
-
-  while (
-    (
-      formMatch =
-        formRegex.exec(
-          html
-        )
-    ) !== null &&
-    forms.length <
-      MAX_FORM_SAMPLES
-  ) {
-
-    const attrs =
-      formMatch[1] ||
-      "";
-
-
-    const body =
-      formMatch[2] ||
-      "";
-
-
-    const method =
-      (
-        getAttribute(
-          attrs,
-          "method"
-        ) ||
-        "GET"
-      )
-        .toUpperCase();
-
-
-    const rawAction =
-      getAttribute(
-        attrs,
-        "action"
-      );
-
-
-    const action =
-      rawAction
-        ? canonicalUrl(
-            rawAction,
-            pageUrl
-          )
-        : pageUrl;
-
-
-    const form = {
-
-      id:
-        getAttribute(
-          attrs,
-          "id"
-        ),
-
-      name:
-        getAttribute(
-          attrs,
-          "name"
-        ),
-
-      method:
-        method,
-
-      action:
-        action,
-
-      onsubmit:
-        getAttribute(
-          attrs,
-          "onsubmit"
-        ),
-
-      fields:
-        []
-    };
-
-
-    const fieldRegex =
-      /<(input|select|textarea|button)\b([^>]*)>/gi;
-
-
-    let fieldMatch;
-
-
-    while (
-      (
-        fieldMatch =
-          fieldRegex.exec(
-            body
-          )
-      ) !== null &&
-      form.fields.length <
-        MAX_FIELD_SAMPLES
-    ) {
-
-      const tag =
-        String(
-          fieldMatch[1] ||
-          ""
-        )
-          .toLowerCase();
-
-
-      const fieldAttrs =
-        fieldMatch[2] ||
-        "";
-
-
-      const field = {
-
-        tag:
-          tag,
-
-        type:
-          getAttribute(
-            fieldAttrs,
-            "type"
-          ),
-
-        name:
-          getAttribute(
-            fieldAttrs,
-            "name"
-          ),
-
-        id:
-          getAttribute(
-            fieldAttrs,
-            "id"
-          ),
-
-        value:
-          getAttribute(
-            fieldAttrs,
-            "value"
-          ),
-
-        placeholder:
-          getAttribute(
-            fieldAttrs,
-            "placeholder"
-          ),
-
-        onclick:
-          getAttribute(
-            fieldAttrs,
-            "onclick"
-          )
-      };
-
-
-      /*
-        검색 구조 분석에 의미 있는 필드만 출력
-      */
-      if (
-        field.name ||
-        field.id ||
-        field.placeholder ||
-        field.onclick ||
-        field.type ===
-          "submit"
-      ) {
-
-        form.fields.push(
-          field
-        );
-      }
-    }
-
-
-    forms.push(
-      form
-    );
-  }
-
-
-  return forms;
-}
-
-
-/* =========================================================
-   SCRIPT DIAGNOSTICS
-========================================================= */
-
-function extractSearchScriptSamples(
-  html
-) {
-
-  const result =
-    [];
-
-
-  const patterns = [
-
-    /function\s+[A-Za-z0-9_$]*(search|Search|srch|Srch)[A-Za-z0-9_$]*\s*\([^)]*\)\s*\{[\s\S]{0,1600}?\}/g,
-
-    /(?:search|Search|srch|Srch)[A-Za-z0-9_$]*\s*=\s*function\s*\([^)]*\)\s*\{[\s\S]{0,1600}?\}/g,
-
-    /(?:onclick|onsubmit)\s*=\s*["'][^"']*(?:search|Search|srch|Srch)[^"']*["']/g,
-
-    /(?:ajax|fetch|\$\.ajax)[\s\S]{0,500}?(?:search|crawler|info)[\s\S]{0,1000}?/gi
-
-  ];
-
-
-  patterns.forEach(
-    function (
-      regex
-    ) {
-
-      const matches =
-        html.match(
-          regex
-        ) ||
-        [];
-
-
-      matches.forEach(
-        function (
-          match
-        ) {
-
-          const sample =
-            shorten(
-              match,
-              1600
-            );
-
-
-          if (
-            !sample ||
-            result.includes(
-              sample
-            )
-          ) {
-
-            return;
-          }
-
-
-          if (
-            result.length >=
-            MAX_SCRIPT_SAMPLES
-          ) {
-
-            return;
-          }
-
-
-          result.push(
-            sample
-          );
-        }
-      );
-    }
-  );
-
-
-  return result;
-}
-
-
-/* =========================================================
-   ANALYZE
-========================================================= */
-
-function analyzePage(
+function analyzeResponse(
   source,
-  seedUrl,
-  fetchResult
+  request,
+  response
 ) {
 
   const html =
-    fetchResult.html ||
+    response.html ||
     "";
 
 
   const pageUrl =
-    fetchResult.finalUrl ||
-    seedUrl;
+    response.finalUrl ||
+    request.url;
 
 
   const rawAnchors =
@@ -919,7 +546,8 @@ function analyzePage(
           return (
             followScore(
               anchor
-            ) > 0
+            ) >
+            0
           );
         }
       )
@@ -964,7 +592,7 @@ function analyzePage(
 
 
       if (
-        !/미술|예술|작품|공모|공고|고시|art/i.test(
+        !/미술|예술|작품|공모|건축|설치|art/i.test(
           label
         )
       ) {
@@ -999,13 +627,22 @@ function analyzePage(
   );
 
 
+  const searchTerm =
+    getRequestSearchTerm(
+      request
+    );
+
+
+  const normalizedHtmlText =
+    cleanText(
+      html
+    );
+
+
   return {
 
-    seedUrl:
-      seedUrl,
-
-    pageUrl:
-      pageUrl,
+    searchTerm:
+      searchTerm,
 
     htmlBytes:
       Buffer.byteLength(
@@ -1040,306 +677,101 @@ function analyzePage(
     relatedLabels:
       relatedLabels,
 
-    forms:
-      extractFormDiagnostics(
-        html,
-        pageUrl
-      ),
-
-    searchScripts:
-      extractSearchScriptSamples(
-        html
-      )
+    searchTermEchoed:
+      searchTerm
+        ? normalizedHtmlText.includes(
+            searchTerm
+          )
+        : false
   };
 }
 
 
 /* =========================================================
-   FORM PRINT
+   PRINT REQUEST RESULT
 ========================================================= */
 
-function printFormDiagnostics(
-  forms
-) {
-
-  console.log(
-    ""
-  );
-
-  console.log(
-    "------------------------------------"
-  );
-
-  console.log(
-    "FORM DIAGNOSTICS"
-  );
-
-  console.log(
-    "------------------------------------"
-  );
-
-
-  console.log(
-    "FORMS:",
-    forms.length
-  );
-
-
-  forms.forEach(
-    function (
-      form,
-      index
-    ) {
-
-      console.log(
-        ""
-      );
-
-
-      console.log(
-        "FORM #" +
-        (
-          index +
-          1
-        )
-      );
-
-
-      console.log(
-        "   id:",
-        form.id ||
-        "-"
-      );
-
-
-      console.log(
-        "   name:",
-        form.name ||
-        "-"
-      );
-
-
-      console.log(
-        "   method:",
-        form.method
-      );
-
-
-      console.log(
-        "   action:",
-        form.action ||
-        "-"
-      );
-
-
-      console.log(
-        "   onsubmit:",
-        form.onsubmit ||
-        "-"
-      );
-
-
-      console.log(
-        "   fields:",
-        form.fields.length
-      );
-
-
-      form.fields.forEach(
-        function (
-          field
-        ) {
-
-          console.log(
-            "      -",
-            [
-              "tag=" +
-                (
-                  field.tag ||
-                  "-"
-                ),
-
-              "type=" +
-                (
-                  field.type ||
-                  "-"
-                ),
-
-              "name=" +
-                (
-                  field.name ||
-                  "-"
-                ),
-
-              "id=" +
-                (
-                  field.id ||
-                  "-"
-                ),
-
-              "value=" +
-                (
-                  field.value ||
-                  "-"
-                ),
-
-              "placeholder=" +
-                (
-                  field.placeholder ||
-                  "-"
-                ),
-
-              "onclick=" +
-                (
-                  field.onclick ||
-                  "-"
-                )
-            ].join(
-              " | "
-            )
-          );
-        }
-      );
-    }
-  );
-}
-
-
-/* =========================================================
-   SCRIPT PRINT
-========================================================= */
-
-function printScriptDiagnostics(
-  samples
-) {
-
-  console.log(
-    ""
-  );
-
-  console.log(
-    "------------------------------------"
-  );
-
-  console.log(
-    "SEARCH SCRIPT DIAGNOSTICS"
-  );
-
-  console.log(
-    "------------------------------------"
-  );
-
-
-  console.log(
-    "SAMPLES:",
-    samples.length
-  );
-
-
-  samples.forEach(
-    function (
-      sample,
-      index
-    ) {
-
-      console.log(
-        ""
-      );
-
-
-      console.log(
-        "SCRIPT #" +
-        (
-          index +
-          1
-        )
-      );
-
-
-      console.log(
-        sample
-      );
-    }
-  );
-}
-
-
-/* =========================================================
-   SEED RESULT
-========================================================= */
-
-function printSeedResult(
+function printRequestResult(
   index,
-  seedUrl,
-  fetchResult,
+  request,
+  response,
   analysis
 ) {
 
-  const originChanged =
-    !sameOrigin(
-      seedUrl,
-      fetchResult.finalUrl
-    );
-
-
   console.log(
     ""
   );
+
 
   console.log(
     "------------------------------------"
   );
 
+
   console.log(
-    "SEED #" +
+    "REQUEST #" +
     (
       index +
       1
     )
   );
 
+
   console.log(
     "------------------------------------"
   );
 
 
   console.log(
-    "SEED URL:",
-    seedUrl
-  );
-
-
-  console.log(
-    "FINAL URL:",
-    fetchResult.finalUrl
-  );
-
-
-  console.log(
-    "ORIGIN CHANGED:",
-    formatBoolean(
-      originChanged
+    "REQUEST:",
+    describeRequest(
+      request
     )
   );
 
 
   console.log(
-    "HTTP:",
-    fetchResult.status,
-    fetchResult.statusText
+    "METHOD:",
+    request.method
   );
 
 
   console.log(
-    "CONTENT TYPE:",
-    fetchResult.contentType
+    "URL:",
+    request.url
+  );
+
+
+  console.log(
+    "SEARCH TERM:",
+    analysis.searchTerm ||
+    "-"
+  );
+
+
+  console.log(
+    "HTTP:",
+    response.status,
+    response.statusText
+  );
+
+
+  console.log(
+    "FINAL URL:",
+    response.finalUrl
   );
 
 
   console.log(
     "TIME:",
-    fetchResult.elapsedMs +
-      "ms"
+    response.elapsedMs +
+    "ms"
+  );
+
+
+  console.log(
+    "CONTENT TYPE:",
+    response.contentType
   );
 
 
@@ -1349,6 +781,14 @@ function printSeedResult(
       analysis.htmlBytes /
       1024
     )
+  );
+
+
+  console.log(
+    "SEARCH TERM ECHOED:",
+    analysis.searchTermEchoed
+      ? "YES"
+      : "NO"
   );
 
 
@@ -1470,6 +910,53 @@ function printSeedResult(
         }
       );
   }
+
+
+  if (
+    analysis.navigationAnchors.length >
+    0
+  ) {
+
+    console.log(
+      ""
+    );
+
+
+    console.log(
+      "TOP NAVIGATION SAMPLE:"
+    );
+
+
+    analysis.navigationAnchors
+
+      .slice(
+        0,
+        MAX_NAV_SAMPLES
+      )
+
+      .forEach(
+        function (
+          anchor
+        ) {
+
+          console.log(
+            "   [" +
+            followScore(
+              anchor
+            ) +
+            "]",
+            anchor.label ||
+            "(NO LABEL)"
+          );
+
+
+          console.log(
+            "     ",
+            anchor.url
+          );
+        }
+      );
+  }
 }
 
 
@@ -1477,12 +964,16 @@ function printSeedResult(
    COMBINED RESULT
 ========================================================= */
 
-function buildCombinedResult(
+function combineAnalyses(
   analyses
 ) {
 
   const candidateMap =
     new Map();
+
+
+  const labelSet =
+    new Set();
 
 
   let htmlBytes =
@@ -1494,12 +985,6 @@ function buildCombinedResult(
   let parsedAnchors =
     0;
 
-  let javascriptAnchors =
-    0;
-
-  let allowedAnchors =
-    0;
-
   let primaryAnchors =
     0;
 
@@ -1507,6 +992,9 @@ function buildCombinedResult(
     0;
 
   let navigationAnchors =
+    0;
+
+  let searchTermEchoCount =
     0;
 
 
@@ -1518,26 +1006,33 @@ function buildCombinedResult(
       htmlBytes +=
         analysis.htmlBytes;
 
+
       rawAnchors +=
         analysis.rawAnchors;
+
 
       parsedAnchors +=
         analysis.parsedAnchors;
 
-      javascriptAnchors +=
-        analysis.javascriptAnchors;
-
-      allowedAnchors +=
-        analysis.allowedAnchors;
 
       primaryAnchors +=
         analysis.primaryAnchors.length;
 
+
       actionAnchors +=
         analysis.actionAnchors.length;
 
+
       navigationAnchors +=
         analysis.navigationAnchors.length;
+
+
+      if (
+        analysis.searchTermEchoed
+      ) {
+
+        searchTermEchoCount++;
+      }
 
 
       analysis.candidateAnchors
@@ -1559,6 +1054,19 @@ function buildCombinedResult(
             }
           }
         );
+
+
+      analysis.relatedLabels
+        .forEach(
+          function (
+            label
+          ) {
+
+            labelSet.add(
+              label
+            );
+          }
+        );
     }
   );
 
@@ -1574,36 +1082,39 @@ function buildCombinedResult(
     parsedAnchors:
       parsedAnchors,
 
-    javascriptAnchors:
-      javascriptAnchors,
-
-    allowedAnchors:
-      allowedAnchors,
-
     primaryAnchors:
       primaryAnchors,
 
     actionAnchors:
       actionAnchors,
 
+    navigationAnchors:
+      navigationAnchors,
+
+    searchTermEchoCount:
+      searchTermEchoCount,
+
     candidateAnchors:
       Array.from(
         candidateMap.values()
       ),
 
-    navigationAnchors:
-      navigationAnchors
+    relatedLabels:
+      Array.from(
+        labelSet
+      )
   };
 }
 
 
 /* =========================================================
-   INTERPRETATION
+   SUMMARY
 ========================================================= */
 
-function printInterpretation(
-  successfulSeeds,
-  failedSeeds,
+function printSummary(
+  requestCount,
+  successCount,
+  failedCount,
   combined
 ) {
 
@@ -1611,28 +1122,45 @@ function printInterpretation(
     ""
   );
 
+
   console.log(
     "===================================="
   );
+
 
   console.log(
     "PROBE SUMMARY"
   );
 
+
   console.log(
     "===================================="
   );
 
 
   console.log(
-    "SUCCESSFUL SEEDS:",
-    successfulSeeds
+    "REQUESTS:",
+    requestCount
   );
 
 
   console.log(
-    "FAILED SEEDS:",
-    failedSeeds
+    "SUCCESSFUL REQUESTS:",
+    successCount
+  );
+
+
+  console.log(
+    "FAILED REQUESTS:",
+    failedCount
+  );
+
+
+  console.log(
+    "SEARCH TERM ECHO:",
+    combined.searchTermEchoCount +
+    "/" +
+    successCount
   );
 
 
@@ -1654,18 +1182,6 @@ function printInterpretation(
   console.log(
     "PARSED <a>:",
     combined.parsedAnchors
-  );
-
-
-  console.log(
-    "JAVASCRIPT HREF:",
-    combined.javascriptAnchors
-  );
-
-
-  console.log(
-    "ALLOWED ORIGIN:",
-    combined.allowedAnchors
   );
 
 
@@ -1693,17 +1209,70 @@ function printInterpretation(
   );
 
 
+  if (
+    combined.candidateAnchors.length >
+    0
+  ) {
+
+    console.log(
+      ""
+    );
+
+
+    console.log(
+      "===================================="
+    );
+
+
+    console.log(
+      "🎯 UNIQUE CANDIDATES"
+    );
+
+
+    console.log(
+      "===================================="
+    );
+
+
+    combined.candidateAnchors
+      .slice(
+        0,
+        MAX_CANDIDATE_SAMPLES
+      )
+      .forEach(
+        function (
+          anchor
+        ) {
+
+          console.log(
+            "-",
+            anchor.label
+          );
+
+
+          console.log(
+            " ",
+            anchor.url
+          );
+        }
+      );
+  }
+
+
   console.log(
     ""
   );
+
 
   console.log(
     "===================================="
   );
 
+
   console.log(
     "PROBE INTERPRETATION"
   );
+
 
   console.log(
     "===================================="
@@ -1711,44 +1280,81 @@ function printInterpretation(
 
 
   if (
-    successfulSeeds ===
+    successCount ===
     0
   ) {
 
     console.log(
-      "❌ 모든 Seed URL 접근에 실패했습니다."
-    );
-
-
-  } else if (
-    combined.primaryAnchors ===
-      0
-  ) {
-
-    console.log(
-      "⚠️ 검색 Seed GET 파라미터로는 검색 결과가 반영되지 않습니다."
+      "❌ 모든 Request가 실패했습니다."
     );
 
 
     console.log(
-      "→ FORM DIAGNOSTICS의 method/action/name을 기준으로 실제 검색 요청을 구현하세요."
+      "→ 네트워크 또는 POST 요청 구성을 다시 확인해야 합니다."
     );
 
 
   } else if (
+    combined.primaryAnchors >
+      0 &&
     combined.candidateAnchors.length >
       0
   ) {
 
     console.log(
-      "✅ 실제 공모 후보 탐지에 성공했습니다."
+      "✅ POST 검색을 통해 실제 건축물 미술작품 공모 후보를 탐지했습니다."
+    );
+
+
+    console.log(
+      "→ 아트누리 Adapter 검색 단계 성공."
+    );
+
+
+    console.log(
+      "→ 다음 단계는 상세페이지/지역/마감일 추출입니다."
+    );
+
+
+  } else if (
+    combined.primaryAnchors >
+      0
+  ) {
+
+    console.log(
+      "🟡 POST 검색 자체는 동작하고 미술작품 관련 결과가 나옵니다."
+    );
+
+
+    console.log(
+      "→ Candidate Filter 또는 결과 링크 구조를 다음으로 확인해야 합니다."
+    );
+
+
+  } else if (
+    combined.searchTermEchoCount >
+      0
+  ) {
+
+    console.log(
+      "🟡 검색어는 서버 응답에 반영됐지만 결과 링크에서 미술작품 제목을 찾지 못했습니다."
+    );
+
+
+    console.log(
+      "→ 결과가 별도 AJAX/DOM 구조인지 확인해야 합니다."
     );
 
 
   } else {
 
     console.log(
-      "ℹ️ 관련 결과는 있으나 Candidate Filter를 추가 확인해야 합니다."
+      "⚠️ POST 요청은 200 응답이지만 검색 결과 반영 여부를 확인하지 못했습니다."
+    );
+
+
+    console.log(
+      "→ 실제 Browser submit과 Request 차이를 추가 진단해야 합니다."
     );
   }
 
@@ -1781,12 +1387,12 @@ async function probeSource(
     );
 
 
-  const seedUrls =
-    getSourceSeedUrls(
+  const requests =
+    getSourceRequests(
       source,
       {
-        maxSeeds:
-          MAX_SEEDS_PER_SOURCE
+        maxRequests:
+          MAX_REQUESTS_PER_SOURCE
       }
     );
 
@@ -1795,13 +1401,16 @@ async function probeSource(
     ""
   );
 
+
   console.log(
     "===================================="
   );
 
+
   console.log(
-    "AXOO ART SOURCE PROBE"
+    "AXOO ART SOURCE REQUEST PROBE"
   );
+
 
   console.log(
     "===================================="
@@ -1834,9 +1443,9 @@ async function probeSource(
 
   console.log(
     "ADAPTER APPLIED:",
-    formatBoolean(
-      adapterInfo.applied
-    )
+    adapterInfo.applied
+      ? "YES"
+      : "NO"
   );
 
 
@@ -1847,51 +1456,92 @@ async function probeSource(
 
 
   console.log(
-    "SEED COUNT:",
-    seedUrls.length
+    "ADAPTER MODE:",
+    adapterInfo.mode
   );
+
+
+  console.log(
+    "REQUEST COUNT:",
+    requests.length
+  );
+
+
+  console.log(
+    "TIMEOUT / REQUEST:",
+    FETCH_TIMEOUT_MS +
+    "ms"
+  );
+
+
+  if (
+    requests.length ===
+    0
+  ) {
+
+    console.error(
+      "❌ 실행 가능한 Request가 없습니다."
+    );
+
+
+    process.exitCode =
+      1;
+
+
+    return;
+  }
 
 
   const analyses =
     [];
 
 
-  let successfulSeeds =
+  let successCount =
     0;
 
 
-  let failedSeeds =
+  let failedCount =
     0;
 
 
   for (
     let index = 0;
-    index < seedUrls.length;
+    index < requests.length;
     index++
   ) {
 
-    const seedUrl =
-      seedUrls[
+    const request =
+      requests[
         index
       ];
 
 
     try {
 
-      const fetchResult =
-        await fetchPage(
-          seedUrl
+      const response =
+        await fetchRequest(
+          request
         );
 
 
-      successfulSeeds++;
+      if (
+        response.ok
+      ) {
+
+        successCount++;
+
+
+      } else {
+
+        failedCount++;
+      }
 
 
       const analysis =
-        analyzePage(
+        analyzeResponse(
           source,
-          seedUrl,
-          fetchResult
+          request,
+          response
         );
 
 
@@ -1900,39 +1550,19 @@ async function probeSource(
       );
 
 
-      printSeedResult(
+      printRequestResult(
         index,
-        seedUrl,
-        fetchResult,
+        request,
+        response,
         analysis
       );
-
-
-      /*
-        첫 Seed에서만 FORM / SCRIPT 구조 출력.
-        동일 페이지 구조가 반복되므로 로그 폭주 방지.
-      */
-      if (
-        index ===
-        0
-      ) {
-
-        printFormDiagnostics(
-          analysis.forms
-        );
-
-
-        printScriptDiagnostics(
-          analysis.searchScripts
-        );
-      }
 
 
     } catch (
       error
     ) {
 
-      failedSeeds++;
+      failedCount++;
 
 
       console.log(
@@ -1941,7 +1571,12 @@ async function probeSource(
 
 
       console.log(
-        "SEED #" +
+        "------------------------------------"
+      );
+
+
+      console.log(
+        "REQUEST #" +
         (
           index +
           1
@@ -1951,8 +1586,15 @@ async function probeSource(
 
 
       console.log(
-        "URL:",
-        seedUrl
+        "------------------------------------"
+      );
+
+
+      console.log(
+        "REQUEST:",
+        describeRequest(
+          request
+        )
       );
 
 
@@ -1967,20 +1609,21 @@ async function probeSource(
 
 
   const combined =
-    buildCombinedResult(
+    combineAnalyses(
       analyses
     );
 
 
-  printInterpretation(
-    successfulSeeds,
-    failedSeeds,
+  printSummary(
+    requests.length,
+    successCount,
+    failedCount,
     combined
   );
 
 
   if (
-    successfulSeeds ===
+    successCount ===
     0
   ) {
 
@@ -2000,7 +1643,8 @@ async function main() {
     String(
       process.argv[2] ||
       ""
-    ).trim();
+    )
+      .trim();
 
 
   if (
@@ -2010,6 +1654,21 @@ async function main() {
   ) {
 
     printSourceList();
+
+
+    console.log(
+      ""
+    );
+
+
+    console.log(
+      "사용법:"
+    );
+
+
+    console.log(
+      "node scripts/probe_art_source.js <SOURCE_ID>"
+    );
 
 
     return;
@@ -2044,7 +1703,7 @@ async function main() {
 
 
   console.log(
-    "🔎 SOURCE PROBE START"
+    "🔎 SOURCE REQUEST PROBE START"
   );
 
 
@@ -2071,7 +1730,7 @@ main()
     ) {
 
       console.error(
-        "[AXOO ART SOURCE PROBE]",
+        "[AXOO ART SOURCE REQUEST PROBE]",
         error
       );
 
