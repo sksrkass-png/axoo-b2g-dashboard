@@ -560,7 +560,7 @@
     "deadlineStatus": "마감",
     "archiveFirstSeenAt": "2026-09-02",
     "archiveLastSeenAt": "2026-09-02",
-    "archiveIsCurrent": true,
+    "archiveIsCurrent": false,
     "deadlineRaw": "26. 08. 10",
     "suspiciousPeriodIgnored": false,
     "staleReason": ""
@@ -720,7 +720,7 @@
     "deadlineStatus": "마감",
     "archiveFirstSeenAt": "2026-09-02",
     "archiveLastSeenAt": "2026-09-02",
-    "archiveIsCurrent": true,
+    "archiveIsCurrent": false,
     "deadlineRaw": "2026 년 08 월 07 일",
     "suspiciousPeriodIgnored": false,
     "staleReason": ""
@@ -1059,7 +1059,7 @@
     "deadlineStatus": "마감",
     "archiveFirstSeenAt": "2026-09-02",
     "archiveLastSeenAt": "2026-09-02",
-    "archiveIsCurrent": true,
+    "archiveIsCurrent": false,
     "deadlineRaw": "",
     "suspiciousPeriodIgnored": false,
     "staleReason": ""
@@ -1101,11 +1101,11 @@
     "isStaleCandidate": false,
     "collectionSourceId": "gyeonggi_public_art",
     "collectionVersion": "1.3.1",
-    "detailFetchStatus": "ok",
+    "detailFetchStatus": "fetch_failed",
     "detailFetchTransport": "",
     "detailFetchError": "",
     "detailHtmlBytes": 0,
-    "detailTextSample": "양주옥정5,6차(중상,복합 1BL) 신축공사 미술작품 공모 공고 | 공모공고 | 미술작품 공모 | 경기도 건축물 미술작품 본문 바로가기 주메뉴 바로가기 제도 소개 제도 개요 제도 운영 미술작품 비용산출 미술작품 FAQ 미술작품 정보검색 심의위원회 위원회 소개 심의계획·결과 미술작품 공모 공모개요 공모공고 공모결과 자료실 자료실 경기도 건축물 미술작품 기회와 상생의 새로운 패러다임 지금 만들어 갑니다. --> 미술작품 공모 공모개요 공모공고 공모결과 공모공고 홈 미술작품 공모 공모공고 양주옥정5,6차(중상,복합 1BL) 신축공사 미술작품 공모 공고 게시물 정보 구분 공모 작성자 관리자 등록일 2026-06-29 ◦ 일자/방법 : 2026.07.20.(월) 10:00 까지 이메일 choish1122333@naver.com 접수 ◦ 제출서류 : 도판이미지, 응모서류 일체 첨부파일 양주옥정5.6차(중상.복합1BL) 미술작품 공모지침서.hwp 바로보기 바로듣기 양주옥정5,6차(중상,복합1BL) 미술작품 공모자료+1.pdf 바로보기 바로듣기 양주옥정5,6차(중상,복합1BL) 미술작품 공모자료+2.pdf 바로보기 바로듣기 목록보기 다음글 성남금토 A-4BL 및 의왕월암 A-1BL 공동주택 미술작품 제작·설치 공모 공고 이전글 용인시 기흥구 마북동 298의1 번지 일원 가로주택정비사업 공동주택 신축공사 內 미술작품 제작 및 설치 공모 공고 [제4유형:출처명시+상업적 이용금지+변경금지] 관련사이트 경기도청 공익제보 핫라인 공공미술포털 담당부서: 예술정책과 | 전화번호: 031-8008-4652 경기도청: 16508 경기도 수원시 영통구 도청로 30 (이의동) © GYEONGGI PROVINCE All Rights Reserved.",
+    "detailTextSample": "◦ 일자/방법 : 2026.07.20.(월) 10:00 까지 이메일 choish1122333@naver.com 접수 ◦ 제출서류 : 도판이미지, 응모서류 일체",
     "listFetchTransport": "apps-script-bridge-ajax",
     "listBIdx": "110902881",
     "listRecordNo": 542,
@@ -1161,7 +1161,7 @@
       }
     },
     "periodEnd": "",
-    "publishedDateSource": "detail_metadata",
+    "publishedDateSource": "existing",
     "periodSource": "not_found",
     "periodKeyword": "",
     "deadlineSource": "not_found",
@@ -1285,7 +1285,7 @@
     "deadlineStatus": "마감",
     "archiveFirstSeenAt": "2026-09-02",
     "archiveLastSeenAt": "2026-09-02",
-    "archiveIsCurrent": true,
+    "archiveIsCurrent": false,
     "deadlineRaw": "2026. 07. 09 ",
     "suspiciousPeriodIgnored": false,
     "staleReason": ""
@@ -1398,7 +1398,7 @@
     "deadlineStatus": "마감 추정",
     "archiveFirstSeenAt": "2026-09-02",
     "archiveLastSeenAt": "2026-09-02",
-    "archiveIsCurrent": true,
+    "archiveIsCurrent": false,
     "deadlineRaw": "",
     "suspiciousPeriodIgnored": false,
     "staleReason": "마감일 미확인 + 등록 후 77일 경과"
@@ -1511,7 +1511,7 @@
     "deadlineStatus": "마감",
     "archiveFirstSeenAt": "2026-09-02",
     "archiveLastSeenAt": "2026-09-02",
-    "archiveIsCurrent": true,
+    "archiveIsCurrent": false,
     "deadlineRaw": "2026. 6.22",
     "suspiciousPeriodIgnored": false,
     "staleReason": ""
@@ -1670,7 +1670,7 @@
     "deadlineStatus": "마감",
     "archiveFirstSeenAt": "2026-09-02",
     "archiveLastSeenAt": "2026-09-02",
-    "archiveIsCurrent": true,
+    "archiveIsCurrent": false,
     "deadlineRaw": "2026. 05. 20 ",
     "suspiciousPeriodIgnored": false,
     "staleReason": ""
