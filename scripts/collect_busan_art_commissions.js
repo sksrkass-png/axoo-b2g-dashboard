@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
-
 /* =========================================================
    CONFIG
 ========================================================= */
@@ -28,74 +27,73 @@ const SOURCE_ID =
 const LIST_BASE_URL =
   "https://www.busan.go.kr/nbgosi/list";
 
+const FETCH_BRIDGE_URL =
+  process.env.AXOO_B2G_FETCH_BRIDGE_URL ||
+  "https://script.google.com/macros/s/AKfycbzu4m0lNbY5RzXFuKTR3C6H2hd_swAfLTdyZeERGqM3XrChjBrT46cWdiWTQGWSn9-4aQ/exec";
+
 const COLLECTION_VERSION =
-  "1.0.0";
+  "1.1.0";
 
-const FETCH_TIMEOUT_MS =
-  15000;
-
-
-/*
- * 초기 전국 확장 단계에서는
- * 최근 공고 누락을 줄이기 위해 40페이지 확인.
- *
- * 이미 Archive에 들어온 공고는 계속 유지된다.
- */
 const MAX_PAGES =
   40;
 
+const PAGE_CONCURRENCY =
+  8;
 
-/*
- * 공모가 아닌 결과/심의/행정 문서 제외
- */
+const BRIDGE_TIMEOUT_MS =
+  10000;
+
+const DIRECT_TIMEOUT_MS =
+  5000;
+
+const MIN_HTML_BYTES =
+  1000;
+
+const MIN_SUCCESS_PAGES =
+  Math.ceil(
+    MAX_PAGES *
+    0.75
+  );
+
 const EXCLUDE_KEYWORDS = [
-
   "선정결과",
   "선정 결과",
-
   "공모결과",
   "공모 결과",
-
   "결과공고",
   "결과 공고",
-
   "심사결과",
   "심사 결과",
-
   "심의결과",
   "심의 결과",
-
   "당선작",
   "당선 후보",
   "당선후보",
-
   "이의신청",
-
   "회의록",
-
   "심의위원회",
-
   "위원 모집",
-
   "설치완료",
   "설치 완료",
-
   "준공",
-
   "조례",
-
   "행정예고"
 ];
-
 
 
 /* =========================================================
    JSON
 ========================================================= */
 
-function readArray(filePath) {
+function readArray(
+  filePath
+) {
 
-  if (!fs.existsSync(filePath)) {
+  if (
+    !fs.existsSync(
+      filePath
+    )
+  ) {
     return [];
   }
 
@@ -115,10 +113,16 @@ function readArray(filePath) {
 
 
   const parsed =
-    JSON.parse(raw);
+    JSON.parse(
+      raw
+    );
 
 
-  if (!Array.isArray(parsed)) {
+  if (
+    !Array.isArray(
+      parsed
+    )
+  ) {
 
     throw new Error(
       filePath +
@@ -129,7 +133,6 @@ function readArray(filePath) {
 
   return parsed;
 }
-
 
 
 function writeArray(
@@ -144,56 +147,91 @@ function writeArray(
       items,
       null,
       2
-    ) + "\n",
+    ) +
+    "\n",
 
     "utf8"
   );
 }
 
 
-
 /* =========================================================
    TEXT
 ========================================================= */
 
-function decodeHtmlEntities(value) {
+function decodeHtmlEntities(
+  value
+) {
 
-  return String(value || "")
+  return String(
+    value ||
+    ""
+  )
 
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, "\"")
-    .replace(/&#39;/gi, "'")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/&nbsp;/gi, " ")
+    .replace(
+      /&amp;/gi,
+      "&"
+    )
+
+    .replace(
+      /&quot;/gi,
+      "\""
+    )
+
+    .replace(
+      /&#39;/gi,
+      "'"
+    )
+
+    .replace(
+      /&lt;/gi,
+      "<"
+    )
+
+    .replace(
+      /&gt;/gi,
+      ">"
+    )
+
+    .replace(
+      /&nbsp;/gi,
+      " "
+    )
 
     .replace(
       /&#(\d+);/g,
-      function (_, code) {
 
-        return String.fromCharCode(
-          Number(code)
-        );
-      }
+      (
+        _,
+        code
+      ) =>
+        String.fromCharCode(
+          Number(
+            code
+          )
+        )
     )
 
     .replace(
       /&#x([0-9a-f]+);/gi,
-      function (_, code) {
 
-        return String.fromCharCode(
+      (
+        _,
+        code
+      ) =>
+        String.fromCharCode(
           parseInt(
             code,
             16
           )
-        );
-      }
+        )
     );
 }
 
 
-
-function cleanText(value) {
+function cleanText(
+  value
+) {
 
   return decodeHtmlEntities(
     value
@@ -223,24 +261,30 @@ function cleanText(value) {
 }
 
 
-
 /* =========================================================
    URL
 ========================================================= */
 
-function makeListUrl(page) {
+function makeListUrl(
+  page
+) {
 
   return (
     LIST_BASE_URL +
     "?curPage=" +
-    encodeURIComponent(page) +
+    encodeURIComponent(
+      String(
+        page
+      )
+    ) +
     "&gosiGbn=A"
   );
 }
 
 
-
-function canonicalizeBusanUrl(value) {
+function canonicalizeBusanUrl(
+  value
+) {
 
   try {
 
@@ -286,22 +330,28 @@ function canonicalizeBusanUrl(value) {
       "https://www.busan.go.kr/nbgosi/view" +
       "?gosiGbn=A" +
       "&sno=" +
-      encodeURIComponent(sno)
+      encodeURIComponent(
+        sno
+      )
     );
 
 
-  } catch (error) {
+  } catch (
+    error
+  ) {
 
     return "";
   }
 }
 
 
-
-function normalizeUrl(value) {
+function normalizeUrl(
+  value
+) {
 
   return String(
-    value || ""
+    value ||
+    ""
   )
 
     .trim()
@@ -318,7 +368,6 @@ function normalizeUrl(value) {
 }
 
 
-
 /* =========================================================
    FILTER
 ========================================================= */
@@ -328,11 +377,16 @@ function hasExcludedKeyword(
 ) {
 
   const text =
-    cleanText(title);
+    cleanText(
+      title
+    );
 
 
   return EXCLUDE_KEYWORDS.some(
-    function (keyword) {
+
+    function (
+      keyword
+    ) {
 
       return text.includes(
         keyword
@@ -342,13 +396,14 @@ function hasExcludedKeyword(
 }
 
 
-
 function isCandidateTitle(
   title
 ) {
 
   const text =
-    cleanText(title);
+    cleanText(
+      title
+    );
 
 
   if (!text) {
@@ -367,11 +422,6 @@ function isCandidateTitle(
   }
 
 
-  /*
-   * 건축물 미술작품 공모의
-   * 핵심 신호
-   */
-
   if (
     !text.includes(
       "미술작품"
@@ -386,11 +436,6 @@ function isCandidateTitle(
   }
 
 
-  /*
-   * 일반 미술 공모전과
-   * 건축물 설치 공모 구분
-   */
-
   return [
 
     "제작",
@@ -403,7 +448,10 @@ function isCandidateTitle(
     "건립"
 
   ].some(
-    function (keyword) {
+
+    function (
+      keyword
+    ) {
 
       return text.includes(
         keyword
@@ -412,6 +460,59 @@ function isCandidateTitle(
   );
 }
 
+
+function isExcludedArtNotice(
+  item
+) {
+
+  if (!item) {
+
+    return true;
+  }
+
+
+  const title =
+    cleanText(
+      item.title ||
+      ""
+    );
+
+
+  if (!title) {
+
+    return true;
+  }
+
+
+  if (
+    hasExcludedKeyword(
+      title
+    )
+  ) {
+
+    return true;
+  }
+
+
+  const region =
+    String(
+      item.region ||
+      ""
+    ).trim();
+
+
+  if (
+    region &&
+    region !==
+    "부산"
+  ) {
+
+    return true;
+  }
+
+
+  return false;
+}
 
 
 /* =========================================================
@@ -439,9 +540,13 @@ function isManagedBusanItem(
 
   const sourceUrl =
     String(
+
       item.sourceUrl ||
+
       item.originalUrl ||
+
       item.url ||
+
       ""
     );
 
@@ -457,13 +562,15 @@ function isManagedBusanItem(
 }
 
 
-
 function cleanFalsePositives(
   items
 ) {
 
   return items.filter(
-    function (item) {
+
+    function (
+      item
+    ) {
 
       /*
        * 다른 지역 Collector 데이터는
@@ -498,7 +605,6 @@ function cleanFalsePositives(
 }
 
 
-
 /* =========================================================
    ID
 ========================================================= */
@@ -529,7 +635,6 @@ function stableId(
     hash
   );
 }
-
 
 
 /* =========================================================
@@ -689,11 +794,6 @@ function extractBoardItems(
     };
 
 
-    /*
-     * 전국 범위 정책의 최종 안전장치.
-     * 부산 Collector에서는 정상적으로 false여야 한다.
-     */
-
     if (
       isExcludedArtNotice(
         item
@@ -719,13 +819,14 @@ function extractBoardItems(
 }
 
 
-
 /* =========================================================
-   FETCH
+   FETCH HELPERS
 ========================================================= */
 
-async function fetchText(
-  url
+async function fetchWithTimeout(
+  url,
+  options,
+  timeoutMs
 ) {
 
   const controller =
@@ -734,52 +835,29 @@ async function fetchText(
 
   const timer =
     setTimeout(
+
       function () {
 
         controller.abort();
 
       },
-      FETCH_TIMEOUT_MS
+
+      timeoutMs
     );
 
 
   try {
 
-    const response =
-      await fetch(
-        url,
-        {
+    return await fetch(
+      url,
+      {
 
-          signal:
-            controller.signal,
+        ...options,
 
-          headers: {
-
-            "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-Busan-Collector/1.0)",
-
-            "Accept":
-              "text/html,application/xhtml+xml,*/*",
-
-            "Accept-Language":
-              "ko-KR,ko;q=0.9,en;q=0.7"
-          }
-        }
-      );
-
-
-    if (
-      !response.ok
-    ) {
-
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
-    }
-
-
-    return await response.text();
+        signal:
+          controller.signal
+      }
+    );
 
 
   } finally {
@@ -790,6 +868,498 @@ async function fetchText(
   }
 }
 
+
+function validateBusanListHtml(
+  html,
+  label
+) {
+
+  const bytes =
+    Buffer.byteLength(
+      String(
+        html ||
+        ""
+      ),
+      "utf8"
+    );
+
+
+  if (
+    bytes <
+    MIN_HTML_BYTES
+  ) {
+
+    throw new Error(
+      label +
+      "_HTML_TOO_SMALL"
+    );
+  }
+
+
+  if (
+    !/\/nbgosi\/view/.test(
+      html
+    )
+  ) {
+
+    throw new Error(
+      label +
+      "_BOARD_STRUCTURE_NOT_FOUND"
+    );
+  }
+}
+
+
+/* =========================================================
+   FETCH BRIDGE
+========================================================= */
+
+async function fetchBusanPageViaBridge(
+  page
+) {
+
+  const bridgeUrl =
+    new URL(
+      FETCH_BRIDGE_URL
+    );
+
+
+  bridgeUrl.searchParams.set(
+    "action",
+    "fetchBusanList"
+  );
+
+
+  bridgeUrl.searchParams.set(
+    "curPage",
+    String(
+      page
+    )
+  );
+
+
+  const response =
+    await fetchWithTimeout(
+
+      bridgeUrl.toString(),
+
+      {
+
+        redirect:
+          "follow",
+
+        headers: {
+
+          "User-Agent":
+            "Mozilla/5.0 (compatible; AXOO-B2G-Busan-Collector/1.1)",
+
+          "Accept":
+            "application/json,text/plain,*/*"
+        }
+      },
+
+      BRIDGE_TIMEOUT_MS
+    );
+
+
+  if (
+    !response.ok
+  ) {
+
+    throw new Error(
+      "BRIDGE_HTTP_" +
+      response.status
+    );
+  }
+
+
+  let payload;
+
+
+  try {
+
+    payload =
+      JSON.parse(
+        await response.text()
+      );
+
+
+  } catch (
+    error
+  ) {
+
+    throw new Error(
+      "BRIDGE_JSON_PARSE_FAILED: " +
+      error.message
+    );
+  }
+
+
+  if (
+    !payload ||
+    payload.ok !==
+    true
+  ) {
+
+    throw new Error(
+      "BRIDGE_UPSTREAM_FAILED: " +
+      String(
+
+        (
+          payload &&
+
+          (
+            payload.message ||
+            payload.error
+          )
+        ) ||
+
+        "unknown"
+      )
+    );
+  }
+
+
+  const upstreamStatus =
+    Number(
+      payload.upstreamStatus
+    );
+
+
+  if (
+    upstreamStatus <
+      200 ||
+
+    upstreamStatus >=
+      400
+  ) {
+
+    throw new Error(
+      "BRIDGE_UPSTREAM_HTTP_" +
+      String(
+        payload.upstreamStatus ||
+        ""
+      )
+    );
+  }
+
+
+  if (
+    payload.truncated ===
+    true
+  ) {
+
+    throw new Error(
+      "BRIDGE_RESPONSE_TRUNCATED"
+    );
+  }
+
+
+  const htmlBase64 =
+    String(
+      payload.htmlBase64 ||
+      ""
+    );
+
+
+  if (!htmlBase64) {
+
+    throw new Error(
+      "BRIDGE_HTML_EMPTY"
+    );
+  }
+
+
+  const html =
+    Buffer
+      .from(
+        htmlBase64,
+        "base64"
+      )
+      .toString(
+        "utf8"
+      );
+
+
+  validateBusanListHtml(
+    html,
+    "BRIDGE"
+  );
+
+
+  return {
+
+    page:
+      page,
+
+    html:
+      html,
+
+    transport:
+      "apps-script-bridge",
+
+    status:
+      upstreamStatus,
+
+    bytes:
+      Buffer.byteLength(
+        html,
+        "utf8"
+      )
+  };
+}
+
+
+/* =========================================================
+   DIRECT FALLBACK
+========================================================= */
+
+async function fetchBusanPageDirect(
+  page
+) {
+
+  const response =
+    await fetchWithTimeout(
+
+      makeListUrl(
+        page
+      ),
+
+      {
+
+        redirect:
+          "follow",
+
+        headers: {
+
+          "User-Agent":
+            "Mozilla/5.0 (compatible; AXOO-B2G-Busan-Collector/1.1)",
+
+          "Accept":
+            "text/html,application/xhtml+xml,*/*",
+
+          "Accept-Language":
+            "ko-KR,ko;q=0.9,en;q=0.7"
+        }
+      },
+
+      DIRECT_TIMEOUT_MS
+    );
+
+
+  if (
+    !response.ok
+  ) {
+
+    throw new Error(
+      "DIRECT_HTTP_" +
+      response.status
+    );
+  }
+
+
+  const html =
+    await response.text();
+
+
+  validateBusanListHtml(
+    html,
+    "DIRECT"
+  );
+
+
+  return {
+
+    page:
+      page,
+
+    html:
+      html,
+
+    transport:
+      "direct",
+
+    status:
+      response.status,
+
+    bytes:
+      Buffer.byteLength(
+        html,
+        "utf8"
+      )
+  };
+}
+
+
+async function fetchBusanPage(
+  page
+) {
+
+  try {
+
+    return await fetchBusanPageViaBridge(
+      page
+    );
+
+
+  } catch (
+    bridgeError
+  ) {
+
+    console.warn(
+      "[BUSAN BRIDGE FAILED]",
+      "page=" +
+      page,
+      bridgeError.message ||
+      bridgeError
+    );
+
+
+    try {
+
+      return await fetchBusanPageDirect(
+        page
+      );
+
+
+    } catch (
+      directError
+    ) {
+
+      const error =
+        new Error(
+
+          "bridge=" +
+          String(
+            bridgeError.message ||
+            bridgeError
+          ) +
+
+          " | direct=" +
+          String(
+            directError.message ||
+            directError
+          )
+        );
+
+
+      error.page =
+        page;
+
+
+      throw error;
+    }
+  }
+}
+
+
+/* =========================================================
+   CONCURRENCY
+========================================================= */
+
+async function mapWithConcurrency(
+  values,
+  concurrency,
+  worker
+) {
+
+  const results =
+    new Array(
+      values.length
+    );
+
+
+  let nextIndex =
+    0;
+
+
+  async function runner() {
+
+    while (
+      true
+    ) {
+
+      const index =
+        nextIndex++;
+
+
+      if (
+        index >=
+        values.length
+      ) {
+
+        return;
+      }
+
+
+      try {
+
+        results[
+          index
+        ] = {
+
+          ok:
+            true,
+
+          value:
+            await worker(
+              values[
+                index
+              ]
+            )
+        };
+
+
+      } catch (
+        error
+      ) {
+
+        results[
+          index
+        ] = {
+
+          ok:
+            false,
+
+          error:
+            error
+        };
+      }
+    }
+  }
+
+
+  const workerCount =
+    Math.min(
+
+      Math.max(
+        1,
+        concurrency
+      ),
+
+      values.length
+    );
+
+
+  await Promise.all(
+
+    Array.from(
+
+      {
+        length:
+          workerCount
+      },
+
+      function () {
+
+        return runner();
+      }
+    )
+  );
+
+
+  return results;
+}
 
 
 /* =========================================================
@@ -802,6 +1372,38 @@ async function discoverBusanItems() {
     new Map();
 
 
+  const pages =
+    Array.from(
+
+      {
+        length:
+          MAX_PAGES
+      },
+
+      function (
+        _,
+        index
+      ) {
+
+        return (
+          index +
+          1
+        );
+      }
+    );
+
+
+  const results =
+    await mapWithConcurrency(
+
+      pages,
+
+      PAGE_CONCURRENCY,
+
+      fetchBusanPage
+    );
+
+
   let successfulPages =
     0;
 
@@ -810,37 +1412,91 @@ async function discoverBusanItems() {
     0;
 
 
-  for (
-    let page = 1;
-    page <= MAX_PAGES;
-    page++
-  ) {
-
-    const url =
-      makeListUrl(
-        page
-      );
+  let bridgePages =
+    0;
 
 
-    try {
+  let directPages =
+    0;
 
-      const html =
-        await fetchText(
-          url
+
+  results.forEach(
+
+    function (
+      result,
+      index
+    ) {
+
+      const page =
+        pages[
+          index
+        ];
+
+
+      if (
+        !result ||
+        result.ok !==
+        true
+      ) {
+
+        failedPages++;
+
+
+        console.error(
+          "[BUSAN PAGE FAILED]",
+          page,
+
+          result &&
+          result.error
+
+            ? (
+                result.error.message ||
+                result.error
+              )
+
+            : "unknown"
         );
+
+
+        return;
+      }
 
 
       successfulPages++;
 
 
+      const fetched =
+        result.value;
+
+
+      if (
+        fetched.transport ===
+        "apps-script-bridge"
+      ) {
+
+        bridgePages++;
+
+
+      } else if (
+        fetched.transport ===
+        "direct"
+      ) {
+
+        directPages++;
+      }
+
+
       const items =
         extractBoardItems(
-          html
+          fetched.html
         );
 
 
       items.forEach(
-        function (item) {
+
+        function (
+          item
+        ) {
 
           discovered.set(
             item.sourceUrl,
@@ -852,34 +1508,19 @@ async function discoverBusanItems() {
 
       console.log(
         "[BUSAN]",
-        "page=" + page,
-        "found=" + items.length
-      );
-
-
-    } catch (error) {
-
-      failedPages++;
-
-
-      console.error(
-        "[BUSAN PAGE FAILED]",
-        page,
-        error.message ||
-        error
+        "page=" +
+          page,
+        "transport=" +
+          fetched.transport,
+        "http=" +
+          fetched.status,
+        "bytes=" +
+          fetched.bytes,
+        "found=" +
+          items.length
       );
     }
-  }
-
-
-  if (
-    successfulPages === 0
-  ) {
-
-    throw new Error(
-      "부산광역시 고시공고 페이지를 불러오지 못했습니다."
-    );
-  }
+  );
 
 
   console.log(
@@ -887,15 +1528,59 @@ async function discoverBusanItems() {
     "successPages=" +
       successfulPages,
     "failedPages=" +
-      failedPages
+      failedPages,
+    "bridgePages=" +
+      bridgePages,
+    "directPages=" +
+      directPages
   );
+
+
+  if (
+    successfulPages ===
+    0
+  ) {
+
+    throw new Error(
+      "부산광역시 고시공고 페이지를 하나도 불러오지 못했습니다."
+    );
+  }
+
+
+  /*
+   * 일부 페이지만 읽힌 상태를 정상 완료로 오인하지 않도록
+   * 최소 75% 성공을 요구한다.
+   *
+   * 미달 시 파일 쓰기 전 종료하여 기존 데이터 보존.
+   */
+
+  if (
+    successfulPages <
+    MIN_SUCCESS_PAGES
+  ) {
+
+    throw new Error(
+
+      "부산 페이지 수집 성공률이 안전 기준보다 낮습니다. " +
+
+      "successPages=" +
+      successfulPages +
+
+      "/" +
+      MAX_PAGES +
+
+      " (required=" +
+      MIN_SUCCESS_PAGES +
+
+      "). 기존 데이터를 유지합니다."
+    );
+  }
 
 
   return Array.from(
     discovered.values()
   );
 }
-
 
 
 /* =========================================================
@@ -913,9 +1598,13 @@ function getItemUrl(
 
 
   const raw =
+
     item.sourceUrl ||
+
     item.originalUrl ||
+
     item.url ||
+
     "";
 
 
@@ -925,17 +1614,13 @@ function getItemUrl(
     );
 
 
-  if (busan) {
-
-    return busan;
-  }
-
-
-  return normalizeUrl(
-    raw
+  return (
+    busan ||
+    normalizeUrl(
+      raw
+    )
   );
 }
-
 
 
 /* =========================================================
@@ -960,22 +1645,21 @@ function mergeLive(
     );
 
 
-  /*
-   * 이미 마감 처리된 URL을 기억.
-   * 게시판에 남아 있어도 LIVE 부활 금지.
-   */
-
   const expiredUrls =
     new Set(
 
       cleanedArchive
 
         .filter(
-          function (item) {
+
+          function (
+            item
+          ) {
 
             return (
               item &&
-              item.isExpired === true
+              item.isExpired ===
+              true
             );
           }
         )
@@ -999,11 +1683,15 @@ function mergeLive(
 
 
   cleanedExisting.forEach(
-    function (item) {
+
+    function (
+      item
+    ) {
 
       if (
         !item ||
-        item.isExpired === true
+        item.isExpired ===
+        true
       ) {
 
         return;
@@ -1016,7 +1704,9 @@ function mergeLive(
         );
 
 
-      if (url) {
+      if (
+        url
+      ) {
 
         byUrl.set(
           url,
@@ -1037,7 +1727,10 @@ function mergeLive(
 
 
   discovered.forEach(
-    function (item) {
+
+    function (
+      item
+    ) {
 
       const url =
         getItemUrl(
@@ -1051,15 +1744,11 @@ function mergeLive(
       }
 
 
-      /*
-       * 이미 Archive에서 마감된 공고는
-       * 다시 LIVE로 넣지 않는다.
-       */
-
       if (
         expiredUrls.has(
           url
         ) &&
+
         !byUrl.has(
           url
         )
@@ -1075,7 +1764,9 @@ function mergeLive(
         );
 
 
-      if (previous) {
+      if (
+        previous
+      ) {
 
         byUrl.set(
           url,
@@ -1117,7 +1808,16 @@ function mergeLive(
 
         byUrl.set(
           url,
-          item
+          {
+
+            ...item,
+
+            sourceUrl:
+              url,
+
+            collectionVersion:
+              COLLECTION_VERSION
+          }
         );
       }
     }
@@ -1126,15 +1826,13 @@ function mergeLive(
 
   return [
 
-  ...withoutUrl,
+    ...withoutUrl,
 
-  ...Array.from(
-    byUrl.values()
-  )
-
-];
+    ...Array.from(
+      byUrl.values()
+    )
+  ];
 }
-
 
 
 /* =========================================================
@@ -1157,7 +1855,10 @@ function mergeArchive(
 
 
   cleanedArchive.forEach(
-    function (item) {
+
+    function (
+      item
+    ) {
 
       if (!item) {
 
@@ -1191,7 +1892,10 @@ function mergeArchive(
 
 
   discovered.forEach(
-    function (item) {
+
+    function (
+      item
+    ) {
 
       const url =
         getItemUrl(
@@ -1216,7 +1920,9 @@ function mergeArchive(
         );
 
 
-      if (previous) {
+      if (
+        previous
+      ) {
 
         byKey.set(
           key,
@@ -1255,17 +1961,25 @@ function mergeArchive(
 
         byKey.set(
           key,
-          item
+          {
+
+            ...item,
+
+            sourceUrl:
+              url,
+
+            collectionVersion:
+              COLLECTION_VERSION
+          }
         );
       }
     }
   );
 
 
-return Array.from(
-  byKey.values()
-);
-
+  return Array.from(
+    byKey.values()
+  );
 }
 
 
@@ -1279,9 +1993,12 @@ async function main() {
     "===================================="
   );
 
+
   console.log(
-    "AXOO BUSAN ART COMMISSION COLLECTOR"
+    "AXOO BUSAN ART COMMISSION COLLECTOR v" +
+    COLLECTION_VERSION
   );
+
 
   console.log(
     "===================================="
@@ -1312,6 +2029,11 @@ async function main() {
   );
 
 
+  /*
+   * 네트워크 / 게시판 구조 검증이 모두 끝난 뒤에만
+   * LIVE / ARCHIVE 파일을 쓴다.
+   */
+
   const discovered =
     await discoverBusanItems();
 
@@ -1323,12 +2045,16 @@ async function main() {
 
 
   discovered.forEach(
-    function (item) {
+
+    function (
+      item
+    ) {
 
       console.log(
         "  +",
         item.title
       );
+
 
       console.log(
         "    ",
@@ -1393,14 +2119,19 @@ async function main() {
 }
 
 
+/* =========================================================
+   RUN
+========================================================= */
 
 main()
-
   .catch(
-    function (error) {
+
+    function (
+      error
+    ) {
 
       console.error(
-        "[AXOO BUSAN ART COLLECTOR]",
+        "[AXOO BUSAN ART COMMISSION COLLECTOR]",
         error
       );
 
