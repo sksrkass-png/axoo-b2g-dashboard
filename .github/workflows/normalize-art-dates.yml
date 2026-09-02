@@ -1,18 +1,17 @@
 name: Normalize Art Commission Dates
 
 on:
+  # 날짜 정규화만 따로 점검하고 싶을 때 수동 실행.
+  # 자동 수집 워크플로 안에서 normalize_art_dates.js를 이미 실행하므로
+  # main push 자동 트리거는 사용하지 않는다.
   workflow_dispatch:
-
-  push:
-    branches:
-      - main
-    paths:
-      - "data/art_commissions.json"
-      - "data/art_commissions_archive.json"
-      - "scripts/normalize_art_dates.js"
 
 permissions:
   contents: write
+
+concurrency:
+  group: normalize-art-commission-dates
+  cancel-in-progress: false
 
 jobs:
   normalize-dates:
@@ -21,11 +20,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Validate normalizer syntax
+        run: node --check scripts/normalize_art_dates.js
 
       - name: Normalize art commission dates
         run: node scripts/normalize_art_dates.js
@@ -51,12 +56,16 @@ jobs:
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add \
             data/art_commissions.json \
             data/art_commissions_archive.json
 
-          git commit -m "Normalize art dates and update archive"
+          git commit \
+            -m "Normalize art dates and update archive"
 
-          git push
+          git pull --rebase origin main
+
+          git push origin HEAD:main
