@@ -746,50 +746,72 @@ function getKamsDeadline(row) {
    KAMS DETAIL
 ========================================================= */
 
-async function getKamsDetailInfo(
-  detailUrl
-) {
+async function getKamsDetailInfo(detailUrl) {
   try {
     const html =
       await fetchHtml(
         detailUrl
       );
 
+    const raw =
+      decodeEntities(
+        String(html ?? "")
+      );
+
     const plain =
-      stripTags(html);
+      stripTags(raw);
 
+    let postedDate = "";
 
-    let postedDate =
-      "";
-
-
-    const postedPatterns = [
+    /*
+      1. 일반 텍스트 구조
+    */
+    const plainPatterns = [
       /작성일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-
       /등록일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-
       /게시일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
     ];
 
-
-    for (
-      const pattern of postedPatterns
-    ) {
+    for (const pattern of plainPatterns) {
       const match =
-        plain.match(
-          pattern
-        );
+        plain.match(pattern);
 
       if (match) {
         postedDate =
-          normalizeDate(
-            match[1]
-          );
+          normalizeDate(match[1]);
 
         break;
       }
     }
 
+    /*
+      2. KAMS처럼 "작성일"이
+         img alt/title 속성에 들어간 구조
+    */
+    if (!postedDate) {
+      const rawPatterns = [
+        /작성일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
+        /등록일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
+        /게시일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      ];
+
+      for (const pattern of rawPatterns) {
+        const match =
+          raw.match(pattern);
+
+        if (match) {
+          postedDate =
+            normalizeDate(match[1]);
+
+          break;
+        }
+      }
+    }
+
+    console.log(
+      "  상세 작성일:",
+      postedDate || "미확인"
+    );
 
     return {
       postedDate
@@ -803,10 +825,8 @@ async function getKamsDetailInfo(
       error.message
     );
 
-
     return {
-      postedDate:
-        ""
+      postedDate: ""
     };
   }
 }
