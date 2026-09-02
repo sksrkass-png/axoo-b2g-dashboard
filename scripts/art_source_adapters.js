@@ -11,18 +11,8 @@
    - artnuri_art_commission
      → 실제 frm submit 방식과 동일한 GET 검색
 
-   아트누리 확인 결과
-   ---------------------------------------------------------
-   fn_egov_link_page(v) {
-     $("#seNo").val($("#sc_seNo").val());
-     $('#pageSetting').val("1");
-     f.pageIndex.value = v;
-     f.action = "search.do";
-     f.method = "get";
-     f.submit();
-   }
-
-   따라서 POST는 사용하지 않는다.
+   - daejeon_city_notice
+     → 대전광역시 게시판 제목 검색 GET seed 생성
 ========================================================= */
 
 
@@ -45,6 +35,21 @@ const ARTNURI_SEARCH_TERMS = [
   "건축물 미술작품 공모",
 
   "미술작품 제작 설치"
+
+];
+
+
+const DAEJEON_SEARCH_CONDITION =
+  "TITLE";
+
+
+const DAEJEON_SEARCH_TERMS = [
+
+  "미술작품",
+
+  "건축물 미술작품",
+
+  "미술작품 공모"
 
 ];
 
@@ -321,27 +326,6 @@ function buildArtnuriRequests(
         searchTerm
       ) {
 
-        /*
-          실제 frm GET submit과 최대한 동일하게 구성한다.
-
-          확인된 hidden fields:
-          - docid
-          - source
-          - pageSetting
-          - sc_seNo
-          - key
-          - sc_orderBy
-          - recordCountPerPage
-          - pageIndex
-          - sc_hash
-          - sc_list
-          - seNo
-          - sw
-
-          체크되지 않은 checkbox는 브라우저 submit 시
-          전송되지 않으므로 넣지 않는다.
-        */
-
         const url =
           new URL(
             endpoint
@@ -408,20 +392,12 @@ function buildArtnuriRequests(
         );
 
 
-        /*
-          fn_egov_link_page에서
-          seNo = sc_seNo 로 복사됨.
-          현재 둘 다 빈 값.
-        */
         url.searchParams.set(
           "seNo",
           ""
         );
 
 
-        /*
-          실제 검색어
-        */
         url.searchParams.set(
           "sw",
           searchTerm
@@ -461,6 +437,146 @@ function buildArtnuriRequests(
 
 
 /* =========================================================
+   DAEJEON TITLE SEARCH ADAPTER
+========================================================= */
+
+function getDaejeonSearchEndpoint(
+  source
+) {
+
+  if (
+    !source ||
+    !source.sourceUrl
+  ) {
+
+    return "";
+  }
+
+
+  const endpoint =
+    canonicalUrl(
+      source.sourceUrl,
+      source.sourceUrl
+    );
+
+
+  if (!endpoint) {
+
+    return "";
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        endpoint
+      );
+
+
+    if (
+      !/\/boardNormalList\.do$/i.test(
+        url.pathname
+      )
+    ) {
+
+      return "";
+    }
+
+
+    return url.toString();
+
+
+  } catch (
+    error
+  ) {
+
+    return "";
+  }
+}
+
+
+function buildDaejeonRequests(
+  source
+) {
+
+  const endpoint =
+    getDaejeonSearchEndpoint(
+      source
+    );
+
+
+  if (!endpoint) {
+
+    return buildDefaultRequests(
+      source
+    );
+  }
+
+
+  return DAEJEON_SEARCH_TERMS
+    .map(
+      function (
+        searchTerm
+      ) {
+
+        const url =
+          new URL(
+            endpoint
+          );
+
+
+        url.searchParams.set(
+          "pageIndex",
+          "1"
+        );
+
+
+        url.searchParams.set(
+          "searchCondition",
+          DAEJEON_SEARCH_CONDITION
+        );
+
+
+        url.searchParams.set(
+          "searchKeyword",
+          searchTerm
+        );
+
+
+        return normalizeRequest(
+          {
+
+            method:
+              "GET",
+
+            url:
+              url.toString(),
+
+            headers: {
+
+              "Referer":
+                source.sourceUrl
+            },
+
+            body:
+              null,
+
+            label:
+              "대전 제목 검색: " +
+              searchTerm
+          },
+          endpoint
+        );
+      }
+    )
+    .filter(
+      Boolean
+    );
+}
+
+
+/* =========================================================
    ADAPTER REGISTRY
 ========================================================= */
 
@@ -479,6 +595,22 @@ const SOURCE_ADAPTERS = {
 
     buildRequests:
       buildArtnuriRequests
+  },
+
+
+  daejeon_city_notice: {
+
+    id:
+      "daejeon_title_search",
+
+    label:
+      "대전광역시 게시판 제목 검색",
+
+    mode:
+      "get_title_search",
+
+    buildRequests:
+      buildDaejeonRequests
   }
 
 };
@@ -738,6 +870,9 @@ function describeRequest(
       url.searchParams.get(
         "sw"
       ) ||
+      url.searchParams.get(
+        "searchKeyword"
+      ) ||
       "";
 
 
@@ -757,7 +892,7 @@ function describeRequest(
     request.url,
 
     searchTerm
-      ? "sw=" +
+      ? "search=" +
         searchTerm
       : ""
 
@@ -772,10 +907,33 @@ function describeRequest(
 
 
 /* =========================================================
-   SELF TEST
+   SELF TEST HELPERS
 ========================================================= */
 
-function runSelfTest() {
+function assertSelfTest(
+  condition,
+  message
+) {
+
+  if (
+    condition
+  ) {
+
+    return;
+  }
+
+
+  throw new Error(
+    message
+  );
+}
+
+
+/* =========================================================
+   ARTNURI SELF TEST
+========================================================= */
+
+function testArtnuriAdapter() {
 
   const sampleSource = {
 
@@ -799,6 +957,187 @@ function runSelfTest() {
     );
 
 
+  assertSelfTest(
+    result.applied,
+    "ARTNURI ADAPTER NOT APPLIED"
+  );
+
+
+  assertSelfTest(
+    result.requests.length ===
+      ARTNURI_SEARCH_TERMS.length,
+    "ARTNURI REQUEST COUNT TEST FAILED"
+  );
+
+
+  assertSelfTest(
+    result.requests.every(
+      function (
+        request
+      ) {
+
+        return (
+          request.method ===
+          "GET"
+        );
+      }
+    ),
+    "ARTNURI GET METHOD TEST FAILED"
+  );
+
+
+  assertSelfTest(
+    result.requests.every(
+      function (
+        request
+      ) {
+
+        const url =
+          new URL(
+            request.url
+          );
+
+
+        return (
+          url.searchParams.get(
+            "key"
+          ) ===
+            ARTNURI_KEY &&
+
+          url.searchParams.get(
+            "pageSetting"
+          ) ===
+            "1" &&
+
+          url.searchParams.get(
+            "recordCountPerPage"
+          ) ===
+            "30" &&
+
+          url.searchParams.get(
+            "pageIndex"
+          ) ===
+            "1" &&
+
+          Boolean(
+            url.searchParams.get(
+              "sw"
+            )
+          )
+        );
+      }
+    ),
+    "ARTNURI QUERY PARAM TEST FAILED"
+  );
+
+
+  console.log(
+    "✅ ARTNURI GET FORM ADAPTER SELF TEST PASSED"
+  );
+}
+
+
+/* =========================================================
+   DAEJEON SELF TEST
+========================================================= */
+
+function testDaejeonAdapter() {
+
+  const sampleSource = {
+
+    id:
+      "daejeon_city_notice",
+
+    sourceName:
+      "대전광역시 고시공고·부서 게시판",
+
+    sourceUrl:
+      "https://www.daejeon.go.kr/drh/depart/board/boardNormalList.do?boardId=normal_0167&menuSeq=1453",
+
+    crawlMode:
+      "board"
+  };
+
+
+  const result =
+    describeSourceAdapter(
+      sampleSource
+    );
+
+
+  assertSelfTest(
+    result.applied,
+    "DAEJEON ADAPTER NOT APPLIED"
+  );
+
+
+  assertSelfTest(
+    result.requests.length ===
+      DAEJEON_SEARCH_TERMS.length,
+    "DAEJEON REQUEST COUNT TEST FAILED"
+  );
+
+
+  assertSelfTest(
+    result.requests.every(
+      function (
+        request
+      ) {
+
+        const url =
+          new URL(
+            request.url
+          );
+
+
+        return (
+          request.method ===
+            "GET" &&
+
+          url.searchParams.get(
+            "boardId"
+          ) ===
+            "normal_0167" &&
+
+          url.searchParams.get(
+            "menuSeq"
+          ) ===
+            "1453" &&
+
+          url.searchParams.get(
+            "pageIndex"
+          ) ===
+            "1" &&
+
+          url.searchParams.get(
+            "searchCondition"
+          ) ===
+            DAEJEON_SEARCH_CONDITION &&
+
+          Boolean(
+            url.searchParams.get(
+              "searchKeyword"
+            )
+          )
+        );
+      }
+    ),
+    "DAEJEON QUERY PARAM TEST FAILED"
+  );
+
+
+  console.log(
+    "✅ DAEJEON TITLE SEARCH ADAPTER SELF TEST PASSED"
+  );
+}
+
+
+/* =========================================================
+   SELF TEST
+========================================================= */
+
+function runSelfTest() {
+
   console.log(
     ""
   );
@@ -819,213 +1158,41 @@ function runSelfTest() {
   );
 
 
-  console.log(
-    "SOURCE:",
-    sampleSource.id
-  );
+  try {
+
+    testArtnuriAdapter();
 
 
-  console.log(
-    "ADAPTER:",
-    result.adapterId
-  );
+    testDaejeonAdapter();
 
 
-  console.log(
-    "MODE:",
-    result.mode
-  );
+    console.log(
+      "------------------------------------"
+    );
 
 
-  console.log(
-    "REQUESTS:",
-    result.requests.length
-  );
+    console.log(
+      "✅ ALL SOURCE ADAPTER SELF TESTS PASSED"
+    );
 
 
-  result.requests.forEach(
-    function (
-      request,
-      index
-    ) {
-
-      console.log(
-        ""
-      );
-
-
-      console.log(
-        "#" +
-        (
-          index +
-          1
-        )
-      );
-
-
-      console.log(
-        describeRequest(
-          request
-        )
-      );
-    }
-  );
-
-
-  /*
-    Adapter 적용
-  */
-  if (
-    !result.applied
+  } catch (
+    error
   ) {
 
     console.error(
-      "❌ ARTNURI ADAPTER NOT APPLIED"
+      "❌ SOURCE ADAPTER SELF TEST FAILED"
     );
 
-
-    process.exitCode =
-      1;
-
-
-    return;
-  }
-
-
-  /*
-    3개 검색어
-  */
-  if (
-    result.requests.length !==
-    ARTNURI_SEARCH_TERMS.length
-  ) {
 
     console.error(
-      "❌ ARTNURI REQUEST COUNT TEST FAILED"
+      error.message
     );
 
 
     process.exitCode =
       1;
-
-
-    return;
   }
-
-
-  /*
-    전부 GET
-  */
-  const allGet =
-    result.requests.every(
-      function (
-        request
-      ) {
-
-        return (
-          request.method ===
-          "GET"
-        );
-      }
-    );
-
-
-  if (!allGet) {
-
-    console.error(
-      "❌ ARTNURI GET METHOD TEST FAILED"
-    );
-
-
-    process.exitCode =
-      1;
-
-
-    return;
-  }
-
-
-  /*
-    실제 form 주요 query 확인
-  */
-  const requiredParamsOk =
-    result.requests.every(
-      function (
-        request
-      ) {
-
-        try {
-
-          const url =
-            new URL(
-              request.url
-            );
-
-
-          return (
-            url.searchParams.get(
-              "key"
-            ) ===
-              ARTNURI_KEY &&
-
-            url.searchParams.get(
-              "pageSetting"
-            ) ===
-              "1" &&
-
-            url.searchParams.get(
-              "recordCountPerPage"
-            ) ===
-              "30" &&
-
-            url.searchParams.get(
-              "pageIndex"
-            ) ===
-              "1" &&
-
-            Boolean(
-              url.searchParams.get(
-                "sw"
-              )
-            )
-          );
-
-
-        } catch (
-          error
-        ) {
-
-          return false;
-        }
-      }
-    );
-
-
-  if (
-    !requiredParamsOk
-  ) {
-
-    console.error(
-      "❌ ARTNURI QUERY PARAM TEST FAILED"
-    );
-
-
-    process.exitCode =
-      1;
-
-
-    return;
-  }
-
-
-  console.log(
-    ""
-  );
-
-
-  console.log(
-    "✅ ARTNURI GET FORM ADAPTER SELF TEST PASSED"
-  );
 }
 
 
@@ -1050,9 +1217,16 @@ module.exports = {
 
   SOURCE_ADAPTERS,
 
+
   ARTNURI_KEY,
 
   ARTNURI_SEARCH_TERMS,
+
+
+  DAEJEON_SEARCH_CONDITION,
+
+  DAEJEON_SEARCH_TERMS,
+
 
   getSourceAdapter,
 
@@ -1066,8 +1240,16 @@ module.exports = {
 
   describeRequest,
 
+
+  buildDefaultRequests,
+
   buildArtnuriRequests,
 
-  getArtnuriEndpoint
+  getArtnuriEndpoint,
+
+
+  buildDaejeonRequests,
+
+  getDaejeonSearchEndpoint
 
 };
