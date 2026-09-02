@@ -1,45 +1,39 @@
 const fs = require("fs");
 const path = require("path");
 
-const DATA_FILE = path.join(
-  process.cwd(),
-  "data",
-  "art_commissions.json"
-);
+const DATA_FILE = path.join(process.cwd(), "data", "art_commissions.json");
+const ARCHIVE_FILE = path.join(process.cwd(), "data", "art_commissions_archive.json");
 
-const ARCHIVE_FILE = path.join(
-  process.cwd(),
-  "data",
-  "art_commissions_archive.json"
-);
-
-const NORMALIZER_VERSION = "1.3.1";
+const NORMALIZER_VERSION = "1.4.0";
 const DETAIL_TEXT_LIMIT = 12000;
 const FETCH_TIMEOUT_MS = 15000;
+const MAX_REASONABLE_PERIOD_DAYS = 180;
+const UNKNOWN_DEADLINE_STALE_DAYS = 75;
 
-const PERIOD_KEYWORDS = [
-  "응모작품 접수일시",
-  "작품 접수일시",
-  "작품제출일시",
-  "작품 제출일시",
-  "작품제출",
-  "작품 제출",
-  "제출일시",
-  "접수일시",
-  "접수기간",
-  "공모기간",
-  "공모 기간",
-  "공고기간",
-  "공고 기간",
-  "응모기간",
-  "신청기간",
-  "제출기간",
-  "작품 접수",
-  "접수일",
-  "제출일"
+const PUBLISHED_KEYWORDS = [
+  "등록일자",
+  "등록일",
+  "작성일",
+  "게시일",
+  "공고일"
 ];
 
-const DEADLINE_KEYWORDS = [
+const PRIORITY_DEADLINE_KEYWORDS = [
+  "응모작품 접수일시",
+  "작품 접수일시",
+  "작품접수일시",
+  "작품 제출일시",
+  "작품제출일시",
+  "접수 일자",
+  "접수일자",
+  "접수 일시",
+  "접수일시",
+  "제출 일자",
+  "제출일자",
+  "제출 일시",
+  "제출일시",
+  "응모 접수",
+  "응모접수",
   "접수마감",
   "제출마감",
   "신청마감",
@@ -47,15 +41,41 @@ const DEADLINE_KEYWORDS = [
   "마감일",
   "마감기한",
   "제출기한",
-  "접수기한"
+  "접수기한",
+  "일자 / 시간",
+  "일자/시간",
+  "작품 접수",
+  "접수일",
+  "제출일"
 ];
 
-const PUBLISHED_KEYWORDS = [
-  "등록일",
-  "등록일자",
-  "작성일",
-  "게시일",
-  "공고일"
+const RANGE_DEADLINE_KEYWORDS = [
+  "작품 접수기간",
+  "작품접수기간",
+  "접수기간",
+  "제출기간",
+  "응모기간",
+  "신청기간"
+];
+
+const PERIOD_KEYWORDS = [
+  "공모기간",
+  "공모 기간",
+  "공고기간",
+  "공고 기간",
+  "응모기간",
+  "신청기간",
+  "제출기간",
+  "접수기간",
+  "응모작품 접수일시",
+  "작품 접수일시",
+  "작품제출일시",
+  "작품 제출일시",
+  "제출일시",
+  "접수일시",
+  "작품 접수",
+  "접수일",
+  "제출일"
 ];
 
 
@@ -94,12 +114,22 @@ function decodeHtmlEntities(value) {
     .replace(/&#39;/gi, "'")
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">")
-    .replace(/&#(\d+);/g, function (_, code) {
-      return String.fromCharCode(Number(code));
-    })
-    .replace(/&#x([0-9a-f]+);/gi, function (_, code) {
-      return String.fromCharCode(parseInt(code, 16));
-    });
+    .replace(
+      /&#(\d+);/g,
+      function (_, code) {
+        return String.fromCharCode(
+          Number(code)
+        );
+      }
+    )
+    .replace(
+      /&#x([0-9a-f]+);/gi,
+      function (_, code) {
+        return String.fromCharCode(
+          parseInt(code, 16)
+        );
+      }
+    );
 }
 
 
@@ -107,34 +137,68 @@ function htmlToText(html) {
   return cleanText(
     decodeHtmlEntities(
       String(html || "")
-        .replace(/<script[\s\S]*?<\/script>/gi, " ")
-        .replace(/<style[\s\S]*?<\/style>/gi, " ")
-        .replace(/<noscript[\s\S]*?<\/noscript>/gi, " ")
-        .replace(/<(br|\/p|\/div|\/li|\/tr|\/td|\/th|\/h\d)>/gi, " ")
-        .replace(/<[^>]+>/g, " ")
+        .replace(
+          /<script[\s\S]*?<\/script>/gi,
+          " "
+        )
+        .replace(
+          /<style[\s\S]*?<\/style>/gi,
+          " "
+        )
+        .replace(
+          /<noscript[\s\S]*?<\/noscript>/gi,
+          " "
+        )
+        .replace(
+          /<(br|\/p|\/div|\/li|\/tr|\/td|\/th|\/h\d)>/gi,
+          " "
+        )
+        .replace(
+          /<[^>]+>/g,
+          " "
+        )
     )
   );
 }
 
 
 function getKoreaToday() {
-  const parts = new Intl.DateTimeFormat(
-    "en-CA",
-    {
-      timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    }
-  ).formatToParts(new Date());
+  const parts =
+    new Intl.DateTimeFormat(
+      "en-CA",
+      {
+        timeZone:
+          "Asia/Seoul",
+
+        year:
+          "numeric",
+
+        month:
+          "2-digit",
+
+        day:
+          "2-digit"
+      }
+    )
+      .formatToParts(
+        new Date()
+      );
 
   const map = {};
 
-  parts.forEach(function (part) {
-    if (part.type !== "literal") {
-      map[part.type] = part.value;
+  parts.forEach(
+    function (part) {
+      if (
+        part.type !==
+        "literal"
+      ) {
+        map[
+          part.type
+        ] =
+          part.value;
+      }
     }
-  });
+  );
 
   return [
     map.year,
@@ -146,62 +210,57 @@ function getKoreaToday() {
 
 function getKoreaYear() {
   return Number(
-    getKoreaToday().slice(0, 4)
+    getKoreaToday()
+      .slice(
+        0,
+        4
+      )
   );
 }
 
 
-/*
-  공공기관 게시물의 명백한 연도 오타 보정.
-
-  예:
-  20266. 8. 21 -> 2026. 8. 21
-  20255. 3. 10 -> 2025. 3. 10
-
-  안전장치:
-  1. 20xx 형태의 4자리 연도 뒤에 숫자가 하나 더 붙은 경우만
-  2. 추가 숫자가 정상 연도의 마지막 숫자와 동일해야 함
-  3. 현재 연도 기준 ±2년 범위에서만 허용
-
-  즉 임의의 5자리 숫자를 연도로 바꾸지 않는다.
-*/
+/* =========================================================
+   YEAR / DATE NORMALIZATION
+========================================================= */
 
 function repairLikelyYearTypos(value) {
-  const currentYear = getKoreaYear();
+  const currentYear =
+    getKoreaYear();
 
-  return String(value || "")
-    .replace(
-      /\b(20\d{2})(\d)(?=\s*(?:년|[-./]))/g,
-      function (
-        full,
-        fourDigitYear,
-        extraDigit
-      ) {
-        const year = Number(
+  return String(
+    value || ""
+  ).replace(
+    /\b(20\d{2})(\d)(?=\s*(?:년|[-./]))/g,
+
+    function (
+      full,
+      fourDigitYear,
+      extraDigit
+    ) {
+      const year =
+        Number(
           fourDigitYear
         );
 
-        const lastDigit =
-          fourDigitYear.slice(-1);
+      const repeatedLastDigit =
+        fourDigitYear
+          .slice(-1) ===
+        extraDigit;
 
-        const repeatedLastDigit =
-          lastDigit === extraDigit;
+      const nearCurrentYear =
+        Math.abs(
+          year -
+          currentYear
+        ) <= 2;
 
-        const nearCurrentYear =
-          Math.abs(
-            year - currentYear
-          ) <= 2;
-
-        if (
-          repeatedLastDigit &&
-          nearCurrentYear
-        ) {
-          return fourDigitYear;
-        }
-
-        return full;
-      }
-    );
+      return (
+        repeatedLastDigit &&
+        nearCurrentYear
+      )
+        ? fourDigitYear
+        : full;
+    }
+  );
 }
 
 
@@ -213,19 +272,117 @@ function normalizeDateText(value) {
 
 
 function yearFromDate(value) {
-  const match = String(value || "")
-    .match(/^(\d{4})-/);
+  const match =
+    String(
+      value || ""
+    ).match(
+      /^(\d{4})-/
+    );
 
   return match
-    ? Number(match[1])
+    ? Number(
+        match[1]
+      )
     : getKoreaYear();
 }
 
 
-function toISO(year, month, day) {
-  const y = Number(year);
-  const m = Number(month);
-  const d = Number(day);
+/*
+  2자리 연도 지원.
+
+  예:
+  26.07.21 -> 2026-07-21
+  25.12.01 -> 2025-12-01
+
+  baseYear 주변 세기를 기준으로 판단한다.
+*/
+
+function resolveYearToken(
+  token,
+  baseYear
+) {
+  const raw =
+    String(
+      token || ""
+    ).trim();
+
+  const base =
+    Number(
+      baseYear ||
+      getKoreaYear()
+    );
+
+  if (
+    /^\d{4}$/.test(
+      raw
+    )
+  ) {
+    const year =
+      Number(raw);
+
+    return (
+      year >= 2000 &&
+      year <= 2100
+    )
+      ? year
+      : null;
+  }
+
+  if (
+    /^\d{2}$/.test(
+      raw
+    )
+  ) {
+    const century =
+      Math.floor(
+        base / 100
+      ) * 100;
+
+    let year =
+      century +
+      Number(raw);
+
+    if (
+      year -
+      base >
+      50
+    ) {
+      year -= 100;
+    }
+
+    if (
+      base -
+      year >
+      50
+    ) {
+      year += 100;
+    }
+
+    return (
+      year >= 2000 &&
+      year <= 2100
+    )
+      ? year
+      : null;
+  }
+
+  return null;
+}
+
+
+function toISO(
+  year,
+  month,
+  day
+) {
+  const y =
+    Number(year);
+
+  const m =
+    Number(month);
+
+  const d =
+    Number(day);
 
   if (
     !Number.isFinite(y) ||
@@ -241,43 +398,108 @@ function toISO(year, month, day) {
     return "";
   }
 
-  const date = new Date(
-    Date.UTC(y, m - 1, d)
-  );
+  const date =
+    new Date(
+      Date.UTC(
+        y,
+        m - 1,
+        d
+      )
+    );
 
   if (
-    date.getUTCFullYear() !== y ||
-    date.getUTCMonth() !== m - 1 ||
-    date.getUTCDate() !== d
+    date.getUTCFullYear() !==
+      y ||
+
+    date.getUTCMonth() !==
+      m - 1 ||
+
+    date.getUTCDate() !==
+      d
   ) {
     return "";
   }
 
   return [
-    String(y).padStart(4, "0"),
-    String(m).padStart(2, "0"),
-    String(d).padStart(2, "0")
+    String(y)
+      .padStart(
+        4,
+        "0"
+      ),
+
+    String(m)
+      .padStart(
+        2,
+        "0"
+      ),
+
+    String(d)
+      .padStart(
+        2,
+        "0"
+      )
   ].join("-");
 }
 
 
-function parseExistingDate(value) {
-  const text = normalizeDateText(
-    value
-  );
+function parseExistingDate(
+  value,
+  baseYear
+) {
+  const matches =
+    findDateMatches(
+      value,
+      baseYear ||
+      getKoreaYear()
+    );
 
-  const match = text.match(
-    /(\d{4})\s*(?:년|[-./])\s*(\d{1,2})\s*(?:월|[-./])\s*(\d{1,2})/
-  );
+  return matches.length
+    ? matches[0].value
+    : "";
+}
 
-  if (!match) {
-    return "";
+
+function dateDiffDays(
+  fromIso,
+  toIso
+) {
+  if (
+    !fromIso ||
+    !toIso
+  ) {
+    return null;
   }
 
-  return toISO(
-    match[1],
-    match[2],
-    match[3]
+  const from =
+    new Date(
+      fromIso +
+      "T00:00:00+09:00"
+    );
+
+  const to =
+    new Date(
+      toIso +
+      "T00:00:00+09:00"
+    );
+
+  if (
+    Number.isNaN(
+      from.getTime()
+    ) ||
+
+    Number.isNaN(
+      to.getTime()
+    )
+  ) {
+    return null;
+  }
+
+  return Math.round(
+    (
+      to.getTime() -
+      from.getTime()
+    ) /
+    86400000
   );
 }
 
@@ -287,47 +509,71 @@ function parseExistingDate(value) {
 ========================================================= */
 
 async function fetchDetailText(url) {
-  const target = normalizeUrl(url);
+  const target =
+    normalizeUrl(url);
 
-  if (!/^https?:\/\//i.test(target)) {
+  if (
+    !/^https?:\/\//i.test(
+      target
+    )
+  ) {
     return {
-      ok: false,
-      reason: "invalid_url",
-      text: ""
+      ok:
+        false,
+
+      reason:
+        "invalid_url",
+
+      text:
+        ""
     };
   }
 
-  const controller = new AbortController();
+  const controller =
+    new AbortController();
 
-  const timer = setTimeout(
-    function () {
-      controller.abort();
-    },
-    FETCH_TIMEOUT_MS
-  );
-
-  try {
-    const response = await fetch(
-      target,
-      {
-        signal: controller.signal,
-        redirect: "follow",
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (compatible; AXOO-B2G-DateNormalizer/1.3.1; +https://github.com/sksrkass-png/axoo-b2g-dashboard)",
-
-          "Accept-Language":
-            "ko-KR,ko;q=0.9,en;q=0.7"
-        }
-      }
+  const timer =
+    setTimeout(
+      function () {
+        controller.abort();
+      },
+      FETCH_TIMEOUT_MS
     );
 
-    if (!response.ok) {
+  try {
+    const response =
+      await fetch(
+        target,
+        {
+          signal:
+            controller.signal,
+
+          redirect:
+            "follow",
+
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (compatible; AXOO-B2G-DateNormalizer/1.4.0; +https://github.com/sksrkass-png/axoo-b2g-dashboard)",
+
+            "Accept-Language":
+              "ko-KR,ko;q=0.9,en;q=0.7"
+          }
+        }
+      );
+
+    if (
+      !response.ok
+    ) {
       return {
-        ok: false,
+        ok:
+          false,
+
         reason:
-          "http_" + response.status,
-        text: ""
+          "http_" +
+          response.status,
+
+        text:
+          ""
       };
     }
 
@@ -335,37 +581,57 @@ async function fetchDetailText(url) {
       await response.text();
 
     const text =
-      htmlToText(html);
+      htmlToText(
+        html
+      );
 
-    if (text.length < 30) {
+    if (
+      text.length <
+      30
+    ) {
       return {
-        ok: false,
-        reason: "empty_text",
-        text: ""
+        ok:
+          false,
+
+        reason:
+          "empty_text",
+
+        text:
+          ""
       };
     }
 
     return {
-      ok: true,
-      reason: "ok",
-      text: text
+      ok:
+        true,
+
+      reason:
+        "ok",
+
+      text:
+        text
     };
 
   } catch (error) {
     return {
-      ok: false,
+      ok:
+        false,
 
       reason:
         error &&
-        error.name === "AbortError"
+        error.name ===
+          "AbortError"
           ? "timeout"
           : "fetch_failed",
 
-      text: ""
+      text:
+        ""
     };
 
   } finally {
-    clearTimeout(timer);
+    clearTimeout(
+      timer
+    );
   }
 }
 
@@ -374,43 +640,90 @@ async function fetchDetailText(url) {
    DATE PARSING
 ========================================================= */
 
-function findDateMatches(text, baseYear) {
+function findDateMatches(
+  text,
+  baseYear
+) {
   const source =
-    normalizeDateText(text);
+    normalizeDateText(
+      text
+    );
+
+  /*
+    지원:
+    2026-08-10
+    2026.08.10
+    2026년 08월 10일
+    26.08.10
+    26-08-10
+    08.10
+  */
 
   const regex =
-    /(?:(\d{4})\s*(?:년|[-./])\s*)?(\d{1,2})\s*(?:월|[-./])\s*(\d{1,2})\s*(?:일)?/g;
+    /(?:(\d{4}|\d{2})\s*(?:년|[-./])\s*)?(\d{1,2})\s*(?:월|[-./])\s*(\d{1,2})\s*(?:일)?/g;
 
-  const matches = [];
+  const matches =
+    [];
 
   let match;
 
   while (
-    (match = regex.exec(source)) !== null
+    (
+      match =
+        regex.exec(
+          source
+        )
+    ) !== null
   ) {
-    const year = match[1]
-      ? Number(match[1])
-      : Number(
-          baseYear ||
-          getKoreaYear()
-        );
+    const explicitToken =
+      match[1] ||
+      "";
 
-    const value = toISO(
-      year,
-      match[2],
-      match[3]
-    );
+    const year =
+      explicitToken
+        ? resolveYearToken(
+            explicitToken,
+            baseYear
+          )
 
-    if (!value) {
+        : Number(
+            baseYear ||
+            getKoreaYear()
+          );
+
+    if (
+      !year
+    ) {
+      continue;
+    }
+
+    const value =
+      toISO(
+        year,
+        match[2],
+        match[3]
+      );
+
+    if (
+      !value
+    ) {
       continue;
     }
 
     matches.push({
-      value: value,
-      year: year,
+      value:
+        value,
+
+      year:
+        year,
 
       hasExplicitYear:
-        Boolean(match[1]),
+        Boolean(
+          explicitToken
+        ),
+
+      yearToken:
+        explicitToken,
 
       start:
         match.index,
@@ -427,11 +740,15 @@ function findDateMatches(text, baseYear) {
 }
 
 
-function findFirstDate(text, baseYear) {
-  const dates = findDateMatches(
-    text,
-    baseYear
-  );
+function findFirstDate(
+  text,
+  baseYear
+) {
+  const dates =
+    findDateMatches(
+      text,
+      baseYear
+    );
 
   return dates.length
     ? dates[0]
@@ -440,16 +757,24 @@ function findFirstDate(text, baseYear) {
 
 
 function hasDateRangeConnector(value) {
-  return /[~∼～–—]|\b부터\b|\b까지\b|\s-\s/
-    .test(
-      String(value || "")
-    );
+  return (
+    /[~∼～–—]|\b부터\b|\b까지\b|\s-\s/
+      .test(
+        String(
+          value ||
+          ""
+        )
+      )
+  );
 }
 
 
 function hasTimeRange(value) {
   const source =
-    String(value || "");
+    String(
+      value ||
+      ""
+    );
 
   const colonRange =
     /\d{1,2}\s*:\s*\d{2}\s*[~∼～–—-]\s*\d{1,2}\s*:\s*\d{2}/;
@@ -458,38 +783,49 @@ function hasTimeRange(value) {
     /\d{1,2}\s*시(?:\s*\d{1,2}\s*분)?\s*[~∼～–—-]\s*\d{1,2}\s*시(?:\s*\d{1,2}\s*분)?/;
 
   return (
-    colonRange.test(source) ||
-    koreanHourRange.test(source)
+    colonRange.test(
+      source
+    ) ||
+
+    koreanHourRange.test(
+      source
+    )
   );
 }
 
 
-function extractDateRange(text, baseYear) {
-  /*
-    findDateMatches와 source가 반드시
-    동일하게 보정된 문자열이어야
-    match.index가 어긋나지 않는다.
-  */
-
+function extractDateRange(
+  text,
+  baseYear
+) {
   const source =
-    normalizeDateText(text);
+    normalizeDateText(
+      text
+    );
 
-  const dates = findDateMatches(
-    source,
-    baseYear
-  );
+  const dates =
+    findDateMatches(
+      source,
+      baseYear
+    );
 
-  if (dates.length >= 2) {
+  if (
+    dates.length >=
+    2
+  ) {
     for (
       let index = 0;
-      index < dates.length - 1;
+      index <
+      dates.length - 1;
       index += 1
     ) {
       const first =
         dates[index];
 
       const second =
-        dates[index + 1];
+        dates[
+          index + 1
+        ];
 
       const between =
         source.slice(
@@ -510,17 +846,27 @@ function extractDateRange(text, baseYear) {
 
       if (
         !second.hasExplicitYear &&
-        end < first.value
+        end <
+        first.value
       ) {
-        end = toISO(
-          first.year + 1,
-          Number(
-            end.slice(5, 7)
-          ),
-          Number(
-            end.slice(8, 10)
-          )
-        );
+        end =
+          toISO(
+            first.year + 1,
+
+            Number(
+              end.slice(
+                5,
+                7
+              )
+            ),
+
+            Number(
+              end.slice(
+                8,
+                10
+              )
+            )
+          );
       }
 
       return {
@@ -528,19 +874,29 @@ function extractDateRange(text, baseYear) {
           first.value,
 
         end:
-          end
+          end,
+
+        rawStart:
+          first.raw,
+
+        rawEnd:
+          second.raw
       };
     }
   }
 
-  if (dates.length >= 1) {
+  if (
+    dates.length >=
+    1
+  ) {
     const first =
       dates[0];
 
     const afterDate =
       source.slice(
         first.end,
-        first.end + 140
+        first.end +
+        140
       );
 
     if (
@@ -553,7 +909,13 @@ function extractDateRange(text, baseYear) {
           first.value,
 
         end:
-          first.value
+          first.value,
+
+        rawStart:
+          first.raw,
+
+        rawEnd:
+          first.raw
       };
     }
   }
@@ -563,7 +925,7 @@ function extractDateRange(text, baseYear) {
 
 
 /* =========================================================
-   PUBLISHED DATE
+   SEGMENTS
 ========================================================= */
 
 function keywordSegments(
@@ -571,12 +933,15 @@ function keywordSegments(
   keyword,
   segmentLength
 ) {
-  const segments = [];
+  const segments =
+    [];
 
-  let offset = 0;
+  let offset =
+    0;
 
   while (
-    offset < source.length
+    offset <
+    source.length
   ) {
     const index =
       source.indexOf(
@@ -584,14 +949,18 @@ function keywordSegments(
         offset
       );
 
-    if (index === -1) {
+    if (
+      index ===
+      -1
+    ) {
       break;
     }
 
     segments.push(
       source.slice(
         index,
-        index + segmentLength
+        index +
+        segmentLength
       )
     );
 
@@ -604,12 +973,18 @@ function keywordSegments(
 }
 
 
+/* =========================================================
+   PUBLISHED DATE
+========================================================= */
+
 function extractPublishedDate(
   text,
   existingDates
 ) {
   const source =
-    normalizeDateText(text);
+    normalizeDateText(
+      text
+    );
 
   for (
     const keyword of
@@ -623,7 +998,8 @@ function extractPublishedDate(
       );
 
     for (
-      const segment of segments
+      const segment of
+      segments
     ) {
       const date =
         findFirstDate(
@@ -631,13 +1007,18 @@ function extractPublishedDate(
           getKoreaYear()
         );
 
-      if (date) {
+      if (
+        date
+      ) {
         return {
           value:
             date.value,
 
           source:
-            "detail_metadata"
+            "detail_metadata",
+
+          keyword:
+            keyword
         };
       }
     }
@@ -649,23 +1030,203 @@ function extractPublishedDate(
   ) {
     const parsed =
       parseExistingDate(
-        candidate
+        candidate,
+        getKoreaYear()
       );
 
-    if (parsed) {
+    if (
+      parsed
+    ) {
       return {
         value:
           parsed,
 
         source:
-          "existing"
+          "existing",
+
+        keyword:
+          ""
       };
     }
   }
 
   return {
-    value: "",
-    source: "not_found"
+    value:
+      "",
+
+    source:
+      "not_found",
+
+    keyword:
+      ""
+  };
+}
+
+
+/* =========================================================
+   PRIORITY DEADLINE
+
+   핵심 변경:
+   공모기간보다 실제 접수/제출일을 먼저 사용한다.
+========================================================= */
+
+function extractPriorityDeadline(
+  text,
+  publishedDate
+) {
+  const source =
+    normalizeDateText(
+      text
+    );
+
+  const baseYear =
+    yearFromDate(
+      publishedDate
+    );
+
+  for (
+    const keyword of
+    PRIORITY_DEADLINE_KEYWORDS
+  ) {
+    const segments =
+      keywordSegments(
+        source,
+        keyword,
+        260
+      );
+
+    for (
+      const segment of
+      segments
+    ) {
+      /*
+        예:
+        접수일시 :
+        26.07.21 ~ 26.08.10
+
+        → 범위 끝인 2026-08-10
+      */
+
+      const range =
+        extractDateRange(
+          segment,
+          baseYear
+        );
+
+      if (
+        range
+      ) {
+        return {
+          value:
+            range.end,
+
+          source:
+            "priority_deadline_range",
+
+          keyword:
+            keyword,
+
+          raw:
+            range.rawEnd ||
+            ""
+        };
+      }
+
+      /*
+        예:
+        접수일자 : 2026.08.07
+        일자 / 시간 : 2026.09.21
+      */
+
+      const date =
+        findFirstDate(
+          segment,
+          baseYear
+        );
+
+      if (
+        date
+      ) {
+        return {
+          value:
+            date.value,
+
+          source:
+            "priority_deadline",
+
+          keyword:
+            keyword,
+
+          raw:
+            date.raw
+        };
+      }
+    }
+  }
+
+
+  /*
+    기간 형태 접수정보.
+
+    예:
+    접수기간:
+    2026.08.01 ~ 2026.08.20
+  */
+
+  for (
+    const keyword of
+    RANGE_DEADLINE_KEYWORDS
+  ) {
+    const segments =
+      keywordSegments(
+        source,
+        keyword,
+        320
+      );
+
+    for (
+      const segment of
+      segments
+    ) {
+      const range =
+        extractDateRange(
+          segment,
+          baseYear
+        );
+
+      if (
+        range
+      ) {
+        return {
+          value:
+            range.end,
+
+          source:
+            "priority_deadline_range",
+
+          keyword:
+            keyword,
+
+          raw:
+            range.rawEnd ||
+            ""
+        };
+      }
+    }
+  }
+
+  return {
+    value:
+      "",
+
+    source:
+      "not_found",
+
+    keyword:
+      "",
+
+    raw:
+      ""
   };
 }
 
@@ -679,7 +1240,9 @@ function extractPeriod(
   publishedDate
 ) {
   const source =
-    normalizeDateText(text);
+    normalizeDateText(
+      text
+    );
 
   const baseYear =
     yearFromDate(
@@ -694,11 +1257,12 @@ function extractPeriod(
       keywordSegments(
         source,
         keyword,
-        300
+        320
       );
 
     for (
-      const segment of segments
+      const segment of
+      segments
     ) {
       const range =
         extractDateRange(
@@ -706,7 +1270,9 @@ function extractPeriod(
           baseYear
         );
 
-      if (range) {
+      if (
+        range
+      ) {
         return {
           start:
             range.start,
@@ -728,11 +1294,14 @@ function extractPeriod(
           baseYear
         );
 
-      if (firstDate) {
+      if (
+        firstDate
+      ) {
         const afterDate =
           segment.slice(
             firstDate.end,
-            firstDate.end + 140
+            firstDate.end +
+            140
           );
 
         if (
@@ -759,69 +1328,228 @@ function extractPeriod(
   }
 
   return {
-    start: "",
-    end: "",
-    source: "not_found",
-    keyword: ""
+    start:
+      "",
+
+    end:
+      "",
+
+    source:
+      "not_found",
+
+    keyword:
+      ""
   };
 }
 
 
 /* =========================================================
-   EXPLICIT DEADLINE
+   DEADLINE CHOICE
 ========================================================= */
 
-function extractExplicitDeadline(
-  text,
-  publishedDate
-) {
-  const source =
-    normalizeDateText(text);
+function chooseDeadline(options) {
+  const publishedDate =
+    options.publishedDate ||
+    "";
 
-  const baseYear =
-    yearFromDate(
-      publishedDate
-    );
+  const priority =
+    options.priority ||
+    {
+      value:
+        ""
+    };
 
-  for (
-    const keyword of
-    DEADLINE_KEYWORDS
+  const period =
+    options.period ||
+    {
+      end:
+        ""
+    };
+
+  const existingDeadline =
+    options.existingDeadline ||
+    "";
+
+  const existingPeriodEnd =
+    options.existingPeriodEnd ||
+    "";
+
+
+  /*
+    1순위:
+    원문 실제 접수/제출일.
+  */
+
+  if (
+    priority.value
   ) {
-    const segments =
-      keywordSegments(
-        source,
-        keyword,
-        200
+    return {
+      value:
+        priority.value,
+
+      source:
+        priority.source,
+
+      keyword:
+        priority.keyword ||
+        "",
+
+      suspiciousPeriodIgnored:
+        false
+    };
+  }
+
+
+  /*
+    2순위:
+    공모기간 종료일.
+
+    단 등록일부터 180일을 넘는
+    비정상 장기 기간은 바로 믿지 않는다.
+  */
+
+  if (
+    period.end
+  ) {
+    const periodDays =
+      dateDiffDays(
+        publishedDate,
+        period.end
       );
 
-    for (
-      const segment of segments
+    const suspicious =
+      periodDays !==
+        null &&
+
+      periodDays >
+        MAX_REASONABLE_PERIOD_DAYS;
+
+    if (
+      !suspicious
     ) {
-      const date =
-        findFirstDate(
-          segment,
-          baseYear
-        );
+      return {
+        value:
+          period.end,
 
-      if (date) {
-        return {
-          value:
-            date.value,
+        source:
+          "period_end",
 
-          source:
-            "explicit_deadline",
+        keyword:
+          period.keyword ||
+          "",
 
-          keyword:
-            keyword
-        };
-      }
+        suspiciousPeriodIgnored:
+          false
+      };
     }
   }
 
+
+  /*
+    3순위:
+    기존 deadline.
+
+    이전 버전에서 잘못 추출한
+    1년짜리 deadline은 다시 걸러낸다.
+  */
+
+  if (
+    existingDeadline
+  ) {
+    const existingDays =
+      dateDiffDays(
+        publishedDate,
+        existingDeadline
+      );
+
+    const suspiciousExisting =
+      existingDays !==
+        null &&
+
+      existingDays >
+        MAX_REASONABLE_PERIOD_DAYS;
+
+    if (
+      !suspiciousExisting
+    ) {
+      return {
+        value:
+          existingDeadline,
+
+        source:
+          "existing_deadline",
+
+        keyword:
+          "",
+
+        suspiciousPeriodIgnored:
+          Boolean(
+            period.end
+          )
+      };
+    }
+  }
+
+
+  /*
+    4순위:
+    기존 periodEnd.
+  */
+
+  if (
+    existingPeriodEnd
+  ) {
+    const existingPeriodDays =
+      dateDiffDays(
+        publishedDate,
+        existingPeriodEnd
+      );
+
+    const suspiciousExistingPeriod =
+      existingPeriodDays !==
+        null &&
+
+      existingPeriodDays >
+        MAX_REASONABLE_PERIOD_DAYS;
+
+    if (
+      !suspiciousExistingPeriod
+    ) {
+      return {
+        value:
+          existingPeriodEnd,
+
+        source:
+          "existing_period_end",
+
+        keyword:
+          "",
+
+        suspiciousPeriodIgnored:
+          Boolean(
+            period.end
+          )
+      };
+    }
+  }
+
+
   return {
-    value: "",
-    source: "not_found",
-    keyword: ""
+    value:
+      "",
+
+    source:
+      period.end
+        ? "suspicious_period_ignored"
+        : "not_found",
+
+    keyword:
+      "",
+
+    suspiciousPeriodIgnored:
+      Boolean(
+        period.end
+      )
   };
 }
 
@@ -830,28 +1558,81 @@ function extractExplicitDeadline(
    STATUS
 ========================================================= */
 
-function getDeadlineState(deadline) {
-  if (!deadline) {
+function getDeadlineState(
+  deadline,
+  publishedDate
+) {
+  const today =
+    getKoreaToday();
+
+  if (
+    deadline
+  ) {
+    const expired =
+      deadline <
+      today;
+
     return {
-      isExpired: false,
+      isExpired:
+        expired,
 
       deadlineStatus:
-        "마감일 확인 필요"
+        expired
+          ? "마감"
+          : "진행중",
+
+      isStaleCandidate:
+        false,
+
+      staleReason:
+        ""
     };
   }
 
-  const expired =
-    deadline <
-    getKoreaToday();
+
+  /*
+    마감일 자체를 끝까지 찾지 못한 경우.
+
+    등록 후 75일 이상 지난 공고는
+    LIVE에서 계속 떠 있는 것을 방지하기 위해
+    보수적으로 stale 처리한다.
+
+    일반 공모의 단순 20~40일 기간보다
+    충분히 긴 버퍼를 둔다.
+  */
+
+  const ageDays =
+    dateDiffDays(
+      publishedDate,
+      today
+    );
+
+  const stale =
+    ageDays !==
+      null &&
+
+    ageDays >=
+      UNKNOWN_DEADLINE_STALE_DAYS;
 
   return {
     isExpired:
-      expired,
+      stale,
 
     deadlineStatus:
-      expired
-        ? "마감"
-        : "진행중"
+      stale
+        ? "마감 추정"
+        : "마감일 확인 필요",
+
+    isStaleCandidate:
+      stale,
+
+    staleReason:
+      stale
+        ? "마감일 미확인 + 등록 후 " +
+          ageDays +
+          "일 경과"
+
+        : ""
   };
 }
 
@@ -867,10 +1648,18 @@ async function normalizeItem(item) {
     );
 
   let detailFetchStatus =
-    item.detailFetchStatus || "";
+    item.detailFetchStatus ||
+    "";
+
+
+  /*
+    기존 Collector가 상세본문을 넣어둔 경우
+    네트워크 fetch를 다시 하지 않는다.
+  */
 
   if (
-    detailText.length < 100
+    detailText.length <
+    100
   ) {
     const fetched =
       await fetchDetailText(
@@ -879,7 +1668,9 @@ async function normalizeItem(item) {
         item.url
       );
 
-    if (fetched.ok) {
+    if (
+      fetched.ok
+    ) {
       detailText =
         fetched.text;
 
@@ -893,6 +1684,7 @@ async function normalizeItem(item) {
     }
   }
 
+
   const fallbackText =
     cleanText(
       [
@@ -903,12 +1695,16 @@ async function normalizeItem(item) {
         item.title
       ]
         .filter(Boolean)
-        .join(" | ")
+        .join(
+          " | "
+        )
     );
+
 
   const extractionText =
     detailText ||
     fallbackText;
+
 
   const published =
     extractPublishedDate(
@@ -921,92 +1717,112 @@ async function normalizeItem(item) {
       ]
     );
 
+
+  /*
+    중요:
+    공모기간보다 실제 접수/제출 마감일을
+    먼저 계산한다.
+  */
+
+  const priorityDeadline =
+    extractPriorityDeadline(
+      extractionText,
+      published.value
+    );
+
+
   const period =
     extractPeriod(
       extractionText,
       published.value
     );
 
-  const explicitDeadline =
-    extractExplicitDeadline(
-      extractionText,
-      published.value
-    );
 
   const existingPeriodStart =
     parseExistingDate(
-      item.periodStart
+      item.periodStart,
+      yearFromDate(
+        published.value
+      )
     );
+
 
   const existingPeriodEnd =
     parseExistingDate(
-      item.periodEnd
+      item.periodEnd,
+      yearFromDate(
+        published.value
+      )
     );
+
 
   const existingDeadline =
     parseExistingDate(
       item.deadline ||
       item.endDate ||
-      item.closeDate
+      item.closeDate,
+
+      yearFromDate(
+        published.value
+      )
     );
+
 
   const periodStart =
     period.start ||
     existingPeriodStart ||
     "";
 
+
   const periodEnd =
     period.end ||
     existingPeriodEnd ||
     "";
 
+
+  const deadlineChoice =
+    chooseDeadline({
+      publishedDate:
+        published.value,
+
+      priority:
+        priorityDeadline,
+
+      period:
+        period,
+
+      existingDeadline:
+        existingDeadline,
+
+      existingPeriodEnd:
+        existingPeriodEnd
+    });
+
+
   const deadline =
-    explicitDeadline.value ||
-    period.end ||
-    existingDeadline ||
-    periodEnd ||
-    "";
+    deadlineChoice.value;
 
-  let deadlineSource =
-    "not_found";
 
-  if (
-    explicitDeadline.value
-  ) {
-    deadlineSource =
-      "explicit_deadline";
+  const deadlineState =
+    getDeadlineState(
+      deadline,
+      published.value
+    );
 
-  } else if (
-    period.end
-  ) {
-    deadlineSource =
-      "period_end";
-
-  } else if (
-    existingDeadline
-  ) {
-    deadlineSource =
-      "existing_deadline";
-
-  } else if (
-    existingPeriodEnd
-  ) {
-    deadlineSource =
-      "existing_period_end";
-  }
 
   let confidence =
     "LOW";
 
+
   if (
     published.value &&
     deadline &&
-    (
-      deadlineSource ===
-        "explicit_deadline" ||
-
-      deadlineSource ===
-        "period_end"
+    [
+      "priority_deadline",
+      "priority_deadline_range",
+      "period_end"
+    ].includes(
+      deadlineChoice.source
     )
   ) {
     confidence =
@@ -1019,25 +1835,22 @@ async function normalizeItem(item) {
       "MEDIUM";
   }
 
-  const deadlineState =
-    getDeadlineState(
-      deadline
-    );
 
-  let normalizedStatus =
-    item.status || "";
+  /*
+    기존 status를 그대로 믿지 않고
+    현재 deadline 기준으로 재설정한다.
+  */
 
-  if (
-    deadline &&
-    normalizedStatus.includes(
-      "마감일 확인 필요"
-    )
-  ) {
-    normalizedStatus =
-      deadlineState.isExpired
+  const normalizedStatus =
+    deadline
+      ? deadlineState
+          .isExpired
         ? "마감"
-        : "공모중";
-  }
+        : "공모중"
+
+      : deadlineState
+          .deadlineStatus;
+
 
   const recommendedBase =
     String(
@@ -1055,8 +1868,10 @@ async function normalizeItem(item) {
       )
       .trim();
 
+
   let periodLabel =
     "";
+
 
   if (
     periodStart &&
@@ -1074,6 +1889,7 @@ async function normalizeItem(item) {
           periodEnd;
   }
 
+
   return {
     ...item,
 
@@ -1081,7 +1897,8 @@ async function normalizeItem(item) {
       normalizedStatus,
 
     publishedDate:
-      published.value || "",
+      published.value ||
+      "",
 
     postedDate:
       published.value ||
@@ -1124,14 +1941,24 @@ async function normalizeItem(item) {
         : "not_found",
 
     periodKeyword:
-      period.keyword || "",
+      period.keyword ||
+      "",
 
     deadlineSource:
-      deadlineSource,
+      deadlineChoice.source,
 
     deadlineKeyword:
-      explicitDeadline.keyword ||
+      priorityDeadline.keyword ||
+      deadlineChoice.keyword ||
       "",
+
+    deadlineRaw:
+      priorityDeadline.raw ||
+      "",
+
+    suspiciousPeriodIgnored:
+      deadlineChoice
+        .suspiciousPeriodIgnored,
 
     dateConfidence:
       confidence,
@@ -1143,10 +1970,20 @@ async function normalizeItem(item) {
       getKoreaToday(),
 
     deadlineStatus:
-      deadlineState.deadlineStatus,
+      deadlineState
+        .deadlineStatus,
 
     isExpired:
-      deadlineState.isExpired
+      deadlineState
+        .isExpired,
+
+    isStaleCandidate:
+      deadlineState
+        .isStaleCandidate,
+
+    staleReason:
+      deadlineState
+        .staleReason
   };
 }
 
@@ -1156,7 +1993,11 @@ async function normalizeItem(item) {
 ========================================================= */
 
 function getItems(data) {
-  if (Array.isArray(data)) {
+  if (
+    Array.isArray(
+      data
+    )
+  ) {
     return data;
   }
 
@@ -1213,7 +2054,8 @@ function replaceItems(
   ) {
     return {
       ...original,
-      projects: items
+      projects:
+        items
     };
   }
 
@@ -1225,7 +2067,8 @@ function replaceItems(
   ) {
     return {
       ...original,
-      items: items
+      items:
+        items
     };
   }
 
@@ -1237,7 +2080,8 @@ function replaceItems(
   ) {
     return {
       ...original,
-      data: items
+      data:
+        items
     };
   }
 
@@ -1260,12 +2104,16 @@ function readArchive() {
       "utf8"
     );
 
-  if (!raw.trim()) {
+  if (
+    !raw.trim()
+  ) {
     return [];
   }
 
   const parsed =
-    JSON.parse(raw);
+    JSON.parse(
+      raw
+    );
 
   if (
     !Array.isArray(
@@ -1307,7 +2155,10 @@ function getStrongId(item) {
 }
 
 
-function sameArchiveItem(a, b) {
+function sameArchiveItem(
+  a,
+  b
+) {
   const aId =
     getStrongId(a);
 
@@ -1317,7 +2168,8 @@ function sameArchiveItem(a, b) {
   if (
     aId &&
     bId &&
-    aId === bId
+    aId ===
+      bId
   ) {
     return true;
   }
@@ -1331,25 +2183,29 @@ function sameArchiveItem(a, b) {
   if (
     aUrl &&
     bUrl &&
-    aUrl === bUrl
+    aUrl ===
+      bUrl
   ) {
     return true;
   }
 
   const aBid =
     String(
-      a.bidNtceNo || ""
+      a.bidNtceNo ||
+      ""
     ).trim();
 
   const bBid =
     String(
-      b.bidNtceNo || ""
+      b.bidNtceNo ||
+      ""
     ).trim();
 
   if (
     aBid &&
     bBid &&
-    aBid === bBid
+    aBid ===
+      bBid
   ) {
     return true;
   }
@@ -1383,11 +2239,13 @@ function sameArchiveItem(a, b) {
   return Boolean(
     aTitle &&
     bTitle &&
-    aTitle === bTitle &&
+    aTitle ===
+      bTitle &&
     (
       !aAgency ||
       !bAgency ||
-      aAgency === bAgency
+      aAgency ===
+        bAgency
     )
   );
 }
@@ -1400,16 +2258,19 @@ function upsertArchive(
   const today =
     getKoreaToday();
 
+
   const archive =
     existingArchive.map(
       function (item) {
         return {
           ...item,
+
           archiveIsCurrent:
             false
         };
       }
     );
+
 
   normalizedItems.forEach(
     function (item) {
@@ -1425,7 +2286,11 @@ function upsertArchive(
           }
         );
 
-      if (index >= 0) {
+
+      if (
+        index >=
+        0
+      ) {
         const previous =
           archive[index];
 
@@ -1434,8 +2299,10 @@ function upsertArchive(
           ...item,
 
           archiveFirstSeenAt:
-            previous.archiveFirstSeenAt ||
-            previous.dateNormalizedAt ||
+            previous
+              .archiveFirstSeenAt ||
+            previous
+              .dateNormalizedAt ||
             today,
 
           archiveLastSeenAt:
@@ -1462,8 +2329,12 @@ function upsertArchive(
     }
   );
 
+
   archive.sort(
-    function (a, b) {
+    function (
+      a,
+      b
+    ) {
       const aDate =
         a.publishedDate ||
         a.postedDate ||
@@ -1476,17 +2347,23 @@ function upsertArchive(
         b.deadline ||
         "";
 
-      if (aDate !== bDate) {
-        return bDate.localeCompare(
-          aDate
-        );
+      if (
+        aDate !==
+        bDate
+      ) {
+        return bDate
+          .localeCompare(
+            aDate
+          );
       }
 
       return String(
-        a.title || ""
+        a.title ||
+        ""
       ).localeCompare(
         String(
-          b.title || ""
+          b.title ||
+          ""
         ),
         "ko"
       );
@@ -1512,6 +2389,7 @@ async function main() {
     );
   }
 
+
   const original =
     JSON.parse(
       fs.readFileSync(
@@ -1520,21 +2398,25 @@ async function main() {
       )
     );
 
+
   const items =
-    getItems(original);
+    getItems(
+      original
+    );
+
 
   const normalized =
     [];
 
-  /*
-    공공사이트 과부하 방지를 위해
-    현재 live 공고만 순차 검증한다.
 
-    Archive의 과거 공고는 매번 다시 fetch하지 않는다.
+  /*
+    현재 LIVE 공고만
+    순차적으로 날짜 검증.
   */
 
   for (
-    const item of items
+    const item of
+    items
   ) {
     const result =
       await normalizeItem(
@@ -1546,11 +2428,13 @@ async function main() {
     );
   }
 
+
   const output =
     replaceItems(
       original,
       normalized
     );
+
 
   fs.writeFileSync(
     DATA_FILE,
@@ -1564,14 +2448,17 @@ async function main() {
     "utf8"
   );
 
+
   const existingArchive =
     readArchive();
+
 
   const archive =
     upsertArchive(
       existingArchive,
       normalized
     );
+
 
   fs.writeFileSync(
     ARCHIVE_FILE,
@@ -1585,11 +2472,27 @@ async function main() {
     "utf8"
   );
 
+
   const summary = {
-    HIGH: 0,
-    MEDIUM: 0,
-    LOW: 0
+    HIGH:
+      0,
+
+    MEDIUM:
+      0,
+
+    LOW:
+      0,
+
+    EXPIRED:
+      0,
+
+    STALE:
+      0,
+
+    SUSPICIOUS_PERIOD_IGNORED:
+      0
   };
+
 
   normalized.forEach(
     function (item) {
@@ -1601,10 +2504,35 @@ async function main() {
         summary[key] !==
         undefined
       ) {
-        summary[key] += 1;
+        summary[key] +=
+          1;
+      }
+
+      if (
+        item.isExpired
+      ) {
+        summary.EXPIRED +=
+          1;
+      }
+
+      if (
+        item.isStaleCandidate
+      ) {
+        summary.STALE +=
+          1;
+      }
+
+      if (
+        item
+          .suspiciousPeriodIgnored
+      ) {
+        summary
+          .SUSPICIOUS_PERIOD_IGNORED +=
+          1;
       }
     }
   );
+
 
   console.log(
     "===================================="
@@ -1641,19 +2569,61 @@ async function main() {
   );
 
   console.log(
+    "마감 판정:",
+    summary.EXPIRED
+  );
+
+  console.log(
+    "마감일 미확인 장기경과:",
+    summary.STALE
+  );
+
+  console.log(
+    "비정상 장기 공모기간 무시:",
+    summary
+      .SUSPICIOUS_PERIOD_IGNORED
+  );
+
+  console.log(
     "===================================="
   );
 }
 
 
-main()
-  .catch(
-    function (error) {
-      console.error(
-        "[AXOO ART DATE NORMALIZER]",
-        error
-      );
+/* =========================================================
+   ENTRY
+========================================================= */
 
-      process.exitCode = 1;
-    }
-  );
+if (
+  require.main ===
+  module
+) {
+  main()
+    .catch(
+      function (error) {
+        console.error(
+          "[AXOO ART DATE NORMALIZER]",
+          error
+        );
+
+        process.exitCode =
+          1;
+      }
+    );
+}
+
+
+/* =========================================================
+   TEST EXPORTS
+========================================================= */
+
+module.exports = {
+  findDateMatches,
+  extractDateRange,
+  extractPriorityDeadline,
+  extractPeriod,
+  normalizeItem,
+  parseExistingDate,
+  chooseDeadline,
+  getDeadlineState
+};
