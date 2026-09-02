@@ -7,18 +7,20 @@ const crypto = require("crypto");
    CONFIG
 ========================================================= */
 
-const DATA_FILE = path.join(
-  process.cwd(),
-  "data",
-  "art_commissions.json"
-);
+const DATA_FILE =
+  path.join(
+    process.cwd(),
+    "data",
+    "art_commissions.json"
+  );
 
 
-const ARCHIVE_FILE = path.join(
-  process.cwd(),
-  "data",
-  "art_commissions_archive.json"
-);
+const ARCHIVE_FILE =
+  path.join(
+    process.cwd(),
+    "data",
+    "art_commissions_archive.json"
+  );
 
 
 const SOURCE_NAME =
@@ -33,16 +35,29 @@ const LIST_URL =
   "https://www.incheon.go.kr/culture/CU070302";
 
 
+const FETCH_BRIDGE_URL =
+  process.env.AXOO_B2G_FETCH_BRIDGE_URL ||
+  "https://script.google.com/macros/s/AKfycbzu4m0lNbY5RzXFuKTR3C6H2hd_swAfLTdyZeERGqM3XrChjBrT46cWdiWTQGWSn9-4aQ/exec";
+
+
 const COLLECTION_VERSION =
-  "1.0.0";
+  "1.1.0";
 
 
 const FETCH_TIMEOUT_MS =
   15000;
 
 
+const BRIDGE_TIMEOUT_MS =
+  30000;
+
+
+const MIN_HTML_BYTES =
+  1000;
+
+
 /*
-  최초 도입 시 2024~2025 과거 게시물을
+  최초 도입 시 오래된 게시물을
   전부 LIVE 후보로 되살리지 않기 위한 안전장치.
 
   최근 120일 내 게시물만 신규 후보로 본다.
@@ -96,7 +111,6 @@ const EXCLUDE_KEYWORDS = [
 
   "업무 안내"
 ];
-
 
 
 /* =========================================================
@@ -155,7 +169,6 @@ function readArray(
 }
 
 
-
 function writeArray(
   filePath,
   items
@@ -168,12 +181,12 @@ function writeArray(
       items,
       null,
       2
-    ) + "\n",
+    ) +
+    "\n",
 
     "utf8"
   );
 }
-
 
 
 /* =========================================================
@@ -185,7 +198,8 @@ function decodeHtmlEntities(
 ) {
 
   return String(
-    value || ""
+    value ||
+    ""
   )
 
     .replace(
@@ -253,7 +267,6 @@ function decodeHtmlEntities(
 }
 
 
-
 function cleanText(
   value
 ) {
@@ -286,7 +299,6 @@ function cleanText(
 }
 
 
-
 function cleanTitle(
   value
 ) {
@@ -304,7 +316,6 @@ function cleanTitle(
 }
 
 
-
 /* =========================================================
    DATE
 ========================================================= */
@@ -315,6 +326,7 @@ function getKoreaToday() {
     new Intl.DateTimeFormat(
       "en-CA",
       {
+
         timeZone:
           "Asia/Seoul",
 
@@ -333,10 +345,12 @@ function getKoreaToday() {
       );
 
 
-  const map = {};
+  const map =
+    {};
 
 
   parts.forEach(
+
     function (
       part
     ) {
@@ -356,14 +370,17 @@ function getKoreaToday() {
 
 
   return [
+
     map.year,
+
     map.month,
+
     map.day
+
   ].join(
     "-"
   );
 }
-
 
 
 function parseISODate(
@@ -372,7 +389,8 @@ function parseISODate(
 
   const match =
     String(
-      value || ""
+      value ||
+      ""
     )
       .match(
         /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
@@ -432,33 +450,29 @@ function parseISODate(
 
     String(
       year
-    )
-      .padStart(
-        4,
-        "0"
-      ),
+    ).padStart(
+      4,
+      "0"
+    ),
 
     String(
       month
-    )
-      .padStart(
-        2,
-        "0"
-      ),
+    ).padStart(
+      2,
+      "0"
+    ),
 
     String(
       day
+    ).padStart(
+      2,
+      "0"
     )
-      .padStart(
-        2,
-        "0"
-      )
 
   ].join(
     "-"
   );
 }
-
 
 
 function daysBetween(
@@ -513,7 +527,6 @@ function daysBetween(
 }
 
 
-
 function isRecentEnough(
   publishedDate
 ) {
@@ -534,7 +547,8 @@ function isRecentEnough(
 
 
   if (
-    age === null
+    age ===
+    null
   ) {
 
     return true;
@@ -548,7 +562,6 @@ function isRecentEnough(
 }
 
 
-
 /* =========================================================
    URL
 ========================================================= */
@@ -558,7 +571,8 @@ function normalizeUrl(
 ) {
 
   return String(
-    value || ""
+    value ||
+    ""
   )
 
     .trim()
@@ -573,7 +587,6 @@ function normalizeUrl(
       ""
     );
 }
-
 
 
 function canonicalizeIncheonUrl(
@@ -628,7 +641,6 @@ function canonicalizeIncheonUrl(
 }
 
 
-
 /* =========================================================
    FILTER
 ========================================================= */
@@ -644,6 +656,7 @@ function hasExcludedKeyword(
 
 
   return EXCLUDE_KEYWORDS.some(
+
     function (
       keyword
     ) {
@@ -654,7 +667,6 @@ function hasExcludedKeyword(
     }
   );
 }
-
 
 
 function isCandidateTitle(
@@ -706,40 +718,36 @@ function isCandidateTitle(
     추가 신호 확인
   */
 
-  const hasCommissionSignal =
-    [
+  return [
 
-      "제작",
+    "제작",
 
-      "설치",
+    "설치",
 
-      "건축물",
+    "건축물",
 
-      "공동주택",
+    "공동주택",
 
-      "아파트",
+    "아파트",
 
-      "청사",
+    "청사",
 
-      "신축",
+    "신축",
 
-      "재건축"
+    "재건축"
 
-    ].some(
-      function (
+  ].some(
+
+    function (
+      keyword
+    ) {
+
+      return text.includes(
         keyword
-      ) {
-
-        return text.includes(
-          keyword
-        );
-      }
-    );
-
-
-  return hasCommissionSignal;
+      );
+    }
+  );
 }
-
 
 
 /* =========================================================
@@ -789,18 +797,18 @@ function isManagedIncheonItem(
 }
 
 
-
 function cleanFalsePositives(
   items
 ) {
 
   return items.filter(
+
     function (
       item
     ) {
 
       /*
-        인천 collector가 관리하지 않는
+        인천 Collector가 관리하지 않는
         서울 / 경기 / 기타 데이터는
         절대로 건드리지 않는다.
       */
@@ -823,7 +831,6 @@ function cleanFalsePositives(
 }
 
 
-
 /* =========================================================
    ID
 ========================================================= */
@@ -837,15 +844,12 @@ function stableId(
       .createHash(
         "sha1"
       )
-
       .update(
         sourceUrl
       )
-
       .digest(
         "hex"
       )
-
       .slice(
         0,
         16
@@ -857,7 +861,6 @@ function stableId(
     hash
   );
 }
-
 
 
 /* =========================================================
@@ -877,7 +880,8 @@ function extractPublishedDateFromRow(
 
 
   if (
-    rowStart < 0
+    rowStart <
+    0
   ) {
 
     return "";
@@ -892,7 +896,8 @@ function extractPublishedDateFromRow(
 
 
   if (
-    rowEnd < 0
+    rowEnd <
+    0
   ) {
 
     return "";
@@ -902,7 +907,8 @@ function extractPublishedDateFromRow(
   const rowHtml =
     html.slice(
       rowStart,
-      rowEnd + 5
+      rowEnd +
+      5
     );
 
 
@@ -920,12 +926,12 @@ function extractPublishedDateFromRow(
 }
 
 
-
 function extractBoardItems(
   html
 ) {
 
-  const found = [];
+  const found =
+    [];
 
 
   const seen =
@@ -945,7 +951,8 @@ function extractBoardItems(
         anchorRegex.exec(
           html
         )
-    ) !== null
+    ) !==
+    null
   ) {
 
     const href =
@@ -1001,7 +1008,7 @@ function extractBoardItems(
 
     /*
       과거 게시물을 최초 실행 때
-      대량 LIVE 복원시키지 않음.
+      대량 LIVE 복원시키지 않는다.
     */
 
     if (
@@ -1103,12 +1110,11 @@ function extractBoardItems(
 }
 
 
-
 /* =========================================================
-   FETCH
+   DIRECT FETCH
 ========================================================= */
 
-async function fetchText(
+async function fetchTextDirect(
   url
 ) {
 
@@ -1118,11 +1124,13 @@ async function fetchText(
 
   const timer =
     setTimeout(
+
       function () {
 
         controller.abort();
 
       },
+
       FETCH_TIMEOUT_MS
     );
 
@@ -1137,10 +1145,13 @@ async function fetchText(
           signal:
             controller.signal,
 
+          redirect:
+            "follow",
+
           headers: {
 
             "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-Incheon-Collector/1.0)",
+              "Mozilla/5.0 (compatible; AXOO-B2G-Incheon-Collector/1.1)",
 
             "Accept":
               "text/html,application/xhtml+xml,*/*",
@@ -1163,7 +1174,43 @@ async function fetchText(
     }
 
 
-    return await response.text();
+    const html =
+      await response.text();
+
+
+    const bytes =
+      Buffer.byteLength(
+        html,
+        "utf8"
+      );
+
+
+    if (
+      bytes <
+      MIN_HTML_BYTES
+    ) {
+
+      throw new Error(
+        "HTML_TOO_SMALL"
+      );
+    }
+
+
+    return {
+
+      html:
+        html,
+
+      transport:
+        "direct",
+
+      status:
+        response.status,
+
+      finalUrl:
+        response.url ||
+        url
+    };
 
 
   } finally {
@@ -1174,6 +1221,316 @@ async function fetchText(
   }
 }
 
+
+/* =========================================================
+   FETCH BRIDGE
+========================================================= */
+
+async function fetchIncheonMainViaBridge() {
+
+  const controller =
+    new AbortController();
+
+
+  const timer =
+    setTimeout(
+
+      function () {
+
+        controller.abort();
+
+      },
+
+      BRIDGE_TIMEOUT_MS
+    );
+
+
+  try {
+
+    const url =
+      new URL(
+        FETCH_BRIDGE_URL
+      );
+
+
+    url.searchParams.set(
+      "action",
+      "fetch"
+    );
+
+
+    url.searchParams.set(
+      "target",
+      "incheon_main"
+    );
+
+
+    const response =
+      await fetch(
+        url.toString(),
+        {
+
+          signal:
+            controller.signal,
+
+          redirect:
+            "follow",
+
+          headers: {
+
+            "User-Agent":
+              "Mozilla/5.0 (compatible; AXOO-B2G-Incheon-Collector/1.1)",
+
+            "Accept":
+              "application/json,text/plain,*/*"
+          }
+        }
+      );
+
+
+    if (
+      !response.ok
+    ) {
+
+      throw new Error(
+        "BRIDGE_HTTP_" +
+        response.status
+      );
+    }
+
+
+    const text =
+      await response.text();
+
+
+    let payload;
+
+
+    try {
+
+      payload =
+        JSON.parse(
+          text
+        );
+
+
+    } catch (
+      error
+    ) {
+
+      throw new Error(
+        "BRIDGE_JSON_PARSE_FAILED: " +
+        error.message
+      );
+    }
+
+
+    if (
+      !payload ||
+      payload.ok !==
+        true
+    ) {
+
+      throw new Error(
+        "BRIDGE_UPSTREAM_FAILED: " +
+        String(
+          (
+            payload &&
+            (
+              payload.message ||
+              payload.error
+            )
+          ) ||
+          "unknown"
+        )
+      );
+    }
+
+
+    if (
+      Number(
+        payload.upstreamStatus
+      ) <
+        200 ||
+
+      Number(
+        payload.upstreamStatus
+      ) >=
+        400
+    ) {
+
+      throw new Error(
+        "BRIDGE_UPSTREAM_HTTP_" +
+        String(
+          payload.upstreamStatus ||
+          ""
+        )
+      );
+    }
+
+
+    const htmlBase64 =
+      String(
+        payload.htmlBase64 ||
+        ""
+      );
+
+
+    if (
+      !htmlBase64
+    ) {
+
+      throw new Error(
+        "BRIDGE_HTML_EMPTY"
+      );
+    }
+
+
+    const html =
+      Buffer
+        .from(
+          htmlBase64,
+          "base64"
+        )
+        .toString(
+          "utf8"
+        );
+
+
+    const bytes =
+      Buffer.byteLength(
+        html,
+        "utf8"
+      );
+
+
+    if (
+      bytes <
+      MIN_HTML_BYTES
+    ) {
+
+      throw new Error(
+        "BRIDGE_HTML_TOO_SMALL"
+      );
+    }
+
+
+    return {
+
+      html:
+        html,
+
+      transport:
+        "apps-script-bridge",
+
+      status:
+        Number(
+          payload.upstreamStatus
+        ) ||
+        0,
+
+      finalUrl:
+        payload.upstreamUrl ||
+        LIST_URL,
+
+      bridgeMeta: {
+
+        chars:
+          Number(
+            payload.chars
+          ) ||
+          0,
+
+        bytes:
+          Number(
+            payload.bytes
+          ) ||
+          0,
+
+        truncated:
+          payload.truncated ===
+          true,
+
+        hasArtKeyword:
+          payload.hasArtKeyword ===
+          true,
+
+        hasCompetitionKeyword:
+          payload.hasCompetitionKeyword ===
+          true,
+
+        hasIncheonKeyword:
+          payload.hasIncheonKeyword ===
+          true
+      }
+    };
+
+
+  } finally {
+
+    clearTimeout(
+      timer
+    );
+  }
+}
+
+
+/* =========================================================
+   LIST FETCH WITH FALLBACK
+========================================================= */
+
+async function fetchListHtml() {
+
+  try {
+
+    const direct =
+      await fetchTextDirect(
+        LIST_URL
+      );
+
+
+    /*
+      HTTP 성공이어도 실제 게시판 HTML이 아니라
+      차단/오류 페이지일 가능성을 검사한다.
+    */
+
+    const hasBoardStructure =
+      /\/culture\/CU070302\/\d+/.test(
+        direct.html
+      );
+
+
+    if (
+      hasBoardStructure
+    ) {
+
+      return direct;
+    }
+
+
+    console.log(
+      "⚠️ 인천 direct 응답에서 게시판 구조 미검출 → Fetch Bridge fallback"
+    );
+
+
+  } catch (
+    directError
+  ) {
+
+    console.log(
+      "⚠️ 인천 MAIN direct fetch 실패 → Fetch Bridge fallback"
+    );
+
+
+    console.log(
+      "   direct error:",
+      directError.message
+    );
+  }
+
+
+  return fetchIncheonMainViaBridge();
+}
 
 
 /* =========================================================
@@ -1221,7 +1578,6 @@ function getItemUrl(
 }
 
 
-
 /* =========================================================
    ARCHIVE CLEANUP
 ========================================================= */
@@ -1242,7 +1598,8 @@ function cleanArchive(
 
 
   if (
-    removed > 0
+    removed >
+    0
   ) {
 
     console.log(
@@ -1254,7 +1611,6 @@ function cleanArchive(
 
   return cleaned;
 }
-
 
 
 /* =========================================================
@@ -1279,6 +1635,7 @@ function mergeWithExisting(
       archive
 
         .filter(
+
           function (
             item
           ) {
@@ -1316,6 +1673,7 @@ function mergeWithExisting(
 
 
   cleanedExisting.forEach(
+
     function (
       item
     ) {
@@ -1359,6 +1717,7 @@ function mergeWithExisting(
 
 
   discovered.forEach(
+
     function (
       item
     ) {
@@ -1449,7 +1808,10 @@ function mergeWithExisting(
             ...item,
 
             sourceUrl:
-              url
+              url,
+
+            collectionVersion:
+              COLLECTION_VERSION
           }
         );
       }
@@ -1464,6 +1826,7 @@ function mergeWithExisting(
     ...withoutUrl
 
   ].sort(
+
     function (
       a,
       b
@@ -1503,18 +1866,20 @@ function mergeWithExisting(
 
 
       return String(
-        a.title || ""
-      )
-        .localeCompare(
-          String(
-            b.title || ""
-          ),
-          "ko"
-        );
+        a.title ||
+        ""
+      ).localeCompare(
+
+        String(
+          b.title ||
+          ""
+        ),
+
+        "ko"
+      );
     }
   );
 }
-
 
 
 /* =========================================================
@@ -1547,35 +1912,24 @@ async function collect() {
     );
 
 
-  if (
-    archive.length !==
-    originalArchive.length
-  ) {
+  /*
+    파일 저장 전 네트워크 검증부터 한다.
 
-    writeArray(
-      ARCHIVE_FILE,
-      archive
-    );
-  }
+    direct 접속이 실패하거나
+    차단 페이지가 반환되면
+    Apps Script Fetch Bridge 사용.
+  */
+
+  const fetched =
+    await fetchListHtml();
 
 
   const html =
-    await fetchText(
-      LIST_URL
-    );
-
-
-  const discovered =
-    extractBoardItems(
-      html
-    );
+    fetched.html;
 
 
   /*
-    최근 공모 후보가 0건인 건 정상일 수 있다.
-
-    대신 게시판 상세 URL 구조 자체를
-    하나도 읽지 못하면 사이트 구조 변경으로 판단.
+    게시판 상세 URL 구조 자체를 읽었는지 검증.
   */
 
   const hasBoardStructure =
@@ -1590,9 +1944,15 @@ async function collect() {
 
     throw new Error(
       "인천 건축물 미술작품 게시물 링크 구조를 읽지 못했습니다. " +
-      "사이트 구조 변경 가능성이 있어 기존 데이터를 유지하고 종료합니다."
+      "direct/Bridge 확인 후에도 구조가 없어 기존 데이터를 유지하고 종료합니다."
     );
   }
+
+
+  const discovered =
+    extractBoardItems(
+      html
+    );
 
 
   const merged =
@@ -1603,10 +1963,26 @@ async function collect() {
     );
 
 
+  /*
+    네트워크 + 구조 검증이 끝난 뒤에만 저장한다.
+  */
+
   writeArray(
     DATA_FILE,
     merged
   );
+
+
+  if (
+    archive.length !==
+    originalArchive.length
+  ) {
+
+    writeArray(
+      ARCHIVE_FILE,
+      archive
+    );
+  }
 
 
   console.log(
@@ -1624,6 +2000,54 @@ async function collect() {
     "소스:",
     SOURCE_NAME
   );
+
+
+  console.log(
+    "MAIN transport:",
+    fetched.transport
+  );
+
+
+  console.log(
+    "HTTP:",
+    fetched.status ||
+    "-"
+  );
+
+
+  if (
+    fetched.bridgeMeta
+  ) {
+
+    console.log(
+      "Bridge bytes:",
+      fetched.bridgeMeta.bytes
+    );
+
+
+    console.log(
+      "Bridge truncated:",
+      fetched.bridgeMeta.truncated
+    );
+
+
+    console.log(
+      "Bridge 미술작품:",
+      fetched.bridgeMeta.hasArtKeyword
+    );
+
+
+    console.log(
+      "Bridge 공모:",
+      fetched.bridgeMeta.hasCompetitionKeyword
+    );
+
+
+    console.log(
+      "Bridge 인천:",
+      fetched.bridgeMeta.hasIncheonKeyword
+    );
+  }
 
 
   console.log(
@@ -1658,13 +2082,13 @@ async function collect() {
 }
 
 
-
 /* =========================================================
    RUN
 ========================================================= */
 
 collect()
   .catch(
+
     function (
       error
     ) {
