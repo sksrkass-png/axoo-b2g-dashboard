@@ -34,14 +34,15 @@ const MAX_REQUESTS_PER_SOURCE =
   3;
 
 const MAX_LABEL_SAMPLES =
-  15;
+  12;
 
 const MAX_CANDIDATE_SAMPLES =
-  15;
+  12;
 
-const MAX_NAV_SAMPLES =
-  10;
 
+/* =========================================================
+   KEYWORDS
+========================================================= */
 
 const PRIMARY_KEYWORDS = [
   "미술작품",
@@ -93,12 +94,8 @@ function sameOrigin(
   try {
 
     return (
-      new URL(
-        first
-      ).origin ===
-      new URL(
-        second
-      ).origin
+      new URL(first).origin ===
+      new URL(second).origin
     );
 
 
@@ -146,6 +143,131 @@ function getRequestSearchTerm(
 
     return "";
   }
+}
+
+
+/* =========================================================
+   COOKIE
+========================================================= */
+
+function getSetCookieValues(
+  headers
+) {
+
+  if (!headers) {
+
+    return [];
+  }
+
+
+  /*
+    Node / undici에서 지원하는 경우
+    Set-Cookie 각각을 안전하게 가져온다.
+  */
+  if (
+    typeof headers.getSetCookie ===
+      "function"
+  ) {
+
+    try {
+
+      return headers
+        .getSetCookie()
+        .filter(
+          Boolean
+        );
+
+
+    } catch (
+      error
+    ) {
+
+      // fallback
+    }
+  }
+
+
+  /*
+    fallback
+  */
+  const raw =
+    headers.get(
+      "set-cookie"
+    );
+
+
+  return raw
+    ? [
+        raw
+      ]
+    : [];
+}
+
+
+function buildCookieHeader(
+  setCookies
+) {
+
+  return setCookies
+
+    .map(
+      function (
+        value
+      ) {
+
+        return String(
+          value || ""
+        )
+          .split(
+            ";"
+          )[0]
+          .trim();
+      }
+    )
+
+    .filter(
+      Boolean
+    )
+
+    .join(
+      "; "
+    );
+}
+
+
+function getCookieNames(
+  cookieHeader
+) {
+
+  if (!cookieHeader) {
+
+    return [];
+  }
+
+
+  return cookieHeader
+
+    .split(
+      ";"
+    )
+
+    .map(
+      function (
+        pair
+      ) {
+
+        return pair
+          .trim()
+          .split(
+            "="
+          )[0]
+          .trim();
+      }
+    )
+
+    .filter(
+      Boolean
+    );
 }
 
 
@@ -248,66 +370,12 @@ function findSource(
 
 
 /* =========================================================
-   SOURCE LIST
+   FETCH CORE
 ========================================================= */
 
-function printSourceList() {
-
-  console.log(
-    ""
-  );
-
-
-  console.log(
-    "===================================="
-  );
-
-
-  console.log(
-    "AXOO ART SOURCE LIST"
-  );
-
-
-  console.log(
-    "===================================="
-  );
-
-
-  loadAllSources()
-    .forEach(
-      function (
-        entry
-      ) {
-
-        const adapter =
-          describeSourceAdapter(
-            entry.source
-          );
-
-
-        console.log(
-          entry.source.id +
-          " | " +
-          entry.region.name +
-          " | " +
-          adapter.adapterId
-        );
-      }
-    );
-
-
-  console.log(
-    "===================================="
-  );
-}
-
-
-/* =========================================================
-   FETCH REQUEST
-========================================================= */
-
-async function fetchRequest(
-  request
+async function fetchWithTimeout(
+  url,
+  options
 ) {
 
   const controller =
@@ -331,58 +399,19 @@ async function fetchRequest(
 
   try {
 
-    const headers = {
-
-      "User-Agent":
-        "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.3)",
-
-      "Accept":
-        "text/html,application/xhtml+xml,*/*",
-
-      "Accept-Language":
-        "ko-KR,ko;q=0.9,en;q=0.6",
-
-      ...(
-        request.headers ||
-        {}
-      )
-    };
-
-
-    const options = {
-
-      method:
-        request.method ||
-        "GET",
-
-      headers:
-        headers,
-
-      signal:
-        controller.signal,
-
-      redirect:
-        "follow"
-    };
-
-
-    if (
-      request.method !==
-        "GET" &&
-      request.method !==
-        "HEAD" &&
-      request.body != null
-    ) {
-
-      options.body =
-        request.body;
-    }
-
-
     const response =
       await fetch(
-        request.url,
-        options
+        url,
+        {
+
+          ...options,
+
+          signal:
+            controller.signal,
+
+          redirect:
+            "follow"
+        }
       );
 
 
@@ -409,6 +438,11 @@ async function fetchRequest(
           "content-type"
         ) || "",
 
+      setCookies:
+        getSetCookieValues(
+          response.headers
+        ),
+
       elapsedMs:
         Date.now() -
         startedAt,
@@ -424,6 +458,249 @@ async function fetchRequest(
       timer
     );
   }
+}
+
+
+/* =========================================================
+   PREFLIGHT SESSION
+========================================================= */
+
+async function createSession(
+  source,
+  requests
+) {
+
+  const firstRequest =
+    requests[0];
+
+
+  const preflightUrl =
+    firstRequest
+      ? firstRequest.url
+      : source.sourceUrl;
+
+
+  console.log(
+    ""
+  );
+
+
+  console.log(
+    "===================================="
+  );
+
+
+  console.log(
+    "SESSION PREFLIGHT"
+  );
+
+
+  console.log(
+    "===================================="
+  );
+
+
+  console.log(
+    "GET:",
+    preflightUrl
+  );
+
+
+  try {
+
+    const response =
+      await fetchWithTimeout(
+        preflightUrl,
+        {
+
+          method:
+            "GET",
+
+          headers: {
+
+            "User-Agent":
+              "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.4)",
+
+            "Accept":
+              "text/html,application/xhtml+xml,*/*",
+
+            "Accept-Language":
+              "ko-KR,ko;q=0.9,en;q=0.6"
+          }
+        }
+      );
+
+
+    const cookieHeader =
+      buildCookieHeader(
+        response.setCookies
+      );
+
+
+    console.log(
+      "HTTP:",
+      response.status
+    );
+
+
+    console.log(
+      "FINAL URL:",
+      response.finalUrl
+    );
+
+
+    console.log(
+      "HTML KB:",
+      Math.round(
+        Buffer.byteLength(
+          response.html || "",
+          "utf8"
+        ) /
+        1024
+      )
+    );
+
+
+    console.log(
+      "SET-COOKIE COUNT:",
+      response.setCookies.length
+    );
+
+
+    console.log(
+      "COOKIE NAMES:",
+      getCookieNames(
+        cookieHeader
+      ).join(
+        ", "
+      ) || "-"
+    );
+
+
+    console.log(
+      "SESSION COOKIE:",
+      cookieHeader
+        ? "YES"
+        : "NO"
+    );
+
+
+    return {
+
+      ok:
+        response.ok,
+
+      cookieHeader:
+        cookieHeader,
+
+      referer:
+        response.finalUrl ||
+        preflightUrl
+    };
+
+
+  } catch (
+    error
+  ) {
+
+    console.log(
+      "PREFLIGHT ERROR:",
+      error.name,
+      "|",
+      error.message
+    );
+
+
+    return {
+
+      ok:
+        false,
+
+      cookieHeader:
+        "",
+
+      referer:
+        preflightUrl
+    };
+  }
+}
+
+
+/* =========================================================
+   REQUEST
+========================================================= */
+
+async function fetchRequest(
+  request,
+  session
+) {
+
+  const headers = {
+
+    "User-Agent":
+      "Mozilla/5.0 (compatible; AXOO-B2G-SourceProbe/1.4)",
+
+    "Accept":
+      "text/html,application/xhtml+xml,*/*",
+
+    "Accept-Language":
+      "ko-KR,ko;q=0.9,en;q=0.6",
+
+    ...(
+      request.headers ||
+      {}
+    )
+  };
+
+
+  if (
+    session &&
+    session.cookieHeader
+  ) {
+
+    headers.Cookie =
+      session.cookieHeader;
+  }
+
+
+  if (
+    session &&
+    session.referer
+  ) {
+
+    headers.Referer =
+      session.referer;
+  }
+
+
+  const options = {
+
+    method:
+      request.method ||
+      "GET",
+
+    headers:
+      headers
+  };
+
+
+  if (
+    request.method !==
+      "GET" &&
+    request.method !==
+      "HEAD" &&
+    request.body != null
+  ) {
+
+    options.body =
+      request.body;
+  }
+
+
+  return fetchWithTimeout(
+    request.url,
+    options
+  );
 }
 
 
@@ -445,22 +722,6 @@ function analyzeResponse(
   const pageUrl =
     response.finalUrl ||
     request.url;
-
-
-  const rawAnchors =
-    (
-      html.match(
-        /<a\b/gi
-      ) || []
-    ).length;
-
-
-  const javascriptAnchors =
-    (
-      html.match(
-        /href\s*=\s*["']\s*javascript:/gi
-      ) || []
-    ).length;
 
 
   const anchors =
@@ -535,41 +796,6 @@ function analyzeResponse(
     );
 
 
-  const navigationAnchors =
-    allowedAnchors
-
-      .filter(
-        function (
-          anchor
-        ) {
-
-          return (
-            followScore(
-              anchor
-            ) >
-            0
-          );
-        }
-      )
-
-      .sort(
-        function (
-          first,
-          second
-        ) {
-
-          return (
-            followScore(
-              second
-            ) -
-            followScore(
-              first
-            )
-          );
-        }
-      );
-
-
   const relatedLabels =
     [];
 
@@ -585,14 +811,9 @@ function analyzeResponse(
         );
 
 
-      if (!label) {
-
-        return;
-      }
-
-
       if (
-        !/미술|예술|작품|공모|건축|설치|art/i.test(
+        !label ||
+        !/미술|작품|공공미술|공모|설치|건축/i.test(
           label
         )
       ) {
@@ -633,7 +854,7 @@ function analyzeResponse(
     );
 
 
-  const normalizedHtmlText =
+  const htmlText =
     cleanText(
       html
     );
@@ -651,13 +872,14 @@ function analyzeResponse(
       ),
 
     rawAnchors:
-      rawAnchors,
+      (
+        html.match(
+          /<a\b/gi
+        ) || []
+      ).length,
 
     parsedAnchors:
       anchors.length,
-
-    javascriptAnchors:
-      javascriptAnchors,
 
     allowedAnchors:
       allowedAnchors.length,
@@ -671,15 +893,12 @@ function analyzeResponse(
     candidateAnchors:
       candidateAnchors,
 
-    navigationAnchors:
-      navigationAnchors,
-
     relatedLabels:
       relatedLabels,
 
     searchTermEchoed:
       searchTerm
-        ? normalizedHtmlText.includes(
+        ? htmlText.includes(
             searchTerm
           )
         : false
@@ -688,7 +907,7 @@ function analyzeResponse(
 
 
 /* =========================================================
-   PRINT REQUEST RESULT
+   PRINT
 ========================================================= */
 
 function printRequestResult(
@@ -737,22 +956,8 @@ function printRequestResult(
 
 
   console.log(
-    "URL:",
-    request.url
-  );
-
-
-  console.log(
-    "SEARCH TERM:",
-    analysis.searchTerm ||
-    "-"
-  );
-
-
-  console.log(
     "HTTP:",
-    response.status,
-    response.statusText
+    response.status
   );
 
 
@@ -770,17 +975,18 @@ function printRequestResult(
 
 
   console.log(
-    "CONTENT TYPE:",
-    response.contentType
-  );
-
-
-  console.log(
     "HTML KB:",
     Math.round(
       analysis.htmlBytes /
       1024
     )
+  );
+
+
+  console.log(
+    "SEARCH TERM:",
+    analysis.searchTerm ||
+    "-"
   );
 
 
@@ -805,18 +1011,6 @@ function printRequestResult(
 
 
   console.log(
-    "JAVASCRIPT HREF:",
-    analysis.javascriptAnchors
-  );
-
-
-  console.log(
-    "ALLOWED ORIGIN:",
-    analysis.allowedAnchors
-  );
-
-
-  console.log(
     "PRIMARY KEYWORD:",
     analysis.primaryAnchors.length
   );
@@ -834,15 +1028,8 @@ function printRequestResult(
   );
 
 
-  console.log(
-    "NAVIGATION:",
-    analysis.navigationAnchors.length
-  );
-
-
   if (
-    analysis.relatedLabels.length >
-    0
+    analysis.relatedLabels.length
   ) {
 
     console.log(
@@ -871,8 +1058,7 @@ function printRequestResult(
 
 
   if (
-    analysis.candidateAnchors.length >
-    0
+    analysis.candidateAnchors.length
   ) {
 
     console.log(
@@ -886,12 +1072,10 @@ function printRequestResult(
 
 
     analysis.candidateAnchors
-
       .slice(
         0,
         MAX_CANDIDATE_SAMPLES
       )
-
       .forEach(
         function (
           anchor
@@ -910,458 +1094,6 @@ function printRequestResult(
         }
       );
   }
-
-
-  if (
-    analysis.navigationAnchors.length >
-    0
-  ) {
-
-    console.log(
-      ""
-    );
-
-
-    console.log(
-      "TOP NAVIGATION SAMPLE:"
-    );
-
-
-    analysis.navigationAnchors
-
-      .slice(
-        0,
-        MAX_NAV_SAMPLES
-      )
-
-      .forEach(
-        function (
-          anchor
-        ) {
-
-          console.log(
-            "   [" +
-            followScore(
-              anchor
-            ) +
-            "]",
-            anchor.label ||
-            "(NO LABEL)"
-          );
-
-
-          console.log(
-            "     ",
-            anchor.url
-          );
-        }
-      );
-  }
-}
-
-
-/* =========================================================
-   COMBINED RESULT
-========================================================= */
-
-function combineAnalyses(
-  analyses
-) {
-
-  const candidateMap =
-    new Map();
-
-
-  const labelSet =
-    new Set();
-
-
-  let htmlBytes =
-    0;
-
-  let rawAnchors =
-    0;
-
-  let parsedAnchors =
-    0;
-
-  let primaryAnchors =
-    0;
-
-  let actionAnchors =
-    0;
-
-  let navigationAnchors =
-    0;
-
-  let searchTermEchoCount =
-    0;
-
-
-  analyses.forEach(
-    function (
-      analysis
-    ) {
-
-      htmlBytes +=
-        analysis.htmlBytes;
-
-
-      rawAnchors +=
-        analysis.rawAnchors;
-
-
-      parsedAnchors +=
-        analysis.parsedAnchors;
-
-
-      primaryAnchors +=
-        analysis.primaryAnchors.length;
-
-
-      actionAnchors +=
-        analysis.actionAnchors.length;
-
-
-      navigationAnchors +=
-        analysis.navigationAnchors.length;
-
-
-      if (
-        analysis.searchTermEchoed
-      ) {
-
-        searchTermEchoCount++;
-      }
-
-
-      analysis.candidateAnchors
-        .forEach(
-          function (
-            anchor
-          ) {
-
-            if (
-              !candidateMap.has(
-                anchor.url
-              )
-            ) {
-
-              candidateMap.set(
-                anchor.url,
-                anchor
-              );
-            }
-          }
-        );
-
-
-      analysis.relatedLabels
-        .forEach(
-          function (
-            label
-          ) {
-
-            labelSet.add(
-              label
-            );
-          }
-        );
-    }
-  );
-
-
-  return {
-
-    htmlBytes:
-      htmlBytes,
-
-    rawAnchors:
-      rawAnchors,
-
-    parsedAnchors:
-      parsedAnchors,
-
-    primaryAnchors:
-      primaryAnchors,
-
-    actionAnchors:
-      actionAnchors,
-
-    navigationAnchors:
-      navigationAnchors,
-
-    searchTermEchoCount:
-      searchTermEchoCount,
-
-    candidateAnchors:
-      Array.from(
-        candidateMap.values()
-      ),
-
-    relatedLabels:
-      Array.from(
-        labelSet
-      )
-  };
-}
-
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-function printSummary(
-  requestCount,
-  successCount,
-  failedCount,
-  combined
-) {
-
-  console.log(
-    ""
-  );
-
-
-  console.log(
-    "===================================="
-  );
-
-
-  console.log(
-    "PROBE SUMMARY"
-  );
-
-
-  console.log(
-    "===================================="
-  );
-
-
-  console.log(
-    "REQUESTS:",
-    requestCount
-  );
-
-
-  console.log(
-    "SUCCESSFUL REQUESTS:",
-    successCount
-  );
-
-
-  console.log(
-    "FAILED REQUESTS:",
-    failedCount
-  );
-
-
-  console.log(
-    "SEARCH TERM ECHO:",
-    combined.searchTermEchoCount +
-    "/" +
-    successCount
-  );
-
-
-  console.log(
-    "HTML KB:",
-    Math.round(
-      combined.htmlBytes /
-      1024
-    )
-  );
-
-
-  console.log(
-    "RAW <a>:",
-    combined.rawAnchors
-  );
-
-
-  console.log(
-    "PARSED <a>:",
-    combined.parsedAnchors
-  );
-
-
-  console.log(
-    "PRIMARY KEYWORD:",
-    combined.primaryAnchors
-  );
-
-
-  console.log(
-    "ACTION KEYWORD:",
-    combined.actionAnchors
-  );
-
-
-  console.log(
-    "UNIQUE CANDIDATE:",
-    combined.candidateAnchors.length
-  );
-
-
-  console.log(
-    "NAVIGATION:",
-    combined.navigationAnchors
-  );
-
-
-  if (
-    combined.candidateAnchors.length >
-    0
-  ) {
-
-    console.log(
-      ""
-    );
-
-
-    console.log(
-      "===================================="
-    );
-
-
-    console.log(
-      "🎯 UNIQUE CANDIDATES"
-    );
-
-
-    console.log(
-      "===================================="
-    );
-
-
-    combined.candidateAnchors
-      .slice(
-        0,
-        MAX_CANDIDATE_SAMPLES
-      )
-      .forEach(
-        function (
-          anchor
-        ) {
-
-          console.log(
-            "-",
-            anchor.label
-          );
-
-
-          console.log(
-            " ",
-            anchor.url
-          );
-        }
-      );
-  }
-
-
-  console.log(
-    ""
-  );
-
-
-  console.log(
-    "===================================="
-  );
-
-
-  console.log(
-    "PROBE INTERPRETATION"
-  );
-
-
-  console.log(
-    "===================================="
-  );
-
-
-  if (
-    successCount ===
-    0
-  ) {
-
-    console.log(
-      "❌ 모든 Request가 실패했습니다."
-    );
-
-
-    console.log(
-      "→ 네트워크 또는 POST 요청 구성을 다시 확인해야 합니다."
-    );
-
-
-  } else if (
-    combined.primaryAnchors >
-      0 &&
-    combined.candidateAnchors.length >
-      0
-  ) {
-
-    console.log(
-      "✅ POST 검색을 통해 실제 건축물 미술작품 공모 후보를 탐지했습니다."
-    );
-
-
-    console.log(
-      "→ 아트누리 Adapter 검색 단계 성공."
-    );
-
-
-    console.log(
-      "→ 다음 단계는 상세페이지/지역/마감일 추출입니다."
-    );
-
-
-  } else if (
-    combined.primaryAnchors >
-      0
-  ) {
-
-    console.log(
-      "🟡 POST 검색 자체는 동작하고 미술작품 관련 결과가 나옵니다."
-    );
-
-
-    console.log(
-      "→ Candidate Filter 또는 결과 링크 구조를 다음으로 확인해야 합니다."
-    );
-
-
-  } else if (
-    combined.searchTermEchoCount >
-      0
-  ) {
-
-    console.log(
-      "🟡 검색어는 서버 응답에 반영됐지만 결과 링크에서 미술작품 제목을 찾지 못했습니다."
-    );
-
-
-    console.log(
-      "→ 결과가 별도 AJAX/DOM 구조인지 확인해야 합니다."
-    );
-
-
-  } else {
-
-    console.log(
-      "⚠️ POST 요청은 200 응답이지만 검색 결과 반영 여부를 확인하지 못했습니다."
-    );
-
-
-    console.log(
-      "→ 실제 Browser submit과 Request 차이를 추가 진단해야 합니다."
-    );
-  }
-
-
-  console.log(
-    "===================================="
-  );
 }
 
 
@@ -1375,10 +1107,6 @@ async function probeSource(
 
   const source =
     target.source;
-
-
-  const region =
-    target.region;
 
 
   const adapterInfo =
@@ -1408,24 +1136,12 @@ async function probeSource(
 
 
   console.log(
-    "AXOO ART SOURCE REQUEST PROBE"
+    "AXOO ART SOURCE SESSION PROBE"
   );
 
 
   console.log(
     "===================================="
-  );
-
-
-  console.log(
-    "SOURCE ID:",
-    source.id
-  );
-
-
-  console.log(
-    "REGION:",
-    region.name
   );
 
 
@@ -1436,71 +1152,50 @@ async function probeSource(
 
 
   console.log(
-    "SOURCE URL:",
-    source.sourceUrl
-  );
-
-
-  console.log(
-    "ADAPTER APPLIED:",
-    adapterInfo.applied
-      ? "YES"
-      : "NO"
-  );
-
-
-  console.log(
-    "ADAPTER ID:",
+    "ADAPTER:",
     adapterInfo.adapterId
   );
 
 
   console.log(
-    "ADAPTER MODE:",
-    adapterInfo.mode
-  );
-
-
-  console.log(
-    "REQUEST COUNT:",
+    "REQUESTS:",
     requests.length
   );
 
 
-  console.log(
-    "TIMEOUT / REQUEST:",
-    FETCH_TIMEOUT_MS +
-    "ms"
-  );
-
-
   if (
-    requests.length ===
-    0
+    !requests.length
   ) {
 
-    console.error(
-      "❌ 실행 가능한 Request가 없습니다."
+    throw new Error(
+      "실행 가능한 Request가 없습니다."
     );
-
-
-    process.exitCode =
-      1;
-
-
-    return;
   }
 
 
-  const analyses =
-    [];
+  /*
+    브라우저처럼 먼저 GET하여 세션 확보
+  */
+  const session =
+    await createSession(
+      source,
+      requests
+    );
 
 
-  let successCount =
+  let successfulRequests =
     0;
 
 
-  let failedCount =
+  let rejectedRequests =
+    0;
+
+
+  let totalPrimary =
+    0;
+
+
+  let totalCandidate =
     0;
 
 
@@ -1520,21 +1215,9 @@ async function probeSource(
 
       const response =
         await fetchRequest(
-          request
+          request,
+          session
         );
-
-
-      if (
-        response.ok
-      ) {
-
-        successCount++;
-
-
-      } else {
-
-        failedCount++;
-      }
 
 
       const analysis =
@@ -1545,11 +1228,6 @@ async function probeSource(
         );
 
 
-      analyses.push(
-        analysis
-      );
-
-
       printRequestResult(
         index,
         request,
@@ -1558,20 +1236,35 @@ async function probeSource(
       );
 
 
+      if (
+        response.ok
+      ) {
+
+        successfulRequests++;
+
+      } else {
+
+        rejectedRequests++;
+      }
+
+
+      totalPrimary +=
+        analysis.primaryAnchors.length;
+
+
+      totalCandidate +=
+        analysis.candidateAnchors.length;
+
+
     } catch (
       error
     ) {
 
-      failedCount++;
+      rejectedRequests++;
 
 
       console.log(
         ""
-      );
-
-
-      console.log(
-        "------------------------------------"
       );
 
 
@@ -1581,119 +1274,16 @@ async function probeSource(
           index +
           1
         ) +
-        " FAILED"
+        " ERROR:"
       );
 
 
       console.log(
-        "------------------------------------"
-      );
-
-
-      console.log(
-        "REQUEST:",
-        describeRequest(
-          request
-        )
-      );
-
-
-      console.log(
-        "ERROR:",
         error.name,
         "|",
         error.message
       );
     }
-  }
-
-
-  const combined =
-    combineAnalyses(
-      analyses
-    );
-
-
-  printSummary(
-    requests.length,
-    successCount,
-    failedCount,
-    combined
-  );
-
-
-  if (
-    successCount ===
-    0
-  ) {
-
-    process.exitCode =
-      1;
-  }
-}
-
-
-/* =========================================================
-   RUN
-========================================================= */
-
-async function main() {
-
-  const argument =
-    String(
-      process.argv[2] ||
-      ""
-    )
-      .trim();
-
-
-  if (
-    !argument ||
-    argument ===
-      "--list"
-  ) {
-
-    printSourceList();
-
-
-    console.log(
-      ""
-    );
-
-
-    console.log(
-      "사용법:"
-    );
-
-
-    console.log(
-      "node scripts/probe_art_source.js <SOURCE_ID>"
-    );
-
-
-    return;
-  }
-
-
-  const target =
-    findSource(
-      argument
-    );
-
-
-  if (!target) {
-
-    console.error(
-      "❌ SOURCE ID를 찾을 수 없습니다:",
-      argument
-    );
-
-
-    process.exitCode =
-      1;
-
-
-    return;
   }
 
 
@@ -1703,13 +1293,147 @@ async function main() {
 
 
   console.log(
-    "🔎 SOURCE REQUEST PROBE START"
+    "===================================="
+  );
+
+
+  console.log(
+    "PROBE SUMMARY"
+  );
+
+
+  console.log(
+    "===================================="
+  );
+
+
+  console.log(
+    "SESSION PREFLIGHT:",
+    session.ok
+      ? "OK"
+      : "FAILED"
+  );
+
+
+  console.log(
+    "SESSION COOKIE:",
+    session.cookieHeader
+      ? "YES"
+      : "NO"
+  );
+
+
+  console.log(
+    "SUCCESSFUL REQUESTS:",
+    successfulRequests
+  );
+
+
+  console.log(
+    "REJECTED REQUESTS:",
+    rejectedRequests
+  );
+
+
+  console.log(
+    "PRIMARY KEYWORD:",
+    totalPrimary
+  );
+
+
+  console.log(
+    "CANDIDATE:",
+    totalCandidate
+  );
+
+
+  console.log(
+    "===================================="
+  );
+
+
+  if (
+    successfulRequests >
+      0
+  ) {
+
+    console.log(
+      "✅ 세션 기반 POST 요청이 서버에서 정상 처리되었습니다."
+    );
+
+
+  } else {
+
+    console.log(
+      "::warning title=ArtNuri POST probe rejected::" +
+      "세션 확보 후에도 POST 요청이 거절되었습니다."
+    );
+
+
+    console.log(
+      "⚠️ 다음 단계에서는 fn_egov_link_page()의 실제 action/method 변경 코드를 추출해야 합니다."
+    );
+  }
+
+
+  /*
+    중요:
+    Probe는 외부 사이트 상태를 진단하는 도구다.
+    HTTP 404/403 때문에 GitHub Action 자체를 실패시키지 않는다.
+  */
+}
+
+
+/* =========================================================
+   RUN
+========================================================= */
+
+async function main() {
+
+  const sourceId =
+    String(
+      process.argv[2] ||
+      ""
+    )
+      .trim();
+
+
+  if (!sourceId) {
+
+    throw new Error(
+      "SOURCE_ID가 필요합니다."
+    );
+  }
+
+
+  const target =
+    findSource(
+      sourceId
+    );
+
+
+  if (!target) {
+
+    throw new Error(
+      "SOURCE ID를 찾을 수 없습니다: " +
+      sourceId
+    );
+  }
+
+
+  console.log(
+    ""
+  );
+
+
+  console.log(
+    "🔎 SOURCE SESSION PROBE START"
   );
 
 
   console.log(
     "SOURCE ID:",
-    target.source.id
+    sourceId
   );
 
 
@@ -1729,8 +1453,13 @@ main()
       error
     ) {
 
+      /*
+        코드 오류/구성 오류는 실제 실패 처리.
+        외부 사이트 HTTP 거절은 probeSource 안에서 warning 처리.
+      */
+
       console.error(
-        "[AXOO ART SOURCE REQUEST PROBE]",
+        "[AXOO ART SOURCE SESSION PROBE]",
         error
       );
 
