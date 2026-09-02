@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: collect-g2b-opportunities
+  group: axoo-dashboard-data-write
   cancel-in-progress: false
 
 jobs:
