@@ -12,6 +12,10 @@ const {
   describeSourceAdapter
 } = require("./art_source_adapters");
 
+const {
+  inferTargetArtRegionFromValues
+} = require("./art_region_scope");
+
 
 /* =========================================================
    CONFIG
@@ -37,7 +41,7 @@ const SPECIALIZED_REGION_IDS = new Set([
 ]);
 
 const COLLECTION_VERSION =
-  "nationwide-generic-1.2.0";
+  "nationwide-generic-1.3.0";
 
 const FETCH_TIMEOUT_MS =
   12000;
@@ -521,7 +525,8 @@ function isCandidateTitle(
 
   if (
     !title ||
-    title.length < 4
+    title.length <
+      4
   ) {
 
     return false;
@@ -750,7 +755,8 @@ async function fetchText(
 
   for (
     let attempt = 1;
-    attempt <= FETCH_MAX_ATTEMPTS;
+    attempt <=
+      FETCH_MAX_ATTEMPTS;
     attempt++
   ) {
 
@@ -785,7 +791,7 @@ async function fetchText(
             headers: {
 
               "User-Agent":
-                "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.2)",
+                "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.3)",
 
               "Accept":
                 "text/html,application/xhtml+xml,*/*",
@@ -870,23 +876,399 @@ async function fetchText(
 
 
 /* =========================================================
+   REGION INFERENCE
+========================================================= */
+
+function isNationalRegion(
+  region
+) {
+
+  return Boolean(
+    region &&
+    region.name ===
+      "전국"
+  );
+}
+
+
+/*
+  전국 포털의 HTML 전체에는
+  지역 필터 등 17개 시·도명이 동시에 포함될 수 있다.
+
+  따라서 상세페이지 전체 텍스트를
+  지역 판별기에 직접 넣지 않는다.
+
+  제목 주변과 지역 관련 메타데이터 주변만
+  제한적으로 Evidence로 사용한다.
+*/
+function extractRegionEvidenceSnippets(
+  html,
+  title
+) {
+
+  const text =
+    cleanText(
+      html
+    );
+
+
+  if (!text) {
+
+    return [];
+  }
+
+
+  const snippets =
+    [];
+
+
+  function pushSnippet(
+    value
+  ) {
+
+    const normalized =
+      String(
+        value || ""
+      )
+        .replace(
+          /\s+/g,
+          " "
+        )
+        .trim();
+
+
+    if (
+      !normalized ||
+      snippets.includes(
+        normalized
+      )
+    ) {
+
+      return;
+    }
+
+
+    snippets.push(
+      normalized
+    );
+  }
+
+
+  /*
+    1. 공고 제목 주변
+  */
+  const normalizedTitle =
+    cleanText(
+      title
+    );
+
+
+  if (
+    normalizedTitle
+  ) {
+
+    const titleIndex =
+      text.indexOf(
+        normalizedTitle
+      );
+
+
+    if (
+      titleIndex >=
+      0
+    ) {
+
+      pushSnippet(
+        text.slice(
+          Math.max(
+            0,
+            titleIndex -
+              400
+          ),
+
+          Math.min(
+            text.length,
+            titleIndex +
+              normalizedTitle.length +
+              2200
+          )
+        )
+      );
+    }
+  }
+
+
+  /*
+    2. 지역을 판단하기 좋은 메타데이터 주변
+
+    단순 "지역"은 전국 포털 필터에 너무 많이 등장하므로
+    사용하지 않는다.
+  */
+  const markers = [
+    "사업지역",
+    "사업 지역",
+    "소재지",
+    "설치장소",
+    "설치 장소",
+    "주소",
+    "공고기관",
+    "공고 기관",
+    "주관기관",
+    "주관 기관",
+    "주최기관",
+    "주최 기관",
+    "시행기관",
+    "시행 기관"
+  ];
+
+
+  markers.forEach(
+    function (
+      marker
+    ) {
+
+      let cursor =
+        0;
+
+      let count =
+        0;
+
+
+      while (
+        cursor <
+          text.length &&
+        count <
+          2
+      ) {
+
+        const index =
+          text.indexOf(
+            marker,
+            cursor
+          );
+
+
+        if (
+          index <
+          0
+        ) {
+
+          break;
+        }
+
+
+        pushSnippet(
+          text.slice(
+            Math.max(
+              0,
+              index -
+                100
+            ),
+
+            Math.min(
+              text.length,
+              index +
+                marker.length +
+                500
+            )
+          )
+        );
+
+
+        cursor =
+          index +
+          marker.length;
+
+        count++;
+      }
+    }
+  );
+
+
+  return snippets;
+}
+
+
+function resolveCandidateRegion(
+  sourceRegion,
+  title,
+  detailEvidence
+) {
+
+  const originalRegion =
+    sourceRegion || {
+      id:
+        "national",
+
+      name:
+        "전국",
+
+      fullName:
+        "전국 공통 백업"
+    };
+
+
+  /*
+    지역 공식 Source에서 수집된 경우
+    Source Registry의 지역을 그대로 신뢰한다.
+  */
+  if (
+    !isNationalRegion(
+      originalRegion
+    )
+  ) {
+
+    return {
+
+      region:
+        originalRegion,
+
+      inferred:
+        false,
+
+      method:
+        "source_registry"
+    };
+  }
+
+
+  /*
+    전국 Source:
+    제목에서 먼저 판별.
+  */
+  const titleRegion =
+    inferTargetArtRegionFromValues(
+      [
+        title
+      ]
+    );
+
+
+  if (
+    titleRegion
+  ) {
+
+    return {
+
+      region:
+        titleRegion,
+
+      inferred:
+        true,
+
+      method:
+        "title"
+    };
+  }
+
+
+  /*
+    제목으로 판단할 수 없을 경우
+    상세페이지에서 뽑은 제한된 Evidence만 사용.
+  */
+  const evidenceValues =
+    Array.isArray(
+      detailEvidence
+    )
+      ? detailEvidence
+      : (
+          detailEvidence
+            ? [
+                detailEvidence
+              ]
+            : []
+        );
+
+
+  const detailRegion =
+    inferTargetArtRegionFromValues(
+      evidenceValues
+    );
+
+
+  if (
+    detailRegion
+  ) {
+
+    return {
+
+      region:
+        detailRegion,
+
+      inferred:
+        true,
+
+      method:
+        "detail"
+    };
+  }
+
+
+  /*
+    확신할 수 없으면 강제 추론하지 않는다.
+  */
+  return {
+
+    region:
+      originalRegion,
+
+    inferred:
+      false,
+
+    method:
+      "unresolved"
+  };
+}
+
+
+/* =========================================================
    ITEM
 ========================================================= */
 
 function buildItem(
-  region,
+  sourceRegion,
   source,
   title,
-  sourceUrl
+  sourceUrl,
+  options
 ) {
+
+  const config =
+    options ||
+    {};
+
 
   const today =
     todayKst();
 
 
-  const isNational =
-    region.name ===
-    "전국";
+  const nationalSource =
+    isNationalRegion(
+      sourceRegion
+    );
+
+
+  const resolution =
+    config.regionResolution ||
+    resolveCandidateRegion(
+      sourceRegion,
+      title,
+      []
+    );
+
+
+  const resolvedRegion =
+    resolution.region ||
+    sourceRegion;
+
+
+  const resolved =
+    Boolean(
+      resolvedRegion &&
+      resolvedRegion.name &&
+      resolvedRegion.name !==
+        "전국"
+    );
 
 
   return {
@@ -925,14 +1307,73 @@ function buildItem(
         title
       ),
 
+
+    /*
+      실제 판별 지역
+    */
     region:
-      region.name,
+      (
+        resolvedRegion &&
+        resolvedRegion.name
+      ) ||
+      "전국",
+
+    regionId:
+      (
+        resolvedRegion &&
+        resolvedRegion.id
+      ) ||
+      "",
+
+    regionFullName:
+      (
+        resolvedRegion &&
+        resolvedRegion.fullName
+      ) ||
+      "",
+
+
+    /*
+      어떤 Source 범위에서 왔는지도 별도 보존.
+
+      예:
+      sourceRegion = 전국
+      region       = 대전
+    */
+    sourceRegion:
+      (
+        sourceRegion &&
+        sourceRegion.name
+      ) ||
+      "",
+
+    sourceRegionId:
+      (
+        sourceRegion &&
+        sourceRegion.id
+      ) ||
+      "",
+
+    regionInferred:
+      resolution.inferred ===
+      true,
+
+    regionInferenceSource:
+      resolution.method,
+
+    regionInferenceStatus:
+      resolved
+        ? "resolved"
+        : "unresolved",
+
 
     regionGroup:
-      source.regionGroup || "",
+      source.regionGroup ||
+      "",
 
     regionGroupLabel:
-      source.regionGroupLabel || "",
+      source.regionGroupLabel ||
+      "",
 
     sourceUrl:
       sourceUrl,
@@ -993,8 +1434,12 @@ function buildItem(
       "전국 자동수집",
 
     fitReason:
-      isNational
-        ? "전국 공통 소스에서 건축물 미술작품 공모 키워드가 확인된 후보입니다."
+      nationalSource
+        ? (
+            resolved
+              ? "전국 공통 소스에서 발견된 후보이며 공고 제목 또는 상세정보를 기준으로 실제 지역을 자동 판별했습니다."
+              : "전국 공통 소스에서 건축물 미술작품 공모 키워드가 확인된 후보이며 실제 지역은 추가 확인이 필요합니다."
+          )
         : "광역시·도 공식 소스에서 건축물 미술작품 공모 키워드가 확인된 후보입니다.",
 
     summary:
@@ -1032,6 +1477,96 @@ function buildItem(
 
     collectionVersion:
       COLLECTION_VERSION
+  };
+}
+
+
+/* =========================================================
+   DETAIL REGION ENRICHMENT
+========================================================= */
+
+function enrichNationalItemRegionFromDetail(
+  item,
+  sourceRegion,
+  html
+) {
+
+  if (
+    !item ||
+    !isNationalRegion(
+      sourceRegion
+    )
+  ) {
+
+    return item;
+  }
+
+
+  /*
+    제목에서 이미 명확히 판별했다면
+    상세페이지의 공통 Navigation 텍스트 때문에
+    다른 지역으로 덮어쓰지 않는다.
+  */
+  if (
+    item.regionInferenceStatus ===
+      "resolved" &&
+    item.regionInferenceSource ===
+      "title"
+  ) {
+
+    return item;
+  }
+
+
+  const evidence =
+    extractRegionEvidenceSnippets(
+      html,
+      item.title
+    );
+
+
+  const resolution =
+    resolveCandidateRegion(
+      sourceRegion,
+      item.title,
+      evidence
+    );
+
+
+  if (
+    !resolution.region ||
+    resolution.region.name ===
+      "전국"
+  ) {
+
+    return item;
+  }
+
+
+  return {
+
+    ...item,
+
+    region:
+      resolution.region.name,
+
+    regionId:
+      resolution.region.id,
+
+    regionFullName:
+      resolution.region.fullName,
+
+    regionInferred:
+      true,
+
+    regionInferenceSource:
+      resolution.method,
+
+    regionInferenceStatus:
+      "resolved",
+
+    fitReason:
+      "전국 공통 소스에서 발견된 후보이며 공고 제목 또는 상세정보를 기준으로 실제 지역을 자동 판별했습니다."
   };
 }
 
@@ -1315,6 +1850,85 @@ async function crawlSource(
       ).length;
 
 
+    /*
+      전국 Source에서 이미 후보 상세페이지로 진입했다면
+      해당 페이지의 제한된 Evidence를 이용해
+      실제 지역을 보완한다.
+    */
+    if (
+      isNationalRegion(
+        region
+      )
+    ) {
+
+      let candidateKey =
+        null;
+
+
+      if (
+        found.has(
+          current.url
+        )
+      ) {
+
+        candidateKey =
+          current.url;
+
+
+      } else if (
+        found.has(
+          finalUrl
+        )
+      ) {
+
+        candidateKey =
+          finalUrl;
+      }
+
+
+      if (
+        candidateKey
+      ) {
+
+        const previousItem =
+          found.get(
+            candidateKey
+          );
+
+
+        const enrichedItem =
+          enrichNationalItemRegionFromDetail(
+            previousItem,
+            region,
+            html
+          );
+
+
+        found.set(
+          candidateKey,
+          enrichedItem
+        );
+
+
+        if (
+          previousItem.region ===
+            "전국" &&
+          enrichedItem.region !==
+            "전국"
+        ) {
+
+          console.log(
+            "   📍 REGION RESOLVED" +
+            " | " +
+            enrichedItem.region +
+            " | " +
+            enrichedItem.title
+          );
+        }
+      }
+    }
+
+
     const anchors =
       extractAnchors(
         html,
@@ -1334,11 +1948,6 @@ async function crawlSource(
         anchor
       ) {
 
-        /*
-          Source가 redirect된 경우를 고려해
-          원래 Source Origin 또는 현재 페이지 Origin
-          둘 중 하나와 일치하면 허용한다.
-        */
         const originAllowed =
           sameOrigin(
             source.sourceUrl,
@@ -1416,16 +2025,76 @@ async function crawlSource(
         diagnostics.candidateAnchors++;
 
 
-        found.set(
-          anchor.url,
+        /*
+          동일 URL이 이미 Detail 단계에서 보완되었다면
+          List Page 재탐색으로 덮어쓰지 않는다.
+        */
+        if (
+          found.has(
+            anchor.url
+          )
+        ) {
 
+          return;
+        }
+
+
+        const regionResolution =
+          resolveCandidateRegion(
+            region,
+            label,
+            []
+          );
+
+
+        const item =
           buildItem(
             region,
             source,
             label,
-            anchor.url
-          )
+            anchor.url,
+            {
+              regionResolution:
+                regionResolution
+            }
+          );
+
+
+        found.set(
+          anchor.url,
+          item
         );
+
+
+        if (
+          isNationalRegion(
+            region
+          )
+        ) {
+
+          if (
+            item.region !==
+            "전국"
+          ) {
+
+            console.log(
+              "   📍 REGION FROM TITLE" +
+              " | " +
+              item.region +
+              " | " +
+              item.title
+            );
+
+
+          } else {
+
+            console.log(
+              "   📍 REGION PENDING" +
+              " | " +
+              item.title
+            );
+          }
+        }
       }
     );
 
@@ -1489,7 +2158,8 @@ async function crawlSource(
             return (
               followScore(
                 anchor
-              ) > 0
+              ) >
+              0
             );
           }
         )
@@ -1516,10 +2186,6 @@ async function crawlSource(
       followCandidates.length;
 
 
-    /*
-      전체 Source의 최대 페이지 수는 그대로 유지한다.
-      Adapter가 Seed를 여러 개 생성해도 무한 탐색하지 않는다.
-    */
     followCandidates
       .slice(
         0,
@@ -1552,9 +2218,41 @@ async function crawlSource(
   }
 
 
-  /*
-    items=0 원인 진단
-  */
+  const finalItems =
+    Array.from(
+      found.values()
+    );
+
+
+  const resolvedRegions =
+    finalItems.filter(
+      function (
+        item
+      ) {
+
+        return (
+          item.region &&
+          item.region !==
+            "전국"
+        );
+      }
+    ).length;
+
+
+  const unresolvedRegions =
+    finalItems.filter(
+      function (
+        item
+      ) {
+
+        return (
+          item.region ===
+          "전국"
+        );
+      }
+    ).length;
+
+
   if (
     pagesFetched >
     0
@@ -1586,7 +2284,11 @@ async function crawlSource(
       " | nav=" +
       diagnostics.navigationCandidates +
       " | redirects=" +
-      diagnostics.redirectedPages
+      diagnostics.redirectedPages +
+      " | regionResolved=" +
+      resolvedRegions +
+      " | regionPending=" +
+      unresolvedRegions
     );
 
 
@@ -1636,9 +2338,7 @@ async function crawlSource(
       pagesFetched,
 
     items:
-      Array.from(
-        found.values()
-      )
+      finalItems
   };
 }
 
@@ -1668,6 +2368,121 @@ function itemUrl(
 }
 
 
+/*
+  신규 수집이 "전국 미확정"인데
+  기존 데이터에 이미 실제 지역이 확정돼 있다면
+  기존 확정값을 지우지 않는다.
+*/
+function chooseRegionMetadata(
+  item,
+  previous
+) {
+
+  const itemResolved =
+    Boolean(
+      item &&
+      item.region &&
+      item.region !==
+        "전국"
+    );
+
+
+  const previousResolved =
+    Boolean(
+      previous &&
+      previous.region &&
+      previous.region !==
+        "전국"
+    );
+
+
+  const chosen =
+    itemResolved
+      ? item
+      : (
+          previousResolved
+            ? previous
+            : item
+        );
+
+
+  return {
+
+    region:
+      (
+        chosen &&
+        chosen.region
+      ) ||
+      "전국",
+
+    regionId:
+      (
+        chosen &&
+        chosen.regionId
+      ) ||
+      "",
+
+    regionFullName:
+      (
+        chosen &&
+        chosen.regionFullName
+      ) ||
+      "",
+
+    sourceRegion:
+      (
+        item &&
+        item.sourceRegion
+      ) ||
+      (
+        previous &&
+        previous.sourceRegion
+      ) ||
+      "",
+
+    sourceRegionId:
+      (
+        item &&
+        item.sourceRegionId
+      ) ||
+      (
+        previous &&
+        previous.sourceRegionId
+      ) ||
+      "",
+
+    regionInferred:
+      Boolean(
+        chosen &&
+        chosen.regionInferred
+      ),
+
+    regionInferenceSource:
+      (
+        chosen &&
+        chosen.regionInferenceSource
+      ) ||
+      "",
+
+    regionInferenceStatus:
+      (
+        chosen &&
+        chosen.regionInferenceStatus
+      ) ||
+      (
+        (
+          chosen &&
+          chosen.region &&
+          chosen.region !==
+            "전국"
+        )
+          ? "resolved"
+          : "unresolved"
+      )
+  };
+}
+
+
 function mergeData(
   discovered
 ) {
@@ -1688,10 +2503,6 @@ function mergeData(
     todayKst();
 
 
-  /*
-    이미 마감된 공고 URL은
-    다시 LIVE에 올리지 않는다.
-  */
   const expiredUrls =
     new Set(
 
@@ -1799,7 +2610,16 @@ function mergeData(
         );
 
 
-      if (previous) {
+      if (
+        previous
+      ) {
+
+        const regionMetadata =
+          chooseRegionMetadata(
+            item,
+            previous
+          );
+
 
         liveByUrl.set(
           url,
@@ -1821,8 +2641,7 @@ function mergeData(
             sourceType:
               item.sourceType,
 
-            region:
-              item.region,
+            ...regionMetadata,
 
             collectionSourceId:
               item.collectionSourceId,
@@ -1913,6 +2732,13 @@ function mergeData(
         );
 
 
+      const regionMetadata =
+        chooseRegionMetadata(
+          item,
+          previous
+        );
+
+
       archiveByUrl.set(
         url,
         {
@@ -1938,8 +2764,7 @@ function mergeData(
           sourceType:
             item.sourceType,
 
-          region:
-            item.region,
+          ...regionMetadata,
 
           collectionSourceId:
             item.collectionSourceId,
@@ -2364,6 +3189,49 @@ async function main() {
     );
 
 
+  const nationalItems =
+    items.filter(
+      function (
+        item
+      ) {
+
+        return (
+          item.sourceRegion ===
+          "전국"
+        );
+      }
+    );
+
+
+  const nationalResolved =
+    nationalItems.filter(
+      function (
+        item
+      ) {
+
+        return (
+          item.region &&
+          item.region !==
+          "전국"
+        );
+      }
+    ).length;
+
+
+  const nationalPending =
+    nationalItems.filter(
+      function (
+        item
+      ) {
+
+        return (
+          item.region ===
+          "전국"
+        );
+      }
+    ).length;
+
+
   /* ---------------------------------------------------------
      4. LIVE + ARCHIVE MERGE
   --------------------------------------------------------- */
@@ -2429,6 +3297,18 @@ async function main() {
 
 
   console.log(
+    "전국 후보 실제 지역 판별:",
+    nationalResolved
+  );
+
+
+  console.log(
+    "전국 후보 지역 미확정:",
+    nationalPending
+  );
+
+
+  console.log(
     "LIVE:",
     merged.liveCount
   );
@@ -2454,6 +3334,19 @@ async function main() {
       "::warning title=일부 미술작품 수집 소스 접근 실패::" +
       counters.failed +
       "개 소스 접근에 실패했지만 나머지 수집은 완료했습니다."
+    );
+  }
+
+
+  if (
+    nationalPending >
+    0
+  ) {
+
+    console.log(
+      "::warning title=전국 백업 후보 지역 미확정::" +
+      nationalPending +
+      "개 후보는 지역을 확신할 수 없어 전국 상태로 유지했습니다."
     );
   }
 
@@ -2513,5 +3406,13 @@ module.exports = {
 
   canonicalUrl,
 
-  crawlSource
+  crawlSource,
+
+  resolveCandidateRegion,
+
+  extractRegionEvidenceSnippets,
+
+  enrichNationalItemRegionFromDetail,
+
+  buildItem
 };
