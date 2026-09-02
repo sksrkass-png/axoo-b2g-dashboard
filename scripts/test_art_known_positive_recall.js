@@ -8,19 +8,29 @@ const {
 
 
 /* =========================================================
-   KNOWN POSITIVE FIXTURE
+   KNOWN-POSITIVE FIXTURE
 
-   실제 확인된 과거 대전 건축물 미술작품 공모를
-   네트워크 없이 재현한다.
+   실제 확인된 과거 대전 건축물 미술작품 공모의
+   제목과 URL을 기반으로 한다.
+
+   단, 아래 상세페이지의
+   공고일 / 마감일 / 작품비 / 참가자격 값은
+   Detail Extraction 파이프라인 검증을 위한
+   결정론적 TEST FIXTURE 값이다.
+
+   실제 과거 공고의 세부내용이라고 간주하지 않는다.
 
    목적:
+
    LIST HTML
    → LINK EXTRACTION
    → TITLE FILTER
-   → CRAWL
-   → ITEM BUILD
+   → CANDIDATE DISCOVERY
+   → DETAIL PAGE PRIORITY VISIT
+   → DETAIL EXTRACTION
+   → ITEM ENRICHMENT
 
-   전체 파이프라인 Recall 검증
+   전체 E2E Recall 검증
 ========================================================= */
 
 const KNOWN_TITLE =
@@ -41,16 +51,58 @@ const DETAIL_URL =
 
 
 /* =========================================================
-   FIXTURE HTML
+   DETAIL FIXTURE VALUES
+
+   아래 값은 테스트 전용.
+========================================================= */
+
+const FIXTURE_PUBLISHED_DATE =
+  "2026-02-02";
+
+
+const FIXTURE_DEADLINE =
+  "2026-02-20";
+
+
+const FIXTURE_AGENCY =
+  "대전광역시";
+
+
+const FIXTURE_AMOUNT =
+  "150000000";
+
+
+const FIXTURE_AMOUNT_NUMERIC =
+  150000000;
+
+
+const FIXTURE_LOCATION =
+  "대전광역시 유성구 장대동 501";
+
+
+const FIXTURE_ELIGIBILITY =
+  "공고일 현재 관련 법령에 따른 자격을 갖춘 작가";
+
+
+/* =========================================================
+   LIST FIXTURE HTML
 ========================================================= */
 
 const LIST_HTML = `
 <!doctype html>
+
 <html lang="ko">
+
 <head>
+
   <meta charset="utf-8">
-  <title>대전광역시 공고</title>
+
+  <title>
+    대전광역시 공고
+  </title>
+
 </head>
+
 <body>
 
   <div class="board-list">
@@ -61,11 +113,13 @@ const LIST_HTML = `
       건축물 미술작품 심의위원 모집 결과
     </a>
 
+
     <a
       href="${DETAIL_PATH}"
     >
       ${KNOWN_TITLE}
     </a>
+
 
     <a
       href="/drh/depart/board/boardNormalView.do?boardId=normal_0167&menuSeq=1453&ntatcSeq=8888888888&pageIndex=1"
@@ -76,17 +130,30 @@ const LIST_HTML = `
   </div>
 
 </body>
+
 </html>
 `;
 
 
+/* =========================================================
+   DETAIL FIXTURE HTML
+========================================================= */
+
 const DETAIL_HTML = `
 <!doctype html>
+
 <html lang="ko">
+
 <head>
+
   <meta charset="utf-8">
-  <title>${KNOWN_TITLE}</title>
+
+  <title>
+    ${KNOWN_TITLE}
+  </title>
+
 </head>
+
 <body>
 
   <article>
@@ -95,13 +162,97 @@ const DETAIL_HTML = `
       ${KNOWN_TITLE}
     </h1>
 
+
     <p>
       건축물 미술작품 제작 및 설치 공모 안내
     </p>
 
+
+    <table>
+
+      <tr>
+
+        <th>
+          공고일
+        </th>
+
+        <td>
+          2026. 02. 02.
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <th>
+          공고기관
+        </th>
+
+        <td>
+          ${FIXTURE_AGENCY}
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <th>
+          접수기간
+        </th>
+
+        <td>
+          2026. 02. 10. ~ 2026. 02. 20.
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <th>
+          작품 제작비
+        </th>
+
+        <td>
+          1억 5,000만원
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <th>
+          설치장소
+        </th>
+
+        <td>
+          ${FIXTURE_LOCATION}
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <th>
+          참가자격
+        </th>
+
+        <td>
+          ${FIXTURE_ELIGIBILITY}
+        </td>
+
+      </tr>
+
+    </table>
+
   </article>
 
 </body>
+
 </html>
 `;
 
@@ -165,6 +316,10 @@ let passCount =
 let failCount =
   0;
 
+
+/* =========================================================
+   ASSERT
+========================================================= */
 
 function pass(
   name
@@ -294,7 +449,7 @@ async function mockFetch(
 
 
   /*
-    LIST
+    LIST PAGE
   */
   if (
     url.includes(
@@ -310,7 +465,7 @@ async function mockFetch(
 
 
   /*
-    KNOWN POSITIVE DETAIL
+    KNOWN POSITIVE DETAIL PAGE
   */
   if (
     url.includes(
@@ -327,16 +482,18 @@ async function mockFetch(
 
   /*
     기타 링크가 Queue에 들어와도
-    테스트가 네트워크에 접근하지 않도록
-    빈 정상 페이지를 반환한다.
+    외부 네트워크에 접근하지 않는다.
   */
   return createMockResponse(
     url,
     `
       <!doctype html>
+
       <html lang="ko">
+
       <body>
       </body>
+
       </html>
     `
   );
@@ -434,7 +591,7 @@ function testLinkExtraction() {
 
 /* =========================================================
    TEST 3
-   CRAWL → ITEM
+   CRAWL → DETAIL → ENRICHED ITEM
 ========================================================= */
 
 async function testCrawlRecall() {
@@ -456,6 +613,10 @@ async function testCrawlRecall() {
       );
 
 
+    /* -------------------------------------------------------
+       ACCESS
+    ------------------------------------------------------- */
+
     assertEqual(
       "Source 접근 성공",
       result.accessOk,
@@ -463,10 +624,17 @@ async function testCrawlRecall() {
     );
 
 
+    /*
+      LIST + DETAIL 최소 2페이지가 필요하다.
+
+      이 검증이 통과해야
+      후보 상세페이지 우선 방문 로직이
+      실제로 실행됐다고 볼 수 있다.
+    */
     assertTrue(
-      "최소 1페이지 이상 처리",
+      "List와 Candidate Detail을 모두 방문",
       result.pagesFetched >=
-        1
+        2
     );
 
 
@@ -489,6 +657,10 @@ async function testCrawlRecall() {
     const item =
       result.items[0];
 
+
+    /* -------------------------------------------------------
+       BASIC ITEM
+    ------------------------------------------------------- */
 
     assertEqual(
       "Item 제목",
@@ -567,6 +739,129 @@ async function testCrawlRecall() {
     );
 
 
+    /* -------------------------------------------------------
+       DETAIL EXTRACTION
+    ------------------------------------------------------- */
+
+    assertEqual(
+      "Detail deadline",
+      item.deadline,
+      FIXTURE_DEADLINE
+    );
+
+
+    assertEqual(
+      "Detail endDate",
+      item.endDate,
+      FIXTURE_DEADLINE
+    );
+
+
+    assertEqual(
+      "Detail publishedDate",
+      item.publishedDate,
+      FIXTURE_PUBLISHED_DATE
+    );
+
+
+    assertEqual(
+      "Detail postedDate",
+      item.postedDate,
+      FIXTURE_PUBLISHED_DATE
+    );
+
+
+    assertEqual(
+      "Detail agency",
+      item.agency,
+      FIXTURE_AGENCY
+    );
+
+
+    assertEqual(
+      "Detail organization",
+      item.organization,
+      FIXTURE_AGENCY
+    );
+
+
+    assertEqual(
+      "Detail amount",
+      item.amount,
+      FIXTURE_AMOUNT
+    );
+
+
+    assertEqual(
+      "Detail amountNumeric",
+      item.amountNumeric,
+      FIXTURE_AMOUNT_NUMERIC
+    );
+
+
+    assertEqual(
+      "Detail budget",
+      item.budget,
+      FIXTURE_AMOUNT
+    );
+
+
+    assertEqual(
+      "Detail location",
+      item.location,
+      FIXTURE_LOCATION
+    );
+
+
+    assertEqual(
+      "Detail installationLocation",
+      item.installationLocation,
+      FIXTURE_LOCATION
+    );
+
+
+    assertEqual(
+      "Detail eligibility",
+      item.eligibility,
+      FIXTURE_ELIGIBILITY
+    );
+
+
+    /* -------------------------------------------------------
+       EXTRACTION METADATA
+    ------------------------------------------------------- */
+
+    assertEqual(
+      "Detail Extraction Status",
+      item.detailExtractionStatus,
+      "extracted"
+    );
+
+
+    assertEqual(
+      "Detail Extraction Count",
+      item.detailExtractionCount,
+      6
+    );
+
+
+    assertEqual(
+      "Detail Extraction Version",
+      item.detailExtractionVersion,
+      "art-detail-1.0.0"
+    );
+
+
+    assertTrue(
+      "Detail Extraction Evidence 저장",
+      item.detailExtractionEvidence &&
+      Object.keys(
+        item.detailExtractionEvidence
+      ).length >
+        0
+    );
+
+
   } finally {
 
     global.fetch =
@@ -592,7 +887,7 @@ async function main() {
 
 
   console.log(
-    "AXOO ART KNOWN-POSITIVE RECALL TEST"
+    "AXOO ART KNOWN-POSITIVE E2E TEST"
   );
 
 
@@ -610,6 +905,23 @@ async function main() {
   console.log(
     "DETAIL:",
     DETAIL_URL
+  );
+
+
+  console.log(
+    ""
+  );
+
+
+  console.log(
+    "NETWORK:",
+    "MOCK ONLY"
+  );
+
+
+  console.log(
+    "DETAIL DATA:",
+    "TEST FIXTURE"
   );
 
 
@@ -643,7 +955,7 @@ async function main() {
 
 
   console.log(
-    "KNOWN-POSITIVE RECALL RESULT"
+    "KNOWN-POSITIVE E2E RESULT"
   );
 
 
@@ -681,7 +993,7 @@ async function main() {
   ) {
 
     console.error(
-      "❌ KNOWN-POSITIVE RECALL TEST FAILED"
+      "❌ KNOWN-POSITIVE E2E TEST FAILED"
     );
 
 
@@ -694,7 +1006,7 @@ async function main() {
 
 
   console.log(
-    "✅ KNOWN-POSITIVE RECALL TEST PASSED"
+    "✅ KNOWN-POSITIVE E2E TEST PASSED"
   );
 }
 
@@ -710,7 +1022,7 @@ main()
     ) {
 
       console.error(
-        "[AXOO KNOWN-POSITIVE RECALL TEST]",
+        "[AXOO KNOWN-POSITIVE E2E TEST]",
         error
       );
 
