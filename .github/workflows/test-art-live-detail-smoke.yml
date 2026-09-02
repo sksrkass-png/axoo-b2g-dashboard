@@ -1,0 +1,62 @@
+name: Test Art Live Detail Smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-detail-smoke:
+    runs-on: ubuntu-24.04
+
+    timeout-minutes: 3
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Show environment
+        run: |
+          echo ""
+          echo "===================================="
+          echo "AXOO ART LIVE DETAIL SMOKE"
+          echo "===================================="
+          node --version
+          echo "MODE: READ ONLY"
+          echo "===================================="
+          echo ""
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check scripts/art_detail_extractor.js
+          node --check scripts/test_art_live_detail_smoke.js
+
+      - name: Run live detail smoke test
+        run: |
+          echo ""
+          echo "===================================="
+          echo "LIVE DETAIL SMOKE TEST"
+          echo "===================================="
+          echo ""
+
+          node scripts/test_art_live_detail_smoke.js
+
+      - name: Smoke test summary
+        run: |
+          echo ""
+          echo "===================================="
+          echo "AXOO ART LIVE DETAIL SMOKE"
+          echo "===================================="
+          echo "NETWORK ACCESS    : PASS"
+          echo "HTML FETCH        : PASS"
+          echo "DETAIL EXTRACTION : PASS"
+          echo "DATA WRITE        : NONE"
+          echo "===================================="
+          echo ""
+          echo "✅ ART LIVE DETAIL SMOKE TEST PASSED"
