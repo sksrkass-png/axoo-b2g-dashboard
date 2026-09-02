@@ -12,6 +12,12 @@ const G2B_FILE = path.join(
   "b2g_opportunities.json"
 );
 
+const SUPPORT_FILE = path.join(
+  process.cwd(),
+  "data",
+  "support_programs.json"
+);
+
 const PRIORITY_FILE = path.join(
   process.cwd(),
   "data",
@@ -19,7 +25,7 @@ const PRIORITY_FILE = path.join(
 );
 
 const BUILDER_VERSION =
-  "priority_from_g2b_v1.0";
+  "priority_g2b_support_v2.0";
 
 
 /* =========================================================
@@ -103,19 +109,12 @@ function unique(values) {
 
 
 /* =========================================================
-   EXISTING PRIORITY DATA
+   EXISTING DATA CLASSIFICATION
 ========================================================= */
 
 /*
-  기존 priority_projects.json 안에는
-
-  - 나라장터 데이터
-  - 별도 지원사업 데이터
-
-  가 함께 존재한다.
-
-  나라장터 데이터만 새 G2B 결과로 교체하고
-  지원사업 등 다른 데이터는 그대로 유지한다.
+  기존 priority_projects.json 안의
+  나라장터 데이터 판별
 */
 
 function isG2bItem(item) {
@@ -148,6 +147,46 @@ function isG2bItem(item) {
     text(
       item.bidNtceNo
     )
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+
+/*
+  기존 지원사업 샘플 / 과거 지원사업 데이터 판별
+
+  이제 arts_content_support 카테고리는
+  priority_projects.json 자체를 원본으로 사용하지 않고
+
+  data/support_programs.json
+
+  을 단일 원본으로 사용한다.
+*/
+
+function isSupportItem(item) {
+  const category =
+    text(
+      item.category
+    );
+
+  const priorityCategory =
+    text(
+      item.priorityCategory
+    );
+
+  if (
+    category ===
+    "arts_content_support"
+  ) {
+    return true;
+  }
+
+  if (
+    priorityCategory ===
+    "arts_content_support"
   ) {
     return true;
   }
@@ -193,7 +232,9 @@ function detectPriorityCategory(item) {
     );
 
   const search =
-    getSearchText(item);
+    getSearchText(
+      item
+    );
 
 
   /*
@@ -221,7 +262,6 @@ function detectPriorityCategory(item) {
         );
       }
     );
-
 
   if (isMural) {
     return {
@@ -278,7 +318,6 @@ function detectPriorityCategory(item) {
         );
       }
     );
-
 
   if (isExhibition) {
     return {
@@ -347,10 +386,10 @@ function getSourceUrl(item) {
 
 function getDocumentUrl(item) {
   const candidates = [
+    item.documentUrl,
     item.ntceSpecDocUrl1,
     item.ntceSpecDocUrl2,
-    item.ntceSpecDocUrl3,
-    item.sourceUrl
+    item.ntceSpecDocUrl3
   ];
 
   return (
@@ -579,7 +618,8 @@ function mapG2bItem(item) {
 
     gradeReason:
       text(
-        item.fitReason
+        item.fitReason ||
+        item.gradeReason
       ) ||
       scoreReasons.join(
         " · "
@@ -627,6 +667,282 @@ function mapG2bItem(item) {
 
     scoringVersion:
       item.scoringVersion ||
+      "",
+
+    priorityVersion:
+      BUILDER_VERSION
+  };
+}
+
+
+/* =========================================================
+   MAP SUPPORT → PRIORITY
+========================================================= */
+
+function mapSupportItem(item) {
+  const matched =
+    unique([
+      ...(Array.isArray(
+        item.matchedPriorityKeywords
+      )
+        ? item.matchedPriorityKeywords
+        : []),
+
+      ...(Array.isArray(
+        item.matchedKeywords
+      )
+        ? item.matchedKeywords
+        : [])
+    ]);
+
+
+  const title =
+    text(
+      item.title
+    );
+
+
+  const agency =
+    text(
+      item.organization ||
+      item.agency ||
+      item.source
+    );
+
+
+  const id =
+    text(
+      item.id
+    );
+
+
+  const publishedDate =
+    text(
+      item.publishedDate ||
+      item.postedDate ||
+      item.startDate
+    );
+
+
+  const deadline =
+    text(
+      item.deadline ||
+      item.endDate ||
+      item.closeDate
+    );
+
+
+  const sourceUrl =
+    getSourceUrl(
+      item
+    );
+
+
+  const documentUrl =
+    getDocumentUrl(
+      item
+    );
+
+
+  const score =
+    number(
+      item.score ||
+      item.axooFitScore
+    );
+
+
+  const grade =
+    text(
+      item.grade
+    ) ||
+    (
+      score >= 85
+        ? "S"
+        : score >= 70
+          ? "A"
+          : score >= 50
+            ? "B"
+            : "C"
+    );
+
+
+  const amount =
+    number(
+      item.supportAmount ||
+      item.budget ||
+      item.amount
+    );
+
+
+  const gradeReason =
+    text(
+      item.gradeReason ||
+      item.axooFitReason ||
+      item.summary
+    );
+
+
+  const nextAction =
+    text(
+      item.nextAction ||
+      item.recommendedAction
+    ) ||
+    "지원자격 및 공고문 확인";
+
+
+  return {
+    id:
+      id,
+
+    source:
+      item.source ||
+      agency,
+
+    sourceCode:
+      item.sourceCode ||
+      "",
+
+    sourceType:
+      item.sourceType ||
+      "지원사업",
+
+    title:
+      title,
+
+    organization:
+      agency,
+
+    agency:
+      agency,
+
+    amount:
+      amount,
+
+    budget:
+      item.budget ??
+      null,
+
+    supportAmount:
+      item.supportAmount ??
+      null,
+
+    publishedDate:
+      publishedDate,
+
+    postedDate:
+      text(
+        item.postedDate ||
+        item.publishedDate
+      ),
+
+    startDate:
+      text(
+        item.startDate
+      ),
+
+    deadline:
+      deadline,
+
+    deadlineDate:
+      deadline,
+
+    endDate:
+      text(
+        item.endDate ||
+        item.deadline
+      ),
+
+    status:
+      item.status ||
+      "진행중",
+
+    sourceUrl:
+      sourceUrl,
+
+    originalUrl:
+      sourceUrl,
+
+    documentUrl:
+      documentUrl,
+
+    category:
+      "arts_content_support",
+
+    categoryLabel:
+      "예술·콘텐츠 지원사업",
+
+    priorityCategory:
+      "arts_content_support",
+
+    priorityCategoryLabel:
+      "예술·콘텐츠 지원사업",
+
+    priorityRank:
+      0,
+
+    field:
+      item.field ||
+      matched.join(" / "),
+
+    matchedPriorityKeywords:
+      matched,
+
+    matchedKeywords:
+      matched,
+
+    isPriority:
+      item.isPriority !== false,
+
+    isExcludedFromPriority:
+      item.isExcludedFromPriority === true,
+
+    exclusionReason:
+      text(
+        item.exclusionReason
+      ),
+
+    grade:
+      grade,
+
+    score:
+      score,
+
+    axooFitScore:
+      score,
+
+    gradeReason:
+      gradeReason,
+
+    axooFitReason:
+      gradeReason,
+
+    nextAction:
+      nextAction,
+
+    recommendedAction:
+      nextAction,
+
+    searchText:
+      [
+        title,
+        agency,
+        item.source,
+        "예술 콘텐츠 지원사업",
+        item.field,
+        ...matched
+      ]
+        .filter(Boolean)
+        .join(" "),
+
+    collectionSourceId:
+      item.sourceCode
+        ? `support_${String(
+            item.sourceCode
+          ).toLowerCase()}`
+        : "support_program",
+
+    collectionVersion:
+      item.collectionVersion ||
       "",
 
     priorityVersion:
@@ -713,6 +1029,47 @@ function sortG2b(a, b) {
 }
 
 
+function sortSupport(a, b) {
+  const gradeDiff =
+    gradeRank(
+      a.grade
+    ) -
+    gradeRank(
+      b.grade
+    );
+
+  if (
+    gradeDiff !== 0
+  ) {
+    return gradeDiff;
+  }
+
+
+  const scoreDiff =
+    number(
+      b.score
+    ) -
+    number(
+      a.score
+    );
+
+  if (
+    scoreDiff !== 0
+  ) {
+    return scoreDiff;
+  }
+
+
+  return text(
+    a.deadline
+  ).localeCompare(
+    text(
+      b.deadline
+    )
+  );
+}
+
+
 /* =========================================================
    MAIN
 ========================================================= */
@@ -723,6 +1080,7 @@ function main() {
       G2B_FILE,
       []
     );
+
 
   if (
     !Array.isArray(
@@ -735,11 +1093,30 @@ function main() {
   }
 
 
+  const supportPrograms =
+    readJson(
+      SUPPORT_FILE,
+      []
+    );
+
+
+  if (
+    !Array.isArray(
+      supportPrograms
+    )
+  ) {
+    throw new Error(
+      "data/support_programs.json 은 배열이어야 합니다."
+    );
+  }
+
+
   const existing =
     readJson(
       PRIORITY_FILE,
       []
     );
+
 
   if (
     !Array.isArray(
@@ -753,21 +1130,31 @@ function main() {
 
 
   /*
-    기존 지원사업 / 외부 데이터 보존
+    나라장터도 아니고
+    예술·콘텐츠 지원사업도 아닌
+    별도 데이터만 보존.
+
+    기존 샘플 arts_content_support는
+    여기서 자동 제거된다.
   */
 
   const preserved =
     existing.filter(
       function (item) {
-        return !isG2bItem(
-          item
+        return (
+          !isG2bItem(
+            item
+          ) &&
+          !isSupportItem(
+            item
+          )
         );
       }
     );
 
 
   /*
-    최신 G2B 데이터 변환
+    최신 G2B
   */
 
   const latestG2b =
@@ -780,8 +1167,27 @@ function main() {
       );
 
 
+  /*
+    최신 지원사업
+  */
+
+  const latestSupport =
+    supportPrograms
+      .map(
+        mapSupportItem
+      )
+      .sort(
+        sortSupport
+      );
+
+
+  /*
+    최종 통합 데이터
+  */
+
   const output = [
     ...preserved,
+    ...latestSupport,
     ...latestG2b
   ];
 
@@ -792,19 +1198,26 @@ function main() {
   );
 
 
+  /*
+    통계
+  */
+
   const counts = {
+    arts_content_support: 0,
     mural_sculpture: 0,
     exhibition_content: 0,
     other: 0
   };
 
 
-  latestG2b.forEach(
+  output.forEach(
     function (item) {
       if (
         counts[
           item.priorityCategory
-        ] !== undefined
+        ] !== undefined &&
+        item.isExcludedFromPriority !==
+          true
       ) {
         counts[
           item.priorityCategory
@@ -812,6 +1225,17 @@ function main() {
       }
     }
   );
+
+
+  const supportExcluded =
+    latestSupport.filter(
+      function (item) {
+        return (
+          item.isExcludedFromPriority ===
+          true
+        );
+      }
+    ).length;
 
 
   console.log(
@@ -831,8 +1255,28 @@ function main() {
   );
 
   console.log(
-    "보존된 비-G2B 데이터:",
+    "보존된 기타 데이터:",
     preserved.length
+  );
+
+  console.log(
+    "지원사업 원본:",
+    supportPrograms.length
+  );
+
+  console.log(
+    "지원사업 변환:",
+    latestSupport.length
+  );
+
+  console.log(
+    "지원사업 노출:",
+    counts.arts_content_support
+  );
+
+  console.log(
+    "지원사업 제외:",
+    supportExcluded
   );
 
   console.log(
@@ -865,7 +1309,7 @@ function main() {
   );
 
   console.log(
-    "✅ priority_projects.json 갱신 완료"
+    "✅ priority_projects.json 통합 갱신 완료"
   );
 
   console.log(
