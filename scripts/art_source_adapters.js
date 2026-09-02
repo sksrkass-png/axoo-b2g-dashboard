@@ -6,20 +6,23 @@
    사이트마다 실제 공모 목록으로 진입하는 방식이 다르므로
    Generic Collector / Probe가 사용할 Request를 생성한다.
 
-   지원 방식
-   ---------------------------------------------------------
-   1. GET
-      일반 게시판 / 일반 URL
-
-   2. POST FORM
-      검색폼을 POST로 제출해야 하는 사이트
-
    현재 Adapter
    ---------------------------------------------------------
    - artnuri_art_commission
-     → POST keyword search
+     → 실제 frm submit 방식과 동일한 GET 검색
 
-   이 파일 자체는 네트워크 요청을 하지 않는다.
+   아트누리 확인 결과
+   ---------------------------------------------------------
+   fn_egov_link_page(v) {
+     $("#seNo").val($("#sc_seNo").val());
+     $('#pageSetting').val("1");
+     f.pageIndex.value = v;
+     f.action = "search.do";
+     f.method = "get";
+     f.submit();
+   }
+
+   따라서 POST는 사용하지 않는다.
 ========================================================= */
 
 
@@ -127,23 +130,6 @@ function normalizeRequest(
   }
 
 
-  const headers = {
-
-    ...(
-      request.headers ||
-      {}
-    )
-  };
-
-
-  const body =
-    request.body == null
-      ? null
-      : String(
-          request.body
-        );
-
-
   return {
 
     method:
@@ -152,11 +138,20 @@ function normalizeRequest(
     url:
       url,
 
-    headers:
-      headers,
+    headers: {
+
+      ...(
+        request.headers ||
+        {}
+      )
+    },
 
     body:
-      body,
+      request.body == null
+        ? null
+        : String(
+            request.body
+          ),
 
     label:
       String(
@@ -166,6 +161,10 @@ function normalizeRequest(
   };
 }
 
+
+/* =========================================================
+   UNIQUE
+========================================================= */
 
 function uniqueRequests(
   requests
@@ -289,54 +288,20 @@ function getArtnuriEndpoint(
   }
 
 
-  try {
-
-    const url =
-      new URL(
-        "/crawler/info/search.do",
-        source.sourceUrl
-      );
-
-
-    /*
-      중요:
-      아트누리는 이 key가 없는 POST 요청에
-      404를 반환하는 것으로 확인됨.
-    */
-    url.searchParams.set(
-      "key",
-      ARTNURI_KEY
-    );
-
-
-    return url.toString();
-
-
-  } catch (
-    error
-  ) {
-
-    return "";
-  }
+  return canonicalUrl(
+    "search.do",
+    source.sourceUrl
+  );
 }
 
 
 /* =========================================================
-   ARTNURI POST ADAPTER
+   ARTNURI GET FORM ADAPTER
 ========================================================= */
 
 function buildArtnuriRequests(
   source
 ) {
-
-  if (
-    !source ||
-    !source.sourceUrl
-  ) {
-
-    return [];
-  }
-
 
   const endpoint =
     getArtnuriEndpoint(
@@ -356,83 +321,108 @@ function buildArtnuriRequests(
         searchTerm
       ) {
 
-        const params =
-          new URLSearchParams();
-
-
         /*
-          실제 frm Form에서 확인된 필드
+          실제 frm GET submit과 최대한 동일하게 구성한다.
+
+          확인된 hidden fields:
+          - docid
+          - source
+          - pageSetting
+          - sc_seNo
+          - key
+          - sc_orderBy
+          - recordCountPerPage
+          - pageIndex
+          - sc_hash
+          - sc_list
+          - seNo
+          - sw
+
+          체크되지 않은 checkbox는 브라우저 submit 시
+          전송되지 않으므로 넣지 않는다.
         */
-        params.set(
+
+        const url =
+          new URL(
+            endpoint
+          );
+
+
+        url.searchParams.set(
           "docid",
           ""
         );
 
 
-        params.set(
+        url.searchParams.set(
           "source",
           ""
         );
 
 
-        params.set(
+        url.searchParams.set(
           "pageSetting",
           "1"
         );
 
 
-        params.set(
+        url.searchParams.set(
           "sc_seNo",
           ""
         );
 
 
-        params.set(
+        url.searchParams.set(
           "key",
           ARTNURI_KEY
         );
 
 
-        params.set(
+        url.searchParams.set(
           "sc_orderBy",
           ""
         );
 
 
-        params.set(
+        url.searchParams.set(
           "recordCountPerPage",
           "30"
         );
 
 
-        params.set(
+        url.searchParams.set(
           "pageIndex",
           "1"
         );
 
 
-        params.set(
+        url.searchParams.set(
           "sc_hash",
           ""
         );
 
 
-        params.set(
+        url.searchParams.set(
           "sc_list",
           ""
         );
 
 
-        params.set(
+        /*
+          fn_egov_link_page에서
+          seNo = sc_seNo 로 복사됨.
+          현재 둘 다 빈 값.
+        */
+        url.searchParams.set(
           "seNo",
           ""
         );
 
 
         /*
-          검색어
+          실제 검색어
         */
-        params.set(
+        url.searchParams.set(
           "sw",
           searchTerm
         );
@@ -442,25 +432,19 @@ function buildArtnuriRequests(
           {
 
             method:
-              "POST",
+              "GET",
 
             url:
-              endpoint,
+              url.toString(),
 
             headers: {
 
-              "Content-Type":
-                "application/x-www-form-urlencoded",
-
-              "Origin":
-                "https://artnuri.or.kr",
-
               "Referer":
-                endpoint
+                source.sourceUrl
             },
 
             body:
-              params.toString(),
+              null,
 
             label:
               "아트누리 검색: " +
@@ -485,13 +469,13 @@ const SOURCE_ADAPTERS = {
   artnuri_art_commission: {
 
     id:
-      "artnuri_post_keyword_search",
+      "artnuri_get_form_search",
 
     label:
-      "아트누리 POST 키워드 검색",
+      "아트누리 GET Form 검색",
 
     mode:
-      "post_keyword_search",
+      "get_form_search",
 
     buildRequests:
       buildArtnuriRequests
@@ -600,7 +584,7 @@ function getSourceRequests(
 
 
 /* =========================================================
-   BACKWARD COMPATIBILITY
+   SEED URL COMPATIBILITY
 ========================================================= */
 
 function getSourceSeedUrls(
@@ -725,7 +709,7 @@ function describeSourceAdapter(
 
 
 /* =========================================================
-   SAFE REQUEST PRINT
+   REQUEST DESCRIPTION
 ========================================================= */
 
 function describeRequest(
@@ -742,32 +726,27 @@ function describeRequest(
     "";
 
 
-  if (
-    request.body
+  try {
+
+    const url =
+      new URL(
+        request.url
+      );
+
+
+    searchTerm =
+      url.searchParams.get(
+        "sw"
+      ) ||
+      "";
+
+
+  } catch (
+    error
   ) {
 
-    try {
-
-      const params =
-        new URLSearchParams(
-          request.body
-        );
-
-
-      searchTerm =
-        params.get(
-          "sw"
-        ) ||
-        "";
-
-
-    } catch (
-      error
-    ) {
-
-      searchTerm =
-        "";
-    }
+    searchTerm =
+      "";
   }
 
 
@@ -853,12 +832,6 @@ function runSelfTest() {
 
 
   console.log(
-    "APPLIED:",
-    result.applied
-  );
-
-
-  console.log(
     "MODE:",
     result.mode
   );
@@ -899,16 +872,9 @@ function runSelfTest() {
   );
 
 
-  console.log(
-    ""
-  );
-
-
-  console.log(
-    "===================================="
-  );
-
-
+  /*
+    Adapter 적용
+  */
   if (
     !result.applied
   ) {
@@ -926,6 +892,9 @@ function runSelfTest() {
   }
 
 
+  /*
+    3개 검색어
+  */
   if (
     result.requests.length !==
     ARTNURI_SEARCH_TERMS.length
@@ -944,7 +913,10 @@ function runSelfTest() {
   }
 
 
-  const everyRequestIsPost =
+  /*
+    전부 GET
+  */
+  const allGet =
     result.requests.every(
       function (
         request
@@ -952,18 +924,16 @@ function runSelfTest() {
 
         return (
           request.method ===
-          "POST"
+          "GET"
         );
       }
     );
 
 
-  if (
-    !everyRequestIsPost
-  ) {
+  if (!allGet) {
 
     console.error(
-      "❌ ARTNURI POST METHOD TEST FAILED"
+      "❌ ARTNURI GET METHOD TEST FAILED"
     );
 
 
@@ -976,9 +946,9 @@ function runSelfTest() {
 
 
   /*
-    URL Query의 key 확인
+    실제 form 주요 query 확인
   */
-  const everyRequestHasQueryKey =
+  const requiredParamsOk =
     result.requests.every(
       function (
         request
@@ -996,7 +966,28 @@ function runSelfTest() {
             url.searchParams.get(
               "key"
             ) ===
-            ARTNURI_KEY
+              ARTNURI_KEY &&
+
+            url.searchParams.get(
+              "pageSetting"
+            ) ===
+              "1" &&
+
+            url.searchParams.get(
+              "recordCountPerPage"
+            ) ===
+              "30" &&
+
+            url.searchParams.get(
+              "pageIndex"
+            ) ===
+              "1" &&
+
+            Boolean(
+              url.searchParams.get(
+                "sw"
+              )
+            )
           );
 
 
@@ -1011,98 +1002,11 @@ function runSelfTest() {
 
 
   if (
-    !everyRequestHasQueryKey
+    !requiredParamsOk
   ) {
 
     console.error(
-      "❌ ARTNURI QUERY KEY TEST FAILED"
-    );
-
-
-    process.exitCode =
-      1;
-
-
-    return;
-  }
-
-
-  const everyRequestHasSearchWord =
-    result.requests.every(
-      function (
-        request
-      ) {
-
-        const params =
-          new URLSearchParams(
-            request.body ||
-            ""
-          );
-
-
-        return Boolean(
-          params.get(
-            "sw"
-          )
-        );
-      }
-    );
-
-
-  if (
-    !everyRequestHasSearchWord
-  ) {
-
-    console.error(
-      "❌ ARTNURI SEARCH WORD TEST FAILED"
-    );
-
-
-    process.exitCode =
-      1;
-
-
-    return;
-  }
-
-
-  const everyRequestHasRequiredFields =
-    result.requests.every(
-      function (
-        request
-      ) {
-
-        const params =
-          new URLSearchParams(
-            request.body ||
-            ""
-          );
-
-
-        return (
-          params.get(
-            "key"
-          ) ===
-            ARTNURI_KEY &&
-          params.get(
-            "pageIndex"
-          ) ===
-            "1" &&
-          params.get(
-            "recordCountPerPage"
-          ) ===
-            "30"
-        );
-      }
-    );
-
-
-  if (
-    !everyRequestHasRequiredFields
-  ) {
-
-    console.error(
-      "❌ ARTNURI REQUIRED FIELD TEST FAILED"
+      "❌ ARTNURI QUERY PARAM TEST FAILED"
     );
 
 
@@ -1115,7 +1019,12 @@ function runSelfTest() {
 
 
   console.log(
-    "✅ ARTNURI POST ADAPTER SELF TEST PASSED"
+    ""
+  );
+
+
+  console.log(
+    "✅ ARTNURI GET FORM ADAPTER SELF TEST PASSED"
   );
 }
 
