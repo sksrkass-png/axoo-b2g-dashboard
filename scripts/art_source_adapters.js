@@ -4,7 +4,7 @@
    목적
    ---------------------------------------------------------
    사이트마다 실제 공모 목록으로 진입하는 방식이 다르므로
-   Generic Collector가 사용할 Request를 생성한다.
+   Generic Collector / Probe가 사용할 Request를 생성한다.
 
    지원 방식
    ---------------------------------------------------------
@@ -31,10 +31,10 @@ const DEFAULT_MAX_REQUESTS =
   4;
 
 
-/*
-  건축물 미술작품 공모에 집중하기 위해
-  너무 넓은 "미술작품 공모"는 사용하지 않는다.
-*/
+const ARTNURI_KEY =
+  "2301170002";
+
+
 const ARTNURI_SEARCH_TERMS = [
 
   "건축물 미술작품",
@@ -273,6 +273,55 @@ function buildDefaultRequests(
 
 
 /* =========================================================
+   ARTNURI ENDPOINT
+========================================================= */
+
+function getArtnuriEndpoint(
+  source
+) {
+
+  if (
+    !source ||
+    !source.sourceUrl
+  ) {
+
+    return "";
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        "/crawler/info/search.do",
+        source.sourceUrl
+      );
+
+
+    /*
+      중요:
+      아트누리는 이 key가 없는 POST 요청에
+      404를 반환하는 것으로 확인됨.
+    */
+    url.searchParams.set(
+      "key",
+      ARTNURI_KEY
+    );
+
+
+    return url.toString();
+
+
+  } catch (
+    error
+  ) {
+
+    return "";
+  }
+}
+
+
+/* =========================================================
    ARTNURI POST ADAPTER
 ========================================================= */
 
@@ -289,28 +338,9 @@ function buildArtnuriRequests(
   }
 
 
-  /*
-    FORM DIAGNOSTICS에서 확인된 실제 지원사업 검색폼:
-
-    form name = frm
-    method    = POST
-
-    주요 필드:
-    key=2301170002
-    pageSetting
-    recordCountPerPage=30
-    pageIndex=1
-    sw=<검색어>
-
-    버튼:
-    fn_egov_link_page(1)
-  */
-
-
   const endpoint =
-    canonicalUrl(
-      "/crawler/info/search.do",
-      source.sourceUrl
+    getArtnuriEndpoint(
+      source
     );
 
 
@@ -331,7 +361,7 @@ function buildArtnuriRequests(
 
 
         /*
-          기존 FORM hidden fields
+          실제 frm Form에서 확인된 필드
         */
         params.set(
           "docid",
@@ -359,7 +389,7 @@ function buildArtnuriRequests(
 
         params.set(
           "key",
-          "2301170002"
+          ARTNURI_KEY
         );
 
 
@@ -400,7 +430,7 @@ function buildArtnuriRequests(
 
 
         /*
-          실제 검색어 필드
+          검색어
         */
         params.set(
           "sw",
@@ -426,7 +456,7 @@ function buildArtnuriRequests(
                 "https://artnuri.or.kr",
 
               "Referer":
-                source.sourceUrl
+                endpoint
             },
 
             body:
@@ -571,13 +601,6 @@ function getSourceRequests(
 
 /* =========================================================
    BACKWARD COMPATIBILITY
-
-   기존 Collector / Probe가 아직
-   getSourceSeedUrls()를 호출하는 동안 깨지지 않도록 유지.
-
-   POST Request의 경우 URL만 반환하면 실제 검색은 안 되므로,
-   다음 단계에서 Collector / Probe를
-   getSourceRequests() 방식으로 교체한다.
 ========================================================= */
 
 function getSourceSeedUrls(
@@ -737,6 +760,7 @@ function describeRequest(
         ) ||
         "";
 
+
     } catch (
       error
     ) {
@@ -885,10 +909,6 @@ function runSelfTest() {
   );
 
 
-  /*
-    검증 1
-    Adapter가 실제 적용되어야 한다.
-  */
   if (
     !result.applied
   ) {
@@ -906,10 +926,6 @@ function runSelfTest() {
   }
 
 
-  /*
-    검증 2
-    검색어 수만큼 Request가 있어야 한다.
-  */
   if (
     result.requests.length !==
     ARTNURI_SEARCH_TERMS.length
@@ -928,10 +944,6 @@ function runSelfTest() {
   }
 
 
-  /*
-    검증 3
-    모두 POST여야 한다.
-  */
   const everyRequestIsPost =
     result.requests.every(
       function (
@@ -964,10 +976,9 @@ function runSelfTest() {
 
 
   /*
-    검증 4
-    모든 POST body에 sw가 있어야 한다.
+    URL Query의 key 확인
   */
-  const everyRequestHasSearchWord =
+  const everyRequestHasQueryKey =
     result.requests.every(
       function (
         request
@@ -975,17 +986,17 @@ function runSelfTest() {
 
         try {
 
-          const params =
-            new URLSearchParams(
-              request.body ||
-              ""
+          const url =
+            new URL(
+              request.url
             );
 
 
-          return Boolean(
-            params.get(
-              "sw"
-            )
+          return (
+            url.searchParams.get(
+              "key"
+            ) ===
+            ARTNURI_KEY
           );
 
 
@@ -995,6 +1006,45 @@ function runSelfTest() {
 
           return false;
         }
+      }
+    );
+
+
+  if (
+    !everyRequestHasQueryKey
+  ) {
+
+    console.error(
+      "❌ ARTNURI QUERY KEY TEST FAILED"
+    );
+
+
+    process.exitCode =
+      1;
+
+
+    return;
+  }
+
+
+  const everyRequestHasSearchWord =
+    result.requests.every(
+      function (
+        request
+      ) {
+
+        const params =
+          new URLSearchParams(
+            request.body ||
+            ""
+          );
+
+
+        return Boolean(
+          params.get(
+            "sw"
+          )
+        );
       }
     );
 
@@ -1016,10 +1066,6 @@ function runSelfTest() {
   }
 
 
-  /*
-    검증 5
-    key와 pageIndex 확인
-  */
   const everyRequestHasRequiredFields =
     result.requests.every(
       function (
@@ -1037,7 +1083,7 @@ function runSelfTest() {
           params.get(
             "key"
           ) ===
-            "2301170002" &&
+            ARTNURI_KEY &&
           params.get(
             "pageIndex"
           ) ===
@@ -1095,6 +1141,8 @@ module.exports = {
 
   SOURCE_ADAPTERS,
 
+  ARTNURI_KEY,
+
   ARTNURI_SEARCH_TERMS,
 
   getSourceAdapter,
@@ -1109,6 +1157,8 @@ module.exports = {
 
   describeRequest,
 
-  buildArtnuriRequests
+  buildArtnuriRequests,
+
+  getArtnuriEndpoint
 
 };
