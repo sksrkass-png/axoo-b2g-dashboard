@@ -4,7 +4,7 @@ const path = require("path");
 const DATA_FILE = path.join(process.cwd(), "data", "art_commissions.json");
 const ARCHIVE_FILE = path.join(process.cwd(), "data", "art_commissions_archive.json");
 
-const NORMALIZER_VERSION = "1.4.0";
+const NORMALIZER_VERSION = "1.4.1";
 const DETAIL_TEXT_LIMIT = 12000;
 const FETCH_TIMEOUT_MS = 15000;
 const MAX_REASONABLE_PERIOD_DAYS = 180;
@@ -42,6 +42,14 @@ const PRIORITY_DEADLINE_KEYWORDS = [
   "마감기한",
   "제출기한",
   "접수기한",
+
+  // v1.4.1
+  // 실제 경기도 공모에서 확인된 추가 표현
+  "공모 방법",
+  "공모방법",
+  "일자 / 방법",
+  "일자/방법",
+
   "일자 / 시간",
   "일자/시간",
   "작품 접수",
@@ -286,16 +294,6 @@ function yearFromDate(value) {
     : getKoreaYear();
 }
 
-
-/*
-  2자리 연도 지원.
-
-  예:
-  26.07.21 -> 2026-07-21
-  25.12.01 -> 2025-12-01
-
-  baseYear 주변 세기를 기준으로 판단한다.
-*/
 
 function resolveYearToken(
   token,
@@ -553,7 +551,7 @@ async function fetchDetailText(url) {
 
           headers: {
             "User-Agent":
-              "Mozilla/5.0 (compatible; AXOO-B2G-DateNormalizer/1.4.0; +https://github.com/sksrkass-png/axoo-b2g-dashboard)",
+              "Mozilla/5.0 (compatible; AXOO-B2G-DateNormalizer/1.4.1; +https://github.com/sksrkass-png/axoo-b2g-dashboard)",
 
             "Accept-Language":
               "ko-KR,ko;q=0.9,en;q=0.7"
@@ -648,16 +646,6 @@ function findDateMatches(
     normalizeDateText(
       text
     );
-
-  /*
-    지원:
-    2026-08-10
-    2026.08.10
-    2026년 08월 10일
-    26.08.10
-    26-08-10
-    08.10
-  */
 
   const regex =
     /(?:(\d{4}|\d{2})\s*(?:년|[-./])\s*)?(\d{1,2})\s*(?:월|[-./])\s*(\d{1,2})\s*(?:일)?/g;
@@ -1065,9 +1053,6 @@ function extractPublishedDate(
 
 /* =========================================================
    PRIORITY DEADLINE
-
-   핵심 변경:
-   공모기간보다 실제 접수/제출일을 먼저 사용한다.
 ========================================================= */
 
 function extractPriorityDeadline(
@@ -1099,14 +1084,6 @@ function extractPriorityDeadline(
       const segment of
       segments
     ) {
-      /*
-        예:
-        접수일시 :
-        26.07.21 ~ 26.08.10
-
-        → 범위 끝인 2026-08-10
-      */
-
       const range =
         extractDateRange(
           segment,
@@ -1131,12 +1108,6 @@ function extractPriorityDeadline(
             ""
         };
       }
-
-      /*
-        예:
-        접수일자 : 2026.08.07
-        일자 / 시간 : 2026.09.21
-      */
 
       const date =
         findFirstDate(
@@ -1164,14 +1135,6 @@ function extractPriorityDeadline(
     }
   }
 
-
-  /*
-    기간 형태 접수정보.
-
-    예:
-    접수기간:
-    2026.08.01 ~ 2026.08.20
-  */
 
   for (
     const keyword of
@@ -1375,11 +1338,6 @@ function chooseDeadline(options) {
     "";
 
 
-  /*
-    1순위:
-    원문 실제 접수/제출일.
-  */
-
   if (
     priority.value
   ) {
@@ -1399,14 +1357,6 @@ function chooseDeadline(options) {
     };
   }
 
-
-  /*
-    2순위:
-    공모기간 종료일.
-
-    단 등록일부터 180일을 넘는
-    비정상 장기 기간은 바로 믿지 않는다.
-  */
 
   if (
     period.end
@@ -1445,14 +1395,6 @@ function chooseDeadline(options) {
   }
 
 
-  /*
-    3순위:
-    기존 deadline.
-
-    이전 버전에서 잘못 추출한
-    1년짜리 deadline은 다시 걸러낸다.
-  */
-
   if (
     existingDeadline
   ) {
@@ -1490,11 +1432,6 @@ function chooseDeadline(options) {
     }
   }
 
-
-  /*
-    4순위:
-    기존 periodEnd.
-  */
 
   if (
     existingPeriodEnd
@@ -1590,17 +1527,6 @@ function getDeadlineState(
   }
 
 
-  /*
-    마감일 자체를 끝까지 찾지 못한 경우.
-
-    등록 후 75일 이상 지난 공고는
-    LIVE에서 계속 떠 있는 것을 방지하기 위해
-    보수적으로 stale 처리한다.
-
-    일반 공모의 단순 20~40일 기간보다
-    충분히 긴 버퍼를 둔다.
-  */
-
   const ageDays =
     dateDiffDays(
       publishedDate,
@@ -1651,11 +1577,6 @@ async function normalizeItem(item) {
     item.detailFetchStatus ||
     "";
 
-
-  /*
-    기존 Collector가 상세본문을 넣어둔 경우
-    네트워크 fetch를 다시 하지 않는다.
-  */
 
   if (
     detailText.length <
@@ -1717,12 +1638,6 @@ async function normalizeItem(item) {
       ]
     );
 
-
-  /*
-    중요:
-    공모기간보다 실제 접수/제출 마감일을
-    먼저 계산한다.
-  */
 
   const priorityDeadline =
     extractPriorityDeadline(
@@ -1835,11 +1750,6 @@ async function normalizeItem(item) {
       "MEDIUM";
   }
 
-
-  /*
-    기존 status를 그대로 믿지 않고
-    현재 deadline 기준으로 재설정한다.
-  */
 
   const normalizedStatus =
     deadline
@@ -2408,11 +2318,6 @@ async function main() {
   const normalized =
     [];
 
-
-  /*
-    현재 LIVE 공고만
-    순차적으로 날짜 검증.
-  */
 
   for (
     const item of
