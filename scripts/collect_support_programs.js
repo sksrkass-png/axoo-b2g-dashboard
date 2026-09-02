@@ -7,7 +7,7 @@ const OUTPUT_FILE = path.join(
   "support_programs.json"
 );
 
-const KAMS_BASE = "https://www.gokams.or.kr";
+const KAMS_BASE = "https://www.gokams.or.kr/02_apply/";
 
 const KAMS_LIST =
   "https://www.gokams.or.kr/02_apply/introduction.aspx";
