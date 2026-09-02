@@ -16,6 +16,11 @@ const {
   inferTargetArtRegionFromValues
 } = require("./art_region_scope");
 
+const {
+  extractArtDetail,
+  mergeArtDetailIntoItem
+} = require("./art_detail_extractor");
+
 
 /* =========================================================
    CONFIG
@@ -41,7 +46,7 @@ const SPECIALIZED_REGION_IDS = new Set([
 ]);
 
 const COLLECTION_VERSION =
-  "nationwide-generic-1.3.0";
+  "nationwide-generic-1.4.0";
 
 const FETCH_TIMEOUT_MS =
   12000;
@@ -791,7 +796,7 @@ async function fetchText(
             headers: {
 
               "User-Agent":
-                "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.3)",
+                "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.4)",
 
               "Accept":
                 "text/html,application/xhtml+xml,*/*",
@@ -891,16 +896,6 @@ function isNationalRegion(
 }
 
 
-/*
-  전국 포털의 HTML 전체에는
-  지역 필터 등 17개 시·도명이 동시에 포함될 수 있다.
-
-  따라서 상세페이지 전체 텍스트를
-  지역 판별기에 직접 넣지 않는다.
-
-  제목 주변과 지역 관련 메타데이터 주변만
-  제한적으로 Evidence로 사용한다.
-*/
 function extractRegionEvidenceSnippets(
   html,
   title
@@ -954,9 +949,6 @@ function extractRegionEvidenceSnippets(
   }
 
 
-  /*
-    1. 공고 제목 주변
-  */
   const normalizedTitle =
     cleanText(
       title
@@ -998,12 +990,6 @@ function extractRegionEvidenceSnippets(
   }
 
 
-  /*
-    2. 지역을 판단하기 좋은 메타데이터 주변
-
-    단순 "지역"은 전국 포털 필터에 너무 많이 등장하므로
-    사용하지 않는다.
-  */
   const markers = [
     "사업지역",
     "사업 지역",
@@ -1108,10 +1094,6 @@ function resolveCandidateRegion(
     };
 
 
-  /*
-    지역 공식 Source에서 수집된 경우
-    Source Registry의 지역을 그대로 신뢰한다.
-  */
   if (
     !isNationalRegion(
       originalRegion
@@ -1132,10 +1114,6 @@ function resolveCandidateRegion(
   }
 
 
-  /*
-    전국 Source:
-    제목에서 먼저 판별.
-  */
   const titleRegion =
     inferTargetArtRegionFromValues(
       [
@@ -1162,10 +1140,6 @@ function resolveCandidateRegion(
   }
 
 
-  /*
-    제목으로 판단할 수 없을 경우
-    상세페이지에서 뽑은 제한된 Evidence만 사용.
-  */
   const evidenceValues =
     Array.isArray(
       detailEvidence
@@ -1204,9 +1178,6 @@ function resolveCandidateRegion(
   }
 
 
-  /*
-    확신할 수 없으면 강제 추론하지 않는다.
-  */
   return {
 
     region:
@@ -1307,10 +1278,6 @@ function buildItem(
         title
       ),
 
-
-    /*
-      실제 판별 지역
-    */
     region:
       (
         resolvedRegion &&
@@ -1332,14 +1299,6 @@ function buildItem(
       ) ||
       "",
 
-
-    /*
-      어떤 Source 범위에서 왔는지도 별도 보존.
-
-      예:
-      sourceRegion = 전국
-      region       = 대전
-    */
     sourceRegion:
       (
         sourceRegion &&
@@ -1365,7 +1324,6 @@ function buildItem(
       resolved
         ? "resolved"
         : "unresolved",
-
 
     regionGroup:
       source.regionGroup ||
@@ -1410,6 +1368,30 @@ function buildItem(
 
     amount:
       "",
+
+    amountNumeric:
+      null,
+
+    location:
+      "",
+
+    installationLocation:
+      "",
+
+    eligibility:
+      "",
+
+    detailExtractionStatus:
+      "pending",
+
+    detailExtractionCount:
+      0,
+
+    detailExtractionVersion:
+      "",
+
+    detailExtractionEvidence:
+      {},
 
     keywords: [
       "건축물 미술작품",
@@ -1482,7 +1464,7 @@ function buildItem(
 
 
 /* =========================================================
-   DETAIL REGION ENRICHMENT
+   DETAIL ENRICHMENT
 ========================================================= */
 
 function enrichNationalItemRegionFromDetail(
@@ -1502,11 +1484,6 @@ function enrichNationalItemRegionFromDetail(
   }
 
 
-  /*
-    제목에서 이미 명확히 판별했다면
-    상세페이지의 공통 Navigation 텍스트 때문에
-    다른 지역으로 덮어쓰지 않는다.
-  */
   if (
     item.regionInferenceStatus ===
       "resolved" &&
@@ -1568,6 +1545,58 @@ function enrichNationalItemRegionFromDetail(
     fitReason:
       "전국 공통 소스에서 발견된 후보이며 공고 제목 또는 상세정보를 기준으로 실제 지역을 자동 판별했습니다."
   };
+}
+
+
+function enrichItemFromDetailPage(
+  item,
+  sourceRegion,
+  html,
+  pageUrl
+) {
+
+  if (!item) {
+
+    return item;
+  }
+
+
+  const detail =
+    extractArtDetail(
+      html,
+      {
+        sourceUrl:
+          pageUrl,
+
+        title:
+          item.title
+      }
+    );
+
+
+  let enriched =
+    mergeArtDetailIntoItem(
+      item,
+      detail
+    );
+
+
+  if (
+    isNationalRegion(
+      sourceRegion
+    )
+  ) {
+
+    enriched =
+      enrichNationalItemRegionFromDetail(
+        enriched,
+        sourceRegion,
+        html
+      );
+  }
+
+
+  return enriched;
 }
 
 
@@ -1680,7 +1709,10 @@ async function crawlSource(
             0,
 
           seed:
-            true
+            true,
+
+          candidateDetail:
+            false
         };
       }
     );
@@ -1737,6 +1769,27 @@ async function crawlSource(
       0,
 
     redirectedPages:
+      0,
+
+    detailPages:
+      0,
+
+    detailExtracted:
+      0,
+
+    deadlineExtracted:
+      0,
+
+    agencyExtracted:
+      0,
+
+    amountExtracted:
+      0,
+
+    locationExtracted:
+      0,
+
+    eligibilityExtracted:
       0,
 
     sampleLabels:
@@ -1851,81 +1904,155 @@ async function crawlSource(
 
 
     /*
-      전국 Source에서 이미 후보 상세페이지로 진입했다면
-      해당 페이지의 제한된 Evidence를 이용해
-      실제 지역을 보완한다.
+      후보 상세페이지에 진입한 경우
+      실제 공고 세부정보를 추출한다.
     */
+    let candidateKey =
+      null;
+
+
     if (
-      isNationalRegion(
-        region
+      found.has(
+        current.url
       )
     ) {
 
-      let candidateKey =
-        null;
+      candidateKey =
+        current.url;
 
 
-      if (
-        found.has(
-          current.url
-        )
-      ) {
+    } else if (
+      found.has(
+        finalUrl
+      )
+    ) {
 
-        candidateKey =
-          current.url;
-
-
-      } else if (
-        found.has(
-          finalUrl
-        )
-      ) {
-
-        candidateKey =
-          finalUrl;
-      }
+      candidateKey =
+        finalUrl;
+    }
 
 
-      if (
-        candidateKey
-      ) {
+    if (
+      candidateKey
+    ) {
 
-        const previousItem =
-          found.get(
-            candidateKey
-          );
+      diagnostics.detailPages++;
 
 
-        const enrichedItem =
-          enrichNationalItemRegionFromDetail(
-            previousItem,
-            region,
-            html
-          );
-
-
-        found.set(
-          candidateKey,
-          enrichedItem
+      const previousItem =
+        found.get(
+          candidateKey
         );
 
 
-        if (
-          previousItem.region ===
-            "전국" &&
-          enrichedItem.region !==
-            "전국"
-        ) {
+      const enrichedItem =
+        enrichItemFromDetailPage(
+          previousItem,
+          region,
+          html,
+          finalUrl
+        );
 
-          console.log(
-            "   📍 REGION RESOLVED" +
-            " | " +
-            enrichedItem.region +
-            " | " +
-            enrichedItem.title
-          );
-        }
+
+      found.set(
+        candidateKey,
+        enrichedItem
+      );
+
+
+      if (
+        enrichedItem.detailExtractionCount >
+        0
+      ) {
+
+        diagnostics.detailExtracted++;
       }
+
+
+      if (
+        enrichedItem.deadline
+      ) {
+
+        diagnostics.deadlineExtracted++;
+      }
+
+
+      if (
+        enrichedItem.agency &&
+        enrichedItem.agency !==
+          source.sourceName
+      ) {
+
+        diagnostics.agencyExtracted++;
+      }
+
+
+      if (
+        enrichedItem.amount
+      ) {
+
+        diagnostics.amountExtracted++;
+      }
+
+
+      if (
+        enrichedItem.location
+      ) {
+
+        diagnostics.locationExtracted++;
+      }
+
+
+      if (
+        enrichedItem.eligibility
+      ) {
+
+        diagnostics.eligibilityExtracted++;
+      }
+
+
+      if (
+        previousItem.region ===
+          "전국" &&
+        enrichedItem.region !==
+          "전국"
+      ) {
+
+        console.log(
+          "   📍 REGION RESOLVED" +
+          " | " +
+          enrichedItem.region +
+          " | " +
+          enrichedItem.title
+        );
+      }
+
+
+      console.log(
+        "   📄 DETAIL" +
+        " | fields=" +
+        enrichedItem.detailExtractionCount +
+        " | deadline=" +
+        (
+          enrichedItem.deadline ||
+          "-"
+        ) +
+        " | agency=" +
+        (
+          enrichedItem.agency ||
+          "-"
+        ) +
+        " | amount=" +
+        (
+          enrichedItem.amount ||
+          "-"
+        ) +
+        " | location=" +
+        (
+          enrichedItem.location ||
+          "-"
+        )
+      );
     }
 
 
@@ -2025,83 +2152,113 @@ async function crawlSource(
         diagnostics.candidateAnchors++;
 
 
-        /*
-          동일 URL이 이미 Detail 단계에서 보완되었다면
-          List Page 재탐색으로 덮어쓰지 않는다.
-        */
         if (
-          found.has(
+          !found.has(
             anchor.url
           )
         ) {
 
-          return;
+          const regionResolution =
+            resolveCandidateRegion(
+              region,
+              label,
+              []
+            );
+
+
+          const item =
+            buildItem(
+              region,
+              source,
+              label,
+              anchor.url,
+              {
+                regionResolution:
+                  regionResolution
+              }
+            );
+
+
+          found.set(
+            anchor.url,
+            item
+          );
+
+
+          if (
+            isNationalRegion(
+              region
+            )
+          ) {
+
+            if (
+              item.region !==
+                "전국"
+            ) {
+
+              console.log(
+                "   📍 REGION FROM TITLE" +
+                " | " +
+                item.region +
+                " | " +
+                item.title
+              );
+
+
+            } else {
+
+              console.log(
+                "   📍 REGION PENDING" +
+                " | " +
+                item.title
+              );
+            }
+          }
         }
 
 
-        const regionResolution =
-          resolveCandidateRegion(
-            region,
-            label,
-            []
-          );
+        /*
+          후보가 발견되면 일반 Navigation보다
+          상세페이지를 우선 방문한다.
 
-
-        const item =
-          buildItem(
-            region,
-            source,
-            label,
-            anchor.url,
-            {
-              regionResolution:
-                regionResolution
-            }
-          );
-
-
-        found.set(
-          anchor.url,
-          item
-        );
-
-
+          이 로직이 없으면 seed 3개 + page budget 4 구조에서
+          후보 상세페이지가 뒤로 밀려
+          세부정보 추출이 누락될 수 있다.
+        */
         if (
-          isNationalRegion(
-            region
+          !visited.has(
+            anchor.url
+          ) &&
+          !queued.has(
+            anchor.url
           )
         ) {
 
-          if (
-            item.region !==
-            "전국"
-          ) {
-
-            console.log(
-              "   📍 REGION FROM TITLE" +
-              " | " +
-              item.region +
-              " | " +
-              item.title
-            );
+          queued.add(
+            anchor.url
+          );
 
 
-          } else {
+          queue.unshift({
 
-            console.log(
-              "   📍 REGION PENDING" +
-              " | " +
-              item.title
-            );
-          }
+            url:
+              anchor.url,
+
+            depth:
+              current.depth +
+              1,
+
+            seed:
+              false,
+
+            candidateDetail:
+              true
+          });
         }
       }
     );
 
 
-    /*
-      depth 제한
-    */
     if (
       current.depth >=
       MAX_DEPTH
@@ -2111,10 +2268,6 @@ async function crawlSource(
     }
 
 
-    /*
-      검색 Seed가 여러 개인 경우에도
-      각 Seed 결과 페이지에서 유력한 상세/게시판 링크를 탐색.
-    */
     const followCandidates =
       anchors
 
@@ -2211,6 +2364,9 @@ async function crawlSource(
               1,
 
             seed:
+              false,
+
+            candidateDetail:
               false
           });
         }
@@ -2285,6 +2441,20 @@ async function crawlSource(
       diagnostics.navigationCandidates +
       " | redirects=" +
       diagnostics.redirectedPages +
+      " | detailPages=" +
+      diagnostics.detailPages +
+      " | detailExtracted=" +
+      diagnostics.detailExtracted +
+      " | deadline=" +
+      diagnostics.deadlineExtracted +
+      " | agency=" +
+      diagnostics.agencyExtracted +
+      " | amount=" +
+      diagnostics.amountExtracted +
+      " | location=" +
+      diagnostics.locationExtracted +
+      " | eligibility=" +
+      diagnostics.eligibilityExtracted +
       " | regionResolved=" +
       resolvedRegions +
       " | regionPending=" +
@@ -2368,11 +2538,6 @@ function itemUrl(
 }
 
 
-/*
-  신규 수집이 "전국 미확정"인데
-  기존 데이터에 이미 실제 지역이 확정돼 있다면
-  기존 확정값을 지우지 않는다.
-*/
 function chooseRegionMetadata(
   item,
   previous
@@ -2480,6 +2645,175 @@ function chooseRegionMetadata(
           : "unresolved"
       )
   };
+}
+
+
+function chooseDetailValue(
+  freshValue,
+  previousValue
+) {
+
+  if (
+    freshValue !== undefined &&
+    freshValue !== null &&
+    freshValue !== ""
+  ) {
+
+    return freshValue;
+  }
+
+
+  if (
+    previousValue !== undefined &&
+    previousValue !== null
+  ) {
+
+    return previousValue;
+  }
+
+
+  return "";
+}
+
+
+function applyDetailMetadata(
+  result,
+  item,
+  previous
+) {
+
+  result.deadline =
+    chooseDetailValue(
+      item.deadline,
+      previous &&
+      previous.deadline
+    );
+
+  result.endDate =
+    chooseDetailValue(
+      item.endDate,
+      previous &&
+      previous.endDate
+    );
+
+  result.publishedDate =
+    chooseDetailValue(
+      item.publishedDate,
+      previous &&
+      previous.publishedDate
+    );
+
+  result.postedDate =
+    chooseDetailValue(
+      item.postedDate,
+      previous &&
+      previous.postedDate
+    );
+
+  result.agency =
+    chooseDetailValue(
+      item.agency,
+      previous &&
+      previous.agency
+    );
+
+  result.organization =
+    chooseDetailValue(
+      item.organization,
+      previous &&
+      previous.organization
+    );
+
+  result.amount =
+    chooseDetailValue(
+      item.amount,
+      previous &&
+      previous.amount
+    );
+
+  result.budget =
+    chooseDetailValue(
+      item.budget,
+      previous &&
+      previous.budget
+    );
+
+  result.amountNumeric =
+    (
+      item.amountNumeric !== undefined &&
+      item.amountNumeric !== null
+    )
+      ? item.amountNumeric
+      : (
+          previous &&
+          previous.amountNumeric !== undefined
+            ? previous.amountNumeric
+            : null
+        );
+
+  result.location =
+    chooseDetailValue(
+      item.location,
+      previous &&
+      previous.location
+    );
+
+  result.installationLocation =
+    chooseDetailValue(
+      item.installationLocation,
+      previous &&
+      previous.installationLocation
+    );
+
+  result.eligibility =
+    chooseDetailValue(
+      item.eligibility,
+      previous &&
+      previous.eligibility
+    );
+
+  result.detailExtractionStatus =
+    chooseDetailValue(
+      item.detailExtractionStatus,
+      previous &&
+      previous.detailExtractionStatus
+    );
+
+  result.detailExtractionCount =
+    (
+      item.detailExtractionCount !== undefined
+    )
+      ? item.detailExtractionCount
+      : (
+          previous &&
+          previous.detailExtractionCount
+        ) ||
+        0;
+
+  result.detailExtractionVersion =
+    chooseDetailValue(
+      item.detailExtractionVersion,
+      previous &&
+      previous.detailExtractionVersion
+    );
+
+  result.detailExtractionEvidence =
+    (
+      item.detailExtractionEvidence &&
+      Object.keys(
+        item.detailExtractionEvidence
+      ).length >
+        0
+    )
+      ? item.detailExtractionEvidence
+      : (
+          previous &&
+          previous.detailExtractionEvidence
+        ) ||
+        {};
+
+
+  return result;
 }
 
 
@@ -2621,37 +2955,47 @@ function mergeData(
           );
 
 
+        const mergedItem = {
+
+          ...item,
+          ...previous,
+
+          title:
+            item.title ||
+            previous.title,
+
+          source:
+            item.source,
+
+          sourceName:
+            item.sourceName,
+
+          sourceType:
+            item.sourceType,
+
+          ...regionMetadata,
+
+          collectionSourceId:
+            item.collectionSourceId,
+
+          collectionVersion:
+            item.collectionVersion,
+
+          updatedAt:
+            today
+        };
+
+
+        applyDetailMetadata(
+          mergedItem,
+          item,
+          previous
+        );
+
+
         liveByUrl.set(
           url,
-          {
-
-            ...item,
-            ...previous,
-
-            title:
-              item.title ||
-              previous.title,
-
-            source:
-              item.source,
-
-            sourceName:
-              item.sourceName,
-
-            sourceType:
-              item.sourceType,
-
-            ...regionMetadata,
-
-            collectionSourceId:
-              item.collectionSourceId,
-
-            collectionVersion:
-              item.collectionVersion,
-
-            updatedAt:
-              today
-          }
+          mergedItem
         );
 
 
@@ -2739,62 +3083,72 @@ function mergeData(
         );
 
 
+      const mergedItem = {
+
+        ...item,
+
+        ...(previous || {}),
+
+        title:
+          item.title ||
+          (
+            previous &&
+            previous.title
+          ) ||
+          "",
+
+        source:
+          item.source,
+
+        sourceName:
+          item.sourceName,
+
+        sourceType:
+          item.sourceType,
+
+        ...regionMetadata,
+
+        collectionSourceId:
+          item.collectionSourceId,
+
+        collectionVersion:
+          item.collectionVersion,
+
+        archiveFirstSeenAt:
+          (
+            previous &&
+            previous.archiveFirstSeenAt
+          ) ||
+          today,
+
+        archiveLastSeenAt:
+          today,
+
+        archiveIsCurrent:
+          true,
+
+        collectedAt:
+          (
+            previous &&
+            previous.collectedAt
+          ) ||
+          today,
+
+        updatedAt:
+          today
+      };
+
+
+      applyDetailMetadata(
+        mergedItem,
+        item,
+        previous
+      );
+
+
       archiveByUrl.set(
         url,
-        {
-
-          ...item,
-
-          ...(previous || {}),
-
-          title:
-            item.title ||
-            (
-              previous &&
-              previous.title
-            ) ||
-            "",
-
-          source:
-            item.source,
-
-          sourceName:
-            item.sourceName,
-
-          sourceType:
-            item.sourceType,
-
-          ...regionMetadata,
-
-          collectionSourceId:
-            item.collectionSourceId,
-
-          collectionVersion:
-            item.collectionVersion,
-
-          archiveFirstSeenAt:
-            (
-              previous &&
-              previous.archiveFirstSeenAt
-            ) ||
-            today,
-
-          archiveLastSeenAt:
-            today,
-
-          archiveIsCurrent:
-            true,
-
-          collectedAt:
-            (
-              previous &&
-              previous.collectedAt
-            ) ||
-            today,
-
-          updatedAt:
-            today
-        }
+        mergedItem
       );
     }
   );
@@ -3031,10 +3385,6 @@ async function main() {
   };
 
 
-  /* ---------------------------------------------------------
-     1. 나머지 13개 시도
-  --------------------------------------------------------- */
-
   for (
     const region of
     targetRegions
@@ -3089,10 +3439,6 @@ async function main() {
   }
 
 
-  /* ---------------------------------------------------------
-     2. 전국 공통 백업
-  --------------------------------------------------------- */
-
   const nationalRegion = {
 
     id:
@@ -3144,13 +3490,6 @@ async function main() {
     });
   }
 
-
-  /* ---------------------------------------------------------
-     3. URL 기준 중복 제거
-
-     지역 Source가 먼저 들어왔으므로
-     같은 URL이면 지역 Source를 우선 유지한다.
-  --------------------------------------------------------- */
 
   const unique =
     new Map();
@@ -3212,7 +3551,7 @@ async function main() {
         return (
           item.region &&
           item.region !==
-          "전국"
+            "전국"
         );
       }
     ).length;
@@ -3232,19 +3571,51 @@ async function main() {
     ).length;
 
 
-  /* ---------------------------------------------------------
-     4. LIVE + ARCHIVE MERGE
-  --------------------------------------------------------- */
+  const detailEnriched =
+    items.filter(
+      function (
+        item
+      ) {
+
+        return (
+          item.detailExtractionCount >
+          0
+        );
+      }
+    ).length;
+
+
+  const deadlineEnriched =
+    items.filter(
+      function (
+        item
+      ) {
+
+        return Boolean(
+          item.deadline
+        );
+      }
+    ).length;
+
+
+  const amountEnriched =
+    items.filter(
+      function (
+        item
+      ) {
+
+        return Boolean(
+          item.amount
+        );
+      }
+    ).length;
+
 
   const merged =
     mergeData(
       items
     );
 
-
-  /* ---------------------------------------------------------
-     5. SUMMARY
-  --------------------------------------------------------- */
 
   console.log(
     ""
@@ -3293,6 +3664,24 @@ async function main() {
   console.log(
     "신규/발견 후보:",
     items.length
+  );
+
+
+  console.log(
+    "상세정보 추출 후보:",
+    detailEnriched
+  );
+
+
+  console.log(
+    "마감일 추출:",
+    deadlineEnriched
+  );
+
+
+  console.log(
+    "작품비 추출:",
+    amountEnriched
   );
 
 
@@ -3413,6 +3802,8 @@ module.exports = {
   extractRegionEvidenceSnippets,
 
   enrichNationalItemRegionFromDetail,
+
+  enrichItemFromDetailPage,
 
   buildItem
 };
