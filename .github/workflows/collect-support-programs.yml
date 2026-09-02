@@ -36,7 +36,7 @@ jobs:
 
       # ------------------------------------------
       # 3. 문화예술 지원사업 수집
-      # 현재는 KAMS 테스트
+      # 현재 KAMS부터 운영
       # ------------------------------------------
 
       - name: Collect support programs
@@ -44,7 +44,16 @@ jobs:
 
 
       # ------------------------------------------
-      # 4. 결과 확인
+      # 4. Priority 데이터 통합 생성
+      # support_programs + G2B
+      # ------------------------------------------
+
+      - name: Build priority projects
+        run: node scripts/build_priority_projects.js
+
+
+      # ------------------------------------------
+      # 5. 결과 확인
       # ------------------------------------------
 
       - name: Show collection result
@@ -58,39 +67,135 @@ jobs:
           node -e "
           const fs = require('fs');
 
-          const data = JSON.parse(
+          const support = JSON.parse(
             fs.readFileSync(
               'data/support_programs.json',
               'utf8'
             )
           );
 
-          console.log('총 수집:', data.length + '건');
+          const priority = JSON.parse(
+            fs.readFileSync(
+              'data/priority_projects.json',
+              'utf8'
+            )
+          );
 
-          const kams = data.filter(
+          const kams = support.filter(
             item => item.sourceCode === 'KAMS'
           );
 
-          console.log('KAMS:', kams.length + '건');
+          const supportPriority = priority.filter(
+            item =>
+              item.priorityCategory ===
+              'arts_content_support'
+          );
+
+          console.log(
+            '지원사업 원본:',
+            support.length + '건'
+          );
+
+          console.log(
+            'KAMS:',
+            kams.length + '건'
+          );
+
+          console.log(
+            '대시보드 지원사업:',
+            supportPriority.length + '건'
+          );
 
           console.log('');
 
-          kams.slice(0, 10).forEach(
-            (item, index) => {
-              console.log(
-                (index + 1) + '.',
-                item.grade,
-                item.title,
-                '/',
-                item.deadline || '마감일 미확인'
-              );
-            }
+          supportPriority
+            .slice(0, 10)
+            .forEach(
+              (item, index) => {
+                console.log(
+                  (index + 1) + '.',
+                  item.grade,
+                  item.title,
+                  '/',
+                  item.deadline ||
+                    '마감일 미확인',
+                  '/',
+                  item.source ||
+                    item.organization ||
+                    ''
+                );
+              }
+            );
+          "
+
+
+      # ------------------------------------------
+      # 6. 샘플 데이터 잔존 여부 QA
+      # ------------------------------------------
+
+      - name: Validate support dashboard data
+        shell: bash
+
+        run: |
+          node -e "
+          const fs = require('fs');
+
+          const priority = JSON.parse(
+            fs.readFileSync(
+              'data/priority_projects.json',
+              'utf8'
+            )
+          );
+
+          const support = priority.filter(
+            item =>
+              item.priorityCategory ===
+              'arts_content_support'
+          );
+
+          const samples = support.filter(
+            item =>
+              String(item.title || '')
+                .includes('샘플')
+          );
+
+          if (samples.length > 0) {
+            console.error(
+              '❌ 기존 샘플 지원사업이 남아 있습니다.'
+            );
+
+            samples.forEach(
+              item =>
+                console.error(
+                  '-',
+                  item.title
+                )
+            );
+
+            process.exit(1);
+          }
+
+          if (support.length === 0) {
+            console.error(
+              '❌ 대시보드용 지원사업 데이터가 0건입니다.'
+            );
+
+            process.exit(1);
+          }
+
+          console.log(
+            '✅ 샘플 데이터 없음'
+          );
+
+          console.log(
+            '✅ 실제 지원사업:',
+            support.length + '건'
           );
           "
 
 
       # ------------------------------------------
-      # 5. 변경 여부 확인
+      # 7. 변경 여부 확인
       # ------------------------------------------
 
       - name: Check changes
@@ -99,7 +204,8 @@ jobs:
 
         run: |
           if git diff --quiet -- \
-            data/support_programs.json; then
+            data/support_programs.json \
+            data/priority_projects.json; then
 
             echo "changed=false" >> "$GITHUB_OUTPUT"
 
@@ -111,10 +217,10 @@ jobs:
 
 
       # ------------------------------------------
-      # 6. 실제 데이터가 변경되었으면 저장
+      # 8. 데이터 저장
       # ------------------------------------------
 
-      - name: Commit support programs
+      - name: Commit support dashboard data
         if: steps.changes.outputs.changed == 'true'
         shell: bash
 
@@ -126,9 +232,10 @@ jobs:
             "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add \
-            data/support_programs.json
+            data/support_programs.json \
+            data/priority_projects.json
 
           git commit \
-            -m "Collect KAMS support programs"
+            -m "Update support program dashboard data"
 
           git push
