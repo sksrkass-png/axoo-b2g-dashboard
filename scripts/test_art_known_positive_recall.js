@@ -52,8 +52,6 @@ const DETAIL_URL =
 
 /* =========================================================
    DETAIL FIXTURE VALUES
-
-   아래 값은 테스트 전용.
 ========================================================= */
 
 const FIXTURE_PUBLISHED_DATE =
@@ -82,6 +80,10 @@ const FIXTURE_LOCATION =
 
 const FIXTURE_ELIGIBILITY =
   "공고일 현재 관련 법령에 따른 자격을 갖춘 작가";
+
+
+const EXPECTED_DETAIL_VERSION =
+  "art-detail-1.1.0";
 
 
 /* =========================================================
@@ -448,9 +450,6 @@ async function mockFetch(
     );
 
 
-  /*
-    LIST PAGE
-  */
   if (
     url.includes(
       "boardNormalList.do"
@@ -464,9 +463,6 @@ async function mockFetch(
   }
 
 
-  /*
-    KNOWN POSITIVE DETAIL PAGE
-  */
   if (
     url.includes(
       "ntatcSeq=1506067944"
@@ -480,10 +476,6 @@ async function mockFetch(
   }
 
 
-  /*
-    기타 링크가 Queue에 들어와도
-    외부 네트워크에 접근하지 않는다.
-  */
   return createMockResponse(
     url,
     `
@@ -613,10 +605,6 @@ async function testCrawlRecall() {
       );
 
 
-    /* -------------------------------------------------------
-       ACCESS
-    ------------------------------------------------------- */
-
     assertEqual(
       "Source 접근 성공",
       result.accessOk,
@@ -624,13 +612,6 @@ async function testCrawlRecall() {
     );
 
 
-    /*
-      LIST + DETAIL 최소 2페이지가 필요하다.
-
-      이 검증이 통과해야
-      후보 상세페이지 우선 방문 로직이
-      실제로 실행됐다고 볼 수 있다.
-    */
     assertTrue(
       "List와 Candidate Detail을 모두 방문",
       result.pagesFetched >=
@@ -848,7 +829,7 @@ async function testCrawlRecall() {
     assertEqual(
       "Detail Extraction Version",
       item.detailExtractionVersion,
-      "art-detail-1.0.0"
+      EXPECTED_DETAIL_VERSION
     );
 
 
@@ -922,6 +903,12 @@ async function main() {
   console.log(
     "DETAIL DATA:",
     "TEST FIXTURE"
+  );
+
+
+  console.log(
+    "DETAIL VERSION:",
+    EXPECTED_DETAIL_VERSION
   );
 
 
