@@ -1,430 +1,78 @@
 (() => {
   "use strict";
 
-  const DATA_PATHS = {
-    opportunities:
-      "data/b2g_opportunities.json",
+  const ART_DATA_URL = "data/art_commissions.json";
 
-    agencies:
-      "data/target_agencies.json",
+  const LEGACY_SELECTORS = [
+    ".native-tab-intro-wrap",
+    ".nationwide-source-inline",
+    ".nationwide-source-board"
+  ];
 
-    art:
-      "data/art_commissions.json",
-
-    local:
-      "data/local_projects.json"
-  };
-
-
-  const TAB_INTRO_CONFIG = {
-
-    opportunities: {
-      eyebrow:
-        "AXOO B2G ENGINE",
-
-      title:
-        "나라장터 우선 검토 공고",
-
-      description:
-        "나라장터 입찰공고를 기준으로 AXOO와 연결 가능한 공고를 우선 검토합니다.",
-
-      criteria:
-        "키워드 매칭, 사업 성격, 예산 규모, 제안 가능성을 기준으로 우선 검토 공고를 정리합니다.",
-
-      sources: [
-        "나라장터 입찰공고",
-        "나라장터 발주계획",
-        "AXOO Fit 키워드 엔진"
-      ],
-
-      countLabel:
-        "표시 공고"
-    },
-
-
-    art: {
-      eyebrow:
-        "AXOO PUBLIC ART TRACK",
-
-      title:
-        "건축물 미술작품",
-
-      description:
-        "건축물 미술작품 설치공모를 중심으로 서울·경기·인천 등 주요 권역 공고를 모아봅니다.",
-
-      criteria:
-        "건축물 미술작품 공고 원문에서 공고일, 접수·공모기간, 마감일을 다시 검증한 뒤 일정과 제출 조건을 검토합니다.",
-
-      sources: [
-        "서울시/서울주택도시계열 공고",
-        "경기권 공공기관 공고",
-        "공고문·첨부파일 직접 확인"
-      ],
-
-      countLabel:
-        "표시 공고"
-    },
-
-
-    local: {
-      eyebrow:
-        "AXOO LOCAL PROJECT FEED",
-
-      title:
-        "로컬·지자체 공고",
-
-      description:
-        "지자체 및 산하기관 개별 공고 중 AXOO와 연결 가능성이 있는 프로젝트를 모아봅니다.",
-
-      criteria:
-        "계약방법, 예산, 지역, 프로젝트 유형, 마감 일정을 기준으로 실무 대응 가능 공고를 우선 검토합니다.",
-
-      sources: [
-        "지자체 개별 홈페이지",
-        "공공기관 공고 게시판",
-        "수의·용역·운영 공고 수집 데이터"
-      ],
-
-      countLabel:
-        "표시 공고"
-    },
-
-
-    agencies: {
-      eyebrow:
-        "AXOO TARGET AGENCY MAP",
-
-      title:
-        "기관 타깃",
-
-      description:
-        "AXOO와 접점이 높은 기관들을 지역·유형·관련 이력 기준으로 정리한 기관 타깃 뷰입니다.",
-
-      criteria:
-        "관련 공고 수, 발주계획, 낙찰/계약 이력, 추정 규모를 기준으로 제안 우선순위를 검토합니다.",
-
-      sources: [
-        "나라장터 계약/낙찰/계획 데이터",
-        "기관별 공고 이력",
-        "AXOO 내부 우선순위 기준"
-      ],
-
-      countLabel:
-        "표시 기관"
-    }
-  };
-
-
-  const summaryData = {
-    opportunities: [],
-    agencies: [],
-    art: [],
-    local: []
-  };
-
-
-  const cardContainerIds = {
-    opportunities:
-      "cards",
-
-    agencies:
-      "agencyCards",
-
-    art:
-      "artCards",
-
-    local:
-      "localCards"
-  };
+  let artData = [];
+  let scheduled = false;
+  let applying = false;
 
 
   /* =====================================================
      BASIC
   ===================================================== */
 
-  function safeText(
+  function esc(value) {
+    return String(value ?? "").replace(
+      /[&<>"']/g,
+      ch => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[ch]
+    );
+  }
+
+
+  function clean(
     value,
     fallback = "-"
   ) {
-    const text =
-      String(
-        value ?? ""
-      ).trim();
+    const result =
+      String(value ?? "")
+        .replace(/\s+/g, " ")
+        .trim();
 
-    return (
-      text ||
-      fallback
-    );
+    return result || fallback;
   }
 
 
-  function compactWhitespace(value) {
-    return String(
-      value ?? ""
+  function normalizeTitle(value) {
+    return clean(
+      value,
+      ""
     )
-      .replace(
-        /\s+/g,
-        " "
-      )
+      .replace(/\s+/g, " ")
       .trim();
   }
 
 
-  function extractDateOnlyList(value) {
-    const text =
-      safeText(
-        value,
-        ""
-      );
-
-    const dates = [];
-
-
-    if (!text) {
-      return dates;
-    }
-
-
-    const compactPattern =
-      /\b(20\d{2})(\d{2})(\d{2})(?:\d{2}\d{2}(?:\d{2})?)?\b/g;
-
-
-    const separatedPattern =
-      /(20\d{2})\s*(?:년|[-./])\s*(\d{1,2})\s*(?:월|[-./])\s*(\d{1,2})/g;
-
-
-    let compactMatch;
-
-
-    while (
-      (
-        compactMatch =
-          compactPattern.exec(
-            text
-          )
-      ) !== null
-    ) {
-      dates.push(
-        `${compactMatch[1]}-${compactMatch[2]}-${compactMatch[3]}`
-      );
-    }
-
-
-    let separatedMatch;
-
-
-    while (
-      (
-        separatedMatch =
-          separatedPattern.exec(
-            text
-          )
-      ) !== null
-    ) {
-
-      const year =
-        separatedMatch[1];
-
-      const month =
-        String(
-          separatedMatch[2]
-        ).padStart(
-          2,
-          "0"
-        );
-
-      const day =
-        String(
-          separatedMatch[3]
-        ).padStart(
-          2,
-          "0"
-        );
-
-
-      dates.push(
-        `${year}-${month}-${day}`
-      );
-    }
-
-
-    return Array.from(
-      new Set(dates)
-    );
-  }
-
-
-  function formatDateOnly(value) {
-    const dates =
-      extractDateOnlyList(
-        value
-      );
-
-    return (
-      dates[0] ||
-      "-"
-    );
-  }
-
-
-  function formatDateRange(
-    startValue,
-    endValue
+  function setText(
+    element,
+    value
   ) {
-    const startDate =
-      formatDateOnly(
-        startValue
-      );
-
-    const endDate =
-      formatDateOnly(
-        endValue
-      );
-
-
-    if (
-      startDate !== "-" &&
-      endDate !== "-" &&
-      startDate !== endDate
-    ) {
-      return (
-        `${startDate} ~ ${endDate}`
-      );
+    if (!element) {
+      return;
     }
 
+    const next =
+      String(value);
 
     if (
-      startDate !== "-"
+      element.textContent !==
+      next
     ) {
-      return startDate;
+      element.textContent =
+        next;
     }
-
-
-    if (
-      endDate !== "-"
-    ) {
-      return endDate;
-    }
-
-
-    return "-";
-  }
-
-
-  function getCompactContractMethod(value) {
-    const text =
-      safeText(
-        value,
-        ""
-      );
-
-
-    if (
-      !text ||
-      text === "-"
-    ) {
-      return "확인 필요";
-    }
-
-
-    if (
-      text.includes(
-        "협상에 의한 계약"
-      )
-    ) {
-      return "협상계약";
-    }
-
-
-    if (
-      text.includes(
-        "제한경쟁"
-      )
-    ) {
-      return "제한경쟁";
-    }
-
-
-    if (
-      text.includes(
-        "일반경쟁"
-      )
-    ) {
-      return "일반경쟁";
-    }
-
-
-    if (
-      text.includes(
-        "수의계약"
-      )
-    ) {
-      return "수의계약";
-    }
-
-
-    if (
-      text.includes(
-        "전자입찰"
-      )
-    ) {
-      return "전자입찰";
-    }
-
-
-    if (
-      text.includes(
-        "방문제출"
-      )
-    ) {
-      return "방문제출";
-    }
-
-
-    return text
-      .split("/")[0]
-      .trim();
-  }
-
-
-  function getCompactArtSource(value) {
-    const text =
-      safeText(
-        value,
-        ""
-      );
-
-
-    if (
-      !text ||
-      text === "-"
-    ) {
-      return "-";
-    }
-
-
-    if (
-      text.includes("경기")
-    ) {
-      return "경기도";
-    }
-
-
-    if (
-      text.includes("서울")
-    ) {
-      return "서울시";
-    }
-
-
-    if (
-      text.includes("인천")
-    ) {
-      return "인천시";
-    }
-
-
-    return text;
   }
 
 
@@ -432,588 +80,197 @@
      DATA
   ===================================================== */
 
-  async function loadJson(
-    path,
-    fallback = []
-  ) {
+  async function loadArtData() {
     try {
       const response =
         await fetch(
-          `${path}?ui=${Date.now()}`
+          `${ART_DATA_URL}?ui2=${Date.now()}`
         );
-
 
       if (!response.ok) {
-        console.warn(
-          "[AXOO UI] JSON load failed:",
-          path,
-          response.status
-        );
-
-        return fallback;
+        return;
       }
 
+      const data =
+        await response.json();
 
-      return await response.json();
+      artData =
+        Array.isArray(data)
+          ? data
+          : [];
 
     } catch (error) {
       console.warn(
-        "[AXOO UI] JSON load error:",
-        path,
+        "[AXOO UI v2] art data load failed",
         error
       );
-
-      return fallback;
     }
-  }
-
-
-  async function loadSummaryData() {
-    const [
-      opportunities,
-      agencies,
-      art,
-      local
-    ] =
-      await Promise.all([
-        loadJson(
-          DATA_PATHS.opportunities,
-          []
-        ),
-
-        loadJson(
-          DATA_PATHS.agencies,
-          []
-        ),
-
-        loadJson(
-          DATA_PATHS.art,
-          []
-        ),
-
-        loadJson(
-          DATA_PATHS.local,
-          []
-        )
-      ]);
-
-
-    summaryData.opportunities =
-      Array.isArray(
-        opportunities
-      )
-        ? opportunities
-        : [];
-
-
-    summaryData.agencies =
-      Array.isArray(
-        agencies
-      )
-        ? agencies
-        : [];
-
-
-    summaryData.art =
-      Array.isArray(
-        art
-      )
-        ? art
-        : [];
-
-
-    summaryData.local =
-      Array.isArray(
-        local
-      )
-        ? local
-        : [];
   }
 
 
   /* =====================================================
-     TABS / META
+     LEGACY UI CLEANUP
   ===================================================== */
 
-  function getActiveTabKey() {
-    const activeButton =
-      document.querySelector(
-        ".tab-button.active"
-      );
-
-
+  function ensureRuntimeStyle() {
     if (
-      activeButton?.dataset?.tab
-    ) {
-      return (
-        activeButton.dataset.tab
-      );
-    }
-
-
-    const activePanel =
-      document.querySelector(
-        ".tab-panel.active"
-      );
-
-
-    if (!activePanel) {
-      return "opportunities";
-    }
-
-
-    if (
-      activePanel.id ===
-      "agenciesTab"
-    ) {
-      return "agencies";
-    }
-
-
-    if (
-      activePanel.id ===
-      "artTab"
-    ) {
-      return "art";
-    }
-
-
-    if (
-      activePanel.id ===
-      "localTab"
-    ) {
-      return "local";
-    }
-
-
-    return "opportunities";
-  }
-
-
-  function getMetaCardMap() {
-    return {
-      opportunities:
-        document
-          .getElementById(
-            "metaOpportunityCount"
-          )
-          ?.closest(
-            ".meta-card"
-          ),
-
-      art:
-        document
-          .getElementById(
-            "metaArtCount"
-          )
-          ?.closest(
-            ".meta-card"
-          ),
-
-      local:
-        document
-          .getElementById(
-            "metaLocalCount"
-          )
-          ?.closest(
-            ".meta-card"
-          ),
-
-      agencies:
-        document
-          .getElementById(
-            "metaAgencyCount"
-          )
-          ?.closest(
-            ".meta-card"
-          )
-    };
-  }
-
-
-  function activateTab(tabKey) {
-    const button =
-      document.querySelector(
-        `.tab-button[data-tab="${tabKey}"]`
-      );
-
-
-    if (button) {
-      button.click();
-    }
-
-
-    setTimeout(
-      () => {
-        updateMetaCardState();
-        updateSummaryByActiveTab();
-        updateRequestedListHeadLabels();
-        setupAccordions();
-        ensureNativeTabIntros();
-      },
-      160
-    );
-  }
-
-
-  function setupMetaCards() {
-    const cardMap =
-      getMetaCardMap();
-
-
-    Object.entries(
-      cardMap
-    ).forEach(
-      ([tabKey, card]) => {
-
-        if (!card) {
-          return;
-        }
-
-
-        card.dataset.tabTarget =
-          tabKey;
-
-
-        card.setAttribute(
-          "role",
-          "button"
-        );
-
-
-        card.setAttribute(
-          "tabindex",
-          "0"
-        );
-
-
-        if (
-          card.dataset
-            .metaBound ===
-          "true"
-        ) {
-          return;
-        }
-
-
-        card.dataset
-          .metaBound =
-          "true";
-
-
-        card.addEventListener(
-          "click",
-          () => {
-            activateTab(
-              tabKey
-            );
-          }
-        );
-
-
-        card.addEventListener(
-          "keydown",
-          event => {
-
-            if (
-              event.key ===
-                "Enter" ||
-              event.key ===
-                " "
-            ) {
-              event.preventDefault();
-
-              activateTab(
-                tabKey
-              );
-            }
-          }
-        );
-      }
-    );
-
-
-    updateMetaCardState();
-  }
-
-
-  function updateMetaCardState() {
-    const activeTab =
-      getActiveTabKey();
-
-    const cardMap =
-      getMetaCardMap();
-
-
-    Object.entries(
-      cardMap
-    ).forEach(
-      ([tabKey, card]) => {
-
-        if (!card) {
-          return;
-        }
-
-
-        card.classList.toggle(
-          "meta-card-active",
-          tabKey ===
-            activeTab
-        );
-
-
-        card.classList.toggle(
-          "meta-card-muted",
-          tabKey !==
-            activeTab
-        );
-      }
-    );
-  }
-
-
-  function setupTabButtons() {
-    document
-      .querySelectorAll(
-        ".tab-button"
+      document.getElementById(
+        "axooDashboardUiV2RuntimeStyle"
       )
-      .forEach(
-        button => {
+    ) {
+      return;
+    }
 
-          if (
-            button.dataset
-              .uiBound ===
-            "true"
-          ) {
-            return;
-          }
+    const style =
+      document.createElement(
+        "style"
+      );
+
+    style.id =
+      "axooDashboardUiV2RuntimeStyle";
+
+    style.textContent = `
+      .native-tab-intro-wrap,
+      .nationwide-source-inline,
+      .nationwide-source-board {
+        display: none !important;
+      }
+    `;
+
+    document.head.appendChild(
+      style
+    );
+  }
 
 
-          button.dataset
-            .uiBound =
-            "true";
+  function removeLegacyUi() {
+    LEGACY_SELECTORS.forEach(
+      selector => {
 
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              setTimeout(
-                () => {
-                  updateMetaCardState();
-                  updateSummaryByActiveTab();
-                  updateRequestedListHeadLabels();
-                  setupAccordions();
-                  ensureNativeTabIntros();
-                },
-                160
-              );
-            }
+        document
+          .querySelectorAll(
+            selector
+          )
+          .forEach(
+            node =>
+              node.remove()
           );
-        }
-      );
+      }
+    );
   }
 
 
   /* =====================================================
-     LIST HEAD
+     ACTIVE TAB
   ===================================================== */
 
-  function updateRequestedListHeadLabels() {
-    const opportunitiesPanel =
-      document.getElementById(
-        "opportunitiesTab"
+  function getActiveTab() {
+    return (
+      document
+        .querySelector(
+          ".tab-button.active[data-tab]"
+        )
+        ?.dataset
+        ?.tab ||
+      "art"
+    );
+  }
+
+
+  function getActivePanel() {
+    return document
+      .getElementById(
+        `${getActiveTab()}Tab`
       );
-
-
-    const opportunitiesHead =
-      opportunitiesPanel
-        ?.querySelector(
-          ".list-head"
-        );
-
-
-    if (opportunitiesHead) {
-      opportunitiesHead.innerHTML = `
-        <span class="list-source-grade">
-
-          <em>
-            출처
-          </em>
-
-          <em>
-            등급
-          </em>
-
-        </span>
-
-        <span>
-          공고명
-        </span>
-
-        <span>
-          게재기간
-        </span>
-
-        <span>
-          마감일
-        </span>
-      `;
-    }
-
-
-    const artPanel =
-      document.getElementById(
-        "artTab"
-      );
-
-
-    const artHead =
-      artPanel
-        ?.querySelector(
-          ".list-head"
-        );
-
-
-    if (artHead) {
-      artHead.innerHTML = `
-        <span class="list-source-grade">
-
-          <em>
-            출처
-          </em>
-
-          <em></em>
-
-        </span>
-
-        <span>
-          공고명
-        </span>
-
-        <span>
-          공고일
-        </span>
-
-        <span>
-          마감일
-        </span>
-      `;
-    }
-
-
-    const localPanel =
-      document.getElementById(
-        "localTab"
-      );
-
-
-    const localHead =
-      localPanel
-        ?.querySelector(
-          ".list-head"
-        );
-
-
-    if (localHead) {
-      localHead.innerHTML = `
-        <span class="list-source-grade">
-
-          <em>
-            공고기관
-          </em>
-
-          <em>
-            등급
-          </em>
-
-        </span>
-
-        <span>
-          공고명
-        </span>
-
-        <span>
-          계약방법
-        </span>
-
-        <span>
-          마감/개찰
-        </span>
-      `;
-    }
   }
 
 
   /* =====================================================
-     CARD DATA
+     META
   ===================================================== */
 
   function getMetaValue(
     card,
-    label
+    labels
   ) {
-    const items =
-      Array.from(
-        card.querySelectorAll(
-          ".meta div"
-        )
+    const wanted =
+      Array.isArray(labels)
+        ? labels
+        : [labels];
+
+    const rows =
+      card.querySelectorAll(
+        ".meta div"
       );
 
-
     for (
-      const item of
-      items
+      const row of rows
     ) {
-      const span =
-        item.querySelector(
+      const labelNode =
+        row.querySelector(
           "span"
         );
 
-
-      const spanText =
-        safeText(
-          span?.textContent,
+      const label =
+        clean(
+          labelNode?.textContent,
           ""
         );
 
-
       if (
-        spanText ===
-        label
+        !wanted.includes(
+          label
+        )
       ) {
-        return safeText(
-          item.textContent.replace(
-            spanText,
-            ""
-          )
-        );
+        continue;
       }
-    }
 
+      return clean(
+        clean(
+          row.textContent,
+          ""
+        ).replace(
+          label,
+          ""
+        ),
+        "-"
+      );
+    }
 
     return "-";
   }
 
 
-  function getFirstBadgeText(card) {
-    return safeText(
+  /* =====================================================
+     CARD
+  ===================================================== */
+
+  function getCardTitle(card) {
+    return clean(
       card
         .querySelector(
-          ".badge"
+          ".accordion-body h2"
         )
-        ?.textContent
-    );
-  }
+        ?.textContent ||
 
+      card
+        .querySelector(
+          ".accordion-body h3"
+        )
+        ?.textContent ||
 
-  function getTitleText(card) {
-    return safeText(
       card
         .querySelector(
           "h2"
         )
+        ?.textContent ||
+
+      card
+        .querySelector(
+          "h3"
+        )
         ?.textContent,
+
       "제목 없음"
     );
   }
@@ -1021,270 +278,305 @@
 
   function isEmptyCard(card) {
     const title =
-      getTitleText(card);
+      getCardTitle(
+        card
+      );
 
-
-    return (
-      title.includes(
-        "데이터가 없습니다"
-      ) ||
-      title.includes(
-        "조건에 맞는"
-      ) ||
-      title.includes(
-        "불러오는 중"
-      )
+    return [
+      "데이터가 없습니다",
+      "조건에 맞는",
+      "불러오는 중"
+    ].some(
+      keyword =>
+        title.includes(
+          keyword
+        )
     );
   }
 
 
-  function findDataByTitle(
-    tabKey,
-    title
+  function getGradeFromDom(
+    card
   ) {
-    const normalizedTitle =
-      compactWhitespace(
-        title
+    const values = [
+      card
+        .querySelector(
+          ".priority-grade"
+        )
+        ?.textContent,
+
+      card
+        .querySelector(
+          ".summary-grade"
+        )
+        ?.textContent,
+
+      ...Array
+        .from(
+          card.querySelectorAll(
+            ".badge"
+          )
+        )
+        .map(
+          node =>
+            node.textContent
+        )
+    ]
+      .map(
+        value =>
+          clean(
+            value,
+            ""
+          )
       );
 
+    for (
+      const value of
+      values
+    ) {
+      const match =
+        value.match(
+          /\b(S|A|B|C)\b/i
+        );
+
+      if (match) {
+        return match[1]
+          .toUpperCase();
+      }
+    }
+
+    return "";
+  }
+
+
+  /* =====================================================
+     ART MATCH
+  ===================================================== */
+
+  function findArtItem(card) {
+    const title =
+      normalizeTitle(
+        getCardTitle(
+          card
+        )
+      );
+
+    if (!title) {
+      return null;
+    }
 
     return (
-      summaryData[
-        tabKey
-      ].find(
-        item => {
-
-          const itemTitle =
-            compactWhitespace(
-              item.bidNtceNm ||
-              item.title ||
-              item.agencyName ||
-              ""
-            );
-
-
-          return (
-            itemTitle ===
-            normalizedTitle
-          );
-        }
+      artData.find(
+        item =>
+          normalizeTitle(
+            item.title ||
+            item.noticeTitle ||
+            item.projectName
+          ) ===
+          title
       ) ||
       null
     );
   }
 
 
-  function getOpportunityPublishPeriod(card) {
-    const title =
-      getTitleText(card);
-
-
-    const data =
-      findDataByTitle(
-        "opportunities",
-        title
-      );
-
-
-    const startValue =
-      data?.publishedDate ||
-      data?.postedDate ||
-      data?.noticeDate ||
-      data?.bidNtceDt ||
-      data?.bidNtceBgnDt ||
-      data?.bidNtceBgn ||
-      getMetaValue(
-        card,
-        "게재일"
-      );
-
-
-    const endValue =
-      data?.deadlineDate ||
-      data?.deadline ||
-      data?.bidClseDt ||
-      data?.bidNtceEndDt ||
-      getMetaValue(
-        card,
-        "마감/개찰"
-      );
-
-
-    return formatDateRange(
-      startValue,
-      endValue
-    );
-  }
-
-
-  function getOpportunityDeadlineDate(card) {
-    const title =
-      getTitleText(card);
-
-
-    const data =
-      findDataByTitle(
-        "opportunities",
-        title
-      );
-
-
-    const deadlineValue =
-      data?.deadlineDate ||
-      data?.deadline ||
-      data?.bidClseDt ||
-      data?.bidClseDate ||
-      data?.bidNtceEndDt ||
-      getMetaValue(
-        card,
-        "마감/개찰"
-      );
-
-
-    return formatDateOnly(
-      deadlineValue
-    );
-  }
-
-
-  function getSourceGradeInfo(
-    card,
-    tabKey
-  ) {
-    const grade =
-      getFirstBadgeText(
+  function getGrade(card) {
+    const domGrade =
+      getGradeFromDom(
         card
       );
 
-
-    if (
-      tabKey ===
-      "opportunities"
-    ) {
-      return {
-        source:
-          "나라장터",
-
-        grade:
-          grade
-      };
+    if (domGrade) {
+      return domGrade;
     }
 
+    const item =
+      findArtItem(
+        card
+      );
 
-    if (
-      tabKey ===
-      "agencies"
+    return clean(
+      item?.grade,
+      ""
+    )
+      .toUpperCase();
+  }
+
+
+  /* =====================================================
+     SOURCE
+  ===================================================== */
+
+  function normalizeSource(value) {
+    const source =
+      clean(
+        value,
+        "-"
+      );
+
+    const regions = [
+      "서울",
+      "부산",
+      "대구",
+      "인천",
+      "광주",
+      "대전",
+      "울산",
+      "세종",
+      "경기",
+      "강원",
+      "충북",
+      "충남",
+      "전북",
+      "전남",
+      "경북",
+      "경남",
+      "제주"
+    ];
+
+    for (
+      const region of
+      regions
     ) {
-      return {
-        source:
-          getMetaValue(
-            card,
-            "기관유형"
-          ),
-
-        grade:
-          grade
-      };
+      if (
+        source.includes(
+          region
+        )
+      ) {
+        return region;
+      }
     }
 
-
-    if (
-      tabKey ===
-      "art"
-    ) {
-      return {
-        source:
-          getCompactArtSource(
-            getFirstBadgeText(
-              card
-            )
-          ),
-
-        grade:
-          ""
-      };
-    }
+    return source;
+  }
 
 
-    if (
-      tabKey ===
-      "local"
-    ) {
-      return {
-        source:
-          getMetaValue(
-            card,
-            "공고기관"
-          ) ||
-          getMetaValue(
-            card,
-            "출처"
-          ) ||
-          "로컬공고",
+  /* =====================================================
+     SUMMARY DATA
+  ===================================================== */
 
-        grade:
-          grade
-      };
-    }
+  function buildArtSummary(
+    card
+  ) {
+    const item =
+      findArtItem(
+        card
+      );
 
+    const source =
+      normalizeSource(
+        item?.region ||
+
+        getMetaValue(
+          card,
+          [
+            "지역",
+            "기관"
+          ]
+        ) ||
+
+        card
+          .querySelector(
+            ".badge"
+          )
+          ?.textContent
+      );
 
     return {
       source:
-        "-",
+        source,
 
       grade:
-        grade
+        getGrade(
+          card
+        ),
+
+      title:
+        getCardTitle(
+          card
+        ),
+
+      periodLabel:
+        "공고일",
+
+      period:
+        clean(
+          item?.publishedDate ||
+          item?.postedDate ||
+
+          getMetaValue(
+            card,
+            [
+              "공고일",
+              "공개일"
+            ]
+          )
+        ),
+
+      deadlineLabel:
+        "마감일",
+
+      deadline:
+        clean(
+          item?.deadline ||
+          item?.periodEnd ||
+          item?.endDate ||
+
+          getMetaValue(
+            card,
+            "마감일"
+          )
+        )
     };
   }
 
 
-  function getPeriodDeadlineInfo(
+  function buildGenericSummary(
     card,
-    tabKey
+    tab
   ) {
     if (
-      tabKey ===
-      "opportunities"
-    ) {
-      return {
-        periodLabel:
-          "게재기간",
-
-        period:
-          getOpportunityPublishPeriod(
-            card
-          ),
-
-        deadlineLabel:
-          "마감일",
-
-        deadline:
-          getOpportunityDeadlineDate(
-            card
-          )
-      };
-    }
-
-
-    if (
-      tabKey ===
+      tab ===
       "agencies"
     ) {
       return {
+        source:
+          clean(
+            getMetaValue(
+              card,
+              [
+                "기관유형",
+                "구분"
+              ]
+            )
+          ),
+
+        grade:
+          getGrade(
+            card
+          ),
+
+        title:
+          getCardTitle(
+            card
+          ),
+
         periodLabel:
           "지역",
 
         period:
-          getMetaValue(
-            card,
-            "지역"
+          clean(
+            getMetaValue(
+              card,
+              "지역"
+            )
           ),
 
         deadlineLabel:
           "관련 이력",
 
         deadline:
-          safeText(
+          clean(
             card
               .querySelector(
                 ".score"
@@ -1295,81 +587,37 @@
     }
 
 
-    /*
-      건축물 미술작품은
-      화면에 적힌 값보다
-      정규화 JSON 값을 우선한다.
-    */
     if (
-      tabKey ===
-      "art"
-    ) {
-      const title =
-        getTitleText(
-          card
-        );
-
-
-      const data =
-        findDataByTitle(
-          "art",
-          title
-        );
-
-
-      const publishedDate =
-        data?.publishedDate ||
-        data?.postedDate ||
-        getMetaValue(
-          card,
-          "공고일"
-        ) ||
-        getMetaValue(
-          card,
-          "공개일"
-        );
-
-
-      const deadline =
-        data?.deadline ||
-        data?.periodEnd ||
-        data?.endDate ||
-        getMetaValue(
-          card,
-          "마감일"
-        );
-
-
-      return {
-        periodLabel:
-          "공고일",
-
-        period:
-          formatDateOnly(
-            publishedDate
-          ),
-
-        deadlineLabel:
-          "마감일",
-
-        deadline:
-          formatDateOnly(
-            deadline
-          )
-      };
-    }
-
-
-    if (
-      tabKey ===
+      tab ===
       "local"
     ) {
       return {
+        source:
+          clean(
+            getMetaValue(
+              card,
+              [
+                "공고기관",
+                "출처"
+              ]
+            )
+          ),
+
+        grade:
+          getGrade(
+            card
+          ),
+
+        title:
+          getCardTitle(
+            card
+          ),
+
         periodLabel:
           "계약방법",
 
         period:
-          getCompactContractMethod(
+          clean(
             getMetaValue(
               card,
               "계약방법"
@@ -1377,36 +625,91 @@
           ),
 
         deadlineLabel:
-          "마감/개찰",
+          "마감 / 개찰",
 
         deadline:
-          formatDateOnly(
+          clean(
             getMetaValue(
               card,
-              "마감/개찰"
+              [
+                "마감/개찰",
+                "마감 / 개찰"
+              ]
             )
-          ) ||
-          getMetaValue(
-            card,
-            "마감/개찰"
           )
       };
     }
 
 
     return {
+      source:
+        tab ===
+        "opportunities"
+          ? "나라장터"
+          : clean(
+              card
+                .querySelector(
+                  ".badge"
+                )
+                ?.textContent
+            ),
+
+      grade:
+        getGrade(
+          card
+        ),
+
+      title:
+        getCardTitle(
+          card
+        ),
+
       periodLabel:
-        "기간",
+        "게재기간",
 
       period:
-        "-",
+        clean(
+          getMetaValue(
+            card,
+            [
+              "게재기간",
+              "게재일",
+              "공고일"
+            ]
+          )
+        ),
 
       deadlineLabel:
-        "마감",
+        "마감일",
 
       deadline:
-        "-"
+        clean(
+          getMetaValue(
+            card,
+            [
+              "마감일",
+              "마감/개찰"
+            ]
+          )
+        )
     };
+  }
+
+
+  function getSummary(
+    card,
+    tab
+  ) {
+    return (
+      tab === "art"
+        ? buildArtSummary(
+            card
+          )
+        : buildGenericSummary(
+            card,
+            tab
+          )
+    );
   }
 
 
@@ -1414,174 +717,40 @@
      ACCORDION
   ===================================================== */
 
-  function createAccordionSummary(
-    card,
-    tabKey
-  ) {
-    const sourceGrade =
-      getSourceGradeInfo(
-        card,
-        tabKey
-      );
-
-
-    const periodDeadline =
-      getPeriodDeadlineInfo(
-        card,
-        tabKey
-      );
-
-
-    const title =
-      getTitleText(
-        card
-      );
-
-
-    const sourceGradeHtml =
-      sourceGrade.grade
-        ? `
-          <span class="summary-source-wrap">
-
-            <span class="summary-source">
-              ${sourceGrade.source}
-            </span>
-
-            <span class="summary-grade">
-              ${sourceGrade.grade}
-            </span>
-
-          </span>
-        `
-        : `
-          <span class="summary-source-wrap">
-
-            <span class="summary-source">
-              ${sourceGrade.source}
-            </span>
-
-          </span>
-        `;
-
-
-    return `
-      <summary class="accordion-summary">
-
-        ${sourceGradeHtml}
-
-
-        <span class="summary-title">
-          ${title}
-        </span>
-
-
-        <span class="summary-period">
-
-          <span>
-            ${periodDeadline.periodLabel}
-          </span>
-
-          <strong>
-            ${periodDeadline.period}
-          </strong>
-
-        </span>
-
-
-        <span class="summary-deadline">
-
-          <span>
-            ${periodDeadline.deadlineLabel}
-          </span>
-
-          <strong>
-            ${periodDeadline.deadline}
-          </strong>
-
-        </span>
-
-      </summary>
-    `;
-  }
-
-
   function convertCardToAccordion(
     card,
-    tabKey
+    tab
   ) {
     if (
       !card ||
+      isEmptyCard(
+        card
+      ) ||
       card.classList.contains(
         "card-as-accordion"
       )
     ) {
-      const existingDetails =
-        card?.querySelector(
-          "details.accordion-card"
-        );
-
-
-      if (
-        tabKey === "art" &&
-        existingDetails
-      ) {
-        existingDetails
-          .removeAttribute(
-            "open"
-          );
-
-        existingDetails.open =
-          false;
-      }
-
-
       return;
     }
 
-
-    if (
-      isEmptyCard(
-        card
-      )
-    ) {
-      return;
-    }
-
-
-    const summaryHtml =
-      createAccordionSummary(
+    const info =
+      getSummary(
         card,
-        tabKey
+        tab
       );
-
 
     const details =
       document.createElement(
         "details"
       );
 
-
-    details.className =
-      "accordion-card";
-
-
-    if (
-      tabKey === "art"
-    ) {
-      details.removeAttribute(
-        "open"
-      );
-
-      details.open =
-        false;
-    }
-
-
     const body =
       document.createElement(
         "div"
       );
 
+    details.className =
+      "accordion-card";
 
     body.className =
       "accordion-body";
@@ -1596,8 +765,60 @@
     }
 
 
-    details.innerHTML =
-      summaryHtml;
+    details.innerHTML = `
+      <summary class="accordion-summary">
+
+        <span class="summary-source-wrap">
+
+          <span class="summary-source">
+            ${esc(info.source)}
+          </span>
+
+          ${
+            info.grade
+              ? `
+                <span class="summary-grade">
+                  ${esc(info.grade)}
+                </span>
+              `
+              : ""
+          }
+
+        </span>
+
+
+        <span class="summary-title">
+          ${esc(info.title)}
+        </span>
+
+
+        <span class="summary-period">
+
+          <span>
+            ${esc(info.periodLabel)}
+          </span>
+
+          <strong>
+            ${esc(info.period)}
+          </strong>
+
+        </span>
+
+
+        <span class="summary-deadline">
+
+          <span>
+            ${esc(info.deadlineLabel)}
+          </span>
+
+          <strong>
+            ${esc(info.deadline)}
+          </strong>
+
+        </span>
+
+      </summary>
+    `;
 
 
     details.appendChild(
@@ -1606,12 +827,9 @@
 
 
     if (
-      tabKey === "art"
+      tab ===
+      "art"
     ) {
-      details.removeAttribute(
-        "open"
-      );
-
       details.open =
         false;
     }
@@ -1621,7 +839,6 @@
       "card-as-accordion"
     );
 
-
     card.appendChild(
       details
     );
@@ -1629,167 +846,259 @@
 
 
   function setupAccordions() {
+    const map = {
+      art:
+        "artCards",
+
+      opportunities:
+        "cards",
+
+      local:
+        "localCards",
+
+      agencies:
+        "agencyCards"
+    };
+
+
     Object.entries(
-      cardContainerIds
+      map
     ).forEach(
       (
         [
-          tabKey,
-          containerId
+          tab,
+          id
         ]
       ) => {
 
         const container =
           document.getElementById(
-            containerId
+            id
           );
-
 
         if (!container) {
           return;
         }
 
 
-        Array.from(
-          container.querySelectorAll(
-            ".card"
+        Array
+          .from(
+            container.children
           )
-        ).forEach(
-          card => {
-            convertCardToAccordion(
-              card,
-              tabKey
-            );
-          }
-        );
+          .forEach(
+            card => {
+
+              if (
+                card.classList
+                  ?.contains(
+                    "card"
+                  )
+              ) {
+                convertCardToAccordion(
+                  card,
+                  tab
+                );
+              }
+            }
+          );
       }
     );
   }
 
 
   /* =====================================================
-     REVIEW FILTER
+     ART LIST HEAD
   ===================================================== */
 
-  function setupReviewSelects() {
-    const preferredOrder = [
-      "all",
-      "new",
-      "reviewing",
-      "proposal",
-      "hold",
-      "done"
-    ];
-
-
-    document
-      .querySelectorAll(
-        "select[id$='ReviewFilter']"
-      )
-      .forEach(
-        select => {
-
-          if (
-            select.dataset
-              .reviewOrderFixed ===
-            "true"
-          ) {
-            return;
-          }
-
-
-          const options =
-            Array.from(
-              select.options
-            );
-
-
-          const sorted =
-            preferredOrder
-              .map(
-                value =>
-                  options.find(
-                    option =>
-                      option.value ===
-                      value
-                  )
-              )
-              .filter(
-                Boolean
-              );
-
-
-          options.forEach(
-            option => {
-
-              if (
-                !sorted.includes(
-                  option
-                )
-              ) {
-                sorted.push(
-                  option
-                );
-              }
-            }
-          );
-
-
-          select.innerHTML =
-            "";
-
-
-          sorted.forEach(
-            option =>
-              select.appendChild(
-                option
-              )
-          );
-
-
-          select.dataset
-            .reviewOrderFixed =
-            "true";
-        }
+  function normalizeArtListHead() {
+    const head =
+      document.querySelector(
+        "#artTab .list-head"
       );
+
+    if (!head) {
+      return;
+    }
+
+
+    const html = `
+      <span class="list-source-grade">
+        <em>출처</em>
+        <em>우선순위</em>
+      </span>
+
+      <span>
+        공모명
+      </span>
+
+      <span>
+        공고일
+      </span>
+
+      <span>
+        마감일
+      </span>
+    `;
+
+
+    if (
+      head.innerHTML
+        .replace(
+          /\s+/g,
+          " "
+        )
+        .trim() !==
+
+      html
+        .replace(
+          /\s+/g,
+          " "
+        )
+        .trim()
+    ) {
+      head.innerHTML =
+        html;
+    }
   }
 
 
   /* =====================================================
-     SUMMARY
+     DATE
   ===================================================== */
 
-  function getVisibleCards(tabKey) {
-    const containerId =
-      cardContainerIds[
-        tabKey
-      ];
+  function parseDate(value) {
+    const raw =
+      clean(
+        value,
+        ""
+      );
+
+    const match =
+      raw.match(
+        /(20\d{2})[-./년\s]+(\d{1,2})[-./월\s]+(\d{1,2})/
+      );
+
+    if (!match) {
+      return null;
+    }
 
 
-    const container =
-      document.getElementById(
-        containerId
+    const date =
+      new Date(
+        Number(match[1]),
+        Number(match[2]) - 1,
+        Number(match[3])
       );
 
 
-    if (!container) {
+    return (
+      Number.isNaN(
+        date.getTime()
+      )
+        ? null
+        : date
+    );
+  }
+
+
+  function getDeadlineDays(
+    card
+  ) {
+    const item =
+      findArtItem(
+        card
+      );
+
+
+    const raw =
+      item?.deadline ||
+
+      card
+        .querySelector(
+          ".summary-deadline strong"
+        )
+        ?.textContent ||
+
+      getMetaValue(
+        card,
+        [
+          "마감일",
+          "마감/개찰",
+          "마감 / 개찰"
+        ]
+      );
+
+
+    const deadline =
+      parseDate(
+        raw
+      );
+
+    if (!deadline) {
+      return null;
+    }
+
+
+    const today =
+      new Date();
+
+
+    today.setHours(
+      0,
+      0,
+      0,
+      0
+    );
+
+
+    deadline.setHours(
+      0,
+      0,
+      0,
+      0
+    );
+
+
+    return Math.ceil(
+      (
+        deadline.getTime() -
+        today.getTime()
+      ) /
+      86400000
+    );
+  }
+
+
+  /* =====================================================
+     TODAY KPI
+  ===================================================== */
+
+  function getVisibleCards() {
+    const panel =
+      getActivePanel();
+
+    if (!panel) {
       return [];
     }
 
 
-    return Array.from(
-      container.querySelectorAll(
-        ".card"
-      )
-    )
-      .filter(
-        card =>
-          !isEmptyCard(
-            card
-          )
+    return Array
+      .from(
+        panel.querySelectorAll(
+          ".card, .priority-accordion-card, .priority-project-card"
+        )
       )
       .filter(
         card => {
+
+          if (
+            isEmptyCard(
+              card
+            )
+          ) {
+            return false;
+          }
+
 
           const style =
             window.getComputedStyle(
@@ -1800,6 +1109,7 @@
           return (
             style.display !==
               "none" &&
+
             style.visibility !==
               "hidden"
           );
@@ -1808,669 +1118,289 @@
   }
 
 
-  function getGradeFromCard(card) {
-    const text =
-      safeText(
-        card
-          .querySelector(
-            ".summary-grade"
-          )
-          ?.textContent ||
-
-        card
-          .querySelector(
-            ".badge"
-          )
-          ?.textContent,
-
-        ""
-      );
-
-
-    if (
-      text.includes("S")
-    ) {
-      return "S";
-    }
-
-
-    if (
-      text.includes("A")
-    ) {
-      return "A";
-    }
-
-
-    if (
-      text.includes("B")
-    ) {
-      return "B";
-    }
-
-
-    if (
-      text.includes("C")
-    ) {
-      return "C";
-    }
-
-
-    return "";
-  }
-
-
-  function setSummaryLabels(labels) {
-    const summaryCards =
-      Array.from(
-        document.querySelectorAll(
-          ".summary-card span"
-        )
-      );
-
-
-    labels.forEach(
-      (
-        label,
-        index
-      ) => {
-
-        if (
-          summaryCards[
-            index
-          ]
-        ) {
-          summaryCards[
-            index
-          ].textContent =
-            label;
-        }
-      }
-    );
-  }
-
-
-  function updateSummaryNumbers(numbers) {
-    const totalCount =
-      document.getElementById(
-        "totalCount"
-      );
-
-
-    const sCount =
-      document.getElementById(
-        "sCount"
-      );
-
-
-    const aCount =
-      document.getElementById(
-        "aCount"
-      );
-
-
-    const bCount =
-      document.getElementById(
-        "bCount"
-      );
-
-
-    if (totalCount) {
-      totalCount.textContent =
-        numbers.total;
-    }
-
-
-    if (sCount) {
-      sCount.textContent =
-        numbers.first;
-    }
-
-
-    if (aCount) {
-      aCount.textContent =
-        numbers.second;
-    }
-
-
-    if (bCount) {
-      bCount.textContent =
-        numbers.third;
-    }
-  }
-
-
-  function updateSummaryByActiveTab() {
-    const activeTab =
-      getActiveTabKey();
-
-
-    const visibleCards =
-      getVisibleCards(
-        activeTab
-      );
-
-
-    if (
-      activeTab === "art"
-    ) {
-      setSummaryLabels([
-        "현재 표시",
-        "서울",
-        "경기",
-        "기타"
-      ]);
-
-
-      const seoulCount =
-        visibleCards.filter(
-          card =>
-            card.textContent.includes(
-              "서울"
-            )
-        ).length;
-
-
-      const gyeonggiCount =
-        visibleCards.filter(
-          card =>
-            card.textContent.includes(
-              "경기"
-            )
-        ).length;
-
-
-      const otherCount =
-        Math.max(
-          visibleCards.length -
-          seoulCount -
-          gyeonggiCount,
-          0
-        );
-
-
-      updateSummaryNumbers({
-        total:
-          visibleCards.length,
-
-        first:
-          seoulCount,
-
-        second:
-          gyeonggiCount,
-
-        third:
-          otherCount
-      });
-
-
-      return;
-    }
-
-
-    setSummaryLabels([
-      "현재 표시",
-      "S등급",
-      "A등급",
-      "B/C등급"
-    ]);
-
-
-    const sCount =
-      visibleCards.filter(
-        card =>
-          getGradeFromCard(
-            card
-          ) === "S"
-      ).length;
-
-
-    const aCount =
-      visibleCards.filter(
-        card =>
-          getGradeFromCard(
-            card
-          ) === "A"
-      ).length;
-
-
-    const bcCount =
-      visibleCards.filter(
-        card => {
-
-          const grade =
-            getGradeFromCard(
-              card
-            );
-
-
-          return (
-            grade === "B" ||
-            grade === "C"
-          );
-        }
-      ).length;
-
-
-    updateSummaryNumbers({
-      total:
-        visibleCards.length,
-
-      first:
-        sCount,
-
-      second:
-        aCount,
-
-      third:
-        bcCount
-    });
-  }
-
-
-  function updateMetaCountsFromData() {
-    const opportunityCount =
-      document.getElementById(
-        "metaOpportunityCount"
-      );
-
-
-    const agencyCount =
-      document.getElementById(
-        "metaAgencyCount"
-      );
-
-
-    const artCount =
-      document.getElementById(
-        "metaArtCount"
-      );
-
-
-    const localCount =
-      document.getElementById(
-        "metaLocalCount"
-      );
-
-
-    if (
-      opportunityCount &&
-      opportunityCount.textContent ===
-        "0"
-    ) {
-      opportunityCount.textContent =
-        summaryData
-          .opportunities
-          .length;
-    }
-
-
-    if (
-      agencyCount &&
-      agencyCount.textContent ===
-        "0"
-    ) {
-      agencyCount.textContent =
-        summaryData
-          .agencies
-          .length;
-    }
-
-
-    if (
-      artCount &&
-      artCount.textContent ===
-        "0"
-    ) {
-      artCount.textContent =
-        summaryData
-          .art
-          .length;
-    }
-
-
-    if (
-      localCount &&
-      localCount.textContent ===
-        "0"
-    ) {
-      localCount.textContent =
-        summaryData
-          .local
-          .length;
-    }
-  }
-
-
-  /* =====================================================
-     TAB INTRO
-  ===================================================== */
-
-  function getPanelByTabKey(tabKey) {
-    if (
-      tabKey ===
-      "opportunities"
-    ) {
-      return document.getElementById(
-        "opportunitiesTab"
-      );
-    }
-
-
-    if (
-      tabKey ===
-      "art"
-    ) {
-      return document.getElementById(
-        "artTab"
-      );
-    }
-
-
-    if (
-      tabKey ===
-      "local"
-    ) {
-      return document.getElementById(
-        "localTab"
-      );
-    }
-
-
-    if (
-      tabKey ===
-      "agencies"
-    ) {
-      return document.getElementById(
-        "agenciesTab"
-      );
-    }
-
-
-    return null;
-  }
-
-
-  function getTabDisplayCount(tabKey) {
-    const visibleCards =
-      getVisibleCards(
-        tabKey
-      );
-
-
-    if (
-      visibleCards.length >
-      0
-    ) {
-      return (
-        visibleCards.length
-      );
-    }
-
-
-    const data =
-      summaryData[
-        tabKey
-      ];
-
-
-    return (
-      Array.isArray(data)
-        ? data.length
-        : 0
-    );
-  }
-
-
-  function renderSourceTags(sources) {
-    if (
-      !Array.isArray(
-        sources
-      ) ||
-      !sources.length
-    ) {
-      return "";
-    }
-
-
-    return `
-      <div
-        class="keywords"
-        style="margin-top:16px;"
-      >
-        ${
-          sources
-            .map(
-              source => `
-                <span class="keyword">
-                  ${source}
-                </span>
-              `
-            )
-            .join("")
-        }
-      </div>
-    `;
-  }
-
-
-  function createNativeTabIntroHtml(tabKey) {
-    const config =
-      TAB_INTRO_CONFIG[
-        tabKey
-      ];
-
-
-    if (!config) {
-      return "";
-    }
-
-
-    const count =
-      getTabDisplayCount(
-        tabKey
-      );
-
-
-    return `
-      <div class="native-tab-intro-wrap">
-
-        <section class="priority-panel-head priority-panel-head-green">
-
-          <div>
-
-            <p class="priority-eyebrow">
-              ${config.eyebrow}
-            </p>
-
-            <h2>
-              ${config.title}
-            </h2>
-
-            <p>
-              ${config.description}
-            </p>
-
-            ${renderSourceTags(
-              config.sources
-            )}
-
-          </div>
-
-
-          <div class="priority-mini-stat">
-
-            <span>
-              ${config.countLabel}
-            </span>
-
-            <strong>
-              ${count}건
-            </strong>
-
-            <small>
-              출처
-              ${config.sources.length}종
-              기준
-            </small>
-
-          </div>
-
-        </section>
-
-
-        <section class="grade-guide-box grade-guide-box-green">
-
-          <strong>
-            검토 기준 안내
-          </strong>
-
-          <p>
-            ${config.criteria}
-          </p>
-
-        </section>
-
-      </div>
-    `;
-  }
-
-
-  function ensureNativeTabIntro(tabKey) {
-    const panel =
-      getPanelByTabKey(
-        tabKey
-      );
-
-
-    if (!panel) {
-      return;
-    }
-
-
-    const existing =
-      panel.querySelector(
-        ".native-tab-intro-wrap"
-      );
-
-
-    if (existing) {
-      existing.remove();
-    }
-
-
-    const wrapper =
-      document.createElement(
-        "div"
-      );
-
-
-    wrapper.innerHTML =
-      createNativeTabIntroHtml(
-        tabKey
-      );
-
-
-    if (
-      wrapper.firstElementChild
-    ) {
-      panel.insertBefore(
-        wrapper.firstElementChild,
-        panel.firstChild
-      );
-    }
-  }
-
-
-  function ensureNativeTabIntros() {
-    [
-      "opportunities",
-      "art",
-      "local",
-      "agencies"
-    ].forEach(
-      ensureNativeTabIntro
-    );
-  }
-
-
-  /* =====================================================
-     FILTER REFRESH
-  ===================================================== */
-
-  function bindFilterRefresh() {
-    const filterSelectors = [
-      "#searchInput",
-      "#gradeFilter",
-      "#categoryFilter",
-      "#reviewFilter",
-
-      "#agencySearchInput",
-      "#agencyRegionFilter",
-      "#agencyGradeFilter",
-      "#agencyReviewFilter",
-      "#agencyAwardOnly",
-      "#agencyPlanOnly",
-
-      "#artSearchInput",
-      "#artSourceFilter",
-      "#artReviewFilter",
-
-      "#localSearchInput",
-      "#localRegionFilter",
-      "#localTypeFilter",
-      "#localGradeFilter",
-      "#localReviewFilter",
-      "#localDeadlineStatusFilter"
+  function updateToday() {
+    const labels = [
+      [
+        "진행중",
+        "ACTIVE"
+      ],
+
+      [
+        "마감임박",
+        "D-7"
+      ],
+
+      [
+        "HIGH",
+        "PRIORITY"
+      ],
+
+      [
+        "검토중",
+        "REVIEW"
+      ]
     ];
 
 
-    filterSelectors.forEach(
-      selector => {
+    document
+      .querySelectorAll(
+        ".today-grid .summary-card"
+      )
+      .forEach(
+        (
+          card,
+          index
+        ) => {
 
-        const element =
-          document.querySelector(
-            selector
+          const config =
+            labels[
+              index
+            ];
+
+          if (!config) {
+            return;
+          }
+
+
+          setText(
+            card.querySelector(
+              "span"
+            ),
+            config[0]
           );
 
 
-        if (
-          !element ||
-          element.dataset
-            .uiRefreshBound ===
-            "true"
-        ) {
-          return;
+          setText(
+            card.querySelector(
+              "small"
+            ),
+            config[1]
+          );
         }
+      );
 
 
-        const eventName =
-          element.tagName ===
-            "INPUT" &&
-          element.type ===
-            "text"
-            ? "input"
-            : "change";
+    const cards =
+      getVisibleCards();
 
 
-        element.dataset
-          .uiRefreshBound =
-          "true";
+    const soon =
+      cards.filter(
+        card => {
 
-
-        element.addEventListener(
-          eventName,
-          () => {
-
-            setTimeout(
-              () => {
-                updateRequestedListHeadLabels();
-                setupAccordions();
-                updateSummaryByActiveTab();
-                ensureNativeTabIntros();
-              },
-              180
+          const days =
+            getDeadlineDays(
+              card
             );
-          }
+
+          return (
+            days !== null &&
+            days >= 0 &&
+            days <= 7
+          );
+        }
+      ).length;
+
+
+    const high =
+      cards.filter(
+        card =>
+          [
+            "S",
+            "A"
+          ].includes(
+            getGrade(
+              card
+            )
+          )
+      ).length;
+
+
+    const reviewing =
+      cards.filter(
+        card =>
+          card
+            .querySelector(
+              ".review-select"
+            )
+            ?.value ===
+          "reviewing"
+      ).length;
+
+
+    setText(
+      document.getElementById(
+        "totalCount"
+      ),
+      cards.length
+    );
+
+
+    setText(
+      document.getElementById(
+        "sCount"
+      ),
+      soon
+    );
+
+
+    setText(
+      document.getElementById(
+        "aCount"
+      ),
+      high
+    );
+
+
+    setText(
+      document.getElementById(
+        "bCount"
+      ),
+      reviewing
+    );
+  }
+
+
+  /* =====================================================
+     APPLY
+  ===================================================== */
+
+  function applyV2() {
+    if (applying) {
+      return;
+    }
+
+    applying =
+      true;
+
+
+    try {
+      ensureRuntimeStyle();
+
+      removeLegacyUi();
+
+      normalizeArtListHead();
+
+      setupAccordions();
+
+      updateToday();
+
+    } finally {
+      applying =
+        false;
+    }
+  }
+
+
+  function scheduleApply(
+    delay = 80
+  ) {
+    if (scheduled) {
+      return;
+    }
+
+
+    scheduled =
+      true;
+
+
+    setTimeout(
+      () => {
+
+        scheduled =
+          false;
+
+        applyV2();
+
+      },
+      delay
+    );
+  }
+
+
+  /* =====================================================
+     EVENTS
+  ===================================================== */
+
+  function bindEvents() {
+    document.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target.closest(
+            ".tab-button[data-tab]"
+          ) ||
+
+          event.target.closest(
+            ".meta-card[data-tab-target]"
+          )
+        ) {
+          scheduleApply(
+            120
+          );
+
+          setTimeout(
+            applyV2,
+            350
+          );
+        }
+      }
+    );
+
+
+    document.addEventListener(
+      "input",
+      event => {
+
+        if (
+          event.target.closest(
+            ".filters"
+          )
+        ) {
+          scheduleApply(
+            160
+          );
+        }
+      }
+    );
+
+
+    document.addEventListener(
+      "change",
+      event => {
+
+        if (
+          event.target.closest(
+            ".filters"
+          ) ||
+
+          event.target
+            .classList
+            .contains(
+              "review-select"
+            )
+        ) {
+          scheduleApply(
+            160
+          );
+        }
+      }
+    );
+
+
+    window.addEventListener(
+      "axoo:rendered",
+      () => {
+
+        scheduleApply(
+          80
+        );
+
+
+        setTimeout(
+          applyV2,
+          260
         );
       }
     );
@@ -2478,53 +1408,93 @@
 
 
   /* =====================================================
-     PATCH
+     OBSERVER
   ===================================================== */
 
-  function applyDashboardPatch() {
-    setupMetaCards();
-    setupTabButtons();
-    setupReviewSelects();
-
-    updateRequestedListHeadLabels();
-
-    setupAccordions();
-
-    updateMetaCountsFromData();
-    updateMetaCardState();
-    updateSummaryByActiveTab();
-
-    ensureNativeTabIntros();
-    bindFilterRefresh();
-  }
-
-
-  async function initDashboardUiUpdate() {
-    await loadSummaryData();
-
-    applyDashboardPatch();
-
-    setTimeout(
-      applyDashboardPatch,
-      400
-    );
-
-    setTimeout(
-      applyDashboardPatch,
-      1200
-    );
-  }
-
-
-  window.addEventListener(
-    "axoo:rendered",
-    () => {
-      setTimeout(
-        applyDashboardPatch,
-        100
-      );
+  function startObserver() {
+    if (
+      window
+        .__axooUiV2Observer
+    ) {
+      return;
     }
-  );
+
+
+    const observer =
+      new MutationObserver(
+        mutations => {
+
+          const added =
+            mutations.some(
+              mutation =>
+                mutation.type ===
+                  "childList" &&
+                mutation
+                  .addedNodes
+                  .length >
+                  0
+            );
+
+
+          if (added) {
+            scheduleApply(
+              90
+            );
+          }
+        }
+      );
+
+
+    observer.observe(
+      document.body,
+      {
+        childList:
+          true,
+
+        subtree:
+          true
+      }
+    );
+
+
+    window
+      .__axooUiV2Observer =
+      observer;
+  }
+
+
+  /* =====================================================
+     INIT
+  ===================================================== */
+
+  async function init() {
+    ensureRuntimeStyle();
+
+    bindEvents();
+
+    startObserver();
+
+
+    await loadArtData();
+
+
+    applyV2();
+
+
+    [
+      350,
+      900,
+      1800,
+      4000,
+      7000
+    ].forEach(
+      delay =>
+        setTimeout(
+          applyV2,
+          delay
+        )
+    );
+  }
 
 
   if (
@@ -2533,11 +1503,11 @@
   ) {
     document.addEventListener(
       "DOMContentLoaded",
-      initDashboardUiUpdate
+      init
     );
 
   } else {
-    initDashboardUiUpdate();
+    init();
   }
 
 })();
