@@ -21,6 +21,7 @@
  * - 날짜가 보인다고 무조건 마감일로 사용하지 않는다.
  * - 라벨/문맥이 있는 값만 우선 채택한다.
  * - 날짜 범위는 마지막 날짜를 deadline으로 본다.
+ * - 종료일의 연도/월이 생략되면 시작일 기준으로 상속한다.
  * - 추출 근거(raw/evidence)를 함께 보존한다.
  * - 확신할 수 없는 값은 빈 문자열로 둔다.
  * - 네트워크 요청은 하지 않는다.
@@ -35,22 +36,43 @@
 const DEADLINE_LABELS = [
   "접수마감",
   "접수 마감",
+
+  "접수일시",
+  "접수 일시",
+
   "접수기간",
   "접수 기간",
+
   "제출마감",
   "제출 마감",
+
+  "제출일시",
+  "제출 일시",
+
   "제출기간",
   "제출 기간",
+
   "신청마감",
   "신청 마감",
+
+  "신청일시",
+  "신청 일시",
+
   "신청기간",
   "신청 기간",
+
   "응모마감",
   "응모 마감",
+
+  "응모일시",
+  "응모 일시",
+
   "응모기간",
   "응모 기간",
+
   "공모기간",
   "공모 기간",
+
   "마감일",
   "마감 일자",
   "마감"
@@ -233,11 +255,6 @@ function normalizeInlineText(
 /*
   HTML을 단순 한 줄 텍스트로 만들지 않고
   테이블/문단/리스트 등의 경계를 줄바꿈으로 보존한다.
-
-  상세페이지의
-  "설치장소 : ..."
-  "접수기간 : ..."
-  같은 라벨 기반 추출 정확도를 높이기 위함.
 */
 function htmlToLines(
   html
@@ -446,12 +463,14 @@ function formatDate(
 
 
 /*
-  지원 형식
+  완전한 날짜 지원 형식
 
   2026.09.15
   2026-09-15
   2026/09/15
+
   2026년 9월 15일
+  2026 년 9 월 15 일
 */
 function extractDates(
   value
@@ -553,6 +572,227 @@ function extractDates(
 
 
 /* ============================================================
+   DATE RANGE
+============================================================ */
+
+/*
+  실제 공공기관 공고에서 자주 사용되는 형태:
+
+  2026 년 8 월 10 일 ~ 8 월 29 일
+  2026년 8월 10일 ~ 8월 29일
+  2026.08.10 ~ 08.29
+  2026-08-10 ~ 08-29
+
+  시작일에는 연도가 있고
+  종료일에는 연도가 생략된 경우를 처리한다.
+*/
+function extractInheritedRangeEndDate(
+  value
+) {
+
+  const text =
+    normalizeInlineText(
+      value
+    );
+
+
+  if (!text) {
+
+    return null;
+  }
+
+
+  /*
+    한국어 날짜
+
+    2026 년 8 월 10 일 ~ 8 월 29 일
+  */
+  const koreanRange =
+    text.match(
+      /(20\d{2})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일?\s*(?:~|～|−|-|부터|에서)\s*(?:(20\d{2})\s*년\s*)?(\d{1,2})\s*월\s*(\d{1,2})\s*일?/
+    );
+
+
+  if (
+    koreanRange
+  ) {
+
+    const startYear =
+      Number(
+        koreanRange[1]
+      );
+
+
+    const endYear =
+      koreanRange[4]
+        ? Number(
+            koreanRange[4]
+          )
+        : startYear;
+
+
+    const endMonth =
+      Number(
+        koreanRange[5]
+      );
+
+
+    const endDay =
+      Number(
+        koreanRange[6]
+      );
+
+
+    const date =
+      formatDate(
+        endYear,
+        endMonth,
+        endDay
+      );
+
+
+    if (
+      date
+    ) {
+
+      return {
+
+        date:
+          date,
+
+        raw:
+          koreanRange[0],
+
+        source:
+          "inherited_korean_range"
+      };
+    }
+  }
+
+
+  /*
+    숫자형 날짜
+
+    2026.08.10 ~ 08.29
+    2026-08-10 ~ 08-29
+    2026/08/10 ~ 08/29
+  */
+  const numericRange =
+    text.match(
+      /(20\d{2})\s*([.\-/])\s*(\d{1,2})\s*\2\s*(\d{1,2})\s*(?:~|～|−|-)\s*(?:(20\d{2})\s*([.\-/])\s*)?(\d{1,2})\s*[.\-/]\s*(\d{1,2})/
+    );
+
+
+  if (
+    numericRange
+  ) {
+
+    const startYear =
+      Number(
+        numericRange[1]
+      );
+
+
+    const endYear =
+      numericRange[5]
+        ? Number(
+            numericRange[5]
+          )
+        : startYear;
+
+
+    const endMonth =
+      Number(
+        numericRange[7]
+      );
+
+
+    const endDay =
+      Number(
+        numericRange[8]
+      );
+
+
+    const date =
+      formatDate(
+        endYear,
+        endMonth,
+        endDay
+      );
+
+
+    if (
+      date
+    ) {
+
+      return {
+
+        date:
+          date,
+
+        raw:
+          numericRange[0],
+
+        source:
+          "inherited_numeric_range"
+      };
+    }
+  }
+
+
+  /*
+    종료일에서 월까지 생략된 형태
+
+    2026년 8월 10일 ~ 29일
+  */
+  const koreanDayOnly =
+    text.match(
+      /(20\d{2})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일?\s*(?:~|～|−|-|부터|에서)\s*(\d{1,2})\s*일/
+    );
+
+
+  if (
+    koreanDayOnly
+  ) {
+
+    const date =
+      formatDate(
+        Number(
+          koreanDayOnly[1]
+        ),
+        Number(
+          koreanDayOnly[2]
+        ),
+        Number(
+          koreanDayOnly[4]
+        )
+      );
+
+
+    if (
+      date
+    ) {
+
+      return {
+
+        date:
+          date,
+
+        raw:
+          koreanDayOnly[0],
+
+        source:
+          "inherited_korean_day_only"
+      };
+    }
+  }
+
+
+  return null;
+}
+
+
+/* ============================================================
    LABEL MATCH
 ============================================================ */
 
@@ -593,12 +833,6 @@ function lineContainsLabel(
 /*
   라벨이 들어 있는 줄을 찾고,
   다음 줄까지 Evidence로 함께 사용한다.
-
-  예:
-  접수기간
-  2026.09.01 ~ 2026.09.20
-
-  같은 구조 지원.
 */
 function findLabelEvidence(
   lines,
@@ -728,6 +962,48 @@ function extractDeadline(
     evidence
   ) {
 
+    /*
+      1순위:
+      종료일에서 연도/월이 생략된 기간 표현을 먼저 처리한다.
+    */
+    const inheritedRangeEnd =
+      extractInheritedRangeEndDate(
+        item.evidence
+      );
+
+
+    if (
+      inheritedRangeEnd
+    ) {
+
+      return {
+
+        value:
+          inheritedRangeEnd.date,
+
+        raw:
+          inheritedRangeEnd.raw,
+
+        label:
+          item.label,
+
+        evidence:
+          item.evidence,
+
+        confidence:
+          "high",
+
+        dateSource:
+          inheritedRangeEnd.source
+      };
+    }
+
+
+    /*
+      2순위:
+      완전한 날짜가 1개 이상 존재할 경우
+      마지막 날짜를 마감일로 사용한다.
+    */
     const dates =
       extractDates(
         item.evidence
@@ -743,9 +1019,6 @@ function extractDeadline(
     }
 
 
-    /*
-      기간이면 마지막 날짜를 마감일로 사용.
-    */
     const selected =
       dates[
         dates.length -
@@ -768,7 +1041,13 @@ function extractDeadline(
         item.evidence,
 
       confidence:
-        "high"
+        "high",
+
+      dateSource:
+        dates.length >
+          1
+          ? "full_date_range"
+          : "full_date"
     };
   }
 
@@ -956,11 +1235,6 @@ function extractLabeledText(
       );
 
 
-    /*
-      lineContainsLabel은 줄 중간 라벨도 허용한다.
-      strip 결과가 변하지 않았다면
-      ":" 기준 우측도 확인한다.
-    */
     if (
       !value ||
       value === line
@@ -1183,9 +1457,6 @@ function parseKoreanMoney(
   }
 
 
-  /*
-    150,000,000원
-  */
   const wonMatch =
     text.match(
       /(\d[\d,]*)\s*원/
@@ -1406,9 +1677,6 @@ function extractArtDetail(
 
   return {
 
-    /*
-      Collector / Project Control에서 바로 사용할 필드
-    */
     deadline:
       deadline.value,
 
@@ -1446,9 +1714,6 @@ function extractArtDetail(
       eligibility.value,
 
 
-    /*
-      추출 상태
-    */
     detailExtractionStatus:
       extractedCount >
         0
@@ -1459,12 +1724,9 @@ function extractArtDetail(
       extractedCount,
 
     detailExtractionVersion:
-      "art-detail-1.0.0",
+      "art-detail-1.1.0",
 
 
-    /*
-      QA / 디버깅용 Evidence
-    */
     extraction: {
 
       deadline:
@@ -1487,9 +1749,6 @@ function extractArtDetail(
     },
 
 
-    /*
-      테스트/진단용
-    */
     diagnostics: {
 
       lineCount:
@@ -1515,12 +1774,6 @@ function extractArtDetail(
    ITEM MERGE HELPER
 ============================================================ */
 
-/*
-  기존 Collector Item에 상세 추출 결과를 합친다.
-
-  기존에 값이 있는 경우에는
-  새 추출값이 비어 있다고 기존 값을 지우지 않는다.
-*/
 function mergeArtDetailIntoItem(
   item,
   detail
@@ -1643,6 +1896,7 @@ function runSelfTest() {
 
   const fixture = `
     <!doctype html>
+
     <html lang="ko">
 
     <body>
@@ -1672,7 +1926,9 @@ function runSelfTest() {
 
         <tr>
           <th>작품 제작비</th>
-          <td>1억 5,000만원</td>
+          <td>
+            1억 5,000만원
+          </td>
         </tr>
 
         <tr>
@@ -1697,6 +1953,38 @@ function runSelfTest() {
   `;
 
 
+  /*
+    실제 경기도 공공미술 페이지에서 확인된 표현 구조를
+    네트워크 없이 재현한다.
+
+    접수일시 :
+    2026 년 8 월 10 일 ~ 8 월 29 일
+  */
+  const liveLikeFixture = `
+    <!doctype html>
+
+    <html lang="ko">
+
+    <body>
+
+      <h1>
+        남양주왕숙2A-1 신축공사 內 미술작품 제작 및 설치 공모 공고
+      </h1>
+
+      <p>
+        등록일 2026-08-10
+      </p>
+
+      <p>
+        접수일시 : 2026 년 8 월 10 일 ~ 8 월 29 일
+      </p>
+
+    </body>
+
+    </html>
+  `;
+
+
   const result =
     extractArtDetail(
       fixture,
@@ -1706,6 +1994,19 @@ function runSelfTest() {
 
         title:
           "2026-03 대전광역시 건축물 미술작품 제작·설치 공모"
+      }
+    );
+
+
+  const liveLikeResult =
+    extractArtDetail(
+      liveLikeFixture,
+      {
+        sourceUrl:
+          "https://example.com/detail/live-like",
+
+        title:
+          "남양주왕숙2A-1 신축공사 內 미술작품 제작 및 설치 공모 공고"
       }
     );
 
@@ -1746,6 +2047,12 @@ function runSelfTest() {
       "eligibility",
       result.eligibility,
       "공고일 현재 관련 법령에 따른 자격을 갖춘 작가"
+    ],
+
+    [
+      "live-like 접수일시 연도 생략 종료일",
+      liveLikeResult.deadline,
+      "2026-08-29"
     ]
 
   ];
@@ -1924,6 +2231,8 @@ module.exports = {
   htmlToText,
 
   extractDates,
+
+  extractInheritedRangeEndDate,
 
   findLabelEvidence,
 
