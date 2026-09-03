@@ -46,7 +46,7 @@ const SPECIALIZED_REGION_IDS = new Set([
 ]);
 
 const COLLECTION_VERSION =
-  "nationwide-generic-1.4.0";
+  "nationwide-generic-1.5.0";
 
 const FETCH_TIMEOUT_MS =
   12000;
@@ -72,6 +72,15 @@ const MAX_DEPTH =
 const MAX_SEEDS_PER_SOURCE =
   3;
 
+const CHEONGJU_SOURCE_ID =
+  "chungbuk_notice";
+
+const CHEONGJU_SEARCH_TERMS = [
+  "미술작품",
+  "건축물 미술작품",
+  "미술작품 제작 설치"
+];
+
 
 /* =========================================================
    KEYWORDS
@@ -93,31 +102,22 @@ const ACTION_KEYWORDS = [
 const EXCLUDE_KEYWORDS = [
   "선정결과",
   "선정 결과",
-
   "공모결과",
   "공모 결과",
-
   "결과공고",
   "결과 공고",
-
   "심의결과",
   "심의 결과",
-
   "심의위원",
   "위원 모집",
-
   "회의록",
   "조례",
   "규칙",
-
   "행정예고",
-
   "제도 안내",
   "업무 안내",
-
   "설치완료",
   "설치 완료",
-
   "준공"
 ];
 
@@ -127,19 +127,15 @@ const NAVIGATION_KEYWORDS = [
   "알림",
   "소식",
   "게시판",
-
   "문화",
   "예술",
   "미술",
-
   "공모",
-
   "notice",
   "board",
   "bbs",
   "announce",
   "announcement",
-
   "gosi",
   "gonggo",
   "culture",
@@ -164,7 +160,6 @@ function readArray(
     return [];
   }
 
-
   const raw =
     fs
       .readFileSync(
@@ -173,18 +168,15 @@ function readArray(
       )
       .trim();
 
-
   if (!raw) {
 
     return [];
   }
 
-
   const parsed =
     JSON.parse(
       raw
     );
-
 
   if (
     !Array.isArray(
@@ -198,7 +190,6 @@ function readArray(
     );
   }
 
-
   return parsed;
 }
 
@@ -210,13 +201,11 @@ function writeArray(
 
   fs.writeFileSync(
     filePath,
-
     JSON.stringify(
       items,
       null,
       2
     ) + "\n",
-
     "utf8"
   );
 }
@@ -233,37 +222,30 @@ function decodeHtmlEntities(
   return String(
     value || ""
   )
-
     .replace(
       /&amp;/gi,
       "&"
     )
-
     .replace(
       /&quot;/gi,
       "\""
     )
-
     .replace(
       /&#39;/gi,
       "'"
     )
-
     .replace(
       /&lt;/gi,
       "<"
     )
-
     .replace(
       /&gt;/gi,
       ">"
     )
-
     .replace(
       /&nbsp;/gi,
       " "
     )
-
     .replace(
       /&#(\d+);/g,
       function (
@@ -286,27 +268,22 @@ function cleanText(
   return decodeHtmlEntities(
     value
   )
-
     .replace(
       /<script[\s\S]*?<\/script>/gi,
       " "
     )
-
     .replace(
       /<style[\s\S]*?<\/style>/gi,
       " "
     )
-
     .replace(
       /<[^>]*>/g,
       " "
     )
-
     .replace(
       /\s+/g,
       " "
     )
-
     .trim();
 }
 
@@ -323,18 +300,14 @@ function todayKst() {
       {
         timeZone:
           "Asia/Seoul",
-
         year:
           "numeric",
-
         month:
           "2-digit",
-
         day:
           "2-digit"
       }
     );
-
 
   const parts =
     formatter
@@ -342,10 +315,8 @@ function todayKst() {
         new Date()
       );
 
-
   const values =
     {};
-
 
   parts.forEach(
     function (
@@ -358,7 +329,6 @@ function todayKst() {
         part.value;
     }
   );
-
 
   return (
     values.year +
@@ -387,7 +357,6 @@ function canonicalUrl(
         baseUrl
       );
 
-
     if (
       url.protocol !== "http:" &&
       url.protocol !== "https:"
@@ -396,10 +365,8 @@ function canonicalUrl(
       return "";
     }
 
-
     url.hash =
       "";
-
 
     Array.from(
       url.searchParams.keys()
@@ -423,9 +390,7 @@ function canonicalUrl(
       }
     );
 
-
     return url.toString();
-
 
   } catch (
     error
@@ -452,6 +417,37 @@ function sameOrigin(
       ).origin
     );
 
+  } catch (
+    error
+  ) {
+
+    return false;
+  }
+}
+
+
+/* =========================================================
+   CHEONGJU E-MINWON HELPERS
+========================================================= */
+
+function isCheongjuEminwonListUrl(
+  value
+) {
+
+  try {
+
+    const url =
+      new URL(
+        value
+      );
+
+    return (
+      url.hostname ===
+        "www.cheongju.go.kr" &&
+      /\/www\/selectEminwonNoticeList\.do$/i.test(
+        url.pathname
+      )
+    );
 
   } catch (
     error
@@ -459,6 +455,565 @@ function sameOrigin(
 
     return false;
   }
+}
+
+
+function buildCheongjuSearchSeedUrls(
+  source,
+  seedUrls
+) {
+
+  if (
+    !source ||
+    source.id !==
+      CHEONGJU_SOURCE_ID
+  ) {
+
+    return seedUrls;
+  }
+
+  const base =
+    seedUrls[0] ||
+    source.sourceUrl;
+
+  if (
+    !base ||
+    !isCheongjuEminwonListUrl(
+      base
+    )
+  ) {
+
+    return seedUrls;
+  }
+
+  const result =
+    [];
+
+  CHEONGJU_SEARCH_TERMS.forEach(
+    function (
+      term
+    ) {
+
+      const url =
+        new URL(
+          base
+        );
+
+      url.searchParams.set(
+        "key",
+        url.searchParams.get(
+          "key"
+        ) ||
+        "281"
+      );
+
+      url.searchParams.set(
+        "notAncmtSeCd",
+        url.searchParams.get(
+          "notAncmtSeCd"
+        ) ||
+        ""
+      );
+
+      url.searchParams.set(
+        "pageIndex",
+        "1"
+      );
+
+      url.searchParams.set(
+        "searchCnd",
+        "all"
+      );
+
+      url.searchParams.set(
+        "searchKrwd",
+        term
+      );
+
+      result.push(
+        url.toString()
+      );
+    }
+  );
+
+  return result.slice(
+    0,
+    MAX_SEEDS_PER_SOURCE
+  );
+}
+
+
+function buildCheongjuPostBody(
+  value
+) {
+
+  const url =
+    new URL(
+      value
+    );
+
+  const params =
+    new URLSearchParams();
+
+  [
+    "key",
+    "notAncmtSeCd",
+    "pageIndex",
+    "searchCnd",
+    "searchKrwd",
+    "nowDongGn"
+  ].forEach(
+    function (
+      key
+    ) {
+
+      if (
+        url.searchParams.has(
+          key
+        )
+      ) {
+
+        params.set(
+          key,
+          url.searchParams.get(
+            key
+          ) ||
+          ""
+        );
+      }
+    }
+  );
+
+  if (
+    !params.has(
+      "key"
+    )
+  ) {
+
+    params.set(
+      "key",
+      "281"
+    );
+  }
+
+  if (
+    !params.has(
+      "notAncmtSeCd"
+    )
+  ) {
+
+    params.set(
+      "notAncmtSeCd",
+      ""
+    );
+  }
+
+  if (
+    !params.has(
+      "pageIndex"
+    )
+  ) {
+
+    params.set(
+      "pageIndex",
+      "1"
+    );
+  }
+
+  if (
+    !params.has(
+      "searchCnd"
+    )
+  ) {
+
+    params.set(
+      "searchCnd",
+      "all"
+    );
+  }
+
+  if (
+    !params.has(
+      "searchKrwd"
+    )
+  ) {
+
+    params.set(
+      "searchKrwd",
+      "미술작품"
+    );
+  }
+
+  if (
+    !params.has(
+      "nowDongGn"
+    )
+  ) {
+
+    params.set(
+      "nowDongGn",
+      ""
+    );
+  }
+
+  return params.toString();
+}
+
+
+function extractCheongjuManagementNo(
+  rowHtml
+) {
+
+  const decoded =
+    decodeHtmlEntities(
+      rowHtml
+    );
+
+  const patterns = [
+    /notAncmtMgtNo[^0-9]{0,100}([0-9]{4,})/i,
+    /notAncmtMgtNo(?:=|%3D)([0-9]{4,})/i,
+    /selectEminwonNoticeView\.do[\s\S]{0,400}?notAncmtMgtNo(?:=|%3D)([0-9]{4,})/i,
+    /(?:fn|go|select|view)[A-Za-z0-9_]*\s*\(\s*['"]([0-9]{5,})['"]/i
+  ];
+
+  for (
+    const pattern of
+    patterns
+  ) {
+
+    const match =
+      decoded.match(
+        pattern
+      );
+
+    if (
+      match &&
+      match[1]
+    ) {
+
+      return match[1];
+    }
+  }
+
+  return "";
+}
+
+
+function extractCheongjuNoticeType(
+  rowHtml,
+  pageUrl
+) {
+
+  const decoded =
+    decodeHtmlEntities(
+      rowHtml
+    );
+
+  const patterns = [
+    /notAncmtSeCd[^0-9]{0,60}([0-9]{2})/i,
+    /notAncmtSeCd(?:=|%3D)([0-9]{2})/i
+  ];
+
+  for (
+    const pattern of
+    patterns
+  ) {
+
+    const match =
+      decoded.match(
+        pattern
+      );
+
+    if (
+      match &&
+      match[1]
+    ) {
+
+      return match[1];
+    }
+  }
+
+  try {
+
+    return (
+      new URL(
+        pageUrl
+      ).searchParams.get(
+        "notAncmtSeCd"
+      ) ||
+      ""
+    );
+
+  } catch (
+    error
+  ) {
+
+    return "";
+  }
+}
+
+
+function chooseCheongjuRowLabel(
+  rowHtml
+) {
+
+  const labels =
+    [];
+
+  const regex =
+    /<a\b[^>]*>([\s\S]*?)<\/a>/gi;
+
+  let match;
+
+  while (
+    (
+      match =
+        regex.exec(
+          rowHtml
+        )
+    ) !==
+    null
+  ) {
+
+    const label =
+      cleanText(
+        match[1]
+      );
+
+    if (
+      !label ||
+      /^\d+$/.test(
+        label
+      )
+    ) {
+
+      continue;
+    }
+
+    labels.push(
+      label
+    );
+  }
+
+  const candidate =
+    labels.find(
+      function (
+        label
+      ) {
+
+        return isCandidateTitle(
+          label
+        );
+      }
+    );
+
+  if (
+    candidate
+  ) {
+
+    return candidate;
+  }
+
+  const artworkLabel =
+    labels.find(
+      function (
+        label
+      ) {
+
+        return /미술작품|공공미술/i.test(
+          label
+        );
+      }
+    );
+
+  if (
+    artworkLabel
+  ) {
+
+    return artworkLabel;
+  }
+
+  return labels
+    .sort(
+      function (
+        first,
+        second
+      ) {
+
+        return (
+          second.length -
+          first.length
+        );
+      }
+    )[0] ||
+    "";
+}
+
+
+function extractCheongjuEminwonAnchors(
+  html,
+  pageUrl
+) {
+
+  if (
+    !isCheongjuEminwonListUrl(
+      pageUrl
+    )
+  ) {
+
+    return [];
+  }
+
+  const result =
+    [];
+
+  const rowRegex =
+    /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi;
+
+  let rowMatch;
+
+  while (
+    (
+      rowMatch =
+        rowRegex.exec(
+          html
+        )
+    ) !==
+    null
+  ) {
+
+    const rowHtml =
+      rowMatch[0];
+
+    const managementNo =
+      extractCheongjuManagementNo(
+        rowHtml
+      );
+
+    if (
+      !managementNo
+    ) {
+
+      continue;
+    }
+
+    const label =
+      chooseCheongjuRowLabel(
+        rowHtml
+      );
+
+    if (
+      !label
+    ) {
+
+      continue;
+    }
+
+    const noticeType =
+      extractCheongjuNoticeType(
+        rowHtml,
+        pageUrl
+      );
+
+    const listUrl =
+      new URL(
+        pageUrl
+      );
+
+    const detailUrl =
+      new URL(
+        "/www/selectEminwonNoticeView.do",
+        listUrl.origin
+      );
+
+    detailUrl.searchParams.set(
+      "key",
+      listUrl.searchParams.get(
+        "key"
+      ) ||
+      "281"
+    );
+
+    detailUrl.searchParams.set(
+      "nowDongGn",
+      ""
+    );
+
+    detailUrl.searchParams.set(
+      "notAncmtSeCd",
+      noticeType
+    );
+
+    detailUrl.searchParams.set(
+      "notAncmtMgtNo",
+      managementNo
+    );
+
+    result.push({
+      url:
+        detailUrl.toString(),
+      label:
+        label,
+      attrs:
+        "cheongju-eminwon-resolved"
+    });
+  }
+
+  return result;
+}
+
+
+function uniqueAnchors(
+  anchors
+) {
+
+  const result =
+    [];
+
+  const seen =
+    new Set();
+
+  anchors.forEach(
+    function (
+      anchor
+    ) {
+
+      if (
+        !anchor ||
+        !anchor.url
+      ) {
+
+        return;
+      }
+
+      const key =
+        anchor.url +
+        "::" +
+        (
+          anchor.label ||
+          ""
+        );
+
+      if (
+        seen.has(
+          key
+        )
+      ) {
+
+        return;
+      }
+
+      seen.add(
+        key
+      );
+
+      result.push(
+        anchor
+      );
+    }
+  );
+
+  return result;
 }
 
 
@@ -485,7 +1040,6 @@ function stableId(
         0,
         12
       );
-
 
   return (
     "nationwide-art-commission-" +
@@ -527,7 +1081,6 @@ function isCandidateTitle(
       value
     );
 
-
   if (
     !title ||
     title.length <
@@ -536,7 +1089,6 @@ function isCandidateTitle(
 
     return false;
   }
-
 
   if (
     hasAnyKeyword(
@@ -548,7 +1100,6 @@ function isCandidateTitle(
     return false;
   }
 
-
   if (
     !hasAnyKeyword(
       title,
@@ -559,7 +1110,6 @@ function isCandidateTitle(
     return false;
   }
 
-
   if (
     !hasAnyKeyword(
       title,
@@ -569,7 +1119,6 @@ function isCandidateTitle(
 
     return false;
   }
-
 
   return true;
 }
@@ -587,13 +1136,10 @@ function extractAnchors(
   const result =
     [];
 
-
   const regex =
     /<a\b([^>]*)href\s*=\s*["']([^"']+)["']([^>]*)>([\s\S]*?)<\/a>/gi;
 
-
   let match;
-
 
   while (
     (
@@ -601,14 +1147,14 @@ function extractAnchors(
         regex.exec(
           html
         )
-    ) !== null
+    ) !==
+    null
   ) {
 
     const href =
       decodeHtmlEntities(
         match[2]
       );
-
 
     if (
       !href ||
@@ -630,45 +1176,52 @@ function extractAnchors(
       continue;
     }
 
-
     const url =
       canonicalUrl(
         href,
         pageUrl
       );
 
-
-    if (!url) {
+    if (
+      !url
+    ) {
 
       continue;
     }
 
-
     result.push({
-
       url:
         url,
-
       label:
         cleanText(
           match[4]
         ),
-
       attrs:
         cleanText(
           (
-            match[1] || ""
+            match[1] ||
+            ""
           ) +
           " " +
           (
-            match[3] || ""
+            match[3] ||
+            ""
           )
         )
     });
   }
 
+  const cheongjuAnchors =
+    extractCheongjuEminwonAnchors(
+      html,
+      pageUrl
+    );
 
-  return result;
+  return uniqueAnchors(
+    result.concat(
+      cheongjuAnchors
+    )
+  );
 }
 
 
@@ -690,10 +1243,8 @@ function followScore(
     )
       .toLowerCase();
 
-
   let score =
     0;
-
 
   NAVIGATION_KEYWORDS.forEach(
     function (
@@ -712,7 +1263,6 @@ function followScore(
     }
   );
 
-
   if (
     isCandidateTitle(
       anchor.label
@@ -722,7 +1272,6 @@ function followScore(
     score +=
       100;
   }
-
 
   return score;
 }
@@ -750,13 +1299,62 @@ function sleep(
 }
 
 
+function buildFetchOptions(
+  url,
+  signal
+) {
+
+  const headers = {
+    "User-Agent":
+      "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.5)",
+    "Accept":
+      "text/html,application/xhtml+xml,*/*",
+    "Accept-Language":
+      "ko-KR,ko;q=0.9,en;q=0.6"
+  };
+
+  const options = {
+    signal:
+      signal,
+    redirect:
+      "follow",
+    headers:
+      headers
+  };
+
+  if (
+    isCheongjuEminwonListUrl(
+      url
+    )
+  ) {
+
+    options.method =
+      "POST";
+
+    options.body =
+      buildCheongjuPostBody(
+        url
+      );
+
+    options.headers = {
+      ...headers,
+      "Content-Type":
+        "application/x-www-form-urlencoded; charset=UTF-8",
+      "Referer":
+        "https://www.cheongju.go.kr/www/selectEminwonNoticeList.do?key=281"
+    };
+  }
+
+  return options;
+}
+
+
 async function fetchText(
   url
 ) {
 
   let lastError =
     null;
-
 
   for (
     let attempt = 1;
@@ -768,7 +1366,6 @@ async function fetchText(
     const controller =
       new AbortController();
 
-
     const timer =
       setTimeout(
         function () {
@@ -779,34 +1376,16 @@ async function fetchText(
         FETCH_TIMEOUT_MS
       );
 
-
     try {
 
       const response =
         await fetch(
           url,
-          {
-
-            signal:
-              controller.signal,
-
-            redirect:
-              "follow",
-
-            headers: {
-
-              "User-Agent":
-                "Mozilla/5.0 (compatible; AXOO-B2G-NationwideCollector/1.4)",
-
-              "Accept":
-                "text/html,application/xhtml+xml,*/*",
-
-              "Accept-Language":
-                "ko-KR,ko;q=0.9,en;q=0.6"
-            }
-          }
+          buildFetchOptions(
+            url,
+            controller.signal
+          )
         );
-
 
       if (
         !response.ok
@@ -818,16 +1397,12 @@ async function fetchText(
         );
       }
 
-
       return {
-
         html:
           await response.text(),
-
         finalUrl:
           response.url
       };
-
 
     } catch (
       error
@@ -835,7 +1410,6 @@ async function fetchText(
 
       lastError =
         error;
-
 
       if (
         attempt <
@@ -855,12 +1429,10 @@ async function fetchText(
           url
         );
 
-
         await sleep(
           FETCH_RETRY_DELAY_MS
         );
       }
-
 
     } finally {
 
@@ -869,7 +1441,6 @@ async function fetchText(
       );
     }
   }
-
 
   throw (
     lastError ||
@@ -906,16 +1477,15 @@ function extractRegionEvidenceSnippets(
       html
     );
 
-
-  if (!text) {
+  if (
+    !text
+  ) {
 
     return [];
   }
 
-
   const snippets =
     [];
-
 
   function pushSnippet(
     value
@@ -931,7 +1501,6 @@ function extractRegionEvidenceSnippets(
         )
         .trim();
 
-
     if (
       !normalized ||
       snippets.includes(
@@ -942,18 +1511,15 @@ function extractRegionEvidenceSnippets(
       return;
     }
 
-
     snippets.push(
       normalized
     );
   }
 
-
   const normalizedTitle =
     cleanText(
       title
     );
-
 
   if (
     normalizedTitle
@@ -963,7 +1529,6 @@ function extractRegionEvidenceSnippets(
       text.indexOf(
         normalizedTitle
       );
-
 
     if (
       titleIndex >=
@@ -977,7 +1542,6 @@ function extractRegionEvidenceSnippets(
             titleIndex -
               400
           ),
-
           Math.min(
             text.length,
             titleIndex +
@@ -988,7 +1552,6 @@ function extractRegionEvidenceSnippets(
       );
     }
   }
-
 
   const markers = [
     "사업지역",
@@ -1007,7 +1570,6 @@ function extractRegionEvidenceSnippets(
     "시행 기관"
   ];
 
-
   markers.forEach(
     function (
       marker
@@ -1018,7 +1580,6 @@ function extractRegionEvidenceSnippets(
 
       let count =
         0;
-
 
       while (
         cursor <
@@ -1033,7 +1594,6 @@ function extractRegionEvidenceSnippets(
             cursor
           );
 
-
         if (
           index <
           0
@@ -1042,7 +1602,6 @@ function extractRegionEvidenceSnippets(
           break;
         }
 
-
         pushSnippet(
           text.slice(
             Math.max(
@@ -1050,7 +1609,6 @@ function extractRegionEvidenceSnippets(
               index -
                 100
             ),
-
             Math.min(
               text.length,
               index +
@@ -1060,7 +1618,6 @@ function extractRegionEvidenceSnippets(
           )
         );
 
-
         cursor =
           index +
           marker.length;
@@ -1069,7 +1626,6 @@ function extractRegionEvidenceSnippets(
       }
     }
   );
-
 
   return snippets;
 }
@@ -1085,14 +1641,11 @@ function resolveCandidateRegion(
     sourceRegion || {
       id:
         "national",
-
       name:
         "전국",
-
       fullName:
         "전국 공통 백업"
     };
-
 
   if (
     !isNationalRegion(
@@ -1101,18 +1654,14 @@ function resolveCandidateRegion(
   ) {
 
     return {
-
       region:
         originalRegion,
-
       inferred:
         false,
-
       method:
         "source_registry"
     };
   }
-
 
   const titleRegion =
     inferTargetArtRegionFromValues(
@@ -1121,24 +1670,19 @@ function resolveCandidateRegion(
       ]
     );
 
-
   if (
     titleRegion
   ) {
 
     return {
-
       region:
         titleRegion,
-
       inferred:
         true,
-
       method:
         "title"
     };
   }
-
 
   const evidenceValues =
     Array.isArray(
@@ -1153,39 +1697,30 @@ function resolveCandidateRegion(
             : []
         );
 
-
   const detailRegion =
     inferTargetArtRegionFromValues(
       evidenceValues
     );
-
 
   if (
     detailRegion
   ) {
 
     return {
-
       region:
         detailRegion,
-
       inferred:
         true,
-
       method:
         "detail"
     };
   }
 
-
   return {
-
     region:
       originalRegion,
-
     inferred:
       false,
-
     method:
       "unresolved"
   };
@@ -1208,16 +1743,13 @@ function buildItem(
     options ||
     {};
 
-
   const today =
     todayKst();
-
 
   const nationalSource =
     isNationalRegion(
       sourceRegion
     );
-
 
   const resolution =
     config.regionResolution ||
@@ -1227,11 +1759,9 @@ function buildItem(
       []
     );
 
-
   const resolvedRegion =
     resolution.region ||
     sourceRegion;
-
 
   const resolved =
     Boolean(
@@ -1241,180 +1771,133 @@ function buildItem(
         "전국"
     );
 
-
   return {
-
     id:
       stableId(
         sourceUrl
       ),
-
     category:
       "건축물 미술작품",
-
     categoryLabel:
       "건축물 미술작품",
-
     status:
       "마감일 확인 필요",
-
     source:
       source.sourceName,
-
     sourceName:
       source.sourceName,
-
     sourceType:
       source.sourceType,
-
     agency:
       source.sourceName,
-
     organization:
       source.sourceName,
-
     title:
       cleanText(
         title
       ),
-
     region:
       (
         resolvedRegion &&
         resolvedRegion.name
       ) ||
       "전국",
-
     regionId:
       (
         resolvedRegion &&
         resolvedRegion.id
       ) ||
       "",
-
     regionFullName:
       (
         resolvedRegion &&
         resolvedRegion.fullName
       ) ||
       "",
-
     sourceRegion:
       (
         sourceRegion &&
         sourceRegion.name
       ) ||
       "",
-
     sourceRegionId:
       (
         sourceRegion &&
         sourceRegion.id
       ) ||
       "",
-
     regionInferred:
       resolution.inferred ===
       true,
-
     regionInferenceSource:
       resolution.method,
-
     regionInferenceStatus:
       resolved
         ? "resolved"
         : "unresolved",
-
     regionGroup:
       source.regionGroup ||
       "",
-
     regionGroupLabel:
       source.regionGroupLabel ||
       "",
-
     sourceUrl:
       sourceUrl,
-
     originalUrl:
       sourceUrl,
-
     url:
       sourceUrl,
-
     rawSourcePageUrl:
       source.sourceUrl,
-
     publishedDate:
       "",
-
     postedDate:
       "",
-
     periodStart:
       "",
-
     periodEnd:
       "",
-
     deadline:
       "",
-
     endDate:
       "",
-
     budget:
       "",
-
     amount:
       "",
-
     amountNumeric:
       null,
-
     location:
       "",
-
     installationLocation:
       "",
-
     eligibility:
       "",
-
     detailExtractionStatus:
       "pending",
-
     detailExtractionCount:
       0,
-
     detailExtractionVersion:
       "",
-
     detailExtractionEvidence:
       {},
-
     keywords: [
       "건축물 미술작품",
       "미술작품 공모"
     ],
-
     matchedKeywords: [
       "미술작품",
       "공모"
     ],
-
     crawlMode:
       source.crawlMode ||
       "generic_board_discovery",
-
     priority:
       source.priority ||
       3,
-
     priorityLabel:
       source.priorityLabel ||
       "전국 자동수집",
-
     fitReason:
       nationalSource
         ? (
@@ -1423,40 +1906,28 @@ function buildItem(
               : "전국 공통 소스에서 건축물 미술작품 공모 키워드가 확인된 후보이며 실제 지역은 추가 확인이 필요합니다."
           )
         : "광역시·도 공식 소스에서 건축물 미술작품 공모 키워드가 확인된 후보입니다.",
-
     summary:
       "공고 원문에서 마감일, 참가자격, 작품비, 설치조건을 확인해야 합니다.",
-
     nextAction:
       "공고 원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
-
     recommendedAction:
       "공고 원문 확인 후 마감일, 제출 방식, 설치 조건을 검토하세요.",
-
     score:
       80,
-
     grade:
       "A",
-
     isExpired:
       false,
-
     isStaleCandidate:
       false,
-
     deadlineStatus:
       "마감일 확인 필요",
-
     collectedAt:
       today,
-
     updatedAt:
       today,
-
     collectionSourceId:
       source.id,
-
     collectionVersion:
       COLLECTION_VERSION
   };
@@ -1483,7 +1954,6 @@ function enrichNationalItemRegionFromDetail(
     return item;
   }
 
-
   if (
     item.regionInferenceStatus ===
       "resolved" &&
@@ -1494,13 +1964,11 @@ function enrichNationalItemRegionFromDetail(
     return item;
   }
 
-
   const evidence =
     extractRegionEvidenceSnippets(
       html,
       item.title
     );
-
 
   const resolution =
     resolveCandidateRegion(
@@ -1508,7 +1976,6 @@ function enrichNationalItemRegionFromDetail(
       item.title,
       evidence
     );
-
 
   if (
     !resolution.region ||
@@ -1519,29 +1986,20 @@ function enrichNationalItemRegionFromDetail(
     return item;
   }
 
-
   return {
-
     ...item,
-
     region:
       resolution.region.name,
-
     regionId:
       resolution.region.id,
-
     regionFullName:
       resolution.region.fullName,
-
     regionInferred:
       true,
-
     regionInferenceSource:
       resolution.method,
-
     regionInferenceStatus:
       "resolved",
-
     fitReason:
       "전국 공통 소스에서 발견된 후보이며 공고 제목 또는 상세정보를 기준으로 실제 지역을 자동 판별했습니다."
   };
@@ -1555,11 +2013,12 @@ function enrichItemFromDetailPage(
   pageUrl
 ) {
 
-  if (!item) {
+  if (
+    !item
+  ) {
 
     return item;
   }
-
 
   const detail =
     extractArtDetail(
@@ -1567,19 +2026,16 @@ function enrichItemFromDetailPage(
       {
         sourceUrl:
           pageUrl,
-
         title:
           item.title
       }
     );
-
 
   let enriched =
     mergeArtDetailIntoItem(
       item,
       detail
     );
-
 
   if (
     isNationalRegion(
@@ -1594,7 +2050,6 @@ function enrichItemFromDetailPage(
         html
       );
   }
-
 
   return enriched;
 }
@@ -1612,14 +2067,12 @@ async function crawlSource(
   const startedAt =
     Date.now();
 
-
   const adapterInfo =
     describeSourceAdapter(
       source
     );
 
-
-  const seedUrls =
+  let seedUrls =
     getSourceSeedUrls(
       source,
       {
@@ -1628,6 +2081,11 @@ async function crawlSource(
       }
     );
 
+  seedUrls =
+    buildCheongjuSearchSeedUrls(
+      source,
+      seedUrls
+    );
 
   if (
     seedUrls.length ===
@@ -1635,27 +2093,20 @@ async function crawlSource(
   ) {
 
     return {
-
       sourceId:
         source.id,
-
       sourceName:
         source.sourceName,
-
       region:
         region.name,
-
       accessOk:
         false,
-
       pagesFetched:
         0,
-
       items:
         []
     };
   }
-
 
   console.log(
     "   🧩 ADAPTER" +
@@ -1669,9 +2120,24 @@ async function crawlSource(
     seedUrls.length
   );
 
+  if (
+    source.id ===
+    CHEONGJU_SOURCE_ID
+  ) {
+
+    console.log(
+      "   🧩 CHEONGJU E-MINWON" +
+      " | transport=POST-search" +
+      " | jsResolver=enabled" +
+      " | seeds=" +
+      seedUrls.length
+    );
+  }
 
   if (
-    adapterInfo.applied
+    adapterInfo.applied ||
+    source.id ===
+      CHEONGJU_SOURCE_ID
   ) {
 
     seedUrls.forEach(
@@ -1693,7 +2159,6 @@ async function crawlSource(
     );
   }
 
-
   const queue =
     seedUrls.map(
       function (
@@ -1701,101 +2166,74 @@ async function crawlSource(
       ) {
 
         return {
-
           url:
             seedUrl,
-
           depth:
             0,
-
           seed:
             true,
-
           candidateDetail:
             false
         };
       }
     );
 
-
   const queued =
     new Set(
       seedUrls
     );
 
-
   const visited =
     new Set();
-
 
   const found =
     new Map();
 
-
   let pagesFetched =
     0;
 
-
   const diagnostics = {
-
     seedCount:
       seedUrls.length,
-
     htmlBytes:
       0,
-
     rawAnchors:
       0,
-
     extractedAnchors:
       0,
-
     javascriptAnchors:
       0,
-
+    resolvedJavascriptAnchors:
+      0,
     sameOriginAnchors:
       0,
-
     primaryKeywordAnchors:
       0,
-
     actionKeywordAnchors:
       0,
-
     candidateAnchors:
       0,
-
     navigationCandidates:
       0,
-
     redirectedPages:
       0,
-
     detailPages:
       0,
-
     detailExtracted:
       0,
-
     deadlineExtracted:
       0,
-
     agencyExtracted:
       0,
-
     amountExtracted:
       0,
-
     locationExtracted:
       0,
-
     eligibilityExtracted:
       0,
-
     sampleLabels:
       new Set()
   };
-
 
   while (
     queue.length &&
@@ -1811,7 +2249,6 @@ async function crawlSource(
     const current =
       queue.shift();
 
-
     if (
       !current ||
       visited.has(
@@ -1822,14 +2259,11 @@ async function crawlSource(
       continue;
     }
 
-
     visited.add(
       current.url
     );
 
-
     let fetchResult;
-
 
     try {
 
@@ -1838,9 +2272,7 @@ async function crawlSource(
           current.url
         );
 
-
       pagesFetched++;
-
 
     } catch (
       error
@@ -1852,15 +2284,12 @@ async function crawlSource(
         error.message
       );
 
-
       continue;
     }
-
 
     const html =
       fetchResult.html ||
       "";
-
 
     const finalUrl =
       canonicalUrl(
@@ -1870,7 +2299,6 @@ async function crawlSource(
       ) ||
       current.url;
 
-
     if (
       finalUrl !==
       current.url
@@ -1879,37 +2307,30 @@ async function crawlSource(
       diagnostics.redirectedPages++;
     }
 
-
     diagnostics.htmlBytes +=
       Buffer.byteLength(
         html,
         "utf8"
       );
 
-
     diagnostics.rawAnchors +=
       (
         html.match(
           /<a\b/gi
-        ) || []
+        ) ||
+        []
       ).length;
-
 
     diagnostics.javascriptAnchors +=
       (
         html.match(
           /href\s*=\s*["']\s*javascript:/gi
-        ) || []
+        ) ||
+        []
       ).length;
 
-
-    /*
-      후보 상세페이지에 진입한 경우
-      실제 공고 세부정보를 추출한다.
-    */
     let candidateKey =
       null;
-
 
     if (
       found.has(
@@ -1919,7 +2340,6 @@ async function crawlSource(
 
       candidateKey =
         current.url;
-
 
     } else if (
       found.has(
@@ -1931,19 +2351,16 @@ async function crawlSource(
         finalUrl;
     }
 
-
     if (
       candidateKey
     ) {
 
       diagnostics.detailPages++;
 
-
       const previousItem =
         found.get(
           candidateKey
         );
-
 
       const enrichedItem =
         enrichItemFromDetailPage(
@@ -1953,12 +2370,10 @@ async function crawlSource(
           finalUrl
         );
 
-
       found.set(
         candidateKey,
         enrichedItem
       );
-
 
       if (
         enrichedItem.detailExtractionCount >
@@ -1968,14 +2383,12 @@ async function crawlSource(
         diagnostics.detailExtracted++;
       }
 
-
       if (
         enrichedItem.deadline
       ) {
 
         diagnostics.deadlineExtracted++;
       }
-
 
       if (
         enrichedItem.agency &&
@@ -1986,14 +2399,12 @@ async function crawlSource(
         diagnostics.agencyExtracted++;
       }
 
-
       if (
         enrichedItem.amount
       ) {
 
         diagnostics.amountExtracted++;
       }
-
 
       if (
         enrichedItem.location
@@ -2002,14 +2413,12 @@ async function crawlSource(
         diagnostics.locationExtracted++;
       }
 
-
       if (
         enrichedItem.eligibility
       ) {
 
         diagnostics.eligibilityExtracted++;
       }
-
 
       if (
         previousItem.region ===
@@ -2026,7 +2435,6 @@ async function crawlSource(
           enrichedItem.title
         );
       }
-
 
       console.log(
         "   📄 DETAIL" +
@@ -2055,21 +2463,28 @@ async function crawlSource(
       );
     }
 
-
     const anchors =
       extractAnchors(
         html,
         finalUrl
       );
 
-
     diagnostics.extractedAnchors +=
       anchors.length;
 
+    diagnostics.resolvedJavascriptAnchors +=
+      anchors.filter(
+        function (
+          anchor
+        ) {
 
-    /*
-      실제 공모 후보 탐지
-    */
+          return (
+            anchor.attrs ===
+            "cheongju-eminwon-resolved"
+          );
+        }
+      ).length;
+
     anchors.forEach(
       function (
         anchor
@@ -2085,7 +2500,6 @@ async function crawlSource(
             anchor.url
           );
 
-
         if (
           !originAllowed
         ) {
@@ -2093,15 +2507,12 @@ async function crawlSource(
           return;
         }
 
-
         diagnostics.sameOriginAnchors++;
-
 
         const label =
           cleanText(
             anchor.label
           );
-
 
         if (
           diagnostics.sampleLabels.size <
@@ -2116,7 +2527,6 @@ async function crawlSource(
           );
         }
 
-
         if (
           hasAnyKeyword(
             label,
@@ -2126,7 +2536,6 @@ async function crawlSource(
 
           diagnostics.primaryKeywordAnchors++;
         }
-
 
         if (
           hasAnyKeyword(
@@ -2138,7 +2547,6 @@ async function crawlSource(
           diagnostics.actionKeywordAnchors++;
         }
 
-
         if (
           !isCandidateTitle(
             label
@@ -2148,9 +2556,7 @@ async function crawlSource(
           return;
         }
 
-
         diagnostics.candidateAnchors++;
-
 
         if (
           !found.has(
@@ -2165,7 +2571,6 @@ async function crawlSource(
               []
             );
 
-
           const item =
             buildItem(
               region,
@@ -2178,12 +2583,10 @@ async function crawlSource(
               }
             );
 
-
           found.set(
             anchor.url,
             item
           );
-
 
           if (
             isNationalRegion(
@@ -2204,7 +2607,6 @@ async function crawlSource(
                 item.title
               );
 
-
             } else {
 
               console.log(
@@ -2216,15 +2618,6 @@ async function crawlSource(
           }
         }
 
-
-        /*
-          후보가 발견되면 일반 Navigation보다
-          상세페이지를 우선 방문한다.
-
-          이 로직이 없으면 seed 3개 + page budget 4 구조에서
-          후보 상세페이지가 뒤로 밀려
-          세부정보 추출이 누락될 수 있다.
-        */
         if (
           !visited.has(
             anchor.url
@@ -2238,26 +2631,20 @@ async function crawlSource(
             anchor.url
           );
 
-
           queue.unshift({
-
             url:
               anchor.url,
-
             depth:
               current.depth +
               1,
-
             seed:
               false,
-
             candidateDetail:
               true
           });
         }
       }
     );
-
 
     if (
       current.depth >=
@@ -2267,10 +2654,8 @@ async function crawlSource(
       continue;
     }
 
-
     const followCandidates =
       anchors
-
         .filter(
           function (
             anchor
@@ -2286,14 +2671,12 @@ async function crawlSource(
                 anchor.url
               );
 
-
             if (
               !originAllowed
             ) {
 
               return false;
             }
-
 
             if (
               visited.has(
@@ -2307,7 +2690,6 @@ async function crawlSource(
               return false;
             }
 
-
             return (
               followScore(
                 anchor
@@ -2316,7 +2698,6 @@ async function crawlSource(
             );
           }
         )
-
         .sort(
           function (
             first,
@@ -2334,10 +2715,8 @@ async function crawlSource(
           }
         );
 
-
     diagnostics.navigationCandidates +=
       followCandidates.length;
-
 
     followCandidates
       .slice(
@@ -2353,19 +2732,14 @@ async function crawlSource(
             anchor.url
           );
 
-
           queue.push({
-
             url:
               anchor.url,
-
             depth:
               current.depth +
               1,
-
             seed:
               false,
-
             candidateDetail:
               false
           });
@@ -2373,12 +2747,10 @@ async function crawlSource(
       );
   }
 
-
   const finalItems =
     Array.from(
       found.values()
     );
-
 
   const resolvedRegions =
     finalItems.filter(
@@ -2394,7 +2766,6 @@ async function crawlSource(
       }
     ).length;
 
-
   const unresolvedRegions =
     finalItems.filter(
       function (
@@ -2407,7 +2778,6 @@ async function crawlSource(
         );
       }
     ).length;
-
 
   if (
     pagesFetched >
@@ -2429,6 +2799,8 @@ async function crawlSource(
       diagnostics.extractedAnchors +
       " | jsHref=" +
       diagnostics.javascriptAnchors +
+      " | jsResolved=" +
+      diagnostics.resolvedJavascriptAnchors +
       " | sameOrigin=" +
       diagnostics.sameOriginAnchors +
       " | primary=" +
@@ -2461,7 +2833,6 @@ async function crawlSource(
       unresolvedRegions
     );
 
-
     if (
       diagnostics.sampleLabels.size >
       0
@@ -2470,7 +2841,6 @@ async function crawlSource(
       console.log(
         "   🔎 LABEL SAMPLE:"
       );
-
 
       Array.from(
         diagnostics.sampleLabels
@@ -2488,25 +2858,18 @@ async function crawlSource(
     }
   }
 
-
   return {
-
     sourceId:
       source.id,
-
     sourceName:
       source.sourceName,
-
     region:
       region.name,
-
     accessOk:
       pagesFetched >
       0,
-
     pagesFetched:
       pagesFetched,
-
     items:
       finalItems
   };
@@ -2530,7 +2893,6 @@ function itemUrl(
       ""
     );
 
-
   return canonicalUrl(
     value,
     value
@@ -2551,7 +2913,6 @@ function chooseRegionMetadata(
         "전국"
     );
 
-
   const previousResolved =
     Boolean(
       previous &&
@@ -2559,7 +2920,6 @@ function chooseRegionMetadata(
       previous.region !==
         "전국"
     );
-
 
   const chosen =
     itemResolved
@@ -2570,30 +2930,25 @@ function chooseRegionMetadata(
             : item
         );
 
-
   return {
-
     region:
       (
         chosen &&
         chosen.region
       ) ||
       "전국",
-
     regionId:
       (
         chosen &&
         chosen.regionId
       ) ||
       "",
-
     regionFullName:
       (
         chosen &&
         chosen.regionFullName
       ) ||
       "",
-
     sourceRegion:
       (
         item &&
@@ -2604,7 +2959,6 @@ function chooseRegionMetadata(
         previous.sourceRegion
       ) ||
       "",
-
     sourceRegionId:
       (
         item &&
@@ -2615,20 +2969,17 @@ function chooseRegionMetadata(
         previous.sourceRegionId
       ) ||
       "",
-
     regionInferred:
       Boolean(
         chosen &&
         chosen.regionInferred
       ),
-
     regionInferenceSource:
       (
         chosen &&
         chosen.regionInferenceSource
       ) ||
       "",
-
     regionInferenceStatus:
       (
         chosen &&
@@ -2654,23 +3005,26 @@ function chooseDetailValue(
 ) {
 
   if (
-    freshValue !== undefined &&
-    freshValue !== null &&
-    freshValue !== ""
+    freshValue !==
+      undefined &&
+    freshValue !==
+      null &&
+    freshValue !==
+      ""
   ) {
 
     return freshValue;
   }
 
-
   if (
-    previousValue !== undefined &&
-    previousValue !== null
+    previousValue !==
+      undefined &&
+    previousValue !==
+      null
   ) {
 
     return previousValue;
   }
-
 
   return "";
 }
@@ -2740,13 +3094,16 @@ function applyDetailMetadata(
 
   result.amountNumeric =
     (
-      item.amountNumeric !== undefined &&
-      item.amountNumeric !== null
+      item.amountNumeric !==
+        undefined &&
+      item.amountNumeric !==
+        null
     )
       ? item.amountNumeric
       : (
           previous &&
-          previous.amountNumeric !== undefined
+          previous.amountNumeric !==
+            undefined
             ? previous.amountNumeric
             : null
         );
@@ -2781,7 +3138,8 @@ function applyDetailMetadata(
 
   result.detailExtractionCount =
     (
-      item.detailExtractionCount !== undefined
+      item.detailExtractionCount !==
+        undefined
     )
       ? item.detailExtractionCount
       : (
@@ -2812,7 +3170,6 @@ function applyDetailMetadata(
         ) ||
         {};
 
-
   return result;
 }
 
@@ -2826,22 +3183,17 @@ function mergeData(
       DATA_FILE
     );
 
-
   const archive =
     readArray(
       ARCHIVE_FILE
     );
 
-
   const today =
     todayKst();
 
-
   const expiredUrls =
     new Set(
-
       archive
-
         .filter(
           function (
             item
@@ -2854,49 +3206,45 @@ function mergeData(
             );
           }
         )
-
         .map(
           itemUrl
         )
-
         .filter(
           Boolean
         )
     );
 
-
   const liveByUrl =
     new Map();
 
-
   const liveWithoutUrl =
     [];
-
 
   live.forEach(
     function (
       item
     ) {
 
-      if (!item) {
+      if (
+        !item
+      ) {
 
         return;
       }
-
 
       const url =
         itemUrl(
           item
         );
 
-
-      if (url) {
+      if (
+        url
+      ) {
 
         liveByUrl.set(
           url,
           item
         );
-
 
       } else {
 
@@ -2906,7 +3254,6 @@ function mergeData(
       }
     }
   );
-
 
   discovered.forEach(
     function (
@@ -2918,12 +3265,12 @@ function mergeData(
           item
         );
 
-
-      if (!url) {
+      if (
+        !url
+      ) {
 
         return;
       }
-
 
       if (
         expiredUrls.has(
@@ -2937,12 +3284,10 @@ function mergeData(
         return;
       }
 
-
       const previous =
         liveByUrl.get(
           url
         );
-
 
       if (
         previous
@@ -2954,37 +3299,26 @@ function mergeData(
             previous
           );
 
-
         const mergedItem = {
-
           ...item,
           ...previous,
-
           title:
             item.title ||
             previous.title,
-
           source:
             item.source,
-
           sourceName:
             item.sourceName,
-
           sourceType:
             item.sourceType,
-
           ...regionMetadata,
-
           collectionSourceId:
             item.collectionSourceId,
-
           collectionVersion:
             item.collectionVersion,
-
           updatedAt:
             today
         };
-
 
         applyDetailMetadata(
           mergedItem,
@@ -2992,12 +3326,10 @@ function mergeData(
           previous
         );
 
-
         liveByUrl.set(
           url,
           mergedItem
         );
-
 
       } else {
 
@@ -3009,39 +3341,37 @@ function mergeData(
     }
   );
 
-
   const archiveByUrl =
     new Map();
 
-
   const archiveWithoutUrl =
     [];
-
 
   archive.forEach(
     function (
       item
     ) {
 
-      if (!item) {
+      if (
+        !item
+      ) {
 
         return;
       }
-
 
       const url =
         itemUrl(
           item
         );
 
-
-      if (url) {
+      if (
+        url
+      ) {
 
         archiveByUrl.set(
           url,
           item
         );
-
 
       } else {
 
@@ -3051,7 +3381,6 @@ function mergeData(
       }
     }
   );
-
 
   discovered.forEach(
     function (
@@ -3063,18 +3392,17 @@ function mergeData(
           item
         );
 
-
-      if (!url) {
+      if (
+        !url
+      ) {
 
         return;
       }
-
 
       const previous =
         archiveByUrl.get(
           url
         );
-
 
       const regionMetadata =
         chooseRegionMetadata(
@@ -3082,13 +3410,9 @@ function mergeData(
           previous
         );
 
-
       const mergedItem = {
-
         ...item,
-
         ...(previous || {}),
-
         title:
           item.title ||
           (
@@ -3096,48 +3420,36 @@ function mergeData(
             previous.title
           ) ||
           "",
-
         source:
           item.source,
-
         sourceName:
           item.sourceName,
-
         sourceType:
           item.sourceType,
-
         ...regionMetadata,
-
         collectionSourceId:
           item.collectionSourceId,
-
         collectionVersion:
           item.collectionVersion,
-
         archiveFirstSeenAt:
           (
             previous &&
             previous.archiveFirstSeenAt
           ) ||
           today,
-
         archiveLastSeenAt:
           today,
-
         archiveIsCurrent:
           true,
-
         collectedAt:
           (
             previous &&
             previous.collectedAt
           ) ||
           today,
-
         updatedAt:
           today
       };
-
 
       applyDetailMetadata(
         mergedItem,
@@ -3145,14 +3457,12 @@ function mergeData(
         previous
       );
 
-
       archiveByUrl.set(
         url,
         mergedItem
       );
     }
   );
-
 
   const nextLive =
     Array.from(
@@ -3162,7 +3472,6 @@ function mergeData(
         liveWithoutUrl
       );
 
-
   const nextArchive =
     Array.from(
       archiveByUrl.values()
@@ -3171,24 +3480,19 @@ function mergeData(
         archiveWithoutUrl
       );
 
-
   writeArray(
     DATA_FILE,
     nextLive
   );
-
 
   writeArray(
     ARCHIVE_FILE,
     nextArchive
   );
 
-
   return {
-
     liveCount:
       nextLive.length,
-
     archiveCount:
       nextArchive.length
   };
@@ -3207,18 +3511,14 @@ async function runSourceGroup(
     options.sources ||
     [];
 
-
   const region =
     options.region;
-
 
   const discovered =
     options.discovered;
 
-
   const counters =
     options.counters;
-
 
   for (
     const source of
@@ -3230,7 +3530,6 @@ async function runSourceGroup(
       source.sourceName
     );
 
-
     try {
 
       const result =
@@ -3239,13 +3538,11 @@ async function runSourceGroup(
           source
         );
 
-
       if (
         result.accessOk
       ) {
 
         counters.success++;
-
 
         console.log(
           "   ✅ ACCESS OK" +
@@ -3255,11 +3552,9 @@ async function runSourceGroup(
           result.items.length
         );
 
-
       } else {
 
         counters.failed++;
-
 
         console.log(
           "   ❌ ACCESS FAILED" +
@@ -3267,7 +3562,6 @@ async function runSourceGroup(
           " | items=0"
         );
       }
-
 
       if (
         result.items.length >
@@ -3279,19 +3573,16 @@ async function runSourceGroup(
           result.items.length
         );
 
-
         discovered.push(
           ...result.items
         );
       }
-
 
     } catch (
       error
     ) {
 
       counters.failed++;
-
 
       console.warn(
         "   ⚠️ SOURCE FAILED:",
@@ -3313,7 +3604,6 @@ async function main() {
   const registry =
     getRegionalSources();
 
-
   const targetRegions =
     registry.filter(
       function (
@@ -3328,62 +3618,49 @@ async function main() {
       }
     );
 
-
   const nationalSources =
     getNationalSources();
-
 
   console.log(
     ""
   );
 
-
   console.log(
     "===================================="
   );
-
 
   console.log(
     "AXOO REMAINING REGION COLLECTOR"
   );
 
-
   console.log(
     "===================================="
   );
-
 
   console.log(
     "VERSION:",
     COLLECTION_VERSION
   );
 
-
   console.log(
     "대상 지역:",
     targetRegions.length
   );
-
 
   console.log(
     "전국 백업 소스:",
     nationalSources.length
   );
 
-
   const discovered =
     [];
 
-
   const counters = {
-
     success:
       0,
-
     failed:
       0
   };
-
 
   for (
     const region of
@@ -3394,19 +3671,16 @@ async function main() {
       ""
     );
 
-
     console.log(
       "▶",
       region.fullName
     );
-
 
     const sources =
       region.sources.slice(
         0,
         MAX_SOURCES_PER_REGION
       );
-
 
     if (
       sources.length ===
@@ -3417,50 +3691,37 @@ async function main() {
         "   ⚠️ 등록된 소스 없음"
       );
 
-
       continue;
     }
 
-
     await runSourceGroup({
-
       sources:
         sources,
-
       region:
         region,
-
       discovered:
         discovered,
-
       counters:
         counters
     });
   }
 
-
   const nationalRegion = {
-
     id:
       "national",
-
     name:
       "전국",
-
     fullName:
       "전국 공통 백업"
   };
-
 
   console.log(
     ""
   );
 
-
   console.log(
     "▶ 전국 공통 백업"
   );
-
 
   if (
     nationalSources.length ===
@@ -3471,29 +3732,22 @@ async function main() {
       "   ⚠️ 등록된 전국 공통 소스 없음"
     );
 
-
   } else {
 
     await runSourceGroup({
-
       sources:
         nationalSources,
-
       region:
         nationalRegion,
-
       discovered:
         discovered,
-
       counters:
         counters
     });
   }
 
-
   const unique =
     new Map();
-
 
   discovered.forEach(
     function (
@@ -3504,7 +3758,6 @@ async function main() {
         itemUrl(
           item
         );
-
 
       if (
         url &&
@@ -3521,12 +3774,10 @@ async function main() {
     }
   );
 
-
   const items =
     Array.from(
       unique.values()
     );
-
 
   const nationalItems =
     items.filter(
@@ -3540,7 +3791,6 @@ async function main() {
         );
       }
     );
-
 
   const nationalResolved =
     nationalItems.filter(
@@ -3556,7 +3806,6 @@ async function main() {
       }
     ).length;
 
-
   const nationalPending =
     nationalItems.filter(
       function (
@@ -3569,7 +3818,6 @@ async function main() {
         );
       }
     ).length;
-
 
   const detailEnriched =
     items.filter(
@@ -3584,7 +3832,6 @@ async function main() {
       }
     ).length;
 
-
   const deadlineEnriched =
     items.filter(
       function (
@@ -3596,7 +3843,6 @@ async function main() {
         );
       }
     ).length;
-
 
   const amountEnriched =
     items.filter(
@@ -3610,109 +3856,90 @@ async function main() {
       }
     ).length;
 
-
   const merged =
     mergeData(
       items
     );
 
-
   console.log(
     ""
   );
 
-
   console.log(
     "===================================="
   );
-
 
   console.log(
     "REMAINING REGION SUMMARY"
   );
 
-
   console.log(
     "===================================="
   );
-
 
   console.log(
     "지역:",
     targetRegions.length
   );
 
-
   console.log(
     "전국 백업 소스:",
     nationalSources.length
   );
-
 
   console.log(
     "성공 소스:",
     counters.success
   );
 
-
   console.log(
     "실패 소스:",
     counters.failed
   );
-
 
   console.log(
     "신규/발견 후보:",
     items.length
   );
 
-
   console.log(
     "상세정보 추출 후보:",
     detailEnriched
   );
-
 
   console.log(
     "마감일 추출:",
     deadlineEnriched
   );
 
-
   console.log(
     "작품비 추출:",
     amountEnriched
   );
-
 
   console.log(
     "전국 후보 실제 지역 판별:",
     nationalResolved
   );
 
-
   console.log(
     "전국 후보 지역 미확정:",
     nationalPending
   );
-
 
   console.log(
     "LIVE:",
     merged.liveCount
   );
 
-
   console.log(
     "ARCHIVE:",
     merged.archiveCount
   );
 
-
   console.log(
     "===================================="
   );
-
 
   if (
     counters.failed >
@@ -3726,7 +3953,6 @@ async function main() {
     );
   }
 
-
   if (
     nationalPending >
     0
@@ -3739,11 +3965,9 @@ async function main() {
     );
   }
 
-
   console.log(
     ""
   );
-
 
   console.log(
     "✅ 남은 13개 지역 + 전국 공통 백업 수집 완료"
@@ -3771,7 +3995,6 @@ if (
           error
         );
 
-
         process.exitCode =
           1;
       }
@@ -3784,26 +4007,20 @@ if (
 ========================================================= */
 
 module.exports = {
-
   isCandidateTitle,
-
   cleanText,
-
   extractAnchors,
-
   followScore,
-
   canonicalUrl,
-
   crawlSource,
-
   resolveCandidateRegion,
-
   extractRegionEvidenceSnippets,
-
   enrichNationalItemRegionFromDetail,
-
   enrichItemFromDetailPage,
-
-  buildItem
+  buildItem,
+  isCheongjuEminwonListUrl,
+  buildCheongjuSearchSeedUrls,
+  buildCheongjuPostBody,
+  extractCheongjuManagementNo,
+  extractCheongjuEminwonAnchors
 };
