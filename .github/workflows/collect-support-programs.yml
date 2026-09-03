@@ -3,6 +3,11 @@ name: Collect Support Programs
 on:
   workflow_dispatch:
 
+  schedule:
+    # GitHub Actions cron = UTC
+    # 00:40 UTC = 한국시간 오전 09:40
+    - cron: "40 0 * * *"
+
 permissions:
   contents: write
 
