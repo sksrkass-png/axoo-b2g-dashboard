@@ -13,6 +13,9 @@
 
    - daejeon_city_notice
      → 대전광역시 게시판 제목 검색 GET seed 생성
+
+   - gangwon_notice
+     → 강원특별자치도 공고/고시 + 강원특별자치도보를 함께 감시
 ========================================================= */
 
 
@@ -52,6 +55,10 @@ const DAEJEON_SEARCH_TERMS = [
   "미술작품 공모"
 
 ];
+
+
+const GANGWON_DOBO_URL =
+  "https://state.gwd.go.kr/portal/bulletin/dobo";
 
 
 /* =========================================================
@@ -577,6 +584,75 @@ function buildDaejeonRequests(
 
 
 /* =========================================================
+   GANGWON NOTICE + DOBO ADAPTER
+========================================================= */
+
+function buildGangwonRequests(
+  source
+) {
+
+  if (
+    !source ||
+    !source.sourceUrl
+  ) {
+
+    return [];
+  }
+
+
+  const primaryRequest =
+    normalizeRequest(
+      {
+
+        method:
+          "GET",
+
+        url:
+          source.sourceUrl,
+
+        label:
+          "강원특별자치도 공고·고시"
+      },
+      source.sourceUrl
+    );
+
+
+  const doboRequest =
+    normalizeRequest(
+      {
+
+        method:
+          "GET",
+
+        url:
+          GANGWON_DOBO_URL,
+
+        headers: {
+
+          "Referer":
+            source.sourceUrl
+        },
+
+        label:
+          "강원특별자치도보"
+      },
+      source.sourceUrl
+    );
+
+
+  return [
+
+    primaryRequest,
+
+    doboRequest
+
+  ].filter(
+    Boolean
+  );
+}
+
+
+/* =========================================================
    ADAPTER REGISTRY
 ========================================================= */
 
@@ -611,6 +687,22 @@ const SOURCE_ADAPTERS = {
 
     buildRequests:
       buildDaejeonRequests
+  },
+
+
+  gangwon_notice: {
+
+    id:
+      "gangwon_notice_plus_dobo",
+
+    label:
+      "강원 공고·고시 + 강원특별자치도보",
+
+    mode:
+      "multi_seed_board",
+
+    buildRequests:
+      buildGangwonRequests
   }
 
 };
@@ -1133,6 +1225,94 @@ function testDaejeonAdapter() {
 
 
 /* =========================================================
+   GANGWON SELF TEST
+========================================================= */
+
+function testGangwonAdapter() {
+
+  const sampleSource = {
+
+    id:
+      "gangwon_notice",
+
+    sourceName:
+      "강원특별자치도 고시공고",
+
+    sourceUrl:
+      "https://state.gwd.go.kr/portal/bulletin/notification",
+
+    crawlMode:
+      "board"
+  };
+
+
+  const result =
+    describeSourceAdapter(
+      sampleSource
+    );
+
+
+  assertSelfTest(
+    result.applied,
+    "GANGWON ADAPTER NOT APPLIED"
+  );
+
+
+  assertSelfTest(
+    result.requests.length ===
+      2,
+    "GANGWON REQUEST COUNT TEST FAILED"
+  );
+
+
+  const urls =
+    result.requests.map(
+      function (
+        request
+      ) {
+
+        return request.url;
+      }
+    );
+
+
+  assertSelfTest(
+    urls.some(
+      function (
+        url
+      ) {
+
+        return url.includes(
+          "/portal/bulletin/notification"
+        );
+      }
+    ),
+    "GANGWON PRIMARY NOTICE SEED MISSING"
+  );
+
+
+  assertSelfTest(
+    urls.some(
+      function (
+        url
+      ) {
+
+        return url.includes(
+          "/portal/bulletin/dobo"
+        );
+      }
+    ),
+    "GANGWON DOBO SEED MISSING"
+  );
+
+
+  console.log(
+    "✅ GANGWON NOTICE + DOBO ADAPTER SELF TEST PASSED"
+  );
+}
+
+
+/* =========================================================
    SELF TEST
 ========================================================= */
 
@@ -1164,6 +1344,9 @@ function runSelfTest() {
 
 
     testDaejeonAdapter();
+
+
+    testGangwonAdapter();
 
 
     console.log(
@@ -1228,6 +1411,9 @@ module.exports = {
   DAEJEON_SEARCH_TERMS,
 
 
+  GANGWON_DOBO_URL,
+
+
   getSourceAdapter,
 
   hasSourceAdapter,
@@ -1250,6 +1436,9 @@ module.exports = {
 
   buildDaejeonRequests,
 
-  getDaejeonSearchEndpoint
+  getDaejeonSearchEndpoint,
+
+
+  buildGangwonRequests
 
 };
