@@ -26,8 +26,14 @@ const KCDF_BASE =
 const KCDF_LIST =
   "https://www.kcdf.or.kr/brd/board/337/L/menu/284";
 
+const KOCCA_BASE =
+  "https://www.kocca.kr/";
+
+const KOCCA_LIST =
+  "https://www.kocca.kr/kocca/pims/list.do?menuNo=204104";
+
 const COLLECTOR_VERSION =
-  "support_programs_kams_arko_kcdf_v3.1";
+  "support_programs_kams_arko_kcdf_kocca_v4.0";
 
 
 /* =========================================================
@@ -119,29 +125,44 @@ function stripTags(value) {
 
 
 function normalizeDate(value) {
-  const match =
-    text(value).match(
+  const raw =
+    text(value);
+
+  let match =
+    raw.match(
       /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
     );
 
   if (!match) {
-    return "";
+    match =
+      raw.match(
+        /(?:^|\D)(\d{2})[-./](\d{1,2})[-./](\d{1,2})(?:\D|$)/
+      );
+
+    if (!match) {
+      return "";
+    }
+
+    return [
+      `20${match[1]}`,
+      String(match[2]).padStart(
+        2,
+        "0"
+      ),
+      String(match[3]).padStart(
+        2,
+        "0"
+      )
+    ].join("-");
   }
 
-  const [
-    ,
-    year,
-    month,
-    day
-  ] = match;
-
   return [
-    year,
-    String(month).padStart(
+    match[1],
+    String(match[2]).padStart(
       2,
       "0"
     ),
-    String(day).padStart(
+    String(match[3]).padStart(
       2,
       "0"
     )
@@ -150,19 +171,65 @@ function normalizeDate(value) {
 
 
 function extractDates(value) {
-  return [
-    ...stripTags(value)
-      .matchAll(
-        /(20\d{2}[-./]\d{1,2}[-./]\d{1,2})(?:\s+\d{1,2}:\d{2})?/g
-      )
-  ]
-    .map(
-      match =>
-        normalizeDate(
-          match[1]
-        )
+  const plain =
+    stripTags(
+      value
+    );
+
+  const results =
+    [];
+
+  for (
+    const match of plain.matchAll(
+      /20\d{2}[-./]\d{1,2}[-./]\d{1,2}/g
     )
-    .filter(Boolean);
+  ) {
+    const date =
+      normalizeDate(
+        match[0]
+      );
+
+    if (date) {
+      results.push(
+        date
+      );
+    }
+  }
+
+  return results;
+}
+
+
+function extractShortDates(value) {
+  const plain =
+    stripTags(
+      value
+    );
+
+  const results =
+    [];
+
+  const regex =
+    /(?:20\d{2}|\d{2})[-./]\d{1,2}[-./]\d{1,2}/g;
+
+  for (
+    const match of plain.matchAll(
+      regex
+    )
+  ) {
+    const date =
+      normalizeDate(
+        match[0]
+      );
+
+    if (date) {
+      results.push(
+        date
+      );
+    }
+  }
+
+  return results;
 }
 
 
@@ -207,11 +274,15 @@ function isExpired(deadline) {
 
 function stableId(value) {
   return crypto
-    .createHash("sha1")
+    .createHash(
+      "sha1"
+    )
     .update(
       text(value)
     )
-    .digest("hex")
+    .digest(
+      "hex"
+    )
     .slice(
       0,
       12
@@ -242,7 +313,9 @@ function absoluteUrl(
 ) {
   try {
     return new URL(
-      decodeEntities(href),
+      decodeEntities(
+        href
+      ),
       base
     ).href;
   }
@@ -460,7 +533,21 @@ const SUPPORT_KEYWORDS = [
   "쇼케이스",
 
   "파트너사",
-  "참가사"
+  "참가사",
+
+  "제작지원",
+  "제작 지원",
+
+  "콘텐츠 제작",
+
+  "문화기술",
+  "문화 기술",
+
+  "신기술",
+
+  "인공지능",
+  "AI",
+  "에이아이"
 ];
 
 
@@ -547,7 +634,9 @@ const HARD_EXCLUDE_KEYWORDS = [
 
 function analyzeAxooFit(value) {
   const source =
-    text(value)
+    text(
+      value
+    )
       .toLowerCase();
 
 
@@ -621,12 +710,6 @@ function analyzeAxooFit(value) {
       )
     );
 
-
-  /*
-    모집대상 / 결과발표 / 후보추천처럼
-    AXOO가 직접 사업자로 참여할 성격이 아니면
-    강제로 C 등급 영역으로 제한.
-  */
 
   if (
     hardExcludeMatches.length
@@ -723,6 +806,261 @@ function analyzeAxooFit(value) {
     isExcluded:
       score < 50 ||
       hardExcludeMatches.length > 0
+  };
+}
+
+
+/* =========================================================
+   KOCCA FIT
+========================================================= */
+
+const KOCCA_POSITIVE_KEYWORDS = [
+  "인공지능",
+  "AI",
+  "에이아이",
+
+  "신기술",
+
+  "문화기술",
+
+  "실감콘텐츠",
+  "실감 콘텐츠",
+
+  "융복합",
+  "융합",
+
+  "XR",
+  "VR",
+  "AR",
+
+  "메타버스",
+
+  "콘텐츠 제작",
+
+  "제작지원",
+  "제작 지원",
+
+  "협력형",
+
+  "수요기업",
+  "수요 기업",
+
+  "공급기업",
+  "공급 기업",
+
+  "디자인",
+
+  "브랜드",
+  "브랜딩",
+
+  "IP",
+
+  "팝업",
+
+  "전시",
+
+  "공간"
+];
+
+
+const KOCCA_GENRE_DOWNRANK_KEYWORDS = [
+  "웹툰",
+  "만화",
+
+  "게임",
+
+  "애니메이션",
+
+  "방송",
+
+  "영화",
+
+  "음악",
+
+  "공연",
+
+  "출판",
+
+  "e스포츠",
+  "이스포츠"
+];
+
+
+const KOCCA_HARD_EXCLUDE_KEYWORDS = [
+  "인턴십",
+
+  "교육생",
+  "수강생",
+
+  "인재양성",
+
+  "입주기업 모집",
+  "신규 입주기업",
+
+  "데브캠프",
+
+  "교육과정",
+
+  "연수생"
+];
+
+
+function analyzeKoccaFit(title) {
+  const base =
+    analyzeAxooFit(
+      title
+    );
+
+
+  const source =
+    text(
+      title
+    )
+      .toLowerCase();
+
+
+  const positiveMatches =
+    KOCCA_POSITIVE_KEYWORDS.filter(
+      keyword =>
+        source.includes(
+          keyword.toLowerCase()
+        )
+    );
+
+
+  const genreMatches =
+    KOCCA_GENRE_DOWNRANK_KEYWORDS.filter(
+      keyword =>
+        source.includes(
+          keyword.toLowerCase()
+        )
+    );
+
+
+  const hardMatches =
+    KOCCA_HARD_EXCLUDE_KEYWORDS.filter(
+      keyword =>
+        source.includes(
+          keyword.toLowerCase()
+        )
+    );
+
+
+  let score =
+    base.score;
+
+
+  score +=
+    Math.min(
+      positiveMatches.length * 8,
+      24
+    );
+
+
+  score -=
+    Math.min(
+      genreMatches.length * 30,
+      60
+    );
+
+
+  if (
+    hardMatches.length
+  ) {
+    score =
+      Math.min(
+        score,
+        45
+      );
+  }
+
+
+  score =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        score
+      )
+    );
+
+
+  let grade =
+    "C";
+
+
+  if (score >= 85) {
+    grade =
+      "S";
+  }
+
+  else if (
+    score >= 70
+  ) {
+    grade =
+      "A";
+  }
+
+  else if (
+    score >= 50
+  ) {
+    grade =
+      "B";
+  }
+
+
+  const matchedKeywords = [
+    ...new Set([
+      ...base.matchedKeywords,
+      ...positiveMatches
+    ])
+  ];
+
+
+  let reason =
+    base.reason;
+
+
+  if (
+    positiveMatches.length
+  ) {
+    reason +=
+      ` KOCCA 사업 중 ${positiveMatches
+        .slice(0, 4)
+        .join(", ")} 요소가 AXOO와 연결됩니다.`;
+  }
+
+
+  if (
+    genreMatches.length
+  ) {
+    reason +=
+      ` 다만 ${genreMatches.join(", ")} 장르 중심 사업이라 우선순위를 낮췄습니다.`;
+  }
+
+
+  if (
+    hardMatches.length
+  ) {
+    reason +=
+      ` ${hardMatches.join(", ")} 유형은 직접 사업 참여 검토 대상에서 제외합니다.`;
+  }
+
+
+  return {
+    ...base,
+
+    score,
+    grade,
+
+    matchedKeywords,
+
+    reason,
+
+    isExcluded:
+      score < 50 ||
+      hardMatches.length > 0 ||
+      base.hardExcludeMatches.length > 0
   };
 }
 
@@ -892,15 +1230,16 @@ function makeSupportRecord({
 
 
 /* =========================================================
-   KAMS PARSER
+   KAMS
 ========================================================= */
 
 function findKamsRows(html) {
   return [
-    ...String(html)
-      .matchAll(
-        /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi
-      )
+    ...String(
+      html
+    ).matchAll(
+      /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi
+    )
   ].map(
     match =>
       match[1]
@@ -911,11 +1250,16 @@ function findKamsRows(html) {
 function isKamsOpenRow(row) {
   const raw =
     decodeEntities(
-      String(row ?? "")
+      String(
+        row ?? ""
+      )
     );
 
+
   const plain =
-    stripTags(raw);
+    stripTags(
+      raw
+    );
 
 
   return (
@@ -924,10 +1268,14 @@ function isKamsOpenRow(row) {
     ) ||
 
     /alt\s*=\s*["'][^"']*접수중[^"']*["']/i
-      .test(raw) ||
+      .test(
+        raw
+      ) ||
 
     /title\s*=\s*["'][^"']*접수중[^"']*["']/i
-      .test(raw) ||
+      .test(
+        raw
+      ) ||
 
     raw.includes(
       "접수중"
@@ -939,20 +1287,17 @@ function isKamsOpenRow(row) {
 function getKamsDetailLink(row) {
   const source =
     decodeEntities(
-      String(row ?? "")
-    );
-
-
-  const anchors =
-    getAnchorEntries(
-      source
+      String(
+        row ?? ""
+      )
     );
 
 
   for (
-    const anchor of anchors
+    const anchor of getAnchorEntries(
+      source
+    )
   ) {
-
     if (
       anchor.href.includes(
         "introduction_view.aspx"
@@ -961,7 +1306,6 @@ function getKamsDetailLink(row) {
         anchor.href
       )
     ) {
-
       const url =
         absoluteUrl(
           anchor.href,
@@ -995,23 +1339,19 @@ function getKamsTitle(
   row,
   detailUrl
 ) {
-
   const source =
     decodeEntities(
-      String(row ?? "")
-    );
-
-
-  const anchors =
-    getAnchorEntries(
-      source
+      String(
+        row ?? ""
+      )
     );
 
 
   for (
-    const anchor of anchors
+    const anchor of getAnchorEntries(
+      source
+    )
   ) {
-
     if (
       !anchor.href.includes(
         "introduction_view.aspx"
@@ -1021,47 +1361,39 @@ function getKamsTitle(
     }
 
 
-    const title =
-      anchor.plain;
-
-
     if (
-      title &&
-      title !== "보기"
+      anchor.plain &&
+      anchor.plain !== "보기"
     ) {
-      return title;
+      return anchor.plain;
     }
   }
 
 
-  if (detailUrl) {
+  const id =
+    getKamsId(
+      detailUrl
+    );
 
-    const id =
-      getKamsId(
-        detailUrl
+
+  if (id) {
+    const pattern =
+      new RegExp(
+        `<a\\b[^>]*href\\s*=\\s*["'][^"']*Idx=${id}[^"']*["'][^>]*>([\\s\\S]*?)<\\/a>`,
+        "i"
       );
 
 
-    if (id) {
-
-      const pattern =
-        new RegExp(
-          `<a\\b[^>]*href\\s*=\\s*["'][^"']*Idx=${id}[^"']*["'][^>]*>([\\s\\S]*?)<\\/a>`,
-          "i"
-        );
+    const match =
+      source.match(
+        pattern
+      );
 
 
-      const match =
-        source.match(
-          pattern
-        );
-
-
-      if (match) {
-        return stripTags(
-          match[1]
-        );
-      }
+    if (match) {
+      return stripTags(
+        match[1]
+      );
     }
   }
 
@@ -1073,9 +1405,13 @@ function getKamsTitle(
 function getKamsId(url) {
   try {
     return (
-      new URL(url)
+      new URL(
+        url
+      )
         .searchParams
-        .get("Idx") ||
+        .get(
+          "Idx"
+        ) ||
       ""
     );
   }
@@ -1101,13 +1437,8 @@ function getKamsDeadline(row) {
 }
 
 
-/* =========================================================
-   KAMS DETAIL
-========================================================= */
-
 async function getKamsDetailInfo(detailUrl) {
   try {
-
     const html =
       await fetchHtml(
         detailUrl
@@ -1116,37 +1447,51 @@ async function getKamsDetailInfo(detailUrl) {
 
     const raw =
       decodeEntities(
-        String(html ?? "")
+        String(
+          html ?? ""
+        )
       );
 
 
     const plain =
-      stripTags(raw);
+      stripTags(
+        raw
+      );
 
 
     let postedDate =
       "";
 
 
-    const plainPatterns = [
+    const patterns = [
       /작성일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
       /등록일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-      /게시일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      /게시일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
+
+      /작성일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
+      /등록일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
+      /게시일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
     ];
 
 
     for (
-      const pattern of plainPatterns
+      const pattern of patterns
     ) {
+      const source =
+        pattern.source.includes(
+          "[\\s\\S]"
+        )
+          ? raw
+          : plain;
+
 
       const match =
-        plain.match(
+        source.match(
           pattern
         );
 
 
       if (match) {
-
         postedDate =
           normalizeDate(
             match[1]
@@ -1157,52 +1502,12 @@ async function getKamsDetailInfo(detailUrl) {
     }
 
 
-    if (!postedDate) {
-
-      const rawPatterns = [
-        /작성일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-        /등록일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-        /게시일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
-      ];
-
-
-      for (
-        const pattern of rawPatterns
-      ) {
-
-        const match =
-          raw.match(
-            pattern
-          );
-
-
-        if (match) {
-
-          postedDate =
-            normalizeDate(
-              match[1]
-            );
-
-          break;
-        }
-      }
-    }
-
-
-    console.log(
-      "  상세 작성일:",
-      postedDate ||
-      "미확인"
-    );
-
-
     return {
       postedDate
     };
   }
 
   catch (error) {
-
     console.warn(
       "⚠️ KAMS detail fetch failed:",
       detailUrl,
@@ -1218,12 +1523,7 @@ async function getKamsDetailInfo(detailUrl) {
 }
 
 
-/* =========================================================
-   KAMS COLLECTOR
-========================================================= */
-
 async function collectKams() {
-
   console.log("");
   console.log(
     "===================================="
@@ -1255,16 +1555,10 @@ async function collectKams() {
     page <= 3;
     page += 1
   ) {
-
     const url =
       `${KAMS_LIST}?page=${page}` +
       "&ddlKeyfield=45" +
       "&txtKeyword=";
-
-
-    console.log(
-      `KAMS page ${page} fetch`
-    );
 
 
     const html =
@@ -1273,20 +1567,10 @@ async function collectKams() {
       );
 
 
-    console.log(
-      `HTML length: ${html.length}`
-    );
-
-
     const rows =
       findKamsRows(
         html
       );
-
-
-    console.log(
-      `table rows: ${rows.length}`
-    );
 
 
     totalRows +=
@@ -1296,7 +1580,6 @@ async function collectKams() {
     for (
       const row of rows
     ) {
-
       const detailUrl =
         getKamsDetailLink(
           row
@@ -1333,12 +1616,6 @@ async function collectKams() {
 
 
       if (!title) {
-
-        console.warn(
-          "⚠️ 제목 추출 실패:",
-          detailUrl
-        );
-
         continue;
       }
 
@@ -1361,11 +1638,6 @@ async function collectKams() {
     }
   }
 
-
-  console.log("");
-  console.log(
-    "KAMS parser diagnostic"
-  );
 
   console.log(
     "전체 table row:",
@@ -1392,7 +1664,7 @@ async function collectKams() {
     detailLinkCount === 0
   ) {
     throw new Error(
-      "KAMS 공모 상세 링크를 하나도 찾지 못했습니다. 사이트 HTML 구조를 다시 확인해야 합니다."
+      "KAMS 상세 링크를 찾지 못했습니다."
     );
   }
 
@@ -1401,7 +1673,7 @@ async function collectKams() {
     openRowCount === 0
   ) {
     throw new Error(
-      "KAMS에서 접수중 공고를 하나도 인식하지 못했습니다. 접수 상태 HTML 구조를 확인해야 합니다."
+      "KAMS 접수중 공고를 인식하지 못했습니다."
     );
   }
 
@@ -1410,18 +1682,9 @@ async function collectKams() {
     candidates.length === 0
   ) {
     throw new Error(
-      "KAMS 접수중 공고는 발견했지만 제목을 추출하지 못했습니다."
+      "KAMS 제목 추출 결과가 0건입니다."
     );
   }
-
-
-  const uniqueCandidates =
-    uniqueBy(
-      candidates,
-      item =>
-        item.id ||
-        item.detailUrl
-    );
 
 
   const results =
@@ -1429,16 +1692,13 @@ async function collectKams() {
 
 
   for (
-    const item of uniqueCandidates
+    const item of uniqueBy(
+      candidates,
+      item =>
+        item.id ||
+        item.detailUrl
+    )
   ) {
-
-    console.log("");
-    console.log(
-      "→",
-      item.title
-    );
-
-
     const fit =
       analyzeAxooFit(
         item.title
@@ -1451,7 +1711,7 @@ async function collectKams() {
       );
 
 
-    const result =
+    results.push(
       makeSupportRecord({
         id:
           `kams-${item.id}`,
@@ -1478,37 +1738,24 @@ async function collectKams() {
           item.detailUrl,
 
         fit
-      });
-
-
-    results.push(
-      result
-    );
-
-
-    console.log(
-      `  ${result.grade} / ${result.score}점 / ${result.deadline || "마감일 미확인"}`
+      })
     );
   }
 
 
   if (
-    results.length === 0
+    !results.length
   ) {
     throw new Error(
-      "KAMS 결과가 0건입니다. 빈 데이터를 저장하지 않습니다."
+      "KAMS 결과가 0건입니다."
     );
   }
 
 
-  console.log("");
-  console.log(
-    "------------------------------------"
-  );
-
   console.log(
     `KAMS 접수중 공모: ${results.length}건`
   );
+
 
   console.log(
     `대시보드 노출 대상: ${
@@ -1525,13 +1772,14 @@ async function collectKams() {
 
 
 /* =========================================================
-   ARKO PARSER
+   ARKO
 ========================================================= */
 
 function looksLikeArkoDetailUrl(href) {
-
   const value =
-    text(href)
+    text(
+      href
+    )
       .toLowerCase();
 
 
@@ -1548,24 +1796,17 @@ function looksLikeArkoDetailUrl(href) {
       "/board/view/"
     ) ||
 
-    value.includes(
-      "/board/view/4013"
-    ) ||
-
     (
       value.includes(
         "bid=463"
       ) &&
-
       (
         value.includes(
           "cid="
         ) ||
-
         value.includes(
           "seq="
         ) ||
-
         value.includes(
           "idx="
         )
@@ -1576,23 +1817,16 @@ function looksLikeArkoDetailUrl(href) {
 
 
 function getArkoDetailUrl(block) {
-
-  const anchors =
-    getAnchorEntries(
-      block
-    );
-
-
   for (
-    const anchor of anchors
+    const anchor of getAnchorEntries(
+      block
+    )
   ) {
-
     if (
       looksLikeArkoDetailUrl(
         anchor.href
       )
     ) {
-
       return absoluteUrl(
         anchor.href,
         ARKO_BASE
@@ -1602,9 +1836,10 @@ function getArkoDetailUrl(block) {
 
 
   for (
-    const anchor of anchors
+    const anchor of getAnchorEntries(
+      block
+    )
   ) {
-
     const href =
       text(
         anchor.href
@@ -1613,7 +1848,9 @@ function getArkoDetailUrl(block) {
 
     if (
       !href ||
-      href.startsWith("#") ||
+      href.startsWith(
+        "#"
+      ) ||
       href
         .toLowerCase()
         .startsWith(
@@ -1628,12 +1865,10 @@ function getArkoDetailUrl(block) {
       anchor.plain.includes(
         "상세보기"
       ) ||
-
       anchor.plain.includes(
         "자세히보기"
       )
     ) {
-
       return absoluteUrl(
         href,
         ARKO_BASE
@@ -1647,14 +1882,13 @@ function getArkoDetailUrl(block) {
 
 
 function getArkoTitle(block) {
-
   const raw =
     String(
       block ?? ""
     );
 
 
-  const preferredPatterns = [
+  const patterns = [
     /<(?:strong|h2|h3|h4|h5)\b[^>]*>([\s\S]*?)<\/(?:strong|h2|h3|h4|h5)>/gi,
 
     /<(?:p|div|span)\b[^>]*class\s*=\s*["'][^"']*(?:tit|title|subject)[^"']*["'][^>]*>([\s\S]*?)<\/(?:p|div|span)>/gi
@@ -1662,15 +1896,13 @@ function getArkoTitle(block) {
 
 
   for (
-    const pattern of preferredPatterns
+    const pattern of patterns
   ) {
-
     for (
       const match of raw.matchAll(
         pattern
       )
     ) {
-
       const candidate =
         stripTags(
           match[1]
@@ -1695,7 +1927,6 @@ function getArkoTitle(block) {
           candidate
         )
       ) {
-
         return candidate;
       }
     }
@@ -1707,7 +1938,6 @@ function getArkoTitle(block) {
       raw
     )
   ) {
-
     let candidate =
       anchor.plain
         .replace(
@@ -1738,7 +1968,6 @@ function getArkoTitle(block) {
     if (
       firstDate >= 0
     ) {
-
       candidate =
         candidate
           .slice(
@@ -1755,47 +1984,8 @@ function getArkoTitle(block) {
         anchor.href
       )
     ) {
-
       return candidate;
     }
-  }
-
-
-  const plain =
-    stripTags(
-      raw
-    )
-      .replace(
-        /^진행중\s*/i,
-        ""
-      )
-      .replace(
-        /^NEW\s*/i,
-        ""
-      )
-      .trim();
-
-
-  const dateIndex =
-    plain.search(
-      /20\d{2}[-./]\d{1,2}[-./]\d{1,2}/
-    );
-
-
-  if (
-    dateIndex > 0
-  ) {
-
-    return plain
-      .slice(
-        0,
-        dateIndex
-      )
-      .replace(
-        /상세보기.*$/i,
-        ""
-      )
-      .trim();
   }
 
 
@@ -1807,7 +1997,6 @@ function getArkoSummary(
   block,
   title
 ) {
-
   const raw =
     String(
       block ?? ""
@@ -1834,10 +2023,7 @@ function getArkoSummary(
       value =>
         !value.includes(
           "상세보기"
-        )
-    )
-    .filter(
-      value =>
+        ) &&
         !value.includes(
           "자세히보기"
         )
@@ -1853,7 +2039,6 @@ function getArkoSummary(
   if (
     pMatches.length
   ) {
-
     return pMatches
       .sort(
         (a, b) =>
@@ -1863,40 +2048,11 @@ function getArkoSummary(
   }
 
 
-  return text(
-    stripTags(
-      raw
-    )
-      .replace(
-        title,
-        " "
-      )
-      .replace(
-        /진행중/gi,
-        " "
-      )
-      .replace(
-        /NEW/gi,
-        " "
-      )
-      .replace(
-        /상세보기/gi,
-        " "
-      )
-      .replace(
-        /자세히보기/gi,
-        " "
-      )
-      .replace(
-        /20\d{2}[-./]\d{1,2}[-./]\d{1,2}/g,
-        " "
-      )
-  );
+  return "";
 }
 
 
 function findArkoBlocks(html) {
-
   const source =
     String(
       html ?? ""
@@ -1920,7 +2076,6 @@ function findArkoBlocks(html) {
   for (
     const block of liBlocks
   ) {
-
     const plain =
       stripTags(
         block
@@ -1931,13 +2086,11 @@ function findArkoBlocks(html) {
       plain.includes(
         "진행중"
       ) &&
-
       /20\d{2}[-./]\d{1,2}[-./]\d{1,2}/
         .test(
           plain
         )
     ) {
-
       blocks.push(
         block
       );
@@ -1948,39 +2101,6 @@ function findArkoBlocks(html) {
   if (
     blocks.length
   ) {
-
-    return blocks;
-  }
-
-
-  for (
-    const anchor of getAnchorEntries(
-      source
-    )
-  ) {
-
-    if (
-      anchor.plain.includes(
-        "진행중"
-      ) &&
-
-      /20\d{2}[-./]\d{1,2}[-./]\d{1,2}/
-        .test(
-          anchor.plain
-        )
-    ) {
-
-      blocks.push(
-        anchor.full
-      );
-    }
-  }
-
-
-  if (
-    blocks.length
-  ) {
-
     return blocks;
   }
 
@@ -1990,7 +2110,6 @@ function findArkoBlocks(html) {
 
 
   while (true) {
-
     const index =
       source.indexOf(
         "진행중",
@@ -2005,24 +2124,16 @@ function findArkoBlocks(html) {
     }
 
 
-    const start =
-      Math.max(
-        0,
-        index - 1800
-      );
-
-
-    const end =
-      Math.min(
-        source.length,
-        index + 3200
-      );
-
-
     const windowHtml =
       source.slice(
-        start,
-        end
+        Math.max(
+          0,
+          index - 1800
+        ),
+        Math.min(
+          source.length,
+          index + 3200
+        )
       );
 
 
@@ -2034,7 +2145,6 @@ function findArkoBlocks(html) {
           )
         )
     ) {
-
       blocks.push(
         windowHtml
       );
@@ -2054,30 +2164,24 @@ function getArkoId(
   detailUrl,
   title
 ) {
-
   try {
-
     const url =
       new URL(
         detailUrl
       );
 
 
-    const queryKeys = [
-      "cid",
-      "seq",
-      "idx",
-      "id",
-      "contentId",
-      "bbsId",
-      "docid"
-    ];
-
-
     for (
-      const key of queryKeys
+      const key of [
+        "cid",
+        "seq",
+        "idx",
+        "id",
+        "contentId",
+        "bbsId",
+        "docid"
+      ]
     ) {
-
       const value =
         url.searchParams
           .get(
@@ -2115,12 +2219,7 @@ function getArkoId(
 }
 
 
-/* =========================================================
-   ARKO COLLECTOR
-========================================================= */
-
 async function collectArko() {
-
   console.log("");
   console.log(
     "===================================="
@@ -2140,9 +2239,6 @@ async function collectArko() {
   let totalBlocks =
     0;
 
-  let openBlocks =
-    0;
-
   let detailLinks =
     0;
 
@@ -2152,40 +2248,10 @@ async function collectArko() {
     page <= 2;
     page += 1
   ) {
-
-    const url =
-      `${ARKO_LIST}&page=${page}`;
-
-
-    console.log(
-      `ARKO page ${page} fetch`
-    );
-
-
     const html =
       await fetchHtml(
-        url
+        `${ARKO_LIST}&page=${page}`
       );
-
-
-    console.log(
-      `HTML length: ${html.length}`
-    );
-
-
-    if (
-      !html.includes(
-        "공모"
-      ) &&
-      !html.includes(
-        "지원"
-      )
-    ) {
-
-      throw new Error(
-        "ARKO 목록 페이지를 정상적으로 읽지 못했습니다."
-      );
-    }
 
 
     const blocks =
@@ -2198,30 +2264,9 @@ async function collectArko() {
       blocks.length;
 
 
-    console.log(
-      `진행중 후보 block: ${blocks.length}`
-    );
-
-
     for (
       const block of blocks
     ) {
-
-      if (
-        !stripTags(
-          block
-        ).includes(
-          "진행중"
-        )
-      ) {
-        continue;
-      }
-
-
-      openBlocks +=
-        1;
-
-
       const detailUrl =
         getArkoDetailUrl(
           block
@@ -2244,12 +2289,6 @@ async function collectArko() {
 
 
       if (!title) {
-
-        console.warn(
-          "⚠️ ARKO 제목 추출 실패:",
-          detailUrl
-        );
-
         continue;
       }
 
@@ -2277,22 +2316,8 @@ async function collectArko() {
           deadline
         )
       ) {
-
-        console.log(
-          "  만료 공고 제외:",
-          title,
-          deadline
-        );
-
         continue;
       }
-
-
-      const summary =
-        getArkoSummary(
-          block,
-          title
-        );
 
 
       candidates.push({
@@ -2304,7 +2329,11 @@ async function collectArko() {
 
         title,
 
-        summary,
+        summary:
+          getArkoSummary(
+            block,
+            title
+          ),
 
         detailUrl,
 
@@ -2316,25 +2345,17 @@ async function collectArko() {
   }
 
 
-  console.log("");
-  console.log(
-    "ARKO parser diagnostic"
-  );
-
   console.log(
     "진행중 후보 block:",
     totalBlocks
   );
 
-  console.log(
-    "진행중 인식:",
-    openBlocks
-  );
 
   console.log(
     "상세 링크:",
     detailLinks
   );
+
 
   console.log(
     "유효 후보:",
@@ -2343,100 +2364,70 @@ async function collectArko() {
 
 
   if (
-    openBlocks > 0 &&
-    candidates.length === 0
+    totalBlocks > 0 &&
+    detailLinks === 0
   ) {
-
     throw new Error(
-      "ARKO 진행중 공고는 발견했지만 유효한 상세 링크 또는 제목을 추출하지 못했습니다."
+      "ARKO 상세 링크를 추출하지 못했습니다."
     );
   }
 
 
-  const uniqueCandidates =
+  const results =
     uniqueBy(
       candidates,
       item =>
         item.detailUrl ||
         `${item.title}|${item.deadline}`
-    );
+    )
+      .map(
+        item => {
+          const fit =
+            analyzeAxooFit(
+              [
+                item.title,
+                item.summary
+              ]
+                .filter(Boolean)
+                .join(" ")
+            );
 
 
-  const results =
-    [];
+          return makeSupportRecord({
+            id:
+              `arko-${item.id}`,
 
+            source:
+              "한국문화예술위원회",
 
-  for (
-    const item of uniqueCandidates
-  ) {
+            sourceCode:
+              "ARKO",
 
-    console.log("");
-    console.log(
-      "→",
-      item.title
-    );
+            title:
+              item.title,
 
+            startDate:
+              item.startDate,
 
-    const fit =
-      analyzeAxooFit(
-        [
-          item.title,
-          item.summary
-        ]
-          .filter(Boolean)
-          .join(" ")
+            deadline:
+              item.deadline,
+
+            publishedDate:
+              item.startDate,
+
+            sourceUrl:
+              item.detailUrl,
+
+            fit
+          });
+        }
       );
 
-
-    const result =
-      makeSupportRecord({
-        id:
-          `arko-${item.id}`,
-
-        source:
-          "한국문화예술위원회",
-
-        sourceCode:
-          "ARKO",
-
-        title:
-          item.title,
-
-        startDate:
-          item.startDate,
-
-        deadline:
-          item.deadline,
-
-        publishedDate:
-          item.startDate,
-
-        sourceUrl:
-          item.detailUrl,
-
-        fit
-      });
-
-
-    results.push(
-      result
-    );
-
-
-    console.log(
-      `  ${result.grade} / ${result.score}점 / ${result.deadline || "마감일 미확인"}`
-    );
-  }
-
-
-  console.log("");
-  console.log(
-    "------------------------------------"
-  );
 
   console.log(
     `ARKO 진행중 공모: ${results.length}건`
   );
+
 
   console.log(
     `대시보드 노출 대상: ${
@@ -2453,11 +2444,10 @@ async function collectArko() {
 
 
 /* =========================================================
-   KCDF PARSER
+   KCDF
 ========================================================= */
 
 function findKcdfRows(html) {
-
   const source =
     String(
       html ?? ""
@@ -2474,7 +2464,7 @@ function findKcdfRows(html) {
   );
 
 
-  const relevantTrRows =
+  const relevant =
     trRows.filter(
       row =>
         /bbIdx=\d+/i.test(
@@ -2486,39 +2476,38 @@ function findKcdfRows(html) {
 
 
   if (
-    relevantTrRows.length
+    relevant.length
   ) {
-
-    return relevantTrRows;
+    return relevant;
   }
 
 
-  const liRows = [
+  return [
     ...source.matchAll(
       /<li\b[^>]*>([\s\S]*?)<\/li>/gi
     )
-  ].map(
-    match =>
-      match[0]
-  );
-
-
-  return liRows.filter(
-    row =>
-      /bbIdx=\d+/i.test(
-        decodeEntities(
-          row
+  ]
+    .map(
+      match =>
+        match[0]
+    )
+    .filter(
+      row =>
+        /bbIdx=\d+/i.test(
+          decodeEntities(
+            row
+          )
         )
-      )
-  );
+    );
 }
 
 
 function isKcdfOpenRow(row) {
-
   const raw =
     decodeEntities(
-      String(row ?? "")
+      String(
+        row ?? ""
+      )
     );
 
 
@@ -2534,19 +2523,24 @@ function isKcdfOpenRow(row) {
     ) ||
 
     /alt\s*=\s*["'][^"']*접수중[^"']*["']/i
-      .test(raw) ||
+      .test(
+        raw
+      ) ||
 
     /title\s*=\s*["'][^"']*접수중[^"']*["']/i
-      .test(raw)
+      .test(
+        raw
+      )
   );
 }
 
 
 function getKcdfDetailLink(row) {
-
   const source =
     decodeEntities(
-      String(row ?? "")
+      String(
+        row ?? ""
+      )
     );
 
 
@@ -2555,32 +2549,14 @@ function getKcdfDetailLink(row) {
       source
     )
   ) {
-
-    const href =
-      decodeEntities(
-        anchor.href
-      );
-
-
     if (
       /bbIdx=\d+/i.test(
-        href
-      ) &&
-
-      (
-        /brdType=R/i.test(
-          href
-        ) ||
-
-        href.includes(
-          "/brd/board/337/L/menu/284"
-        )
+        anchor.href
       )
     ) {
-
       const url =
         absoluteUrl(
-          href,
+          anchor.href,
           KCDF_BASE
         );
 
@@ -2592,44 +2568,19 @@ function getKcdfDetailLink(row) {
   }
 
 
-  const fallback =
-    source.match(
-      /href\s*=\s*["']([^"']*bbIdx=\d+[^"']*)["']/i
-    );
-
-
-  return fallback
-    ? absoluteUrl(
-        fallback[1],
-        KCDF_BASE
-      )
-    : "";
+  return "";
 }
 
 
 function getKcdfTitle(row) {
-
-  const source =
-    decodeEntities(
-      String(row ?? "")
-    );
-
-
   for (
     const anchor of getAnchorEntries(
-      source
+      row
     )
   ) {
-
-    const href =
-      decodeEntities(
-        anchor.href
-      );
-
-
     if (
       !/bbIdx=\d+/i.test(
-        href
+        anchor.href
       )
     ) {
       continue;
@@ -2658,7 +2609,6 @@ function getKcdfTitle(row) {
         "다운로드"
       )
     ) {
-
       return candidate;
     }
   }
@@ -2670,7 +2620,6 @@ function getKcdfTitle(row) {
 
 function getKcdfId(detailUrl) {
   try {
-
     return (
       new URL(
         detailUrl
@@ -2689,36 +2638,8 @@ function getKcdfId(detailUrl) {
 }
 
 
-function getKcdfPeriod(row) {
-
-  const dates =
-    extractDates(
-      row
-    );
-
-
-  return {
-    startDate:
-      dates[0] ||
-      "",
-
-    deadline:
-      dates.length >= 2
-        ? dates[1]
-        : dates[0] ||
-          ""
-  };
-}
-
-
-/* =========================================================
-   KCDF DETAIL
-========================================================= */
-
 async function getKcdfDetailInfo(detailUrl) {
-
   try {
-
     const html =
       await fetchHtml(
         detailUrl
@@ -2731,34 +2652,10 @@ async function getKcdfDetailInfo(detailUrl) {
       );
 
 
-    /*
-      상세페이지 전체를 AXOO 점수 계산에 사용하지 않는다.
-
-      상세페이지는 오직
-      공모기간 / 첨부파일 확인용.
-    */
-
-
     const periodMatch =
       plain.match(
         /공모기간\s*[:：]?\s*(20\d{2}[-./]\d{1,2}[-./]\d{1,2})\s*[~∼-]\s*(20\d{2}[-./]\d{1,2}[-./]\d{1,2})/i
       );
-
-
-    const startDate =
-      periodMatch
-        ? normalizeDate(
-            periodMatch[1]
-          )
-        : "";
-
-
-    const deadline =
-      periodMatch
-        ? normalizeDate(
-            periodMatch[2]
-          )
-        : "";
 
 
     let documentUrl =
@@ -2770,13 +2667,6 @@ async function getKcdfDetailInfo(detailUrl) {
         html
       )
     ) {
-
-      const href =
-        text(
-          anchor.href
-        );
-
-
       const label =
         text(
           anchor.plain
@@ -2789,27 +2679,22 @@ async function getKcdfDetailInfo(detailUrl) {
           label.includes(
             "공고문"
           ) ||
-
           label.includes(
             "pdf"
           )
         ) &&
-
-        href
+        anchor.href
       ) {
-
-        const absolute =
+        documentUrl =
           absoluteUrl(
-            href,
+            anchor.href,
             KCDF_BASE
           );
 
 
-        if (absolute) {
-
-          documentUrl =
-            absolute;
-
+        if (
+          documentUrl
+        ) {
           break;
         }
       }
@@ -2817,14 +2702,25 @@ async function getKcdfDetailInfo(detailUrl) {
 
 
     return {
-      startDate,
-      deadline,
+      startDate:
+        periodMatch
+          ? normalizeDate(
+              periodMatch[1]
+            )
+          : "",
+
+      deadline:
+        periodMatch
+          ? normalizeDate(
+              periodMatch[2]
+            )
+          : "",
+
       documentUrl
     };
   }
 
   catch (error) {
-
     console.warn(
       "⚠️ KCDF detail fetch failed:",
       detailUrl,
@@ -2846,12 +2742,7 @@ async function getKcdfDetailInfo(detailUrl) {
 }
 
 
-/* =========================================================
-   KCDF COLLECTOR
-========================================================= */
-
 async function collectKcdf() {
-
   console.log("");
   console.log(
     "===================================="
@@ -2868,9 +2759,6 @@ async function collectKcdf() {
     [];
 
 
-  let totalRows =
-    0;
-
   let detailLinkCount =
     0;
 
@@ -2883,7 +2771,6 @@ async function collectKcdf() {
     page <= 3;
     page += 1
   ) {
-
     const url =
       `${KCDF_LIST}` +
       `?brdCodeValue=` +
@@ -2892,35 +2779,10 @@ async function collectKcdf() {
       `&thisPage=${page}`;
 
 
-    console.log(
-      `KCDF page ${page} fetch`
-    );
-
-
     const html =
       await fetchHtml(
         url
       );
-
-
-    console.log(
-      `HTML length: ${html.length}`
-    );
-
-
-    if (
-      !html.includes(
-        "사업공모"
-      ) &&
-      !html.includes(
-        "접수"
-      )
-    ) {
-
-      throw new Error(
-        "KCDF 사업공모 목록 페이지를 정상적으로 읽지 못했습니다."
-      );
-    }
 
 
     const rows =
@@ -2929,19 +2791,9 @@ async function collectKcdf() {
       );
 
 
-    totalRows +=
-      rows.length;
-
-
-    console.log(
-      `공모 row: ${rows.length}`
-    );
-
-
     for (
       const row of rows
     ) {
-
       const detailUrl =
         getKcdfDetailLink(
           row
@@ -2977,25 +2829,31 @@ async function collectKcdf() {
 
 
       if (!title) {
-
-        console.warn(
-          "⚠️ KCDF 제목 추출 실패:",
-          detailUrl
-        );
-
         continue;
       }
 
 
-      const period =
-        getKcdfPeriod(
+      const dates =
+        extractDates(
           row
         );
 
 
+      const startDate =
+        dates[0] ||
+        "";
+
+
+      const deadline =
+        dates.length >= 2
+          ? dates[1]
+          : dates[0] ||
+            "";
+
+
       if (
         isExpired(
-          period.deadline
+          deadline
         )
       ) {
         continue;
@@ -3015,35 +2873,25 @@ async function collectKcdf() {
 
         detailUrl,
 
-        startDate:
-          period.startDate,
+        startDate,
 
-        deadline:
-          period.deadline
+        deadline
       });
     }
   }
 
-
-  console.log("");
-  console.log(
-    "KCDF parser diagnostic"
-  );
-
-  console.log(
-    "전체 공모 row:",
-    totalRows
-  );
 
   console.log(
     "상세 링크:",
     detailLinkCount
   );
 
+
   console.log(
     "접수중 row:",
     openRowCount
   );
+
 
   console.log(
     "후보:",
@@ -3054,31 +2902,10 @@ async function collectKcdf() {
   if (
     detailLinkCount === 0
   ) {
-
     throw new Error(
-      "KCDF 공모 상세 링크를 하나도 찾지 못했습니다. 사이트 HTML 구조를 다시 확인해야 합니다."
+      "KCDF 상세 링크를 찾지 못했습니다."
     );
   }
-
-
-  if (
-    openRowCount > 0 &&
-    candidates.length === 0
-  ) {
-
-    throw new Error(
-      "KCDF 접수중 공고는 발견했지만 제목 또는 기간을 정상적으로 추출하지 못했습니다."
-    );
-  }
-
-
-  const uniqueCandidates =
-    uniqueBy(
-      candidates,
-      item =>
-        item.id ||
-        item.detailUrl
-    );
 
 
   const results =
@@ -3086,29 +2913,26 @@ async function collectKcdf() {
 
 
   for (
-    const item of uniqueCandidates
+    const item of uniqueBy(
+      candidates,
+      item =>
+        item.id ||
+        item.detailUrl
+    )
   ) {
-
-    console.log("");
-    console.log(
-      "→",
-      item.title
-    );
-
-
-    const detailInfo =
+    const detail =
       await getKcdfDetailInfo(
         item.detailUrl
       );
 
 
     const startDate =
-      detailInfo.startDate ||
+      detail.startDate ||
       item.startDate;
 
 
     const deadline =
-      detailInfo.deadline ||
+      detail.deadline ||
       item.deadline;
 
 
@@ -3117,24 +2941,9 @@ async function collectKcdf() {
         deadline
       )
     ) {
-
-      console.log(
-        "  만료 공고 제외:",
-        deadline
-      );
-
       continue;
     }
 
-
-    /*
-      v3.1 핵심
-
-      KCDF는 사이트 전체 HTML을
-      AXOO 점수 계산에 사용하지 않는다.
-
-      공모 제목만 평가한다.
-    */
 
     const fit =
       analyzeAxooFit(
@@ -3142,7 +2951,7 @@ async function collectKcdf() {
       );
 
 
-    const result =
+    results.push(
       makeSupportRecord({
         id:
           `kcdf-${item.id}`,
@@ -3167,7 +2976,433 @@ async function collectKcdf() {
           item.detailUrl,
 
         documentUrl:
-          detailInfo.documentUrl,
+          detail.documentUrl,
+
+        fit
+      })
+    );
+  }
+
+
+  console.log(
+    `KCDF 접수중 공모: ${results.length}건`
+  );
+
+
+  console.log(
+    `대시보드 노출 대상: ${
+      results.filter(
+        item =>
+          !item.isExcludedFromPriority
+      ).length
+    }건`
+  );
+
+
+  return results;
+}
+
+
+/* =========================================================
+   KOCCA
+========================================================= */
+
+function findKoccaRows(html) {
+  return [
+    ...String(
+      html ?? ""
+    ).matchAll(
+      /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi
+    )
+  ]
+    .map(
+      match =>
+        match[0]
+    )
+    .filter(
+      row =>
+        /pims\/view\.do/i.test(
+          row
+        ) &&
+        /intcNo=/i.test(
+          row
+        )
+    );
+}
+
+
+function getKoccaDetailLink(row) {
+  for (
+    const anchor of getAnchorEntries(
+      row
+    )
+  ) {
+    if (
+      /pims\/view\.do/i.test(
+        anchor.href
+      ) &&
+      /intcNo=/i.test(
+        anchor.href
+      )
+    ) {
+      return absoluteUrl(
+        anchor.href,
+        KOCCA_BASE
+      );
+    }
+  }
+
+
+  return "";
+}
+
+
+function getKoccaTitle(row) {
+  for (
+    const anchor of getAnchorEntries(
+      row
+    )
+  ) {
+    if (
+      !/pims\/view\.do/i.test(
+        anchor.href
+      ) ||
+      !/intcNo=/i.test(
+        anchor.href
+      )
+    ) {
+      continue;
+    }
+
+
+    const candidate =
+      anchor.plain
+        .replace(
+          /^NEW\s*/i,
+          ""
+        )
+        .trim();
+
+
+    if (
+      candidate.length >= 5
+    ) {
+      return candidate;
+    }
+  }
+
+
+  return "";
+}
+
+
+function getKoccaId(detailUrl) {
+  try {
+    return (
+      new URL(
+        detailUrl
+      )
+        .searchParams
+        .get(
+          "intcNo"
+        ) ||
+      ""
+    );
+  }
+
+  catch {
+    return "";
+  }
+}
+
+
+function getKoccaDates(row) {
+  const dates =
+    extractShortDates(
+      row
+    );
+
+
+  if (
+    !dates.length
+  ) {
+    return {
+      postedDate:
+        "",
+
+      startDate:
+        "",
+
+      deadline:
+        ""
+    };
+  }
+
+
+  if (
+    dates.length >= 3
+  ) {
+    return {
+      postedDate:
+        dates[0],
+
+      startDate:
+        dates[
+          dates.length - 2
+        ],
+
+      deadline:
+        dates[
+          dates.length - 1
+        ]
+    };
+  }
+
+
+  if (
+    dates.length === 2
+  ) {
+    return {
+      postedDate:
+        dates[0],
+
+      startDate:
+        dates[0],
+
+      deadline:
+        dates[1]
+    };
+  }
+
+
+  return {
+    postedDate:
+      dates[0],
+
+    startDate:
+      dates[0],
+
+    deadline:
+      dates[0]
+  };
+}
+
+
+async function collectKocca() {
+  console.log("");
+  console.log(
+    "===================================="
+  );
+  console.log(
+    "KOCCA SUPPORT PROGRAM COLLECTOR"
+  );
+  console.log(
+    "===================================="
+  );
+
+
+  const candidates =
+    [];
+
+
+  let totalRows =
+    0;
+
+  let detailLinks =
+    0;
+
+
+  /*
+    KOCCA 현재 지원공고는
+    페이지당 여러 건으로 구성되므로
+    최근 4페이지 검사.
+  */
+
+  for (
+    let page = 1;
+    page <= 4;
+    page += 1
+  ) {
+    const url =
+      `${KOCCA_LIST}&pageIndex=${page}`;
+
+
+    console.log(
+      `KOCCA page ${page} fetch`
+    );
+
+
+    const html =
+      await fetchHtml(
+        url
+      );
+
+
+    if (
+      !html.includes(
+        "지원공고"
+      ) &&
+      !html.includes(
+        "접수기간"
+      )
+    ) {
+      throw new Error(
+        "KOCCA 지원공고 목록 페이지를 정상적으로 읽지 못했습니다."
+      );
+    }
+
+
+    const rows =
+      findKoccaRows(
+        html
+      );
+
+
+    totalRows +=
+      rows.length;
+
+
+    for (
+      const row of rows
+    ) {
+      const detailUrl =
+        getKoccaDetailLink(
+          row
+        );
+
+
+      if (!detailUrl) {
+        continue;
+      }
+
+
+      detailLinks +=
+        1;
+
+
+      const title =
+        getKoccaTitle(
+          row
+        );
+
+
+      if (!title) {
+        continue;
+      }
+
+
+      const dates =
+        getKoccaDates(
+          row
+        );
+
+
+      /*
+        KOCCA 목록에는
+        종료된 공고가 섞여 들어올 가능성에 대비.
+      */
+
+      if (
+        isExpired(
+          dates.deadline
+        )
+      ) {
+        continue;
+      }
+
+
+      candidates.push({
+        id:
+          getKoccaId(
+            detailUrl
+          ) ||
+          stableId(
+            detailUrl
+          ),
+
+        title,
+
+        detailUrl,
+
+        ...dates
+      });
+    }
+  }
+
+
+  console.log(
+    "전체 KOCCA row:",
+    totalRows
+  );
+
+
+  console.log(
+    "상세 링크:",
+    detailLinks
+  );
+
+
+  console.log(
+    "진행중 후보:",
+    candidates.length
+  );
+
+
+  if (
+    detailLinks === 0
+  ) {
+    throw new Error(
+      "KOCCA 지원공고 상세 링크를 하나도 찾지 못했습니다. HTML 구조를 확인해야 합니다."
+    );
+  }
+
+
+  const results =
+    [];
+
+
+  for (
+    const item of uniqueBy(
+      candidates,
+      item =>
+        item.id ||
+        item.detailUrl
+    )
+  ) {
+    const fit =
+      analyzeKoccaFit(
+        item.title
+      );
+
+
+    const result =
+      makeSupportRecord({
+        id:
+          `kocca-${item.id}`,
+
+        source:
+          "한국콘텐츠진흥원",
+
+        sourceCode:
+          "KOCCA",
+
+        title:
+          item.title,
+
+        startDate:
+          item.startDate,
+
+        deadline:
+          item.deadline,
+
+        postedDate:
+          item.postedDate,
+
+        publishedDate:
+          item.postedDate,
+
+        sourceUrl:
+          item.detailUrl,
 
         fit
       });
@@ -3179,36 +3414,19 @@ async function collectKcdf() {
 
 
     console.log(
-      `  ${result.grade} / ${result.score}점 / ${result.deadline || "마감일 미확인"}`
+      `→ ${result.grade} / ${result.score}점 / ${
+        result.isExcludedFromPriority
+          ? "제외"
+          : "노출"
+      } / ${result.title}`
     );
-
-
-    if (
-      result.isExcludedFromPriority
-    ) {
-
-      console.log(
-        "  → 대시보드 제외"
-      );
-    }
-
-    else {
-
-      console.log(
-        "  → 대시보드 노출"
-      );
-    }
   }
 
 
-  console.log("");
   console.log(
-    "------------------------------------"
+    `KOCCA 진행중 공모: ${results.length}건`
   );
 
-  console.log(
-    `KCDF 접수중 공모: ${results.length}건`
-  );
 
   console.log(
     `대시보드 노출 대상: ${
@@ -3229,7 +3447,6 @@ async function collectKcdf() {
 ========================================================= */
 
 async function main() {
-
   const existing =
     readJson(
       OUTPUT_FILE,
@@ -3242,24 +3459,17 @@ async function main() {
       existing
     )
   ) {
-
     throw new Error(
       "data/support_programs.json 은 배열이어야 합니다."
     );
   }
 
 
-  /*
-    KAMS / ARKO / KCDF는
-    이번 실행 결과로 교체.
-
-    향후 KOCCA 등은 유지.
-  */
-
   const replacedSourceCodes = [
     "KAMS",
     "ARKO",
-    "KCDF"
+    "KCDF",
+    "KOCCA"
   ];
 
 
@@ -3269,7 +3479,8 @@ async function main() {
         !replacedSourceCodes.includes(
           text(
             item.sourceCode
-          ).toUpperCase()
+          )
+            .toUpperCase()
         )
     );
 
@@ -3286,18 +3497,22 @@ async function main() {
     await collectKcdf();
 
 
+  const kocca =
+    await collectKocca();
+
+
   const output = [
     ...preserved,
     ...kams,
     ...arko,
-    ...kcdf
+    ...kcdf,
+    ...kocca
   ];
 
 
   if (
-    output.length === 0
+    !output.length
   ) {
-
     throw new Error(
       "저장할 지원사업 데이터가 없습니다."
     );
@@ -3345,6 +3560,11 @@ async function main() {
 
 
   console.log(
+    `KOCCA ${kocca.length}건`
+  );
+
+
+  console.log(
     `기타 기관 보존 ${preserved.length}건`
   );
 
@@ -3360,7 +3580,7 @@ async function main() {
 
 
   console.log(
-    "✅ KAMS + ARKO + KCDF v3.1 수집 완료"
+    "✅ KAMS + ARKO + KCDF + KOCCA v4.0 수집 완료"
   );
 
 
@@ -3372,9 +3592,7 @@ async function main() {
 
 main().catch(
   error => {
-
     console.error("");
-
     console.error(
       "===================================="
     );
@@ -3397,7 +3615,8 @@ main().catch(
       "===================================="
     );
 
-
-    process.exit(1);
+    process.exit(
+      1
+    );
   }
 );
