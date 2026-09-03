@@ -28,10 +28,12 @@
   },
 
   "chungbuk_notice": {
-    "sourceUrl": "https://www.chungbuk.go.kr/www/selectGosiPblancList.do?key=422",
+    "sourceUrl": "https://www.cheongju.go.kr/www/selectEminwonNoticeList.do?key=281&notAncmtSeCd=&pageIndex=1&searchCnd=all&searchKrwd=%EB%AF%B8%EC%88%A0%EC%9E%91%ED%92%88",
+    "sourceName": "청주시 고시공고 - 미술작품 검색",
+    "sourceType": "official_board",
     "crawlMode": "board",
     "verified": true,
-    "note": "충청북도 공식 고시/공고 목록"
+    "note": "충북 건축물 미술작품 실전 공모 우선 수집 소스. 청주시 공식 고시공고에서 '미술작품' 검색 결과를 직접 감시. 2026년 청주 농수산물 도매시장 미술작품 제작 및 설치 공모 known-positive 확인."
   },
 
   "chungnam_notice": {
