@@ -72,5 +72,14 @@
     "crawlMode": "generic_board_discovery",
     "verified": true,
     "note": "경상남도 공식 문화예술 정보플랫폼. 건축물 미술작품 관련 공지 확인 가능"
+  },
+
+    "gwangju_city_notice": {
+    "sourceUrl": "https://sido.jeonnam.go.kr/citynet/jsp/sap/SAPGosiBizProcess.do?command=searchList&conIfmEnddt=99991231&conIfmStdt=20260701&flag=gosiGL&svp=Y",
+    "sourceName": "전남광주통합특별시 고시공고 - 광주권",
+    "sourceType": "official_board",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "2026-07-01 이후 전남광주통합특별시 현행 고시공고 게시판. 광주 지역 공고 수집용."
   }
 }
