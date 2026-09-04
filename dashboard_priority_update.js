@@ -1,7 +1,12 @@
 (function () {
   "use strict";
 
-  const PRIORITY_DATA_URL = "data/priority_projects.json";
+  const PRIORITY_DATA_URL =
+    "data/priority_projects.json";
+
+  const STORAGE_KEY =
+    "axoo_priority_kr_preferences_v1";
+
 
   /* =========================================================
      CONFIG
@@ -111,6 +116,7 @@
   const state = {
     projects: [],
     loaded: false,
+
     currentTab: "art",
 
     supportSource: "ALL",
@@ -118,25 +124,40 @@
     supportSort: "RECOMMENDED",
     supportQuery: "",
 
-    supportInteracted: false
+    supportInteracted: false,
+
+    restored: false
   };
+
 
   /* =========================================================
      BASIC
   ========================================================= */
 
-  function $(selector, root = document) {
-    return root.querySelector(selector);
+  function $(
+    selector,
+    root = document
+  ) {
+    return root.querySelector(
+      selector
+    );
   }
 
-  function $all(selector, root = document) {
+  function $all(
+    selector,
+    root = document
+  ) {
     return Array.from(
-      root.querySelectorAll(selector)
+      root.querySelectorAll(
+        selector
+      )
     );
   }
 
   function esc(value) {
-    return String(value ?? "").replace(
+    return String(
+      value ?? ""
+    ).replace(
       /[&<>"']/g,
       function (match) {
         return {
@@ -151,30 +172,44 @@
   }
 
   function formatCount(value) {
-    return Number(value || 0).toLocaleString(
+    return Number(
+      value || 0
+    ).toLocaleString(
       "ko-KR"
     );
   }
 
   function formatKrw(value) {
-    const amount = Number(value || 0);
+    const amount =
+      Number(
+        value || 0
+      );
 
     if (!amount) {
       return "예산 미확인";
     }
 
-    if (amount >= 100000000) {
-      const eok = amount / 100000000;
+    if (
+      amount >= 100000000
+    ) {
+      const eok =
+        amount / 100000000;
 
       return `${eok.toFixed(
-        eok >= 10 ? 0 : 1
+        eok >= 10
+          ? 0
+          : 1
       )}억`;
     }
 
-    if (amount >= 10000) {
+    if (
+      amount >= 10000
+    ) {
       return `${Math.round(
         amount / 10000
-      ).toLocaleString("ko-KR")}만원`;
+      ).toLocaleString(
+        "ko-KR"
+      )}만원`;
     }
 
     return `${amount.toLocaleString(
@@ -183,33 +218,230 @@
   }
 
   function compactDate(value) {
-    const raw = String(value || "").trim();
+    const raw =
+      String(
+        value || ""
+      ).trim();
 
     if (!raw) {
       return "확인 필요";
     }
 
-    const match = raw.match(
-      /\d{4}[-.]\d{1,2}[-.]\d{1,2}/
-    );
+    const match =
+      raw.match(
+        /\d{4}[-.]\d{1,2}[-.]\d{1,2}/
+      );
 
     return match
-      ? match[0].replace(/\./g, "-")
+      ? match[0].replace(
+          /\./g,
+          "-"
+        )
       : raw;
   }
 
   function normalizeUrl(url) {
-    const value = String(url || "").trim();
+    const value =
+      String(
+        url || ""
+      ).trim();
 
     if (
-      value.startsWith("http://") ||
-      value.startsWith("https://")
+      value.startsWith(
+        "http://"
+      ) ||
+      value.startsWith(
+        "https://"
+      )
     ) {
       return value;
     }
 
     return "";
   }
+
+
+  /* =========================================================
+     LOCAL STORAGE
+  ========================================================= */
+
+  function isAllowedTab(value) {
+    return TAB_CONFIG.some(
+      function (item) {
+        return (
+          item.tab === value
+        );
+      }
+    );
+  }
+
+  function isAllowedSupportSource(
+    value
+  ) {
+    return SUPPORT_SOURCE_FILTERS.some(
+      function (item) {
+        return (
+          item.code === value
+        );
+      }
+    );
+  }
+
+  function isAllowedSupportQuick(
+    value
+  ) {
+    return SUPPORT_QUICK_FILTERS.some(
+      function (item) {
+        return (
+          item.code === value
+        );
+      }
+    );
+  }
+
+  function isAllowedSupportSort(
+    value
+  ) {
+    return SUPPORT_SORT_OPTIONS.some(
+      function (item) {
+        return (
+          item.code === value
+        );
+      }
+    );
+  }
+
+  function savePreferences() {
+    try {
+      const payload = {
+        currentTab:
+          state.currentTab,
+
+        supportSource:
+          state.supportSource,
+
+        supportQuick:
+          state.supportQuick,
+
+        supportSort:
+          state.supportSort,
+
+        supportQuery:
+          state.supportQuery
+      };
+
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(
+          payload
+        )
+      );
+    }
+
+    catch (error) {
+      console.warn(
+        "[AXOO Priority] preference save failed",
+        error
+      );
+    }
+  }
+
+  function loadPreferences() {
+    try {
+      const raw =
+        window.localStorage.getItem(
+          STORAGE_KEY
+        );
+
+      if (!raw) {
+        return false;
+      }
+
+      const saved =
+        JSON.parse(
+          raw
+        );
+
+      if (
+        saved &&
+        isAllowedTab(
+          saved.currentTab
+        )
+      ) {
+        state.currentTab =
+          saved.currentTab;
+      }
+
+      if (
+        saved &&
+        isAllowedSupportSource(
+          saved.supportSource
+        )
+      ) {
+        state.supportSource =
+          saved.supportSource;
+      }
+
+      if (
+        saved &&
+        isAllowedSupportQuick(
+          saved.supportQuick
+        )
+      ) {
+        state.supportQuick =
+          saved.supportQuick;
+      }
+
+      if (
+        saved &&
+        isAllowedSupportSort(
+          saved.supportSort
+        )
+      ) {
+        state.supportSort =
+          saved.supportSort;
+      }
+
+      if (
+        saved &&
+        typeof saved.supportQuery ===
+          "string"
+      ) {
+        state.supportQuery =
+          saved.supportQuery;
+      }
+
+      state.restored =
+        true;
+
+      if (
+        state.currentTab ===
+          "support" ||
+        state.supportSource !==
+          "ALL" ||
+        state.supportQuick !==
+          "ALL" ||
+        state.supportSort !==
+          "RECOMMENDED" ||
+        state.supportQuery
+      ) {
+        state.supportInteracted =
+          true;
+      }
+
+      return true;
+    }
+
+    catch (error) {
+      console.warn(
+        "[AXOO Priority] preference load failed",
+        error
+      );
+
+      return false;
+    }
+  }
+
 
   /* =========================================================
      DATE
@@ -220,18 +452,33 @@
       new Intl.DateTimeFormat(
         "en-US",
         {
-          timeZone: "Asia/Seoul",
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit"
+          timeZone:
+            "Asia/Seoul",
+
+          year:
+            "numeric",
+
+          month:
+            "2-digit",
+
+          day:
+            "2-digit"
         }
-      ).formatToParts(new Date());
+      ).formatToParts(
+        new Date()
+      );
 
-    const values = {};
+    const values =
+      {};
 
-    parts.forEach(function (part) {
-      values[part.type] = part.value;
-    });
+    parts.forEach(
+      function (part) {
+        values[
+          part.type
+        ] =
+          part.value;
+      }
+    );
 
     if (
       !values.year ||
@@ -249,19 +496,34 @@
   }
 
   function normalizeDateKey(value) {
-    const raw = String(value || "").trim();
+    const raw =
+      String(
+        value || ""
+      ).trim();
 
-    const match = raw.match(
-      /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
-    );
+    const match =
+      raw.match(
+        /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
+      );
 
     if (!match) {
       return "";
     }
 
-    const year = Number(match[1]);
-    const month = Number(match[2]);
-    const day = Number(match[3]);
+    const year =
+      Number(
+        match[1]
+      );
+
+    const month =
+      Number(
+        match[2]
+      );
+
+    const day =
+      Number(
+        match[3]
+      );
 
     if (
       month < 1 ||
@@ -274,43 +536,72 @@
 
     return [
       String(year),
-      String(month).padStart(2, "0"),
-      String(day).padStart(2, "0")
+
+      String(month)
+        .padStart(
+          2,
+          "0"
+        ),
+
+      String(day)
+        .padStart(
+          2,
+          "0"
+        )
     ].join("-");
   }
 
-  function dateKeyToUtcTime(dateKey) {
-    const match = String(
-      dateKey || ""
-    ).match(
-      /^(\d{4})-(\d{2})-(\d{2})$/
-    );
+  function dateKeyToUtcTime(
+    dateKey
+  ) {
+    const match =
+      String(
+        dateKey || ""
+      ).match(
+        /^(\d{4})-(\d{2})-(\d{2})$/
+      );
 
     if (!match) {
       return NaN;
     }
 
     return Date.UTC(
-      Number(match[1]),
-      Number(match[2]) - 1,
-      Number(match[3])
+      Number(
+        match[1]
+      ),
+
+      Number(
+        match[2]
+      ) - 1,
+
+      Number(
+        match[3]
+      )
     );
   }
 
   function getDateTime(value) {
     const key =
-      normalizeDateKey(value);
+      normalizeDateKey(
+        value
+      );
 
     if (!key) {
       return NaN;
     }
 
-    return dateKeyToUtcTime(key);
+    return dateKeyToUtcTime(
+      key
+    );
   }
 
-  function getDaysUntilDate(dateValue) {
+  function getDaysUntilDate(
+    dateValue
+  ) {
     const target =
-      getDateTime(dateValue);
+      getDateTime(
+        dateValue
+      );
 
     const today =
       getDateTime(
@@ -318,20 +609,32 @@
       );
 
     if (
-      !Number.isFinite(target) ||
-      !Number.isFinite(today)
+      !Number.isFinite(
+        target
+      ) ||
+      !Number.isFinite(
+        today
+      )
     ) {
       return null;
     }
 
     return Math.round(
-      (target - today) / 86400000
+      (
+        target -
+        today
+      ) /
+      86400000
     );
   }
 
-  function getDaysSinceDate(dateValue) {
+  function getDaysSinceDate(
+    dateValue
+  ) {
     const target =
-      getDateTime(dateValue);
+      getDateTime(
+        dateValue
+      );
 
     const today =
       getDateTime(
@@ -339,16 +642,25 @@
       );
 
     if (
-      !Number.isFinite(target) ||
-      !Number.isFinite(today)
+      !Number.isFinite(
+        target
+      ) ||
+      !Number.isFinite(
+        today
+      )
     ) {
       return null;
     }
 
     return Math.round(
-      (today - target) / 86400000
+      (
+        today -
+        target
+      ) /
+      86400000
     );
   }
+
 
   /* =========================================================
      DATA
@@ -357,33 +669,45 @@
   function getTabConfig(tab) {
     return TAB_CONFIG.find(
       function (item) {
-        return item.tab === tab;
+        return (
+          item.tab === tab
+        );
       }
     );
   }
 
   function extractProjects(data) {
-    if (Array.isArray(data)) {
+    if (
+      Array.isArray(
+        data
+      )
+    ) {
       return data;
     }
 
     if (
       data &&
-      Array.isArray(data.projects)
+      Array.isArray(
+        data.projects
+      )
     ) {
       return data.projects;
     }
 
     if (
       data &&
-      Array.isArray(data.items)
+      Array.isArray(
+        data.items
+      )
     ) {
       return data.items;
     }
 
     if (
       data &&
-      Array.isArray(data.data)
+      Array.isArray(
+        data.data
+      )
     ) {
       return data.data;
     }
@@ -392,7 +716,9 @@
   }
 
   async function loadPriorityProjects() {
-    if (state.loaded) {
+    if (
+      state.loaded
+    ) {
       return state.projects;
     }
 
@@ -402,7 +728,9 @@
           `${PRIORITY_DATA_URL}?v=${Date.now()}`
         );
 
-      if (!response.ok) {
+      if (
+        !response.ok
+      ) {
         throw new Error(
           `priority_projects.json load failed: ${response.status}`
         );
@@ -412,9 +740,12 @@
         await response.json();
 
       state.projects =
-        extractProjects(data);
+        extractProjects(
+          data
+        );
 
-      state.loaded = true;
+      state.loaded =
+        true;
 
       return state.projects;
     }
@@ -425,12 +756,16 @@
         error
       );
 
-      state.projects = [];
-      state.loaded = true;
+      state.projects =
+        [];
+
+      state.loaded =
+        true;
 
       return state.projects;
     }
   }
+
 
   /* =========================================================
      PROJECT GETTERS
@@ -455,22 +790,32 @@
   }
 
   function getProjectGrade(project) {
-    if (project.grade) {
+    if (
+      project.grade
+    ) {
       return project.grade;
     }
 
     const score =
-      getProjectScore(project);
+      getProjectScore(
+        project
+      );
 
-    if (score >= 85) {
+    if (
+      score >= 85
+    ) {
       return "S";
     }
 
-    if (score >= 70) {
+    if (
+      score >= 70
+    ) {
       return "A";
     }
 
-    if (score >= 50) {
+    if (
+      score >= 50
+    ) {
       return "B";
     }
 
@@ -528,7 +873,8 @@
     project
   ) {
     return String(
-      project.sourceCode || ""
+      project.sourceCode ||
+      ""
     )
       .trim()
       .toUpperCase();
@@ -545,8 +891,11 @@
     );
   }
 
-  function getProjectKeywords(project) {
-    let keywords = [];
+  function getProjectKeywords(
+    project
+  ) {
+    let keywords =
+      [];
 
     if (
       Array.isArray(
@@ -575,25 +924,37 @@
         project.keywords;
     }
 
-    else if (project.field) {
+    else if (
+      project.field
+    ) {
       keywords =
-        String(project.field)
+        String(
+          project.field
+        )
           .split("/")
-          .map(function (item) {
-            return item.trim();
-          })
-          .filter(Boolean);
+          .map(
+            function (item) {
+              return item.trim();
+            }
+          )
+          .filter(
+            Boolean
+          );
     }
 
     return [
       ...new Set(
         keywords
-          .map(function (item) {
-            return String(
-              item || ""
-            ).trim();
-          })
-          .filter(Boolean)
+          .map(
+            function (item) {
+              return String(
+                item || ""
+              ).trim();
+            }
+          )
+          .filter(
+            Boolean
+          )
       )
     ];
   }
@@ -602,16 +963,29 @@
     project
   ) {
     const keywords =
-      getProjectKeywords(project);
+      getProjectKeywords(
+        project
+      );
 
-    if (keywords.length) {
+    if (
+      keywords.length
+    ) {
       return keywords
-        .slice(0, 3)
-        .join(" · ");
+        .slice(
+          0,
+          3
+        )
+        .join(
+          " · "
+        );
     }
 
-    if (project.field) {
-      return String(project.field);
+    if (
+      project.field
+    ) {
+      return String(
+        project.field
+      );
     }
 
     return "지원사업";
@@ -621,7 +995,9 @@
     project,
     tab
   ) {
-    if (tab === "support") {
+    if (
+      tab === "support"
+    ) {
       return getSupportFieldLabel(
         project
       );
@@ -639,7 +1015,9 @@
     project,
     tab
   ) {
-    if (tab === "support") {
+    if (
+      tab === "support"
+    ) {
       return (
         getSupportSourceCode(
           project
@@ -662,7 +1040,9 @@
     project,
     tab
   ) {
-    if (tab === "support") {
+    if (
+      tab === "support"
+    ) {
       return getSupportSourceName(
         project
       );
@@ -674,17 +1054,24 @@
     );
   }
 
+
   /* =========================================================
      D-DAY
   ========================================================= */
 
-  function getDeadlineStatus(project) {
+  function getDeadlineStatus(
+    project
+  ) {
     const days =
       getDaysUntilDate(
-        getProjectDeadline(project)
+        getProjectDeadline(
+          project
+        )
       );
 
-    if (days === null) {
+    if (
+      days === null
+    ) {
       return {
         days: null,
         expired: false,
@@ -693,7 +1080,9 @@
       };
     }
 
-    if (days < 0) {
+    if (
+      days < 0
+    ) {
       return {
         days,
         expired: true,
@@ -702,7 +1091,9 @@
       };
     }
 
-    if (days === 0) {
+    if (
+      days === 0
+    ) {
       return {
         days,
         expired: false,
@@ -711,7 +1102,9 @@
       };
     }
 
-    if (days <= 3) {
+    if (
+      days <= 3
+    ) {
       return {
         days,
         expired: false,
@@ -725,7 +1118,8 @@
       days,
       expired: false,
       urgent: false,
-      label: `D-${days}`
+      label:
+        `D-${days}`
     };
   }
 
@@ -741,9 +1135,13 @@
     project
   ) {
     const status =
-      getDeadlineStatus(project);
+      getDeadlineStatus(
+        project
+      );
 
-    if (status.days === null) {
+    if (
+      status.days === null
+    ) {
       return "";
     }
 
@@ -780,16 +1178,21 @@
           white-space:nowrap;
         "
       >
-        ${esc(status.label)}
+        ${esc(
+          status.label
+        )}
       </span>
     `;
   }
+
 
   /* =========================================================
      RECENT
   ========================================================= */
 
-  function getRecentStatus(project) {
+  function getRecentStatus(
+    project
+  ) {
     const days =
       getDaysSinceDate(
         getProjectPublishedDate(
@@ -808,7 +1211,9 @@
       };
     }
 
-    if (days <= 3) {
+    if (
+      days <= 3
+    ) {
       return {
         type: "new",
         days,
@@ -816,7 +1221,9 @@
       };
     }
 
-    if (days <= 7) {
+    if (
+      days <= 7
+    ) {
       return {
         type: "recent",
         days,
@@ -831,15 +1238,24 @@
     };
   }
 
-  function renderRecentBadge(project) {
+  function renderRecentBadge(
+    project
+  ) {
     const status =
-      getRecentStatus(project);
+      getRecentStatus(
+        project
+      );
 
-    if (!status.type) {
+    if (
+      !status.type
+    ) {
       return "";
     }
 
-    if (status.type === "new") {
+    if (
+      status.type ===
+      "new"
+    ) {
       return `
         <span
           title="최근 3일 이내 등록"
@@ -888,108 +1304,157 @@
     `;
   }
 
-  function countNewProjects(projects) {
+  function countNewProjects(
+    projects
+  ) {
     return projects.filter(
       function (project) {
         return (
           getRecentStatus(
             project
-          ).type === "new"
+          ).type ===
+          "new"
         );
       }
     ).length;
   }
 
+
   /* =========================================================
      SORT
   ========================================================= */
 
-  function compareRecommended(a, b) {
+  function compareRecommended(
+    a,
+    b
+  ) {
     const gradeDiff =
       (
         GRADE_ORDER[
-          getProjectGrade(a)
+          getProjectGrade(
+            a
+          )
         ] ?? 9
       ) -
       (
         GRADE_ORDER[
-          getProjectGrade(b)
+          getProjectGrade(
+            b
+          )
         ] ?? 9
       );
 
-    if (gradeDiff !== 0) {
+    if (
+      gradeDiff !== 0
+    ) {
       return gradeDiff;
     }
 
     const scoreDiff =
-      getProjectScore(b) -
-      getProjectScore(a);
+      getProjectScore(
+        b
+      ) -
+      getProjectScore(
+        a
+      );
 
-    if (scoreDiff !== 0) {
+    if (
+      scoreDiff !== 0
+    ) {
       return scoreDiff;
     }
 
     const amountDiff =
-      getProjectAmount(b) -
-      getProjectAmount(a);
+      getProjectAmount(
+        b
+      ) -
+      getProjectAmount(
+        a
+      );
 
-    if (amountDiff !== 0) {
+    if (
+      amountDiff !== 0
+    ) {
       return amountDiff;
     }
 
     return String(
-      getProjectDeadline(a) ||
+      getProjectDeadline(
+        a
+      ) ||
       "9999-99-99"
     ).localeCompare(
       String(
-        getProjectDeadline(b) ||
+        getProjectDeadline(
+          b
+        ) ||
         "9999-99-99"
       )
     );
   }
 
-  function sortProjects(projects) {
+  function sortProjects(
+    projects
+  ) {
     return [
       ...projects
-    ].sort(compareRecommended);
+    ].sort(
+      compareRecommended
+    );
   }
 
   function sortSupportProjects(
     projects
   ) {
     const list =
-      [...projects];
+      [
+        ...projects
+      ];
 
     if (
       state.supportSort ===
       "NEWEST"
     ) {
       return list.sort(
-        function (a, b) {
+        function (
+          a,
+          b
+        ) {
           const aTime =
             getDateTime(
-              getProjectPublishedDate(a)
+              getProjectPublishedDate(
+                a
+              )
             );
 
           const bTime =
             getDateTime(
-              getProjectPublishedDate(b)
+              getProjectPublishedDate(
+                b
+              )
             );
 
           const safeA =
-            Number.isFinite(aTime)
+            Number.isFinite(
+              aTime
+            )
               ? aTime
               : -Infinity;
 
           const safeB =
-            Number.isFinite(bTime)
+            Number.isFinite(
+              bTime
+            )
               ? bTime
               : -Infinity;
 
           const diff =
-            safeB - safeA;
+            safeB -
+            safeA;
 
-          if (diff !== 0) {
+          if (
+            diff !== 0
+          ) {
             return diff;
           }
 
@@ -1006,31 +1471,45 @@
       "DEADLINE"
     ) {
       return list.sort(
-        function (a, b) {
+        function (
+          a,
+          b
+        ) {
           const aTime =
             getDateTime(
-              getProjectDeadline(a)
+              getProjectDeadline(
+                a
+              )
             );
 
           const bTime =
             getDateTime(
-              getProjectDeadline(b)
+              getProjectDeadline(
+                b
+              )
             );
 
           const safeA =
-            Number.isFinite(aTime)
+            Number.isFinite(
+              aTime
+            )
               ? aTime
               : Infinity;
 
           const safeB =
-            Number.isFinite(bTime)
+            Number.isFinite(
+              bTime
+            )
               ? bTime
               : Infinity;
 
           const diff =
-            safeA - safeB;
+            safeA -
+            safeB;
 
-          if (diff !== 0) {
+          if (
+            diff !== 0
+          ) {
             return diff;
           }
 
@@ -1047,6 +1526,7 @@
     );
   }
 
+
   /* =========================================================
      BASE FILTER
   ========================================================= */
@@ -1061,7 +1541,8 @@
           if (
             getProjectCategory(
               project
-            ) !== category
+            ) !==
+            category
           ) {
             return false;
           }
@@ -1088,6 +1569,7 @@
       )
     );
   }
+
 
   /* =========================================================
      SUPPORT FILTER
@@ -1127,15 +1609,26 @@
       project.organization,
       project.agency,
       project.field,
-      getSupportFieldLabel(project),
+
+      getSupportFieldLabel(
+        project
+      ),
+
       getProjectKeywords(
         project
-      ).join(" "),
+      ).join(
+        " "
+      ),
+
       project.gradeReason,
       project.axooFitReason
     ]
-      .filter(Boolean)
-      .join(" ")
+      .filter(
+        Boolean
+      )
+      .join(
+        " "
+      )
       .toLowerCase();
   }
 
@@ -1144,12 +1637,15 @@
   ) {
     const query =
       String(
-        state.supportQuery || ""
+        state.supportQuery ||
+        ""
       )
         .trim()
         .toLowerCase();
 
-    if (!query) {
+    if (
+      !query
+    ) {
       return projects;
     }
 
@@ -1157,7 +1653,9 @@
       function (project) {
         return getSupportSearchText(
           project
-        ).includes(query);
+        ).includes(
+          query
+        );
       }
     );
   }
@@ -1166,11 +1664,17 @@
     project,
     code
   ) {
-    if (code === "ALL") {
+    if (
+      code ===
+      "ALL"
+    ) {
       return true;
     }
 
-    if (code === "RECENT") {
+    if (
+      code ===
+      "RECENT"
+    ) {
       const type =
         getRecentStatus(
           project
@@ -1182,7 +1686,10 @@
       );
     }
 
-    if (code === "D7") {
+    if (
+      code ===
+      "D7"
+    ) {
       const days =
         getDeadlineStatus(
           project
@@ -1195,7 +1702,10 @@
       );
     }
 
-    if (code === "B_PLUS") {
+    if (
+      code ===
+      "B_PLUS"
+    ) {
       return [
         "S",
         "A",
@@ -1231,7 +1741,9 @@
       );
 
     const bySource =
-      filterSupportBySource(all);
+      filterSupportBySource(
+        all
+      );
 
     const bySourceAndQuery =
       filterSupportByQuery(
@@ -1276,7 +1788,8 @@
         return (
           getProjectCategory(
             project
-          ) === category &&
+          ) ===
+            category &&
           project.isExcludedFromPriority ===
             true
         );
@@ -1292,7 +1805,8 @@
         return (
           getProjectCategory(
             project
-          ) === category &&
+          ) ===
+            category &&
           project.isExcludedFromPriority !==
             true &&
           isProjectDeadlineExpired(
@@ -1331,6 +1845,7 @@
     };
   }
 
+
   /* =========================================================
      META
   ========================================================= */
@@ -1340,10 +1855,15 @@
     value
   ) {
     const element =
-      document.getElementById(id);
+      document.getElementById(
+        id
+      );
 
-    if (element) {
-      element.textContent = value;
+    if (
+      element
+    ) {
+      element.textContent =
+        value;
     }
   }
 
@@ -1357,7 +1877,8 @@
       legacy &&
       legacy.textContent.trim()
     ) {
-      return legacy.textContent.trim();
+      return legacy.textContent
+        .trim();
     }
 
     const artCards =
@@ -1365,14 +1886,20 @@
         "artCards"
       );
 
-    if (artCards) {
+    if (
+      artCards
+    ) {
       const count =
         artCards.querySelectorAll(
           ".card, article, details"
         ).length;
 
-      if (count > 0) {
-        return formatCount(count);
+      if (
+        count > 0
+      ) {
+        return formatCount(
+          count
+        );
       }
     }
 
@@ -1413,6 +1940,7 @@
       ".meta-card[data-tab-target]"
     ).forEach(
       function (card) {
+
         const target =
           card.getAttribute(
             "data-tab-target"
@@ -1444,23 +1972,31 @@
 
         card.onclick =
           function () {
-            showTab(target);
+            showTab(
+              target
+            );
           };
 
         card.onkeydown =
           function (event) {
+
             if (
-              event.key === "Enter" ||
-              event.key === " "
+              event.key ===
+                "Enter" ||
+              event.key ===
+                " "
             ) {
               event.preventDefault();
 
-              showTab(target);
+              showTab(
+                target
+              );
             }
           };
       }
     );
   }
+
 
   /* =========================================================
      SUMMARY
@@ -1470,17 +2006,22 @@
     projects
   ) {
     const list =
-      Array.isArray(projects)
+      Array.isArray(
+        projects
+      )
         ? projects
         : [];
 
-    const total = list.length;
+    const total =
+      list.length;
 
     const sCount =
       list.filter(
         function (item) {
           return (
-            getProjectGrade(item) ===
+            getProjectGrade(
+              item
+            ) ===
             "S"
           );
         }
@@ -1490,7 +2031,9 @@
       list.filter(
         function (item) {
           return (
-            getProjectGrade(item) ===
+            getProjectGrade(
+              item
+            ) ===
             "A"
           );
         }
@@ -1499,8 +2042,11 @@
     const bcCount =
       list.filter(
         function (item) {
+
           const grade =
-            getProjectGrade(item);
+            getProjectGrade(
+              item
+            );
 
           return (
             grade === "B" ||
@@ -1511,22 +2057,30 @@
 
     updateTextById(
       "totalCount",
-      formatCount(total)
+      formatCount(
+        total
+      )
     );
 
     updateTextById(
       "sCount",
-      formatCount(sCount)
+      formatCount(
+        sCount
+      )
     );
 
     updateTextById(
       "aCount",
-      formatCount(aCount)
+      formatCount(
+        aCount
+      )
     );
 
     updateTextById(
       "bCount",
-      formatCount(bcCount)
+      formatCount(
+        bcCount
+      )
     );
   }
 
@@ -1543,7 +2097,9 @@
 
     updateTextById(
       "totalCount",
-      formatCount(total)
+      formatCount(
+        total
+      )
     );
 
     updateTextById(
@@ -1562,16 +2118,25 @@
     );
   }
 
+
   /* =========================================================
      PANELS
   ========================================================= */
 
   function getNativePanel(tab) {
-    if (tab === "art") {
-      return $("#artTab");
+    if (
+      tab ===
+      "art"
+    ) {
+      return $(
+        "#artTab"
+      );
     }
 
-    if (tab === "agencies") {
+    if (
+      tab ===
+      "agencies"
+    ) {
       return (
         $("#agenciesTab") ||
         $("#agencyTab")
@@ -1581,29 +2146,42 @@
     return null;
   }
 
-  function getPriorityPanelId(tab) {
+  function getPriorityPanelId(
+    tab
+  ) {
     return `${tab}Tab`;
   }
 
-  function getPriorityPanel(tab) {
+  function getPriorityPanel(
+    tab
+  ) {
     return document.getElementById(
-      getPriorityPanelId(tab)
+      getPriorityPanelId(
+        tab
+      )
     );
   }
+
 
   /* =========================================================
      BADGES
   ========================================================= */
 
-  function getGradeClass(grade) {
+  function getGradeClass(
+    grade
+  ) {
     return `priority-grade-${String(
       grade || "C"
     ).toLowerCase()}`;
   }
 
-  function renderGradeBadge(project) {
+  function renderGradeBadge(
+    project
+  ) {
     const grade =
-      getProjectGrade(project);
+      getProjectGrade(
+        project
+      );
 
     const reason =
       project.gradeReason ||
@@ -1619,7 +2197,9 @@
             grade
           )}"
         >
-          ${esc(grade)}
+          ${esc(
+            grade
+          )}
         </span>
 
         <span class="priority-tooltip">
@@ -1631,7 +2211,9 @@
           </strong>
 
           <em>
-            ${esc(reason)}
+            ${esc(
+              reason
+            )}
           </em>
 
         </span>
@@ -1640,11 +2222,17 @@
     `;
   }
 
-  function renderKeywordTags(project) {
+  function renderKeywordTags(
+    project
+  ) {
     const keywords =
-      getProjectKeywords(project);
+      getProjectKeywords(
+        project
+      );
 
-    if (!keywords.length) {
+    if (
+      !keywords.length
+    ) {
       return `
         <span class="keyword">
           키워드 미분류
@@ -1653,22 +2241,33 @@
     }
 
     return keywords
-      .slice(0, 6)
+      .slice(
+        0,
+        6
+      )
       .map(
         function (keyword) {
           return `
             <span class="keyword">
-              ${esc(keyword)}
+              ${esc(
+                keyword
+              )}
             </span>
           `;
         }
       )
-      .join("");
+      .join(
+        ""
+      );
   }
 
-  function renderSourceTags(sources) {
+  function renderSourceTags(
+    sources
+  ) {
     if (
-      !Array.isArray(sources) ||
+      !Array.isArray(
+        sources
+      ) ||
       !sources.length
     ) {
       return "";
@@ -1684,7 +2283,9 @@
             function (source) {
               return `
                 <span class="keyword">
-                  ${esc(source)}
+                  ${esc(
+                    source
+                  )}
                 </span>
               `;
             }
@@ -1694,6 +2295,7 @@
     `;
   }
 
+
   /* =========================================================
      SUPPORT CONTROLS
   ========================================================= */
@@ -1702,7 +2304,10 @@
     projects,
     code
   ) {
-    if (code === "ALL") {
+    if (
+      code ===
+      "ALL"
+    ) {
       return projects.length;
     }
 
@@ -1711,10 +2316,78 @@
         return (
           getSupportSourceCode(
             project
-          ) === code
+          ) ===
+          code
         );
       }
     ).length;
+  }
+
+  function renderPillButton(
+    attribute,
+    code,
+    label,
+    active,
+    count = null
+  ) {
+    return `
+      <button
+        type="button"
+
+        ${attribute}="${esc(
+          code
+        )}"
+
+        aria-pressed="${
+          active
+            ? "true"
+            : "false"
+        }"
+
+        style="
+          appearance:none;
+          cursor:pointer;
+          border:1px solid ${
+            active
+              ? "#171717"
+              : "#d8d8d8"
+          };
+          background:${
+            active
+              ? "#171717"
+              : "#ffffff"
+          };
+          color:${
+            active
+              ? "#ffffff"
+              : "#444444"
+          };
+          border-radius:999px;
+          padding:8px 12px;
+          font:inherit;
+          font-size:12px;
+          font-weight:${
+            active
+              ? "700"
+              : "600"
+          };
+          line-height:1;
+          white-space:nowrap;
+        "
+      >
+        ${esc(
+          label
+        )}
+
+        ${
+          count === null
+            ? ""
+            : ` ${formatCount(
+                count
+              )}`
+        }
+      </button>
+    `;
   }
 
   function renderSupportSourceFilters(
@@ -1743,61 +2416,18 @@
         ${SUPPORT_SOURCE_FILTERS
           .map(
             function (item) {
-              const active =
-                state.supportSource ===
-                item.code;
 
-              const count =
+              return renderPillButton(
+                "data-support-source",
+                item.code,
+                item.label,
+                state.supportSource ===
+                  item.code,
                 getSupportSourceCount(
                   allProjects,
                   item.code
-                );
-
-              return `
-                <button
-                  type="button"
-                  data-support-source="${esc(
-                    item.code
-                  )}"
-                  aria-pressed="${
-                    active
-                      ? "true"
-                      : "false"
-                  }"
-                  style="
-                    appearance:none;
-                    cursor:pointer;
-                    border:1px solid ${
-                      active
-                        ? "#171717"
-                        : "#d8d8d8"
-                    };
-                    background:${
-                      active
-                        ? "#171717"
-                        : "#ffffff"
-                    };
-                    color:${
-                      active
-                        ? "#ffffff"
-                        : "#444444"
-                    };
-                    border-radius:999px;
-                    padding:8px 12px;
-                    font:inherit;
-                    font-size:12px;
-                    font-weight:${
-                      active
-                        ? "700"
-                        : "600"
-                    };
-                    line-height:1;
-                  "
-                >
-                  ${esc(item.label)}
-                  ${formatCount(count)}
-                </button>
-              `;
+                )
+              );
             }
           )
           .join("")}
@@ -1814,59 +2444,6 @@
       projects,
       code
     ).length;
-  }
-
-  function renderPillButton(
-    attribute,
-    code,
-    label,
-    active,
-    count = null
-  ) {
-    return `
-      <button
-        type="button"
-        ${attribute}="${esc(code)}"
-        aria-pressed="${
-          active ? "true" : "false"
-        }"
-        style="
-          appearance:none;
-          cursor:pointer;
-          border:1px solid ${
-            active
-              ? "#171717"
-              : "#d8d8d8"
-          };
-          background:${
-            active
-              ? "#171717"
-              : "#ffffff"
-          };
-          color:${
-            active
-              ? "#ffffff"
-              : "#444444"
-          };
-          border-radius:999px;
-          padding:8px 12px;
-          font:inherit;
-          font-size:12px;
-          font-weight:${
-            active ? "700" : "600"
-          };
-          line-height:1;
-          white-space:nowrap;
-        "
-      >
-        ${esc(label)}
-        ${
-          count === null
-            ? ""
-            : ` ${formatCount(count)}`
-        }
-      </button>
-    `;
   }
 
   function renderSupportQuickControls(
@@ -1905,6 +2482,7 @@
           ${SUPPORT_QUICK_FILTERS
             .map(
               function (item) {
+
                 return renderPillButton(
                   "data-support-quick",
                   item.code,
@@ -1921,6 +2499,7 @@
             .join("")}
 
         </div>
+
 
         <div
           style="
@@ -1944,6 +2523,7 @@
           ${SUPPORT_SORT_OPTIONS
             .map(
               function (item) {
+
                 return renderPillButton(
                   "data-support-sort",
                   item.code,
@@ -1957,6 +2537,7 @@
 
         </div>
 
+
         <div
           style="
             display:flex;
@@ -1967,6 +2548,7 @@
 
           <input
             id="supportSearchInput"
+
             type="search"
 
             value="${esc(
@@ -1995,7 +2577,9 @@
 
           <button
             type="button"
+
             data-support-reset="true"
+
             style="
               flex:0 0 auto;
               height:40px;
@@ -2016,6 +2600,7 @@
 
         </div>
 
+
         <p
           style="
             margin:9px 2px 0;
@@ -2024,9 +2609,9 @@
             line-height:1.5;
           "
         >
-          기관 필터 · 빠른 필터 · 검색어를
-          동시에 적용할 수 있습니다.
-          검색 결과
+          기관 · 필터 · 정렬 · 검색어는
+          이 브라우저에 자동 저장됩니다.
+          현재 검색 결과
           ${formatCount(
             context.final.length
           )}건.
@@ -2036,16 +2621,23 @@
     `;
   }
 
+
   /* =========================================================
      GUIDE
   ========================================================= */
 
-  function renderGradeGuide(tab) {
-    if (tab === "support") {
+  function renderGradeGuide(
+    tab
+  ) {
+    if (
+      tab ===
+      "support"
+    ) {
       return `
         <section
           class="grade-guide-box grade-guide-box-green"
         >
+
           <strong>
             지원사업 검토 기준
           </strong>
@@ -2061,6 +2653,7 @@
             7일 이내 공고는 최근 등록으로 표시되며,
             마감된 공고는 한국시간 기준으로 자동 숨김 처리합니다.
           </p>
+
         </section>
       `;
     }
@@ -2069,6 +2662,7 @@
       <section
         class="grade-guide-box grade-guide-box-green"
       >
+
         <strong>
           등급 기준 안내
         </strong>
@@ -2079,9 +2673,11 @@
           B는 모니터링,
           C는 낮은 우선순위입니다.
         </p>
+
       </section>
     `;
   }
+
 
   /* =========================================================
      CARD
@@ -2098,7 +2694,9 @@
       "제목 없음";
 
     const agency =
-      getProjectAgency(project);
+      getProjectAgency(
+        project
+      );
 
     const sourceLabel =
       getSummarySourceLabel(
@@ -2120,7 +2718,9 @@
 
     const amount =
       formatKrw(
-        getProjectAmount(project)
+        getProjectAmount(
+          project
+        )
       );
 
     const published =
@@ -2132,7 +2732,9 @@
 
     const deadline =
       compactDate(
-        getProjectDeadline(project)
+        getProjectDeadline(
+          project
+        )
       );
 
     const nextAction =
@@ -2156,27 +2758,35 @@
       );
 
     const bodyBadges =
-      tab === "support"
+      tab ===
+        "support"
         ? `
           <span class="badge category">
             ${esc(
               getSupportSourceCode(
                 project
-              ) || "지원"
+              ) ||
+              "지원"
             )}
           </span>
 
           <span class="badge category">
-            ${esc(agency)}
+            ${esc(
+              agency
+            )}
           </span>
         `
         : `
           <span class="badge category">
-            ${esc(categoryLabel)}
+            ${esc(
+              categoryLabel
+            )}
           </span>
 
           <span class="badge category">
-            ${esc(sourceLabel)}
+            ${esc(
+              sourceLabel
+            )}
           </span>
         `;
 
@@ -2199,7 +2809,9 @@
                   sourceTitle
                 )}"
               >
-                ${esc(sourceLabel)}
+                ${esc(
+                  sourceLabel
+                )}
               </em>
 
               ${renderGradeBadge(
@@ -2208,107 +2820,179 @@
 
             </span>
 
+
             <span
               class="summary-title priority-summary-title"
             >
 
               <small>
-                ${esc(categoryLabel)}
+
+                ${esc(
+                  categoryLabel
+                )}
 
                 ${
-                  tab === "support"
+                  tab ===
+                    "support"
                     ? renderRecentBadge(
                         project
                       )
                     : ""
                 }
+
               </small>
 
-              ${esc(title)}
+              ${esc(
+                title
+              )}
 
             </span>
 
-            <span class="summary-period">
+
+            <span
+              class="summary-period"
+            >
+
               <span>
                 공고일
               </span>
 
               <strong>
-                ${esc(published)}
+                ${esc(
+                  published
+                )}
               </strong>
+
             </span>
 
-            <span class="summary-deadline">
+
+            <span
+              class="summary-deadline"
+            >
+
               <span>
                 마감일
               </span>
 
               <strong>
-                ${esc(deadline)}
+                ${esc(
+                  deadline
+                )}
               </strong>
 
               ${
-                tab === "support"
+                tab ===
+                  "support"
                   ? renderDeadlineBadge(
                       project
                     )
                   : ""
               }
+
             </span>
 
           </summary>
 
-          <div class="accordion-body">
 
-            <div class="card-top">
+          <div
+            class="accordion-body"
+          >
 
-              <div class="badges">
+            <div
+              class="card-top"
+            >
+
+              <div
+                class="badges"
+              >
+
                 ${bodyBadges}
 
                 ${
-                  tab === "support"
+                  tab ===
+                    "support"
                     ? renderRecentBadge(
                         project
                       )
                     : ""
                 }
+
               </div>
 
-              <div class="score-group">
-                <span class="score">
-                  ${esc(nextAction)}
+
+              <div
+                class="score-group"
+              >
+
+                <span
+                  class="score"
+                >
+                  ${esc(
+                    nextAction
+                  )}
                 </span>
+
               </div>
 
             </div>
 
+
             <h2>
-              ${esc(title)}
+              ${esc(
+                title
+              )}
             </h2>
 
-            <div class="meta">
+
+            <div
+              class="meta"
+            >
 
               <div>
-                <span>기관</span>
-                ${esc(agency)}
+                <span>
+                  기관
+                </span>
+
+                ${esc(
+                  agency
+                )}
               </div>
 
-              <div>
-                <span>예산/지원금</span>
-                ${esc(amount)}
-              </div>
 
               <div>
-                <span>공고일</span>
-                ${esc(published)}
+                <span>
+                  예산/지원금
+                </span>
+
+                ${esc(
+                  amount
+                )}
               </div>
 
+
               <div>
-                <span>마감일</span>
-                ${esc(deadline)}
+                <span>
+                  공고일
+                </span>
+
+                ${esc(
+                  published
+                )}
+              </div>
+
+
+              <div>
+                <span>
+                  마감일
+                </span>
+
+                ${esc(
+                  deadline
+                )}
 
                 ${
-                  tab === "support"
+                  tab ===
+                    "support"
                     ? renderDeadlineBadge(
                         project
                       )
@@ -2318,41 +3002,64 @@
 
             </div>
 
-            <div class="keywords">
+
+            <div
+              class="keywords"
+            >
               ${renderKeywordTags(
                 project
               )}
             </div>
 
-            <div class="reason">
+
+            <div
+              class="reason"
+            >
+
               <strong>
                 검토 기준
               </strong>
 
               <br />
 
-              ${esc(gradeReason)}
+              ${esc(
+                gradeReason
+              )}
+
             </div>
 
-            <p class="action">
+
+            <p
+              class="action"
+            >
               다음 액션:
-              ${esc(nextAction)}
+              ${esc(
+                nextAction
+              )}
             </p>
+
 
             ${
               url
                 ? `
                   <a
                     class="link"
-                    href="${esc(url)}"
+
+                    href="${esc(
+                      url
+                    )}"
+
                     target="_blank"
+
                     rel="noopener noreferrer"
                   >
                     공고 보기
                   </a>
                 `
                 : `
-                  <p class="empty-message-inline">
+                  <p
+                    class="empty-message-inline"
+                  >
                     공고 링크가 없습니다.
                   </p>
                 `
@@ -2366,6 +3073,7 @@
     `;
   }
 
+
   /* =========================================================
      PANEL RENDER
   ========================================================= */
@@ -2375,10 +3083,14 @@
     category
   ) {
     const config =
-      getTabConfig(tab);
+      getTabConfig(
+        tab
+      );
 
     const panel =
-      getPriorityPanel(tab);
+      getPriorityPanel(
+        tab
+      );
 
     if (
       !panel ||
@@ -2393,12 +3105,14 @@
       );
 
     const supportContext =
-      tab === "support"
+      tab ===
+        "support"
         ? getSupportFilterContext()
         : null;
 
     const projects =
-      tab === "support"
+      tab ===
+        "support"
         ? supportContext.final
         : allProjects;
 
@@ -2408,14 +3122,16 @@
       ).length;
 
     const expiredCount =
-      tab === "support"
+      tab ===
+        "support"
         ? getExpiredProjectsByCategory(
             category
           ).length
         : 0;
 
     const newCount =
-      tab === "support"
+      tab ===
+        "support"
         ? countNewProjects(
             projects
           )
@@ -2426,8 +3142,11 @@
         excludedCount
       )}건`;
 
-    if (tab === "support") {
-      const sortLabel =
+    if (
+      tab ===
+      "support"
+    ) {
+      const sortItem =
         SUPPORT_SORT_OPTIONS.find(
           function (item) {
             return (
@@ -2435,7 +3154,12 @@
               state.supportSort
             );
           }
-        )?.label || "추천순";
+        );
+
+      const sortLabel =
+        sortItem
+          ? sortItem.label
+          : "추천순";
 
       miniStatSmall =
         `NEW ${formatCount(
@@ -2448,12 +3172,14 @@
     }
 
     const firstHeader =
-      tab === "support"
+      tab ===
+        "support"
         ? "기관"
         : "출처";
 
     const secondHeader =
-      tab === "support"
+      tab ===
+        "support"
         ? "분야 / 공고명"
         : "카테고리 / 공고명";
 
@@ -2465,18 +3191,25 @@
 
         <div>
 
-          <p class="priority-eyebrow">
-            AXOO Priority KR v1.8
+          <p
+            class="priority-eyebrow"
+          >
+            AXOO Priority KR v1.9
           </p>
 
           <h2>
-            ${esc(config.icon)}
-            ${esc(config.label)}
+            ${esc(
+              config.icon
+            )}
+            ${esc(
+              config.label
+            )}
           </h2>
 
           <p>
             ${esc(
-              config.description || ""
+              config.description ||
+              ""
             )}
           </p>
 
@@ -2486,7 +3219,10 @@
 
         </div>
 
-        <div class="priority-mini-stat">
+
+        <div
+          class="priority-mini-stat"
+        >
 
           <span>
             표시 공고
@@ -2506,40 +3242,56 @@
 
       </section>
 
+
       ${
-        tab === "support"
+        tab ===
+          "support"
           ? renderSupportSourceFilters(
               allProjects
             )
           : ""
       }
 
+
       ${
-        tab === "support"
+        tab ===
+          "support"
           ? renderSupportQuickControls(
               supportContext
             )
           : ""
       }
 
-      ${renderGradeGuide(tab)}
+
+      ${renderGradeGuide(
+        tab
+      )}
+
 
       <div
         class="list-head priority-list-head"
       >
 
-        <span class="list-source-grade">
+        <span
+          class="list-source-grade"
+        >
+
           <em>
-            ${esc(firstHeader)}
+            ${esc(
+              firstHeader
+            )}
           </em>
 
           <em>
             등급
           </em>
+
         </span>
 
         <span>
-          ${esc(secondHeader)}
+          ${esc(
+            secondHeader
+          )}
         </span>
 
         <span>
@@ -2552,12 +3304,14 @@
 
       </div>
 
+
       ${
         projects.length
           ? `
             <section
               class="cards priority-accordion-list"
             >
+
               ${projects
                 .map(
                   function (project) {
@@ -2568,12 +3322,16 @@
                   }
                 )
                 .join("")}
+
             </section>
           `
           : `
-            <div class="priority-empty">
+            <div
+              class="priority-empty"
+            >
               ${
-                tab === "support"
+                tab ===
+                  "support"
                   ? "현재 선택한 기관·필터·검색 조건에 맞는 진행 중 공고가 없습니다."
                   : "해당 기준에 맞는 진행 중 공고가 아직 없습니다."
               }
@@ -2586,6 +3344,7 @@
       projects
     );
   }
+
 
   /* =========================================================
      TAB CONTROL
@@ -2604,10 +3363,15 @@
       "localTab"
     ].forEach(
       function (id) {
-        const panel =
-          document.getElementById(id);
 
-        if (panel) {
+        const panel =
+          document.getElementById(
+            id
+          );
+
+        if (
+          panel
+        ) {
           panel.classList.remove(
             "active"
           );
@@ -2619,15 +3383,19 @@
     );
   }
 
-  function activateTabButton(tab) {
+  function activateTabButton(
+    tab
+  ) {
     $all(
       ".tab-button"
     ).forEach(
       function (button) {
+
         const active =
           button.getAttribute(
             "data-tab"
-          ) === tab;
+          ) ===
+          tab;
 
         button.classList.toggle(
           "active",
@@ -2636,7 +3404,9 @@
 
         button.setAttribute(
           "aria-selected",
-          active ? "true" : "false"
+          active
+            ? "true"
+            : "false"
         );
       }
     );
@@ -2644,9 +3414,13 @@
 
   function showNativeTab(tab) {
     const panel =
-      getNativePanel(tab);
+      getNativePanel(
+        tab
+      );
 
-    if (!panel) {
+    if (
+      !panel
+    ) {
       return;
     }
 
@@ -2654,29 +3428,43 @@
       "active"
     );
 
-    panel.style.display = "";
+    panel.style.display =
+      "";
 
-    if (tab === "art") {
+    if (
+      tab ===
+      "art"
+    ) {
       updateArtSummaryCount();
     }
   }
 
   function showTab(tab) {
     const config =
-      getTabConfig(tab);
+      getTabConfig(
+        tab
+      );
 
-    if (!config) {
+    if (
+      !config
+    ) {
       return;
     }
 
-    state.currentTab = tab;
+    state.currentTab =
+      tab;
+
+    savePreferences();
 
     hideAllPanels();
 
-    activateTabButton(tab);
+    activateTabButton(
+      tab
+    );
 
     if (
-      config.type === "priority"
+      config.type ===
+      "priority"
     ) {
       renderPriorityPanel(
         tab,
@@ -2684,19 +3472,26 @@
       );
 
       const panel =
-        getPriorityPanel(tab);
+        getPriorityPanel(
+          tab
+        );
 
-      if (panel) {
+      if (
+        panel
+      ) {
         panel.classList.add(
           "active"
         );
 
-        panel.style.display = "";
+        panel.style.display =
+          "";
       }
     }
 
     else {
-      showNativeTab(tab);
+      showNativeTab(
+        tab
+      );
     }
 
     updateMetaCards();
@@ -2707,14 +3502,17 @@
       ".tab-button"
     ).forEach(
       function (button) {
+
         const tab =
           button.getAttribute(
             "data-tab"
           );
 
         if (
-          tab === "opportunities" ||
-          tab === "local"
+          tab ===
+            "opportunities" ||
+          tab ===
+            "local"
         ) {
           button.style.display =
             "none";
@@ -2724,7 +3522,9 @@
 
         button.onclick =
           function (event) {
+
             event.preventDefault();
+
             event.stopPropagation();
 
             const nextTab =
@@ -2732,13 +3532,18 @@
                 "data-tab"
               );
 
-            if (nextTab) {
-              showTab(nextTab);
+            if (
+              nextTab
+            ) {
+              showTab(
+                nextTab
+              );
             }
           };
       }
     );
   }
+
 
   /* =========================================================
      ENSURE PANELS
@@ -2752,10 +3557,15 @@
       "other"
     ].forEach(
       function (tab) {
-        let panel =
-          getPriorityPanel(tab);
 
-        if (panel) {
+        let panel =
+          getPriorityPanel(
+            tab
+          );
+
+        if (
+          panel
+        ) {
           return;
         }
 
@@ -2765,12 +3575,15 @@
           );
 
         panel.id =
-          getPriorityPanelId(tab);
+          getPriorityPanelId(
+            tab
+          );
 
         panel.className =
           "tab-panel priority-tab-panel";
 
-        panel.style.display = "none";
+        panel.style.display =
+          "none";
 
         const agenciesPanel =
           $("#agenciesTab") ||
@@ -2792,20 +3605,26 @@
         }
 
         else {
-          main.appendChild(panel);
+          main.appendChild(
+            panel
+          );
         }
       }
     );
   }
+
 
   /* =========================================================
      TAB LAYOUT
   ========================================================= */
 
   function ensureTabLayout() {
-    const tabs = $(".tabs");
+    const tabs =
+      $(".tabs");
 
-    if (!tabs) {
+    if (
+      !tabs
+    ) {
       return;
     }
 
@@ -2844,18 +3663,22 @@
 
     desiredTabs.forEach(
       function (item) {
+
         let button =
           tabs.querySelector(
             `.tab-button[data-tab="${item.tab}"]`
           );
 
-        if (!button) {
+        if (
+          !button
+        ) {
           button =
             document.createElement(
               "button"
             );
 
-          button.type = "button";
+          button.type =
+            "button";
 
           button.className =
             "tab-button";
@@ -2869,9 +3692,12 @@
         button.textContent =
           item.text;
 
-        button.style.display = "";
+        button.style.display =
+          "";
 
-        tabs.appendChild(button);
+        tabs.appendChild(
+          button
+        );
       }
     );
 
@@ -2885,12 +3711,16 @@
         '.tab-button[data-tab="local"]'
       );
 
-    if (oldOpportunity) {
+    if (
+      oldOpportunity
+    ) {
       oldOpportunity.style.display =
         "none";
     }
 
-    if (oldLocal) {
+    if (
+      oldLocal
+    ) {
       oldLocal.style.display =
         "none";
     }
@@ -2900,7 +3730,9 @@
         ".priority-tab-separator"
       );
 
-    if (!separator) {
+    if (
+      !separator
+    ) {
       separator =
         document.createElement(
           "span"
@@ -2918,13 +3750,16 @@
         '.tab-button[data-tab="agencies"]'
       );
 
-    if (agenciesButton) {
+    if (
+      agenciesButton
+    ) {
       tabs.insertBefore(
         separator,
         agenciesButton
       );
     }
   }
+
 
   /* =========================================================
      META FALLBACK
@@ -2934,37 +3769,52 @@
     const metaBar =
       $(".meta-bar");
 
-    if (!metaBar) {
+    if (
+      !metaBar
+    ) {
       return;
     }
 
     const cards = [
       {
-        id: "priorityMetaArtCount",
+        id:
+          "priorityMetaArtCount",
+
         label:
           "1. 건축물 미술작품",
-        tab: "art"
+
+        tab:
+          "art"
       },
       {
         id:
           "priorityMetaMuralCount",
+
         label:
           "2. 벽화 & 조형물",
-        tab: "mural"
+
+        tab:
+          "mural"
       },
       {
         id:
           "priorityMetaExhibitionCount",
+
         label:
           "3. 전시 콘텐츠 기획 운영",
-        tab: "exhibition"
+
+        tab:
+          "exhibition"
       },
       {
         id:
           "priorityMetaSupportCount",
+
         label:
           "4. 예술·콘텐츠 지원사업",
-        tab: "support"
+
+        tab:
+          "support"
       }
     ];
 
@@ -2977,14 +3827,18 @@
         }
       );
 
-    if (complete) {
+    if (
+      complete
+    ) {
       return;
     }
 
-    metaBar.innerHTML = "";
+    metaBar.innerHTML =
+      "";
 
     cards.forEach(
       function (item) {
+
         const card =
           document.createElement(
             "div"
@@ -2999,36 +3853,64 @@
         );
 
         card.innerHTML = `
-          <div class="meta-label">
-            ${esc(item.label)}
+          <div
+            class="meta-label"
+          >
+            ${esc(
+              item.label
+            )}
           </div>
 
           <div
             class="meta-value"
-            id="${esc(item.id)}"
+
+            id="${esc(
+              item.id
+            )}"
           >
             0
           </div>
         `;
 
-        metaBar.appendChild(card);
+        metaBar.appendChild(
+          card
+        );
       }
     );
   }
+
 
   /* =========================================================
      INIT
   ========================================================= */
 
   async function applyPriorityDashboard() {
+    loadPreferences();
+
     ensurePriorityPanels();
+
     ensureTabLayout();
+
     setupMetaFallback();
 
     await loadPriorityProjects();
 
     updateMetaCards();
+
     setupTabButtons();
+
+    if (
+      state.restored &&
+      isAllowedTab(
+        state.currentTab
+      )
+    ) {
+      showTab(
+        state.currentTab
+      );
+
+      return;
+    }
 
     const activeButton =
       $(".tab-button.active");
@@ -3044,22 +3926,29 @@
       !activeTab ||
       activeTab ===
         "opportunities" ||
-      activeTab === "local"
+      activeTab ===
+        "local"
     ) {
-      showTab("art");
+      showTab(
+        "art"
+      );
     }
 
     else {
-      showTab(activeTab);
+      showTab(
+        activeTab
+      );
     }
   }
 
   function schedulePatch() {
-    let count = 0;
+    let count =
+      0;
 
     const timer =
       window.setInterval(
         function () {
+
           updateMetaCards();
 
           const config =
@@ -3084,9 +3973,12 @@
             );
           }
 
-          count += 1;
+          count +=
+            1;
 
-          if (count >= 8) {
+          if (
+            count >= 8
+          ) {
             window.clearInterval(
               timer
             );
@@ -3110,7 +4002,9 @@
         "supportSearchInput"
       );
 
-    if (!input) {
+    if (
+      !input
+    ) {
       return;
     }
 
@@ -3131,6 +4025,7 @@
     }
   }
 
+
   /* =========================================================
      EVENTS / KOREAN IME SAFE
   ========================================================= */
@@ -3140,7 +4035,9 @@
     function () {
 
       applyPriorityDashboard();
+
       schedulePatch();
+
 
       let supportSearchComposing =
         false;
@@ -3148,8 +4045,11 @@
       let supportSearchTimer =
         null;
 
+
       function clearSupportSearchTimer() {
-        if (supportSearchTimer) {
+        if (
+          supportSearchTimer
+        ) {
           window.clearTimeout(
             supportSearchTimer
           );
@@ -3159,18 +4059,22 @@
         }
       }
 
+
       function applySupportSearch(
         input,
         delay = 140
       ) {
-        if (!input) {
+        if (
+          !input
+        ) {
           return;
         }
 
         clearSupportSearchTimer();
 
         const value =
-          input.value || "";
+          input.value ||
+          "";
 
         const selectionStart =
           input.selectionStart;
@@ -3194,6 +4098,8 @@
               state.supportQuery =
                 value;
 
+              savePreferences();
+
               rerenderSupportAndRestoreSearchFocus(
                 selectionStart,
                 selectionEnd
@@ -3206,9 +4112,11 @@
           );
       }
 
+
       document.addEventListener(
         "compositionstart",
         function (event) {
+
           const input =
             event.target.closest
               ? event.target.closest(
@@ -3216,7 +4124,9 @@
                 )
               : null;
 
-          if (!input) {
+          if (
+            !input
+          ) {
             return;
           }
 
@@ -3231,9 +4141,11 @@
         true
       );
 
+
       document.addEventListener(
         "compositionend",
         function (event) {
+
           const input =
             event.target.closest
               ? event.target.closest(
@@ -3241,7 +4153,9 @@
                 )
               : null;
 
-          if (!input) {
+          if (
+            !input
+          ) {
             return;
           }
 
@@ -3259,9 +4173,11 @@
         true
       );
 
+
       document.addEventListener(
         "input",
         function (event) {
+
           const input =
             event.target.closest
               ? event.target.closest(
@@ -3269,7 +4185,9 @@
                 )
               : null;
 
-          if (!input) {
+          if (
+            !input
+          ) {
             return;
           }
 
@@ -3278,7 +4196,8 @@
 
           if (
             supportSearchComposing ||
-            event.isComposing === true
+            event.isComposing ===
+              true
           ) {
             return;
           }
@@ -3291,6 +4210,7 @@
         true
       );
 
+
       document.addEventListener(
         "click",
         function (event) {
@@ -3302,8 +4222,11 @@
               "[data-support-source]"
             );
 
-          if (sourceButton) {
+          if (
+            sourceButton
+          ) {
             event.preventDefault();
+
             event.stopPropagation();
 
             clearSupportSearchTimer();
@@ -3315,21 +4238,20 @@
               String(
                 sourceButton.getAttribute(
                   "data-support-source"
-                ) || "ALL"
+                ) ||
+                "ALL"
               )
                 .trim()
                 .toUpperCase();
 
             state.supportSource =
-              SUPPORT_SOURCE_FILTERS.some(
-                function (item) {
-                  return (
-                    item.code === source
-                  );
-                }
+              isAllowedSupportSource(
+                source
               )
                 ? source
                 : "ALL";
+
+            savePreferences();
 
             renderPriorityPanel(
               "support",
@@ -3339,6 +4261,7 @@
             return;
           }
 
+
           /* 빠른 필터 */
 
           const quickButton =
@@ -3346,8 +4269,11 @@
               "[data-support-quick]"
             );
 
-          if (quickButton) {
+          if (
+            quickButton
+          ) {
             event.preventDefault();
+
             event.stopPropagation();
 
             clearSupportSearchTimer();
@@ -3359,21 +4285,20 @@
               String(
                 quickButton.getAttribute(
                   "data-support-quick"
-                ) || "ALL"
+                ) ||
+                "ALL"
               )
                 .trim()
                 .toUpperCase();
 
             state.supportQuick =
-              SUPPORT_QUICK_FILTERS.some(
-                function (item) {
-                  return (
-                    item.code === quick
-                  );
-                }
+              isAllowedSupportQuick(
+                quick
               )
                 ? quick
                 : "ALL";
+
+            savePreferences();
 
             renderPriorityPanel(
               "support",
@@ -3383,6 +4308,7 @@
             return;
           }
 
+
           /* 정렬 */
 
           const sortButton =
@@ -3390,8 +4316,11 @@
               "[data-support-sort]"
             );
 
-          if (sortButton) {
+          if (
+            sortButton
+          ) {
             event.preventDefault();
+
             event.stopPropagation();
 
             clearSupportSearchTimer();
@@ -3410,15 +4339,13 @@
                 .toUpperCase();
 
             state.supportSort =
-              SUPPORT_SORT_OPTIONS.some(
-                function (item) {
-                  return (
-                    item.code === sort
-                  );
-                }
+              isAllowedSupportSort(
+                sort
               )
                 ? sort
                 : "RECOMMENDED";
+
+            savePreferences();
 
             renderPriorityPanel(
               "support",
@@ -3428,6 +4355,7 @@
             return;
           }
 
+
           /* 초기화 */
 
           const resetButton =
@@ -3435,8 +4363,11 @@
               "[data-support-reset]"
             );
 
-          if (resetButton) {
+          if (
+            resetButton
+          ) {
             event.preventDefault();
+
             event.stopPropagation();
 
             clearSupportSearchTimer();
@@ -3459,6 +4390,8 @@
             state.supportQuery =
               "";
 
+            savePreferences();
+
             renderPriorityPanel(
               "support",
               "arts_content_support"
@@ -3466,6 +4399,7 @@
 
             return;
           }
+
 
           /* TAB */
 
@@ -3490,32 +4424,29 @@
                   )
                 : "";
 
-          const allowedTabs = [
-            "art",
-            "mural",
-            "exhibition",
-            "support",
-            "other",
-            "agencies"
-          ];
-
           if (
-            !allowedTabs.includes(tab)
+            !isAllowedTab(
+              tab
+            )
           ) {
             return;
           }
 
           event.preventDefault();
+
           event.stopPropagation();
 
           clearSupportSearchTimer();
 
           window.setTimeout(
             function () {
-              showTab(tab);
+              showTab(
+                tab
+              );
             },
             0
           );
+
         },
         true
       );
