@@ -39,9 +39,9 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "arko-CRL3578",
@@ -79,9 +79,9 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "arko-CRL3577",
@@ -119,9 +119,9 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "arko-CRL3575",
@@ -163,9 +163,9 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "arko-CRL3570",
@@ -197,19 +197,19 @@
     "matchedPriorityKeywords": [
       "기업 동반성장"
     ],
-    "axooFitScore": 51,
-    "score": 51,
-    "grade": "B",
-    "axooFitReason": "기업 동반성장 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다.",
-    "gradeReason": "기업 동반성장 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다.",
+    "axooFitScore": 45,
+    "score": 45,
+    "grade": "C",
+    "axooFitReason": "기업 동반성장 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다. ARKO의 시상·사례선정형 공모로 판단되어 AXOO 직접 지원사업 검토 대상에서 제외합니다.",
+    "gradeReason": "기업 동반성장 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다. ARKO의 시상·사례선정형 공모로 판단되어 AXOO 직접 지원사업 검토 대상에서 제외합니다.",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kcdf-9148",
@@ -253,9 +253,9 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kcdf-9135",
@@ -297,9 +297,9 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kcdf-9134",
@@ -343,9 +343,9 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kcdf-9112",
@@ -383,9 +383,9 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kocca-326D00085009",
@@ -429,9 +429,9 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kocca-326D00088010",
@@ -473,9 +473,9 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kocca-326D00037013",
@@ -513,9 +513,9 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kocca-326D00034006",
@@ -557,9 +557,9 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
     "id": "kocca-326D00034004",
@@ -601,8 +601,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-03",
-    "updatedAt": "2026-09-03",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.0"
+    "collectedAt": "2026-09-04",
+    "updatedAt": "2026-09-04",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   }
 ]
