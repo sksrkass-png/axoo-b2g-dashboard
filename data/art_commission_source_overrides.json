@@ -28,12 +28,13 @@
   },
 
   "chungbuk_notice": {
-    "sourceUrl": "https://www.cheongju.go.kr/www/selectEminwonNoticeList.do?key=281&notAncmtSeCd=&pageIndex=1&searchCnd=all&searchKrwd=%EB%AF%B8%EC%88%A0%EC%9E%91%ED%92%88",
-    "sourceName": "청주시 고시공고 - 미술작품 검색",
-    "sourceType": "official_board",
+    "sourceUrl": "https://www.cbdc.co.kr/zboard/list.do?lmCode=BBSMSTR_000000000018",
+    "sourceName": "충북개발공사 공지사항",
+    "sourceType": "public_corporation",
     "crawlMode": "board",
     "verified": true,
-    "note": "충북 건축물 미술작품 실전 공모 우선 수집 소스. 청주시 공식 고시공고에서 '미술작품' 검색 결과를 직접 감시. 2026년 청주 농수산물 도매시장 미술작품 제작 및 설치 공모 known-positive 확인."
+    "fallback": true,
+    "note": "청주시 고시공고 접근 실패에 대비한 충북 공식 대체 소스. 미술작품 제작·설치 공모 게시 이력 확인."
   },
 
   "chungnam_notice": {
@@ -74,7 +75,7 @@
     "note": "경상남도 공식 문화예술 정보플랫폼. 건축물 미술작품 관련 공지 확인 가능"
   },
 
-    "gwangju_city_notice": {
+  "gwangju_city_notice": {
     "sourceUrl": "https://sido.jeonnam.go.kr/citynet/jsp/sap/SAPGosiBizProcess.do?command=searchList&conIfmEnddt=99991231&conIfmStdt=20260701&flag=gosiGL&svp=Y",
     "sourceName": "전남광주통합특별시 고시공고 - 광주권",
     "sourceType": "official_board",
@@ -83,7 +84,7 @@
     "note": "2026-07-01 이후 전남광주통합특별시 현행 고시공고 게시판. 광주 지역 공고 수집용."
   },
   
-    "sejong_city_notice": {
+  "sejong_city_notice": {
     "sourceUrl": "https://www.sejong.go.kr/prog/publicNotice/kor/sub02_030301/C1_1/list.do",
     "sourceName": "세종특별자치시 일반공고",
     "sourceType": "official_board",
@@ -92,7 +93,7 @@
     "note": "세종특별자치시 공식 고시·공고 중 일반공고 목록."
   },
 
-    "jeonbuk_notice": {
+  "jeonbuk_notice": {
     "sourceUrl": "https://www.jeonbuk.go.kr/board/list.jeonbuk?boardId=BBS_0000129&menuCd=DOM_000000102002003001",
     "sourceName": "전북특별자치도 공고·고시",
     "sourceType": "official_board",
@@ -101,7 +102,7 @@
     "note": "전북특별자치도 공식 공고·고시 게시판."
   },
 
-    "jeju_notice": {
+  "jeju_notice": {
     "sourceUrl": "https://www.jpdc.co.kr/open/news.htm",
     "sourceName": "제주특별자치도개발공사 공지사항",
     "sourceType": "public_corporation",
