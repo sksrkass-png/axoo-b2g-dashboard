@@ -99,5 +99,14 @@
     "crawlMode": "board",
     "verified": true,
     "note": "전북특별자치도 공식 공고·고시 게시판."
+  },
+
+    "jeju_notice": {
+    "sourceUrl": "https://sido.jeju.go.kr/citynet/jsp/sap/SAPGosiBizProcess.do?command=searchList&flag=gosiGL&svp=Y",
+    "sourceName": "제주특별자치도 입법·고시·공고",
+    "sourceType": "official_board",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "제주특별자치도 공식 입법·고시·공고 시스템. 접속 환경에 따라 일시적인 502 응답이 발생할 수 있음."
   }
 }
