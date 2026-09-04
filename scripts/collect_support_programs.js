@@ -33,7 +33,7 @@ const KOCCA_LIST =
   "https://www.kocca.kr/kocca/pims/list.do?menuNo=204104";
 
 const COLLECTOR_VERSION =
-  "support_programs_kams_arko_kcdf_kocca_v4.0";
+  "support_programs_kams_arko_kcdf_kocca_v4.1";
 
 
 /* =========================================================
@@ -51,7 +51,11 @@ function readJson(
   filePath,
   fallback = []
 ) {
-  if (!fs.existsSync(filePath)) {
+  if (
+    !fs.existsSync(
+      filePath
+    )
+  ) {
     return fallback;
   }
 
@@ -61,11 +65,15 @@ function readJson(
       "utf8"
     );
 
-  if (!raw.trim()) {
+  if (
+    !raw.trim()
+  ) {
     return fallback;
   }
 
-  return JSON.parse(raw);
+  return JSON.parse(
+    raw
+  );
 }
 
 
@@ -86,18 +94,43 @@ function writeJson(
 
 
 function decodeEntities(value) {
-  return String(value ?? "")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;/gi, "'")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /&nbsp;/gi,
+      " "
+    )
+    .replace(
+      /&amp;/gi,
+      "&"
+    )
+    .replace(
+      /&quot;/gi,
+      '"'
+    )
+    .replace(
+      /&#39;/gi,
+      "'"
+    )
+    .replace(
+      /&lt;/gi,
+      "<"
+    )
+    .replace(
+      /&gt;/gi,
+      ">"
+    )
     .replace(
       /&#(\d+);/g,
-      (_, code) =>
+      (
+        _,
+        code
+      ) =>
         String.fromCharCode(
-          Number(code)
+          Number(
+            code
+          )
         )
     );
 }
@@ -106,7 +139,9 @@ function decodeEntities(value) {
 function stripTags(value) {
   return text(
     decodeEntities(
-      String(value ?? "")
+      String(
+        value ?? ""
+      )
         .replace(
           /<script[\s\S]*?<\/script>/gi,
           " "
@@ -126,43 +161,64 @@ function stripTags(value) {
 
 function normalizeDate(value) {
   const raw =
-    text(value);
+    text(
+      value
+    );
 
   let match =
     raw.match(
       /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
     );
 
-  if (!match) {
-    match =
-      raw.match(
-        /(?:^|\D)(\d{2})[-./](\d{1,2})[-./](\d{1,2})(?:\D|$)/
-      );
-
-    if (!match) {
-      return "";
-    }
-
+  if (
+    match
+  ) {
     return [
-      `20${match[1]}`,
-      String(match[2]).padStart(
+      match[1],
+
+      String(
+        match[2]
+      ).padStart(
         2,
         "0"
       ),
-      String(match[3]).padStart(
+
+      String(
+        match[3]
+      ).padStart(
         2,
         "0"
       )
     ].join("-");
   }
 
+
+  match =
+    raw.match(
+      /(?:^|\D)(\d{2})[-./](\d{1,2})[-./](\d{1,2})(?:\D|$)/
+    );
+
+
+  if (
+    !match
+  ) {
+    return "";
+  }
+
+
   return [
-    match[1],
-    String(match[2]).padStart(
+    `20${match[1]}`,
+
+    String(
+      match[2]
+    ).padStart(
       2,
       "0"
     ),
-    String(match[3]).padStart(
+
+    String(
+      match[3]
+    ).padStart(
       2,
       "0"
     )
@@ -176,27 +232,21 @@ function extractDates(value) {
       value
     );
 
-  const results =
-    [];
 
-  for (
-    const match of plain.matchAll(
+  return [
+    ...plain.matchAll(
       /20\d{2}[-./]\d{1,2}[-./]\d{1,2}/g
     )
-  ) {
-    const date =
-      normalizeDate(
-        match[0]
-      );
-
-    if (date) {
-      results.push(
-        date
-      );
-    }
-  }
-
-  return results;
+  ]
+    .map(
+      match =>
+        normalizeDate(
+          match[0]
+        )
+    )
+    .filter(
+      Boolean
+    );
 }
 
 
@@ -206,30 +256,21 @@ function extractShortDates(value) {
       value
     );
 
-  const results =
-    [];
 
-  const regex =
-    /(?:20\d{2}|\d{2})[-./]\d{1,2}[-./]\d{1,2}/g;
-
-  for (
-    const match of plain.matchAll(
-      regex
+  return [
+    ...plain.matchAll(
+      /(?:20\d{2}|\d{2})[-./]\d{1,2}[-./]\d{1,2}/g
     )
-  ) {
-    const date =
-      normalizeDate(
-        match[0]
-      );
-
-    if (date) {
-      results.push(
-        date
-      );
-    }
-  }
-
-  return results;
+  ]
+    .map(
+      match =>
+        normalizeDate(
+          match[0]
+        )
+    )
+    .filter(
+      Boolean
+    );
 }
 
 
@@ -261,9 +302,13 @@ function isExpired(deadline) {
       deadline
     );
 
-  if (!normalized) {
+
+  if (
+    !normalized
+  ) {
     return false;
   }
+
 
   return (
     normalized <
@@ -278,7 +323,9 @@ function stableId(value) {
       "sha1"
     )
     .update(
-      text(value)
+      text(
+        value
+      )
     )
     .digest(
       "hex"
@@ -298,7 +345,9 @@ function uniqueBy(
     ...new Map(
       items.map(
         item => [
-          keyFn(item),
+          keyFn(
+            item
+          ),
           item
         ]
       )
@@ -383,11 +432,15 @@ async function fetchHtml(url) {
       }
     );
 
-  if (!response.ok) {
+
+  if (
+    !response.ok
+  ) {
     throw new Error(
       `HTTP ${response.status} : ${url}`
     );
   }
+
 
   return await response.text();
 }
@@ -404,6 +457,7 @@ const STRONG_KEYWORDS = [
   "전시",
   "전시기획",
   "전시 기획",
+
   "전시유통",
   "전시 유통",
 
@@ -426,6 +480,7 @@ const STRONG_KEYWORDS = [
   "설치 미술",
 
   "공간",
+
   "공간디자인",
   "공간 디자인",
 
@@ -441,6 +496,7 @@ const STRONG_KEYWORDS = [
   "갤러리",
 
   "디자인",
+
   "공공디자인",
   "공공 디자인",
 
@@ -726,7 +782,9 @@ function analyzeAxooFit(value) {
     "C";
 
 
-  if (score >= 85) {
+  if (
+    score >= 85
+  ) {
     grade =
       "S";
   }
@@ -763,8 +821,13 @@ function analyzeAxooFit(value) {
   ) {
     reason =
       `AXOO 핵심 영역인 ${strongMatches
-        .slice(0, 4)
-        .join(", ")} 관련성이 확인됩니다.`;
+        .slice(
+          0,
+          4
+        )
+        .join(
+          ", "
+        )} 관련성이 확인됩니다.`;
   }
 
   else if (
@@ -772,8 +835,13 @@ function analyzeAxooFit(value) {
   ) {
     reason =
       `${supportMatches
-        .slice(0, 4)
-        .join(", ")} 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다.`;
+        .slice(
+          0,
+          4
+        )
+        .join(
+          ", "
+        )} 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다.`;
   }
 
 
@@ -798,7 +866,9 @@ function analyzeAxooFit(value) {
     grade,
 
     matchedKeywords,
+
     negativeMatches,
+
     hardExcludeMatches,
 
     reason,
@@ -806,6 +876,100 @@ function analyzeAxooFit(value) {
     isExcluded:
       score < 50 ||
       hardExcludeMatches.length > 0
+  };
+}
+
+
+/* =========================================================
+   ARKO FIT v4.1
+========================================================= */
+
+/*
+  ARKO 특수 보정.
+
+  "예술과 기업 동반성장 대상"처럼
+  일반 키워드만 보면 지원사업처럼 보이지만
+  실제 성격은 시상·우수사례 선정인 공고를
+  대시보드에서 강제 제외한다.
+
+  일반적인 "지원 대상", "사업 대상"이라는
+  단어까지 제외하지 않기 위해
+  단순 "대상" 키워드는 사용하지 않는다.
+*/
+
+const ARKO_HARD_EXCLUDE_TITLE_PATTERNS = [
+  /동반성장\s*대상/i,
+
+  /예술과\s*기업\s*동반성장\s*대상/i,
+
+  /후보자\s*추천/i,
+
+  /후보\s*추천/i,
+
+  /선정\s*결과/i,
+
+  /결과\s*발표/i,
+
+  /심사\s*결과/i
+];
+
+
+function analyzeArkoFit(
+  title,
+  summary = ""
+) {
+  const base =
+    analyzeAxooFit(
+      [
+        title,
+        summary
+      ]
+        .filter(
+          Boolean
+        )
+        .join(
+          " "
+        )
+    );
+
+
+  const matchedHardPattern =
+    ARKO_HARD_EXCLUDE_TITLE_PATTERNS
+      .find(
+        pattern =>
+          pattern.test(
+            text(
+              title
+            )
+          )
+      );
+
+
+  if (
+    !matchedHardPattern
+  ) {
+    return base;
+  }
+
+
+  return {
+    ...base,
+
+    score:
+      Math.min(
+        base.score,
+        45
+      ),
+
+    grade:
+      "C",
+
+    reason:
+      `${base.reason} ` +
+      "ARKO의 시상·사례선정형 공모로 판단되어 AXOO 직접 지원사업 검토 대상에서 제외합니다.",
+
+    isExcluded:
+      true
   };
 }
 
@@ -989,7 +1153,9 @@ function analyzeKoccaFit(title) {
     "C";
 
 
-  if (score >= 85) {
+  if (
+    score >= 85
+  ) {
     grade =
       "S";
   }
@@ -1026,8 +1192,13 @@ function analyzeKoccaFit(title) {
   ) {
     reason +=
       ` KOCCA 사업 중 ${positiveMatches
-        .slice(0, 4)
-        .join(", ")} 요소가 AXOO와 연결됩니다.`;
+        .slice(
+          0,
+          4
+        )
+        .join(
+          ", "
+        )} 요소가 AXOO와 연결됩니다.`;
   }
 
 
@@ -1051,6 +1222,7 @@ function analyzeKoccaFit(title) {
     ...base,
 
     score,
+
     grade,
 
     matchedKeywords,
@@ -1078,17 +1250,19 @@ function makeSupportRecord({
   title,
 
   startDate = "",
+
   deadline = "",
 
   postedDate = "",
+
   publishedDate = "",
 
   sourceUrl = "",
+
   documentUrl = "",
 
   fit
 }) {
-
   const nextAction =
     fit.grade === "S" ||
     fit.grade === "A"
@@ -1115,6 +1289,7 @@ function makeSupportRecord({
 
 
     source,
+
     sourceCode,
 
     sourceType:
@@ -1136,6 +1311,7 @@ function makeSupportRecord({
 
 
     postedDate,
+
 
     publishedDate:
       publishedDate ||
@@ -1169,7 +1345,9 @@ function makeSupportRecord({
 
     field:
       fit.matchedKeywords
-        .join(" / "),
+        .join(
+          " / "
+        ),
 
 
     matchedKeywords:
@@ -1302,6 +1480,7 @@ function getKamsDetailLink(row) {
       anchor.href.includes(
         "introduction_view.aspx"
       ) &&
+
       /Idx=\d+/i.test(
         anchor.href
       )
@@ -1313,7 +1492,9 @@ function getKamsDetailLink(row) {
         );
 
 
-      if (url) {
+      if (
+        url
+      ) {
         return url;
       }
     }
@@ -1376,7 +1557,9 @@ function getKamsTitle(
     );
 
 
-  if (id) {
+  if (
+    id
+  ) {
     const pattern =
       new RegExp(
         `<a\\b[^>]*href\\s*=\\s*["'][^"']*Idx=${id}[^"']*["'][^>]*>([\\s\\S]*?)<\\/a>`,
@@ -1390,7 +1573,9 @@ function getKamsTitle(
       );
 
 
-    if (match) {
+    if (
+      match
+    ) {
       return stripTags(
         match[1]
       );
@@ -1459,51 +1644,67 @@ async function getKamsDetailInfo(detailUrl) {
       );
 
 
-    let postedDate =
-      "";
-
-
     const patterns = [
-      /작성일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-      /등록일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-      /게시일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
+      [
+        plain,
+        /작성일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      ],
 
-      /작성일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-      /등록일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i,
-      /게시일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      [
+        plain,
+        /등록일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      ],
+
+      [
+        plain,
+        /게시일\s*[:：]?\s*(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      ],
+
+      [
+        raw,
+        /작성일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      ],
+
+      [
+        raw,
+        /등록일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      ],
+
+      [
+        raw,
+        /게시일[\s\S]{0,500}?(20\d{2}[-.]\d{1,2}[-.]\d{1,2})/i
+      ]
     ];
 
 
     for (
-      const pattern of patterns
+      const [
+        source,
+        pattern
+      ] of patterns
     ) {
-      const source =
-        pattern.source.includes(
-          "[\\s\\S]"
-        )
-          ? raw
-          : plain;
-
-
       const match =
         source.match(
           pattern
         );
 
 
-      if (match) {
-        postedDate =
-          normalizeDate(
-            match[1]
-          );
-
-        break;
+      if (
+        match
+      ) {
+        return {
+          postedDate:
+            normalizeDate(
+              match[1]
+            )
+        };
       }
     }
 
 
     return {
-      postedDate
+      postedDate:
+        ""
     };
   }
 
@@ -1524,13 +1725,14 @@ async function getKamsDetailInfo(detailUrl) {
 
 
 async function collectKams() {
-  console.log("");
   console.log(
-    "===================================="
+    "\n===================================="
   );
+
   console.log(
     "KAMS SUPPORT PROGRAM COLLECTOR"
   );
+
   console.log(
     "===================================="
   );
@@ -1586,7 +1788,9 @@ async function collectKams() {
         );
 
 
-      if (!detailUrl) {
+      if (
+        !detailUrl
+      ) {
         continue;
       }
 
@@ -1615,7 +1819,9 @@ async function collectKams() {
         );
 
 
-      if (!title) {
+      if (
+        !title
+      ) {
         continue;
       }
 
@@ -1644,15 +1850,18 @@ async function collectKams() {
     totalRows
   );
 
+
   console.log(
     "공모 detail link:",
     detailLinkCount
   );
 
+
   console.log(
     "접수중 row:",
     openRowCount
   );
+
 
   console.log(
     "후보:",
@@ -1800,13 +2009,16 @@ function looksLikeArkoDetailUrl(href) {
       value.includes(
         "bid=463"
       ) &&
+
       (
         value.includes(
           "cid="
         ) ||
+
         value.includes(
           "seq="
         ) ||
+
         value.includes(
           "idx="
         )
@@ -1865,6 +2077,7 @@ function getArkoDetailUrl(block) {
       anchor.plain.includes(
         "상세보기"
       ) ||
+
       anchor.plain.includes(
         "자세히보기"
       )
@@ -2014,7 +2227,9 @@ function getArkoSummary(
           match[1]
         )
     )
-    .filter(Boolean)
+    .filter(
+      Boolean
+    )
     .filter(
       value =>
         value !== title
@@ -2041,7 +2256,10 @@ function getArkoSummary(
   ) {
     return pMatches
       .sort(
-        (a, b) =>
+        (
+          a,
+          b
+        ) =>
           b.length -
           a.length
       )[0];
@@ -2086,6 +2304,7 @@ function findArkoBlocks(html) {
       plain.includes(
         "진행중"
       ) &&
+
       /20\d{2}[-./]\d{1,2}[-./]\d{1,2}/
         .test(
           plain
@@ -2109,7 +2328,9 @@ function findArkoBlocks(html) {
     0;
 
 
-  while (true) {
+  while (
+    true
+  ) {
     const index =
       source.indexOf(
         "진행중",
@@ -2130,6 +2351,7 @@ function findArkoBlocks(html) {
           0,
           index - 1800
         ),
+
         Math.min(
           source.length,
           index + 3200
@@ -2189,7 +2411,9 @@ function getArkoId(
           );
 
 
-      if (value) {
+      if (
+        value
+      ) {
         return value;
       }
     }
@@ -2220,13 +2444,14 @@ function getArkoId(
 
 
 async function collectArko() {
-  console.log("");
   console.log(
-    "===================================="
+    "\n===================================="
   );
+
   console.log(
     "ARKO SUPPORT PROGRAM COLLECTOR"
   );
+
   console.log(
     "===================================="
   );
@@ -2273,7 +2498,9 @@ async function collectArko() {
         );
 
 
-      if (!detailUrl) {
+      if (
+        !detailUrl
+      ) {
         continue;
       }
 
@@ -2288,7 +2515,9 @@ async function collectArko() {
         );
 
 
-      if (!title) {
+      if (
+        !title
+      ) {
         continue;
       }
 
@@ -2382,44 +2611,59 @@ async function collectArko() {
     )
       .map(
         item => {
+          /*
+            v4.1:
+            analyzeAxooFit 대신
+            ARKO 전용 보정기를 사용한다.
+          */
+
           const fit =
-            analyzeAxooFit(
-              [
-                item.title,
-                item.summary
-              ]
-                .filter(Boolean)
-                .join(" ")
+            analyzeArkoFit(
+              item.title,
+              item.summary
             );
 
 
-          return makeSupportRecord({
-            id:
-              `arko-${item.id}`,
+          const result =
+            makeSupportRecord({
+              id:
+                `arko-${item.id}`,
 
-            source:
-              "한국문화예술위원회",
+              source:
+                "한국문화예술위원회",
 
-            sourceCode:
-              "ARKO",
+              sourceCode:
+                "ARKO",
 
-            title:
-              item.title,
+              title:
+                item.title,
 
-            startDate:
-              item.startDate,
+              startDate:
+                item.startDate,
 
-            deadline:
-              item.deadline,
+              deadline:
+                item.deadline,
 
-            publishedDate:
-              item.startDate,
+              publishedDate:
+                item.startDate,
 
-            sourceUrl:
-              item.detailUrl,
+              sourceUrl:
+                item.detailUrl,
 
-            fit
-          });
+              fit
+            });
+
+
+          console.log(
+            `→ ${result.grade} / ${result.score}점 / ${
+              result.isExcludedFromPriority
+                ? "제외"
+                : "노출"
+            } / ${result.title}`
+          );
+
+
+          return result;
         }
       );
 
@@ -2561,7 +2805,9 @@ function getKcdfDetailLink(row) {
         );
 
 
-      if (url) {
+      if (
+        url
+      ) {
         return url;
       }
     }
@@ -2679,10 +2925,12 @@ async function getKcdfDetailInfo(detailUrl) {
           label.includes(
             "공고문"
           ) ||
+
           label.includes(
             "pdf"
           )
         ) &&
+
         anchor.href
       ) {
         documentUrl =
@@ -2743,13 +2991,14 @@ async function getKcdfDetailInfo(detailUrl) {
 
 
 async function collectKcdf() {
-  console.log("");
   console.log(
-    "===================================="
+    "\n===================================="
   );
+
   console.log(
     "KCDF SUPPORT PROGRAM COLLECTOR"
   );
+
   console.log(
     "===================================="
   );
@@ -2800,7 +3049,9 @@ async function collectKcdf() {
         );
 
 
-      if (!detailUrl) {
+      if (
+        !detailUrl
+      ) {
         continue;
       }
 
@@ -2828,7 +3079,9 @@ async function collectKcdf() {
         );
 
 
-      if (!title) {
+      if (
+        !title
+      ) {
         continue;
       }
 
@@ -2945,13 +3198,18 @@ async function collectKcdf() {
     }
 
 
+    /*
+      KCDF는 상세 페이지 전체가 아닌
+      제목만 점수 계산에 사용한다.
+    */
+
     const fit =
       analyzeAxooFit(
         item.title
       );
 
 
-    results.push(
+    const result =
       makeSupportRecord({
         id:
           `kcdf-${item.id}`,
@@ -2979,7 +3237,20 @@ async function collectKcdf() {
           detail.documentUrl,
 
         fit
-      })
+      });
+
+
+    results.push(
+      result
+    );
+
+
+    console.log(
+      `→ ${result.grade} / ${result.score}점 / ${
+        result.isExcludedFromPriority
+          ? "제외"
+          : "노출"
+      } / ${result.title}`
     );
   }
 
@@ -3189,13 +3460,14 @@ function getKoccaDates(row) {
 
 
 async function collectKocca() {
-  console.log("");
   console.log(
-    "===================================="
+    "\n===================================="
   );
+
   console.log(
     "KOCCA SUPPORT PROGRAM COLLECTOR"
   );
+
   console.log(
     "===================================="
   );
@@ -3211,12 +3483,6 @@ async function collectKocca() {
   let detailLinks =
     0;
 
-
-  /*
-    KOCCA 현재 지원공고는
-    페이지당 여러 건으로 구성되므로
-    최근 4페이지 검사.
-  */
 
   for (
     let page = 1;
@@ -3271,7 +3537,9 @@ async function collectKocca() {
         );
 
 
-      if (!detailUrl) {
+      if (
+        !detailUrl
+      ) {
         continue;
       }
 
@@ -3286,7 +3554,9 @@ async function collectKocca() {
         );
 
 
-      if (!title) {
+      if (
+        !title
+      ) {
         continue;
       }
 
@@ -3296,11 +3566,6 @@ async function collectKocca() {
           row
         );
 
-
-      /*
-        KOCCA 목록에는
-        종료된 공고가 섞여 들어올 가능성에 대비.
-      */
 
       if (
         isExpired(
@@ -3525,9 +3790,8 @@ async function main() {
   );
 
 
-  console.log("");
   console.log(
-    "===================================="
+    "\n===================================="
   );
 
   console.log(
@@ -3580,7 +3844,7 @@ async function main() {
 
 
   console.log(
-    "✅ KAMS + ARKO + KCDF + KOCCA v4.0 수집 완료"
+    "✅ KAMS + ARKO + KCDF + KOCCA v4.1 수집 완료"
   );
 
 
@@ -3592,18 +3856,20 @@ async function main() {
 
 main().catch(
   error => {
-    console.error("");
     console.error(
-      "===================================="
+      "\n===================================="
     );
+
 
     console.error(
       "❌ SUPPORT PROGRAM COLLECT FAILED"
     );
 
+
     console.error(
       "------------------------------------"
     );
+
 
     console.error(
       error.stack ||
@@ -3611,9 +3877,11 @@ main().catch(
       error
     );
 
+
     console.error(
       "===================================="
     );
+
 
     process.exit(
       1
