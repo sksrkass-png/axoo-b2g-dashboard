@@ -81,5 +81,14 @@
     "crawlMode": "board",
     "verified": true,
     "note": "2026-07-01 이후 전남광주통합특별시 현행 고시공고 게시판. 광주 지역 공고 수집용."
+  },
+  
+    "sejong_city_notice": {
+    "sourceUrl": "https://www.sejong.go.kr/prog/publicNotice/kor/sub02_030301/C1_1/list.do",
+    "sourceName": "세종특별자치시 일반공고",
+    "sourceType": "official_board",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "세종특별자치시 공식 고시·공고 중 일반공고 목록."
   }
 }
