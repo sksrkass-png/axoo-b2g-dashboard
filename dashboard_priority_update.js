@@ -1,7 +1,13 @@
 (function () {
   "use strict";
 
-  const PRIORITY_DATA_URL = "data/priority_projects.json";
+  const PRIORITY_DATA_URL =
+    "data/priority_projects.json";
+
+
+  /* =========================================================
+     TAB CONFIG
+  ========================================================= */
 
   const TAB_CONFIG = [
     {
@@ -10,42 +16,68 @@
       icon: "💙",
       type: "native"
     },
+
     {
       tab: "mural",
       label: "벽화 & 조형물",
       icon: "🧱",
       type: "priority",
       category: "mural_sculpture",
-      description: "벽화, 옹벽 개선, 조형물, 공공미술, 포토존, 아트월 계열 공고를 모아봅니다.",
-      sources: ["나라장터 입찰공고", "지자체·공공기관 공고", "AXOO 우선 키워드 분류"]
+      description:
+        "벽화, 옹벽 개선, 조형물, 공공미술, 포토존, 아트월 계열 공고를 모아봅니다.",
+      sources: [
+        "나라장터 입찰공고",
+        "지자체·공공기관 공고",
+        "AXOO 우선 키워드 분류"
+      ]
     },
+
     {
       tab: "exhibition",
       label: "전시 콘텐츠 기획 운영",
       icon: "🖼️",
       type: "priority",
       category: "exhibition_content",
-      description: "시각예술 전시, 전시연출, 전시물 제작, 실감콘텐츠, 미디어아트 계열 공고를 모아봅니다.",
-      sources: ["나라장터 입찰공고", "전시·미디어아트 키워드 매칭", "AXOO 우선 검토 기준"]
+      description:
+        "시각예술 전시, 전시연출, 전시물 제작, 실감콘텐츠, 미디어아트 계열 공고를 모아봅니다.",
+      sources: [
+        "나라장터 입찰공고",
+        "전시·미디어아트 키워드 매칭",
+        "AXOO 우선 검토 기준"
+      ]
     },
+
     {
       tab: "support",
       label: "예술·콘텐츠 지원사업",
       icon: "✨",
       type: "priority",
       category: "arts_content_support",
-      description: "콘진원, 문예위, 예경 등 예술·콘텐츠 지원사업 공모를 모아봅니다.",
-      sources: ["문화포털/아트누리", "KOCCA 지원공고", "ARKO·예경 공모사업"]
+      description:
+        "AXOO가 실제 기업·법인·사업자로 검토할 수 있는 예술·콘텐츠 지원사업을 모아봅니다.",
+      sources: [
+        "KAMS · 예술경영지원센터",
+        "ARKO · 한국문화예술위원회",
+        "KCDF · 한국공예·디자인문화진흥원",
+        "KOCCA · 한국콘텐츠진흥원"
+      ]
     },
+
     {
       tab: "other",
       label: "기타 AXOO 핏",
       icon: "📂",
       type: "priority",
       category: "other",
-      description: "비주얼 제작, 브랜딩, 영상 제작, 팝업, 굿즈 등 AXOO 서브 핏이 있는 기타 공고를 모아봅니다.",
-      sources: ["나라장터 입찰공고", "지자체 개별 공고", "AXOO 서브 키워드 분류"]
+      description:
+        "비주얼 제작, 브랜딩, 영상 제작, 팝업, 굿즈 등 AXOO 서브 핏이 있는 기타 공고를 모아봅니다.",
+      sources: [
+        "나라장터 입찰공고",
+        "지자체 개별 공고",
+        "AXOO 서브 키워드 분류"
+      ]
     },
+
     {
       tab: "agencies",
       label: "기관 타깃",
@@ -53,6 +85,31 @@
       type: "native"
     }
   ];
+
+
+  const SUPPORT_SOURCE_FILTERS = [
+    {
+      code: "ALL",
+      label: "전체"
+    },
+    {
+      code: "KAMS",
+      label: "KAMS"
+    },
+    {
+      code: "ARKO",
+      label: "ARKO"
+    },
+    {
+      code: "KCDF",
+      label: "KCDF"
+    },
+    {
+      code: "KOCCA",
+      label: "KOCCA"
+    }
+  ];
+
 
   const GRADE_ORDER = {
     S: 0,
@@ -62,138 +119,293 @@
     HOLD: 9
   };
 
+
   const state = {
     projects: [],
     loaded: false,
-    currentTab: "art"
+    currentTab: "art",
+    supportSource: "ALL"
   };
 
-  function $(selector, root = document) {
-    return root.querySelector(selector);
+
+  /* =========================================================
+     BASIC
+  ========================================================= */
+
+  function $(
+    selector,
+    root = document
+  ) {
+    return root.querySelector(
+      selector
+    );
   }
 
-  function $all(selector, root = document) {
-    return Array.from(root.querySelectorAll(selector));
+
+  function $all(
+    selector,
+    root = document
+  ) {
+    return Array.from(
+      root.querySelectorAll(
+        selector
+      )
+    );
   }
+
 
   function esc(value) {
-    return String(value ?? "").replace(/[&<>"']/g, function (match) {
-      return {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      }[match];
-    });
+    return String(
+      value ?? ""
+    ).replace(
+      /[&<>"']/g,
+      function (match) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        }[match];
+      }
+    );
   }
+
 
   function formatCount(value) {
-    return Number(value || 0).toLocaleString("ko-KR");
+    return Number(
+      value || 0
+    ).toLocaleString(
+      "ko-KR"
+    );
   }
 
+
   function formatKrw(value) {
-    const amount = Number(value || 0);
+    const amount =
+      Number(
+        value || 0
+      );
+
 
     if (!amount) {
       return "예산 미확인";
     }
 
-    if (amount >= 100000000) {
-      const eok = amount / 100000000;
-      return `${eok.toFixed(eok >= 10 ? 0 : 1)}억`;
+
+    if (
+      amount >= 100000000
+    ) {
+      const eok =
+        amount / 100000000;
+
+      return `${eok.toFixed(
+        eok >= 10
+          ? 0
+          : 1
+      )}억`;
     }
 
-    if (amount >= 10000) {
-      return `${Math.round(amount / 10000).toLocaleString("ko-KR")}만원`;
+
+    if (
+      amount >= 10000
+    ) {
+      return `${Math.round(
+        amount / 10000
+      ).toLocaleString(
+        "ko-KR"
+      )}만원`;
     }
 
-    return `${amount.toLocaleString("ko-KR")}원`;
+
+    return `${amount.toLocaleString(
+      "ko-KR"
+    )}원`;
   }
 
-  function compactDate(value) {
-    const text = String(value || "").trim();
 
-    if (!text) {
+  function compactDate(value) {
+    const valueText =
+      String(
+        value || ""
+      ).trim();
+
+
+    if (!valueText) {
       return "확인 필요";
     }
 
-    const match = text.match(/\d{4}[-.]\d{1,2}[-.]\d{1,2}/);
+
+    const match =
+      valueText.match(
+        /\d{4}[-.]\d{1,2}[-.]\d{1,2}/
+      );
+
 
     if (match) {
-      return match[0].replace(/\./g, "-");
+      return match[0]
+        .replace(
+          /\./g,
+          "-"
+        );
     }
 
-    return text;
+
+    return valueText;
   }
 
-  function normalizeUrl(url) {
-    const text = String(url || "").trim();
 
-    if (!text) {
+  function normalizeUrl(url) {
+    const value =
+      String(
+        url || ""
+      ).trim();
+
+
+    if (!value) {
       return "";
     }
 
-    if (text.startsWith("http://") || text.startsWith("https://")) {
-      return text;
+
+    if (
+      value.startsWith(
+        "http://"
+      ) ||
+      value.startsWith(
+        "https://"
+      )
+    ) {
+      return value;
     }
+
 
     return "";
   }
 
+
+  /* =========================================================
+     DATA
+  ========================================================= */
+
   function getTabConfig(tab) {
-    return TAB_CONFIG.find(function (item) {
-      return item.tab === tab;
-    });
+    return TAB_CONFIG.find(
+      function (item) {
+        return (
+          item.tab === tab
+        );
+      }
+    );
   }
 
+
   function extractProjects(data) {
-    if (Array.isArray(data)) {
+    if (
+      Array.isArray(
+        data
+      )
+    ) {
       return data;
     }
 
-    if (data && Array.isArray(data.projects)) {
+
+    if (
+      data &&
+      Array.isArray(
+        data.projects
+      )
+    ) {
       return data.projects;
     }
 
-    if (data && Array.isArray(data.items)) {
+
+    if (
+      data &&
+      Array.isArray(
+        data.items
+      )
+    ) {
       return data.items;
     }
 
-    if (data && Array.isArray(data.data)) {
+
+    if (
+      data &&
+      Array.isArray(
+        data.data
+      )
+    ) {
       return data.data;
     }
+
 
     return [];
   }
 
+
   async function loadPriorityProjects() {
-    if (state.loaded) {
+    if (
+      state.loaded
+    ) {
       return state.projects;
     }
 
-    try {
-      const response = await fetch(`${PRIORITY_DATA_URL}?v=${Date.now()}`);
 
-      if (!response.ok) {
-        throw new Error(`priority_projects.json load failed: ${response.status}`);
+    try {
+      const response =
+        await fetch(
+          `${PRIORITY_DATA_URL}?v=${Date.now()}`
+        );
+
+
+      if (
+        !response.ok
+      ) {
+        throw new Error(
+          `priority_projects.json load failed: ${response.status}`
+        );
       }
 
-      const data = await response.json();
 
-      state.projects = extractProjects(data);
-      state.loaded = true;
+      const data =
+        await response.json();
+
+
+      state.projects =
+        extractProjects(
+          data
+        );
+
+
+      state.loaded =
+        true;
+
 
       return state.projects;
-    } catch (error) {
-      console.warn("[AXOO Priority] priority_projects.json load failed", error);
+    }
 
-      state.projects = [];
-      state.loaded = true;
+    catch (error) {
+      console.warn(
+        "[AXOO Priority] priority_projects.json load failed",
+        error
+      );
+
+
+      state.projects =
+        [];
+
+
+      state.loaded =
+        true;
+
 
       return state.projects;
     }
   }
+
+
+  /* =========================================================
+     PROJECT GETTERS
+  ========================================================= */
 
   function getProjectCategory(project) {
     return (
@@ -204,6 +416,7 @@
     );
   }
 
+
   function getProjectScore(project) {
     return Number(
       project.score ||
@@ -213,19 +426,45 @@
     );
   }
 
+
   function getProjectGrade(project) {
-    if (project.grade) {
+    if (
+      project.grade
+    ) {
       return project.grade;
     }
 
-    const score = getProjectScore(project);
 
-    if (score >= 85) return "S";
-    if (score >= 70) return "A";
-    if (score >= 50) return "B";
+    const score =
+      getProjectScore(
+        project
+      );
+
+
+    if (
+      score >= 85
+    ) {
+      return "S";
+    }
+
+
+    if (
+      score >= 70
+    ) {
+      return "A";
+    }
+
+
+    if (
+      score >= 50
+    ) {
+      return "B";
+    }
+
 
     return "C";
   }
+
 
   function getProjectAmount(project) {
     return Number(
@@ -239,6 +478,7 @@
     );
   }
 
+
   function getProjectDeadline(project) {
     return (
       project.deadline ||
@@ -250,277 +490,1110 @@
     );
   }
 
-  function getDisplayProjectsByCategory(category) {
-    return state.projects
-      .filter(function (project) {
-        return (
-          getProjectCategory(project) === category &&
-          project.isExcludedFromPriority !== true
-        );
-      })
-      .sort(function (a, b) {
-        const gradeDiff =
-          (GRADE_ORDER[getProjectGrade(a)] ?? 9) -
-          (GRADE_ORDER[getProjectGrade(b)] ?? 9);
 
-        if (gradeDiff !== 0) {
-          return gradeDiff;
-        }
-
-        const scoreDiff = getProjectScore(b) - getProjectScore(a);
-
-        if (scoreDiff !== 0) {
-          return scoreDiff;
-        }
-
-        const amountDiff = getProjectAmount(b) - getProjectAmount(a);
-
-        if (amountDiff !== 0) {
-          return amountDiff;
-        }
-
-        return String(getProjectDeadline(a)).localeCompare(String(getProjectDeadline(b)));
-      });
-  }
-
-  function getExcludedProjects() {
-    return state.projects.filter(function (project) {
-      return project.isExcludedFromPriority === true;
-    });
-  }
-
-  function getPriorityCounts() {
-    return {
-      mural: getDisplayProjectsByCategory("mural_sculpture").length,
-      exhibition: getDisplayProjectsByCategory("exhibition_content").length,
-      support: getDisplayProjectsByCategory("arts_content_support").length,
-      other: getDisplayProjectsByCategory("other").length,
-      excluded: getExcludedProjects().length
-    };
-  }
-
-  function updateTextById(id, text) {
-    const element = document.getElementById(id);
-
-    if (element) {
-      element.textContent = text;
-    }
-  }
-
-  function getLegacyArtCount() {
-    const legacy = document.getElementById("metaArtCount");
-
-    if (legacy && legacy.textContent.trim()) {
-      return legacy.textContent.trim();
-    }
-
-    const artCards = document.getElementById("artCards");
-
-    if (artCards) {
-      const count = artCards.querySelectorAll(".card, article, details").length;
-
-      if (count > 0) {
-        return formatCount(count);
-      }
-    }
-
-    return "0";
-  }
-
-  function updateMetaCards() {
-    const counts = getPriorityCounts();
-
-    updateTextById("priorityMetaArtCount", getLegacyArtCount());
-    updateTextById("priorityMetaMuralCount", `${formatCount(counts.mural)}건`);
-    updateTextById("priorityMetaExhibitionCount", `${formatCount(counts.exhibition)}건`);
-    updateTextById("priorityMetaSupportCount", `${formatCount(counts.support)}건`);
-
-    $all(".meta-card[data-tab-target]").forEach(function (card) {
-      const target = card.getAttribute("data-tab-target");
-      const isActive = state.currentTab === target;
-
-      card.classList.toggle("meta-card-active", isActive);
-      card.classList.toggle("meta-card-muted", !isActive);
-
-      card.setAttribute("role", "button");
-      card.setAttribute("tabindex", "0");
-
-      card.onclick = function () {
-        showTab(target);
-      };
-
-      card.onkeydown = function (event) {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          showTab(target);
-        }
-      };
-    });
-  }
-
-  function updateSummaryCounts(projects) {
-    const visibleProjects = Array.isArray(projects) ? projects : [];
-
-    const total = visibleProjects.length;
-    const sCount = visibleProjects.filter(function (item) {
-      return getProjectGrade(item) === "S";
-    }).length;
-    const aCount = visibleProjects.filter(function (item) {
-      return getProjectGrade(item) === "A";
-    }).length;
-    const bcCount = visibleProjects.filter(function (item) {
-      const grade = getProjectGrade(item);
-      return grade === "B" || grade === "C";
-    }).length;
-
-    updateTextById("totalCount", formatCount(total));
-    updateTextById("sCount", formatCount(sCount));
-    updateTextById("aCount", formatCount(aCount));
-    updateTextById("bCount", formatCount(bcCount));
-  }
-
-  function updateArtSummaryCount() {
-    const total = Number(String(getLegacyArtCount()).replace(/[^0-9]/g, "")) || 0;
-
-    updateTextById("totalCount", formatCount(total));
-    updateTextById("sCount", "-");
-    updateTextById("aCount", "-");
-    updateTextById("bCount", "-");
-  }
-
-  function getNativePanel(tab) {
-    if (tab === "art") {
-      return $("#artTab");
-    }
-
-    if (tab === "agencies") {
-      return $("#agenciesTab") || $("#agencyTab");
-    }
-
-    return null;
-  }
-
-  function getPriorityPanelId(tab) {
-    return `${tab}Tab`;
-  }
-
-  function getPriorityPanel(tab) {
-    return document.getElementById(getPriorityPanelId(tab));
-  }
-
-  function getGradeClass(grade) {
-    return `priority-grade-${String(grade || "C").toLowerCase()}`;
-  }
-
-  function renderGradeBadge(project) {
-    const grade = getProjectGrade(project);
-    const reason =
-      project.gradeReason ||
-      project.axooFitReason ||
-      project.summary ||
-      "등급 기준 정보 없음";
-
-    return `
-      <span class="priority-grade-wrap">
-        <span class="priority-grade ${getGradeClass(grade)}">
-          ${esc(grade)}
-        </span>
-        <span class="priority-tooltip">
-          <strong>왜 ${esc(grade)}등급인가?</strong>
-          <em>${esc(reason)}</em>
-        </span>
-      </span>
-    `;
-  }
-
-  function renderKeywordTags(project) {
-    let keywords = [];
-
-    if (Array.isArray(project.matchedPriorityKeywords)) {
-      keywords = project.matchedPriorityKeywords;
-    } else if (Array.isArray(project.matchedKeywords)) {
-      keywords = project.matchedKeywords;
-    } else if (Array.isArray(project.keywords)) {
-      keywords = project.keywords;
-    } else if (project.field) {
-      keywords = String(project.field)
-        .split("/")
-        .map(function (item) {
-          return item.trim();
-        })
-        .filter(Boolean);
-    }
-
-    if (!keywords.length) {
-      return `<span class="keyword">키워드 미분류</span>`;
-    }
-
-    return keywords
-      .slice(0, 6)
-      .map(function (keyword) {
-        return `<span class="keyword">${esc(keyword)}</span>`;
-      })
-      .join("");
-  }
-
-  function renderSourceTags(sources) {
-    if (!Array.isArray(sources) || !sources.length) {
-      return "";
-    }
-
-    return `
-      <div class="keywords" style="margin-top:16px;">
-        ${sources.map(function (source) {
-          return `<span class="keyword">${esc(source)}</span>`;
-        }).join("")}
-      </div>
-    `;
-  }
-
-  function renderPriorityAccordion(project) {
-    const title =
-      project.title ||
-      project.bidNtceNm ||
-      project.projectName ||
-      "제목 없음";
-
-    const agency =
+  function getProjectAgency(project) {
+    return (
       project.agency ||
       project.organization ||
       project.ntceInsttNm ||
       project.dminsttNm ||
       project.noticeAgency ||
       project.demandAgency ||
-      "기관 미확인";
+      "기관 미확인"
+    );
+  }
 
-    const sourceType =
-      project.sourceType ||
+
+  function getSupportSourceCode(
+    project
+  ) {
+    return String(
+      project.sourceCode ||
+      ""
+    )
+      .trim()
+      .toUpperCase();
+  }
+
+
+  function getSupportSourceName(
+    project
+  ) {
+    return (
       project.source ||
-      project.sourceName ||
-      "출처 미확인";
+      project.organization ||
+      project.agency ||
+      "기관 미확인"
+    );
+  }
 
-    const categoryLabel =
+
+  function getProjectKeywords(
+    project
+  ) {
+    let keywords =
+      [];
+
+
+    if (
+      Array.isArray(
+        project.matchedPriorityKeywords
+      )
+    ) {
+      keywords =
+        project.matchedPriorityKeywords;
+    }
+
+    else if (
+      Array.isArray(
+        project.matchedKeywords
+      )
+    ) {
+      keywords =
+        project.matchedKeywords;
+    }
+
+    else if (
+      Array.isArray(
+        project.keywords
+      )
+    ) {
+      keywords =
+        project.keywords;
+    }
+
+    else if (
+      project.field
+    ) {
+      keywords =
+        String(
+          project.field
+        )
+          .split("/")
+          .map(
+            function (item) {
+              return item.trim();
+            }
+          )
+          .filter(
+            Boolean
+          );
+    }
+
+
+    return [
+      ...new Set(
+        keywords
+          .map(
+            function (item) {
+              return String(
+                item || ""
+              ).trim();
+            }
+          )
+          .filter(
+            Boolean
+          )
+      )
+    ];
+  }
+
+
+  function getSupportFieldLabel(
+    project
+  ) {
+    const keywords =
+      getProjectKeywords(
+        project
+      );
+
+
+    if (
+      keywords.length
+    ) {
+      return keywords
+        .slice(
+          0,
+          3
+        )
+        .join(
+          " · "
+        );
+    }
+
+
+    if (
+      project.field
+    ) {
+      return String(
+        project.field
+      );
+    }
+
+
+    return "지원사업";
+  }
+
+
+  function getAccordionCategoryLabel(
+    project,
+    tab
+  ) {
+    if (
+      tab === "support"
+    ) {
+      return getSupportFieldLabel(
+        project
+      );
+    }
+
+
+    return (
       project.priorityCategoryLabel ||
       project.categoryLabel ||
       project.field ||
-      "기타 AXOO 핏";
+      "기타 AXOO 핏"
+    );
+  }
 
-    const amount = formatKrw(getProjectAmount(project));
 
-    const published = compactDate(
-      project.publishedDate ||
-      project.postedDate ||
-      project.startDate ||
-      project.bidNtceDt ||
-      ""
+  function getSummarySourceLabel(
+    project,
+    tab
+  ) {
+    if (
+      tab === "support"
+    ) {
+      return (
+        getSupportSourceCode(
+          project
+        ) ||
+        getSupportSourceName(
+          project
+        )
+      );
+    }
+
+
+    return (
+      project.sourceType ||
+      project.source ||
+      project.sourceName ||
+      "출처 미확인"
+    );
+  }
+
+
+  function getSummarySourceTitle(
+    project,
+    tab
+  ) {
+    if (
+      tab === "support"
+    ) {
+      return getSupportSourceName(
+        project
+      );
+    }
+
+
+    return getSummarySourceLabel(
+      project,
+      tab
+    );
+  }
+
+
+  /* =========================================================
+     SORT / FILTER
+  ========================================================= */
+
+  function sortProjects(
+    projects
+  ) {
+    return [
+      ...projects
+    ].sort(
+      function (
+        a,
+        b
+      ) {
+        const gradeDiff =
+          (
+            GRADE_ORDER[
+              getProjectGrade(a)
+            ] ?? 9
+          ) -
+          (
+            GRADE_ORDER[
+              getProjectGrade(b)
+            ] ?? 9
+          );
+
+
+        if (
+          gradeDiff !== 0
+        ) {
+          return gradeDiff;
+        }
+
+
+        const scoreDiff =
+          getProjectScore(b) -
+          getProjectScore(a);
+
+
+        if (
+          scoreDiff !== 0
+        ) {
+          return scoreDiff;
+        }
+
+
+        const amountDiff =
+          getProjectAmount(b) -
+          getProjectAmount(a);
+
+
+        if (
+          amountDiff !== 0
+        ) {
+          return amountDiff;
+        }
+
+
+        return String(
+          getProjectDeadline(a)
+        ).localeCompare(
+          String(
+            getProjectDeadline(b)
+          )
+        );
+      }
+    );
+  }
+
+
+  function getDisplayProjectsByCategory(
+    category
+  ) {
+    return sortProjects(
+      state.projects.filter(
+        function (project) {
+          return (
+            getProjectCategory(
+              project
+            ) === category &&
+            project.isExcludedFromPriority !== true
+          );
+        }
+      )
+    );
+  }
+
+
+  function getProjectsForTab(
+    tab,
+    category
+  ) {
+    const projects =
+      getDisplayProjectsByCategory(
+        category
+      );
+
+
+    if (
+      tab !== "support" ||
+      state.supportSource === "ALL"
+    ) {
+      return projects;
+    }
+
+
+    return projects.filter(
+      function (project) {
+        return (
+          getSupportSourceCode(
+            project
+          ) ===
+          state.supportSource
+        );
+      }
+    );
+  }
+
+
+  function getExcludedProjects() {
+    return state.projects.filter(
+      function (project) {
+        return (
+          project.isExcludedFromPriority === true
+        );
+      }
+    );
+  }
+
+
+  function getExcludedProjectsByCategory(
+    category
+  ) {
+    return state.projects.filter(
+      function (project) {
+        return (
+          getProjectCategory(
+            project
+          ) === category &&
+          project.isExcludedFromPriority === true
+        );
+      }
+    );
+  }
+
+
+  function getPriorityCounts() {
+    return {
+      mural:
+        getDisplayProjectsByCategory(
+          "mural_sculpture"
+        ).length,
+
+      exhibition:
+        getDisplayProjectsByCategory(
+          "exhibition_content"
+        ).length,
+
+      support:
+        getDisplayProjectsByCategory(
+          "arts_content_support"
+        ).length,
+
+      other:
+        getDisplayProjectsByCategory(
+          "other"
+        ).length,
+
+      excluded:
+        getExcludedProjects()
+          .length
+    };
+  }
+
+
+  /* =========================================================
+     META
+  ========================================================= */
+
+  function updateTextById(
+    id,
+    value
+  ) {
+    const element =
+      document.getElementById(
+        id
+      );
+
+
+    if (
+      element
+    ) {
+      element.textContent =
+        value;
+    }
+  }
+
+
+  function getLegacyArtCount() {
+    const legacy =
+      document.getElementById(
+        "metaArtCount"
+      );
+
+
+    if (
+      legacy &&
+      legacy.textContent.trim()
+    ) {
+      return legacy.textContent
+        .trim();
+    }
+
+
+    const artCards =
+      document.getElementById(
+        "artCards"
+      );
+
+
+    if (
+      artCards
+    ) {
+      const count =
+        artCards.querySelectorAll(
+          ".card, article, details"
+        ).length;
+
+
+      if (
+        count > 0
+      ) {
+        return formatCount(
+          count
+        );
+      }
+    }
+
+
+    return "0";
+  }
+
+
+  function updateMetaCards() {
+    const counts =
+      getPriorityCounts();
+
+
+    updateTextById(
+      "priorityMetaArtCount",
+      getLegacyArtCount()
     );
 
-    const deadline = compactDate(getProjectDeadline(project));
+
+    updateTextById(
+      "priorityMetaMuralCount",
+      `${formatCount(
+        counts.mural
+      )}건`
+    );
+
+
+    updateTextById(
+      "priorityMetaExhibitionCount",
+      `${formatCount(
+        counts.exhibition
+      )}건`
+    );
+
+
+    updateTextById(
+      "priorityMetaSupportCount",
+      `${formatCount(
+        counts.support
+      )}건`
+    );
+
+
+    $all(
+      ".meta-card[data-tab-target]"
+    ).forEach(
+      function (card) {
+        const target =
+          card.getAttribute(
+            "data-tab-target"
+          );
+
+
+        const isActive =
+          state.currentTab === target;
+
+
+        card.classList.toggle(
+          "meta-card-active",
+          isActive
+        );
+
+
+        card.classList.toggle(
+          "meta-card-muted",
+          !isActive
+        );
+
+
+        card.setAttribute(
+          "role",
+          "button"
+        );
+
+
+        card.setAttribute(
+          "tabindex",
+          "0"
+        );
+
+
+        card.onclick =
+          function () {
+            showTab(
+              target
+            );
+          };
+
+
+        card.onkeydown =
+          function (event) {
+            if (
+              event.key === "Enter" ||
+              event.key === " "
+            ) {
+              event.preventDefault();
+
+              showTab(
+                target
+              );
+            }
+          };
+      }
+    );
+  }
+
+
+  /* =========================================================
+     SUMMARY
+  ========================================================= */
+
+  function updateSummaryCounts(
+    projects
+  ) {
+    const visibleProjects =
+      Array.isArray(
+        projects
+      )
+        ? projects
+        : [];
+
+
+    const total =
+      visibleProjects.length;
+
+
+    const sCount =
+      visibleProjects.filter(
+        function (item) {
+          return (
+            getProjectGrade(
+              item
+            ) === "S"
+          );
+        }
+      ).length;
+
+
+    const aCount =
+      visibleProjects.filter(
+        function (item) {
+          return (
+            getProjectGrade(
+              item
+            ) === "A"
+          );
+        }
+      ).length;
+
+
+    const bcCount =
+      visibleProjects.filter(
+        function (item) {
+          const grade =
+            getProjectGrade(
+              item
+            );
+
+          return (
+            grade === "B" ||
+            grade === "C"
+          );
+        }
+      ).length;
+
+
+    updateTextById(
+      "totalCount",
+      formatCount(
+        total
+      )
+    );
+
+
+    updateTextById(
+      "sCount",
+      formatCount(
+        sCount
+      )
+    );
+
+
+    updateTextById(
+      "aCount",
+      formatCount(
+        aCount
+      )
+    );
+
+
+    updateTextById(
+      "bCount",
+      formatCount(
+        bcCount
+      )
+    );
+  }
+
+
+  function updateArtSummaryCount() {
+    const total =
+      Number(
+        String(
+          getLegacyArtCount()
+        ).replace(
+          /[^0-9]/g,
+          ""
+        )
+      ) || 0;
+
+
+    updateTextById(
+      "totalCount",
+      formatCount(
+        total
+      )
+    );
+
+
+    updateTextById(
+      "sCount",
+      "-"
+    );
+
+
+    updateTextById(
+      "aCount",
+      "-"
+    );
+
+
+    updateTextById(
+      "bCount",
+      "-"
+    );
+  }
+
+
+  /* =========================================================
+     PANEL
+  ========================================================= */
+
+  function getNativePanel(tab) {
+    if (
+      tab === "art"
+    ) {
+      return $("#artTab");
+    }
+
+
+    if (
+      tab === "agencies"
+    ) {
+      return (
+        $("#agenciesTab") ||
+        $("#agencyTab")
+      );
+    }
+
+
+    return null;
+  }
+
+
+  function getPriorityPanelId(
+    tab
+  ) {
+    return `${tab}Tab`;
+  }
+
+
+  function getPriorityPanel(
+    tab
+  ) {
+    return document.getElementById(
+      getPriorityPanelId(
+        tab
+      )
+    );
+  }
+
+
+  /* =========================================================
+     GRADE
+  ========================================================= */
+
+  function getGradeClass(
+    grade
+  ) {
+    return `priority-grade-${String(
+      grade || "C"
+    ).toLowerCase()}`;
+  }
+
+
+  function renderGradeBadge(
+    project
+  ) {
+    const grade =
+      getProjectGrade(
+        project
+      );
+
+
+    const reason =
+      project.gradeReason ||
+      project.axooFitReason ||
+      project.summary ||
+      "등급 기준 정보 없음";
+
+
+    return `
+      <span class="priority-grade-wrap">
+        <span class="priority-grade ${getGradeClass(
+          grade
+        )}">
+          ${esc(grade)}
+        </span>
+
+        <span class="priority-tooltip">
+          <strong>
+            왜 ${esc(grade)}등급인가?
+          </strong>
+
+          <em>
+            ${esc(reason)}
+          </em>
+        </span>
+      </span>
+    `;
+  }
+
+
+  /* =========================================================
+     TAGS
+  ========================================================= */
+
+  function renderKeywordTags(
+    project
+  ) {
+    const keywords =
+      getProjectKeywords(
+        project
+      );
+
+
+    if (
+      !keywords.length
+    ) {
+      return `
+        <span class="keyword">
+          키워드 미분류
+        </span>
+      `;
+    }
+
+
+    return keywords
+      .slice(
+        0,
+        6
+      )
+      .map(
+        function (keyword) {
+          return `
+            <span class="keyword">
+              ${esc(keyword)}
+            </span>
+          `;
+        }
+      )
+      .join("");
+  }
+
+
+  function renderSourceTags(
+    sources
+  ) {
+    if (
+      !Array.isArray(
+        sources
+      ) ||
+      !sources.length
+    ) {
+      return "";
+    }
+
+
+    return `
+      <div
+        class="keywords"
+        style="margin-top:16px;"
+      >
+        ${sources
+          .map(
+            function (source) {
+              return `
+                <span class="keyword">
+                  ${esc(source)}
+                </span>
+              `;
+            }
+          )
+          .join("")}
+      </div>
+    `;
+  }
+
+
+  /* =========================================================
+     SUPPORT SOURCE FILTER
+  ========================================================= */
+
+  function getSupportSourceCount(
+    projects,
+    code
+  ) {
+    if (
+      code === "ALL"
+    ) {
+      return projects.length;
+    }
+
+
+    return projects.filter(
+      function (project) {
+        return (
+          getSupportSourceCode(
+            project
+          ) === code
+        );
+      }
+    ).length;
+  }
+
+
+  function renderSupportSourceFilters(
+    allSupportProjects
+  ) {
+    return `
+      <section
+        class="support-source-filter-wrap"
+        style="
+          margin:18px 0 20px;
+          display:flex;
+          align-items:center;
+          gap:10px;
+          flex-wrap:wrap;
+        "
+      >
+        <strong
+          style="
+            font-size:13px;
+            margin-right:4px;
+          "
+        >
+          기관
+        </strong>
+
+        ${SUPPORT_SOURCE_FILTERS
+          .map(
+            function (item) {
+              const active =
+                state.supportSource ===
+                item.code;
+
+
+              const count =
+                getSupportSourceCount(
+                  allSupportProjects,
+                  item.code
+                );
+
+
+              return `
+                <button
+                  type="button"
+                  data-support-source="${esc(
+                    item.code
+                  )}"
+                  aria-pressed="${
+                    active
+                      ? "true"
+                      : "false"
+                  }"
+                  style="
+                    appearance:none;
+                    cursor:pointer;
+                    border:1px solid ${
+                      active
+                        ? "#171717"
+                        : "#d8d8d8"
+                    };
+                    background:${
+                      active
+                        ? "#171717"
+                        : "#ffffff"
+                    };
+                    color:${
+                      active
+                        ? "#ffffff"
+                        : "#444444"
+                    };
+                    border-radius:999px;
+                    padding:8px 12px;
+                    font:inherit;
+                    font-size:12px;
+                    font-weight:${
+                      active
+                        ? "700"
+                        : "600"
+                    };
+                    line-height:1;
+                  "
+                >
+                  ${esc(item.label)}
+                  ${formatCount(count)}
+                </button>
+              `;
+            }
+          )
+          .join("")}
+      </section>
+    `;
+  }
+
+
+  /* =========================================================
+     GUIDE
+  ========================================================= */
+
+  function renderGradeGuide(
+    tab
+  ) {
+    if (
+      tab === "support"
+    ) {
+      return `
+        <section class="grade-guide-box grade-guide-box-green">
+          <strong>
+            지원사업 검토 기준
+          </strong>
+
+          <p>
+            S는 즉시 검토,
+            A는 높은 연계 가능성,
+            B는 검토 가치가 있는 공고입니다.
+            시각예술, 전시, 공간, 디자인,
+            브랜드, 콘텐츠 제작,
+            기업 협업과의 연결성을 우선합니다.
+            공연·게임·애니메이션 등 단일 장르 중심 사업,
+            교육생·참여자 모집,
+            시상·결과발표형 공고는 우선순위에서 제외됩니다.
+          </p>
+        </section>
+      `;
+    }
+
+
+    return `
+      <section class="grade-guide-box grade-guide-box-green">
+        <strong>
+          등급 기준 안내
+        </strong>
+
+        <p>
+          S는 즉시 검토,
+          A는 제안 가능성 높음,
+          B는 모니터링,
+          C는 낮은 우선순위입니다.
+          행사 운영대행, 폐기물, 청소,
+          시설관리, 보험, 임차,
+          시스템 유지보수 등은
+          우선순위에서 제외됩니다.
+          등급 배지에 마우스를 올리면
+          세부 선정 기준을 확인할 수 있습니다.
+        </p>
+      </section>
+    `;
+  }
+
+
+  /* =========================================================
+     ACCORDION
+  ========================================================= */
+
+  function renderPriorityAccordion(
+    project,
+    tab
+  ) {
+    const title =
+      project.title ||
+      project.bidNtceNm ||
+      project.projectName ||
+      "제목 없음";
+
+
+    const agency =
+      getProjectAgency(
+        project
+      );
+
+
+    const sourceLabel =
+      getSummarySourceLabel(
+        project,
+        tab
+      );
+
+
+    const sourceTitle =
+      getSummarySourceTitle(
+        project,
+        tab
+      );
+
+
+    const categoryLabel =
+      getAccordionCategoryLabel(
+        project,
+        tab
+      );
+
+
+    const amount =
+      formatKrw(
+        getProjectAmount(
+          project
+        )
+      );
+
+
+    const published =
+      compactDate(
+        project.publishedDate ||
+        project.postedDate ||
+        project.startDate ||
+        project.bidNtceDt ||
+        ""
+      );
+
+
+    const deadline =
+      compactDate(
+        getProjectDeadline(
+          project
+        )
+      );
+
 
     const nextAction =
       project.nextAction ||
       project.recommendedAction ||
       "검토";
+
 
     const gradeReason =
       project.gradeReason ||
@@ -528,154 +1601,451 @@
       project.summary ||
       "등급 기준 정보 없음";
 
-    const url = normalizeUrl(
-      project.sourceUrl ||
-      project.originalUrl ||
-      project.url ||
-      project.ntceSpecDocUrl1 ||
-      ""
-    );
+
+    const url =
+      normalizeUrl(
+        project.sourceUrl ||
+        project.originalUrl ||
+        project.url ||
+        project.ntceSpecDocUrl1 ||
+        ""
+      );
+
+
+    const bodyBadges =
+      tab === "support"
+        ? `
+          <span class="badge category">
+            ${esc(
+              getSupportSourceCode(
+                project
+              ) ||
+              "지원"
+            )}
+          </span>
+
+          <span class="badge category">
+            ${esc(agency)}
+          </span>
+        `
+        : `
+          <span class="badge category">
+            ${esc(categoryLabel)}
+          </span>
+
+          <span class="badge category">
+            ${esc(sourceLabel)}
+          </span>
+        `;
+
 
     return `
-      <article class="card card-as-accordion priority-accordion-card">
+      <article
+        class="card card-as-accordion priority-accordion-card"
+      >
         <details class="accordion-card">
-          <summary class="accordion-summary priority-accordion-summary">
+
+          <summary
+            class="accordion-summary priority-accordion-summary"
+          >
+
             <span class="summary-source-wrap">
-              <em class="summary-source">${esc(sourceType)}</em>
-              ${renderGradeBadge(project)}
+
+              <em
+                class="summary-source"
+                title="${esc(sourceTitle)}"
+              >
+                ${esc(sourceLabel)}
+              </em>
+
+              ${renderGradeBadge(
+                project
+              )}
+
             </span>
 
-            <span class="summary-title priority-summary-title">
-              <small>${esc(categoryLabel)}</small>
+
+            <span
+              class="summary-title priority-summary-title"
+            >
+
+              <small>
+                ${esc(categoryLabel)}
+              </small>
+
               ${esc(title)}
+
             </span>
+
 
             <span class="summary-period">
-              <span>공고일</span>
-              <strong>${esc(published)}</strong>
+
+              <span>
+                공고일
+              </span>
+
+              <strong>
+                ${esc(published)}
+              </strong>
+
             </span>
+
 
             <span class="summary-deadline">
-              <span>마감일</span>
-              <strong>${esc(deadline)}</strong>
+
+              <span>
+                마감일
+              </span>
+
+              <strong>
+                ${esc(deadline)}
+              </strong>
+
             </span>
+
           </summary>
 
+
           <div class="accordion-body">
+
             <div class="card-top">
+
               <div class="badges">
-                <span class="badge category">${esc(categoryLabel)}</span>
-                <span class="badge category">${esc(sourceType)}</span>
+                ${bodyBadges}
               </div>
 
               <div class="score-group">
-                <span class="score">${esc(nextAction)}</span>
+                <span class="score">
+                  ${esc(nextAction)}
+                </span>
               </div>
+
             </div>
 
-            <h2>${esc(title)}</h2>
+
+            <h2>
+              ${esc(title)}
+            </h2>
+
 
             <div class="meta">
+
               <div>
-                <span>기관</span>
+                <span>
+                  기관
+                </span>
+
                 ${esc(agency)}
               </div>
 
+
               <div>
-                <span>예산/지원금</span>
+                <span>
+                  예산/지원금
+                </span>
+
                 ${esc(amount)}
               </div>
 
+
               <div>
-                <span>공고일</span>
+                <span>
+                  공고일
+                </span>
+
                 ${esc(published)}
               </div>
 
+
               <div>
-                <span>마감일</span>
+                <span>
+                  마감일
+                </span>
+
                 ${esc(deadline)}
               </div>
+
             </div>
+
 
             <div class="keywords">
-              ${renderKeywordTags(project)}
+              ${renderKeywordTags(
+                project
+              )}
             </div>
+
 
             <div class="reason">
-              <strong>검토 기준</strong><br />
+
+              <strong>
+                검토 기준
+              </strong>
+
+              <br />
+
               ${esc(gradeReason)}
+
             </div>
 
+
             <p class="action">
-              다음 액션: ${esc(nextAction)}
+              다음 액션:
+              ${esc(nextAction)}
             </p>
+
 
             ${
               url
-                ? `<a class="link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">공고 보기</a>`
-                : `<p class="empty-message-inline">공고 링크가 없습니다.</p>`
+                ? `
+                  <a
+                    class="link"
+                    href="${esc(url)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    공고 보기
+                  </a>
+                `
+                : `
+                  <p class="empty-message-inline">
+                    공고 링크가 없습니다.
+                  </p>
+                `
             }
+
           </div>
+
         </details>
       </article>
     `;
   }
 
-  function renderPriorityPanel(tab, category) {
-    const config = getTabConfig(tab);
-    const panel = getPriorityPanel(tab);
 
-    if (!panel || !config) {
+  /* =========================================================
+     PRIORITY PANEL
+  ========================================================= */
+
+  function renderPriorityPanel(
+    tab,
+    category
+  ) {
+    const config =
+      getTabConfig(
+        tab
+      );
+
+
+    const panel =
+      getPriorityPanel(
+        tab
+      );
+
+
+    if (
+      !panel ||
+      !config
+    ) {
       return;
     }
 
-    const projects = getDisplayProjectsByCategory(category);
-    const excludedCount = getExcludedProjects().length;
+
+    const allProjects =
+      getDisplayProjectsByCategory(
+        category
+      );
+
+
+    const projects =
+      getProjectsForTab(
+        tab,
+        category
+      );
+
+
+    const excludedCount =
+      getExcludedProjectsByCategory(
+        category
+      ).length;
+
+
+    const supportFilter =
+      tab === "support"
+        ? renderSupportSourceFilters(
+            allProjects
+          )
+        : "";
+
+
+    const miniStatSmall =
+      tab === "support" &&
+      state.supportSource !== "ALL"
+        ? `
+          전체 유효
+          ${formatCount(
+            allProjects.length
+          )}건
+          · 제외
+          ${formatCount(
+            excludedCount
+          )}건
+        `
+        : `
+          우선순위 제외
+          ${formatCount(
+            excludedCount
+          )}건
+        `;
+
+
+    const secondHeader =
+      tab === "support"
+        ? "분야 / 공고명"
+        : "카테고리 / 공고명";
+
+
+    const firstHeader =
+      tab === "support"
+        ? "기관"
+        : "출처";
+
 
     panel.innerHTML = `
-      <section class="priority-panel-head priority-panel-head-green">
+
+      <section
+        class="priority-panel-head priority-panel-head-green"
+      >
+
         <div>
-          <p class="priority-eyebrow">AXOO Priority KR v1.3</p>
-          <h2>${esc(config.icon)} ${esc(config.label)}</h2>
-          <p>${esc(config.description || "")}</p>
-          ${renderSourceTags(config.sources)}
+
+          <p class="priority-eyebrow">
+            AXOO Priority KR v1.4
+          </p>
+
+          <h2>
+            ${esc(config.icon)}
+            ${esc(config.label)}
+          </h2>
+
+          <p>
+            ${esc(
+              config.description ||
+              ""
+            )}
+          </p>
+
+          ${renderSourceTags(
+            config.sources
+          )}
+
         </div>
+
 
         <div class="priority-mini-stat">
-          <span>표시 공고</span>
-          <strong>${formatCount(projects.length)}건</strong>
-          <small>우선순위 제외 ${formatCount(excludedCount)}건</small>
+
+          <span>
+            표시 공고
+          </span>
+
+          <strong>
+            ${formatCount(
+              projects.length
+            )}건
+          </strong>
+
+          <small>
+            ${miniStatSmall}
+          </small>
+
         </div>
+
       </section>
 
-      <section class="grade-guide-box grade-guide-box-green">
-        <strong>등급 기준 안내</strong>
-        <p>
-          S는 즉시 검토, A는 제안 가능성 높음, B는 모니터링, C는 낮은 우선순위입니다.
-          행사 운영대행, 폐기물, 청소, 시설관리, 보험, 임차, 시스템 유지보수 등은 우선순위에서 제외됩니다.
-          등급 배지에 마우스를 올리면 세부 선정 기준을 확인할 수 있습니다.
-        </p>
-      </section>
 
-      <div class="list-head priority-list-head">
+      ${supportFilter}
+
+
+      ${renderGradeGuide(
+        tab
+      )}
+
+
+      <div
+        class="list-head priority-list-head"
+      >
+
         <span class="list-source-grade">
-          <em>출처</em>
-          <em>등급</em>
+
+          <em>
+            ${esc(firstHeader)}
+          </em>
+
+          <em>
+            등급
+          </em>
+
         </span>
-        <span>카테고리 / 공고명</span>
-        <span>게재일</span>
-        <span>마감일</span>
+
+
+        <span>
+          ${esc(secondHeader)}
+        </span>
+
+
+        <span>
+          게재일
+        </span>
+
+
+        <span>
+          마감일
+        </span>
+
       </div>
+
 
       ${
         projects.length
-          ? `<section class="cards priority-accordion-list">${projects.map(renderPriorityAccordion).join("")}</section>`
-          : `<div class="priority-empty">해당 기준에 맞는 공고가 아직 없습니다.</div>`
+          ? `
+            <section
+              class="cards priority-accordion-list"
+            >
+              ${projects
+                .map(
+                  function (project) {
+                    return renderPriorityAccordion(
+                      project,
+                      tab
+                    );
+                  }
+                )
+                .join("")}
+            </section>
+          `
+          : `
+            <div class="priority-empty">
+              ${
+                tab === "support" &&
+                state.supportSource !== "ALL"
+                  ? `${esc(
+                      state.supportSource
+                    )}에서 현재 AXOO 기준에 맞는 진행 중 공고가 없습니다.`
+                  : "해당 기준에 맞는 공고가 아직 없습니다."
+              }
+            </div>
+          `
       }
     `;
 
-    updateSummaryCounts(projects);
+
+    updateSummaryCounts(
+      projects
+    );
   }
+
+
+  /* =========================================================
+     TAB CONTROL
+  ========================================================= */
 
   function hideAllPanels() {
     [
@@ -688,313 +2058,802 @@
       "agencyTab",
       "opportunitiesTab",
       "localTab"
-    ].forEach(function (id) {
-      const panel = document.getElementById(id);
+    ].forEach(
+      function (id) {
+        const panel =
+          document.getElementById(
+            id
+          );
 
-      if (panel) {
-        panel.classList.remove("active");
-        panel.style.display = "none";
+
+        if (
+          panel
+        ) {
+          panel.classList.remove(
+            "active"
+          );
+
+          panel.style.display =
+            "none";
+        }
       }
-    });
+    );
   }
 
-  function activateTabButton(tab) {
-    $all(".tab-button").forEach(function (button) {
-      const isActive = button.getAttribute("data-tab") === tab;
 
-      button.classList.toggle("active", isActive);
-      button.setAttribute("aria-selected", isActive ? "true" : "false");
-    });
+  function activateTabButton(
+    tab
+  ) {
+    $all(
+      ".tab-button"
+    ).forEach(
+      function (button) {
+        const isActive =
+          button.getAttribute(
+            "data-tab"
+          ) === tab;
+
+
+        button.classList.toggle(
+          "active",
+          isActive
+        );
+
+
+        button.setAttribute(
+          "aria-selected",
+          isActive
+            ? "true"
+            : "false"
+        );
+      }
+    );
   }
+
 
   function showNativeTab(tab) {
-    const panel = getNativePanel(tab);
+    const panel =
+      getNativePanel(
+        tab
+      );
 
-    if (!panel) {
+
+    if (
+      !panel
+    ) {
       return;
     }
 
-    panel.classList.add("active");
-    panel.style.display = "";
 
-    if (tab === "art") {
+    panel.classList.add(
+      "active"
+    );
+
+
+    panel.style.display =
+      "";
+
+
+    if (
+      tab === "art"
+    ) {
       updateArtSummaryCount();
     }
   }
 
-  function showTab(tab) {
-    const config = getTabConfig(tab);
 
-    if (!config) {
+  function showTab(tab) {
+    const config =
+      getTabConfig(
+        tab
+      );
+
+
+    if (
+      !config
+    ) {
       return;
     }
 
-    state.currentTab = tab;
+
+    state.currentTab =
+      tab;
+
 
     hideAllPanels();
-    activateTabButton(tab);
 
-    if (config.type === "priority") {
-      renderPriorityPanel(tab, config.category);
 
-      const panel = getPriorityPanel(tab);
+    activateTabButton(
+      tab
+    );
 
-      if (panel) {
-        panel.classList.add("active");
-        panel.style.display = "";
+
+    if (
+      config.type ===
+      "priority"
+    ) {
+      renderPriorityPanel(
+        tab,
+        config.category
+      );
+
+
+      const panel =
+        getPriorityPanel(
+          tab
+        );
+
+
+      if (
+        panel
+      ) {
+        panel.classList.add(
+          "active"
+        );
+
+
+        panel.style.display =
+          "";
       }
-    } else {
-      showNativeTab(tab);
     }
+
+    else {
+      showNativeTab(
+        tab
+      );
+    }
+
 
     updateMetaCards();
   }
 
+
   function setupTabButtons() {
-    $all(".tab-button").forEach(function (button) {
-      const tab = button.getAttribute("data-tab");
+    $all(
+      ".tab-button"
+    ).forEach(
+      function (button) {
+        const tab =
+          button.getAttribute(
+            "data-tab"
+          );
 
-      if (tab === "opportunities" || tab === "local") {
-        button.style.display = "none";
-        return;
-      }
 
-      button.onclick = function (event) {
-        event.preventDefault();
-        event.stopPropagation();
+        if (
+          tab === "opportunities" ||
+          tab === "local"
+        ) {
+          button.style.display =
+            "none";
 
-        const nextTab = button.getAttribute("data-tab");
-
-        if (nextTab) {
-          showTab(nextTab);
+          return;
         }
-      };
-    });
+
+
+        button.onclick =
+          function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+
+            const nextTab =
+              button.getAttribute(
+                "data-tab"
+              );
+
+
+            if (
+              nextTab
+            ) {
+              showTab(
+                nextTab
+              );
+            }
+          };
+      }
+    );
   }
+
+
+  /* =========================================================
+     ENSURE PANELS
+  ========================================================= */
 
   function ensurePriorityPanels() {
-    ["mural", "exhibition", "support", "other"].forEach(function (tab) {
-      let panel = getPriorityPanel(tab);
+    [
+      "mural",
+      "exhibition",
+      "support",
+      "other"
+    ].forEach(
+      function (tab) {
+        let panel =
+          getPriorityPanel(
+            tab
+          );
 
-      if (panel) {
-        return;
+
+        if (
+          panel
+        ) {
+          return;
+        }
+
+
+        panel =
+          document.createElement(
+            "section"
+          );
+
+
+        panel.id =
+          getPriorityPanelId(
+            tab
+          );
+
+
+        panel.className =
+          "tab-panel priority-tab-panel";
+
+
+        panel.style.display =
+          "none";
+
+
+        const agenciesPanel =
+          $("#agenciesTab") ||
+          $("#agencyTab");
+
+
+        const main =
+          $("main") ||
+          document.body;
+
+
+        if (
+          agenciesPanel &&
+          agenciesPanel.parentNode
+        ) {
+          agenciesPanel.parentNode
+            .insertBefore(
+              panel,
+              agenciesPanel
+            );
+        }
+
+        else {
+          main.appendChild(
+            panel
+          );
+        }
       }
-
-      panel = document.createElement("section");
-      panel.id = getPriorityPanelId(tab);
-      panel.className = "tab-panel priority-tab-panel";
-      panel.style.display = "none";
-
-      const agenciesPanel = $("#agenciesTab") || $("#agencyTab");
-      const main = $("main") || document.body;
-
-      if (agenciesPanel && agenciesPanel.parentNode) {
-        agenciesPanel.parentNode.insertBefore(panel, agenciesPanel);
-      } else {
-        main.appendChild(panel);
-      }
-    });
+    );
   }
 
-  function ensureTabLayout() {
-    const tabs = $(".tabs");
 
-    if (!tabs) {
+  /* =========================================================
+     TAB LAYOUT
+  ========================================================= */
+
+  function ensureTabLayout() {
+    const tabs =
+      $(".tabs");
+
+
+    if (
+      !tabs
+    ) {
       return;
     }
+
 
     const desiredTabs = [
       {
         tab: "art",
-        text: "💙 건축물 미술작품"
+        text:
+          "💙 건축물 미술작품"
       },
+
       {
         tab: "mural",
-        text: "🧱 벽화 & 조형물"
+        text:
+          "🧱 벽화 & 조형물"
       },
+
       {
         tab: "exhibition",
-        text: "🖼️ 전시 콘텐츠 기획 운영"
+        text:
+          "🖼️ 전시 콘텐츠 기획 운영"
       },
+
       {
         tab: "support",
-        text: "✨ 예술·콘텐츠 지원사업"
+        text:
+          "✨ 예술·콘텐츠 지원사업"
       },
+
       {
         tab: "other",
-        text: "📂 기타 AXOO 핏"
+        text:
+          "📂 기타 AXOO 핏"
       },
+
       {
         tab: "agencies",
-        text: "🎯 기관 타깃"
+        text:
+          "🎯 기관 타깃"
       }
     ];
 
-    desiredTabs.forEach(function (item) {
-      let button = tabs.querySelector(`.tab-button[data-tab="${item.tab}"]`);
 
-      if (!button) {
-        button = document.createElement("button");
-        button.type = "button";
-        button.className = "tab-button";
-        button.setAttribute("data-tab", item.tab);
+    desiredTabs.forEach(
+      function (item) {
+        let button =
+          tabs.querySelector(
+            `.tab-button[data-tab="${item.tab}"]`
+          );
+
+
+        if (
+          !button
+        ) {
+          button =
+            document.createElement(
+              "button"
+            );
+
+
+          button.type =
+            "button";
+
+
+          button.className =
+            "tab-button";
+
+
+          button.setAttribute(
+            "data-tab",
+            item.tab
+          );
+        }
+
+
+        button.textContent =
+          item.text;
+
+
+        button.style.display =
+          "";
+
+
+        tabs.appendChild(
+          button
+        );
       }
+    );
 
-      button.textContent = item.text;
-      button.style.display = "";
-      tabs.appendChild(button);
-    });
 
-    const opportunityButton = tabs.querySelector('.tab-button[data-tab="opportunities"]');
-    const localButton = tabs.querySelector('.tab-button[data-tab="local"]');
+    const opportunityButton =
+      tabs.querySelector(
+        '.tab-button[data-tab="opportunities"]'
+      );
 
-    if (opportunityButton) {
-      opportunityButton.style.display = "none";
+
+    const localButton =
+      tabs.querySelector(
+        '.tab-button[data-tab="local"]'
+      );
+
+
+    if (
+      opportunityButton
+    ) {
+      opportunityButton.style.display =
+        "none";
     }
 
-    if (localButton) {
-      localButton.style.display = "none";
+
+    if (
+      localButton
+    ) {
+      localButton.style.display =
+        "none";
     }
 
-    let separator = tabs.querySelector(".priority-tab-separator");
 
-    if (!separator) {
-      separator = document.createElement("span");
-      separator.className = "priority-tab-separator";
-      separator.textContent = "참고";
+    let separator =
+      tabs.querySelector(
+        ".priority-tab-separator"
+      );
+
+
+    if (
+      !separator
+    ) {
+      separator =
+        document.createElement(
+          "span"
+        );
+
+
+      separator.className =
+        "priority-tab-separator";
+
+
+      separator.textContent =
+        "참고";
     }
 
-    const agenciesButton = tabs.querySelector('.tab-button[data-tab="agencies"]');
 
-    if (agenciesButton) {
-      tabs.insertBefore(separator, agenciesButton);
+    const agenciesButton =
+      tabs.querySelector(
+        '.tab-button[data-tab="agencies"]'
+      );
+
+
+    if (
+      agenciesButton
+    ) {
+      tabs.insertBefore(
+        separator,
+        agenciesButton
+      );
     }
   }
 
-  function setupMetaFallback() {
-    const metaBar = $(".meta-bar");
 
-    if (!metaBar) {
+  /* =========================================================
+     META FALLBACK
+  ========================================================= */
+
+  function setupMetaFallback() {
+    const metaBar =
+      $(".meta-bar");
+
+
+    if (
+      !metaBar
+    ) {
       return;
     }
+
 
     const requiredCards = [
       {
-        id: "priorityMetaArtCount",
-        label: "1. 건축물 미술작품",
-        tab: "art"
+        id:
+          "priorityMetaArtCount",
+
+        label:
+          "1. 건축물 미술작품",
+
+        tab:
+          "art"
       },
+
       {
-        id: "priorityMetaMuralCount",
-        label: "2. 벽화 & 조형물",
-        tab: "mural"
+        id:
+          "priorityMetaMuralCount",
+
+        label:
+          "2. 벽화 & 조형물",
+
+        tab:
+          "mural"
       },
+
       {
-        id: "priorityMetaExhibitionCount",
-        label: "3. 전시 콘텐츠 기획 운영",
-        tab: "exhibition"
+        id:
+          "priorityMetaExhibitionCount",
+
+        label:
+          "3. 전시 콘텐츠 기획 운영",
+
+        tab:
+          "exhibition"
       },
+
       {
-        id: "priorityMetaSupportCount",
-        label: "4. 예술·콘텐츠 지원사업",
-        tab: "support"
+        id:
+          "priorityMetaSupportCount",
+
+        label:
+          "4. 예술·콘텐츠 지원사업",
+
+        tab:
+          "support"
       }
     ];
 
-    const alreadyPriority = requiredCards.every(function (item) {
-      return document.getElementById(item.id);
-    });
 
-    if (alreadyPriority) {
+    const alreadyPriority =
+      requiredCards.every(
+        function (item) {
+          return document.getElementById(
+            item.id
+          );
+        }
+      );
+
+
+    if (
+      alreadyPriority
+    ) {
       return;
     }
 
-    metaBar.innerHTML = "";
 
-    requiredCards.forEach(function (item) {
-      const card = document.createElement("div");
-      card.className = "meta-card priority-meta-card";
-      card.setAttribute("data-tab-target", item.tab);
+    metaBar.innerHTML =
+      "";
 
-      card.innerHTML = `
-        <div class="meta-label">${esc(item.label)}</div>
-        <div class="meta-value" id="${esc(item.id)}">0</div>
-      `;
 
-      metaBar.appendChild(card);
-    });
+    requiredCards.forEach(
+      function (item) {
+        const card =
+          document.createElement(
+            "div"
+          );
+
+
+        card.className =
+          "meta-card priority-meta-card";
+
+
+        card.setAttribute(
+          "data-tab-target",
+          item.tab
+        );
+
+
+        card.innerHTML = `
+          <div class="meta-label">
+            ${esc(item.label)}
+          </div>
+
+          <div
+            class="meta-value"
+            id="${esc(item.id)}"
+          >
+            0
+          </div>
+        `;
+
+
+        metaBar.appendChild(
+          card
+        );
+      }
+    );
   }
+
+
+  /* =========================================================
+     INIT
+  ========================================================= */
 
   async function applyPriorityDashboard() {
     ensurePriorityPanels();
+
     ensureTabLayout();
+
     setupMetaFallback();
+
 
     await loadPriorityProjects();
 
+
     updateMetaCards();
+
     setupTabButtons();
 
-    const activeButton = $(".tab-button.active");
-    const activeTab = activeButton ? activeButton.getAttribute("data-tab") : "";
 
-    if (!activeTab || activeTab === "opportunities" || activeTab === "local") {
-      showTab("art");
-    } else {
-      showTab(activeTab);
+    const activeButton =
+      $(".tab-button.active");
+
+
+    const activeTab =
+      activeButton
+        ? activeButton.getAttribute(
+            "data-tab"
+          )
+        : "";
+
+
+    if (
+      !activeTab ||
+      activeTab ===
+        "opportunities" ||
+      activeTab ===
+        "local"
+    ) {
+      showTab(
+        "art"
+      );
+    }
+
+    else {
+      showTab(
+        activeTab
+      );
     }
   }
 
+
   function schedulePatch() {
-    let count = 0;
+    let count =
+      0;
 
-    const timer = window.setInterval(function () {
-      updateMetaCards();
 
-      const config = getTabConfig(state.currentTab);
+    const timer =
+      window.setInterval(
+        function () {
+          updateMetaCards();
 
-      if (config && config.type === "priority") {
-        renderPriorityPanel(config.tab, config.category);
-      }
 
-      count += 1;
+          const config =
+            getTabConfig(
+              state.currentTab
+            );
 
-      if (count >= 8) {
-        window.clearInterval(timer);
-      }
-    }, 700);
+
+          if (
+            config &&
+            config.type ===
+              "priority"
+          ) {
+            renderPriorityPanel(
+              config.tab,
+              config.category
+            );
+          }
+
+
+          count +=
+            1;
+
+
+          if (
+            count >= 8
+          ) {
+            window.clearInterval(
+              timer
+            );
+          }
+        },
+        700
+      );
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    applyPriorityDashboard();
-    schedulePatch();
 
-    document.addEventListener(
-      "click",
-      function (event) {
-        const tabButton = event.target.closest(".tab-button[data-tab]");
-        const metaCard = event.target.closest(".meta-card[data-tab-target]");
+  /* =========================================================
+     EVENTS
+  ========================================================= */
 
-        const tab = tabButton
-          ? tabButton.getAttribute("data-tab")
-          : metaCard
-            ? metaCard.getAttribute("data-tab-target")
-            : "";
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+      applyPriorityDashboard();
 
-        const priorityTabs = ["art", "mural", "exhibition", "support", "other", "agencies"];
+      schedulePatch();
 
-        if (!priorityTabs.includes(tab)) {
-          return;
-        }
 
-        event.preventDefault();
-        event.stopPropagation();
+      document.addEventListener(
+        "click",
+        function (event) {
 
-        window.setTimeout(function () {
-          showTab(tab);
-        }, 0);
-      },
-      true
-    );
-  });
+          /*
+            SUPPORT SOURCE FILTER
+          */
+
+          const supportFilterButton =
+            event.target.closest(
+              "[data-support-source]"
+            );
+
+
+          if (
+            supportFilterButton
+          ) {
+            event.preventDefault();
+            event.stopPropagation();
+
+
+            const source =
+              String(
+                supportFilterButton.getAttribute(
+                  "data-support-source"
+                ) ||
+                "ALL"
+              )
+                .trim()
+                .toUpperCase();
+
+
+            state.supportSource =
+              SUPPORT_SOURCE_FILTERS.some(
+                function (item) {
+                  return (
+                    item.code ===
+                    source
+                  );
+                }
+              )
+                ? source
+                : "ALL";
+
+
+            renderPriorityPanel(
+              "support",
+              "arts_content_support"
+            );
+
+
+            return;
+          }
+
+
+          /*
+            MAIN TAB
+          */
+
+          const tabButton =
+            event.target.closest(
+              ".tab-button[data-tab]"
+            );
+
+
+          const metaCard =
+            event.target.closest(
+              ".meta-card[data-tab-target]"
+            );
+
+
+          const tab =
+            tabButton
+              ? tabButton.getAttribute(
+                  "data-tab"
+                )
+              : metaCard
+                ? metaCard.getAttribute(
+                    "data-tab-target"
+                  )
+                : "";
+
+
+          const priorityTabs = [
+            "art",
+            "mural",
+            "exhibition",
+            "support",
+            "other",
+            "agencies"
+          ];
+
+
+          if (
+            !priorityTabs.includes(
+              tab
+            )
+          ) {
+            return;
+          }
+
+
+          event.preventDefault();
+          event.stopPropagation();
+
+
+          window.setTimeout(
+            function () {
+              showTab(
+                tab
+              );
+            },
+            0
+          );
+        },
+        true
+      );
+    }
+  );
+
 })();
