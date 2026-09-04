@@ -90,5 +90,14 @@
     "crawlMode": "board",
     "verified": true,
     "note": "세종특별자치시 공식 고시·공고 중 일반공고 목록."
+  },
+
+    "jeonbuk_notice": {
+    "sourceUrl": "https://www.jeonbuk.go.kr/board/list.jeonbuk?boardId=BBS_0000129&menuCd=DOM_000000102002003001",
+    "sourceName": "전북특별자치도 공고·고시",
+    "sourceType": "official_board",
+    "crawlMode": "board",
+    "verified": true,
+    "note": "전북특별자치도 공식 공고·고시 게시판."
   }
 }
