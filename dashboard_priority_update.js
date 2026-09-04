@@ -285,7 +285,7 @@
 
 
   /* =========================================================
-     DATE / D-DAY
+     DATE
   ========================================================= */
 
   function getSeoulTodayKey() {
@@ -440,7 +440,7 @@
   function getDaysUntilDate(
     dateValue
   ) {
-    const deadlineKey =
+    const targetKey =
       normalizeDateKey(
         dateValue
       );
@@ -451,16 +451,16 @@
 
 
     if (
-      !deadlineKey ||
+      !targetKey ||
       !todayKey
     ) {
       return null;
     }
 
 
-    const deadlineTime =
+    const targetTime =
       dateKeyToUtcTime(
-        deadlineKey
+        targetKey
       );
 
 
@@ -472,7 +472,7 @@
 
     if (
       !Number.isFinite(
-        deadlineTime
+        targetTime
       ) ||
       !Number.isFinite(
         todayTime
@@ -484,7 +484,7 @@
 
     return Math.round(
       (
-        deadlineTime -
+        targetTime -
         todayTime
       ) /
       86400000
@@ -492,153 +492,58 @@
   }
 
 
-  function getDeadlineStatus(
-    project
+  function getDaysSinceDate(
+    dateValue
   ) {
-    const deadline =
-      getProjectDeadline(
-        project
+    const targetKey =
+      normalizeDateKey(
+        dateValue
       );
 
 
-    const days =
-      getDaysUntilDate(
-        deadline
+    const todayKey =
+      getSeoulTodayKey();
+
+
+    if (
+      !targetKey ||
+      !todayKey
+    ) {
+      return null;
+    }
+
+
+    const targetTime =
+      dateKeyToUtcTime(
+        targetKey
       );
 
 
-    if (
-      days === null
-    ) {
-      return {
-        days: null,
-        expired: false,
-        urgent: false,
-        label: "마감 확인",
-        shortLabel: ""
-      };
-    }
-
-
-    if (
-      days < 0
-    ) {
-      return {
-        days,
-        expired: true,
-        urgent: false,
-        label: "마감 종료",
-        shortLabel: "종료"
-      };
-    }
-
-
-    if (
-      days === 0
-    ) {
-      return {
-        days,
-        expired: false,
-        urgent: true,
-        label: "오늘 마감",
-        shortLabel: "오늘 마감"
-      };
-    }
-
-
-    if (
-      days <= 3
-    ) {
-      return {
-        days,
-        expired: false,
-        urgent: true,
-        label:
-          `D-${days} · 마감 임박`,
-        shortLabel:
-          `D-${days}`
-      };
-    }
-
-
-    return {
-      days,
-      expired: false,
-      urgent: false,
-      label:
-        `D-${days}`,
-      shortLabel:
-        `D-${days}`
-    };
-  }
-
-
-  function isProjectDeadlineExpired(
-    project
-  ) {
-    return getDeadlineStatus(
-      project
-    ).expired;
-  }
-
-
-  function renderDeadlineBadge(
-    project
-  ) {
-    const status =
-      getDeadlineStatus(
-        project
+    const todayTime =
+      dateKeyToUtcTime(
+        todayKey
       );
 
 
     if (
-      status.days === null
+      !Number.isFinite(
+        targetTime
+      ) ||
+      !Number.isFinite(
+        todayTime
+      )
     ) {
-      return "";
+      return null;
     }
 
 
-    const background =
-      status.urgent
-        ? "#171717"
-        : "#f2f2f2";
-
-
-    const color =
-      status.urgent
-        ? "#ffffff"
-        : "#555555";
-
-
-    const border =
-      status.urgent
-        ? "#171717"
-        : "#dedede";
-
-
-    return `
-      <span
-        style="
-          display:inline-flex;
-          align-items:center;
-          justify-content:center;
-          margin-top:5px;
-          padding:4px 7px;
-          border:1px solid ${border};
-          border-radius:999px;
-          background:${background};
-          color:${color};
-          font-size:10px;
-          font-weight:700;
-          line-height:1;
-          white-space:nowrap;
-        "
-      >
-        ${esc(
-          status.label
-        )}
-      </span>
-    `;
+    return Math.round(
+      (
+        todayTime -
+        targetTime
+      ) /
+      86400000
+    );
   }
 
 
@@ -845,6 +750,19 @@
       project.bidNtceEndDt ||
       project.deadlineDate ||
       project.closeDate ||
+      ""
+    );
+  }
+
+
+  function getProjectPublishedDate(
+    project
+  ) {
+    return (
+      project.publishedDate ||
+      project.postedDate ||
+      project.startDate ||
+      project.bidNtceDt ||
       ""
     );
   }
@@ -1064,6 +982,298 @@
 
 
   /* =========================================================
+     D-DAY
+  ========================================================= */
+
+  function getDeadlineStatus(
+    project
+  ) {
+    const deadline =
+      getProjectDeadline(
+        project
+      );
+
+
+    const days =
+      getDaysUntilDate(
+        deadline
+      );
+
+
+    if (
+      days === null
+    ) {
+      return {
+        days: null,
+        expired: false,
+        urgent: false,
+        label: "마감 확인"
+      };
+    }
+
+
+    if (
+      days < 0
+    ) {
+      return {
+        days,
+        expired: true,
+        urgent: false,
+        label: "마감 종료"
+      };
+    }
+
+
+    if (
+      days === 0
+    ) {
+      return {
+        days,
+        expired: false,
+        urgent: true,
+        label: "오늘 마감"
+      };
+    }
+
+
+    if (
+      days <= 3
+    ) {
+      return {
+        days,
+        expired: false,
+        urgent: true,
+        label:
+          `D-${days} · 마감 임박`
+      };
+    }
+
+
+    return {
+      days,
+      expired: false,
+      urgent: false,
+      label:
+        `D-${days}`
+    };
+  }
+
+
+  function isProjectDeadlineExpired(
+    project
+  ) {
+    return getDeadlineStatus(
+      project
+    ).expired;
+  }
+
+
+  function renderDeadlineBadge(
+    project
+  ) {
+    const status =
+      getDeadlineStatus(
+        project
+      );
+
+
+    if (
+      status.days === null
+    ) {
+      return "";
+    }
+
+
+    const background =
+      status.urgent
+        ? "#171717"
+        : "#f2f2f2";
+
+
+    const color =
+      status.urgent
+        ? "#ffffff"
+        : "#555555";
+
+
+    const border =
+      status.urgent
+        ? "#171717"
+        : "#dedede";
+
+
+    return `
+      <span
+        style="
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          margin-top:5px;
+          padding:4px 7px;
+          border:1px solid ${border};
+          border-radius:999px;
+          background:${background};
+          color:${color};
+          font-size:10px;
+          font-weight:700;
+          line-height:1;
+          white-space:nowrap;
+        "
+      >
+        ${esc(
+          status.label
+        )}
+      </span>
+    `;
+  }
+
+
+  /* =========================================================
+     RECENT / NEW
+  ========================================================= */
+
+  function getRecentStatus(
+    project
+  ) {
+    const published =
+      getProjectPublishedDate(
+        project
+      );
+
+
+    const days =
+      getDaysSinceDate(
+        published
+      );
+
+
+    if (
+      days === null ||
+      days < 0
+    ) {
+      return {
+        type: "",
+        days: null,
+        label: ""
+      };
+    }
+
+
+    if (
+      days <= 3
+    ) {
+      return {
+        type: "new",
+        days,
+        label: "NEW"
+      };
+    }
+
+
+    if (
+      days <= 7
+    ) {
+      return {
+        type: "recent",
+        days,
+        label: "최근 등록"
+      };
+    }
+
+
+    return {
+      type: "",
+      days,
+      label: ""
+    };
+  }
+
+
+  function renderRecentBadge(
+    project
+  ) {
+    const status =
+      getRecentStatus(
+        project
+      );
+
+
+    if (
+      !status.type
+    ) {
+      return "";
+    }
+
+
+    if (
+      status.type === "new"
+    ) {
+      return `
+        <span
+          title="최근 3일 이내 등록"
+          style="
+            display:inline-flex;
+            align-items:center;
+            margin-left:7px;
+            padding:3px 6px;
+            border:1px solid #b9e2c8;
+            border-radius:999px;
+            background:#eaf7ef;
+            color:#166534;
+            font-size:9px;
+            font-weight:800;
+            line-height:1;
+            vertical-align:middle;
+            white-space:nowrap;
+          "
+        >
+          NEW
+        </span>
+      `;
+    }
+
+
+    return `
+      <span
+        title="최근 7일 이내 등록"
+        style="
+          display:inline-flex;
+          align-items:center;
+          margin-left:7px;
+          padding:3px 6px;
+          border:1px solid #dedede;
+          border-radius:999px;
+          background:#f5f5f5;
+          color:#666666;
+          font-size:9px;
+          font-weight:700;
+          line-height:1;
+          vertical-align:middle;
+          white-space:nowrap;
+        "
+      >
+        최근 등록
+      </span>
+    `;
+  }
+
+
+  function countNewProjects(
+    projects
+  ) {
+    return projects.filter(
+      function (project) {
+        return (
+          getRecentStatus(
+            project
+          ).type === "new"
+        );
+      }
+    ).length;
+  }
+
+
+  /* =========================================================
      SORT / FILTER
   ========================================================= */
 
@@ -1156,12 +1366,6 @@
             return false;
           }
 
-
-          /*
-            지원사업은
-            마감일이 지난 순간
-            화면에서 자동 숨김.
-          */
 
           if (
             category ===
@@ -1661,15 +1865,19 @@
 
     return `
       <span class="priority-grade-wrap">
+
         <span
           class="priority-grade ${getGradeClass(
             grade
           )}"
         >
-          ${esc(grade)}
+          ${esc(
+            grade
+          )}
         </span>
 
         <span class="priority-tooltip">
+
           <strong>
             왜 ${esc(
               grade
@@ -1677,9 +1885,13 @@
           </strong>
 
           <em>
-            ${esc(reason)}
+            ${esc(
+              reason
+            )}
           </em>
+
         </span>
+
       </span>
     `;
   }
@@ -1907,6 +2119,7 @@
         <section
           class="grade-guide-box grade-guide-box-green"
         >
+
           <strong>
             지원사업 검토 기준
           </strong>
@@ -1921,8 +2134,11 @@
             공연·게임·애니메이션 등 단일 장르 중심 사업,
             교육생·참여자 모집,
             시상·결과발표형 공고는 우선순위에서 제외됩니다.
+            게재 후 3일 이내 공고는 NEW,
+            7일 이내 공고는 최근 등록으로 표시되며,
             마감된 공고는 한국시간 기준으로 자동 숨김 처리합니다.
           </p>
+
         </section>
       `;
     }
@@ -1932,6 +2148,7 @@
       <section
         class="grade-guide-box grade-guide-box-green"
       >
+
         <strong>
           등급 기준 안내
         </strong>
@@ -1948,6 +2165,7 @@
           등급 배지에 마우스를 올리면
           세부 선정 기준을 확인할 수 있습니다.
         </p>
+
       </section>
     `;
   }
@@ -2005,11 +2223,9 @@
 
     const published =
       compactDate(
-        project.publishedDate ||
-        project.postedDate ||
-        project.startDate ||
-        project.bidNtceDt ||
-        ""
+        getProjectPublishedDate(
+          project
+        )
       );
 
 
@@ -2113,9 +2329,19 @@
             >
 
               <small>
+
                 ${esc(
                   categoryLabel
                 )}
+
+                ${
+                  tab === "support"
+                    ? renderRecentBadge(
+                        project
+                      )
+                    : ""
+                }
+
               </small>
 
               ${esc(
@@ -2170,16 +2396,28 @@
             <div class="card-top">
 
               <div class="badges">
+
                 ${bodyBadges}
+
+                ${
+                  tab === "support"
+                    ? renderRecentBadge(
+                        project
+                      )
+                    : ""
+                }
+
               </div>
 
 
               <div class="score-group">
+
                 <span class="score">
                   ${esc(
                     nextAction
                   )}
                 </span>
+
               </div>
 
             </div>
@@ -2195,6 +2433,7 @@
             <div class="meta">
 
               <div>
+
                 <span>
                   기관
                 </span>
@@ -2202,10 +2441,12 @@
                 ${esc(
                   agency
                 )}
+
               </div>
 
 
               <div>
+
                 <span>
                   예산/지원금
                 </span>
@@ -2213,10 +2454,12 @@
                 ${esc(
                   amount
                 )}
+
               </div>
 
 
               <div>
+
                 <span>
                   공고일
                 </span>
@@ -2224,10 +2467,12 @@
                 ${esc(
                   published
                 )}
+
               </div>
 
 
               <div>
+
                 <span>
                   마감일
                 </span>
@@ -2243,15 +2488,18 @@
                       )
                     : ""
                 }
+
               </div>
 
             </div>
 
 
             <div class="keywords">
+
               ${renderKeywordTags(
                 project
               )}
+
             </div>
 
 
@@ -2271,10 +2519,12 @@
 
 
             <p class="action">
+
               다음 액션:
               ${esc(
                 nextAction
               )}
+
             </p>
 
 
@@ -2363,6 +2613,14 @@
         : 0;
 
 
+    const newCount =
+      tab === "support"
+        ? countNewProjects(
+            projects
+          )
+        : 0;
+
+
     const supportFilter =
       tab === "support"
         ? renderSupportSourceFilters(
@@ -2381,7 +2639,9 @@
       tab === "support"
     ) {
       miniStatSmall =
-        `마감 종료 ${formatCount(
+        `NEW ${formatCount(
+          newCount
+        )}건 · 마감 종료 ${formatCount(
           expiredCount
         )}건 자동 숨김 · 우선순위 제외 ${formatCount(
           excludedCount
@@ -2394,7 +2654,9 @@
       state.supportSource !== "ALL"
     ) {
       miniStatSmall =
-        `전체 유효 ${formatCount(
+        `NEW ${formatCount(
+          newCount
+        )}건 · 전체 유효 ${formatCount(
           allProjects.length
         )}건 · 마감 종료 ${formatCount(
           expiredCount
@@ -2423,7 +2685,7 @@
         <div>
 
           <p class="priority-eyebrow">
-            AXOO Priority KR v1.5
+            AXOO Priority KR v1.6
           </p>
 
 
@@ -2528,6 +2790,7 @@
             <section
               class="cards priority-accordion-list"
             >
+
               ${projects
                 .map(
                   function (project) {
@@ -2538,10 +2801,12 @@
                   }
                 )
                 .join("")}
+
             </section>
           `
           : `
             <div class="priority-empty">
+
               ${
                 tab === "support" &&
                 state.supportSource !== "ALL"
@@ -2550,6 +2815,7 @@
                     )}에서 현재 AXOO 기준에 맞는 진행 중 공고가 없습니다.`
                   : "해당 기준에 맞는 진행 중 공고가 아직 없습니다."
               }
+
             </div>
           `
       }
@@ -2591,6 +2857,7 @@
           panel.classList.remove(
             "active"
           );
+
 
           panel.style.display =
             "none";
@@ -2688,7 +2955,8 @@
 
 
     if (
-      config.type === "priority"
+      config.type ===
+      "priority"
     ) {
       renderPriorityPanel(
         tab,
@@ -2743,6 +3011,7 @@
         ) {
           button.style.display =
             "none";
+
 
           return;
         }
@@ -3183,8 +3452,10 @@
 
     if (
       !activeTab ||
-      activeTab === "opportunities" ||
-      activeTab === "local"
+      activeTab ===
+        "opportunities" ||
+      activeTab ===
+        "local"
     ) {
       showTab(
         "art"
@@ -3218,7 +3489,8 @@
 
           if (
             config &&
-            config.type === "priority"
+            config.type ===
+              "priority"
           ) {
             renderPriorityPanel(
               config.tab,
@@ -3261,10 +3533,6 @@
         "click",
         function (event) {
 
-          /*
-            SUPPORT SOURCE FILTER
-          */
-
           const supportFilterButton =
             event.target.closest(
               "[data-support-source]"
@@ -3294,7 +3562,8 @@
               SUPPORT_SOURCE_FILTERS.some(
                 function (item) {
                   return (
-                    item.code === source
+                    item.code ===
+                    source
                   );
                 }
               )
@@ -3311,10 +3580,6 @@
             return;
           }
 
-
-          /*
-            MAIN TAB
-          */
 
           const tabButton =
             event.target.closest(
