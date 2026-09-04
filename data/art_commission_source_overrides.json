@@ -102,11 +102,12 @@
   },
 
     "jeju_notice": {
-    "sourceUrl": "https://sido.jeju.go.kr/citynet/jsp/sap/SAPGosiBizProcess.do?command=searchList&flag=gosiGL&svp=Y",
-    "sourceName": "제주특별자치도 입법·고시·공고",
-    "sourceType": "official_board",
+    "sourceUrl": "https://www.jpdc.co.kr/open/news.htm",
+    "sourceName": "제주특별자치도개발공사 공지사항",
+    "sourceType": "public_corporation",
     "crawlMode": "board",
     "verified": true,
-    "note": "제주특별자치도 공식 입법·고시·공고 시스템. 접속 환경에 따라 일시적인 502 응답이 발생할 수 있음."
+    "fallback": true,
+    "note": "제주도청 고시공고 시스템의 502 접근 실패에 대비한 제주 지역 공식 대체 수집 소스."
   }
 }
