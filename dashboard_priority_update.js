@@ -199,6 +199,7 @@
       const eok =
         amount / 100000000;
 
+
       return `${eok.toFixed(
         eok >= 10
           ? 0
@@ -280,6 +281,364 @@
 
 
     return "";
+  }
+
+
+  /* =========================================================
+     DATE / D-DAY
+  ========================================================= */
+
+  function getSeoulTodayKey() {
+    const parts =
+      new Intl.DateTimeFormat(
+        "en-US",
+        {
+          timeZone:
+            "Asia/Seoul",
+
+          year:
+            "numeric",
+
+          month:
+            "2-digit",
+
+          day:
+            "2-digit"
+        }
+      ).formatToParts(
+        new Date()
+      );
+
+
+    const values =
+      {};
+
+
+    parts.forEach(
+      function (part) {
+        values[
+          part.type
+        ] =
+          part.value;
+      }
+    );
+
+
+    if (
+      !values.year ||
+      !values.month ||
+      !values.day
+    ) {
+      return "";
+    }
+
+
+    return [
+      values.year,
+      values.month,
+      values.day
+    ].join("-");
+  }
+
+
+  function normalizeDateKey(value) {
+    const raw =
+      String(
+        value || ""
+      ).trim();
+
+
+    const match =
+      raw.match(
+        /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
+      );
+
+
+    if (!match) {
+      return "";
+    }
+
+
+    const year =
+      Number(
+        match[1]
+      );
+
+
+    const month =
+      Number(
+        match[2]
+      );
+
+
+    const day =
+      Number(
+        match[3]
+      );
+
+
+    if (
+      month < 1 ||
+      month > 12 ||
+      day < 1 ||
+      day > 31
+    ) {
+      return "";
+    }
+
+
+    return [
+      String(year),
+
+      String(month)
+        .padStart(
+          2,
+          "0"
+        ),
+
+      String(day)
+        .padStart(
+          2,
+          "0"
+        )
+    ].join("-");
+  }
+
+
+  function dateKeyToUtcTime(
+    dateKey
+  ) {
+    const match =
+      String(
+        dateKey || ""
+      ).match(
+        /^(\d{4})-(\d{2})-(\d{2})$/
+      );
+
+
+    if (!match) {
+      return NaN;
+    }
+
+
+    return Date.UTC(
+      Number(
+        match[1]
+      ),
+
+      Number(
+        match[2]
+      ) - 1,
+
+      Number(
+        match[3]
+      )
+    );
+  }
+
+
+  function getDaysUntilDate(
+    dateValue
+  ) {
+    const deadlineKey =
+      normalizeDateKey(
+        dateValue
+      );
+
+
+    const todayKey =
+      getSeoulTodayKey();
+
+
+    if (
+      !deadlineKey ||
+      !todayKey
+    ) {
+      return null;
+    }
+
+
+    const deadlineTime =
+      dateKeyToUtcTime(
+        deadlineKey
+      );
+
+
+    const todayTime =
+      dateKeyToUtcTime(
+        todayKey
+      );
+
+
+    if (
+      !Number.isFinite(
+        deadlineTime
+      ) ||
+      !Number.isFinite(
+        todayTime
+      )
+    ) {
+      return null;
+    }
+
+
+    return Math.round(
+      (
+        deadlineTime -
+        todayTime
+      ) /
+      86400000
+    );
+  }
+
+
+  function getDeadlineStatus(
+    project
+  ) {
+    const deadline =
+      getProjectDeadline(
+        project
+      );
+
+
+    const days =
+      getDaysUntilDate(
+        deadline
+      );
+
+
+    if (
+      days === null
+    ) {
+      return {
+        days: null,
+        expired: false,
+        urgent: false,
+        label: "마감 확인",
+        shortLabel: ""
+      };
+    }
+
+
+    if (
+      days < 0
+    ) {
+      return {
+        days,
+        expired: true,
+        urgent: false,
+        label: "마감 종료",
+        shortLabel: "종료"
+      };
+    }
+
+
+    if (
+      days === 0
+    ) {
+      return {
+        days,
+        expired: false,
+        urgent: true,
+        label: "오늘 마감",
+        shortLabel: "오늘 마감"
+      };
+    }
+
+
+    if (
+      days <= 3
+    ) {
+      return {
+        days,
+        expired: false,
+        urgent: true,
+        label:
+          `D-${days} · 마감 임박`,
+        shortLabel:
+          `D-${days}`
+      };
+    }
+
+
+    return {
+      days,
+      expired: false,
+      urgent: false,
+      label:
+        `D-${days}`,
+      shortLabel:
+        `D-${days}`
+    };
+  }
+
+
+  function isProjectDeadlineExpired(
+    project
+  ) {
+    return getDeadlineStatus(
+      project
+    ).expired;
+  }
+
+
+  function renderDeadlineBadge(
+    project
+  ) {
+    const status =
+      getDeadlineStatus(
+        project
+      );
+
+
+    if (
+      status.days === null
+    ) {
+      return "";
+    }
+
+
+    const background =
+      status.urgent
+        ? "#171717"
+        : "#f2f2f2";
+
+
+    const color =
+      status.urgent
+        ? "#ffffff"
+        : "#555555";
+
+
+    const border =
+      status.urgent
+        ? "#171717"
+        : "#dedede";
+
+
+    return `
+      <span
+        style="
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          margin-top:5px;
+          padding:4px 7px;
+          border:1px solid ${border};
+          border-radius:999px;
+          background:${background};
+          color:${color};
+          font-size:10px;
+          font-weight:700;
+          line-height:1;
+          white-space:nowrap;
+        "
+      >
+        ${esc(
+          status.label
+        )}
+      </span>
+    `;
   }
 
 
@@ -486,7 +845,7 @@
       project.bidNtceEndDt ||
       project.deadlineDate ||
       project.closeDate ||
-      "9999-99-99"
+      ""
     );
   }
 
@@ -763,10 +1122,12 @@
 
 
         return String(
-          getProjectDeadline(a)
+          getProjectDeadline(a) ||
+          "9999-99-99"
         ).localeCompare(
           String(
-            getProjectDeadline(b)
+            getProjectDeadline(b) ||
+            "9999-99-99"
           )
         );
       }
@@ -780,12 +1141,40 @@
     return sortProjects(
       state.projects.filter(
         function (project) {
-          return (
+          if (
             getProjectCategory(
               project
-            ) === category &&
-            project.isExcludedFromPriority !== true
-          );
+            ) !== category
+          ) {
+            return false;
+          }
+
+
+          if (
+            project.isExcludedFromPriority === true
+          ) {
+            return false;
+          }
+
+
+          /*
+            지원사업은
+            마감일이 지난 순간
+            화면에서 자동 숨김.
+          */
+
+          if (
+            category ===
+              "arts_content_support" &&
+            isProjectDeadlineExpired(
+              project
+            )
+          ) {
+            return false;
+          }
+
+
+          return true;
         }
       )
     );
@@ -844,6 +1233,25 @@
             project
           ) === category &&
           project.isExcludedFromPriority === true
+        );
+      }
+    );
+  }
+
+
+  function getExpiredProjectsByCategory(
+    category
+  ) {
+    return state.projects.filter(
+      function (project) {
+        return (
+          getProjectCategory(
+            project
+          ) === category &&
+          project.isExcludedFromPriority !== true &&
+          isProjectDeadlineExpired(
+            project
+          )
         );
       }
     );
@@ -1097,6 +1505,7 @@
               item
             );
 
+
           return (
             grade === "B" ||
             grade === "C"
@@ -1252,15 +1661,19 @@
 
     return `
       <span class="priority-grade-wrap">
-        <span class="priority-grade ${getGradeClass(
-          grade
-        )}">
+        <span
+          class="priority-grade ${getGradeClass(
+            grade
+          )}"
+        >
           ${esc(grade)}
         </span>
 
         <span class="priority-tooltip">
           <strong>
-            왜 ${esc(grade)}등급인가?
+            왜 ${esc(
+              grade
+            )}등급인가?
           </strong>
 
           <em>
@@ -1305,7 +1718,9 @@
         function (keyword) {
           return `
             <span class="keyword">
-              ${esc(keyword)}
+              ${esc(
+                keyword
+              )}
             </span>
           `;
         }
@@ -1337,7 +1752,9 @@
             function (source) {
               return `
                 <span class="keyword">
-                  ${esc(source)}
+                  ${esc(
+                    source
+                  )}
                 </span>
               `;
             }
@@ -1389,6 +1806,7 @@
           flex-wrap:wrap;
         "
       >
+
         <strong
           style="
             font-size:13px;
@@ -1397,6 +1815,7 @@
         >
           기관
         </strong>
+
 
         ${SUPPORT_SOURCE_FILTERS
           .map(
@@ -1416,14 +1835,17 @@
               return `
                 <button
                   type="button"
+
                   data-support-source="${esc(
                     item.code
                   )}"
+
                   aria-pressed="${
                     active
                       ? "true"
                       : "false"
                   }"
+
                   style="
                     appearance:none;
                     cursor:pointer;
@@ -1454,13 +1876,18 @@
                     line-height:1;
                   "
                 >
-                  ${esc(item.label)}
-                  ${formatCount(count)}
+                  ${esc(
+                    item.label
+                  )}
+                  ${formatCount(
+                    count
+                  )}
                 </button>
               `;
             }
           )
           .join("")}
+
       </section>
     `;
   }
@@ -1477,7 +1904,9 @@
       tab === "support"
     ) {
       return `
-        <section class="grade-guide-box grade-guide-box-green">
+        <section
+          class="grade-guide-box grade-guide-box-green"
+        >
           <strong>
             지원사업 검토 기준
           </strong>
@@ -1492,6 +1921,7 @@
             공연·게임·애니메이션 등 단일 장르 중심 사업,
             교육생·참여자 모집,
             시상·결과발표형 공고는 우선순위에서 제외됩니다.
+            마감된 공고는 한국시간 기준으로 자동 숨김 처리합니다.
           </p>
         </section>
       `;
@@ -1499,7 +1929,9 @@
 
 
     return `
-      <section class="grade-guide-box grade-guide-box-green">
+      <section
+        class="grade-guide-box grade-guide-box-green"
+      >
         <strong>
           등급 기준 안내
         </strong>
@@ -1625,16 +2057,22 @@
           </span>
 
           <span class="badge category">
-            ${esc(agency)}
+            ${esc(
+              agency
+            )}
           </span>
         `
         : `
           <span class="badge category">
-            ${esc(categoryLabel)}
+            ${esc(
+              categoryLabel
+            )}
           </span>
 
           <span class="badge category">
-            ${esc(sourceLabel)}
+            ${esc(
+              sourceLabel
+            )}
           </span>
         `;
 
@@ -1643,6 +2081,7 @@
       <article
         class="card card-as-accordion priority-accordion-card"
       >
+
         <details class="accordion-card">
 
           <summary
@@ -1653,9 +2092,13 @@
 
               <em
                 class="summary-source"
-                title="${esc(sourceTitle)}"
+                title="${esc(
+                  sourceTitle
+                )}"
               >
-                ${esc(sourceLabel)}
+                ${esc(
+                  sourceLabel
+                )}
               </em>
 
               ${renderGradeBadge(
@@ -1670,10 +2113,14 @@
             >
 
               <small>
-                ${esc(categoryLabel)}
+                ${esc(
+                  categoryLabel
+                )}
               </small>
 
-              ${esc(title)}
+              ${esc(
+                title
+              )}
 
             </span>
 
@@ -1685,7 +2132,9 @@
               </span>
 
               <strong>
-                ${esc(published)}
+                ${esc(
+                  published
+                )}
               </strong>
 
             </span>
@@ -1698,8 +2147,18 @@
               </span>
 
               <strong>
-                ${esc(deadline)}
+                ${esc(
+                  deadline
+                )}
               </strong>
+
+              ${
+                tab === "support"
+                  ? renderDeadlineBadge(
+                      project
+                    )
+                  : ""
+              }
 
             </span>
 
@@ -1714,9 +2173,12 @@
                 ${bodyBadges}
               </div>
 
+
               <div class="score-group">
                 <span class="score">
-                  ${esc(nextAction)}
+                  ${esc(
+                    nextAction
+                  )}
                 </span>
               </div>
 
@@ -1724,7 +2186,9 @@
 
 
             <h2>
-              ${esc(title)}
+              ${esc(
+                title
+              )}
             </h2>
 
 
@@ -1735,7 +2199,9 @@
                   기관
                 </span>
 
-                ${esc(agency)}
+                ${esc(
+                  agency
+                )}
               </div>
 
 
@@ -1744,7 +2210,9 @@
                   예산/지원금
                 </span>
 
-                ${esc(amount)}
+                ${esc(
+                  amount
+                )}
               </div>
 
 
@@ -1753,7 +2221,9 @@
                   공고일
                 </span>
 
-                ${esc(published)}
+                ${esc(
+                  published
+                )}
               </div>
 
 
@@ -1762,7 +2232,17 @@
                   마감일
                 </span>
 
-                ${esc(deadline)}
+                ${esc(
+                  deadline
+                )}
+
+                ${
+                  tab === "support"
+                    ? renderDeadlineBadge(
+                        project
+                      )
+                    : ""
+                }
               </div>
 
             </div>
@@ -1783,14 +2263,18 @@
 
               <br />
 
-              ${esc(gradeReason)}
+              ${esc(
+                gradeReason
+              )}
 
             </div>
 
 
             <p class="action">
               다음 액션:
-              ${esc(nextAction)}
+              ${esc(
+                nextAction
+              )}
             </p>
 
 
@@ -1799,7 +2283,9 @@
                 ? `
                   <a
                     class="link"
-                    href="${esc(url)}"
+                    href="${esc(
+                      url
+                    )}"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -1816,6 +2302,7 @@
           </div>
 
         </details>
+
       </article>
     `;
   }
@@ -1868,6 +2355,14 @@
       ).length;
 
 
+    const expiredCount =
+      tab === "support"
+        ? getExpiredProjectsByCategory(
+            category
+          ).length
+        : 0;
+
+
     const supportFilter =
       tab === "support"
         ? renderSupportSourceFilters(
@@ -1876,25 +2371,35 @@
         : "";
 
 
-    const miniStatSmall =
+    let miniStatSmall =
+      `우선순위 제외 ${formatCount(
+        excludedCount
+      )}건`;
+
+
+    if (
+      tab === "support"
+    ) {
+      miniStatSmall =
+        `마감 종료 ${formatCount(
+          expiredCount
+        )}건 자동 숨김 · 우선순위 제외 ${formatCount(
+          excludedCount
+        )}건`;
+    }
+
+
+    if (
       tab === "support" &&
       state.supportSource !== "ALL"
-        ? `
-          전체 유효
-          ${formatCount(
-            allProjects.length
-          )}건
-          · 제외
-          ${formatCount(
-            excludedCount
-          )}건
-        `
-        : `
-          우선순위 제외
-          ${formatCount(
-            excludedCount
-          )}건
-        `;
+    ) {
+      miniStatSmall =
+        `전체 유효 ${formatCount(
+          allProjects.length
+        )}건 · 마감 종료 ${formatCount(
+          expiredCount
+        )}건 숨김`;
+    }
 
 
     const secondHeader =
@@ -1918,13 +2423,19 @@
         <div>
 
           <p class="priority-eyebrow">
-            AXOO Priority KR v1.4
+            AXOO Priority KR v1.5
           </p>
 
+
           <h2>
-            ${esc(config.icon)}
-            ${esc(config.label)}
+            ${esc(
+              config.icon
+            )}
+            ${esc(
+              config.label
+            )}
           </h2>
+
 
           <p>
             ${esc(
@@ -1932,6 +2443,7 @@
               ""
             )}
           </p>
+
 
           ${renderSourceTags(
             config.sources
@@ -1946,11 +2458,13 @@
             표시 공고
           </span>
 
+
           <strong>
             ${formatCount(
               projects.length
             )}건
           </strong>
+
 
           <small>
             ${miniStatSmall}
@@ -1976,8 +2490,11 @@
         <span class="list-source-grade">
 
           <em>
-            ${esc(firstHeader)}
+            ${esc(
+              firstHeader
+            )}
           </em>
+
 
           <em>
             등급
@@ -1987,7 +2504,9 @@
 
 
         <span>
-          ${esc(secondHeader)}
+          ${esc(
+            secondHeader
+          )}
         </span>
 
 
@@ -2029,7 +2548,7 @@
                   ? `${esc(
                       state.supportSource
                     )}에서 현재 AXOO 기준에 맞는 진행 중 공고가 없습니다.`
-                  : "해당 기준에 맞는 공고가 아직 없습니다."
+                  : "해당 기준에 맞는 진행 중 공고가 아직 없습니다."
               }
             </div>
           `
@@ -2169,8 +2688,7 @@
 
 
     if (
-      config.type ===
-      "priority"
+      config.type === "priority"
     ) {
       renderPriorityPanel(
         tab,
@@ -2233,6 +2751,7 @@
         button.onclick =
           function (event) {
             event.preventDefault();
+
             event.stopPropagation();
 
 
@@ -2606,12 +3125,16 @@
 
         card.innerHTML = `
           <div class="meta-label">
-            ${esc(item.label)}
+            ${esc(
+              item.label
+            )}
           </div>
 
           <div
             class="meta-value"
-            id="${esc(item.id)}"
+            id="${esc(
+              item.id
+            )}"
           >
             0
           </div>
@@ -2660,10 +3183,8 @@
 
     if (
       !activeTab ||
-      activeTab ===
-        "opportunities" ||
-      activeTab ===
-        "local"
+      activeTab === "opportunities" ||
+      activeTab === "local"
     ) {
       showTab(
         "art"
@@ -2697,8 +3218,7 @@
 
           if (
             config &&
-            config.type ===
-              "priority"
+            config.type === "priority"
           ) {
             renderPriorityPanel(
               config.tab,
@@ -2731,6 +3251,7 @@
   document.addEventListener(
     "DOMContentLoaded",
     function () {
+
       applyPriorityDashboard();
 
       schedulePatch();
@@ -2754,6 +3275,7 @@
             supportFilterButton
           ) {
             event.preventDefault();
+
             event.stopPropagation();
 
 
@@ -2772,8 +3294,7 @@
               SUPPORT_SOURCE_FILTERS.some(
                 function (item) {
                   return (
-                    item.code ===
-                    source
+                    item.code === source
                   );
                 }
               )
@@ -2839,6 +3360,7 @@
 
 
           event.preventDefault();
+
           event.stopPropagation();
 
 
@@ -2850,6 +3372,7 @@
             },
             0
           );
+
         },
         true
       );
