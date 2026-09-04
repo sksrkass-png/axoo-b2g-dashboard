@@ -1,12 +1,10 @@
 (function () {
   "use strict";
 
-  const PRIORITY_DATA_URL =
-    "data/priority_projects.json";
-
+  const PRIORITY_DATA_URL = "data/priority_projects.json";
 
   /* =========================================================
-     TAB CONFIG
+     CONFIG
   ========================================================= */
 
   const TAB_CONFIG = [
@@ -16,7 +14,6 @@
       icon: "💙",
       type: "native"
     },
-
     {
       tab: "mural",
       label: "벽화 & 조형물",
@@ -31,7 +28,6 @@
         "AXOO 우선 키워드 분류"
       ]
     },
-
     {
       tab: "exhibition",
       label: "전시 콘텐츠 기획 운영",
@@ -46,7 +42,6 @@
         "AXOO 우선 검토 기준"
       ]
     },
-
     {
       tab: "support",
       label: "예술·콘텐츠 지원사업",
@@ -62,7 +57,6 @@
         "KOCCA · 한국콘텐츠진흥원"
       ]
     },
-
     {
       tab: "other",
       label: "기타 AXOO 핏",
@@ -77,7 +71,6 @@
         "AXOO 서브 키워드 분류"
       ]
     },
-
     {
       tab: "agencies",
       label: "기관 타깃",
@@ -86,50 +79,26 @@
     }
   ];
 
-
   const SUPPORT_SOURCE_FILTERS = [
-    {
-      code: "ALL",
-      label: "전체"
-    },
-    {
-      code: "KAMS",
-      label: "KAMS"
-    },
-    {
-      code: "ARKO",
-      label: "ARKO"
-    },
-    {
-      code: "KCDF",
-      label: "KCDF"
-    },
-    {
-      code: "KOCCA",
-      label: "KOCCA"
-    }
+    { code: "ALL", label: "전체" },
+    { code: "KAMS", label: "KAMS" },
+    { code: "ARKO", label: "ARKO" },
+    { code: "KCDF", label: "KCDF" },
+    { code: "KOCCA", label: "KOCCA" }
   ];
-
 
   const SUPPORT_QUICK_FILTERS = [
-    {
-      code: "ALL",
-      label: "전체"
-    },
-    {
-      code: "RECENT",
-      label: "NEW·최근"
-    },
-    {
-      code: "D7",
-      label: "D-7 이내"
-    },
-    {
-      code: "B_PLUS",
-      label: "B 이상"
-    }
+    { code: "ALL", label: "전체" },
+    { code: "RECENT", label: "NEW·최근" },
+    { code: "D7", label: "D-7 이내" },
+    { code: "B_PLUS", label: "B 이상" }
   ];
 
+  const SUPPORT_SORT_OPTIONS = [
+    { code: "RECOMMENDED", label: "추천순" },
+    { code: "NEWEST", label: "최신순" },
+    { code: "DEADLINE", label: "마감순" }
+  ];
 
   const GRADE_ORDER = {
     S: 0,
@@ -139,48 +108,35 @@
     HOLD: 9
   };
 
-
   const state = {
     projects: [],
     loaded: false,
     currentTab: "art",
+
     supportSource: "ALL",
     supportQuick: "ALL",
+    supportSort: "RECOMMENDED",
     supportQuery: "",
+
     supportInteracted: false
   };
-
 
   /* =========================================================
      BASIC
   ========================================================= */
 
-  function $(
-    selector,
-    root = document
-  ) {
-    return root.querySelector(
-      selector
-    );
+  function $(selector, root = document) {
+    return root.querySelector(selector);
   }
 
-
-  function $all(
-    selector,
-    root = document
-  ) {
+  function $all(selector, root = document) {
     return Array.from(
-      root.querySelectorAll(
-        selector
-      )
+      root.querySelectorAll(selector)
     );
   }
-
 
   function esc(value) {
-    return String(
-      value ?? ""
-    ).replace(
+    return String(value ?? "").replace(
       /[&<>"']/g,
       function (match) {
         return {
@@ -194,114 +150,66 @@
     );
   }
 
-
   function formatCount(value) {
-    return Number(
-      value || 0
-    ).toLocaleString(
+    return Number(value || 0).toLocaleString(
       "ko-KR"
     );
   }
 
-
   function formatKrw(value) {
-    const amount =
-      Number(
-        value || 0
-      );
-
+    const amount = Number(value || 0);
 
     if (!amount) {
       return "예산 미확인";
     }
 
-
-    if (
-      amount >= 100000000
-    ) {
-      const eok =
-        amount / 100000000;
-
+    if (amount >= 100000000) {
+      const eok = amount / 100000000;
 
       return `${eok.toFixed(
-        eok >= 10
-          ? 0
-          : 1
+        eok >= 10 ? 0 : 1
       )}억`;
     }
 
-
-    if (
-      amount >= 10000
-    ) {
+    if (amount >= 10000) {
       return `${Math.round(
         amount / 10000
-      ).toLocaleString(
-        "ko-KR"
-      )}만원`;
+      ).toLocaleString("ko-KR")}만원`;
     }
-
 
     return `${amount.toLocaleString(
       "ko-KR"
     )}원`;
   }
 
-
   function compactDate(value) {
-    const valueText =
-      String(
-        value || ""
-      ).trim();
+    const raw = String(value || "").trim();
 
-
-    if (!valueText) {
+    if (!raw) {
       return "확인 필요";
     }
 
-
-    const match =
-      valueText.match(
-        /\d{4}[-.]\d{1,2}[-.]\d{1,2}/
-      );
-
+    const match = raw.match(
+      /\d{4}[-.]\d{1,2}[-.]\d{1,2}/
+    );
 
     return match
-      ? match[0].replace(
-          /\./g,
-          "-"
-        )
-      : valueText;
+      ? match[0].replace(/\./g, "-")
+      : raw;
   }
 
-
   function normalizeUrl(url) {
-    const value =
-      String(
-        url || ""
-      ).trim();
-
-
-    if (!value) {
-      return "";
-    }
-
+    const value = String(url || "").trim();
 
     if (
-      value.startsWith(
-        "http://"
-      ) ||
-      value.startsWith(
-        "https://"
-      )
+      value.startsWith("http://") ||
+      value.startsWith("https://")
     ) {
       return value;
     }
 
-
     return "";
   }
-
 
   /* =========================================================
      DATE
@@ -312,36 +220,18 @@
       new Intl.DateTimeFormat(
         "en-US",
         {
-          timeZone:
-            "Asia/Seoul",
-
-          year:
-            "numeric",
-
-          month:
-            "2-digit",
-
-          day:
-            "2-digit"
+          timeZone: "Asia/Seoul",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit"
         }
-      ).formatToParts(
-        new Date()
-      );
+      ).formatToParts(new Date());
 
+    const values = {};
 
-    const values =
-      {};
-
-
-    parts.forEach(
-      function (part) {
-        values[
-          part.type
-        ] =
-          part.value;
-      }
-    );
-
+    parts.forEach(function (part) {
+      values[part.type] = part.value;
+    });
 
     if (
       !values.year ||
@@ -351,7 +241,6 @@
       return "";
     }
 
-
     return [
       values.year,
       values.month,
@@ -359,42 +248,20 @@
     ].join("-");
   }
 
-
   function normalizeDateKey(value) {
-    const raw =
-      String(
-        value || ""
-      ).trim();
+    const raw = String(value || "").trim();
 
-
-    const match =
-      raw.match(
-        /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
-      );
-
+    const match = raw.match(
+      /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
+    );
 
     if (!match) {
       return "";
     }
 
-
-    const year =
-      Number(
-        match[1]
-      );
-
-
-    const month =
-      Number(
-        match[2]
-      );
-
-
-    const day =
-      Number(
-        match[3]
-      );
-
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
 
     if (
       month < 1 ||
@@ -405,166 +272,83 @@
       return "";
     }
 
-
     return [
       String(year),
-
-      String(month)
-        .padStart(
-          2,
-          "0"
-        ),
-
-      String(day)
-        .padStart(
-          2,
-          "0"
-        )
+      String(month).padStart(2, "0"),
+      String(day).padStart(2, "0")
     ].join("-");
   }
 
-
-  function dateKeyToUtcTime(
-    dateKey
-  ) {
-    const match =
-      String(
-        dateKey || ""
-      ).match(
-        /^(\d{4})-(\d{2})-(\d{2})$/
-      );
-
+  function dateKeyToUtcTime(dateKey) {
+    const match = String(
+      dateKey || ""
+    ).match(
+      /^(\d{4})-(\d{2})-(\d{2})$/
+    );
 
     if (!match) {
       return NaN;
     }
 
-
     return Date.UTC(
-      Number(
-        match[1]
-      ),
-
-      Number(
-        match[2]
-      ) - 1,
-
-      Number(
-        match[3]
-      )
+      Number(match[1]),
+      Number(match[2]) - 1,
+      Number(match[3])
     );
   }
 
+  function getDateTime(value) {
+    const key =
+      normalizeDateKey(value);
 
-  function getDaysUntilDate(
-    dateValue
-  ) {
-    const targetKey =
-      normalizeDateKey(
-        dateValue
+    if (!key) {
+      return NaN;
+    }
+
+    return dateKeyToUtcTime(key);
+  }
+
+  function getDaysUntilDate(dateValue) {
+    const target =
+      getDateTime(dateValue);
+
+    const today =
+      getDateTime(
+        getSeoulTodayKey()
       );
 
-
-    const todayKey =
-      getSeoulTodayKey();
-
-
     if (
-      !targetKey ||
-      !todayKey
+      !Number.isFinite(target) ||
+      !Number.isFinite(today)
     ) {
       return null;
     }
-
-
-    const targetTime =
-      dateKeyToUtcTime(
-        targetKey
-      );
-
-
-    const todayTime =
-      dateKeyToUtcTime(
-        todayKey
-      );
-
-
-    if (
-      !Number.isFinite(
-        targetTime
-      ) ||
-      !Number.isFinite(
-        todayTime
-      )
-    ) {
-      return null;
-    }
-
 
     return Math.round(
-      (
-        targetTime -
-        todayTime
-      ) /
-      86400000
+      (target - today) / 86400000
     );
   }
 
+  function getDaysSinceDate(dateValue) {
+    const target =
+      getDateTime(dateValue);
 
-  function getDaysSinceDate(
-    dateValue
-  ) {
-    const targetKey =
-      normalizeDateKey(
-        dateValue
+    const today =
+      getDateTime(
+        getSeoulTodayKey()
       );
 
-
-    const todayKey =
-      getSeoulTodayKey();
-
-
     if (
-      !targetKey ||
-      !todayKey
+      !Number.isFinite(target) ||
+      !Number.isFinite(today)
     ) {
       return null;
     }
-
-
-    const targetTime =
-      dateKeyToUtcTime(
-        targetKey
-      );
-
-
-    const todayTime =
-      dateKeyToUtcTime(
-        todayKey
-      );
-
-
-    if (
-      !Number.isFinite(
-        targetTime
-      ) ||
-      !Number.isFinite(
-        todayTime
-      )
-    ) {
-      return null;
-    }
-
 
     return Math.round(
-      (
-        todayTime -
-        targetTime
-      ) /
-      86400000
+      (today - target) / 86400000
     );
   }
-
 
   /* =========================================================
      DATA
@@ -573,65 +357,44 @@
   function getTabConfig(tab) {
     return TAB_CONFIG.find(
       function (item) {
-        return (
-          item.tab === tab
-        );
+        return item.tab === tab;
       }
     );
   }
 
-
   function extractProjects(data) {
-    if (
-      Array.isArray(
-        data
-      )
-    ) {
+    if (Array.isArray(data)) {
       return data;
     }
 
-
     if (
       data &&
-      Array.isArray(
-        data.projects
-      )
+      Array.isArray(data.projects)
     ) {
       return data.projects;
     }
 
-
     if (
       data &&
-      Array.isArray(
-        data.items
-      )
+      Array.isArray(data.items)
     ) {
       return data.items;
     }
 
-
     if (
       data &&
-      Array.isArray(
-        data.data
-      )
+      Array.isArray(data.data)
     ) {
       return data.data;
     }
 
-
     return [];
   }
 
-
   async function loadPriorityProjects() {
-    if (
-      state.loaded
-    ) {
+    if (state.loaded) {
       return state.projects;
     }
-
 
     try {
       const response =
@@ -639,52 +402,35 @@
           `${PRIORITY_DATA_URL}?v=${Date.now()}`
         );
 
-
-      if (
-        !response.ok
-      ) {
+      if (!response.ok) {
         throw new Error(
           `priority_projects.json load failed: ${response.status}`
         );
       }
 
-
       const data =
         await response.json();
 
-
       state.projects =
-        extractProjects(
-          data
-        );
+        extractProjects(data);
 
-
-      state.loaded =
-        true;
-
+      state.loaded = true;
 
       return state.projects;
     }
 
     catch (error) {
       console.warn(
-        "[AXOO Priority] priority_projects.json load failed",
+        "[AXOO Priority] load failed",
         error
       );
 
-
-      state.projects =
-        [];
-
-
-      state.loaded =
-        true;
-
+      state.projects = [];
+      state.loaded = true;
 
       return state.projects;
     }
   }
-
 
   /* =========================================================
      PROJECT GETTERS
@@ -699,7 +445,6 @@
     );
   }
 
-
   function getProjectScore(project) {
     return Number(
       project.score ||
@@ -709,45 +454,28 @@
     );
   }
 
-
   function getProjectGrade(project) {
-    if (
-      project.grade
-    ) {
+    if (project.grade) {
       return project.grade;
     }
 
-
     const score =
-      getProjectScore(
-        project
-      );
+      getProjectScore(project);
 
-
-    if (
-      score >= 85
-    ) {
+    if (score >= 85) {
       return "S";
     }
 
-
-    if (
-      score >= 70
-    ) {
+    if (score >= 70) {
       return "A";
     }
 
-
-    if (
-      score >= 50
-    ) {
+    if (score >= 50) {
       return "B";
     }
 
-
     return "C";
   }
-
 
   function getProjectAmount(project) {
     return Number(
@@ -761,7 +489,6 @@
     );
   }
 
-
   function getProjectDeadline(project) {
     return (
       project.deadline ||
@@ -772,7 +499,6 @@
       ""
     );
   }
-
 
   function getProjectPublishedDate(
     project
@@ -786,7 +512,6 @@
     );
   }
 
-
   function getProjectAgency(project) {
     return (
       project.agency ||
@@ -799,18 +524,15 @@
     );
   }
 
-
   function getSupportSourceCode(
     project
   ) {
     return String(
-      project.sourceCode ||
-      ""
+      project.sourceCode || ""
     )
       .trim()
       .toUpperCase();
   }
-
 
   function getSupportSourceName(
     project
@@ -823,13 +545,8 @@
     );
   }
 
-
-  function getProjectKeywords(
-    project
-  ) {
-    let keywords =
-      [];
-
+  function getProjectKeywords(project) {
+    let keywords = [];
 
     if (
       Array.isArray(
@@ -858,91 +575,57 @@
         project.keywords;
     }
 
-    else if (
-      project.field
-    ) {
+    else if (project.field) {
       keywords =
-        String(
-          project.field
-        )
+        String(project.field)
           .split("/")
-          .map(
-            function (item) {
-              return item.trim();
-            }
-          )
-          .filter(
-            Boolean
-          );
+          .map(function (item) {
+            return item.trim();
+          })
+          .filter(Boolean);
     }
-
 
     return [
       ...new Set(
         keywords
-          .map(
-            function (item) {
-              return String(
-                item || ""
-              ).trim();
-            }
-          )
-          .filter(
-            Boolean
-          )
+          .map(function (item) {
+            return String(
+              item || ""
+            ).trim();
+          })
+          .filter(Boolean)
       )
     ];
   }
-
 
   function getSupportFieldLabel(
     project
   ) {
     const keywords =
-      getProjectKeywords(
-        project
-      );
+      getProjectKeywords(project);
 
-
-    if (
-      keywords.length
-    ) {
+    if (keywords.length) {
       return keywords
-        .slice(
-          0,
-          3
-        )
-        .join(
-          " · "
-        );
+        .slice(0, 3)
+        .join(" · ");
     }
 
-
-    if (
-      project.field
-    ) {
-      return String(
-        project.field
-      );
+    if (project.field) {
+      return String(project.field);
     }
-
 
     return "지원사업";
   }
-
 
   function getAccordionCategoryLabel(
     project,
     tab
   ) {
-    if (
-      tab === "support"
-    ) {
+    if (tab === "support") {
       return getSupportFieldLabel(
         project
       );
     }
-
 
     return (
       project.priorityCategoryLabel ||
@@ -952,14 +635,11 @@
     );
   }
 
-
   function getSummarySourceLabel(
     project,
     tab
   ) {
-    if (
-      tab === "support"
-    ) {
+    if (tab === "support") {
       return (
         getSupportSourceCode(
           project
@@ -970,7 +650,6 @@
       );
     }
 
-
     return (
       project.sourceType ||
       project.source ||
@@ -979,19 +658,15 @@
     );
   }
 
-
   function getSummarySourceTitle(
     project,
     tab
   ) {
-    if (
-      tab === "support"
-    ) {
+    if (tab === "support") {
       return getSupportSourceName(
         project
       );
     }
-
 
     return getSummarySourceLabel(
       project,
@@ -999,25 +674,17 @@
     );
   }
 
-
   /* =========================================================
      D-DAY
   ========================================================= */
 
-  function getDeadlineStatus(
-    project
-  ) {
+  function getDeadlineStatus(project) {
     const days =
       getDaysUntilDate(
-        getProjectDeadline(
-          project
-        )
+        getProjectDeadline(project)
       );
 
-
-    if (
-      days === null
-    ) {
+    if (days === null) {
       return {
         days: null,
         expired: false,
@@ -1026,10 +693,7 @@
       };
     }
 
-
-    if (
-      days < 0
-    ) {
+    if (days < 0) {
       return {
         days,
         expired: true,
@@ -1038,10 +702,7 @@
       };
     }
 
-
-    if (
-      days === 0
-    ) {
+    if (days === 0) {
       return {
         days,
         expired: false,
@@ -1050,10 +711,7 @@
       };
     }
 
-
-    if (
-      days <= 3
-    ) {
+    if (days <= 3) {
       return {
         days,
         expired: false,
@@ -1063,16 +721,13 @@
       };
     }
 
-
     return {
       days,
       expired: false,
       urgent: false,
-      label:
-        `D-${days}`
+      label: `D-${days}`
     };
   }
-
 
   function isProjectDeadlineExpired(
     project
@@ -1082,40 +737,30 @@
     ).expired;
   }
 
-
   function renderDeadlineBadge(
     project
   ) {
     const status =
-      getDeadlineStatus(
-        project
-      );
+      getDeadlineStatus(project);
 
-
-    if (
-      status.days === null
-    ) {
+    if (status.days === null) {
       return "";
     }
-
 
     const background =
       status.urgent
         ? "#171717"
         : "#f2f2f2";
 
-
     const color =
       status.urgent
         ? "#ffffff"
         : "#555555";
 
-
     const border =
       status.urgent
         ? "#171717"
         : "#dedede";
-
 
     return `
       <span
@@ -1135,28 +780,22 @@
           white-space:nowrap;
         "
       >
-        ${esc(
-          status.label
-        )}
+        ${esc(status.label)}
       </span>
     `;
   }
 
-
   /* =========================================================
-     RECENT / NEW
+     RECENT
   ========================================================= */
 
-  function getRecentStatus(
-    project
-  ) {
+  function getRecentStatus(project) {
     const days =
       getDaysSinceDate(
         getProjectPublishedDate(
           project
         )
       );
-
 
     if (
       days === null ||
@@ -1169,10 +808,7 @@
       };
     }
 
-
-    if (
-      days <= 3
-    ) {
+    if (days <= 3) {
       return {
         type: "new",
         days,
@@ -1180,17 +816,13 @@
       };
     }
 
-
-    if (
-      days <= 7
-    ) {
+    if (days <= 7) {
       return {
         type: "recent",
         days,
         label: "최근 등록"
       };
     }
-
 
     return {
       type: "",
@@ -1199,26 +831,15 @@
     };
   }
 
-
-  function renderRecentBadge(
-    project
-  ) {
+  function renderRecentBadge(project) {
     const status =
-      getRecentStatus(
-        project
-      );
+      getRecentStatus(project);
 
-
-    if (
-      !status.type
-    ) {
+    if (!status.type) {
       return "";
     }
 
-
-    if (
-      status.type === "new"
-    ) {
+    if (status.type === "new") {
       return `
         <span
           title="최근 3일 이내 등록"
@@ -1242,7 +863,6 @@
         </span>
       `;
     }
-
 
     return `
       <span
@@ -1268,10 +888,7 @@
     `;
   }
 
-
-  function countNewProjects(
-    projects
-  ) {
+  function countNewProjects(projects) {
     return projects.filter(
       function (project) {
         return (
@@ -1283,78 +900,156 @@
     ).length;
   }
 
-
   /* =========================================================
-     SORT / BASE FILTER
+     SORT
   ========================================================= */
 
-  function sortProjects(
-    projects
-  ) {
-    return [
-      ...projects
-    ].sort(
-      function (
-        a,
-        b
-      ) {
-        const gradeDiff =
-          (
-            GRADE_ORDER[
-              getProjectGrade(a)
-            ] ?? 9
-          ) -
-          (
-            GRADE_ORDER[
-              getProjectGrade(b)
-            ] ?? 9
-          );
+  function compareRecommended(a, b) {
+    const gradeDiff =
+      (
+        GRADE_ORDER[
+          getProjectGrade(a)
+        ] ?? 9
+      ) -
+      (
+        GRADE_ORDER[
+          getProjectGrade(b)
+        ] ?? 9
+      );
 
+    if (gradeDiff !== 0) {
+      return gradeDiff;
+    }
 
-        if (
-          gradeDiff !== 0
-        ) {
-          return gradeDiff;
-        }
+    const scoreDiff =
+      getProjectScore(b) -
+      getProjectScore(a);
 
+    if (scoreDiff !== 0) {
+      return scoreDiff;
+    }
 
-        const scoreDiff =
-          getProjectScore(b) -
-          getProjectScore(a);
+    const amountDiff =
+      getProjectAmount(b) -
+      getProjectAmount(a);
 
+    if (amountDiff !== 0) {
+      return amountDiff;
+    }
 
-        if (
-          scoreDiff !== 0
-        ) {
-          return scoreDiff;
-        }
-
-
-        const amountDiff =
-          getProjectAmount(b) -
-          getProjectAmount(a);
-
-
-        if (
-          amountDiff !== 0
-        ) {
-          return amountDiff;
-        }
-
-
-        return String(
-          getProjectDeadline(a) ||
-          "9999-99-99"
-        ).localeCompare(
-          String(
-            getProjectDeadline(b) ||
-            "9999-99-99"
-          )
-        );
-      }
+    return String(
+      getProjectDeadline(a) ||
+      "9999-99-99"
+    ).localeCompare(
+      String(
+        getProjectDeadline(b) ||
+        "9999-99-99"
+      )
     );
   }
 
+  function sortProjects(projects) {
+    return [
+      ...projects
+    ].sort(compareRecommended);
+  }
+
+  function sortSupportProjects(
+    projects
+  ) {
+    const list =
+      [...projects];
+
+    if (
+      state.supportSort ===
+      "NEWEST"
+    ) {
+      return list.sort(
+        function (a, b) {
+          const aTime =
+            getDateTime(
+              getProjectPublishedDate(a)
+            );
+
+          const bTime =
+            getDateTime(
+              getProjectPublishedDate(b)
+            );
+
+          const safeA =
+            Number.isFinite(aTime)
+              ? aTime
+              : -Infinity;
+
+          const safeB =
+            Number.isFinite(bTime)
+              ? bTime
+              : -Infinity;
+
+          const diff =
+            safeB - safeA;
+
+          if (diff !== 0) {
+            return diff;
+          }
+
+          return compareRecommended(
+            a,
+            b
+          );
+        }
+      );
+    }
+
+    if (
+      state.supportSort ===
+      "DEADLINE"
+    ) {
+      return list.sort(
+        function (a, b) {
+          const aTime =
+            getDateTime(
+              getProjectDeadline(a)
+            );
+
+          const bTime =
+            getDateTime(
+              getProjectDeadline(b)
+            );
+
+          const safeA =
+            Number.isFinite(aTime)
+              ? aTime
+              : Infinity;
+
+          const safeB =
+            Number.isFinite(bTime)
+              ? bTime
+              : Infinity;
+
+          const diff =
+            safeA - safeB;
+
+          if (diff !== 0) {
+            return diff;
+          }
+
+          return compareRecommended(
+            a,
+            b
+          );
+        }
+      );
+    }
+
+    return list.sort(
+      compareRecommended
+    );
+  }
+
+  /* =========================================================
+     BASE FILTER
+  ========================================================= */
 
   function getDisplayProjectsByCategory(
     category
@@ -1371,13 +1066,12 @@
             return false;
           }
 
-
           if (
-            project.isExcludedFromPriority === true
+            project.isExcludedFromPriority ===
+            true
           ) {
             return false;
           }
-
 
           if (
             category ===
@@ -1389,27 +1083,25 @@
             return false;
           }
 
-
           return true;
         }
       )
     );
   }
 
-
   /* =========================================================
-     SUPPORT SEARCH / QUICK FILTER
+     SUPPORT FILTER
   ========================================================= */
 
   function filterSupportBySource(
     projects
   ) {
     if (
-      state.supportSource === "ALL"
+      state.supportSource ===
+      "ALL"
     ) {
       return projects;
     }
-
 
     return projects.filter(
       function (project) {
@@ -1423,7 +1115,6 @@
     );
   }
 
-
   function getSupportSearchText(
     project
   ) {
@@ -1436,76 +1127,54 @@
       project.organization,
       project.agency,
       project.field,
-
-      getSupportFieldLabel(
-        project
-      ),
-
+      getSupportFieldLabel(project),
       getProjectKeywords(
         project
       ).join(" "),
-
       project.gradeReason,
       project.axooFitReason
     ]
-      .filter(
-        Boolean
-      )
+      .filter(Boolean)
       .join(" ")
       .toLowerCase();
   }
-
 
   function filterSupportByQuery(
     projects
   ) {
     const query =
       String(
-        state.supportQuery ||
-        ""
+        state.supportQuery || ""
       )
         .trim()
         .toLowerCase();
 
-
-    if (
-      !query
-    ) {
+    if (!query) {
       return projects;
     }
-
 
     return projects.filter(
       function (project) {
         return getSupportSearchText(
           project
-        ).includes(
-          query
-        );
+        ).includes(query);
       }
     );
   }
-
 
   function matchesSupportQuickFilter(
     project,
     code
   ) {
-    if (
-      code === "ALL"
-    ) {
+    if (code === "ALL") {
       return true;
     }
 
-
-    if (
-      code === "RECENT"
-    ) {
+    if (code === "RECENT") {
       const type =
         getRecentStatus(
           project
         ).type;
-
 
       return (
         type === "new" ||
@@ -1513,15 +1182,11 @@
       );
     }
 
-
-    if (
-      code === "D7"
-    ) {
+    if (code === "D7") {
       const days =
         getDeadlineStatus(
           project
         ).days;
-
 
       return (
         days !== null &&
@@ -1530,10 +1195,7 @@
       );
     }
 
-
-    if (
-      code === "B_PLUS"
-    ) {
+    if (code === "B_PLUS") {
       return [
         "S",
         "A",
@@ -1545,10 +1207,8 @@
       );
     }
 
-
     return true;
   }
-
 
   function filterSupportByQuick(
     projects,
@@ -1564,69 +1224,49 @@
     );
   }
 
-
   function getSupportFilterContext() {
     const all =
       getDisplayProjectsByCategory(
         "arts_content_support"
       );
 
-
     const bySource =
-      filterSupportBySource(
-        all
-      );
-
+      filterSupportBySource(all);
 
     const bySourceAndQuery =
       filterSupportByQuery(
         bySource
       );
 
-
-    const final =
+    const filtered =
       filterSupportByQuick(
         bySourceAndQuery
       );
 
+    const final =
+      sortSupportProjects(
+        filtered
+      );
 
     return {
       all,
       bySource,
       bySourceAndQuery,
+      filtered,
       final
     };
   }
-
-
-  function getProjectsForTab(
-    tab,
-    category
-  ) {
-    if (
-      tab !== "support"
-    ) {
-      return getDisplayProjectsByCategory(
-        category
-      );
-    }
-
-
-    return getSupportFilterContext()
-      .final;
-  }
-
 
   function getExcludedProjects() {
     return state.projects.filter(
       function (project) {
         return (
-          project.isExcludedFromPriority === true
+          project.isExcludedFromPriority ===
+          true
         );
       }
     );
   }
-
 
   function getExcludedProjectsByCategory(
     category
@@ -1637,12 +1277,12 @@
           getProjectCategory(
             project
           ) === category &&
-          project.isExcludedFromPriority === true
+          project.isExcludedFromPriority ===
+            true
         );
       }
     );
   }
-
 
   function getExpiredProjectsByCategory(
     category
@@ -1653,7 +1293,8 @@
           getProjectCategory(
             project
           ) === category &&
-          project.isExcludedFromPriority !== true &&
+          project.isExcludedFromPriority !==
+            true &&
           isProjectDeadlineExpired(
             project
           )
@@ -1661,7 +1302,6 @@
       }
     );
   }
-
 
   function getPriorityCounts() {
     return {
@@ -1691,7 +1331,6 @@
     };
   }
 
-
   /* =========================================================
      META
   ========================================================= */
@@ -1701,19 +1340,12 @@
     value
   ) {
     const element =
-      document.getElementById(
-        id
-      );
+      document.getElementById(id);
 
-
-    if (
-      element
-    ) {
-      element.textContent =
-        value;
+    if (element) {
+      element.textContent = value;
     }
   }
-
 
   function getLegacyArtCount() {
     const legacy =
@@ -1721,55 +1353,40 @@
         "metaArtCount"
       );
 
-
     if (
       legacy &&
       legacy.textContent.trim()
     ) {
-      return legacy.textContent
-        .trim();
+      return legacy.textContent.trim();
     }
-
 
     const artCards =
       document.getElementById(
         "artCards"
       );
 
-
-    if (
-      artCards
-    ) {
+    if (artCards) {
       const count =
         artCards.querySelectorAll(
           ".card, article, details"
         ).length;
 
-
-      if (
-        count > 0
-      ) {
-        return formatCount(
-          count
-        );
+      if (count > 0) {
+        return formatCount(count);
       }
     }
 
-
     return "0";
   }
-
 
   function updateMetaCards() {
     const counts =
       getPriorityCounts();
 
-
     updateTextById(
       "priorityMetaArtCount",
       getLegacyArtCount()
     );
-
 
     updateTextById(
       "priorityMetaMuralCount",
@@ -1778,14 +1395,12 @@
       )}건`
     );
 
-
     updateTextById(
       "priorityMetaExhibitionCount",
       `${formatCount(
         counts.exhibition
       )}건`
     );
-
 
     updateTextById(
       "priorityMetaSupportCount",
@@ -1794,73 +1409,58 @@
       )}건`
     );
 
-
     $all(
       ".meta-card[data-tab-target]"
     ).forEach(
       function (card) {
-
         const target =
           card.getAttribute(
             "data-tab-target"
           );
 
-
         const isActive =
           state.currentTab ===
           target;
-
 
         card.classList.toggle(
           "meta-card-active",
           isActive
         );
 
-
         card.classList.toggle(
           "meta-card-muted",
           !isActive
         );
-
 
         card.setAttribute(
           "role",
           "button"
         );
 
-
         card.setAttribute(
           "tabindex",
           "0"
         );
 
-
         card.onclick =
           function () {
-            showTab(
-              target
-            );
+            showTab(target);
           };
-
 
         card.onkeydown =
           function (event) {
-
             if (
               event.key === "Enter" ||
               event.key === " "
             ) {
               event.preventDefault();
 
-              showTab(
-                target
-              );
+              showTab(target);
             }
           };
       }
     );
   }
-
 
   /* =========================================================
      SUMMARY
@@ -1869,51 +1469,38 @@
   function updateSummaryCounts(
     projects
   ) {
-    const visibleProjects =
-      Array.isArray(
-        projects
-      )
+    const list =
+      Array.isArray(projects)
         ? projects
         : [];
 
-
-    const total =
-      visibleProjects.length;
-
+    const total = list.length;
 
     const sCount =
-      visibleProjects.filter(
+      list.filter(
         function (item) {
           return (
-            getProjectGrade(
-              item
-            ) === "S"
+            getProjectGrade(item) ===
+            "S"
           );
         }
       ).length;
-
 
     const aCount =
-      visibleProjects.filter(
+      list.filter(
         function (item) {
           return (
-            getProjectGrade(
-              item
-            ) === "A"
+            getProjectGrade(item) ===
+            "A"
           );
         }
       ).length;
 
-
     const bcCount =
-      visibleProjects.filter(
+      list.filter(
         function (item) {
-
           const grade =
-            getProjectGrade(
-              item
-            );
-
+            getProjectGrade(item);
 
           return (
             grade === "B" ||
@@ -1922,39 +1509,26 @@
         }
       ).length;
 
-
     updateTextById(
       "totalCount",
-      formatCount(
-        total
-      )
+      formatCount(total)
     );
-
 
     updateTextById(
       "sCount",
-      formatCount(
-        sCount
-      )
+      formatCount(sCount)
     );
-
 
     updateTextById(
       "aCount",
-      formatCount(
-        aCount
-      )
+      formatCount(aCount)
     );
-
 
     updateTextById(
       "bCount",
-      formatCount(
-        bcCount
-      )
+      formatCount(bcCount)
     );
   }
-
 
   function updateArtSummaryCount() {
     const total =
@@ -1967,26 +1541,20 @@
         )
       ) || 0;
 
-
     updateTextById(
       "totalCount",
-      formatCount(
-        total
-      )
+      formatCount(total)
     );
-
 
     updateTextById(
       "sCount",
       "-"
     );
 
-
     updateTextById(
       "aCount",
       "-"
     );
-
 
     updateTextById(
       "bCount",
@@ -1994,79 +1562,54 @@
     );
   }
 
-
   /* =========================================================
-     PANEL HELPERS
+     PANELS
   ========================================================= */
 
   function getNativePanel(tab) {
-    if (
-      tab === "art"
-    ) {
+    if (tab === "art") {
       return $("#artTab");
     }
 
-
-    if (
-      tab === "agencies"
-    ) {
+    if (tab === "agencies") {
       return (
         $("#agenciesTab") ||
         $("#agencyTab")
       );
     }
 
-
     return null;
   }
 
-
-  function getPriorityPanelId(
-    tab
-  ) {
+  function getPriorityPanelId(tab) {
     return `${tab}Tab`;
   }
 
-
-  function getPriorityPanel(
-    tab
-  ) {
+  function getPriorityPanel(tab) {
     return document.getElementById(
-      getPriorityPanelId(
-        tab
-      )
+      getPriorityPanelId(tab)
     );
   }
 
-
   /* =========================================================
-     GRADE
+     BADGES
   ========================================================= */
 
-  function getGradeClass(
-    grade
-  ) {
+  function getGradeClass(grade) {
     return `priority-grade-${String(
       grade || "C"
     ).toLowerCase()}`;
   }
 
-
-  function renderGradeBadge(
-    project
-  ) {
+  function renderGradeBadge(project) {
     const grade =
-      getProjectGrade(
-        project
-      );
-
+      getProjectGrade(project);
 
     const reason =
       project.gradeReason ||
       project.axooFitReason ||
       project.summary ||
       "등급 기준 정보 없음";
-
 
     return `
       <span class="priority-grade-wrap">
@@ -2076,9 +1619,7 @@
             grade
           )}"
         >
-          ${esc(
-            grade
-          )}
+          ${esc(grade)}
         </span>
 
         <span class="priority-tooltip">
@@ -2090,9 +1631,7 @@
           </strong>
 
           <em>
-            ${esc(
-              reason
-            )}
+            ${esc(reason)}
           </em>
 
         </span>
@@ -2101,23 +1640,11 @@
     `;
   }
 
-
-  /* =========================================================
-     TAGS
-  ========================================================= */
-
-  function renderKeywordTags(
-    project
-  ) {
+  function renderKeywordTags(project) {
     const keywords =
-      getProjectKeywords(
-        project
-      );
+      getProjectKeywords(project);
 
-
-    if (
-      !keywords.length
-    ) {
+    if (!keywords.length) {
       return `
         <span class="keyword">
           키워드 미분류
@@ -2125,19 +1652,13 @@
       `;
     }
 
-
     return keywords
-      .slice(
-        0,
-        6
-      )
+      .slice(0, 6)
       .map(
         function (keyword) {
           return `
             <span class="keyword">
-              ${esc(
-                keyword
-              )}
+              ${esc(keyword)}
             </span>
           `;
         }
@@ -2145,19 +1666,13 @@
       .join("");
   }
 
-
-  function renderSourceTags(
-    sources
-  ) {
+  function renderSourceTags(sources) {
     if (
-      !Array.isArray(
-        sources
-      ) ||
+      !Array.isArray(sources) ||
       !sources.length
     ) {
       return "";
     }
-
 
     return `
       <div
@@ -2169,9 +1684,7 @@
             function (source) {
               return `
                 <span class="keyword">
-                  ${esc(
-                    source
-                  )}
+                  ${esc(source)}
                 </span>
               `;
             }
@@ -2181,7 +1694,6 @@
     `;
   }
 
-
   /* =========================================================
      SUPPORT CONTROLS
   ========================================================= */
@@ -2190,12 +1702,9 @@
     projects,
     code
   ) {
-    if (
-      code === "ALL"
-    ) {
+    if (code === "ALL") {
       return projects.length;
     }
-
 
     return projects.filter(
       function (project) {
@@ -2208,13 +1717,11 @@
     ).length;
   }
 
-
   function renderSupportSourceFilters(
-    allSupportProjects
+    allProjects
   ) {
     return `
       <section
-        class="support-source-filter-wrap"
         style="
           margin:18px 0 12px;
           display:flex;
@@ -2236,33 +1743,27 @@
         ${SUPPORT_SOURCE_FILTERS
           .map(
             function (item) {
-
               const active =
                 state.supportSource ===
                 item.code;
 
-
               const count =
                 getSupportSourceCount(
-                  allSupportProjects,
+                  allProjects,
                   item.code
                 );
-
 
               return `
                 <button
                   type="button"
-
                   data-support-source="${esc(
                     item.code
                   )}"
-
                   aria-pressed="${
                     active
                       ? "true"
                       : "false"
                   }"
-
                   style="
                     appearance:none;
                     cursor:pointer;
@@ -2293,12 +1794,8 @@
                     line-height:1;
                   "
                 >
-                  ${esc(
-                    item.label
-                  )}
-                  ${formatCount(
-                    count
-                  )}
+                  ${esc(item.label)}
+                  ${formatCount(count)}
                 </button>
               `;
             }
@@ -2308,7 +1805,6 @@
       </section>
     `;
   }
-
 
   function getQuickFilterCount(
     projects,
@@ -2320,6 +1816,58 @@
     ).length;
   }
 
+  function renderPillButton(
+    attribute,
+    code,
+    label,
+    active,
+    count = null
+  ) {
+    return `
+      <button
+        type="button"
+        ${attribute}="${esc(code)}"
+        aria-pressed="${
+          active ? "true" : "false"
+        }"
+        style="
+          appearance:none;
+          cursor:pointer;
+          border:1px solid ${
+            active
+              ? "#171717"
+              : "#d8d8d8"
+          };
+          background:${
+            active
+              ? "#171717"
+              : "#ffffff"
+          };
+          color:${
+            active
+              ? "#ffffff"
+              : "#444444"
+          };
+          border-radius:999px;
+          padding:8px 12px;
+          font:inherit;
+          font-size:12px;
+          font-weight:${
+            active ? "700" : "600"
+          };
+          line-height:1;
+          white-space:nowrap;
+        "
+      >
+        ${esc(label)}
+        ${
+          count === null
+            ? ""
+            : ` ${formatCount(count)}`
+        }
+      </button>
+    `;
+  }
 
   function renderSupportQuickControls(
     context
@@ -2357,77 +1905,57 @@
           ${SUPPORT_QUICK_FILTERS
             .map(
               function (item) {
-
-                const active =
+                return renderPillButton(
+                  "data-support-quick",
+                  item.code,
+                  item.label,
                   state.supportQuick ===
-                  item.code;
-
-
-                const count =
+                    item.code,
                   getQuickFilterCount(
                     context.bySourceAndQuery,
                     item.code
-                  );
-
-
-                return `
-                  <button
-                    type="button"
-
-                    data-support-quick="${esc(
-                      item.code
-                    )}"
-
-                    aria-pressed="${
-                      active
-                        ? "true"
-                        : "false"
-                    }"
-
-                    style="
-                      appearance:none;
-                      cursor:pointer;
-                      border:1px solid ${
-                        active
-                          ? "#171717"
-                          : "#d8d8d8"
-                      };
-                      background:${
-                        active
-                          ? "#171717"
-                          : "#ffffff"
-                      };
-                      color:${
-                        active
-                          ? "#ffffff"
-                          : "#444444"
-                      };
-                      border-radius:999px;
-                      padding:8px 12px;
-                      font:inherit;
-                      font-size:12px;
-                      font-weight:${
-                        active
-                          ? "700"
-                          : "600"
-                      };
-                      line-height:1;
-                    "
-                  >
-                    ${esc(
-                      item.label
-                    )}
-                    ${formatCount(
-                      count
-                    )}
-                  </button>
-                `;
+                  )
+                );
               }
             )
             .join("")}
 
         </div>
 
+        <div
+          style="
+            display:flex;
+            align-items:center;
+            gap:8px;
+            flex-wrap:wrap;
+            margin-bottom:10px;
+          "
+        >
+
+          <strong
+            style="
+              font-size:13px;
+              margin-right:4px;
+            "
+          >
+            정렬
+          </strong>
+
+          ${SUPPORT_SORT_OPTIONS
+            .map(
+              function (item) {
+                return renderPillButton(
+                  "data-support-sort",
+                  item.code,
+                  item.label,
+                  state.supportSort ===
+                    item.code
+                );
+              }
+            )
+            .join("")}
+
+        </div>
 
         <div
           style="
@@ -2467,9 +1995,7 @@
 
           <button
             type="button"
-
             data-support-reset="true"
-
             style="
               flex:0 0 auto;
               height:40px;
@@ -2490,7 +2016,6 @@
 
         </div>
 
-
         <p
           style="
             margin:9px 2px 0;
@@ -2499,8 +2024,8 @@
             line-height:1.5;
           "
         >
-          기관 필터와 빠른 필터,
-          검색어는 동시에 적용됩니다.
+          기관 필터 · 빠른 필터 · 검색어를
+          동시에 적용할 수 있습니다.
           검색 결과
           ${formatCount(
             context.final.length
@@ -2511,22 +2036,16 @@
     `;
   }
 
-
   /* =========================================================
      GUIDE
   ========================================================= */
 
-  function renderGradeGuide(
-    tab
-  ) {
-    if (
-      tab === "support"
-    ) {
+  function renderGradeGuide(tab) {
+    if (tab === "support") {
       return `
         <section
           class="grade-guide-box grade-guide-box-green"
         >
-
           <strong>
             지원사업 검토 기준
           </strong>
@@ -2538,24 +2057,18 @@
             시각예술, 전시, 공간, 디자인,
             브랜드, 콘텐츠 제작,
             기업 협업과의 연결성을 우선합니다.
-            공연·게임·애니메이션 등 단일 장르 중심 사업,
-            교육생·참여자 모집,
-            시상·결과발표형 공고는 우선순위에서 제외됩니다.
             게재 후 3일 이내 공고는 NEW,
             7일 이내 공고는 최근 등록으로 표시되며,
             마감된 공고는 한국시간 기준으로 자동 숨김 처리합니다.
           </p>
-
         </section>
       `;
     }
-
 
     return `
       <section
         class="grade-guide-box grade-guide-box-green"
       >
-
         <strong>
           등급 기준 안내
         </strong>
@@ -2565,21 +2078,13 @@
           A는 제안 가능성 높음,
           B는 모니터링,
           C는 낮은 우선순위입니다.
-          행사 운영대행, 폐기물, 청소,
-          시설관리, 보험, 임차,
-          시스템 유지보수 등은
-          우선순위에서 제외됩니다.
-          등급 배지에 마우스를 올리면
-          세부 선정 기준을 확인할 수 있습니다.
         </p>
-
       </section>
     `;
   }
 
-
   /* =========================================================
-     ACCORDION
+     CARD
   ========================================================= */
 
   function renderPriorityAccordion(
@@ -2592,12 +2097,8 @@
       project.projectName ||
       "제목 없음";
 
-
     const agency =
-      getProjectAgency(
-        project
-      );
-
+      getProjectAgency(project);
 
     const sourceLabel =
       getSummarySourceLabel(
@@ -2605,13 +2106,11 @@
         tab
       );
 
-
     const sourceTitle =
       getSummarySourceTitle(
         project,
         tab
       );
-
 
     const categoryLabel =
       getAccordionCategoryLabel(
@@ -2619,14 +2118,10 @@
         tab
       );
 
-
     const amount =
       formatKrw(
-        getProjectAmount(
-          project
-        )
+        getProjectAmount(project)
       );
-
 
     const published =
       compactDate(
@@ -2635,27 +2130,21 @@
         )
       );
 
-
     const deadline =
       compactDate(
-        getProjectDeadline(
-          project
-        )
+        getProjectDeadline(project)
       );
-
 
     const nextAction =
       project.nextAction ||
       project.recommendedAction ||
       "검토";
 
-
     const gradeReason =
       project.gradeReason ||
       project.axooFitReason ||
       project.summary ||
       "등급 기준 정보 없음";
-
 
     const url =
       normalizeUrl(
@@ -2666,7 +2155,6 @@
         ""
       );
 
-
     const bodyBadges =
       tab === "support"
         ? `
@@ -2674,31 +2162,23 @@
             ${esc(
               getSupportSourceCode(
                 project
-              ) ||
-              "지원"
+              ) || "지원"
             )}
           </span>
 
           <span class="badge category">
-            ${esc(
-              agency
-            )}
+            ${esc(agency)}
           </span>
         `
         : `
           <span class="badge category">
-            ${esc(
-              categoryLabel
-            )}
+            ${esc(categoryLabel)}
           </span>
 
           <span class="badge category">
-            ${esc(
-              sourceLabel
-            )}
+            ${esc(sourceLabel)}
           </span>
         `;
-
 
     return `
       <article
@@ -2719,9 +2199,7 @@
                   sourceTitle
                 )}"
               >
-                ${esc(
-                  sourceLabel
-                )}
+                ${esc(sourceLabel)}
               </em>
 
               ${renderGradeBadge(
@@ -2730,16 +2208,12 @@
 
             </span>
 
-
             <span
               class="summary-title priority-summary-title"
             >
 
               <small>
-
-                ${esc(
-                  categoryLabel
-                )}
+                ${esc(categoryLabel)}
 
                 ${
                   tab === "support"
@@ -2748,41 +2222,29 @@
                       )
                     : ""
                 }
-
               </small>
 
-              ${esc(
-                title
-              )}
+              ${esc(title)}
 
             </span>
 
-
             <span class="summary-period">
-
               <span>
                 공고일
               </span>
 
               <strong>
-                ${esc(
-                  published
-                )}
+                ${esc(published)}
               </strong>
-
             </span>
 
-
             <span class="summary-deadline">
-
               <span>
                 마감일
               </span>
 
               <strong>
-                ${esc(
-                  deadline
-                )}
+                ${esc(deadline)}
               </strong>
 
               ${
@@ -2792,18 +2254,15 @@
                     )
                   : ""
               }
-
             </span>
 
           </summary>
-
 
           <div class="accordion-body">
 
             <div class="card-top">
 
               <div class="badges">
-
                 ${bodyBadges}
 
                 ${
@@ -2813,80 +2272,40 @@
                       )
                     : ""
                 }
-
               </div>
 
-
               <div class="score-group">
-
                 <span class="score">
-                  ${esc(
-                    nextAction
-                  )}
+                  ${esc(nextAction)}
                 </span>
-
               </div>
 
             </div>
 
-
             <h2>
-              ${esc(
-                title
-              )}
+              ${esc(title)}
             </h2>
-
 
             <div class="meta">
 
               <div>
-
-                <span>
-                  기관
-                </span>
-
-                ${esc(
-                  agency
-                )}
-
+                <span>기관</span>
+                ${esc(agency)}
               </div>
 
-
               <div>
-
-                <span>
-                  예산/지원금
-                </span>
-
-                ${esc(
-                  amount
-                )}
-
+                <span>예산/지원금</span>
+                ${esc(amount)}
               </div>
 
-
               <div>
-
-                <span>
-                  공고일
-                </span>
-
-                ${esc(
-                  published
-                )}
-
+                <span>공고일</span>
+                ${esc(published)}
               </div>
 
-
               <div>
-
-                <span>
-                  마감일
-                </span>
-
-                ${esc(
-                  deadline
-                )}
+                <span>마감일</span>
+                ${esc(deadline)}
 
                 ${
                   tab === "support"
@@ -2895,54 +2314,37 @@
                       )
                     : ""
                 }
-
               </div>
 
             </div>
 
-
             <div class="keywords">
-
               ${renderKeywordTags(
                 project
               )}
-
             </div>
 
-
             <div class="reason">
-
               <strong>
                 검토 기준
               </strong>
 
               <br />
 
-              ${esc(
-                gradeReason
-              )}
-
+              ${esc(gradeReason)}
             </div>
 
-
             <p class="action">
-
               다음 액션:
-              ${esc(
-                nextAction
-              )}
-
+              ${esc(nextAction)}
             </p>
-
 
             ${
               url
                 ? `
                   <a
                     class="link"
-                    href="${esc(
-                      url
-                    )}"
+                    href="${esc(url)}"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -2964,9 +2366,8 @@
     `;
   }
 
-
   /* =========================================================
-     PRIORITY PANEL
+     PANEL RENDER
   ========================================================= */
 
   function renderPriorityPanel(
@@ -2974,16 +2375,10 @@
     category
   ) {
     const config =
-      getTabConfig(
-        tab
-      );
-
+      getTabConfig(tab);
 
     const panel =
-      getPriorityPanel(
-        tab
-      );
-
+      getPriorityPanel(tab);
 
     if (
       !panel ||
@@ -2992,30 +2387,25 @@
       return;
     }
 
-
     const allProjects =
       getDisplayProjectsByCategory(
         category
       );
-
 
     const supportContext =
       tab === "support"
         ? getSupportFilterContext()
         : null;
 
-
     const projects =
       tab === "support"
         ? supportContext.final
         : allProjects;
 
-
     const excludedCount =
       getExcludedProjectsByCategory(
         category
       ).length;
-
 
     const expiredCount =
       tab === "support"
@@ -3024,7 +2414,6 @@
           ).length
         : 0;
 
-
     const newCount =
       tab === "support"
         ? countNewProjects(
@@ -3032,38 +2421,41 @@
           )
         : 0;
 
-
     let miniStatSmall =
       `우선순위 제외 ${formatCount(
         excludedCount
       )}건`;
 
+    if (tab === "support") {
+      const sortLabel =
+        SUPPORT_SORT_OPTIONS.find(
+          function (item) {
+            return (
+              item.code ===
+              state.supportSort
+            );
+          }
+        )?.label || "추천순";
 
-    if (
-      tab === "support"
-    ) {
       miniStatSmall =
         `NEW ${formatCount(
           newCount
-        )}건 · 전체 유효 ${formatCount(
+        )}건 · ${sortLabel} · 전체 유효 ${formatCount(
           allProjects.length
         )}건 · 마감 종료 ${formatCount(
           expiredCount
         )}건 숨김`;
     }
 
-
-    const secondHeader =
-      tab === "support"
-        ? "분야 / 공고명"
-        : "카테고리 / 공고명";
-
-
     const firstHeader =
       tab === "support"
         ? "기관"
         : "출처";
 
+    const secondHeader =
+      tab === "support"
+        ? "분야 / 공고명"
+        : "카테고리 / 공고명";
 
     panel.innerHTML = `
 
@@ -3074,27 +2466,19 @@
         <div>
 
           <p class="priority-eyebrow">
-            AXOO Priority KR v1.7.1
+            AXOO Priority KR v1.8
           </p>
 
-
           <h2>
-            ${esc(
-              config.icon
-            )}
-            ${esc(
-              config.label
-            )}
+            ${esc(config.icon)}
+            ${esc(config.label)}
           </h2>
-
 
           <p>
             ${esc(
-              config.description ||
-              ""
+              config.description || ""
             )}
           </p>
-
 
           ${renderSourceTags(
             config.sources
@@ -3102,20 +2486,17 @@
 
         </div>
 
-
         <div class="priority-mini-stat">
 
           <span>
             표시 공고
           </span>
 
-
           <strong>
             ${formatCount(
               projects.length
             )}건
           </strong>
-
 
           <small>
             ${miniStatSmall}
@@ -3125,7 +2506,6 @@
 
       </section>
 
-
       ${
         tab === "support"
           ? renderSupportSourceFilters(
@@ -3133,7 +2513,6 @@
             )
           : ""
       }
-
 
       ${
         tab === "support"
@@ -3143,43 +2522,29 @@
           : ""
       }
 
-
-      ${renderGradeGuide(
-        tab
-      )}
-
+      ${renderGradeGuide(tab)}
 
       <div
         class="list-head priority-list-head"
       >
 
         <span class="list-source-grade">
-
           <em>
-            ${esc(
-              firstHeader
-            )}
+            ${esc(firstHeader)}
           </em>
-
 
           <em>
             등급
           </em>
-
         </span>
-
 
         <span>
-          ${esc(
-            secondHeader
-          )}
+          ${esc(secondHeader)}
         </span>
-
 
         <span>
           게재일
         </span>
-
 
         <span>
           마감일
@@ -3187,14 +2552,12 @@
 
       </div>
 
-
       ${
         projects.length
           ? `
             <section
               class="cards priority-accordion-list"
             >
-
               ${projects
                 .map(
                   function (project) {
@@ -3205,29 +2568,24 @@
                   }
                 )
                 .join("")}
-
             </section>
           `
           : `
             <div class="priority-empty">
-
               ${
                 tab === "support"
-                  ? "현재 선택한 기관·빠른 필터·검색 조건에 맞는 진행 중 공고가 없습니다."
+                  ? "현재 선택한 기관·필터·검색 조건에 맞는 진행 중 공고가 없습니다."
                   : "해당 기준에 맞는 진행 중 공고가 아직 없습니다."
               }
-
             </div>
           `
       }
     `;
 
-
     updateSummaryCounts(
       projects
     );
   }
-
 
   /* =========================================================
      TAB CONTROL
@@ -3246,20 +2604,13 @@
       "localTab"
     ].forEach(
       function (id) {
-
         const panel =
-          document.getElementById(
-            id
-          );
+          document.getElementById(id);
 
-
-        if (
-          panel
-        ) {
+        if (panel) {
           panel.classList.remove(
             "active"
           );
-
 
           panel.style.display =
             "none";
@@ -3268,146 +2619,98 @@
     );
   }
 
-
-  function activateTabButton(
-    tab
-  ) {
+  function activateTabButton(tab) {
     $all(
       ".tab-button"
     ).forEach(
       function (button) {
-
-        const isActive =
+        const active =
           button.getAttribute(
             "data-tab"
           ) === tab;
 
-
         button.classList.toggle(
           "active",
-          isActive
+          active
         );
-
 
         button.setAttribute(
           "aria-selected",
-          isActive
-            ? "true"
-            : "false"
+          active ? "true" : "false"
         );
       }
     );
   }
 
-
   function showNativeTab(tab) {
     const panel =
-      getNativePanel(
-        tab
-      );
+      getNativePanel(tab);
 
-
-    if (
-      !panel
-    ) {
+    if (!panel) {
       return;
     }
-
 
     panel.classList.add(
       "active"
     );
 
+    panel.style.display = "";
 
-    panel.style.display =
-      "";
-
-
-    if (
-      tab === "art"
-    ) {
+    if (tab === "art") {
       updateArtSummaryCount();
     }
   }
 
-
   function showTab(tab) {
     const config =
-      getTabConfig(
-        tab
-      );
+      getTabConfig(tab);
 
-
-    if (
-      !config
-    ) {
+    if (!config) {
       return;
     }
 
-
-    state.currentTab =
-      tab;
-
+    state.currentTab = tab;
 
     hideAllPanels();
 
-
-    activateTabButton(
-      tab
-    );
-
+    activateTabButton(tab);
 
     if (
-      config.type ===
-      "priority"
+      config.type === "priority"
     ) {
       renderPriorityPanel(
         tab,
         config.category
       );
 
-
       const panel =
-        getPriorityPanel(
-          tab
-        );
+        getPriorityPanel(tab);
 
-
-      if (
-        panel
-      ) {
+      if (panel) {
         panel.classList.add(
           "active"
         );
 
-
-        panel.style.display =
-          "";
+        panel.style.display = "";
       }
     }
 
     else {
-      showNativeTab(
-        tab
-      );
+      showNativeTab(tab);
     }
-
 
     updateMetaCards();
   }
-
 
   function setupTabButtons() {
     $all(
       ".tab-button"
     ).forEach(
       function (button) {
-
         const tab =
           button.getAttribute(
             "data-tab"
           );
-
 
         if (
           tab === "opportunities" ||
@@ -3416,37 +2719,26 @@
           button.style.display =
             "none";
 
-
           return;
         }
 
-
         button.onclick =
           function (event) {
-
             event.preventDefault();
-
             event.stopPropagation();
-
 
             const nextTab =
               button.getAttribute(
                 "data-tab"
               );
 
-
-            if (
-              nextTab
-            ) {
-              showTab(
-                nextTab
-              );
+            if (nextTab) {
+              showTab(nextTab);
             }
           };
       }
     );
   }
-
 
   /* =========================================================
      ENSURE PANELS
@@ -3460,49 +2752,33 @@
       "other"
     ].forEach(
       function (tab) {
-
         let panel =
-          getPriorityPanel(
-            tab
-          );
+          getPriorityPanel(tab);
 
-
-        if (
-          panel
-        ) {
+        if (panel) {
           return;
         }
-
 
         panel =
           document.createElement(
             "section"
           );
 
-
         panel.id =
-          getPriorityPanelId(
-            tab
-          );
-
+          getPriorityPanelId(tab);
 
         panel.className =
           "tab-panel priority-tab-panel";
 
-
-        panel.style.display =
-          "none";
-
+        panel.style.display = "none";
 
         const agenciesPanel =
           $("#agenciesTab") ||
           $("#agencyTab");
 
-
         const main =
           $("main") ||
           document.body;
-
 
         if (
           agenciesPanel &&
@@ -3516,30 +2792,22 @@
         }
 
         else {
-          main.appendChild(
-            panel
-          );
+          main.appendChild(panel);
         }
       }
     );
   }
-
 
   /* =========================================================
      TAB LAYOUT
   ========================================================= */
 
   function ensureTabLayout() {
-    const tabs =
-      $(".tabs");
+    const tabs = $(".tabs");
 
-
-    if (
-      !tabs
-    ) {
+    if (!tabs) {
       return;
     }
-
 
     const desiredTabs = [
       {
@@ -3547,31 +2815,26 @@
         text:
           "💙 건축물 미술작품"
       },
-
       {
         tab: "mural",
         text:
           "🧱 벽화 & 조형물"
       },
-
       {
         tab: "exhibition",
         text:
           "🖼️ 전시 콘텐츠 기획 운영"
       },
-
       {
         tab: "support",
         text:
           "✨ 예술·콘텐츠 지원사업"
       },
-
       {
         tab: "other",
         text:
           "📂 기타 AXOO 핏"
       },
-
       {
         tab: "agencies",
         text:
@@ -3579,32 +2842,23 @@
       }
     ];
 
-
     desiredTabs.forEach(
       function (item) {
-
         let button =
           tabs.querySelector(
             `.tab-button[data-tab="${item.tab}"]`
           );
 
-
-        if (
-          !button
-        ) {
+        if (!button) {
           button =
             document.createElement(
               "button"
             );
 
-
-          button.type =
-            "button";
-
+          button.type = "button";
 
           button.className =
             "tab-button";
-
 
           button.setAttribute(
             "data-tab",
@@ -3612,90 +2866,65 @@
           );
         }
 
-
         button.textContent =
           item.text;
 
+        button.style.display = "";
 
-        button.style.display =
-          "";
-
-
-        tabs.appendChild(
-          button
-        );
+        tabs.appendChild(button);
       }
     );
 
-
-    const opportunityButton =
+    const oldOpportunity =
       tabs.querySelector(
         '.tab-button[data-tab="opportunities"]'
       );
 
-
-    const localButton =
+    const oldLocal =
       tabs.querySelector(
         '.tab-button[data-tab="local"]'
       );
 
-
-    if (
-      opportunityButton
-    ) {
-      opportunityButton.style.display =
+    if (oldOpportunity) {
+      oldOpportunity.style.display =
         "none";
     }
 
-
-    if (
-      localButton
-    ) {
-      localButton.style.display =
+    if (oldLocal) {
+      oldLocal.style.display =
         "none";
     }
-
 
     let separator =
       tabs.querySelector(
         ".priority-tab-separator"
       );
 
-
-    if (
-      !separator
-    ) {
+    if (!separator) {
       separator =
         document.createElement(
           "span"
         );
 
-
       separator.className =
         "priority-tab-separator";
-
 
       separator.textContent =
         "참고";
     }
-
 
     const agenciesButton =
       tabs.querySelector(
         '.tab-button[data-tab="agencies"]'
       );
 
-
-    if (
-      agenciesButton
-    ) {
+    if (agenciesButton) {
       tabs.insertBefore(
         separator,
         agenciesButton
       );
     }
   }
-
 
   /* =========================================================
      META FALLBACK
@@ -3705,63 +2934,42 @@
     const metaBar =
       $(".meta-bar");
 
-
-    if (
-      !metaBar
-    ) {
+    if (!metaBar) {
       return;
     }
 
-
-    const requiredCards = [
+    const cards = [
       {
-        id:
-          "priorityMetaArtCount",
-
+        id: "priorityMetaArtCount",
         label:
           "1. 건축물 미술작품",
-
-        tab:
-          "art"
+        tab: "art"
       },
-
       {
         id:
           "priorityMetaMuralCount",
-
         label:
           "2. 벽화 & 조형물",
-
-        tab:
-          "mural"
+        tab: "mural"
       },
-
       {
         id:
           "priorityMetaExhibitionCount",
-
         label:
           "3. 전시 콘텐츠 기획 운영",
-
-        tab:
-          "exhibition"
+        tab: "exhibition"
       },
-
       {
         id:
           "priorityMetaSupportCount",
-
         label:
           "4. 예술·콘텐츠 지원사업",
-
-        tab:
-          "support"
+        tab: "support"
       }
     ];
 
-
-    const alreadyPriority =
-      requiredCards.every(
+    const complete =
+      cards.every(
         function (item) {
           return document.getElementById(
             item.id
@@ -3769,62 +2977,44 @@
         }
       );
 
-
-    if (
-      alreadyPriority
-    ) {
+    if (complete) {
       return;
     }
 
+    metaBar.innerHTML = "";
 
-    metaBar.innerHTML =
-      "";
-
-
-    requiredCards.forEach(
+    cards.forEach(
       function (item) {
-
         const card =
           document.createElement(
             "div"
           );
 
-
         card.className =
           "meta-card priority-meta-card";
-
 
         card.setAttribute(
           "data-tab-target",
           item.tab
         );
 
-
         card.innerHTML = `
           <div class="meta-label">
-            ${esc(
-              item.label
-            )}
+            ${esc(item.label)}
           </div>
 
           <div
             class="meta-value"
-            id="${esc(
-              item.id
-            )}"
+            id="${esc(item.id)}"
           >
             0
           </div>
         `;
 
-
-        metaBar.appendChild(
-          card
-        );
+        metaBar.appendChild(card);
       }
     );
   }
-
 
   /* =========================================================
      INIT
@@ -3832,23 +3022,16 @@
 
   async function applyPriorityDashboard() {
     ensurePriorityPanels();
-
     ensureTabLayout();
-
     setupMetaFallback();
-
 
     await loadPriorityProjects();
 
-
     updateMetaCards();
-
     setupTabButtons();
-
 
     const activeButton =
       $(".tab-button.active");
-
 
     const activeTab =
       activeButton
@@ -3857,56 +3040,43 @@
           )
         : "";
 
-
     if (
       !activeTab ||
       activeTab ===
         "opportunities" ||
-      activeTab ===
-        "local"
+      activeTab === "local"
     ) {
-      showTab(
-        "art"
-      );
+      showTab("art");
     }
 
     else {
-      showTab(
-        activeTab
-      );
+      showTab(activeTab);
     }
   }
 
-
   function schedulePatch() {
-    let count =
-      0;
-
+    let count = 0;
 
     const timer =
       window.setInterval(
         function () {
-
           updateMetaCards();
-
 
           const config =
             getTabConfig(
               state.currentTab
             );
 
-
-          const shouldSkipSupportRerender =
+          const skipSupport =
             state.currentTab ===
               "support" &&
             state.supportInteracted;
-
 
           if (
             config &&
             config.type ===
               "priority" &&
-            !shouldSkipSupportRerender
+            !skipSupport
           ) {
             renderPriorityPanel(
               config.tab,
@@ -3914,14 +3084,9 @@
             );
           }
 
+          count += 1;
 
-          count +=
-            1;
-
-
-          if (
-            count >= 8
-          ) {
+          if (count >= 8) {
             window.clearInterval(
               timer
             );
@@ -3930,7 +3095,6 @@
         700
       );
   }
-
 
   function rerenderSupportAndRestoreSearchFocus(
     selectionStart,
@@ -3941,22 +3105,16 @@
       "arts_content_support"
     );
 
-
     const input =
       document.getElementById(
         "supportSearchInput"
       );
 
-
-    if (
-      !input
-    ) {
+    if (!input) {
       return;
     }
 
-
     input.focus();
-
 
     if (
       typeof selectionStart ===
@@ -3973,9 +3131,8 @@
     }
   }
 
-
   /* =========================================================
-     EVENTS / KOREAN IME FIX
+     EVENTS / KOREAN IME SAFE
   ========================================================= */
 
   document.addEventListener(
@@ -3983,58 +3140,43 @@
     function () {
 
       applyPriorityDashboard();
-
       schedulePatch();
-
 
       let supportSearchComposing =
         false;
 
-
       let supportSearchTimer =
         null;
 
-
       function clearSupportSearchTimer() {
-        if (
-          supportSearchTimer
-        ) {
+        if (supportSearchTimer) {
           window.clearTimeout(
             supportSearchTimer
           );
-
 
           supportSearchTimer =
             null;
         }
       }
 
-
       function applySupportSearch(
         input,
         delay = 140
       ) {
-        if (
-          !input
-        ) {
+        if (!input) {
           return;
         }
 
-
         clearSupportSearchTimer();
-
 
         const value =
           input.value || "";
 
-
         const selectionStart =
           input.selectionStart;
 
-
         const selectionEnd =
           input.selectionEnd;
-
 
         supportSearchTimer =
           window.setTimeout(
@@ -4046,38 +3188,27 @@
                 return;
               }
 
-
               state.supportInteracted =
                 true;
 
-
               state.supportQuery =
                 value;
-
 
               rerenderSupportAndRestoreSearchFocus(
                 selectionStart,
                 selectionEnd
               );
 
-
               supportSearchTimer =
                 null;
-
             },
             delay
           );
       }
 
-
-      /*
-        한글 IME 조합 시작
-      */
-
       document.addEventListener(
         "compositionstart",
         function (event) {
-
           const input =
             event.target.closest
               ? event.target.closest(
@@ -4085,37 +3216,24 @@
                 )
               : null;
 
-
-          if (
-            !input
-          ) {
+          if (!input) {
             return;
           }
-
 
           supportSearchComposing =
             true;
 
-
           state.supportInteracted =
             true;
 
-
           clearSupportSearchTimer();
-
         },
         true
       );
 
-
-      /*
-        한글 IME 조합 완료
-      */
-
       document.addEventListener(
         "compositionend",
         function (event) {
-
           const input =
             event.target.closest
               ? event.target.closest(
@@ -4123,41 +3241,27 @@
                 )
               : null;
 
-
-          if (
-            !input
-          ) {
+          if (!input) {
             return;
           }
-
 
           supportSearchComposing =
             false;
 
-
           state.supportInteracted =
             true;
-
 
           applySupportSearch(
             input,
             100
           );
-
         },
         true
       );
 
-
-      /*
-        일반 입력
-        한글 조합 중에는 렌더링하지 않음
-      */
-
       document.addEventListener(
         "input",
         function (event) {
-
           const input =
             event.target.closest
               ? event.target.closest(
@@ -4165,17 +3269,12 @@
                 )
               : null;
 
-
-          if (
-            !input
-          ) {
+          if (!input) {
             return;
           }
 
-
           state.supportInteracted =
             true;
-
 
           if (
             supportSearchComposing ||
@@ -4184,205 +3283,201 @@
             return;
           }
 
-
           applySupportSearch(
             input,
             140
           );
-
         },
         true
       );
-
 
       document.addEventListener(
         "click",
         function (event) {
 
-          /*
-            기관 필터
-          */
+          /* 기관 */
 
           const sourceButton =
             event.target.closest(
               "[data-support-source]"
             );
 
-
-          if (
-            sourceButton
-          ) {
+          if (sourceButton) {
             event.preventDefault();
-
             event.stopPropagation();
-
 
             clearSupportSearchTimer();
 
-
             state.supportInteracted =
               true;
-
 
             const source =
               String(
                 sourceButton.getAttribute(
                   "data-support-source"
-                ) ||
-                "ALL"
+                ) || "ALL"
               )
                 .trim()
                 .toUpperCase();
-
 
             state.supportSource =
               SUPPORT_SOURCE_FILTERS.some(
                 function (item) {
                   return (
-                    item.code ===
-                    source
+                    item.code === source
                   );
                 }
               )
                 ? source
                 : "ALL";
 
-
             renderPriorityPanel(
               "support",
               "arts_content_support"
             );
 
-
             return;
           }
 
-
-          /*
-            빠른 필터
-          */
+          /* 빠른 필터 */
 
           const quickButton =
             event.target.closest(
               "[data-support-quick]"
             );
 
-
-          if (
-            quickButton
-          ) {
+          if (quickButton) {
             event.preventDefault();
-
             event.stopPropagation();
-
 
             clearSupportSearchTimer();
 
-
             state.supportInteracted =
               true;
-
 
             const quick =
               String(
                 quickButton.getAttribute(
                   "data-support-quick"
-                ) ||
-                "ALL"
+                ) || "ALL"
               )
                 .trim()
                 .toUpperCase();
-
 
             state.supportQuick =
               SUPPORT_QUICK_FILTERS.some(
                 function (item) {
                   return (
-                    item.code ===
-                    quick
+                    item.code === quick
                   );
                 }
               )
                 ? quick
                 : "ALL";
 
+            renderPriorityPanel(
+              "support",
+              "arts_content_support"
+            );
+
+            return;
+          }
+
+          /* 정렬 */
+
+          const sortButton =
+            event.target.closest(
+              "[data-support-sort]"
+            );
+
+          if (sortButton) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            clearSupportSearchTimer();
+
+            state.supportInteracted =
+              true;
+
+            const sort =
+              String(
+                sortButton.getAttribute(
+                  "data-support-sort"
+                ) ||
+                "RECOMMENDED"
+              )
+                .trim()
+                .toUpperCase();
+
+            state.supportSort =
+              SUPPORT_SORT_OPTIONS.some(
+                function (item) {
+                  return (
+                    item.code === sort
+                  );
+                }
+              )
+                ? sort
+                : "RECOMMENDED";
 
             renderPriorityPanel(
               "support",
               "arts_content_support"
             );
 
-
             return;
           }
 
-
-          /*
-            초기화
-          */
+          /* 초기화 */
 
           const resetButton =
             event.target.closest(
               "[data-support-reset]"
             );
 
-
-          if (
-            resetButton
-          ) {
+          if (resetButton) {
             event.preventDefault();
-
             event.stopPropagation();
 
-
             clearSupportSearchTimer();
-
 
             supportSearchComposing =
               false;
 
-
             state.supportInteracted =
               true;
-
 
             state.supportSource =
               "ALL";
 
-
             state.supportQuick =
               "ALL";
 
+            state.supportSort =
+              "RECOMMENDED";
 
             state.supportQuery =
               "";
-
 
             renderPriorityPanel(
               "support",
               "arts_content_support"
             );
 
-
             return;
           }
 
-
-          /*
-            메인 탭
-          */
+          /* TAB */
 
           const tabButton =
             event.target.closest(
               ".tab-button[data-tab]"
             );
 
-
           const metaCard =
             event.target.closest(
               ".meta-card[data-tab-target]"
             );
-
 
           const tab =
             tabButton
@@ -4395,8 +3490,7 @@
                   )
                 : "";
 
-
-          const priorityTabs = [
+          const allowedTabs = [
             "art",
             "mural",
             "exhibition",
@@ -4405,33 +3499,23 @@
             "agencies"
           ];
 
-
           if (
-            !priorityTabs.includes(
-              tab
-            )
+            !allowedTabs.includes(tab)
           ) {
             return;
           }
 
-
           event.preventDefault();
-
           event.stopPropagation();
-
 
           clearSupportSearchTimer();
 
-
           window.setTimeout(
             function () {
-              showTab(
-                tab
-              );
+              showTab(tab);
             },
             0
           );
-
         },
         true
       );
