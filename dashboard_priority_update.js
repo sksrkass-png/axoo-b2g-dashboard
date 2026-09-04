@@ -1,7 +1,13 @@
 (function () {
   "use strict";
 
-  const PRIORITY_DATA_URL = "data/priority_projects.json";
+  const PRIORITY_DATA_URL =
+    "data/priority_projects.json";
+
+
+  /* =========================================================
+     TAB CONFIG
+  ========================================================= */
 
   const TAB_CONFIG = [
     {
@@ -10,6 +16,7 @@
       icon: "💙",
       type: "native"
     },
+
     {
       tab: "mural",
       label: "벽화 & 조형물",
@@ -24,6 +31,7 @@
         "AXOO 우선 키워드 분류"
       ]
     },
+
     {
       tab: "exhibition",
       label: "전시 콘텐츠 기획 운영",
@@ -38,6 +46,7 @@
         "AXOO 우선 검토 기준"
       ]
     },
+
     {
       tab: "support",
       label: "예술·콘텐츠 지원사업",
@@ -53,6 +62,7 @@
         "KOCCA · 한국콘텐츠진흥원"
       ]
     },
+
     {
       tab: "other",
       label: "기타 AXOO 핏",
@@ -67,6 +77,7 @@
         "AXOO 서브 키워드 분류"
       ]
     },
+
     {
       tab: "agencies",
       label: "기관 타깃",
@@ -74,6 +85,7 @@
       type: "native"
     }
   ];
+
 
   const SUPPORT_SOURCE_FILTERS = [
     {
@@ -98,6 +110,7 @@
     }
   ];
 
+
   const SUPPORT_QUICK_FILTERS = [
     {
       code: "ALL",
@@ -117,6 +130,7 @@
     }
   ];
 
+
   const GRADE_ORDER = {
     S: 0,
     A: 1,
@@ -124,6 +138,7 @@
     C: 3,
     HOLD: 9
   };
+
 
   const state = {
     projects: [],
@@ -135,6 +150,11 @@
     supportInteracted: false
   };
 
+
+  /* =========================================================
+     BASIC
+  ========================================================= */
+
   function $(
     selector,
     root = document
@@ -143,6 +163,7 @@
       selector
     );
   }
+
 
   function $all(
     selector,
@@ -154,6 +175,7 @@
       )
     );
   }
+
 
   function esc(value) {
     return String(
@@ -172,6 +194,7 @@
     );
   }
 
+
   function formatCount(value) {
     return Number(
       value || 0
@@ -180,15 +203,18 @@
     );
   }
 
+
   function formatKrw(value) {
     const amount =
       Number(
         value || 0
       );
 
+
     if (!amount) {
       return "예산 미확인";
     }
+
 
     if (
       amount >= 100000000
@@ -196,12 +222,14 @@
       const eok =
         amount / 100000000;
 
+
       return `${eok.toFixed(
         eok >= 10
           ? 0
           : 1
       )}억`;
     }
+
 
     if (
       amount >= 10000
@@ -213,10 +241,12 @@
       )}만원`;
     }
 
+
     return `${amount.toLocaleString(
       "ko-KR"
     )}원`;
   }
+
 
   function compactDate(value) {
     const valueText =
@@ -224,14 +254,17 @@
         value || ""
       ).trim();
 
+
     if (!valueText) {
       return "확인 필요";
     }
+
 
     const match =
       valueText.match(
         /\d{4}[-.]\d{1,2}[-.]\d{1,2}/
       );
+
 
     return match
       ? match[0].replace(
@@ -241,15 +274,18 @@
       : valueText;
   }
 
+
   function normalizeUrl(url) {
     const value =
       String(
         url || ""
       ).trim();
 
+
     if (!value) {
       return "";
     }
+
 
     if (
       value.startsWith(
@@ -262,8 +298,10 @@
       return value;
     }
 
+
     return "";
   }
+
 
   /* =========================================================
      DATE
@@ -290,8 +328,10 @@
         new Date()
       );
 
+
     const values =
       {};
+
 
     parts.forEach(
       function (part) {
@@ -302,6 +342,7 @@
       }
     );
 
+
     if (
       !values.year ||
       !values.month ||
@@ -310,6 +351,7 @@
       return "";
     }
 
+
     return [
       values.year,
       values.month,
@@ -317,35 +359,42 @@
     ].join("-");
   }
 
+
   function normalizeDateKey(value) {
     const raw =
       String(
         value || ""
       ).trim();
 
+
     const match =
       raw.match(
         /(20\d{2})[-./](\d{1,2})[-./](\d{1,2})/
       );
 
+
     if (!match) {
       return "";
     }
+
 
     const year =
       Number(
         match[1]
       );
 
+
     const month =
       Number(
         match[2]
       );
 
+
     const day =
       Number(
         match[3]
       );
+
 
     if (
       month < 1 ||
@@ -355,6 +404,7 @@
     ) {
       return "";
     }
+
 
     return [
       String(year),
@@ -373,6 +423,7 @@
     ].join("-");
   }
 
+
   function dateKeyToUtcTime(
     dateKey
   ) {
@@ -383,9 +434,11 @@
         /^(\d{4})-(\d{2})-(\d{2})$/
       );
 
+
     if (!match) {
       return NaN;
     }
+
 
     return Date.UTC(
       Number(
@@ -402,6 +455,7 @@
     );
   }
 
+
   function getDaysUntilDate(
     dateValue
   ) {
@@ -410,8 +464,10 @@
         dateValue
       );
 
+
     const todayKey =
       getSeoulTodayKey();
+
 
     if (
       !targetKey ||
@@ -420,15 +476,18 @@
       return null;
     }
 
+
     const targetTime =
       dateKeyToUtcTime(
         targetKey
       );
 
+
     const todayTime =
       dateKeyToUtcTime(
         todayKey
       );
+
 
     if (
       !Number.isFinite(
@@ -440,6 +499,7 @@
     ) {
       return null;
     }
+
 
     return Math.round(
       (
@@ -450,6 +510,7 @@
     );
   }
 
+
   function getDaysSinceDate(
     dateValue
   ) {
@@ -458,8 +519,10 @@
         dateValue
       );
 
+
     const todayKey =
       getSeoulTodayKey();
+
 
     if (
       !targetKey ||
@@ -468,15 +531,18 @@
       return null;
     }
 
+
     const targetTime =
       dateKeyToUtcTime(
         targetKey
       );
 
+
     const todayTime =
       dateKeyToUtcTime(
         todayKey
       );
+
 
     if (
       !Number.isFinite(
@@ -489,6 +555,7 @@
       return null;
     }
 
+
     return Math.round(
       (
         todayTime -
@@ -497,6 +564,7 @@
       86400000
     );
   }
+
 
   /* =========================================================
      DATA
@@ -512,6 +580,7 @@
     );
   }
 
+
   function extractProjects(data) {
     if (
       Array.isArray(
@@ -520,6 +589,7 @@
     ) {
       return data;
     }
+
 
     if (
       data &&
@@ -530,6 +600,7 @@
       return data.projects;
     }
 
+
     if (
       data &&
       Array.isArray(
@@ -538,6 +609,7 @@
     ) {
       return data.items;
     }
+
 
     if (
       data &&
@@ -548,8 +620,10 @@
       return data.data;
     }
 
+
     return [];
   }
+
 
   async function loadPriorityProjects() {
     if (
@@ -558,11 +632,13 @@
       return state.projects;
     }
 
+
     try {
       const response =
         await fetch(
           `${PRIORITY_DATA_URL}?v=${Date.now()}`
         );
+
 
       if (
         !response.ok
@@ -572,16 +648,20 @@
         );
       }
 
+
       const data =
         await response.json();
+
 
       state.projects =
         extractProjects(
           data
         );
 
+
       state.loaded =
         true;
+
 
       return state.projects;
     }
@@ -592,15 +672,19 @@
         error
       );
 
+
       state.projects =
         [];
+
 
       state.loaded =
         true;
 
+
       return state.projects;
     }
   }
+
 
   /* =========================================================
      PROJECT GETTERS
@@ -615,6 +699,7 @@
     );
   }
 
+
   function getProjectScore(project) {
     return Number(
       project.score ||
@@ -624,6 +709,7 @@
     );
   }
 
+
   function getProjectGrade(project) {
     if (
       project.grade
@@ -631,10 +717,12 @@
       return project.grade;
     }
 
+
     const score =
       getProjectScore(
         project
       );
+
 
     if (
       score >= 85
@@ -642,11 +730,13 @@
       return "S";
     }
 
+
     if (
       score >= 70
     ) {
       return "A";
     }
+
 
     if (
       score >= 50
@@ -654,8 +744,10 @@
       return "B";
     }
 
+
     return "C";
   }
+
 
   function getProjectAmount(project) {
     return Number(
@@ -669,6 +761,7 @@
     );
   }
 
+
   function getProjectDeadline(project) {
     return (
       project.deadline ||
@@ -679,6 +772,7 @@
       ""
     );
   }
+
 
   function getProjectPublishedDate(
     project
@@ -692,6 +786,7 @@
     );
   }
 
+
   function getProjectAgency(project) {
     return (
       project.agency ||
@@ -704,6 +799,7 @@
     );
   }
 
+
   function getSupportSourceCode(
     project
   ) {
@@ -714,6 +810,7 @@
       .trim()
       .toUpperCase();
   }
+
 
   function getSupportSourceName(
     project
@@ -726,11 +823,13 @@
     );
   }
 
+
   function getProjectKeywords(
     project
   ) {
     let keywords =
       [];
+
 
     if (
       Array.isArray(
@@ -777,6 +876,7 @@
           );
     }
 
+
     return [
       ...new Set(
         keywords
@@ -794,6 +894,7 @@
     ];
   }
 
+
   function getSupportFieldLabel(
     project
   ) {
@@ -801,6 +902,7 @@
       getProjectKeywords(
         project
       );
+
 
     if (
       keywords.length
@@ -815,6 +917,7 @@
         );
     }
 
+
     if (
       project.field
     ) {
@@ -823,8 +926,10 @@
       );
     }
 
+
     return "지원사업";
   }
+
 
   function getAccordionCategoryLabel(
     project,
@@ -838,6 +943,7 @@
       );
     }
 
+
     return (
       project.priorityCategoryLabel ||
       project.categoryLabel ||
@@ -845,6 +951,7 @@
       "기타 AXOO 핏"
     );
   }
+
 
   function getSummarySourceLabel(
     project,
@@ -863,6 +970,7 @@
       );
     }
 
+
     return (
       project.sourceType ||
       project.source ||
@@ -870,6 +978,7 @@
       "출처 미확인"
     );
   }
+
 
   function getSummarySourceTitle(
     project,
@@ -883,11 +992,13 @@
       );
     }
 
+
     return getSummarySourceLabel(
       project,
       tab
     );
   }
+
 
   /* =========================================================
      D-DAY
@@ -903,6 +1014,7 @@
         )
       );
 
+
     if (
       days === null
     ) {
@@ -913,6 +1025,7 @@
         label: "마감 확인"
       };
     }
+
 
     if (
       days < 0
@@ -925,6 +1038,7 @@
       };
     }
 
+
     if (
       days === 0
     ) {
@@ -935,6 +1049,7 @@
         label: "오늘 마감"
       };
     }
+
 
     if (
       days <= 3
@@ -948,6 +1063,7 @@
       };
     }
 
+
     return {
       days,
       expired: false,
@@ -957,6 +1073,7 @@
     };
   }
 
+
   function isProjectDeadlineExpired(
     project
   ) {
@@ -964,6 +1081,7 @@
       project
     ).expired;
   }
+
 
   function renderDeadlineBadge(
     project
@@ -973,26 +1091,31 @@
         project
       );
 
+
     if (
       status.days === null
     ) {
       return "";
     }
 
+
     const background =
       status.urgent
         ? "#171717"
         : "#f2f2f2";
+
 
     const color =
       status.urgent
         ? "#ffffff"
         : "#555555";
 
+
     const border =
       status.urgent
         ? "#171717"
         : "#dedede";
+
 
     return `
       <span
@@ -1019,6 +1142,7 @@
     `;
   }
 
+
   /* =========================================================
      RECENT / NEW
   ========================================================= */
@@ -1033,6 +1157,7 @@
         )
       );
 
+
     if (
       days === null ||
       days < 0
@@ -1044,6 +1169,7 @@
       };
     }
 
+
     if (
       days <= 3
     ) {
@@ -1053,6 +1179,7 @@
         label: "NEW"
       };
     }
+
 
     if (
       days <= 7
@@ -1064,12 +1191,14 @@
       };
     }
 
+
     return {
       type: "",
       days,
       label: ""
     };
   }
+
 
   function renderRecentBadge(
     project
@@ -1079,11 +1208,13 @@
         project
       );
 
+
     if (
       !status.type
     ) {
       return "";
     }
+
 
     if (
       status.type === "new"
@@ -1112,6 +1243,7 @@
       `;
     }
 
+
     return `
       <span
         title="최근 7일 이내 등록"
@@ -1136,6 +1268,7 @@
     `;
   }
 
+
   function countNewProjects(
     projects
   ) {
@@ -1149,6 +1282,7 @@
       }
     ).length;
   }
+
 
   /* =========================================================
      SORT / BASE FILTER
@@ -1176,15 +1310,18 @@
             ] ?? 9
           );
 
+
         if (
           gradeDiff !== 0
         ) {
           return gradeDiff;
         }
 
+
         const scoreDiff =
           getProjectScore(b) -
           getProjectScore(a);
+
 
         if (
           scoreDiff !== 0
@@ -1192,15 +1329,18 @@
           return scoreDiff;
         }
 
+
         const amountDiff =
           getProjectAmount(b) -
           getProjectAmount(a);
+
 
         if (
           amountDiff !== 0
         ) {
           return amountDiff;
         }
+
 
         return String(
           getProjectDeadline(a) ||
@@ -1215,12 +1355,14 @@
     );
   }
 
+
   function getDisplayProjectsByCategory(
     category
   ) {
     return sortProjects(
       state.projects.filter(
         function (project) {
+
           if (
             getProjectCategory(
               project
@@ -1229,11 +1371,13 @@
             return false;
           }
 
+
           if (
             project.isExcludedFromPriority === true
           ) {
             return false;
           }
+
 
           if (
             category ===
@@ -1245,11 +1389,13 @@
             return false;
           }
 
+
           return true;
         }
       )
     );
   }
+
 
   /* =========================================================
      SUPPORT SEARCH / QUICK FILTER
@@ -1264,6 +1410,7 @@
       return projects;
     }
 
+
     return projects.filter(
       function (project) {
         return (
@@ -1275,6 +1422,7 @@
       }
     );
   }
+
 
   function getSupportSearchText(
     project
@@ -1288,12 +1436,15 @@
       project.organization,
       project.agency,
       project.field,
+
       getSupportFieldLabel(
         project
       ),
+
       getProjectKeywords(
         project
       ).join(" "),
+
       project.gradeReason,
       project.axooFitReason
     ]
@@ -1303,6 +1454,7 @@
       .join(" ")
       .toLowerCase();
   }
+
 
   function filterSupportByQuery(
     projects
@@ -1315,11 +1467,13 @@
         .trim()
         .toLowerCase();
 
+
     if (
       !query
     ) {
       return projects;
     }
+
 
     return projects.filter(
       function (project) {
@@ -1332,6 +1486,7 @@
     );
   }
 
+
   function matchesSupportQuickFilter(
     project,
     code
@@ -1342,6 +1497,7 @@
       return true;
     }
 
+
     if (
       code === "RECENT"
     ) {
@@ -1350,11 +1506,13 @@
           project
         ).type;
 
+
       return (
         type === "new" ||
         type === "recent"
       );
     }
+
 
     if (
       code === "D7"
@@ -1364,12 +1522,14 @@
           project
         ).days;
 
+
       return (
         days !== null &&
         days >= 0 &&
         days <= 7
       );
     }
+
 
     if (
       code === "B_PLUS"
@@ -1385,8 +1545,10 @@
       );
     }
 
+
     return true;
   }
+
 
   function filterSupportByQuick(
     projects,
@@ -1402,26 +1564,31 @@
     );
   }
 
+
   function getSupportFilterContext() {
     const all =
       getDisplayProjectsByCategory(
         "arts_content_support"
       );
 
+
     const bySource =
       filterSupportBySource(
         all
       );
+
 
     const bySourceAndQuery =
       filterSupportByQuery(
         bySource
       );
 
+
     const final =
       filterSupportByQuick(
         bySourceAndQuery
       );
+
 
     return {
       all,
@@ -1430,6 +1597,7 @@
       final
     };
   }
+
 
   function getProjectsForTab(
     tab,
@@ -1443,9 +1611,11 @@
       );
     }
 
+
     return getSupportFilterContext()
       .final;
   }
+
 
   function getExcludedProjects() {
     return state.projects.filter(
@@ -1456,6 +1626,7 @@
       }
     );
   }
+
 
   function getExcludedProjectsByCategory(
     category
@@ -1471,6 +1642,7 @@
       }
     );
   }
+
 
   function getExpiredProjectsByCategory(
     category
@@ -1489,6 +1661,7 @@
       }
     );
   }
+
 
   function getPriorityCounts() {
     return {
@@ -1518,6 +1691,7 @@
     };
   }
 
+
   /* =========================================================
      META
   ========================================================= */
@@ -1531,6 +1705,7 @@
         id
       );
 
+
     if (
       element
     ) {
@@ -1539,11 +1714,13 @@
     }
   }
 
+
   function getLegacyArtCount() {
     const legacy =
       document.getElementById(
         "metaArtCount"
       );
+
 
     if (
       legacy &&
@@ -1553,10 +1730,12 @@
         .trim();
     }
 
+
     const artCards =
       document.getElementById(
         "artCards"
       );
+
 
     if (
       artCards
@@ -1565,6 +1744,7 @@
         artCards.querySelectorAll(
           ".card, article, details"
         ).length;
+
 
       if (
         count > 0
@@ -1575,17 +1755,21 @@
       }
     }
 
+
     return "0";
   }
+
 
   function updateMetaCards() {
     const counts =
       getPriorityCounts();
 
+
     updateTextById(
       "priorityMetaArtCount",
       getLegacyArtCount()
     );
+
 
     updateTextById(
       "priorityMetaMuralCount",
@@ -1594,12 +1778,14 @@
       )}건`
     );
 
+
     updateTextById(
       "priorityMetaExhibitionCount",
       `${formatCount(
         counts.exhibition
       )}건`
     );
+
 
     updateTextById(
       "priorityMetaSupportCount",
@@ -1608,38 +1794,46 @@
       )}건`
     );
 
+
     $all(
       ".meta-card[data-tab-target]"
     ).forEach(
       function (card) {
+
         const target =
           card.getAttribute(
             "data-tab-target"
           );
 
+
         const isActive =
           state.currentTab ===
           target;
+
 
         card.classList.toggle(
           "meta-card-active",
           isActive
         );
 
+
         card.classList.toggle(
           "meta-card-muted",
           !isActive
         );
+
 
         card.setAttribute(
           "role",
           "button"
         );
 
+
         card.setAttribute(
           "tabindex",
           "0"
         );
+
 
         card.onclick =
           function () {
@@ -1648,8 +1842,10 @@
             );
           };
 
+
         card.onkeydown =
           function (event) {
+
             if (
               event.key === "Enter" ||
               event.key === " "
@@ -1665,6 +1861,7 @@
     );
   }
 
+
   /* =========================================================
      SUMMARY
   ========================================================= */
@@ -1679,8 +1876,10 @@
         ? projects
         : [];
 
+
     const total =
       visibleProjects.length;
+
 
     const sCount =
       visibleProjects.filter(
@@ -1693,6 +1892,7 @@
         }
       ).length;
 
+
     const aCount =
       visibleProjects.filter(
         function (item) {
@@ -1704,13 +1904,16 @@
         }
       ).length;
 
+
     const bcCount =
       visibleProjects.filter(
         function (item) {
+
           const grade =
             getProjectGrade(
               item
             );
+
 
           return (
             grade === "B" ||
@@ -1719,12 +1922,14 @@
         }
       ).length;
 
+
     updateTextById(
       "totalCount",
       formatCount(
         total
       )
     );
+
 
     updateTextById(
       "sCount",
@@ -1733,12 +1938,14 @@
       )
     );
 
+
     updateTextById(
       "aCount",
       formatCount(
         aCount
       )
     );
+
 
     updateTextById(
       "bCount",
@@ -1747,6 +1954,7 @@
       )
     );
   }
+
 
   function updateArtSummaryCount() {
     const total =
@@ -1759,6 +1967,7 @@
         )
       ) || 0;
 
+
     updateTextById(
       "totalCount",
       formatCount(
@@ -1766,21 +1975,25 @@
       )
     );
 
+
     updateTextById(
       "sCount",
       "-"
     );
+
 
     updateTextById(
       "aCount",
       "-"
     );
 
+
     updateTextById(
       "bCount",
       "-"
     );
   }
+
 
   /* =========================================================
      PANEL HELPERS
@@ -1793,6 +2006,7 @@
       return $("#artTab");
     }
 
+
     if (
       tab === "agencies"
     ) {
@@ -1802,14 +2016,17 @@
       );
     }
 
+
     return null;
   }
+
 
   function getPriorityPanelId(
     tab
   ) {
     return `${tab}Tab`;
   }
+
 
   function getPriorityPanel(
     tab
@@ -1821,6 +2038,11 @@
     );
   }
 
+
+  /* =========================================================
+     GRADE
+  ========================================================= */
+
   function getGradeClass(
     grade
   ) {
@@ -1828,6 +2050,7 @@
       grade || "C"
     ).toLowerCase()}`;
   }
+
 
   function renderGradeBadge(
     project
@@ -1837,11 +2060,13 @@
         project
       );
 
+
     const reason =
       project.gradeReason ||
       project.axooFitReason ||
       project.summary ||
       "등급 기준 정보 없음";
+
 
     return `
       <span class="priority-grade-wrap">
@@ -1876,6 +2101,11 @@
     `;
   }
 
+
+  /* =========================================================
+     TAGS
+  ========================================================= */
+
   function renderKeywordTags(
     project
   ) {
@@ -1883,6 +2113,7 @@
       getProjectKeywords(
         project
       );
+
 
     if (
       !keywords.length
@@ -1893,6 +2124,7 @@
         </span>
       `;
     }
+
 
     return keywords
       .slice(
@@ -1913,6 +2145,7 @@
       .join("");
   }
 
+
   function renderSourceTags(
     sources
   ) {
@@ -1924,6 +2157,7 @@
     ) {
       return "";
     }
+
 
     return `
       <div
@@ -1947,6 +2181,7 @@
     `;
   }
 
+
   /* =========================================================
      SUPPORT CONTROLS
   ========================================================= */
@@ -1961,6 +2196,7 @@
       return projects.length;
     }
 
+
     return projects.filter(
       function (project) {
         return (
@@ -1971,6 +2207,7 @@
       }
     ).length;
   }
+
 
   function renderSupportSourceFilters(
     allSupportProjects
@@ -1999,15 +2236,18 @@
         ${SUPPORT_SOURCE_FILTERS
           .map(
             function (item) {
+
               const active =
                 state.supportSource ===
                 item.code;
+
 
               const count =
                 getSupportSourceCount(
                   allSupportProjects,
                   item.code
                 );
+
 
               return `
                 <button
@@ -2069,6 +2309,7 @@
     `;
   }
 
+
   function getQuickFilterCount(
     projects,
     code
@@ -2078,6 +2319,7 @@
       code
     ).length;
   }
+
 
   function renderSupportQuickControls(
     context
@@ -2115,15 +2357,18 @@
           ${SUPPORT_QUICK_FILTERS
             .map(
               function (item) {
+
                 const active =
                   state.supportQuick ===
                   item.code;
+
 
                 const count =
                   getQuickFilterCount(
                     context.bySourceAndQuery,
                     item.code
                   );
+
 
                 return `
                   <button
@@ -2182,6 +2427,7 @@
             .join("")}
 
         </div>
+
 
         <div
           style="
@@ -2244,6 +2490,7 @@
 
         </div>
 
+
         <p
           style="
             margin:9px 2px 0;
@@ -2263,6 +2510,11 @@
       </section>
     `;
   }
+
+
+  /* =========================================================
+     GUIDE
+  ========================================================= */
 
   function renderGradeGuide(
     tab
@@ -2298,6 +2550,7 @@
       `;
     }
 
+
     return `
       <section
         class="grade-guide-box grade-guide-box-green"
@@ -2324,6 +2577,7 @@
     `;
   }
 
+
   /* =========================================================
      ACCORDION
   ========================================================= */
@@ -2338,10 +2592,12 @@
       project.projectName ||
       "제목 없음";
 
+
     const agency =
       getProjectAgency(
         project
       );
+
 
     const sourceLabel =
       getSummarySourceLabel(
@@ -2349,17 +2605,20 @@
         tab
       );
 
+
     const sourceTitle =
       getSummarySourceTitle(
         project,
         tab
       );
 
+
     const categoryLabel =
       getAccordionCategoryLabel(
         project,
         tab
       );
+
 
     const amount =
       formatKrw(
@@ -2368,12 +2627,14 @@
         )
       );
 
+
     const published =
       compactDate(
         getProjectPublishedDate(
           project
         )
       );
+
 
     const deadline =
       compactDate(
@@ -2382,16 +2643,19 @@
         )
       );
 
+
     const nextAction =
       project.nextAction ||
       project.recommendedAction ||
       "검토";
+
 
     const gradeReason =
       project.gradeReason ||
       project.axooFitReason ||
       project.summary ||
       "등급 기준 정보 없음";
+
 
     const url =
       normalizeUrl(
@@ -2401,6 +2665,7 @@
         project.ntceSpecDocUrl1 ||
         ""
       );
+
 
     const bodyBadges =
       tab === "support"
@@ -2434,6 +2699,7 @@
           </span>
         `;
 
+
     return `
       <article
         class="card card-as-accordion priority-accordion-card"
@@ -2464,6 +2730,7 @@
 
             </span>
 
+
             <span
               class="summary-title priority-summary-title"
             >
@@ -2490,6 +2757,7 @@
 
             </span>
 
+
             <span class="summary-period">
 
               <span>
@@ -2503,6 +2771,7 @@
               </strong>
 
             </span>
+
 
             <span class="summary-deadline">
 
@@ -2528,6 +2797,7 @@
 
           </summary>
 
+
           <div class="accordion-body">
 
             <div class="card-top">
@@ -2546,6 +2816,7 @@
 
               </div>
 
+
               <div class="score-group">
 
                 <span class="score">
@@ -2558,11 +2829,13 @@
 
             </div>
 
+
             <h2>
               ${esc(
                 title
               )}
             </h2>
+
 
             <div class="meta">
 
@@ -2578,6 +2851,7 @@
 
               </div>
 
+
               <div>
 
                 <span>
@@ -2590,6 +2864,7 @@
 
               </div>
 
+
               <div>
 
                 <span>
@@ -2601,6 +2876,7 @@
                 )}
 
               </div>
+
 
               <div>
 
@@ -2624,6 +2900,7 @@
 
             </div>
 
+
             <div class="keywords">
 
               ${renderKeywordTags(
@@ -2631,6 +2908,7 @@
               )}
 
             </div>
+
 
             <div class="reason">
 
@@ -2646,6 +2924,7 @@
 
             </div>
 
+
             <p class="action">
 
               다음 액션:
@@ -2654,6 +2933,7 @@
               )}
 
             </p>
+
 
             ${
               url
@@ -2684,6 +2964,7 @@
     `;
   }
 
+
   /* =========================================================
      PRIORITY PANEL
   ========================================================= */
@@ -2697,10 +2978,12 @@
         tab
       );
 
+
     const panel =
       getPriorityPanel(
         tab
       );
+
 
     if (
       !panel ||
@@ -2709,25 +2992,30 @@
       return;
     }
 
+
     const allProjects =
       getDisplayProjectsByCategory(
         category
       );
+
 
     const supportContext =
       tab === "support"
         ? getSupportFilterContext()
         : null;
 
+
     const projects =
       tab === "support"
         ? supportContext.final
         : allProjects;
 
+
     const excludedCount =
       getExcludedProjectsByCategory(
         category
       ).length;
+
 
     const expiredCount =
       tab === "support"
@@ -2736,6 +3024,7 @@
           ).length
         : 0;
 
+
     const newCount =
       tab === "support"
         ? countNewProjects(
@@ -2743,10 +3032,12 @@
           )
         : 0;
 
+
     let miniStatSmall =
       `우선순위 제외 ${formatCount(
         excludedCount
       )}건`;
+
 
     if (
       tab === "support"
@@ -2761,15 +3052,18 @@
         )}건 숨김`;
     }
 
+
     const secondHeader =
       tab === "support"
         ? "분야 / 공고명"
         : "카테고리 / 공고명";
 
+
     const firstHeader =
       tab === "support"
         ? "기관"
         : "출처";
+
 
     panel.innerHTML = `
 
@@ -2780,8 +3074,9 @@
         <div>
 
           <p class="priority-eyebrow">
-            AXOO Priority KR v1.7
+            AXOO Priority KR v1.7.1
           </p>
+
 
           <h2>
             ${esc(
@@ -2792,6 +3087,7 @@
             )}
           </h2>
 
+
           <p>
             ${esc(
               config.description ||
@@ -2799,11 +3095,13 @@
             )}
           </p>
 
+
           ${renderSourceTags(
             config.sources
           )}
 
         </div>
+
 
         <div class="priority-mini-stat">
 
@@ -2811,11 +3109,13 @@
             표시 공고
           </span>
 
+
           <strong>
             ${formatCount(
               projects.length
             )}건
           </strong>
+
 
           <small>
             ${miniStatSmall}
@@ -2825,6 +3125,7 @@
 
       </section>
 
+
       ${
         tab === "support"
           ? renderSupportSourceFilters(
@@ -2832,6 +3133,7 @@
             )
           : ""
       }
+
 
       ${
         tab === "support"
@@ -2841,9 +3143,11 @@
           : ""
       }
 
+
       ${renderGradeGuide(
         tab
       )}
+
 
       <div
         class="list-head priority-list-head"
@@ -2857,11 +3161,13 @@
             )}
           </em>
 
+
           <em>
             등급
           </em>
 
         </span>
+
 
         <span>
           ${esc(
@@ -2869,15 +3175,18 @@
           )}
         </span>
 
+
         <span>
           게재일
         </span>
+
 
         <span>
           마감일
         </span>
 
       </div>
+
 
       ${
         projects.length
@@ -2913,10 +3222,12 @@
       }
     `;
 
+
     updateSummaryCounts(
       projects
     );
   }
+
 
   /* =========================================================
      TAB CONTROL
@@ -2935,10 +3246,12 @@
       "localTab"
     ].forEach(
       function (id) {
+
         const panel =
           document.getElementById(
             id
           );
+
 
         if (
           panel
@@ -2947,12 +3260,14 @@
             "active"
           );
 
+
           panel.style.display =
             "none";
         }
       }
     );
   }
+
 
   function activateTabButton(
     tab
@@ -2961,15 +3276,18 @@
       ".tab-button"
     ).forEach(
       function (button) {
+
         const isActive =
           button.getAttribute(
             "data-tab"
           ) === tab;
 
+
         button.classList.toggle(
           "active",
           isActive
         );
+
 
         button.setAttribute(
           "aria-selected",
@@ -2981,11 +3299,13 @@
     );
   }
 
+
   function showNativeTab(tab) {
     const panel =
       getNativePanel(
         tab
       );
+
 
     if (
       !panel
@@ -2993,12 +3313,15 @@
       return;
     }
 
+
     panel.classList.add(
       "active"
     );
 
+
     panel.style.display =
       "";
+
 
     if (
       tab === "art"
@@ -3007,11 +3330,13 @@
     }
   }
 
+
   function showTab(tab) {
     const config =
       getTabConfig(
         tab
       );
+
 
     if (
       !config
@@ -3019,14 +3344,18 @@
       return;
     }
 
+
     state.currentTab =
       tab;
 
+
     hideAllPanels();
+
 
     activateTabButton(
       tab
     );
+
 
     if (
       config.type ===
@@ -3037,10 +3366,12 @@
         config.category
       );
 
+
       const panel =
         getPriorityPanel(
           tab
         );
+
 
       if (
         panel
@@ -3048,6 +3379,7 @@
         panel.classList.add(
           "active"
         );
+
 
         panel.style.display =
           "";
@@ -3060,18 +3392,22 @@
       );
     }
 
+
     updateMetaCards();
   }
+
 
   function setupTabButtons() {
     $all(
       ".tab-button"
     ).forEach(
       function (button) {
+
         const tab =
           button.getAttribute(
             "data-tab"
           );
+
 
         if (
           tab === "opportunities" ||
@@ -3080,19 +3416,24 @@
           button.style.display =
             "none";
 
+
           return;
         }
 
+
         button.onclick =
           function (event) {
+
             event.preventDefault();
 
             event.stopPropagation();
+
 
             const nextTab =
               button.getAttribute(
                 "data-tab"
               );
+
 
             if (
               nextTab
@@ -3106,6 +3447,7 @@
     );
   }
 
+
   /* =========================================================
      ENSURE PANELS
   ========================================================= */
@@ -3118,10 +3460,12 @@
       "other"
     ].forEach(
       function (tab) {
+
         let panel =
           getPriorityPanel(
             tab
           );
+
 
         if (
           panel
@@ -3129,29 +3473,36 @@
           return;
         }
 
+
         panel =
           document.createElement(
             "section"
           );
+
 
         panel.id =
           getPriorityPanelId(
             tab
           );
 
+
         panel.className =
           "tab-panel priority-tab-panel";
 
+
         panel.style.display =
           "none";
+
 
         const agenciesPanel =
           $("#agenciesTab") ||
           $("#agencyTab");
 
+
         const main =
           $("main") ||
           document.body;
+
 
         if (
           agenciesPanel &&
@@ -3173,6 +3524,7 @@
     );
   }
 
+
   /* =========================================================
      TAB LAYOUT
   ========================================================= */
@@ -3181,11 +3533,13 @@
     const tabs =
       $(".tabs");
 
+
     if (
       !tabs
     ) {
       return;
     }
+
 
     const desiredTabs = [
       {
@@ -3225,12 +3579,15 @@
       }
     ];
 
+
     desiredTabs.forEach(
       function (item) {
+
         let button =
           tabs.querySelector(
             `.tab-button[data-tab="${item.tab}"]`
           );
+
 
         if (
           !button
@@ -3240,11 +3597,14 @@
               "button"
             );
 
+
           button.type =
             "button";
 
+
           button.className =
             "tab-button";
+
 
           button.setAttribute(
             "data-tab",
@@ -3252,11 +3612,14 @@
           );
         }
 
+
         button.textContent =
           item.text;
 
+
         button.style.display =
           "";
+
 
         tabs.appendChild(
           button
@@ -3264,15 +3627,18 @@
       }
     );
 
+
     const opportunityButton =
       tabs.querySelector(
         '.tab-button[data-tab="opportunities"]'
       );
 
+
     const localButton =
       tabs.querySelector(
         '.tab-button[data-tab="local"]'
       );
+
 
     if (
       opportunityButton
@@ -3281,6 +3647,7 @@
         "none";
     }
 
+
     if (
       localButton
     ) {
@@ -3288,10 +3655,12 @@
         "none";
     }
 
+
     let separator =
       tabs.querySelector(
         ".priority-tab-separator"
       );
+
 
     if (
       !separator
@@ -3301,17 +3670,21 @@
           "span"
         );
 
+
       separator.className =
         "priority-tab-separator";
+
 
       separator.textContent =
         "참고";
     }
 
+
     const agenciesButton =
       tabs.querySelector(
         '.tab-button[data-tab="agencies"]'
       );
+
 
     if (
       agenciesButton
@@ -3323,6 +3696,7 @@
     }
   }
 
+
   /* =========================================================
      META FALLBACK
   ========================================================= */
@@ -3331,11 +3705,13 @@
     const metaBar =
       $(".meta-bar");
 
+
     if (
       !metaBar
     ) {
       return;
     }
+
 
     const requiredCards = [
       {
@@ -3383,6 +3759,7 @@
       }
     ];
 
+
     const alreadyPriority =
       requiredCards.every(
         function (item) {
@@ -3392,29 +3769,36 @@
         }
       );
 
+
     if (
       alreadyPriority
     ) {
       return;
     }
 
+
     metaBar.innerHTML =
       "";
 
+
     requiredCards.forEach(
       function (item) {
+
         const card =
           document.createElement(
             "div"
           );
 
+
         card.className =
           "meta-card priority-meta-card";
+
 
         card.setAttribute(
           "data-tab-target",
           item.tab
         );
+
 
         card.innerHTML = `
           <div class="meta-label">
@@ -3433,12 +3817,14 @@
           </div>
         `;
 
+
         metaBar.appendChild(
           card
         );
       }
     );
   }
+
 
   /* =========================================================
      INIT
@@ -3451,14 +3837,18 @@
 
     setupMetaFallback();
 
+
     await loadPriorityProjects();
+
 
     updateMetaCards();
 
     setupTabButtons();
 
+
     const activeButton =
       $(".tab-button.active");
+
 
     const activeTab =
       activeButton
@@ -3466,6 +3856,7 @@
             "data-tab"
           )
         : "";
+
 
     if (
       !activeTab ||
@@ -3486,24 +3877,30 @@
     }
   }
 
+
   function schedulePatch() {
     let count =
       0;
 
+
     const timer =
       window.setInterval(
         function () {
+
           updateMetaCards();
+
 
           const config =
             getTabConfig(
               state.currentTab
             );
 
+
           const shouldSkipSupportRerender =
             state.currentTab ===
               "support" &&
             state.supportInteracted;
+
 
           if (
             config &&
@@ -3517,8 +3914,10 @@
             );
           }
 
+
           count +=
             1;
+
 
           if (
             count >= 8
@@ -3532,6 +3931,7 @@
       );
   }
 
+
   function rerenderSupportAndRestoreSearchFocus(
     selectionStart,
     selectionEnd
@@ -3541,10 +3941,12 @@
       "arts_content_support"
     );
 
+
     const input =
       document.getElementById(
         "supportSearchInput"
       );
+
 
     if (
       !input
@@ -3552,7 +3954,9 @@
       return;
     }
 
+
     input.focus();
+
 
     if (
       typeof selectionStart ===
@@ -3569,8 +3973,9 @@
     }
   }
 
+
   /* =========================================================
-     EVENTS
+     EVENTS / KOREAN IME FIX
   ========================================================= */
 
   document.addEventListener(
@@ -3580,6 +3985,174 @@
       applyPriorityDashboard();
 
       schedulePatch();
+
+
+      let supportSearchComposing =
+        false;
+
+
+      let supportSearchTimer =
+        null;
+
+
+      function clearSupportSearchTimer() {
+        if (
+          supportSearchTimer
+        ) {
+          window.clearTimeout(
+            supportSearchTimer
+          );
+
+
+          supportSearchTimer =
+            null;
+        }
+      }
+
+
+      function applySupportSearch(
+        input,
+        delay = 140
+      ) {
+        if (
+          !input
+        ) {
+          return;
+        }
+
+
+        clearSupportSearchTimer();
+
+
+        const value =
+          input.value || "";
+
+
+        const selectionStart =
+          input.selectionStart;
+
+
+        const selectionEnd =
+          input.selectionEnd;
+
+
+        supportSearchTimer =
+          window.setTimeout(
+            function () {
+
+              if (
+                supportSearchComposing
+              ) {
+                return;
+              }
+
+
+              state.supportInteracted =
+                true;
+
+
+              state.supportQuery =
+                value;
+
+
+              rerenderSupportAndRestoreSearchFocus(
+                selectionStart,
+                selectionEnd
+              );
+
+
+              supportSearchTimer =
+                null;
+
+            },
+            delay
+          );
+      }
+
+
+      /*
+        한글 IME 조합 시작
+      */
+
+      document.addEventListener(
+        "compositionstart",
+        function (event) {
+
+          const input =
+            event.target.closest
+              ? event.target.closest(
+                  "#supportSearchInput"
+                )
+              : null;
+
+
+          if (
+            !input
+          ) {
+            return;
+          }
+
+
+          supportSearchComposing =
+            true;
+
+
+          state.supportInteracted =
+            true;
+
+
+          clearSupportSearchTimer();
+
+        },
+        true
+      );
+
+
+      /*
+        한글 IME 조합 완료
+      */
+
+      document.addEventListener(
+        "compositionend",
+        function (event) {
+
+          const input =
+            event.target.closest
+              ? event.target.closest(
+                  "#supportSearchInput"
+                )
+              : null;
+
+
+          if (
+            !input
+          ) {
+            return;
+          }
+
+
+          supportSearchComposing =
+            false;
+
+
+          state.supportInteracted =
+            true;
+
+
+          applySupportSearch(
+            input,
+            100
+          );
+
+        },
+        true
+      );
+
+
+      /*
+        일반 입력
+        한글 조합 중에는 렌더링하지 않음
+      */
 
       document.addEventListener(
         "input",
@@ -3592,41 +4165,49 @@
                 )
               : null;
 
+
           if (
             !input
           ) {
             return;
           }
 
+
           state.supportInteracted =
             true;
 
-          state.supportQuery =
-            input.value ||
-            "";
 
-          const selectionStart =
-            input.selectionStart;
+          if (
+            supportSearchComposing ||
+            event.isComposing === true
+          ) {
+            return;
+          }
 
-          const selectionEnd =
-            input.selectionEnd;
 
-          rerenderSupportAndRestoreSearchFocus(
-            selectionStart,
-            selectionEnd
+          applySupportSearch(
+            input,
+            140
           );
+
         },
         true
       );
+
 
       document.addEventListener(
         "click",
         function (event) {
 
+          /*
+            기관 필터
+          */
+
           const sourceButton =
             event.target.closest(
               "[data-support-source]"
             );
+
 
           if (
             sourceButton
@@ -3635,8 +4216,13 @@
 
             event.stopPropagation();
 
+
+            clearSupportSearchTimer();
+
+
             state.supportInteracted =
               true;
+
 
             const source =
               String(
@@ -3647,6 +4233,7 @@
               )
                 .trim()
                 .toUpperCase();
+
 
             state.supportSource =
               SUPPORT_SOURCE_FILTERS.some(
@@ -3660,18 +4247,26 @@
                 ? source
                 : "ALL";
 
+
             renderPriorityPanel(
               "support",
               "arts_content_support"
             );
 
+
             return;
           }
+
+
+          /*
+            빠른 필터
+          */
 
           const quickButton =
             event.target.closest(
               "[data-support-quick]"
             );
+
 
           if (
             quickButton
@@ -3680,8 +4275,13 @@
 
             event.stopPropagation();
 
+
+            clearSupportSearchTimer();
+
+
             state.supportInteracted =
               true;
+
 
             const quick =
               String(
@@ -3692,6 +4292,7 @@
               )
                 .trim()
                 .toUpperCase();
+
 
             state.supportQuick =
               SUPPORT_QUICK_FILTERS.some(
@@ -3705,18 +4306,26 @@
                 ? quick
                 : "ALL";
 
+
             renderPriorityPanel(
               "support",
               "arts_content_support"
             );
 
+
             return;
           }
+
+
+          /*
+            초기화
+          */
 
           const resetButton =
             event.target.closest(
               "[data-support-reset]"
             );
+
 
           if (
             resetButton
@@ -3725,35 +4334,55 @@
 
             event.stopPropagation();
 
+
+            clearSupportSearchTimer();
+
+
+            supportSearchComposing =
+              false;
+
+
             state.supportInteracted =
               true;
+
 
             state.supportSource =
               "ALL";
 
+
             state.supportQuick =
               "ALL";
 
+
             state.supportQuery =
               "";
+
 
             renderPriorityPanel(
               "support",
               "arts_content_support"
             );
 
+
             return;
           }
+
+
+          /*
+            메인 탭
+          */
 
           const tabButton =
             event.target.closest(
               ".tab-button[data-tab]"
             );
 
+
           const metaCard =
             event.target.closest(
               ".meta-card[data-tab-target]"
             );
+
 
           const tab =
             tabButton
@@ -3766,6 +4395,7 @@
                   )
                 : "";
 
+
           const priorityTabs = [
             "art",
             "mural",
@@ -3775,6 +4405,7 @@
             "agencies"
           ];
 
+
           if (
             !priorityTabs.includes(
               tab
@@ -3783,9 +4414,14 @@
             return;
           }
 
+
           event.preventDefault();
 
           event.stopPropagation();
+
+
+          clearSupportSearchTimer();
+
 
           window.setTimeout(
             function () {
