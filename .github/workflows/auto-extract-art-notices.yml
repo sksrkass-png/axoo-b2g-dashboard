@@ -5,7 +5,7 @@ on:
 
   schedule:
     # 5분마다 자동 확인
-     - cron: "*/5 * * * *"
+    - cron: "*/5 * * * *"
 
 
 permissions:
@@ -203,9 +203,11 @@ jobs:
           )
 
           if not path.exists():
+
               raise SystemExit(
                   f"Result not found: {path}"
               )
+
 
           data = json.loads(
               path.read_text(
@@ -213,11 +215,13 @@ jobs:
               )
           )
 
+
           data["source"] = (
               "apps_script_bridge"
           )
 
           data["sourceUrl"] = ""
+
 
           for doc in data.get(
               "documents",
@@ -233,12 +237,17 @@ jobs:
                   "apps_script_bridge"
               )
 
+
           path.write_text(
+
               json.dumps(
                   data,
                   ensure_ascii=False,
                   indent=2
-              ) + "\n",
+              )
+              +
+              "\n",
+
               encoding="utf-8"
           )
           PY
@@ -246,10 +255,18 @@ jobs:
 
             # --------------------------------------------------
             # Raw Text
-            # → Structured Analysis
+            # → Structured Notice Analysis
             # --------------------------------------------------
 
             python scripts/build_art_notice_analysis.py
+
+
+            # --------------------------------------------------
+            # Raw Text
+            # → AXOO Participation Analysis
+            # --------------------------------------------------
+
+            python scripts/build_art_participation_analysis.py
 
 
             # --------------------------------------------------
@@ -261,13 +278,16 @@ jobs:
           import os
           from pathlib import Path
 
+
           research_id = os.environ["ART_NOTICE_ID"]
+
 
           text_path = (
               Path("data")
               / "art_notice_text"
               / f"{research_id}.json"
           )
+
 
           analysis_path = (
               Path("data")
@@ -276,6 +296,17 @@ jobs:
           )
 
 
+          participation_path = (
+              Path("data")
+              / "art_participation_analysis"
+              / f"{research_id}.json"
+          )
+
+
+          # ================================================
+          # RAW TEXT
+          # ================================================
+
           if not text_path.exists():
 
               raise SystemExit(
@@ -283,38 +314,31 @@ jobs:
               )
 
 
-          if not analysis_path.exists():
-
-              raise SystemExit(
-                  f"Analysis result missing: {analysis_path}"
-              )
-
-
           text_data = json.loads(
+
               text_path.read_text(
                   encoding="utf-8"
               )
           )
 
 
-          analysis_data = json.loads(
-              analysis_path.read_text(
-                  encoding="utf-8"
-              )
-          )
-
-
           document_count = int(
+
               text_data.get(
                   "documentCount"
-              ) or 0
+              )
+              or
+              0
           )
 
 
           success_count = int(
+
               text_data.get(
                   "successCount"
-              ) or 0
+              )
+              or
+              0
           )
 
 
@@ -326,21 +350,43 @@ jobs:
 
 
           if (
-              success_count !=
+              success_count
+              !=
               document_count
           ):
 
               raise SystemExit(
+
                   "Document extraction incomplete: "
                   f"{success_count}/"
                   f"{document_count}"
               )
 
 
+          # ================================================
+          # STRUCTURED NOTICE ANALYSIS
+          # ================================================
+
+          if not analysis_path.exists():
+
+              raise SystemExit(
+                  f"Analysis result missing: {analysis_path}"
+              )
+
+
+          analysis_data = json.loads(
+
+              analysis_path.read_text(
+                  encoding="utf-8"
+              )
+          )
+
+
           if (
               analysis_data.get(
                   "status"
-              ) !=
+              )
+              !=
               "ok"
           ):
 
@@ -350,6 +396,7 @@ jobs:
 
 
           summary = (
+
               analysis_data.get(
                   "analysisSummary",
                   {}
@@ -358,16 +405,22 @@ jobs:
 
 
           found_count = int(
+
               summary.get(
                   "foundCount"
-              ) or 0
+              )
+              or
+              0
           )
 
 
           field_count = int(
+
               summary.get(
                   "fieldCount"
-              ) or 0
+              )
+              or
+              0
           )
 
 
@@ -378,27 +431,149 @@ jobs:
               )
 
 
+          # ================================================
+          # AXOO PARTICIPATION ANALYSIS
+          # ================================================
+
+          if not participation_path.exists():
+
+              raise SystemExit(
+
+                  "Participation result missing: "
+                  f"{participation_path}"
+              )
+
+
+          participation_data = json.loads(
+
+              participation_path.read_text(
+                  encoding="utf-8"
+              )
+          )
+
+
+          if (
+              participation_data.get(
+                  "status"
+              )
+              !=
+              "ok"
+          ):
+
+              raise SystemExit(
+                  "Participation status is not OK"
+              )
+
+
+          participation = (
+
+              participation_data.get(
+                  "participation",
+                  {}
+              )
+          )
+
+
+          required_participation_fields = [
+
+              "applicant_type",
+              "axoo_entry_mode",
+              "primary_axoo_entry_mode",
+              "proxy_submission",
+              "proxy_scope",
+              "power_of_attorney",
+              "joint_application",
+              "joint_allowed_parties",
+              "production_company_joint",
+              "participation_evidence",
+              "participation_confidence",
+              "entry_sort_priority"
+          ]
+
+
+          missing_fields = [
+
+              key
+
+              for key
+              in required_participation_fields
+
+              if key
+              not in
+              participation
+          ]
+
+
+          if missing_fields:
+
+              raise SystemExit(
+
+                  "Missing participation fields: "
+                  +
+                  ", ".join(
+                      missing_fields
+                  )
+              )
+
+
+          primary_mode = (
+
+              participation.get(
+                  "primary_axoo_entry_mode",
+                  "CHECK"
+              )
+          )
+
+
+          confidence = (
+
+              participation.get(
+                  "participation_confidence",
+                  "LOW"
+              )
+          )
+
+
+          # ================================================
+          # SUMMARY
+          # ================================================
+
           print("")
           print(
               "========================================"
           )
+
           print(
               "AUTO ANALYSIS COMPLETE"
           )
+
           print(
               "Research ID:",
               research_id
           )
+
           print(
               "Documents:",
               document_count
           )
+
           print(
-              "Fields:",
+              "Notice fields:",
               found_count,
               "/",
               field_count
           )
+
+          print(
+              "AXOO entry mode:",
+              primary_mode
+          )
+
+          print(
+              "Participation confidence:",
+              confidence
+          )
+
           print(
               "========================================"
           )
@@ -458,7 +633,8 @@ jobs:
               --porcelain \
               -- \
               data/art_notice_text \
-              data/art_notice_analysis
+              data/art_notice_analysis \
+              data/art_participation_analysis
           )" ]
           then
 
@@ -495,7 +671,8 @@ jobs:
 
           git add \
             data/art_notice_text \
-            data/art_notice_analysis
+            data/art_notice_analysis \
+            data/art_participation_analysis
 
 
           git commit \
