@@ -5,7 +5,7 @@ on:
 
   schedule:
     # 5분마다 자동 확인
-    - cron: "/5 * * * *"
+     - cron: "*/5 * * * *"
 
 
 permissions:
