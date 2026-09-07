@@ -1,0 +1,134 @@
+name: Test AXOO Art Participation Analysis
+
+on:
+  workflow_dispatch:
+    inputs:
+      research_id:
+        description: "Research ID to test"
+        required: true
+        default: "external-90323f631ffe9605"
+
+permissions:
+  contents: read
+
+jobs:
+  test-participation:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Check required files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          RESEARCH_ID="${{ inputs.research_id }}"
+
+          echo "Research ID: $RESEARCH_ID"
+
+          test -f "data/art_participation_schema.json"
+          test -f "scripts/build_art_participation_analysis.py"
+          test -f "data/art_notice_text/${RESEARCH_ID}.json"
+
+          echo "Required files OK"
+
+
+      - name: Run participation analyzer
+        shell: bash
+        env:
+          ART_NOTICE_ID: ${{ inputs.research_id }}
+        run: |
+          set -euo pipefail
+
+          python scripts/build_art_participation_analysis.py
+
+
+      - name: Validate result
+        shell: bash
+        env:
+          ART_NOTICE_ID: ${{ inputs.research_id }}
+        run: |
+          set -euo pipefail
+
+          RESULT="data/art_participation_analysis/${ART_NOTICE_ID}.json"
+
+          test -f "$RESULT"
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          research_id = os.environ["ART_NOTICE_ID"]
+
+          path = (
+              Path("data")
+              / "art_participation_analysis"
+              / f"{research_id}.json"
+          )
+
+          data = json.loads(
+              path.read_text(encoding="utf-8")
+          )
+
+          if data.get("status") != "ok":
+              raise SystemExit(
+                  "Participation analysis status is not OK"
+              )
+
+          result = data.get(
+              "participation",
+              {}
+          )
+
+          required = [
+              "applicant_type",
+              "axoo_entry_mode",
+              "primary_axoo_entry_mode",
+              "proxy_submission",
+              "proxy_scope",
+              "power_of_attorney",
+              "joint_application",
+              "joint_allowed_parties",
+              "production_company_joint",
+              "participation_evidence",
+              "participation_confidence",
+              "entry_sort_priority"
+          ]
+
+          missing = [
+              key
+              for key in required
+              if key not in result
+          ]
+
+          if missing:
+              raise SystemExit(
+                  "Missing fields: "
+                  + ", ".join(missing)
+              )
+
+          print("")
+          print("========================================")
+          print("AXOO PARTICIPATION RESULT")
+          print("========================================")
+          print(
+              json.dumps(
+                  result,
+                  ensure_ascii=False,
+                  indent=2
+              )
+          )
+          print("========================================")
+          PY
