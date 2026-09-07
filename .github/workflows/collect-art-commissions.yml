@@ -8,18 +8,25 @@ on:
     # 00:00 UTC = 한국시간 오전 09:00
     - cron: "0 0 * * *"
 
+
 permissions:
   contents: write
+
 
 concurrency:
   group: collect-art-commissions
   cancel-in-progress: false
 
+
 jobs:
+
   collect:
+
     runs-on: ubuntu-latest
 
+
     steps:
+
       # --------------------------------------------------
       # 1. Repository
       # --------------------------------------------------
@@ -57,38 +64,58 @@ jobs:
           node --check scripts/collect_incheon_art_commissions.js
           node --check scripts/collect_busan_art_commissions.js
           node --check scripts/collect_remaining_art_commissions.js
+          node --check scripts/filter_art_commission_results.js
           node --check scripts/normalize_art_dates.js
 
 
       # --------------------------------------------------
-      # 4. 전국 17개 시도 Source Registry 검증
+      # 4. 결과/후속 고지 필터 자체 테스트
+      #
+      # 정상 공고를 잘못 지우지 않는지
+      # 본 수집 전에 테스트한다.
+      # --------------------------------------------------
+
+      - name: Test art commission result filter
+        run: |
+          node scripts/filter_art_commission_results.js --self-test
+
+
+      # --------------------------------------------------
+      # 5. 전국 17개 시도 Source Registry 검증
       # --------------------------------------------------
 
       - name: Validate nationwide art source registry
-        run: node scripts/art_commission_sources.js
+        run: |
+          node scripts/art_commission_sources.js
 
 
       # --------------------------------------------------
-      # 5. 주요 공공사이트 네트워크 진단
+      # 6. 주요 공공사이트 네트워크 진단
       # --------------------------------------------------
 
       - name: Diagnose Korean public site network
         run: |
+
           echo "=== GYEONGGI PUBLIC ART BOARD ==="
+
           curl -4 -I -L \
             --connect-timeout 10 \
             --max-time 20 \
             "https://www.gg.go.kr/publicart/bbs/board.do?bsIdx=825&menuId=3865" \
             || true
 
+
           echo "=== INCHEON IPv4 ==="
+
           curl -4 -I -L \
             --connect-timeout 10 \
             --max-time 20 \
             "https://www.incheon.go.kr/culture/CU070302" \
             || true
 
+
           echo "=== BUSAN IPv4 ==="
+
           curl -4 -I -L \
             --connect-timeout 10 \
             --max-time 20 \
@@ -97,17 +124,42 @@ jobs:
 
 
       # --------------------------------------------------
-      # 6. 지역별 건축물 미술작품 수집
+      # 7. 지역별 건축물 미술작품 수집
       # --------------------------------------------------
 
       - name: Collect regional art commissions
-        run: node scripts/run_art_collectors.js
+        run: |
+          node scripts/run_art_collectors.js
 
 
       # --------------------------------------------------
-      # 7. 원문 날짜 정규화
+      # 8. 결과 / 당선작 / 심사결과 등 제거
       #
-      # v1.4.0:
+      # 실제 신규 지원이 가능한 공고만 남긴다.
+      #
+      # 제거 예:
+      # - 당선작
+      # - 선정결과
+      # - 공모결과
+      # - 심사결과
+      # - 심의결과
+      # - 결과공고
+      #
+      # 보존 예:
+      # - 재공모
+      # - 재공고
+      # - 추가공모
+      # - 추가모집
+      # --------------------------------------------------
+
+      - name: Remove result and follow-up art notices
+        run: |
+          node scripts/filter_art_commission_results.js
+
+
+      # --------------------------------------------------
+      # 9. 원문 날짜 정규화
+      #
       # - 2자리 연도 지원
       # - 실제 접수/제출일 우선
       # - 비정상 장기 공모기간 방어
@@ -115,27 +167,30 @@ jobs:
       # --------------------------------------------------
 
       - name: Normalize collected dates
-        run: node scripts/normalize_art_dates.js
+        run: |
+          node scripts/normalize_art_dates.js
 
 
       # --------------------------------------------------
-      # 8. 마감 공고 LIVE 제거
+      # 10. 마감 공고 LIVE 제거
       # --------------------------------------------------
 
       - name: Remove expired items from live feed
-        run: node scripts/collect_art_commissions.js --prune-expired
+        run: |
+          node scripts/collect_art_commissions.js --prune-expired
 
 
       # --------------------------------------------------
-      # 9. Archive current flag 재계산
+      # 11. Archive current flag 재계산
       # --------------------------------------------------
 
       - name: Refresh archive current flags
-        run: node scripts/normalize_art_dates.js
+        run: |
+          node scripts/normalize_art_dates.js
 
 
       # --------------------------------------------------
-      # 10. 변경 여부 확인
+      # 12. 변경 여부 확인
       # --------------------------------------------------
 
       - name: Check changes
@@ -143,6 +198,7 @@ jobs:
         shell: bash
 
         run: |
+
           if git diff --quiet -- \
             data/art_commissions.json \
             data/art_commissions_archive.json; then
@@ -157,11 +213,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 11. 변경된 경우만 Commit + Rebase + Push
-      #
-      # 실행 중 원격 main에 다른 커밋이 추가되더라도
-      # fetch first 오류가 나지 않도록 push 직전
-      # 최신 main을 rebase 한다.
+      # 13. 변경된 경우만 Commit + Rebase + Push
       # --------------------------------------------------
 
       - name: Commit collected art commissions
@@ -169,24 +221,31 @@ jobs:
         shell: bash
 
         run: |
+
           git config user.name "github-actions[bot]"
 
           git config user.email \
             "41898282+github-actions[bot]@users.noreply.github.com"
 
+
           git add \
             data/art_commissions.json \
             data/art_commissions_archive.json
 
+
           git commit \
             -m "Collect current art commissions"
 
+
           echo "=== Sync latest main before push ==="
+
 
           git fetch origin main
 
           git rebase origin/main
 
+
           echo "=== Push collected data ==="
+
 
           git push origin HEAD:main
