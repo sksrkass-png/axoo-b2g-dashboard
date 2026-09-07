@@ -7,7 +7,7 @@ from pathlib import Path
 
 # =========================================================
 # AXOO B2G
-# ART PARTICIPATION ANALYZER v1.2
+# ART PARTICIPATION ANALYZER v1.3
 #
 # INPUT
 # data/art_notice_text/<RESEARCH_ID>.json
@@ -24,6 +24,12 @@ from pathlib import Path
 # - 공고문 실제 문구만 근거로 판정
 # - 불명확하면 CHECK
 # - LOW confidence면 반드시 CHECK
+#
+# v1.3
+# - 응모자격 / 참가자격 / 신청자격 섹션을
+#   문서 전체에서 모두 수집
+# - 공고문 요약본 + 상세 지침서가 한 파일 안에
+#   반복 포함되는 실제 HWP 구조 대응
 # =========================================================
 
 
@@ -264,6 +270,8 @@ def get_lines(
         if not line:
             continue
 
+        # HWP 추출 시 생기는
+        # 제어문자성 쓰레기 문자열 제거
         if (
             re.fullmatch(
                 r"[A-Za-z捤獥汤捯氠瑢漠杳\s]+",
@@ -289,7 +297,63 @@ def get_lines(
 # CONTEXT
 # ---------------------------------------------------------
 
-def section_slice(
+def is_section_boundary(
+    line
+):
+
+    value = clean_line(
+        line
+    )
+
+
+    # 숫자형 제목
+    # 5. 응모자격
+    # 6-1. 작품제작 방향
+    if re.match(
+        r"^\d+(?:-\d+)?\s*[.)]?\s*\S+",
+        value
+    ):
+
+        return True
+
+
+    # 주요 제목형
+    if re.match(
+        (
+            r"^(?:"
+            r"목적|"
+            r"사업명|"
+            r"공모개요|"
+            r"응모자격|"
+            r"참가자격|"
+            r"신청자격|"
+            r"공모일정|"
+            r"작품접수|"
+            r"접수방법|"
+            r"제출방법|"
+            r"제출도서|"
+            r"작품제출|"
+            r"작품선정|"
+            r"계약방법|"
+            r"공모조건|"
+            r"당선작품|"
+            r"기타유의사항|"
+            r"기타\s*유의사항|"
+            r"현장설명|"
+            r"심사"
+            r")"
+        ),
+        value,
+        re.I
+    ):
+
+        return True
+
+
+    return False
+
+
+def section_slices(
     lines,
     headings,
     max_lines=14
@@ -305,6 +369,9 @@ def section_slice(
         in headings
     ]
 
+    collected = []
+
+
     for index, line in enumerate(
         lines
     ):
@@ -312,6 +379,7 @@ def section_slice(
         key = normalize_key(
             line
         )
+
 
         if not any(
 
@@ -326,57 +394,65 @@ def section_slice(
 
             continue
 
-        result = [
+
+        current = [
             line
         ]
+
 
         for candidate in lines[
             index + 1:
             index + 1 + max_lines
         ]:
 
-            if (
-                len(result)
-                >
-                1
-                and
-                re.match(
-                    r"^\d+\s*[.)]\s*\S+",
-                    candidate
-                )
-            ):
-
-                break
-
-            if (
-                len(result)
-                >
-                1
-                and
-                re.match(
-                    (
-                        r"^(공모개요|"
-                        r"작품제출|"
-                        r"작품선정|"
-                        r"기타유의사항|"
-                        r"현장설명|"
-                        r"심사|"
-                        r"접수방법|"
-                        r"제출방법)"
-                    ),
-                    candidate
-                )
-            ):
-
-                break
-
-            result.append(
+            candidate_key = normalize_key(
                 candidate
             )
 
-        return result
 
-    return []
+            # 동일 종류의 자격 제목이 다시 나오면
+            # 현재 섹션을 끝내고
+            # 바깥 루프에서 새 섹션으로 다시 수집
+            if any(
+
+                heading
+                in
+                candidate_key
+
+                for heading
+                in heading_keys
+
+            ):
+
+                break
+
+
+            if (
+                len(current)
+                >
+                1
+                and
+                is_section_boundary(
+                    candidate
+                )
+            ):
+
+                break
+
+
+            current.append(
+                candidate
+            )
+
+
+        collected.extend(
+            current
+        )
+
+
+    return unique(
+        collected
+    )
 
 
 def context_lines(
@@ -474,7 +550,7 @@ def infer_applicant_type(
             ],
             before=0,
             after=8,
-            limit=4
+            limit=8
         )
     )
 
@@ -488,7 +564,8 @@ def infer_applicant_type(
 
 
     # -----------------------------------------------------
-    # 개인 전용 + 법인 / 사업자 명시 금지
+    # 개인 전용 +
+    # 법인 / 사업자 명시 금지
     # -----------------------------------------------------
 
     individual_only_patterns = [
@@ -510,6 +587,7 @@ def infer_applicant_type(
             r"\s*(?:불가|금지)"
         )
     ]
+
 
     if any(
 
@@ -573,6 +651,7 @@ def infer_applicant_type(
         )
     ]
 
+
     if any(
 
         re.search(
@@ -616,6 +695,7 @@ def infer_applicant_type(
             r"(?:가능|허용)"
         )
     ]
+
 
     if any(
 
@@ -661,6 +741,7 @@ def infer_applicant_type(
         )
     ]
 
+
     if any(
 
         re.search(
@@ -695,14 +776,13 @@ def infer_applicant_type(
 
         r"작가\s*1인",
 
-        # v1.2
-        # "대한민국 국적을 가진 자(작가)"
-        # 같은 실제 공모문 표현
+        # 실제 공모문:
+        # 대한민국 국적을 가진 자(작가)
         r"자\s*\(\s*작가\s*\)",
 
         (
             r"대한민국\s*국적"
-            r"[^/\n]{0,60}"
+            r"[^/\n]{0,80}"
             r"\(\s*작가\s*\)"
         ),
 
@@ -726,6 +806,7 @@ def infer_applicant_type(
         )
     ]
 
+
     if any(
 
         re.search(
@@ -739,11 +820,17 @@ def infer_applicant_type(
 
     ):
 
+        evidence = matched_sentences(
+            source,
+            artist_patterns
+        )
+
         return (
             "ARTIST",
-            matched_sentences(
-                source,
-                artist_patterns
+            evidence
+            or
+            unique(
+                source[:4]
             )
         )
 
@@ -769,6 +856,7 @@ def infer_applicant_type(
             r"개인"
         )
     ]
+
 
     if any(
 
@@ -810,6 +898,7 @@ def infer_applicant_type(
         r"자격\s*제한\s*없"
     ]
 
+
     if any(
 
         re.search(
@@ -833,8 +922,8 @@ def infer_applicant_type(
 
 
     # -----------------------------------------------------
-    # "제작·설치 가능한 자"만으로는
-    # 개인/법인/작가를 임의 추론하지 않음.
+    # 제작·설치 가능한 자
+    # 만으로는 임의 추론 금지
     # -----------------------------------------------------
 
     if (
@@ -854,7 +943,7 @@ def infer_applicant_type(
         return (
             "UNCLEAR",
             unique(
-                source[:3]
+                source[:4]
             )
         )
 
@@ -862,7 +951,7 @@ def infer_applicant_type(
     return (
         "UNCLEAR",
         unique(
-            source[:3]
+            source[:4]
         )
     )
 
@@ -897,10 +986,12 @@ def infer_proxy(
         )
     ]
 
+
     no_evidence = matched_sentences(
         lines,
         no_patterns
     )
+
 
     if no_evidence:
 
@@ -956,16 +1047,19 @@ def infer_proxy(
         )
     ]
 
+
     yes_evidence = matched_sentences(
         lines,
         yes_patterns
     )
+
 
     if yes_evidence:
 
         scope = (
             "SUBMISSION_ONLY"
         )
+
 
         if any(
 
@@ -991,6 +1085,7 @@ def infer_proxy(
             scope = (
                 "PROCEDURAL_AGENT"
             )
+
 
         return (
             "YES",
@@ -1027,6 +1122,7 @@ def infer_power_of_attorney(
         )
     ]
 
+
     required_patterns = [
 
         (
@@ -1062,6 +1158,7 @@ def infer_power_of_attorney(
         not_required_patterns
     )
 
+
     if no_evidence:
 
         return (
@@ -1074,6 +1171,7 @@ def infer_power_of_attorney(
         lines,
         required_patterns
     )
+
 
     if required_evidence:
 
@@ -1152,6 +1250,7 @@ def infer_joint(
         no_patterns
     )
 
+
     if no_evidence:
 
         return (
@@ -1165,6 +1264,7 @@ def infer_joint(
         conditional_patterns
     )
 
+
     if conditional_evidence:
 
         return (
@@ -1177,6 +1277,7 @@ def infer_joint(
         lines,
         yes_patterns
     )
+
 
     if yes_evidence:
 
@@ -1262,6 +1363,7 @@ def infer_production_company_joint(
         no_patterns
     )
 
+
     if no_evidence:
 
         return (
@@ -1275,6 +1377,7 @@ def infer_production_company_joint(
         yes_patterns
     )
 
+
     if yes_evidence:
 
         if (
@@ -1287,6 +1390,7 @@ def infer_production_company_joint(
                 "CONDITIONAL",
                 yes_evidence
             )
+
 
         return (
             "YES",
@@ -1488,6 +1592,10 @@ def choose_modes(
     modes = []
 
 
+    # -----------------------------------------------------
+    # DIRECT
+    # -----------------------------------------------------
+
     if applicant_type in {
 
         "INDIVIDUAL_OR_CORPORATION",
@@ -1501,6 +1609,13 @@ def choose_modes(
             "DIRECT"
         )
 
+
+    # -----------------------------------------------------
+    # JOINT
+    #
+    # 단순 공동응모 가능은 JOINT가 아님.
+    # 법인 / 사업자 / 제작업체 참여 근거 필요.
+    # -----------------------------------------------------
 
     joint_axoo = (
 
@@ -1543,6 +1658,10 @@ def choose_modes(
         )
 
 
+    # -----------------------------------------------------
+    # PROXY
+    # -----------------------------------------------------
+
     if (
         proxy_submission
         ==
@@ -1554,6 +1673,10 @@ def choose_modes(
         )
 
 
+    # -----------------------------------------------------
+    # BLOCKED
+    # -----------------------------------------------------
+
     if (
         blocked_evidence
         and
@@ -1564,6 +1687,10 @@ def choose_modes(
             "BLOCKED"
         )
 
+
+    # -----------------------------------------------------
+    # ARTIST ONLY
+    # -----------------------------------------------------
 
     if (
         not blocked_evidence
@@ -1593,6 +1720,10 @@ def choose_modes(
             "ARTIST_ONLY"
         )
 
+
+    # -----------------------------------------------------
+    # CHECK
+    # -----------------------------------------------------
 
     if not modes:
 
@@ -1663,6 +1794,7 @@ def primary_mode(
         ]
     )
 
+
     for mode in priority:
 
         if mode in modes:
@@ -1680,6 +1812,7 @@ def build_evidence(
 ):
 
     values = []
+
 
     for group in groups:
 
@@ -1716,7 +1849,22 @@ def analyze(
     )
 
 
-    eligibility_lines = section_slice(
+    # -----------------------------------------------------
+    # v1.3
+    #
+    # 문서 전체에서 모든 자격 섹션 수집
+    #
+    # 예:
+    # 1) 공고 요약
+    #    응모자격 ... 대한민국 국적을 가진 자
+    #
+    # 2) 상세 공모지침서
+    #    응모자격 ... 대한민국 국적을 가진 자(작가)
+    #
+    # 둘 다 분석
+    # -----------------------------------------------------
+
+    eligibility_lines = section_slices(
 
         lines,
 
@@ -1726,7 +1874,7 @@ def analyze(
             "신청자격"
         ],
 
-        max_lines=10
+        max_lines=12
     )
 
 
@@ -1775,6 +1923,8 @@ def analyze(
     )
 
 
+    # 제작업체 공동응모가 명확한데
+    # joint_application이 비어 있으면 정합성 보정
     if (
         joint_application
         ==
@@ -1849,6 +1999,7 @@ def analyze(
     )
 
 
+    # LOW confidence는 반드시 CHECK
     if (
         confidence
         ==
