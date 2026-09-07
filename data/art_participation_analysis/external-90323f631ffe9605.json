@@ -1,0 +1,23 @@
+{
+  "researchId": "external-90323f631ffe9605",
+  "title": "김포 한강 시네폴리스 신축공사 미술작품 제작 및 설치 공모 공고",
+  "status": "ok",
+  "generatedAt": "2026-09-07T06:52:36.272045+00:00",
+  "schemaVersion": "1.0.0",
+  "participation": {
+    "applicant_type": "ARTIST",
+    "axoo_entry_mode": [
+      "ARTIST_ONLY"
+    ],
+    "primary_axoo_entry_mode": "ARTIST_ONLY",
+    "proxy_submission": "NOT_STATED",
+    "proxy_scope": "NOT_STATED",
+    "power_of_attorney": "NOT_STATED",
+    "joint_application": "NO",
+    "joint_allowed_parties": [],
+    "production_company_joint": "NOT_STATED",
+    "participation_evidence": "단독 응모만 가능, 작가 1인당 1개 작품만 응모 가능",
+    "participation_confidence": "HIGH",
+    "entry_sort_priority": 40
+  }
+}

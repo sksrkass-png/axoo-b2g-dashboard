@@ -1,0 +1,23 @@
+{
+  "researchId": "external-5ca0dea6b51faffe",
+  "title": "수원당수 D-3블록 설계공모 미술작품 공모 공고",
+  "status": "ok",
+  "generatedAt": "2026-09-07T06:52:36.131425+00:00",
+  "schemaVersion": "1.0.0",
+  "participation": {
+    "applicant_type": "UNCLEAR",
+    "axoo_entry_mode": [
+      "CHECK"
+    ],
+    "primary_axoo_entry_mode": "CHECK",
+    "proxy_submission": "NOT_STATED",
+    "proxy_scope": "NOT_STATED",
+    "power_of_attorney": "NOT_STATED",
+    "joint_application": "NOT_STATED",
+    "joint_allowed_parties": [],
+    "production_company_joint": "NOT_STATED",
+    "participation_evidence": "응모자격 | ‒ 공고일 현재 만20세 이상으로 미술작품 제작, 설치를 할 수 있는 자로서 해당 경험이 있는 대한민국 국적을 가진 자 | 작품접수",
+    "participation_confidence": "LOW",
+    "entry_sort_priority": 80
+  }
+}

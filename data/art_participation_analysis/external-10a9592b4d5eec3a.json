@@ -1,0 +1,23 @@
+{
+  "researchId": "external-10a9592b4d5eec3a",
+  "title": "남양주왕숙2A-1 신축공사 內 미술작품 제작 및 설치 공모 공고",
+  "status": "ok",
+  "generatedAt": "2026-09-07T06:52:36.095030+00:00",
+  "schemaVersion": "1.0.0",
+  "participation": {
+    "applicant_type": "INDIVIDUAL",
+    "axoo_entry_mode": [
+      "BLOCKED"
+    ],
+    "primary_axoo_entry_mode": "BLOCKED",
+    "proxy_submission": "NOT_STATED",
+    "proxy_scope": "NOT_STATED",
+    "power_of_attorney": "NOT_STATED",
+    "joint_application": "NOT_STATED",
+    "joint_allowed_parties": [],
+    "production_company_joint": "NOT_STATED",
+    "participation_evidence": "개인을 대상으로 하는 공모로 법인이나 사업자로 응모불가",
+    "participation_confidence": "HIGH",
+    "entry_sort_priority": 90
+  }
+}
