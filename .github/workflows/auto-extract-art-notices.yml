@@ -115,6 +115,7 @@ jobs:
       # ======================================================
 
       - name: Extract and analyze queued notices
+        id: process
         shell: bash
 
         run: |
@@ -137,11 +138,18 @@ jobs:
 
           if [ "$QUEUE_COUNT" = "0" ]; then
 
+            echo "processed=false" \
+              >> "$GITHUB_OUTPUT"
+
             echo "분석이 필요한 프로젝트가 없습니다."
 
             exit 0
 
           fi
+
+
+          echo "processed=true" \
+            >> "$GITHUB_OUTPUT"
 
 
           jq -r \
@@ -194,13 +202,16 @@ jobs:
           import os
           from pathlib import Path
 
+
           research_id = os.environ["ART_NOTICE_ID"]
+
 
           path = (
               Path("data")
               / "art_notice_text"
               / f"{research_id}.json"
           )
+
 
           if not path.exists():
 
@@ -589,6 +600,198 @@ jobs:
 
 
       # ======================================================
+      # STEP 3
+      # 신규 분석이 있었을 때만
+      # Dashboard용 Participation Index 재생성
+      # ======================================================
+
+      - name: Rebuild participation index
+        if: steps.process.outputs.processed == 'true'
+        shell: bash
+
+        run: |
+
+          set -euo pipefail
+
+
+          echo ""
+          echo "========================================"
+          echo "REBUILD AXOO PARTICIPATION INDEX"
+          echo "========================================"
+
+
+          python \
+            scripts/build_art_participation_index.py
+
+
+          if [ ! -f \
+            data/art_participation_index.json
+          ]; then
+
+            echo "Participation index missing"
+
+            exit 1
+
+          fi
+
+
+          echo ""
+          echo "Participation index rebuilt."
+          echo ""
+
+
+      # ======================================================
+      # STEP 4
+      # Index 검증
+      # ======================================================
+
+      - name: Validate participation index
+        if: steps.process.outputs.processed == 'true'
+        shell: bash
+
+        run: |
+
+          set -euo pipefail
+
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+
+          path = Path(
+              "data/art_participation_index.json"
+          )
+
+
+          if not path.exists():
+
+              raise SystemExit(
+                  "Participation index not found"
+              )
+
+
+          data = json.loads(
+              path.read_text(
+                  encoding="utf-8"
+              )
+          )
+
+
+          required = [
+              "version",
+              "schemaVersion",
+              "generatedAt",
+              "sourceCount",
+              "researchIdCount",
+              "titleGroupCount",
+              "conflictCount",
+              "modeCounts",
+              "byResearchId",
+              "byTitle"
+          ]
+
+
+          missing = [
+              key
+              for key
+              in required
+              if key
+              not in data
+          ]
+
+
+          if missing:
+
+              raise SystemExit(
+                  "Index missing fields: "
+                  +
+                  ", ".join(
+                      missing
+                  )
+              )
+
+
+          source_count = int(
+              data.get(
+                  "sourceCount",
+                  0
+              )
+          )
+
+
+          research_count = int(
+              data.get(
+                  "researchIdCount",
+                  0
+              )
+          )
+
+
+          if source_count < 1:
+
+              raise SystemExit(
+                  "Invalid sourceCount"
+              )
+
+
+          if (
+              source_count
+              !=
+              research_count
+          ):
+
+              raise SystemExit(
+                  "sourceCount / researchIdCount mismatch"
+              )
+
+
+          print("")
+          print(
+              "========================================"
+          )
+
+          print(
+              "✅ PARTICIPATION INDEX VALID"
+          )
+
+          print(
+              "Source count:",
+              source_count
+          )
+
+          print(
+              "Title groups:",
+              data.get(
+                  "titleGroupCount"
+              )
+          )
+
+          print(
+              "Conflicts:",
+              data.get(
+                  "conflictCount"
+              )
+          )
+
+          print(
+              "Mode counts:",
+              json.dumps(
+                  data.get(
+                      "modeCounts",
+                      {}
+                  ),
+                  ensure_ascii=False
+              )
+          )
+
+          print(
+              "========================================"
+          )
+          PY
+
+
+      # ======================================================
       # Runtime 파일 정리
       # ======================================================
 
@@ -634,7 +837,8 @@ jobs:
               -- \
               data/art_notice_text \
               data/art_notice_analysis \
-              data/art_participation_analysis
+              data/art_participation_analysis \
+              data/art_participation_index.json
           )" ]
           then
 
@@ -659,6 +863,9 @@ jobs:
 
         run: |
 
+          set -euo pipefail
+
+
           git config \
             user.name \
             "github-actions[bot]"
@@ -672,7 +879,8 @@ jobs:
           git add \
             data/art_notice_text \
             data/art_notice_analysis \
-            data/art_participation_analysis
+            data/art_participation_analysis \
+            data/art_participation_index.json
 
 
           git commit \
