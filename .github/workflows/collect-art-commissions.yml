@@ -8,6 +8,13 @@ on:
     # 00:00 UTC = 한국시간 오전 09:00
     - cron: "0 0 * * *"
 
+  # 다른 자동화가 LIVE 공고 파일을 덮어쓰면
+  # 즉시 공식 Collector로 다시 검증/복구
+  push:
+    branches:
+      - main
+    paths:
+      - "data/art_commissions.json"
 
 permissions:
   contents: write
@@ -21,6 +28,9 @@ concurrency:
 jobs:
 
   collect:
+
+    # Collector 자신의 commit으로 무한 재실행되는 것 방지
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
 
     runs-on: ubuntu-latest
 
