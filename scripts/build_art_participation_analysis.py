@@ -814,6 +814,24 @@ def infer_joint_parties(
     lines
 ):
 
+        # 공동응모가 명시적으로 불가능한 근거인 경우
+    # 공동 참여주체를 추론하지 않는다.
+    if any(
+        re.search(
+            r"단독\s*응모만\s*가능|"
+            r"공동\s*(?:응모|참여|신청)[^\n]{0,20}(?:불가|금지|허용하지)",
+            evidence,
+            re.I
+        )
+        for evidence
+        in (joint_evidence or [])
+    ):
+
+        return (
+            [],
+            joint_evidence or []
+        )
+        
     source = (
         joint_evidence
         or
