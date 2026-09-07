@@ -1,0 +1,43 @@
+name: Test AXOO Art Participation Rules
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-participation-rules:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Check required files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f "data/art_participation_schema.json"
+          test -f "scripts/build_art_participation_analysis.py"
+          test -f "scripts/test_art_participation_rules.py"
+
+          echo "Required files OK"
+
+
+      - name: Run AXOO participation rule QA
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python scripts/test_art_participation_rules.py
