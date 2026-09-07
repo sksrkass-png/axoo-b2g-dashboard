@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
   schedule:
-    # 매시간 45분마다 자동 확인
-    - cron: "45 * * * *"
+    # 5분마다 자동 확인
+    - cron: "/5 * * * *"
 
 
 permissions:
