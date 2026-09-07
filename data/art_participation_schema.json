@@ -1,0 +1,190 @@
+{
+  "version": "1.0.0",
+
+  "applicant_type": {
+    "values": [
+      "ARTIST",
+      "INDIVIDUAL",
+      "INDIVIDUAL_OR_CORPORATION",
+      "CORPORATION",
+      "BUSINESS",
+      "OPEN",
+      "UNCLEAR"
+    ],
+    "labels": {
+      "ARTIST": "작가",
+      "INDIVIDUAL": "개인",
+      "INDIVIDUAL_OR_CORPORATION": "개인·법인",
+      "CORPORATION": "법인",
+      "BUSINESS": "사업자",
+      "OPEN": "제한 없음",
+      "UNCLEAR": "확인 필요"
+    },
+    "default": "UNCLEAR"
+  },
+
+  "axoo_entry_mode": {
+    "values": [
+      "DIRECT",
+      "JOINT",
+      "PROXY",
+      "ARTIST_ONLY",
+      "CHECK",
+      "BLOCKED"
+    ],
+    "labels": {
+      "DIRECT": "AXOO 직접응모",
+      "JOINT": "AXOO 공동응모",
+      "PROXY": "AXOO 대리접수 지원",
+      "ARTIST_ONLY": "작가 단독응모",
+      "CHECK": "참여구조 확인",
+      "BLOCKED": "AXOO 공식 참여 불가"
+    },
+    "icons": {
+      "DIRECT": "🔵",
+      "JOINT": "🟣",
+      "PROXY": "🟢",
+      "ARTIST_ONLY": "⚪",
+      "CHECK": "🟡",
+      "BLOCKED": "⚫"
+    },
+    "primary_priority": [
+      "DIRECT",
+      "JOINT",
+      "PROXY",
+      "ARTIST_ONLY",
+      "CHECK",
+      "BLOCKED"
+    ],
+    "sort_priority": {
+      "DIRECT": 10,
+      "JOINT": 20,
+      "PROXY": 30,
+      "ARTIST_ONLY": 40,
+      "CHECK": 80,
+      "BLOCKED": 90
+    },
+    "default": [
+      "CHECK"
+    ]
+  },
+
+  "proxy_submission": {
+    "values": [
+      "YES",
+      "NO",
+      "NOT_STATED"
+    ],
+    "labels": {
+      "YES": "대리접수 가능",
+      "NO": "대리접수 불가",
+      "NOT_STATED": "공고 미기재"
+    },
+    "default": "NOT_STATED"
+  },
+
+  "proxy_scope": {
+    "values": [
+      "SUBMISSION_ONLY",
+      "PROCEDURAL_AGENT",
+      "NOT_STATED",
+      "UNCLEAR"
+    ],
+    "labels": {
+      "SUBMISSION_ONLY": "접수 대리",
+      "PROCEDURAL_AGENT": "절차 대리",
+      "NOT_STATED": "공고 미기재",
+      "UNCLEAR": "확인 필요"
+    },
+    "default": "NOT_STATED"
+  },
+
+  "power_of_attorney": {
+    "values": [
+      "REQUIRED",
+      "NOT_REQUIRED",
+      "NOT_STATED"
+    ],
+    "labels": {
+      "REQUIRED": "위임장 필요",
+      "NOT_REQUIRED": "위임장 불필요",
+      "NOT_STATED": "위임장 미기재"
+    },
+    "default": "NOT_STATED"
+  },
+
+  "joint_application": {
+    "values": [
+      "YES",
+      "NO",
+      "CONDITIONAL",
+      "NOT_STATED"
+    ],
+    "labels": {
+      "YES": "공동응모 가능",
+      "NO": "공동응모 불가",
+      "CONDITIONAL": "조건부 공동응모",
+      "NOT_STATED": "공고 미기재"
+    },
+    "default": "NOT_STATED"
+  },
+
+  "joint_allowed_parties": {
+    "values": [
+      "ARTIST",
+      "INDIVIDUAL",
+      "CORPORATION",
+      "PRODUCTION_COMPANY",
+      "BUSINESS",
+      "UNCLEAR"
+    ],
+    "default": []
+  },
+
+  "production_company_joint": {
+    "values": [
+      "YES",
+      "NO",
+      "CONDITIONAL",
+      "NOT_STATED"
+    ],
+    "labels": {
+      "YES": "제작업체 공동응모 가능",
+      "NO": "제작업체 공동응모 불가",
+      "CONDITIONAL": "제작업체 조건부 참여",
+      "NOT_STATED": "공고 미기재"
+    },
+    "default": "NOT_STATED"
+  },
+
+  "participation_confidence": {
+    "values": [
+      "HIGH",
+      "MEDIUM",
+      "LOW"
+    ],
+    "labels": {
+      "HIGH": "명확",
+      "MEDIUM": "규정 종합 판단",
+      "LOW": "확인 필요"
+    },
+    "default": "LOW"
+  },
+
+  "record_defaults": {
+    "applicant_type": "UNCLEAR",
+    "axoo_entry_mode": [
+      "CHECK"
+    ],
+    "primary_axoo_entry_mode": "CHECK",
+    "proxy_submission": "NOT_STATED",
+    "proxy_scope": "NOT_STATED",
+    "power_of_attorney": "NOT_STATED",
+    "joint_application": "NOT_STATED",
+    "joint_allowed_parties": [],
+    "production_company_joint": "NOT_STATED",
+    "participation_evidence": "",
+    "participation_confidence": "LOW",
+    "entry_sort_priority": 80
+  }
+}
