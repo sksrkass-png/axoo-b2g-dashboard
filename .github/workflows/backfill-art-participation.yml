@@ -17,9 +17,17 @@ jobs:
 
     steps:
 
+      # --------------------------------------------------
+      # 1. Repository
+      # --------------------------------------------------
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
+
+      # --------------------------------------------------
+      # 2. Python
+      # --------------------------------------------------
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -27,6 +35,10 @@ jobs:
         with:
           python-version: "3.12"
 
+
+      # --------------------------------------------------
+      # 3. 기존 공고 원문 전체 Participation Backfill
+      # --------------------------------------------------
 
       - name: Backfill participation analysis
         shell: bash
@@ -157,6 +169,10 @@ jobs:
 
           fi
 
+
+      # --------------------------------------------------
+      # 4. 개별 Participation 결과 검증
+      # --------------------------------------------------
 
       - name: Validate generated results
         shell: bash
@@ -295,7 +311,243 @@ jobs:
           PY
 
 
-      - name: Commit participation backfill
+      # --------------------------------------------------
+      # 5. Dashboard용 Participation Index 생성
+      # --------------------------------------------------
+
+      - name: Build participation index
+        shell: bash
+
+        run: |
+
+          set -euo pipefail
+
+
+          python \
+            scripts/build_art_participation_index.py
+
+
+          if [ ! -f \
+            data/art_participation_index.json
+          ]; then
+
+            echo "Participation index was not generated"
+
+            exit 1
+
+          fi
+
+
+      # --------------------------------------------------
+      # 6. Index 구조 검증
+      # --------------------------------------------------
+
+      - name: Validate participation index
+        shell: bash
+
+        run: |
+
+          set -euo pipefail
+
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+
+          path = Path(
+              "data/art_participation_index.json"
+          )
+
+
+          if not path.exists():
+
+              raise SystemExit(
+                  "Participation index missing"
+              )
+
+
+          data = json.loads(
+              path.read_text(
+                  encoding="utf-8"
+              )
+          )
+
+
+          required_top = [
+              "version",
+              "schemaVersion",
+              "generatedAt",
+              "sourceCount",
+              "researchIdCount",
+              "titleGroupCount",
+              "conflictCount",
+              "modeCounts",
+              "records",
+              "byResearchId",
+              "byTitle"
+          ]
+
+
+          missing_top = [
+              key
+              for key
+              in required_top
+              if key
+              not in data
+          ]
+
+
+          if missing_top:
+
+              raise SystemExit(
+                  "Index missing fields: "
+                  +
+                  ", ".join(
+                      missing_top
+                  )
+              )
+
+
+          source_count = int(
+              data.get(
+                  "sourceCount",
+                  0
+              )
+          )
+
+
+          research_count = int(
+              data.get(
+                  "researchIdCount",
+                  0
+              )
+          )
+
+
+          title_count = int(
+              data.get(
+                  "titleGroupCount",
+                  0
+              )
+          )
+
+
+          conflict_count = int(
+              data.get(
+                  "conflictCount",
+                  0
+              )
+          )
+
+
+          if source_count < 1:
+
+              raise SystemExit(
+                  "Index sourceCount must be >= 1"
+              )
+
+
+          if research_count != source_count:
+
+              raise SystemExit(
+                  "researchIdCount does not match sourceCount"
+              )
+
+
+          if not isinstance(
+              data.get(
+                  "byResearchId"
+              ),
+              dict
+          ):
+
+              raise SystemExit(
+                  "byResearchId must be an object"
+              )
+
+
+          if not isinstance(
+              data.get(
+                  "byTitle"
+              ),
+              dict
+          ):
+
+              raise SystemExit(
+                  "byTitle must be an object"
+              )
+
+
+          mode_counts = data.get(
+              "modeCounts",
+              {}
+          )
+
+
+          expected_modes = [
+              "DIRECT",
+              "JOINT",
+              "PROXY",
+              "ARTIST_ONLY",
+              "CHECK",
+              "BLOCKED"
+          ]
+
+
+          for mode in expected_modes:
+
+              if mode not in mode_counts:
+
+                  raise SystemExit(
+                      f"modeCounts missing: {mode}"
+                  )
+
+
+          print("")
+          print(
+              "========================================"
+          )
+
+          print(
+              "✅ PARTICIPATION INDEX VALIDATED"
+          )
+
+          print(
+              "SOURCE COUNT:",
+              source_count
+          )
+
+          print(
+              "TITLE GROUP COUNT:",
+              title_count
+          )
+
+          print(
+              "CONFLICT COUNT:",
+              conflict_count
+          )
+
+          print(
+              "MODE COUNTS:",
+              json.dumps(
+                  mode_counts,
+                  ensure_ascii=False
+              )
+          )
+
+          print(
+              "========================================"
+          )
+          PY
+
+
+      # --------------------------------------------------
+      # 7. 변경 여부 확인
+      # --------------------------------------------------
+
+      - name: Check participation changes
+        id: changes
         shell: bash
 
         run: |
@@ -307,15 +559,33 @@ jobs:
             git status \
               --porcelain \
               -- \
-              data/art_participation_analysis
+              data/art_participation_analysis \
+              data/art_participation_index.json
           )" ]
           then
 
-            echo "No changes to commit"
+            echo "changed=false" \
+              >> "$GITHUB_OUTPUT"
 
-            exit 0
+          else
+
+            echo "changed=true" \
+              >> "$GITHUB_OUTPUT"
 
           fi
+
+
+      # --------------------------------------------------
+      # 8. Analysis + Index 함께 Commit
+      # --------------------------------------------------
+
+      - name: Commit participation backfill and index
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+
+        run: |
+
+          set -euo pipefail
 
 
           git config \
@@ -329,11 +599,12 @@ jobs:
 
 
           git add \
-            data/art_participation_analysis
+            data/art_participation_analysis \
+            data/art_participation_index.json
 
 
           git commit \
-            -m "Backfill AXOO art participation analysis"
+            -m "Backfill AXOO art participation and index"
 
 
           git pull \
