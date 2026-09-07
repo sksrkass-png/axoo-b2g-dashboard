@@ -1,0 +1,345 @@
+name: Backfill AXOO Art Participation
+
+on:
+  workflow_dispatch:
+
+
+permissions:
+  contents: write
+
+
+jobs:
+
+  backfill-participation:
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+
+        with:
+          python-version: "3.12"
+
+
+      - name: Backfill participation analysis
+        shell: bash
+
+        run: |
+
+          set -euo pipefail
+
+          mkdir -p \
+            data/art_participation_analysis
+
+
+          TOTAL=0
+          SUCCESS=0
+
+
+          for file in \
+            data/art_notice_text/*.json
+          do
+
+            if [ ! -f "$file" ]; then
+
+              continue
+
+            fi
+
+
+            research_id="$(
+              basename \
+                "$file" \
+                .json
+            )"
+
+
+            export ART_NOTICE_ID="$research_id"
+
+
+            echo ""
+            echo "========================================"
+            echo "PARTICIPATION BACKFILL"
+            echo "Research ID: $ART_NOTICE_ID"
+            echo "========================================"
+
+
+            TOTAL=$((TOTAL + 1))
+
+
+            python \
+              scripts/build_art_participation_analysis.py
+
+
+            result_file="data/art_participation_analysis/${ART_NOTICE_ID}.json"
+
+
+            if [ ! -f "$result_file" ]; then
+
+              echo "Missing result: $result_file"
+
+              exit 1
+
+            fi
+
+
+            STATUS="$(
+              jq -r \
+                '.status // ""' \
+                "$result_file"
+            )"
+
+
+            MODE="$(
+              jq -r \
+                '.participation.primary_axoo_entry_mode // "CHECK"' \
+                "$result_file"
+            )"
+
+
+            CONFIDENCE="$(
+              jq -r \
+                '.participation.participation_confidence // "LOW"' \
+                "$result_file"
+            )"
+
+
+            if [ "$STATUS" != "ok" ]; then
+
+              echo "Invalid result status: $STATUS"
+
+              exit 1
+
+            fi
+
+
+            SUCCESS=$((SUCCESS + 1))
+
+
+            echo ""
+            echo "✅ $ART_NOTICE_ID"
+            echo "MODE: $MODE"
+            echo "CONFIDENCE: $CONFIDENCE"
+            echo ""
+
+          done
+
+
+          echo ""
+          echo "========================================"
+          echo "BACKFILL COMPLETE"
+          echo "TOTAL: $TOTAL"
+          echo "SUCCESS: $SUCCESS"
+          echo "========================================"
+
+
+          if [ "$TOTAL" -lt 1 ]; then
+
+            echo "No raw notice files found"
+
+            exit 1
+
+          fi
+
+
+          if [ "$TOTAL" != "$SUCCESS" ]; then
+
+            echo "Backfill incomplete"
+
+            exit 1
+
+          fi
+
+
+      - name: Validate generated results
+        shell: bash
+
+        run: |
+
+          set -euo pipefail
+
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+
+          input_dir = Path(
+              "data/art_notice_text"
+          )
+
+          output_dir = Path(
+              "data/art_participation_analysis"
+          )
+
+
+          input_ids = sorted(
+              path.stem
+              for path
+              in input_dir.glob("*.json")
+          )
+
+
+          output_ids = sorted(
+              path.stem
+              for path
+              in output_dir.glob("*.json")
+          )
+
+
+          missing = sorted(
+              set(input_ids)
+              -
+              set(output_ids)
+          )
+
+
+          if missing:
+
+              raise SystemExit(
+                  "Missing participation results: "
+                  +
+                  ", ".join(missing)
+              )
+
+
+          required = [
+              "applicant_type",
+              "axoo_entry_mode",
+              "primary_axoo_entry_mode",
+              "proxy_submission",
+              "proxy_scope",
+              "power_of_attorney",
+              "joint_application",
+              "joint_allowed_parties",
+              "production_company_joint",
+              "participation_evidence",
+              "participation_confidence",
+              "entry_sort_priority"
+          ]
+
+
+          for research_id in input_ids:
+
+              path = (
+                  output_dir
+                  /
+                  f"{research_id}.json"
+              )
+
+
+              data = json.loads(
+                  path.read_text(
+                      encoding="utf-8"
+                  )
+              )
+
+
+              if data.get("status") != "ok":
+
+                  raise SystemExit(
+                      f"Invalid status: {research_id}"
+                  )
+
+
+              participation = data.get(
+                  "participation",
+                  {}
+              )
+
+
+              missing_fields = [
+                  field
+                  for field
+                  in required
+                  if field
+                  not in participation
+              ]
+
+
+              if missing_fields:
+
+                  raise SystemExit(
+                      f"{research_id} missing: "
+                      +
+                      ", ".join(
+                          missing_fields
+                      )
+                  )
+
+
+          print("")
+          print(
+              "========================================"
+          )
+
+          print(
+              "✅ PARTICIPATION BACKFILL VALIDATED"
+          )
+
+          print(
+              "RESULT COUNT:",
+              len(input_ids)
+          )
+
+          print(
+              "========================================"
+          )
+          PY
+
+
+      - name: Commit participation backfill
+        shell: bash
+
+        run: |
+
+          set -euo pipefail
+
+
+          if [ -z "$(
+            git status \
+              --porcelain \
+              -- \
+              data/art_participation_analysis
+          )" ]
+          then
+
+            echo "No changes to commit"
+
+            exit 0
+
+          fi
+
+
+          git config \
+            user.name \
+            "github-actions[bot]"
+
+
+          git config \
+            user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+
+          git add \
+            data/art_participation_analysis
+
+
+          git commit \
+            -m "Backfill AXOO art participation analysis"
+
+
+          git pull \
+            --rebase \
+            origin \
+            main
+
+
+          git push
