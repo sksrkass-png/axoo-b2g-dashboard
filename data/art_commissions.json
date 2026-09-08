@@ -105,13 +105,13 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-07",
+    "dateNormalizedAt": "2026-09-08",
     "deadlineStatus": "진행중",
     "staleReason": "",
     "deadlineRepairSource": "detailTextSample",
     "deadlineRepairMode": "single_date",
     "deadlineRepairVersion": "axoo_art_deadline_repair_v1.0.0",
-    "deadlineRepairedAt": "2026-09-07"
+    "deadlineRepairedAt": "2026-09-08"
   },
   {
     "id": "external-5ca0dea6b51faffe",
@@ -243,7 +243,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-07",
+    "dateNormalizedAt": "2026-09-08",
     "staleReason": ""
   },
   {
@@ -376,7 +376,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-07",
+    "dateNormalizedAt": "2026-09-08",
     "staleReason": ""
   },
   {
@@ -509,7 +509,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-07",
+    "dateNormalizedAt": "2026-09-08",
     "staleReason": ""
   }
 ]
