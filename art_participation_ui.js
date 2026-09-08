@@ -4,19 +4,22 @@
 
   // =========================================================
   // AXOO B2G
-  // ART PARTICIPATION UI v1.0
+  // ART PARTICIPATION UI v1.1
   //
   // DATA
   // - data/art_participation_index.json
   // - data/art_participation_schema.json
   //
   // PURPOSE
-  // - 건축물 미술작품 카드에
-  //   AXOO 참여방식 표시
-  //
+  // - 건축물 미술작품 카드에 AXOO 참여방식 표시
   // - 참여방식 필터
   // - AXOO 참여 우선순위 정렬
-  // - 판정 근거 표시
+  // - 판정 근거 접기 / 펼치기
+  //
+  // v1.1
+  // - 긴 participation_evidence 기본 노출 제거
+  // - "공고문 근거 보기" details UI 추가
+  // - 판정 로직 / 필터 / 정렬 로직 변경 없음
   //
   // SAFE LAYER
   // - app.js 수정 없음
@@ -117,6 +120,21 @@
       .replace(
         /[^\p{L}\p{N}]+/gu,
         ""
+      );
+  }
+
+
+  function normalizeEvidenceText(
+    value
+  ) {
+
+    return String(
+      value || ""
+    )
+      .trim()
+      .replace(
+        /\s*\|\s*/g,
+        "\n"
       );
   }
 
@@ -558,40 +576,102 @@
 
 
       /* ================================================
-         EVIDENCE
+         AXOO ENTRY SUMMARY
       ================================================ */
 
       .axoo-entry-evidence {
         margin: 12px 0 0;
-        padding: 10px 12px;
         border: 1px solid #ece8e1;
         border-radius: 12px;
         background: #faf9f7;
-        color: #625e58;
-        font-size: 11px;
-        line-height: 1.55;
+        overflow: hidden;
       }
 
-      .axoo-entry-evidence strong {
-        display: inline-block;
-        margin-right: 7px;
+      .axoo-entry-summary {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 38px;
+        padding: 9px 12px;
+      }
+
+      .axoo-entry-summary strong {
+        flex: 0 0 auto;
         color: #111111;
         font-size: 10px;
+        line-height: 1;
         font-weight: 950;
         letter-spacing: 0.04em;
       }
 
-      .axoo-entry-evidence span {
-        font-weight: 850;
+      .axoo-entry-summary-value {
+        min-width: 0;
+        color: #55514c;
+        font-size: 11px;
+        line-height: 1.35;
+        font-weight: 900;
       }
 
-      .axoo-entry-evidence p {
-        display: -webkit-box;
-        margin: 5px 0 0;
-        overflow: hidden;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+
+      /* ================================================
+         EVIDENCE DETAILS
+      ================================================ */
+
+      .axoo-entry-details {
+        border-top: 1px solid #ece8e1;
+      }
+
+      .axoo-entry-details summary {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 8px 34px 8px 12px;
+        list-style: none;
+        cursor: pointer;
         color: #746f68;
+        font-size: 10px;
+        line-height: 1.3;
+        font-weight: 900;
+        user-select: none;
+      }
+
+      .axoo-entry-details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .axoo-entry-details summary::after {
+        content: "＋";
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        color: #8a867f;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .axoo-entry-details[open] summary::after {
+        content: "－";
+      }
+
+      .axoo-entry-details summary:hover {
+        background: #f5f3ef;
+        color: #111111;
+      }
+
+      .axoo-entry-details-body {
+        padding: 0 12px 11px;
+      }
+
+      .axoo-entry-details-body p {
+        margin: 0;
+        color: #746f68;
+        font-size: 11px;
+        line-height: 1.65;
+        font-weight: 750;
+        white-space: pre-line;
+        word-break: keep-all;
       }
 
 
@@ -610,6 +690,12 @@
         #artEntrySort {
           width: 100%;
           min-width: 0;
+        }
+
+        .axoo-entry-summary {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 5px;
         }
 
       }
@@ -992,31 +1078,63 @@
 
 
     const evidence =
-      String(
+      normalizeEvidenceText(
         participation
           .participation_evidence
-        ||
-        ""
-      ).trim();
+      );
+
+
+    const summaryValue = [
+      getModeIcon(
+        mode
+      ),
+      getModeLabel(
+        mode
+      ),
+      confidence
+        ? `· ${confidence}`
+        : ""
+    ]
+      .filter(
+        Boolean
+      )
+      .join(
+        " "
+      );
 
 
     wrapper.innerHTML = `
-      <strong>AXOO ENTRY</strong>
+      <div class="axoo-entry-summary">
 
-      <span>
-        ${esc(
-          getModeLabel(
-            mode
-          )
-        )}
-        ${confidence
-          ? ` · ${esc(confidence)}`
-          : ""}
-      </span>
+        <strong>
+          AXOO ENTRY
+        </strong>
 
-      ${evidence
-        ? `<p>${esc(evidence)}</p>`
-        : ""}
+        <span class="axoo-entry-summary-value">
+          ${esc(summaryValue)}
+        </span>
+
+      </div>
+
+      ${
+        evidence
+          ? `
+            <details class="axoo-entry-details">
+
+              <summary>
+                공고문 근거 보기
+              </summary>
+
+              <div class="axoo-entry-details-body">
+
+                <p>${esc(evidence)}</p>
+
+              </div>
+
+            </details>
+          `
+          : ""
+      }
     `;
 
 
@@ -1696,7 +1814,6 @@
     applyUI();
 
 
-    // app.js 데이터 fetch 완료 시점 대비
     setTimeout(
       applyUI,
       350
