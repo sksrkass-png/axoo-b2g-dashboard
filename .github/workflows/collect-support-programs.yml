@@ -19,6 +19,9 @@ jobs:
   collect:
     runs-on: ubuntu-latest
 
+    env:
+      NODE_OPTIONS: --dns-result-order=ipv4first
+
     steps:
       # ------------------------------------------
       # 1. Repository
