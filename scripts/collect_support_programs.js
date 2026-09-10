@@ -3750,20 +3750,88 @@ async function main() {
     );
 
 
-  const kams =
-    await collectKams();
+  async function safeCollect(
+  sourceCode,
+  collector,
+  existing
+) {
+  try {
+    const result =
+      await collector();
+
+    return {
+      items: result,
+      success: true
+    };
+
+  } catch (error) {
+
+    console.warn(
+      `⚠️ ${sourceCode} 수집 실패 — 기존 데이터 유지`
+    );
+
+    console.warn(
+      error.message ||
+      error
+    );
+
+    const previous =
+      existing.filter(
+        item =>
+          text(
+            item.sourceCode
+          ).toUpperCase() ===
+          sourceCode
+      );
+
+    return {
+      items: previous,
+      success: false
+    };
+  }
+}
 
 
-  const arko =
-    await collectArko();
+const kamsResult =
+  await safeCollect(
+    "KAMS",
+    collectKams,
+    existing
+  );
+
+const arkoResult =
+  await safeCollect(
+    "ARKO",
+    collectArko,
+    existing
+  );
+
+const kcdfResult =
+  await safeCollect(
+    "KCDF",
+    collectKcdf,
+    existing
+  );
+
+const koccaResult =
+  await safeCollect(
+    "KOCCA",
+    collectKocca,
+    existing
+  );
 
 
-  const kcdf =
-    await collectKcdf();
+const kams =
+  kamsResult.items;
 
+const arko =
+  arkoResult.items;
 
-  const kocca =
-    await collectKocca();
+const kcdf =
+  kcdfResult.items;
+
+const kocca =
+  koccaResult.items;
 
 
   const output = [
