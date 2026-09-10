@@ -50,7 +50,8 @@ jobs:
         shell: bash
 
         env:
-          G2B_SERVICE_KEY: ${{ secrets.G2B_SERVICE_KEY }}
+            G2B_SERVICE_KEY: ${{ secrets.G2B_SERVICE_KEY }}
+            NODE_OPTIONS: --dns-result-order=ipv4first
 
         run: |
           for attempt in 1 2; do
