@@ -76,6 +76,7 @@ jobs:
           node --check scripts/collect_busan_art_commissions.js
           node --check scripts/collect_remaining_art_commissions.js
           node --check scripts/import_g2b_art_commissions.js
+          node --check scripts/validate_art_commission_sources.js
           node --check scripts/filter_art_commission_results.js
           node --check scripts/normalize_art_dates.js
           node --check scripts/repair_art_deadlines.js
@@ -89,6 +90,7 @@ jobs:
         run: |
           node scripts/filter_art_commission_results.js --self-test
           node scripts/test_import_g2b_art_commissions.js
+          node scripts/test_validate_art_commission_sources.js
 
 
       # --------------------------------------------------
@@ -111,6 +113,13 @@ jobs:
       - name: Validate nationwide art source registry
         run: |
           node scripts/art_commission_sources.js
+
+
+      # 등록 URL의 실제 연결 상태·리디렉션을 데이터로 남긴다.
+      # 일부 기관의 자동화 차단은 경고로 기록하고 수집 자체는 계속한다.
+      - name: Validate live art commission source links
+        run: |
+          node scripts/validate_art_commission_sources.js
 
 
       # --------------------------------------------------
@@ -266,6 +275,7 @@ jobs:
             data/art_commissions.json \
             data/art_commissions_archive.json \
             data/art_commission_collection_health.json \
+            data/art_commission_source_validation.json \
             | grep -q .; then
 
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -296,7 +306,8 @@ jobs:
           git add \
             data/art_commissions.json \
             data/art_commissions_archive.json \
-            data/art_commission_collection_health.json
+            data/art_commission_collection_health.json \
+            data/art_commission_source_validation.json
 
 
           git commit \
