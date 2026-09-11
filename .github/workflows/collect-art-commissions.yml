@@ -15,6 +15,7 @@ on:
       - main
     paths:
       - "data/art_commissions.json"
+      - "data/b2g_opportunities.json"
 
 permissions:
   contents: write
@@ -74,6 +75,7 @@ jobs:
           node --check scripts/collect_incheon_art_commissions.js
           node --check scripts/collect_busan_art_commissions.js
           node --check scripts/collect_remaining_art_commissions.js
+          node --check scripts/import_g2b_art_commissions.js
           node --check scripts/filter_art_commission_results.js
           node --check scripts/normalize_art_dates.js
           node --check scripts/repair_art_deadlines.js
@@ -86,6 +88,7 @@ jobs:
       - name: Test art commission result filter
         run: |
           node scripts/filter_art_commission_results.js --self-test
+          node scripts/test_import_g2b_art_commissions.js
 
 
       # --------------------------------------------------
@@ -154,7 +157,20 @@ jobs:
 
 
       # --------------------------------------------------
-      # 9. 결과 / 당선작 / 심사결과 등 제거
+      # 9. 나라장터 보조 수집
+      #
+      # 일반 전시·콘텐츠 사업은 제외하고, 건축물 미술작품 또는
+      # 미술장식품 제작·설치가 명확한 공고만 전국 목록에 합친다.
+      # G2B 수집이 새 데이터를 commit하면 이 workflow가 다시 실행된다.
+      # --------------------------------------------------
+
+      - name: Import G2B architectural art commissions
+        run: |
+          node scripts/import_g2b_art_commissions.js
+
+
+      # --------------------------------------------------
+      # 10. 결과 / 당선작 / 심사결과 등 제거
       #
       # 실제 신규 지원이 가능한 공고만 남긴다.
       #
@@ -179,7 +195,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 10. 원문 날짜 정규화
+      # 11. 원문 날짜 정규화
       #
       # 1차 날짜 추출
       # - 접수기간
@@ -194,7 +210,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 11. 누락 마감일 2차 보완
+      # 12. 누락 마감일 2차 보완
       #
       # 날짜 정규화 후에도 deadline이 없는 공고만 검사.
       #
@@ -213,7 +229,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 12. 마감 공고 LIVE 제거
+      # 13. 마감 공고 LIVE 제거
       #
       # 2차 보완된 deadline까지 반영한 뒤
       # 실제 마감된 공고를 LIVE에서 제거한다.
@@ -225,7 +241,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 13. Archive current flag 및 날짜 상태 재계산
+      # 14. Archive current flag 및 날짜 상태 재계산
       #
       # repair에서 채운 기존 deadline도
       # normalize_art_dates.js가 existing_deadline으로 보존한다.
@@ -237,7 +253,7 @@ jobs:
 
 
       # --------------------------------------------------
-      # 14. 변경 여부 확인
+      # 15. 변경 여부 확인
       # --------------------------------------------------
 
       - name: Check changes
@@ -246,21 +262,23 @@ jobs:
 
         run: |
 
-          if git diff --quiet -- \
+          if git status --porcelain -- \
             data/art_commissions.json \
-            data/art_commissions_archive.json; then
+            data/art_commissions_archive.json \
+            data/art_commission_collection_health.json \
+            | grep -q .; then
 
-            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
 
           else
 
-            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
 
           fi
 
 
       # --------------------------------------------------
-      # 15. 변경된 경우만 Commit + Rebase + Push
+      # 16. 변경된 경우만 Commit + Rebase + Push
       # --------------------------------------------------
 
       - name: Commit collected art commissions
@@ -277,7 +295,8 @@ jobs:
 
           git add \
             data/art_commissions.json \
-            data/art_commissions_archive.json
+            data/art_commissions_archive.json \
+            data/art_commission_collection_health.json
 
 
           git commit \

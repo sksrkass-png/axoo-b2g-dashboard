@@ -51,6 +51,13 @@ const TEST_CASES = [
       true
   },
 
+  {
+    title:
+      "청주시 농수산물도매시장 미술장식품 구매 공고",
+    expected:
+      true
+  },
+
 
   /*
     결과 / 심의 / 행정 정보
