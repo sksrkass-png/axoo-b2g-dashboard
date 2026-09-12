@@ -1,6 +1,6 @@
 [
   {
-    "id": "kams-2830",
+    "id": "kams-2832",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -8,19 +8,19 @@
     "source": "예술경영지원센터",
     "sourceCode": "KAMS",
     "sourceType": "지원사업",
-    "title": "2026 예술산업보증 9월(6차) 공모 안내(9.1.(화)~9.10.(목), 16:00)",
+    "title": "2026 예술산업 금융지원 시범사업(융자) 5차 공모(~10.2.(금) 16:00)",
     "organization": "예술경영지원센터",
     "agency": "예술경영지원센터",
     "status": "진행중",
-    "postedDate": "2026-08-27",
-    "publishedDate": "2026-08-27",
+    "postedDate": "2026-09-11",
+    "publishedDate": "2026-09-11",
     "startDate": "",
-    "endDate": "2026-09-10",
-    "deadline": "2026-09-10",
+    "endDate": "2026-10-02",
+    "deadline": "2026-10-02",
     "budget": null,
     "supportAmount": null,
-    "originalUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2830&page=1&txtKeyword=&ddlKeyfield=45",
-    "sourceUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2830&page=1&txtKeyword=&ddlKeyfield=45",
+    "originalUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45",
+    "sourceUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45",
     "documentUrl": "",
     "field": "예술산업",
     "matchedKeywords": [
@@ -39,8 +39,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-10",
-    "updatedAt": "2026-09-10",
+    "collectedAt": "2026-09-12",
+    "updatedAt": "2026-09-12",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -79,8 +79,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-11",
-    "updatedAt": "2026-09-11",
+    "collectedAt": "2026-09-12",
+    "updatedAt": "2026-09-12",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -119,8 +119,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-11",
-    "updatedAt": "2026-09-11",
+    "collectedAt": "2026-09-12",
+    "updatedAt": "2026-09-12",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -163,8 +163,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-11",
-    "updatedAt": "2026-09-11",
+    "collectedAt": "2026-09-12",
+    "updatedAt": "2026-09-12",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -299,8 +299,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-11",
-    "updatedAt": "2026-09-11",
+    "collectedAt": "2026-09-12",
+    "updatedAt": "2026-09-12",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -343,8 +343,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-11",
-    "updatedAt": "2026-09-11",
+    "collectedAt": "2026-09-12",
+    "updatedAt": "2026-09-12",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   }
 ]
