@@ -105,7 +105,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-12",
+    "dateNormalizedAt": "2026-09-13",
     "deadlineStatus": "진행중",
     "staleReason": "",
     "deadlineRepairSource": "detailTextSample",
@@ -243,7 +243,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-12",
+    "dateNormalizedAt": "2026-09-13",
     "staleReason": ""
   },
   {
@@ -376,7 +376,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-12",
+    "dateNormalizedAt": "2026-09-13",
     "staleReason": ""
   },
   {
@@ -509,7 +509,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-12",
+    "dateNormalizedAt": "2026-09-13",
     "staleReason": ""
   }
 ]
