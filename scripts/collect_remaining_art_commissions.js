@@ -38,6 +38,12 @@ const ARCHIVE_FILE = path.join(
   "art_commissions_archive.json"
 );
 
+const HEALTH_FILE = path.join(
+  process.cwd(),
+  "data",
+  "art_commission_collection_health.json"
+);
+
 const SPECIALIZED_REGION_IDS = new Set([
   "seoul",
   "gyeonggi",
@@ -58,10 +64,10 @@ const FETCH_RETRY_DELAY_MS =
   800;
 
 const MAX_PAGES_PER_SOURCE =
-  4;
+  6;
 
 const MAX_SOURCES_PER_REGION =
-  2;
+  3;
 
 const MAX_SOURCE_BUDGET_MS =
   25000;
@@ -88,7 +94,9 @@ const CHEONGJU_SEARCH_TERMS = [
 
 const PRIMARY_KEYWORDS = [
   "미술작품",
-  "공공미술"
+  "공공미술",
+  "미술장식품",
+  "미술장식"
 ];
 
 const ACTION_KEYWORDS = [
@@ -96,7 +104,9 @@ const ACTION_KEYWORDS = [
   "제작",
   "설치",
   "신축",
-  "공동주택"
+  "공동주택",
+  "구매",
+  "조형물"
 ];
 
 const EXCLUDE_KEYWORDS = [
@@ -206,6 +216,47 @@ function writeArray(
       null,
       2
     ) + "\n",
+    "utf8"
+  );
+}
+
+
+function readObject(
+  filePath
+) {
+
+  if (!fs.existsSync(filePath)) {
+
+    return {};
+  }
+
+  const raw = fs.readFileSync(filePath, "utf8").trim();
+
+  if (!raw) {
+
+    return {};
+  }
+
+  const parsed = JSON.parse(raw);
+
+  return (
+    parsed &&
+    !Array.isArray(parsed) &&
+    typeof parsed === "object"
+  )
+    ? parsed
+    : {};
+}
+
+
+function writeObject(
+  filePath,
+  value
+) {
+
+  fs.writeFileSync(
+    filePath,
+    JSON.stringify(value, null, 2) + "\n",
     "utf8"
   );
 }
@@ -3520,6 +3571,10 @@ async function runSourceGroup(
   const counters =
     options.counters;
 
+  const sourceRuns =
+    options.sourceRuns ||
+    [];
+
   for (
     const source of
     sources
@@ -3563,6 +3618,16 @@ async function runSourceGroup(
         );
       }
 
+      sourceRuns.push({
+        sourceId: source.id,
+        sourceName: source.sourceName,
+        region: region.name,
+        accessOk: Boolean(result.accessOk),
+        pagesFetched: Number(result.pagesFetched || 0),
+        candidatesFound: Array.isArray(result.items) ? result.items.length : 0,
+        error: ""
+      });
+
       if (
         result.items.length >
         0
@@ -3583,6 +3648,16 @@ async function runSourceGroup(
     ) {
 
       counters.failed++;
+
+      sourceRuns.push({
+        sourceId: source.id,
+        sourceName: source.sourceName,
+        region: region.name,
+        accessOk: false,
+        pagesFetched: 0,
+        candidatesFound: 0,
+        error: String(error && error.message || error || "unknown error")
+      });
 
       console.warn(
         "   ⚠️ SOURCE FAILED:",
@@ -3662,6 +3737,8 @@ async function main() {
       0
   };
 
+  const sourceRuns = [];
+
   for (
     const region of
     targetRegions
@@ -3702,7 +3779,9 @@ async function main() {
       discovered:
         discovered,
       counters:
-        counters
+        counters,
+      sourceRuns:
+        sourceRuns
     });
   }
 
@@ -3742,7 +3821,9 @@ async function main() {
       discovered:
         discovered,
       counters:
-        counters
+        counters,
+      sourceRuns:
+        sourceRuns
     });
   }
 
@@ -3860,6 +3941,34 @@ async function main() {
     mergeData(
       items
     );
+
+  const previousHealth =
+    readObject(
+      HEALTH_FILE
+    );
+
+  writeObject(
+    HEALTH_FILE,
+    {
+      ...previousHealth,
+      updatedAt:
+        todayKst(),
+      nationwideWeb: {
+        targetRegionCount:
+          targetRegions.length,
+        nationalSourceCount:
+          nationalSources.length,
+        sourceSuccessCount:
+          counters.success,
+        sourceFailureCount:
+          counters.failed,
+        discoveredCandidateCount:
+          items.length,
+        sourceRuns:
+          sourceRuns
+      }
+    }
+  );
 
   console.log(
     ""

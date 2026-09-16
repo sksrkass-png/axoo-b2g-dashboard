@@ -2,11 +2,17 @@
   "use strict";
 
   const DATA_URL = "data/art_commission_source_targets.json";
+  const VALIDATION_URL = "data/art_commission_source_validation.json";
 
   const state = {
     targets: [],
+    validation: {
+      channels: [],
+      validatedAt: ""
+    },
     loaded: false,
     activeFilter: "all",
+    isOpen: false,
     isBound: false
   };
 
@@ -44,7 +50,41 @@
   }
 
   function getEnabledTargets() {
-    return state.targets.filter(target => target.enabled !== false);
+    const targets = state.targets.filter(target => target.enabled !== false);
+    const targetIds = new Set(targets.map(target => target.id));
+    const validationChannels = Array.isArray(state.validation.channels)
+      ? state.validation.channels
+      : [];
+
+    const withValidation = targets.map(target => ({
+      ...target,
+      validation: validationChannels.find(channel => channel.id === target.id) || null
+    }));
+
+    // 나라장터는 API 기반 import 채널이므로 source target JSON에는 넣지 않는다.
+    // 검증 결과에만 존재하는 이 채널도 대시보드의 실제 판단 근거로 표시한다.
+    validationChannels
+      .filter(channel => channel && channel.id && !targetIds.has(channel.id))
+      .forEach(channel => {
+        withValidation.push({
+          id: channel.id,
+          enabled: true,
+          priority: 1,
+          priorityLabel: "전국 보조 수집",
+          region: channel.region || "전국",
+          regionGroup: "national",
+          regionGroupLabel: "전국",
+          sourceName: channel.sourceName,
+          sourceType: channel.sourceType,
+          sourceUrl: channel.configuredUrl || channel.finalUrl || "",
+          crawlMode: channel.crawlMode,
+          crawlStrategyLabel: "나라장터 데이터 import",
+          recommendedAction: "건축물 미술작품·미술장식품 제작·설치 공고만 선별 반영",
+          validation: channel
+        });
+      });
+
+    return withValidation;
   }
 
   async function loadTargets() {
@@ -62,6 +102,19 @@
       const data = await response.json();
 
       state.targets = Array.isArray(data) ? data : [];
+
+      try {
+        const validationResponse = await fetch(`${VALIDATION_URL}?sourceUi=${Date.now()}`);
+        const validationData = validationResponse.ok ? await validationResponse.json() : {};
+
+        state.validation = {
+          channels: Array.isArray(validationData.channels) ? validationData.channels : [],
+          validatedAt: validationData.validatedAt || ""
+        };
+      } catch (validationError) {
+        console.warn("[AXOO Art Source UI] validation load failed", validationError);
+      }
+
       state.loaded = true;
 
       return state.targets;
@@ -86,6 +139,53 @@
     style.textContent = `
       .nationwide-source-board {
         display: none !important;
+      }
+
+      .nationwide-source-launch {
+        appearance: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 0 14px;
+        border: 1px solid #111111;
+        border-radius: 14px;
+        background: #111111;
+        color: #ffffff;
+        cursor: pointer;
+        font: inherit;
+        white-space: nowrap;
+      }
+
+      .nationwide-source-launch:hover {
+        background: #2b2b2b;
+      }
+
+      .nationwide-source-launch:focus-visible,
+      .source-close-button:focus-visible {
+        outline: 3px solid #ffb9b2;
+        outline-offset: 2px;
+      }
+
+      .nationwide-source-launch-label {
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: -0.03em;
+      }
+
+      .nationwide-source-launch-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 6px;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #111111;
+        font-size: 11px;
+        font-weight: 950;
       }
 
       .nationwide-source-inline {
@@ -302,6 +402,54 @@
         white-space: nowrap;
       }
 
+      .source-inline-heading {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: start;
+        padding: 16px 18px;
+        border-bottom: 1px solid #d7eadf;
+        background: #edf8f1;
+      }
+
+      .source-close-button {
+        min-height: 32px;
+        padding: 0 10px;
+        border: 1px solid #bcdac7;
+        border-radius: 10px;
+        background: #ffffff;
+        color: #24533a;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 950;
+      }
+
+      .source-validation-pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 26px;
+        padding: 0 9px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 950;
+        white-space: nowrap;
+      }
+
+      .source-validation-pill.ok {
+        background: #e7f8ed;
+        color: #007640;
+      }
+
+      .source-validation-pill.redirect {
+        background: #fff4df;
+        color: #9a5a00;
+      }
+
+      .source-validation-pill.warning {
+        background: #fff0ef;
+        color: #c4372b;
+      }
+
       .source-priority-pill {
         background: #fff4f2;
         color: #ff3b30;
@@ -342,6 +490,19 @@
       }
 
       @media (max-width: 860px) {
+        .panel-toolbar {
+          align-items: flex-start;
+        }
+
+        .nationwide-source-launch {
+          min-height: 40px;
+          padding: 0 11px;
+        }
+
+        .source-inline-heading {
+          grid-template-columns: 1fr;
+        }
+
         .nationwide-source-inline summary {
           grid-template-columns: 1fr;
         }
@@ -379,13 +540,40 @@
       )
     );
 
+    const connectedCount = enabledTargets.filter(target => target.validation?.reachable).length;
+    const issueCount = enabledTargets.filter(target => target.validation && !target.validation.reachable).length;
+
     return {
       total: enabledTargets.length,
       priorityOneCount,
       priorityTwoCount,
       priorityThreeCount,
-      regionGroupCount: regionGroups.length
+      regionGroupCount: regionGroups.length,
+      connectedCount,
+      issueCount
     };
+  }
+
+  function getValidationPresentation(target) {
+    const validation = target.validation;
+
+    if (!validation) {
+      return { label: "검증 대기", className: "warning", title: "검증 결과 파일을 아직 읽지 못했습니다." };
+    }
+
+    if (!validation.reachable) {
+      return {
+        label: "연결 확인 필요",
+        className: "warning",
+        title: validation.error || `HTTP ${validation.status || 0}`
+      };
+    }
+
+    if (validation.redirected) {
+      return { label: "연결 확인 · 경로 변경", className: "redirect", title: validation.finalUrl || "" };
+    }
+
+    return { label: "연결 확인됨", className: "ok", title: validation.finalUrl || "" };
   }
 
   function getFilterItems(targets) {
@@ -466,6 +654,7 @@
           <thead>
             <tr>
               <th>우선순위</th>
+              <th>연결 상태</th>
               <th>권역</th>
               <th>지역</th>
               <th>출처</th>
@@ -477,12 +666,18 @@
             ${visibleTargets.map(target => {
               const url = normalizeUrl(target.sourceUrl);
               const sourceName = target.sourceName || "출처명 없음";
+              const validation = getValidationPresentation(target);
 
               return `
                 <tr>
                   <td>
                     <span class="source-priority-pill">
                       ${esc(target.priorityLabel || `${target.priority || "-"}차`)}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="source-validation-pill ${esc(validation.className)}" title="${esc(validation.title)}">
+                      ${esc(validation.label)}
                     </span>
                   </td>
                   <td>
@@ -513,26 +708,45 @@
     `;
   }
 
-  function createBoardHtml(targets, wasOpen) {
+  function createToolbarTriggerHtml(targets) {
     const counts = getSummaryCounts(targets);
 
     return `
-      <details class="nationwide-source-inline" ${wasOpen ? "open" : ""}>
-        <summary>
+      <button
+        type="button"
+        class="nationwide-source-launch"
+        data-art-source-open
+        aria-expanded="${state.isOpen ? "true" : "false"}"
+        aria-controls="nationwideArtSourceBoard"
+      >
+        <span class="nationwide-source-launch-label">전국 공고 출처</span>
+        <span class="nationwide-source-launch-count">${formatCount(counts.total)}</span>
+      </button>
+    `;
+  }
+
+  function createBoardHtml(targets) {
+    const counts = getSummaryCounts(targets);
+
+    return `
+      <section
+        id="nationwideArtSourceBoard"
+        class="nationwide-source-inline"
+        aria-label="전국 건축물 미술작품 공고 출처"
+      >
+        <div class="source-inline-heading">
           <span class="source-inline-title">
             <em>ART COMMISSION SOURCE MAP</em>
             <strong>전국 수집 소스</strong>
             <span>
-              서울·경기/LH·SH 외 인천, 부산, 대구, 울산, 강원, 전북, 전남 등 전국 공고 경로를 함께 관리합니다.
+              지자체·개발공사·아트누리·LH·나라장터를 함께 감시하고, 실제 연결 상태를 기준으로 수집 신뢰도를 판단합니다.
             </span>
           </span>
 
-          <span class="source-inline-stat">
-            <span>등록 소스</span>
-            <strong>${formatCount(counts.total)}개</strong>
-            <small>1차 ${formatCount(counts.priorityOneCount)}개 · ${formatCount(counts.regionGroupCount)}개 권역</small>
-          </span>
-        </summary>
+          <button type="button" class="source-close-button" data-art-source-close>
+            닫기
+          </button>
+        </div>
 
         <div class="source-inline-body">
           <div class="source-stats-grid">
@@ -542,18 +756,18 @@
             </div>
 
             <div class="source-stat-card">
-              <span>1차 우선 반영</span>
-              <strong>${formatCount(counts.priorityOneCount)}개</strong>
+              <span>연결 확인됨</span>
+              <strong>${formatCount(counts.connectedCount)}개</strong>
             </div>
 
             <div class="source-stat-card">
-              <span>2차 확장 반영</span>
-              <strong>${formatCount(counts.priorityTwoCount)}개</strong>
+              <span>연결 확인 필요</span>
+              <strong>${formatCount(counts.issueCount)}개</strong>
             </div>
 
             <div class="source-stat-card">
-              <span>3차 후보 검증</span>
-              <strong>${formatCount(counts.priorityThreeCount)}개</strong>
+              <span>전국 권역</span>
+              <strong>${formatCount(counts.regionGroupCount)}개</strong>
             </div>
           </div>
 
@@ -564,11 +778,11 @@
           ${renderRows(targets)}
 
           <p class="source-note">
-            현재 단계는 “수집 소스 등록 및 자동 후보 수집”입니다. 이후 1차 우선 소스부터 검색 URL 구조를 고도화해
-            공고명·기관·지역·공개일·마감일·원문 링크 정확도를 개선합니다.
+            상태는 매일 수집 전 실제 URL 응답으로 갱신됩니다. “연결 확인됨”은 링크 도달 여부이며,
+            실제 공고 여부는 이어지는 후보 수집·제목 필터·원문 분석을 거쳐 판단합니다.
           </p>
         </div>
-      </details>
+      </section>
     `;
   }
 
@@ -602,6 +816,23 @@
     });
   }
 
+  function renderToolbarTrigger(panel, targets) {
+    const toolbar = panel.querySelector(".panel-toolbar");
+
+    if (!toolbar) return;
+
+    toolbar.querySelectorAll(".nationwide-source-launch").forEach(button => {
+      button.remove();
+    });
+
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = createToolbarTriggerHtml(targets);
+
+    if (wrapper.firstElementChild) {
+      toolbar.appendChild(wrapper.firstElementChild);
+    }
+  }
+
   function renderBoard() {
     const panel = getArtPanel();
 
@@ -614,30 +845,27 @@
       board.remove();
     });
 
-    let wasOpen = false;
-
     oldInlineBoards.forEach(board => {
-      if (board.open) wasOpen = true;
       board.remove();
     });
 
+    const targets = getEnabledTargets();
+
+    renderToolbarTrigger(panel, targets);
+
+    if (!state.isOpen) return;
+
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = createBoardHtml(getEnabledTargets(), wasOpen);
+    wrapper.innerHTML = createBoardHtml(targets);
 
     const board = wrapper.firstElementChild;
 
     if (!board) return;
 
-    const introCard = findIntroCard(panel);
-    const criteriaGuide = findCriteriaGuide(panel);
+    const toolbar = panel.querySelector(".panel-toolbar");
 
-    if (introCard) {
-      introCard.insertAdjacentElement("afterend", board);
-      return;
-    }
-
-    if (criteriaGuide) {
-      panel.insertBefore(board, criteriaGuide);
+    if (toolbar) {
+      toolbar.insertAdjacentElement("afterend", board);
       return;
     }
 
@@ -676,13 +904,36 @@
       event.preventDefault();
 
       state.activeFilter = button.getAttribute("data-art-source-filter") || "all";
+      state.isOpen = true;
+      renderBoard();
+    });
+
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-art-source-open]");
+
+      if (!button) return;
+
+      event.preventDefault();
+
+      state.isOpen = true;
       renderBoard();
 
-      const board = document.querySelector(".nationwide-source-inline");
+      const board = document.getElementById("nationwideArtSourceBoard");
 
       if (board) {
-        board.open = true;
+        board.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+    });
+
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-art-source-close]");
+
+      if (!button) return;
+
+      event.preventDefault();
+
+      state.isOpen = false;
+      renderBoard();
     });
 
     document.addEventListener("click", event => {
