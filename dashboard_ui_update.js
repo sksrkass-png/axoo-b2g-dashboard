@@ -6,7 +6,6 @@
 
   const LEGACY_SELECTORS = [
     ".native-tab-intro-wrap",
-    ".nationwide-source-inline",
     ".nationwide-source-board"
   ];
 
