@@ -13,7 +13,10 @@
     loaded: false,
     activeFilter: "all",
     isOpen: false,
-    isBound: false
+    isBound: false,
+    observedPanel: null,
+    panelObserver: null,
+    restoreTimer: null
   };
 
   function esc(value) {
@@ -833,10 +836,67 @@
     }
   }
 
+  function scheduleOpenBoardRestore() {
+    if (!state.isOpen) return;
+
+    if (state.restoreTimer) {
+      clearTimeout(state.restoreTimer);
+    }
+
+    state.restoreTimer = setTimeout(() => {
+      state.restoreTimer = null;
+
+      const panel = getArtPanel();
+
+      if (
+        !state.isOpen ||
+        !panel ||
+        panel.querySelector("#nationwideArtSourceBoard")
+      ) {
+        return;
+      }
+
+      renderBoard();
+    }, 0);
+  }
+
+  function observeArtPanel() {
+    const panel = getArtPanel();
+
+    if (!panel || state.observedPanel === panel) return;
+
+    if (state.panelObserver) {
+      state.panelObserver.disconnect();
+    }
+
+    state.observedPanel = panel;
+    state.panelObserver = new MutationObserver(() => {
+      if (!state.isOpen) return;
+
+      if (!panel.isConnected || getArtPanel() !== panel) {
+        state.observedPanel = null;
+        observeArtPanel();
+        scheduleOpenBoardRestore();
+        return;
+      }
+
+      if (!panel.querySelector("#nationwideArtSourceBoard")) {
+        scheduleOpenBoardRestore();
+      }
+    });
+
+    state.panelObserver.observe(panel, {
+      childList: true,
+      subtree: true
+    });
+  }
+
   function renderBoard() {
     const panel = getArtPanel();
 
     if (!panel) return;
+
+    observeArtPanel();
 
     const oldStandaloneBoards = panel.querySelectorAll(".nationwide-source-board");
     const oldInlineBoards = panel.querySelectorAll(".nationwide-source-inline");
@@ -947,6 +1007,7 @@
 
   function init() {
     bindEvents();
+    observeArtPanel();
     applySourceBoard();
 
     setTimeout(applySourceBoard, 500);
