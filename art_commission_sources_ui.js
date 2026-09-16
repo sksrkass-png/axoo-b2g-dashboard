@@ -12,6 +12,7 @@
     },
     loaded: false,
     activeFilter: "all",
+    isOpen: false,
     isBound: false
   };
 
@@ -138,6 +139,53 @@
     style.textContent = `
       .nationwide-source-board {
         display: none !important;
+      }
+
+      .nationwide-source-launch {
+        appearance: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 0 14px;
+        border: 1px solid #111111;
+        border-radius: 14px;
+        background: #111111;
+        color: #ffffff;
+        cursor: pointer;
+        font: inherit;
+        white-space: nowrap;
+      }
+
+      .nationwide-source-launch:hover {
+        background: #2b2b2b;
+      }
+
+      .nationwide-source-launch:focus-visible,
+      .source-close-button:focus-visible {
+        outline: 3px solid #ffb9b2;
+        outline-offset: 2px;
+      }
+
+      .nationwide-source-launch-label {
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: -0.03em;
+      }
+
+      .nationwide-source-launch-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 6px;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #111111;
+        font-size: 11px;
+        font-weight: 950;
       }
 
       .nationwide-source-inline {
@@ -354,6 +402,28 @@
         white-space: nowrap;
       }
 
+      .source-inline-heading {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: start;
+        padding: 16px 18px;
+        border-bottom: 1px solid #d7eadf;
+        background: #edf8f1;
+      }
+
+      .source-close-button {
+        min-height: 32px;
+        padding: 0 10px;
+        border: 1px solid #bcdac7;
+        border-radius: 10px;
+        background: #ffffff;
+        color: #24533a;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 950;
+      }
+
       .source-validation-pill {
         display: inline-flex;
         align-items: center;
@@ -420,6 +490,19 @@
       }
 
       @media (max-width: 860px) {
+        .panel-toolbar {
+          align-items: flex-start;
+        }
+
+        .nationwide-source-launch {
+          min-height: 40px;
+          padding: 0 11px;
+        }
+
+        .source-inline-heading {
+          grid-template-columns: 1fr;
+        }
+
         .nationwide-source-inline summary {
           grid-template-columns: 1fr;
         }
@@ -571,10 +654,10 @@
           <thead>
             <tr>
               <th>우선순위</th>
+              <th>연결 상태</th>
               <th>권역</th>
               <th>지역</th>
               <th>출처</th>
-              <th>연결 상태</th>
               <th>수집 방식</th>
               <th>다음 액션</th>
             </tr>
@@ -625,12 +708,33 @@
     `;
   }
 
-  function createBoardHtml(targets, wasOpen) {
+  function createToolbarTriggerHtml(targets) {
     const counts = getSummaryCounts(targets);
 
     return `
-      <details class="nationwide-source-inline" ${wasOpen ? "open" : ""}>
-        <summary>
+      <button
+        type="button"
+        class="nationwide-source-launch"
+        data-art-source-open
+        aria-expanded="${state.isOpen ? "true" : "false"}"
+        aria-controls="nationwideArtSourceBoard"
+      >
+        <span class="nationwide-source-launch-label">전국 공고 출처</span>
+        <span class="nationwide-source-launch-count">${formatCount(counts.total)}</span>
+      </button>
+    `;
+  }
+
+  function createBoardHtml(targets) {
+    const counts = getSummaryCounts(targets);
+
+    return `
+      <section
+        id="nationwideArtSourceBoard"
+        class="nationwide-source-inline"
+        aria-label="전국 건축물 미술작품 공고 출처"
+      >
+        <div class="source-inline-heading">
           <span class="source-inline-title">
             <em>ART COMMISSION SOURCE MAP</em>
             <strong>전국 수집 소스</strong>
@@ -639,12 +743,10 @@
             </span>
           </span>
 
-          <span class="source-inline-stat">
-            <span>등록 소스</span>
-            <strong>${formatCount(counts.total)}개</strong>
-            <small>연결 ${formatCount(counts.connectedCount)}개 · 확인 필요 ${formatCount(counts.issueCount)}개</small>
-          </span>
-        </summary>
+          <button type="button" class="source-close-button" data-art-source-close>
+            닫기
+          </button>
+        </div>
 
         <div class="source-inline-body">
           <div class="source-stats-grid">
@@ -680,7 +782,7 @@
             실제 공고 여부는 이어지는 후보 수집·제목 필터·원문 분석을 거쳐 판단합니다.
           </p>
         </div>
-      </details>
+      </section>
     `;
   }
 
@@ -714,6 +816,23 @@
     });
   }
 
+  function renderToolbarTrigger(panel, targets) {
+    const toolbar = panel.querySelector(".panel-toolbar");
+
+    if (!toolbar) return;
+
+    toolbar.querySelectorAll(".nationwide-source-launch").forEach(button => {
+      button.remove();
+    });
+
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = createToolbarTriggerHtml(targets);
+
+    if (wrapper.firstElementChild) {
+      toolbar.appendChild(wrapper.firstElementChild);
+    }
+  }
+
   function renderBoard() {
     const panel = getArtPanel();
 
@@ -726,30 +845,27 @@
       board.remove();
     });
 
-    let wasOpen = false;
-
     oldInlineBoards.forEach(board => {
-      if (board.open) wasOpen = true;
       board.remove();
     });
 
+    const targets = getEnabledTargets();
+
+    renderToolbarTrigger(panel, targets);
+
+    if (!state.isOpen) return;
+
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = createBoardHtml(getEnabledTargets(), wasOpen);
+    wrapper.innerHTML = createBoardHtml(targets);
 
     const board = wrapper.firstElementChild;
 
     if (!board) return;
 
-    const introCard = findIntroCard(panel);
-    const criteriaGuide = findCriteriaGuide(panel);
+    const toolbar = panel.querySelector(".panel-toolbar");
 
-    if (introCard) {
-      introCard.insertAdjacentElement("afterend", board);
-      return;
-    }
-
-    if (criteriaGuide) {
-      panel.insertBefore(board, criteriaGuide);
+    if (toolbar) {
+      toolbar.insertAdjacentElement("afterend", board);
       return;
     }
 
@@ -788,13 +904,36 @@
       event.preventDefault();
 
       state.activeFilter = button.getAttribute("data-art-source-filter") || "all";
+      state.isOpen = true;
+      renderBoard();
+    });
+
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-art-source-open]");
+
+      if (!button) return;
+
+      event.preventDefault();
+
+      state.isOpen = true;
       renderBoard();
 
-      const board = document.querySelector(".nationwide-source-inline");
+      const board = document.getElementById("nationwideArtSourceBoard");
 
       if (board) {
-        board.open = true;
+        board.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+    });
+
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-art-source-close]");
+
+      if (!button) return;
+
+      event.preventDefault();
+
+      state.isOpen = false;
+      renderBoard();
     });
 
     document.addEventListener("click", event => {

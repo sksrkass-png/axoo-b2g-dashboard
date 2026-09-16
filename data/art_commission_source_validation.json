@@ -1,8 +1,8 @@
 {
-  "validatedAt": "2026-09-11",
+  "validatedAt": "2026-09-16",
   "channelCount": 33,
-  "reachableCount": 33,
-  "unreachableCount": 0,
+  "reachableCount": 31,
+  "unreachableCount": 2,
   "channels": [
     {
       "id": "gyeonggi_public_art",
@@ -16,7 +16,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 351,
+      "elapsedMs": 335,
       "error": ""
     },
     {
@@ -31,7 +31,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 88,
+      "elapsedMs": 55,
       "error": ""
     },
     {
@@ -46,7 +46,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 70,
+      "elapsedMs": 82,
       "error": ""
     },
     {
@@ -61,7 +61,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 225,
+      "elapsedMs": 219,
       "error": ""
     },
     {
@@ -76,7 +76,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1152,
+      "elapsedMs": 578,
       "error": ""
     },
     {
@@ -91,7 +91,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 455,
+      "elapsedMs": 495,
       "error": ""
     },
     {
@@ -106,7 +106,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2988,
+      "elapsedMs": 3092,
       "error": ""
     },
     {
@@ -121,7 +121,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 92,
+      "elapsedMs": 94,
       "error": ""
     },
     {
@@ -136,7 +136,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 998,
+      "elapsedMs": 991,
       "error": ""
     },
     {
@@ -151,7 +151,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 100,
+      "elapsedMs": 135,
       "error": ""
     },
     {
@@ -166,7 +166,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 503,
+      "elapsedMs": 432,
       "error": ""
     },
     {
@@ -181,7 +181,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 73,
+      "elapsedMs": 83,
       "error": ""
     },
     {
@@ -191,12 +191,12 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://www.gb.go.kr/Main/page.do?BD_CODE=gosi_notice&URL=%2Fcommon%2Fboard%2Fboard.do&cmd=1&mnu_uid=6789",
-      "finalUrl": "https://www.gb.go.kr/Main/page.do?BD_CODE=gosi_notice&URL=%2Fcommon%2Fboard%2Fboard.do&cmd=1&mnu_uid=6789",
+      "finalUrl": "https://www.gb.go.kr/page/10109/67.do",
       "reachable": true,
       "status": 200,
-      "redirected": false,
-      "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 540,
+      "redirected": true,
+      "contentType": "text/html; charset=UTF-8",
+      "elapsedMs": 600,
       "error": ""
     },
     {
@@ -211,7 +211,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 190,
+      "elapsedMs": 231,
       "error": ""
     },
     {
@@ -226,7 +226,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 528,
+      "elapsedMs": 608,
       "error": ""
     },
     {
@@ -241,7 +241,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 40,
+      "elapsedMs": 41,
       "error": ""
     },
     {
@@ -256,7 +256,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 359,
+      "elapsedMs": 638,
       "error": ""
     },
     {
@@ -271,7 +271,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 653,
+      "elapsedMs": 652,
       "error": ""
     },
     {
@@ -286,7 +286,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 241,
+      "elapsedMs": 249,
       "error": ""
     },
     {
@@ -301,7 +301,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 87,
+      "elapsedMs": 130,
       "error": ""
     },
     {
@@ -316,7 +316,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 766,
+      "elapsedMs": 728,
       "error": ""
     },
     {
@@ -331,7 +331,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 321,
+      "elapsedMs": 1241,
       "error": ""
     },
     {
@@ -346,7 +346,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 173,
+      "elapsedMs": 979,
       "error": ""
     },
     {
@@ -361,7 +361,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 876,
+      "elapsedMs": 1787,
       "error": ""
     },
     {
@@ -376,7 +376,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 2223,
+      "elapsedMs": 2892,
       "error": ""
     },
     {
@@ -391,7 +391,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 39,
+      "elapsedMs": 261,
       "error": ""
     },
     {
@@ -406,7 +406,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1229,
+      "elapsedMs": 1097,
       "error": ""
     },
     {
@@ -421,7 +421,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 387,
+      "elapsedMs": 256,
       "error": ""
     },
     {
@@ -431,13 +431,13 @@
       "sourceType": "public_corporation",
       "crawlMode": "keyword_search",
       "configuredUrl": "https://www.jpdc.co.kr",
-      "finalUrl": "https://www.jpdc.co.kr/",
-      "reachable": true,
-      "status": 200,
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
       "redirected": false,
-      "contentType": "text/html; charset=UTF-8",
+      "contentType": "",
       "elapsedMs": 26,
-      "error": ""
+      "error": "fetch failed"
     },
     {
       "id": "jeju_notice",
@@ -446,13 +446,13 @@
       "sourceType": "public_corporation",
       "crawlMode": "board",
       "configuredUrl": "https://www.jpdc.co.kr/open/news.htm",
-      "finalUrl": "https://www.jpdc.co.kr/open/news/notice.htm",
-      "reachable": true,
-      "status": 200,
-      "redirected": true,
-      "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 419,
-      "error": ""
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
+      "redirected": false,
+      "contentType": "",
+      "elapsedMs": 24,
+      "error": "fetch failed"
     },
     {
       "id": "sejong_city_notice",
@@ -466,7 +466,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 96,
+      "elapsedMs": 147,
       "error": ""
     },
     {
@@ -481,7 +481,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 448,
+      "elapsedMs": 389,
       "error": ""
     },
     {
@@ -496,7 +496,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 187,
+      "elapsedMs": 723,
       "error": ""
     }
   ]
