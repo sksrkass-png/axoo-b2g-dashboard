@@ -2868,60 +2868,6 @@
   },
   {
     "grade": "C",
-    "score": 44,
-    "activityScore": 42,
-    "priorityBoost": 2,
-    "gradeFloor": "C",
-    "gradeCeiling": "B",
-    "agencyPriority": "일반",
-    "priorityReason": "공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함",
-    "fitLevel": "support",
-    "directFitKeywords": [],
-    "supportFitKeywords": [
-      "운영대행"
-    ],
-    "lowFitEvidenceCount": 0,
-    "agencyName": "대전정보문화산업진흥원",
-    "agencyType": "공공기관",
-    "region": "대전/충남",
-    "mainKeywords": [
-      "운영대행"
-    ],
-    "relatedCount": 2,
-    "bidCount": 1,
-    "contractCount": 0,
-    "awardCount": 1,
-    "orderPlanCount": 0,
-    "estimatedAmount": 469874000,
-    "bidAmount": 79874000,
-    "contractAmount": 0,
-    "awardAmount": 390000000,
-    "orderPlanAmount": 0,
-    "recommendedProposal": "운영대행 관련 악수 협업 제안",
-    "nextAction": "모니터링 유지",
-    "note": "최근 수집 기준 입찰공고 1건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 469,874,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
-    "evidenceSources": [
-      {
-        "title": "2026년 슈퍼:콘 액셀러레이팅 프로그램 운영 용역",
-        "sourceType": "입찰공고",
-        "amount": 79874000,
-        "date": "2026-09-21 10:00:00",
-        "sourceUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01707164&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
-        "id": "R26BK01707164"
-      },
-      {
-        "title": "제8회 대전특수영상영화제 행사운영대행 용역",
-        "sourceType": "낙찰정보",
-        "amount": 390000000,
-        "date": "2026-05-27",
-        "sourceUrl": "",
-        "id": "R26BK01481207"
-      }
-    ],
-    "scoringVersion": "agency_target_v4_s_cut_all"
-  },
-  {
-    "grade": "C",
     "score": 34,
     "activityScore": 32,
     "priorityBoost": 2,
@@ -3008,6 +2954,52 @@
         "date": "2026-07-09",
         "sourceUrl": "",
         "id": "R26BK01548015"
+      }
+    ],
+    "scoringVersion": "agency_target_v4_s_cut_all"
+  },
+  {
+    "grade": "C",
+    "score": 34,
+    "activityScore": 32,
+    "priorityBoost": 2,
+    "gradeFloor": "C",
+    "gradeCeiling": "B",
+    "agencyPriority": "일반",
+    "priorityReason": "공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함",
+    "fitLevel": "support",
+    "directFitKeywords": [],
+    "supportFitKeywords": [
+      "운영대행"
+    ],
+    "lowFitEvidenceCount": 0,
+    "agencyName": "대전정보문화산업진흥원",
+    "agencyType": "공공기관",
+    "region": "대전/충남",
+    "mainKeywords": [
+      "운영대행"
+    ],
+    "relatedCount": 1,
+    "bidCount": 0,
+    "contractCount": 0,
+    "awardCount": 1,
+    "orderPlanCount": 0,
+    "estimatedAmount": 390000000,
+    "bidAmount": 0,
+    "contractAmount": 0,
+    "awardAmount": 390000000,
+    "orderPlanAmount": 0,
+    "recommendedProposal": "운영대행 관련 악수 협업 제안",
+    "nextAction": "모니터링 유지",
+    "note": "최근 수집 기준 입찰공고 0건, 계약정보 0건, 낙찰정보 1건, 발주계획 0건, 총 390,000,000원 규모의 근거가 확인되었습니다. 공공기관 중 확장 가능 키워드가 있으나 직접 핏은 약함. 기관 유형 보정 +2점. 직접 핏이 제한적이어서 B등급 이하로 관리합니다.",
+    "evidenceSources": [
+      {
+        "title": "제8회 대전특수영상영화제 행사운영대행 용역",
+        "sourceType": "낙찰정보",
+        "amount": 390000000,
+        "date": "2026-05-27",
+        "sourceUrl": "",
+        "id": "R26BK01481207"
       }
     ],
     "scoringVersion": "agency_target_v4_s_cut_all"
