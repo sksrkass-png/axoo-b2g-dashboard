@@ -348,7 +348,6 @@
 
     style.textContent = `
       .native-tab-intro-wrap,
-      .nationwide-source-inline,
       .nationwide-source-board {
         display: none !important;
       }
