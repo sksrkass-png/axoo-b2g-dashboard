@@ -1,8 +1,8 @@
 {
   "validatedAt": "2026-09-17",
   "channelCount": 33,
-  "reachableCount": 19,
-  "unreachableCount": 14,
+  "reachableCount": 18,
+  "unreachableCount": 15,
   "channels": [
     {
       "id": "gyeonggi_public_art",
@@ -16,7 +16,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10554,
+      "elapsedMs": 10557,
       "error": "fetch failed"
     },
     {
@@ -31,7 +31,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1346,
+      "elapsedMs": 922,
       "error": ""
     },
     {
@@ -41,13 +41,13 @@
       "sourceType": "official_notice",
       "crawlMode": "keyword_search",
       "configuredUrl": "https://www.seoul.go.kr/news/news_notice.do",
-      "finalUrl": "https://www.seoul.go.kr/news/news_notice.do",
-      "reachable": true,
-      "status": 200,
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
       "redirected": false,
-      "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 2064,
-      "error": ""
+      "contentType": "",
+      "elapsedMs": 10499,
+      "error": "fetch failed"
     },
     {
       "id": "incheon_city_art_commission",
@@ -61,7 +61,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10493,
+      "elapsedMs": 10497,
       "error": "fetch failed"
     },
     {
@@ -76,7 +76,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10491,
+      "elapsedMs": 10494,
       "error": "fetch failed"
     },
     {
@@ -91,7 +91,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10489,
+      "elapsedMs": 10491,
       "error": "fetch failed"
     },
     {
@@ -106,7 +106,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 4116,
+      "elapsedMs": 3835,
       "error": ""
     },
     {
@@ -121,7 +121,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1956,
+      "elapsedMs": 1456,
       "error": ""
     },
     {
@@ -136,7 +136,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10467,
+      "elapsedMs": 10277,
       "error": "fetch failed"
     },
     {
@@ -151,7 +151,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1182,
+      "elapsedMs": 969,
       "error": ""
     },
     {
@@ -166,7 +166,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1626,
+      "elapsedMs": 1318,
       "error": ""
     },
     {
@@ -181,7 +181,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 7892,
+      "elapsedMs": 4666,
       "error": ""
     },
     {
@@ -196,7 +196,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10490,
+      "elapsedMs": 10489,
       "error": "fetch failed"
     },
     {
@@ -211,7 +211,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 2053,
+      "elapsedMs": 1981,
       "error": ""
     },
     {
@@ -226,7 +226,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10489,
+      "elapsedMs": 10025,
       "error": "fetch failed"
     },
     {
@@ -241,7 +241,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 3071,
+      "elapsedMs": 2685,
       "error": ""
     },
     {
@@ -256,7 +256,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1737,
+      "elapsedMs": 2481,
       "error": ""
     },
     {
@@ -271,7 +271,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10409,
+      "elapsedMs": 10488,
       "error": "fetch failed"
     },
     {
@@ -286,7 +286,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2522,
+      "elapsedMs": 1990,
       "error": ""
     },
     {
@@ -301,7 +301,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10486,
+      "elapsedMs": 10022,
       "error": "fetch failed"
     },
     {
@@ -316,7 +316,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10311,
+      "elapsedMs": 10494,
       "error": "fetch failed"
     },
     {
@@ -331,7 +331,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 4702,
+      "elapsedMs": 2272,
       "error": ""
     },
     {
@@ -346,7 +346,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1150,
+      "elapsedMs": 526,
       "error": ""
     },
     {
@@ -361,7 +361,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 6519,
+      "elapsedMs": 3297,
       "error": ""
     },
     {
@@ -376,7 +376,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10457,
+      "elapsedMs": 10493,
       "error": "fetch failed"
     },
     {
@@ -391,7 +391,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 1153,
+      "elapsedMs": 903,
       "error": ""
     },
     {
@@ -404,9 +404,9 @@
       "finalUrl": "https://www.jeonbuk.go.kr/board/list.jeonbuk?boardId=BBS_0000129&menuCd=DOM_000000102002003001",
       "reachable": true,
       "status": 200,
-      "redirected": true,
+      "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 5349,
+      "elapsedMs": 2318,
       "error": ""
     },
     {
@@ -421,7 +421,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10487,
+      "elapsedMs": 10432,
       "error": "fetch failed"
     },
     {
@@ -436,7 +436,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1981,
+      "elapsedMs": 888,
       "error": ""
     },
     {
@@ -451,7 +451,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 2160,
+      "elapsedMs": 1484,
       "error": ""
     },
     {
@@ -466,7 +466,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1391,
+      "elapsedMs": 3457,
       "error": ""
     },
     {
@@ -481,7 +481,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10458,
+      "elapsedMs": 10381,
       "error": "fetch failed"
     },
     {
@@ -496,7 +496,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10113,
+      "elapsedMs": 10006,
       "error": "fetch failed"
     }
   ]
