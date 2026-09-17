@@ -1,0 +1,243 @@
+{
+  "updatedAt": "2026-09-17",
+  "nationwideWeb": {
+    "targetRegionCount": 13,
+    "nationalSourceCount": 2,
+    "sourceSuccessCount": 17,
+    "sourceFailureCount": 8,
+    "discoveredCandidateCount": 0,
+    "sourceRuns": [
+      {
+        "sourceId": "daegu_city_notice",
+        "sourceName": "대구광역시 고시공고",
+        "region": "대구",
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "daegu_urban_development",
+        "sourceName": "대구도시개발공사 공지·공고",
+        "region": "대구",
+        "accessOk": true,
+        "pagesFetched": 1,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "gwangju_city_notice",
+        "sourceName": "전남광주통합특별시 고시공고 - 광주권",
+        "region": "광주",
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "daejeon_city_notice",
+        "sourceName": "대전광역시 고시공고·부서 게시판",
+        "region": "대전",
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "ulsan_city_notice",
+        "sourceName": "울산광역시 고시공고",
+        "region": "울산",
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "ulsan_urban_corporation",
+        "sourceName": "울산도시공사 공지·공고",
+        "region": "울산",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "sejong_city_notice",
+        "sourceName": "세종특별자치시 일반공고",
+        "region": "세종",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "gangwon_development_corporation",
+        "sourceName": "강원개발공사 공지·공고",
+        "region": "강원",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "gangwon_notice",
+        "sourceName": "강원특별자치도 고시공고",
+        "region": "강원",
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "chungbuk_development_corporation",
+        "sourceName": "충북개발공사 공지·공고",
+        "region": "충북",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "chungbuk_notice",
+        "sourceName": "충북개발공사 공지사항",
+        "region": "충북",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "chungnam_notice",
+        "sourceName": "충청남도 공고·고시",
+        "region": "충남",
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "chungnam_development_corporation",
+        "sourceName": "충남개발공사 공지·공고",
+        "region": "충남",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "jeonbuk_notice",
+        "sourceName": "전북특별자치도 공고·고시",
+        "region": "전북",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "jeonbuk_development_corporation",
+        "sourceName": "전북개발공사 공지·공고",
+        "region": "전북",
+        "accessOk": true,
+        "pagesFetched": 1,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "jeonnam_notice",
+        "sourceName": "전라남도 공고·고시",
+        "region": "전남",
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "jeonnam_development_corporation",
+        "sourceName": "전남개발공사 공지·공고",
+        "region": "전남",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "gyeongbuk_notice",
+        "sourceName": "경상북도 고시공고",
+        "region": "경북",
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "gyeongbuk_development_corporation",
+        "sourceName": "경상북도개발공사 공지·공고",
+        "region": "경북",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "gyeongnam_culture_portal",
+        "sourceName": "경상남도 문화예술 정보플랫폼",
+        "region": "경남",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "gyeongnam_development_corporation",
+        "sourceName": "경남개발공사 공지·공고",
+        "region": "경남",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "jeju_development_corporation",
+        "sourceName": "제주개발공사 공지·공고",
+        "region": "제주",
+        "accessOk": true,
+        "pagesFetched": 1,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "jeju_notice",
+        "sourceName": "제주특별자치도개발공사 공지사항",
+        "region": "제주",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "artnuri_art_commission",
+        "sourceName": "아트누리 지원사업·공모 검색",
+        "region": "전국",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      },
+      {
+        "sourceId": "lh_notice",
+        "sourceName": "한국토지주택공사 LH 공고",
+        "region": "전국",
+        "accessOk": true,
+        "pagesFetched": 6,
+        "candidatesFound": 0,
+        "error": ""
+      }
+    ]
+  },
+  "g2bArchitecturalArt": {
+    "sourceId": "g2b_architectural_art",
+    "checked": 0,
+    "matched": 0,
+    "status": "ok"
+  }
+}

@@ -1,5 +1,115 @@
 [
   {
+    "id": "external-ed468e0a78892d8e",
+    "source": "경기도 건축물 미술작품",
+    "title": "배곧서울대학교병원 건립 건축물 미술작품 제작·설치 공모 공고",
+    "agency": "경기도",
+    "organization": "경기도",
+    "region": "경기",
+    "category": "미술작품 공모",
+    "status": "공모중",
+    "publishedDate": "2026-09-17",
+    "postedDate": "2026-09-17",
+    "periodStart": "2026-09-17",
+    "deadline": "2026-10-06",
+    "endDate": "2026-10-06",
+    "amount": "",
+    "amountNumeric": null,
+    "budget": "",
+    "location": "",
+    "installationLocation": "",
+    "eligibility": "",
+    "keywords": [
+      "미술작품",
+      "공모",
+      "공고",
+      "제작",
+      "설치"
+    ],
+    "recommendedAction": "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토 / 공모기간: 2026-09-17 ~ 2026-10-06",
+    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110905791&menuId=3865",
+    "originalUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110905791&menuId=3865",
+    "bidNtceNo": "",
+    "score": 85,
+    "grade": "A",
+    "isExpired": false,
+    "isStaleCandidate": false,
+    "collectionSourceId": "gyeonggi_public_art",
+    "collectionVersion": "1.3.1",
+    "detailFetchStatus": "ok",
+    "detailFetchTransport": "apps-script-bridge",
+    "detailFetchError": "",
+    "detailHtmlBytes": 52073,
+    "detailTextSample": "배곧서울대학교병원 건립 건축물 미술작품 제작·설치 공모 공고 | 공모공고 | 미술작품 공모 | 경기도 건축물 미술작품 본문 바로가기 주메뉴 바로가기 제도 소개 제도 개요 제도 운영 미술작품 비용산출 미술작품 FAQ 미술작품 정보검색 심의위원회 위원회 소개 심의계획·결과 미술작품 공모 공모개요 공모공고 공모결과 자료실 자료실 경기도 건축물 미술작품 기회와 상생의 새로운 패러다임 지금 만들어 갑니다. --> 미술작품 공모 공모개요 공모공고 공모결과 공모공고 홈 미술작품 공모 공모공고 배곧서울대학교병원 건립 건축물 미술작품 제작·설치 공모 공고 게시물 정보 구분 공모 작성자 관리자 등록일 2026-09-17 응모신청 접수 ❍ 신청기간 : &rsquo;26.9.17.( 목 ) ~ &lsquo;26.10.06.( 화 ) ❍ 신청장소 : 서울대학교병원 배곧건립시설팀 ( 서울시 율곡로 194 현대그룹빌딩 서관 14 층 ) ※ 규정된 시간 내에 방문접수만 가능하며 , 우편 &middot; 택배 &middot; 퀵 접수 불가 ❍ 접 수 기 한 : 2026. 10. 12.( 월 ) (10:00 ~ 17:00 까지 ) ❍ 질 의 방 법 : ( 서 식 16) 을 작성하여 담당자에게 직접접수 , E-mail 첨부파일 붙임1. 제안공모 공모문(안).hwp 바로보기 바로듣기 붙임2. 제안공모 지침서.hwp 바로보기 바로듣기 붙임3. 과업지시서.hwp 바로보기 바로듣기 목록보기 다음글이 없습니다. 이전글 의정부변전소부지 공동주택 신축사업(탑석푸르지오파크7) 미술작품 공모 공고 [제4유형:출처명시+상업적 이용금지+변경금지] 관련사이트 경기도청 공익제보 핫라인 공공미술포털 담당부서: 예술정책과 | 전화번호: 031-8008-4652 경기도청: 16508 경기도 수원시 영통구 도청로 30 (이의동) © GYEONGGI PROVINCE All Rights Reserved.",
+    "listFetchTransport": "apps-script-bridge-ajax",
+    "listBIdx": "110905791",
+    "listRecordNo": 566,
+    "listCategory": "공모",
+    "listFileName": "붙임1. 제안공모 공모문(안).hwp",
+    "listRemarkExtractionStatus": "ok",
+    "detailExtractionStatus": "extracted",
+    "detailExtractionCount": 1,
+    "detailExtractionVersion": "art-detail-1.1.0",
+    "detailExtractionEvidence": {
+      "deadline": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none"
+      },
+      "publishedDate": {
+        "value": "2026-09-17",
+        "raw": "2026-09-17",
+        "label": "등록일",
+        "evidence": "등록일 2026-09-17",
+        "confidence": "high"
+      },
+      "agency": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none"
+      },
+      "amount": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none",
+        "numericValue": null
+      },
+      "location": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none"
+      },
+      "eligibility": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none"
+      }
+    },
+    "periodEnd": "2026-10-06",
+    "publishedDateSource": "detail_metadata",
+    "periodSource": "detail_body",
+    "periodKeyword": "신청기간",
+    "deadlineSource": "priority_deadline_range",
+    "deadlineKeyword": "신청기간",
+    "deadlineRaw": "26.10.06",
+    "suspiciousPeriodIgnored": false,
+    "dateConfidence": "HIGH",
+    "dateNormalizationVersion": "1.4.1",
+    "dateNormalizedAt": "2026-09-17",
+    "deadlineStatus": "진행중",
+    "staleReason": ""
+  },
+  {
     "id": "external-5d1569dc3dee765a",
     "source": "경기도 건축물 미술작품",
     "title": "의정부변전소부지 공동주택 신축사업(탑석푸르지오파크7) 미술작품 공모 공고",
@@ -106,7 +216,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-16",
+    "dateNormalizedAt": "2026-09-17",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -217,7 +327,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-16",
+    "dateNormalizedAt": "2026-09-17",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -328,7 +438,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-16",
+    "dateNormalizedAt": "2026-09-17",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -438,7 +548,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-16",
+    "dateNormalizedAt": "2026-09-17",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -548,13 +658,13 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-16",
+    "dateNormalizedAt": "2026-09-17",
     "deadlineStatus": "진행중",
     "staleReason": "",
     "deadlineRepairSource": "detailTextSample",
     "deadlineRepairMode": "single_date",
     "deadlineRepairVersion": "axoo_art_deadline_repair_v1.0.0",
-    "deadlineRepairedAt": "2026-09-16"
+    "deadlineRepairedAt": "2026-09-17"
   },
   {
     "id": "external-5ca0dea6b51faffe",
@@ -686,7 +796,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-16",
+    "dateNormalizedAt": "2026-09-17",
     "staleReason": ""
   },
   {
@@ -819,7 +929,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-16",
+    "dateNormalizedAt": "2026-09-17",
     "staleReason": ""
   },
   {
@@ -952,7 +1062,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-16",
+    "dateNormalizedAt": "2026-09-17",
     "staleReason": ""
   }
 ]
