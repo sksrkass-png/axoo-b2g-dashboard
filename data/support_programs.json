@@ -39,8 +39,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-17",
-    "updatedAt": "2026-09-17",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -83,8 +83,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-17",
-    "updatedAt": "2026-09-17",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -127,8 +127,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-17",
-    "updatedAt": "2026-09-17",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -171,8 +171,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-17",
-    "updatedAt": "2026-09-17",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -314,6 +314,90 @@
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
+    "id": "kocca-326D00092012",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "한국콘텐츠진흥원",
+    "sourceCode": "KOCCA",
+    "sourceType": "지원사업",
+    "title": "2026 월드 웹툰 페스티벌 전시 참가자 모집공고",
+    "organization": "한국콘텐츠진흥원",
+    "agency": "한국콘텐츠진흥원",
+    "status": "진행중",
+    "postedDate": "2026-09-17",
+    "publishedDate": "2026-09-17",
+    "startDate": "2026-09-17",
+    "endDate": "2026-10-06",
+    "deadline": "2026-10-06",
+    "budget": null,
+    "supportAmount": null,
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00092012&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00092012&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "documentUrl": "",
+    "field": "전시",
+    "matchedKeywords": [
+      "전시"
+    ],
+    "matchedPriorityKeywords": [
+      "전시"
+    ],
+    "axooFitScore": 10,
+    "score": 10,
+    "grade": "C",
+    "axooFitReason": "AXOO 핵심 영역인 전시 관련성이 확인됩니다. 다만 참가자 모집 성격이 포함되어 우선순위를 낮췄습니다. 참가자 모집 유형은 AXOO 직접 사업 참여 대상에서 제외합니다. KOCCA 사업 중 전시 요소가 AXOO와 연결됩니다. 다만 웹툰 장르 중심 사업이라 우선순위를 낮췄습니다.",
+    "gradeReason": "AXOO 핵심 영역인 전시 관련성이 확인됩니다. 다만 참가자 모집 성격이 포함되어 우선순위를 낮췄습니다. 참가자 모집 유형은 AXOO 직접 사업 참여 대상에서 제외합니다. KOCCA 사업 중 전시 요소가 AXOO와 연결됩니다. 다만 웹툰 장르 중심 사업이라 우선순위를 낮췄습니다.",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
+  },
+  {
+    "id": "kocca-326D00108002",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "한국콘텐츠진흥원",
+    "sourceCode": "KOCCA",
+    "sourceType": "지원사업",
+    "title": "<2026년 콘솔게임 공동관> 참가기업 추가 모집공고",
+    "organization": "한국콘텐츠진흥원",
+    "agency": "한국콘텐츠진흥원",
+    "status": "진행중",
+    "postedDate": "2026-09-17",
+    "publishedDate": "2026-09-17",
+    "startDate": "2026-09-17",
+    "endDate": "2026-09-29",
+    "deadline": "2026-09-29",
+    "budget": null,
+    "supportAmount": null,
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00108002&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00108002&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "documentUrl": "",
+    "field": "",
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "axooFitScore": 15,
+    "score": 15,
+    "grade": "C",
+    "axooFitReason": "문화예술 지원사업으로 확인되며 AXOO 사업 연계 가능성을 검토합니다. 다만 게임 장르 중심 사업이라 우선순위를 낮췄습니다.",
+    "gradeReason": "문화예술 지원사업으로 확인되며 AXOO 사업 연계 가능성을 검토합니다. 다만 게임 장르 중심 사업이라 우선순위를 낮췄습니다.",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
+  },
+  {
     "id": "kocca-126D00070010",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
@@ -349,8 +433,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-17",
-    "updatedAt": "2026-09-17",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -393,8 +477,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-17",
-    "updatedAt": "2026-09-17",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -439,8 +523,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-17",
-    "updatedAt": "2026-09-17",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -483,8 +567,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-17",
-    "updatedAt": "2026-09-17",
+    "collectedAt": "2026-09-18",
+    "updatedAt": "2026-09-18",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   }
 ]
