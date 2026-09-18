@@ -3,9 +3,9 @@
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 23,
-    "sourceFailureCount": 2,
-    "discoveredCandidateCount": 1,
+    "sourceSuccessCount": 16,
+    "sourceFailureCount": 9,
+    "discoveredCandidateCount": 0,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
@@ -29,8 +29,8 @@
         "sourceId": "gwangju_city_notice",
         "sourceName": "전남광주통합특별시 고시공고 - 광주권",
         "region": "광주",
-        "accessOk": true,
-        "pagesFetched": 1,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -38,17 +38,17 @@
         "sourceId": "daejeon_city_notice",
         "sourceName": "대전광역시 고시공고·부서 게시판",
         "region": "대전",
-        "accessOk": true,
-        "pagesFetched": 6,
-        "candidatesFound": 1,
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
         "error": ""
       },
       {
         "sourceId": "ulsan_city_notice",
         "sourceName": "울산광역시 고시공고",
         "region": "울산",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -83,8 +83,8 @@
         "sourceId": "gangwon_notice",
         "sourceName": "강원특별자치도 고시공고",
         "region": "강원",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -110,8 +110,8 @@
         "sourceId": "chungnam_notice",
         "sourceName": "충청남도 공고·고시",
         "region": "충남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -120,7 +120,7 @@
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
         "accessOk": true,
-        "pagesFetched": 3,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -146,8 +146,8 @@
         "sourceId": "jeonnam_notice",
         "sourceName": "전라남도 공고·고시",
         "region": "전남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -164,8 +164,8 @@
         "sourceId": "gyeongbuk_notice",
         "sourceName": "경상북도 고시공고",
         "region": "경북",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
