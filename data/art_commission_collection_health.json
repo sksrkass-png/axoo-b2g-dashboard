@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19",
+  "updatedAt": "2026-09-20",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
@@ -120,7 +120,7 @@
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
         "accessOk": true,
-        "pagesFetched": 6,
+        "pagesFetched": 3,
         "candidatesFound": 0,
         "error": ""
       },
