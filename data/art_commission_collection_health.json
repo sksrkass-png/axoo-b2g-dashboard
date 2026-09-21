@@ -3,8 +3,8 @@
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 16,
-    "sourceFailureCount": 9,
+    "sourceSuccessCount": 20,
+    "sourceFailureCount": 5,
     "discoveredCandidateCount": 0,
     "sourceRuns": [
       {
@@ -83,8 +83,8 @@
         "sourceId": "gangwon_notice",
         "sourceName": "강원특별자치도 고시공고",
         "region": "강원",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -110,8 +110,8 @@
         "sourceId": "chungnam_notice",
         "sourceName": "충청남도 공고·고시",
         "region": "충남",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -119,8 +119,8 @@
         "sourceId": "chungnam_development_corporation",
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 3,
         "candidatesFound": 0,
         "error": ""
       },
@@ -164,8 +164,8 @@
         "sourceId": "gyeongbuk_notice",
         "sourceName": "경상북도 고시공고",
         "region": "경북",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
