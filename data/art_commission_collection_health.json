@@ -3,16 +3,16 @@
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 17,
-    "sourceFailureCount": 8,
+    "sourceSuccessCount": 21,
+    "sourceFailureCount": 4,
     "discoveredCandidateCount": 0,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -83,8 +83,8 @@
         "sourceId": "gangwon_notice",
         "sourceName": "강원특별자치도 고시공고",
         "region": "강원",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -110,8 +110,8 @@
         "sourceId": "chungnam_notice",
         "sourceName": "충청남도 공고·고시",
         "region": "충남",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -120,7 +120,7 @@
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
         "accessOk": true,
-        "pagesFetched": 3,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -164,8 +164,8 @@
         "sourceId": "gyeongbuk_notice",
         "sourceName": "경상북도 고시공고",
         "region": "경북",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,7 +236,7 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 1,
+    "checked": 3,
     "matched": 0,
     "status": "ok"
   }
