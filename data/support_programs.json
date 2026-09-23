@@ -39,8 +39,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-21",
-    "updatedAt": "2026-09-21",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -83,8 +83,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -127,8 +127,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -171,48 +171,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
-  },
-  {
-    "id": "kcdf-9168",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "source": "한국공예·디자인문화진흥원",
-    "sourceCode": "KCDF",
-    "sourceType": "지원사업",
-    "title": "[일정변경] 2026년 한복마름방 공고",
-    "organization": "한국공예·디자인문화진흥원",
-    "agency": "한국공예·디자인문화진흥원",
-    "status": "진행중",
-    "postedDate": "",
-    "publishedDate": "2026-09-17",
-    "startDate": "2026-09-17",
-    "endDate": "2026-09-22",
-    "deadline": "2026-09-22",
-    "budget": null,
-    "supportAmount": null,
-    "originalUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9168&brdCodeValue=&searchField=titlecontent",
-    "sourceUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9168&brdCodeValue=&searchField=titlecontent",
-    "documentUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30695&_ck=ada338165bd04ae594c4b219c1b3eff2",
-    "field": "",
-    "matchedKeywords": [],
-    "matchedPriorityKeywords": [],
-    "axooFitScore": 45,
-    "score": 45,
-    "grade": "C",
-    "axooFitReason": "문화예술 지원사업으로 확인되며 AXOO 사업 연계 가능성을 검토합니다.",
-    "gradeReason": "문화예술 지원사업으로 확인되며 AXOO 사업 연계 가능성을 검토합니다.",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "isPriority": false,
-    "isExcludedFromPriority": true,
-    "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -255,8 +215,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -299,8 +259,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -339,8 +299,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -379,8 +339,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -423,8 +383,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   },
   {
@@ -467,8 +427,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님",
-    "collectedAt": "2026-09-22",
-    "updatedAt": "2026-09-22",
+    "collectedAt": "2026-09-23",
+    "updatedAt": "2026-09-23",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v4.1"
   }
 ]
