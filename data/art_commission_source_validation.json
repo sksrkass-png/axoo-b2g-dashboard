@@ -1,5 +1,5 @@
 {
-  "validatedAt": "2026-09-23",
+  "validatedAt": "2026-09-24",
   "channelCount": 33,
   "reachableCount": 19,
   "unreachableCount": 14,
@@ -16,7 +16,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10555,
+      "elapsedMs": 10553,
       "error": "fetch failed"
     },
     {
@@ -31,7 +31,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1127,
+      "elapsedMs": 1133,
       "error": ""
     },
     {
@@ -46,7 +46,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1720,
+      "elapsedMs": 1856,
       "error": ""
     },
     {
@@ -61,7 +61,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10495,
+      "elapsedMs": 10493,
       "error": "fetch failed"
     },
     {
@@ -76,7 +76,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10492,
+      "elapsedMs": 10491,
       "error": "fetch failed"
     },
     {
@@ -91,7 +91,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10490,
+      "elapsedMs": 10489,
       "error": "fetch failed"
     },
     {
@@ -106,7 +106,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 4139,
+      "elapsedMs": 4058,
       "error": ""
     },
     {
@@ -121,7 +121,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1805,
+      "elapsedMs": 1495,
       "error": ""
     },
     {
@@ -136,7 +136,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10464,
+      "elapsedMs": 10136,
       "error": "fetch failed"
     },
     {
@@ -151,7 +151,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1211,
+      "elapsedMs": 1356,
       "error": ""
     },
     {
@@ -166,7 +166,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1435,
+      "elapsedMs": 1511,
       "error": ""
     },
     {
@@ -176,13 +176,13 @@
       "sourceType": "local_art_portal",
       "crawlMode": "generic_board_discovery",
       "configuredUrl": "https://www.gyeongnam.go.kr/culture/index.do?siteCd=001",
-      "finalUrl": "https://www.gyeongnam.go.kr/culture/index.do?siteCd=001",
-      "reachable": true,
-      "status": 200,
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
       "redirected": false,
-      "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 5492,
-      "error": ""
+      "contentType": "",
+      "elapsedMs": 10427,
+      "error": "fetch failed"
     },
     {
       "id": "gyeongbuk_notice",
@@ -196,7 +196,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10486,
+      "elapsedMs": 10493,
       "error": "fetch failed"
     },
     {
@@ -211,7 +211,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 2017,
+      "elapsedMs": 1453,
       "error": ""
     },
     {
@@ -226,7 +226,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10485,
+      "elapsedMs": 10491,
       "error": "fetch failed"
     },
     {
@@ -241,7 +241,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 3273,
+      "elapsedMs": 1737,
       "error": ""
     },
     {
@@ -256,7 +256,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 2003,
+      "elapsedMs": 1275,
       "error": ""
     },
     {
@@ -271,7 +271,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10071,
+      "elapsedMs": 10253,
       "error": "fetch failed"
     },
     {
@@ -286,7 +286,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2572,
+      "elapsedMs": 2785,
       "error": ""
     },
     {
@@ -296,13 +296,13 @@
       "sourceType": "public_corporation",
       "crawlMode": "board",
       "configuredUrl": "https://www.cndc.kr/bbs/list.do?key=2404080002",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://www.cndc.kr/bbs/list.do",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10483,
-      "error": "fetch failed"
+      "contentType": "text/html;charset=UTF-8",
+      "elapsedMs": 1768,
+      "error": ""
     },
     {
       "id": "chungnam_notice",
@@ -316,7 +316,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10459,
+      "elapsedMs": 10228,
       "error": "fetch failed"
     },
     {
@@ -331,7 +331,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 4850,
+      "elapsedMs": 4656,
       "error": ""
     },
     {
@@ -346,7 +346,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1123,
+      "elapsedMs": 865,
       "error": ""
     },
     {
@@ -361,7 +361,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 8382,
+      "elapsedMs": 5752,
       "error": ""
     },
     {
@@ -376,7 +376,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10275,
+      "elapsedMs": 10316,
       "error": "fetch failed"
     },
     {
@@ -391,7 +391,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 2967,
+      "elapsedMs": 1156,
       "error": ""
     },
     {
@@ -404,9 +404,9 @@
       "finalUrl": "https://www.jeonbuk.go.kr/board/list.jeonbuk?boardId=BBS_0000129&menuCd=DOM_000000102002003001",
       "reachable": true,
       "status": 200,
-      "redirected": false,
+      "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2808,
+      "elapsedMs": 4071,
       "error": ""
     },
     {
@@ -421,7 +421,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10491,
+      "elapsedMs": 10337,
       "error": "fetch failed"
     },
     {
@@ -436,7 +436,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 3408,
+      "elapsedMs": 1689,
       "error": ""
     },
     {
@@ -451,7 +451,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 3820,
+      "elapsedMs": 1455,
       "error": ""
     },
     {
@@ -466,7 +466,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2490,
+      "elapsedMs": 1150,
       "error": ""
     },
     {
@@ -481,7 +481,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10080,
+      "elapsedMs": 10374,
       "error": "fetch failed"
     },
     {
@@ -496,7 +496,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10188,
+      "elapsedMs": 10492,
       "error": "fetch failed"
     }
   ]
