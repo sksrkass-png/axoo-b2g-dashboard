@@ -106,7 +106,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -216,7 +216,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -327,7 +327,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -438,7 +438,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -549,7 +549,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -659,7 +659,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -769,13 +769,13 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "deadlineStatus": "진행중",
     "staleReason": "",
     "deadlineRepairSource": "detailTextSample",
     "deadlineRepairMode": "single_date",
     "deadlineRepairVersion": "axoo_art_deadline_repair_v1.0.0",
-    "deadlineRepairedAt": "2026-09-24"
+    "deadlineRepairedAt": "2026-09-25"
   },
   {
     "id": "external-5ca0dea6b51faffe",
@@ -907,7 +907,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "staleReason": ""
   },
   {
@@ -1040,7 +1040,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-24",
+    "dateNormalizedAt": "2026-09-25",
     "staleReason": ""
   }
 ]
