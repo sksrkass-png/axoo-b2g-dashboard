@@ -3,9 +3,9 @@
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 23,
-    "sourceFailureCount": 2,
-    "discoveredCandidateCount": 1,
+    "sourceSuccessCount": 20,
+    "sourceFailureCount": 5,
+    "discoveredCandidateCount": 0,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
@@ -29,8 +29,8 @@
         "sourceId": "gwangju_city_notice",
         "sourceName": "전남광주통합특별시 고시공고 - 광주권",
         "region": "광주",
-        "accessOk": true,
-        "pagesFetched": 1,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -38,9 +38,9 @@
         "sourceId": "daejeon_city_notice",
         "sourceName": "대전광역시 고시공고·부서 게시판",
         "region": "대전",
-        "accessOk": true,
-        "pagesFetched": 6,
-        "candidatesFound": 1,
+        "accessOk": false,
+        "pagesFetched": 0,
+        "candidatesFound": 0,
         "error": ""
       },
       {
@@ -146,8 +146,8 @@
         "sourceId": "jeonnam_notice",
         "sourceName": "전라남도 공고·고시",
         "region": "전남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,7 +236,7 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 0,
+    "checked": 2,
     "matched": 0,
     "status": "ok"
   }
