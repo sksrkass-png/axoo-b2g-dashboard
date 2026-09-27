@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-09-26",
+  "updatedAt": "2026-09-27",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 20,
-    "sourceFailureCount": 5,
+    "sourceSuccessCount": 19,
+    "sourceFailureCount": 6,
     "discoveredCandidateCount": 0,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -47,8 +47,8 @@
         "sourceId": "ulsan_city_notice",
         "sourceName": "울산광역시 고시공고",
         "region": "울산",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -120,7 +120,7 @@
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
         "accessOk": true,
-        "pagesFetched": 6,
+        "pagesFetched": 2,
         "candidatesFound": 0,
         "error": ""
       },
@@ -164,8 +164,8 @@
         "sourceId": "gyeongbuk_notice",
         "sourceName": "경상북도 고시공고",
         "region": "경북",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
