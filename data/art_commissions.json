@@ -1,5 +1,116 @@
 [
   {
+    "id": "external-a87f579a92fe869f",
+    "source": "경기도 건축물 미술작품",
+    "title": "더샵 분당센트로 (무지개마을 4단지) 미술작품 제작 및 설치 공모 공고",
+    "agency": "경기도",
+    "organization": "경기도",
+    "region": "경기",
+    "category": "미술작품 공모",
+    "status": "공모중",
+    "publishedDate": "2026-09-28",
+    "postedDate": "2026-09-28",
+    "periodStart": "2026-09-28",
+    "deadline": "2026-10-12",
+    "endDate": "2026-10-12",
+    "amount": "",
+    "amountNumeric": null,
+    "budget": "",
+    "location": "",
+    "installationLocation": "",
+    "eligibility": "",
+    "keywords": [
+      "미술작품",
+      "공모",
+      "공고",
+      "제작",
+      "설치"
+    ],
+    "recommendedAction": "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토 / 공모기간: 2026-09-28 ~ 2026-10-12",
+    "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110905913&menuId=3865",
+    "originalUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110905913&menuId=3865",
+    "bidNtceNo": "",
+    "score": 85,
+    "grade": "A",
+    "isExpired": false,
+    "isStaleCandidate": false,
+    "collectionSourceId": "gyeonggi_public_art",
+    "collectionVersion": "1.3.1",
+    "detailFetchStatus": "ok",
+    "detailFetchTransport": "apps-script-bridge",
+    "detailFetchError": "",
+    "detailHtmlBytes": 44003,
+    "detailTextSample": "더샵 분당센트로 (무지개마을 4단지) 미술작품 제작 및 설치 공모 공고 | 공모공고 | 미술작품 공모 | 경기도 건축물 미술작품 본문 바로가기 주메뉴 바로가기 제도 소개 제도 개요 제도 운영 미술작품 비용산출 미술작품 FAQ 미술작품 정보검색 심의위원회 위원회 소개 심의계획·결과 미술작품 공모 공모개요 공모공고 공모결과 자료실 자료실 경기도 건축물 미술작품 기회와 상생의 새로운 패러다임 지금 만들어 갑니다. --> 미술작품 공모 공모개요 공모공고 공모결과 공모공고 홈 미술작품 공모 공모공고 더샵 분당센트로 (무지개마을 4단지) 미술작품 제작 및 설치 공모 공고 게시물 정보 구분 공모 작성자 관리자 등록일 2026-09-28 ◦ 접수일시 : 2026.09.28.(월) - 26.10.12.(월) 16:00 까지 (이메일 접수) ◦ 응모접수 E-mail : rainbow7145580@naver.com 첨부파일 더샵 분당센트로 미술작품 공모 공고.hwp 바로보기 바로듣기 더샵 분당센트로 미술작품 공모 현장설명서.pdf 바로보기 바로듣기 목록보기 다음글이 없습니다. 이전글 오정 613, 경성빌라, 상신빌라 건축물 미술작품 공모 공고 [제4유형:출처명시+상업적 이용금지+변경금지] 관련사이트 경기도청 공익제보 핫라인 공공미술포털 담당부서: 예술정책과 | 전화번호: 031-8008-4652 경기도청: 16508 경기도 수원시 영통구 도청로 30 (이의동) © GYEONGGI PROVINCE All Rights Reserved.",
+    "listFetchTransport": "apps-script-bridge-ajax",
+    "listBIdx": "110905913",
+    "listRecordNo": 568,
+    "listCategory": "공모",
+    "listFileName": "더샵 분당센트로 미술작품 공모 공고.hwp",
+    "listRemarkExtractionStatus": "ok",
+    "detailExtractionStatus": "extracted",
+    "detailExtractionCount": 2,
+    "detailExtractionVersion": "art-detail-1.1.0",
+    "detailExtractionEvidence": {
+      "deadline": {
+        "value": "2026-09-28",
+        "raw": "2026.09.28",
+        "label": "접수일시",
+        "evidence": "◦ 접수일시 : 2026.09.28.(월) - 26.10.12.(월) 16:00 까지 (이메일 접수) ◦ 응모접수 E-mail : rainbow7145580@naver.com 첨부파일",
+        "confidence": "high",
+        "dateSource": "full_date"
+      },
+      "publishedDate": {
+        "value": "2026-09-28",
+        "raw": "2026-09-28",
+        "label": "등록일",
+        "evidence": "등록일 2026-09-28",
+        "confidence": "high"
+      },
+      "agency": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none"
+      },
+      "amount": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none",
+        "numericValue": null
+      },
+      "location": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none"
+      },
+      "eligibility": {
+        "value": "",
+        "raw": "",
+        "label": "",
+        "evidence": "",
+        "confidence": "none"
+      }
+    },
+    "periodEnd": "2026-10-12",
+    "publishedDateSource": "detail_metadata",
+    "periodSource": "detail_body",
+    "periodKeyword": "접수일시",
+    "deadlineSource": "priority_deadline_range",
+    "deadlineKeyword": "접수일시",
+    "deadlineRaw": "26.10.12",
+    "suspiciousPeriodIgnored": false,
+    "dateConfidence": "HIGH",
+    "dateNormalizationVersion": "1.4.1",
+    "dateNormalizedAt": "2026-09-28",
+    "deadlineStatus": "진행중",
+    "staleReason": ""
+  },
+  {
     "id": "external-5b9d9d3fc4c4351e",
     "source": "경기도 건축물 미술작품",
     "title": "오정 613, 경성빌라, 상신빌라 건축물 미술작품 공모 공고",
@@ -39,8 +150,8 @@
     "detailFetchStatus": "ok",
     "detailFetchTransport": "apps-script-bridge",
     "detailFetchError": "",
-    "detailHtmlBytes": 44028,
-    "detailTextSample": "오정 613, 경성빌라, 상신빌라 건축물 미술작품 공모 공고 | 공모공고 | 미술작품 공모 | 경기도 건축물 미술작품 본문 바로가기 주메뉴 바로가기 제도 소개 제도 개요 제도 운영 미술작품 비용산출 미술작품 FAQ 미술작품 정보검색 심의위원회 위원회 소개 심의계획·결과 미술작품 공모 공모개요 공모공고 공모결과 자료실 자료실 경기도 건축물 미술작품 기회와 상생의 새로운 패러다임 지금 만들어 갑니다. --> 미술작품 공모 공모개요 공모공고 공모결과 공모공고 홈 미술작품 공모 공모공고 오정 613, 경성빌라, 상신빌라 건축물 미술작품 공모 공고 게시물 정보 구분 공모 작성자 관리자 등록일 2026-09-22 ◦ 공고기간 : 2026. 9. 22.(화) ~ 10. 14.(수) (23일간) ◦ 접수일시 : 2026. 10. 14.(수) 16:00까지 이메일 : public_art@malong.co.kr 접수 첨부파일 1. 공모지침서(오정613.경성빌라.상신빌라).hwp 바로보기 바로듣기 2-1. 공모현장설명서(오정 613 가로주택정비사업 외 2).zip 바로보기 바로듣기 목록보기 다음글이 없습니다. 이전글 배곧서울대학교병원 건립 건축물 미술작품 제작·설치 공모 공고 [제4유형:출처명시+상업적 이용금지+변경금지] 관련사이트 경기도청 공익제보 핫라인 공공미술포털 담당부서: 예술정책과 | 전화번호: 031-8008-4652 경기도청: 16508 경기도 수원시 영통구 도청로 30 (이의동) © GYEONGGI PROVINCE All Rights Reserved.",
+    "detailHtmlBytes": 44257,
+    "detailTextSample": "오정 613, 경성빌라, 상신빌라 건축물 미술작품 공모 공고 | 공모공고 | 미술작품 공모 | 경기도 건축물 미술작품 본문 바로가기 주메뉴 바로가기 제도 소개 제도 개요 제도 운영 미술작품 비용산출 미술작품 FAQ 미술작품 정보검색 심의위원회 위원회 소개 심의계획·결과 미술작품 공모 공모개요 공모공고 공모결과 자료실 자료실 경기도 건축물 미술작품 기회와 상생의 새로운 패러다임 지금 만들어 갑니다. --> 미술작품 공모 공모개요 공모공고 공모결과 공모공고 홈 미술작품 공모 공모공고 오정 613, 경성빌라, 상신빌라 건축물 미술작품 공모 공고 게시물 정보 구분 공모 작성자 관리자 등록일 2026-09-22 ◦ 공고기간 : 2026. 9. 22.(화) ~ 10. 14.(수) (23일간) ◦ 접수일시 : 2026. 10. 14.(수) 16:00까지 이메일 : public_art@malong.co.kr 접수 첨부파일 1. 공모지침서(오정613.경성빌라.상신빌라).hwp 바로보기 바로듣기 2-1. 공모현장설명서(오정 613 가로주택정비사업 외 2).zip 바로보기 바로듣기 목록보기 다음글 더샵 분당센트로 (무지개마을 4단지) 미술작품 제작 및 설치 공모 공고 이전글 배곧서울대학교병원 건립 건축물 미술작품 제작·설치 공모 공고 [제4유형:출처명시+상업적 이용금지+변경금지] 관련사이트 경기도청 공익제보 핫라인 공공미술포털 담당부서: 예술정책과 | 전화번호: 031-8008-4652 경기도청: 16508 경기도 수원시 영통구 도청로 30 (이의동) © GYEONGGI PROVINCE All Rights Reserved.",
     "listFetchTransport": "apps-script-bridge-ajax",
     "listBIdx": "110905868",
     "listRecordNo": 567,
@@ -106,7 +217,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-27",
+    "dateNormalizedAt": "2026-09-28",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -216,7 +327,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-27",
+    "dateNormalizedAt": "2026-09-28",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -327,7 +438,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-27",
+    "dateNormalizedAt": "2026-09-28",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -438,7 +549,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-27",
+    "dateNormalizedAt": "2026-09-28",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -549,7 +660,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-27",
+    "dateNormalizedAt": "2026-09-28",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -659,7 +770,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-27",
+    "dateNormalizedAt": "2026-09-28",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -769,12 +880,12 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-09-27",
+    "dateNormalizedAt": "2026-09-28",
     "deadlineStatus": "진행중",
     "staleReason": "",
     "deadlineRepairSource": "detailTextSample",
     "deadlineRepairMode": "single_date",
     "deadlineRepairVersion": "axoo_art_deadline_repair_v1.0.0",
-    "deadlineRepairedAt": "2026-09-27"
+    "deadlineRepairedAt": "2026-09-28"
   }
 ]
