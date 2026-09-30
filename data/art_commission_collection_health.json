@@ -3,16 +3,16 @@
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 23,
-    "sourceFailureCount": 2,
+    "sourceSuccessCount": 25,
+    "sourceFailureCount": 0,
     "discoveredCandidateCount": 1,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -120,7 +120,7 @@
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
         "accessOk": true,
-        "pagesFetched": 6,
+        "pagesFetched": 3,
         "candidatesFound": 0,
         "error": ""
       },
@@ -128,8 +128,8 @@
         "sourceId": "jeonbuk_notice",
         "sourceName": "전북특별자치도 공고·고시",
         "region": "전북",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
