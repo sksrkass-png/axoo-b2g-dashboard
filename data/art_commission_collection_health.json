@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-09-29",
+  "updatedAt": "2026-09-30",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 24,
-    "sourceFailureCount": 1,
+    "sourceSuccessCount": 23,
+    "sourceFailureCount": 2,
     "discoveredCandidateCount": 1,
     "sourceRuns": [
       {
@@ -120,7 +120,7 @@
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
         "accessOk": true,
-        "pagesFetched": 4,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -128,8 +128,8 @@
         "sourceId": "jeonbuk_notice",
         "sourceName": "전북특별자치도 공고·고시",
         "region": "전북",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
