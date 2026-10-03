@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-02",
+  "updatedAt": "2026-10-03",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 25,
-    "sourceFailureCount": 0,
+    "sourceSuccessCount": 21,
+    "sourceFailureCount": 4,
     "discoveredCandidateCount": 1,
     "sourceRuns": [
       {
@@ -29,8 +29,8 @@
         "sourceId": "gwangju_city_notice",
         "sourceName": "전남광주통합특별시 고시공고 - 광주권",
         "region": "광주",
-        "accessOk": true,
-        "pagesFetched": 1,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -47,8 +47,8 @@
         "sourceId": "ulsan_city_notice",
         "sourceName": "울산광역시 고시공고",
         "region": "울산",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -146,8 +146,8 @@
         "sourceId": "jeonnam_notice",
         "sourceName": "전라남도 공고·고시",
         "region": "전남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -182,8 +182,8 @@
         "sourceId": "gyeongnam_culture_portal",
         "sourceName": "경상남도 문화예술 정보플랫폼",
         "region": "경남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
