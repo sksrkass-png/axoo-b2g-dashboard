@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03",
+  "updatedAt": "2026-10-04",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
@@ -12,7 +12,7 @@
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
         "accessOk": true,
-        "pagesFetched": 6,
+        "pagesFetched": 2,
         "candidatesFound": 0,
         "error": ""
       },
