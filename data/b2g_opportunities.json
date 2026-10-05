@@ -36,8 +36,8 @@
     "deadlineDate": "2026-10-13",
     "opportunityStatus": "진행중",
     "projectScale": "중형",
-    "score": 63,
-    "grade": "B",
+    "score": 60,
+    "grade": "A",
     "category": "public_art",
     "categoryLabel": "공공미술",
     "matchedKeywords": [
@@ -55,13 +55,39 @@
     "budgetAmount": 100000000,
     "daysLeft": 8,
     "scoreReasons": [
-      "AXOO 직접 핏 키워드 포함",
-      "예산 규모 적합",
-      "검토 가능 기간 존재",
-      "문화/관광/디자인 관련 기관"
+      "핵심 수행영역: 벽화·조형물"
     ],
-    "fitReason": "AXOO 직접 핏 키워드 조형물 확인. 계약 방식은 추가 확인 필요. 예산 100,000,000원 기준 중형. 공고기관/수요기관 확인 가능. 마감까지 8일 남음. 최종 등급 B.",
-    "recommendedAction": "조건 확인 후 저장/모니터링",
-    "scoringVersion": "axoo_bid_fit_v3"
+    "fitReason": "핵심 수행영역: 벽화·조형물. AXOO FIT 60점 / A등급. 실행조건 45점 (1억원 이상, 검토·제안 준비기간 적정).",
+    "recommendedAction": "AXOO 적합도 높음 — 과업지시서 확인 후 지원 판단",
+    "scoringVersion": "axoo_bid_fit_v6",
+    "fitScore": 60,
+    "executionScore": 45,
+    "priorityScore": 57,
+    "visualArtKeywords": [
+      "조형물"
+    ],
+    "hardFilterPassed": true,
+    "hardFilterVersion": "axoo_hard_filter_v1",
+    "strongFitConcepts": [
+      "mural_sculpture"
+    ],
+    "strongFitLabels": [
+      "벽화·조형물"
+    ],
+    "strongFitKeywords": [
+      "조형물"
+    ],
+    "mediumFitConcepts": [],
+    "mediumFitLabels": [],
+    "mediumFitKeywords": [],
+    "procurementFitLabels": [],
+    "executionReasons": [
+      "1억원 이상",
+      "검토·제안 준비기간 적정"
+    ],
+    "collectionSourceId": "g2b_bid_public_info_servc",
+    "collectionVersion": "1.2.0",
+    "collectedAt": "2026-10-05",
+    "updatedAt": "2026-10-05"
   }
 ]
