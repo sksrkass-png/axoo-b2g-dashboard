@@ -129,7 +129,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 120000000,
-    "daysLeft": 10,
+    "daysLeft": 9,
     "score": 76,
     "fitScore": 76,
     "grade": "A",
@@ -194,7 +194,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-07",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-10"
   },
   {
     "bidNtceNo": "R26BK01758765",
@@ -326,7 +326,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 91580000,
-    "daysLeft": 10,
+    "daysLeft": 9,
     "score": 76,
     "fitScore": 76,
     "grade": "A",
@@ -391,7 +391,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-07",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-10"
   },
   {
     "bidNtceNo": "R26BK01760756",
@@ -523,7 +523,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 285000000,
-    "daysLeft": 10,
+    "daysLeft": 9,
     "score": 73,
     "fitScore": 73,
     "grade": "A",
@@ -591,7 +591,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-08",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-10"
   },
   {
     "bidNtceNo": "R26BK01758601",
@@ -723,7 +723,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 798607464,
-    "daysLeft": 13,
+    "daysLeft": 12,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -778,7 +778,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-07",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-10"
   },
   {
     "bidNtceNo": "R26BK01761443",
@@ -910,7 +910,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 596220000,
-    "daysLeft": 20,
+    "daysLeft": 19,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -962,6 +962,6 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-08",
-    "updatedAt": "2026-10-09"
+    "updatedAt": "2026-10-10"
   }
 ]
