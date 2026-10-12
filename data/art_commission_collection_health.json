@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-10-12",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 23,
-    "sourceFailureCount": 2,
+    "sourceSuccessCount": 25,
+    "sourceFailureCount": 0,
     "discoveredCandidateCount": 1,
     "sourceRuns": [
       {
@@ -119,8 +119,8 @@
         "sourceId": "chungnam_development_corporation",
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -182,8 +182,8 @@
         "sourceId": "gyeongnam_culture_portal",
         "sourceName": "경상남도 문화예술 정보플랫폼",
         "region": "경남",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
