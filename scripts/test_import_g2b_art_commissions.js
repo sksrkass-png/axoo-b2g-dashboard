@@ -2,6 +2,8 @@ const assert = require("assert");
 
 const {
   isArchitecturalArtCommission,
+  mergeActiveG2bArtCandidates,
+  combineG2bSources,
   importG2bArtCommissions
 } = require("./import_g2b_art_commissions");
 
@@ -30,10 +32,35 @@ const RESULT_NOTICE = {
   bidNtceUrl: "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK00000003"
 };
 
+const LOW_BUDGET_GOODS_NOTICE = {
+  bidNtceNo: "R26BK00000004",
+  bidNtceNm: "공공청사 조형물 제작 및 설치",
+  ntceInsttNm: "제주특별자치도",
+  bidNtceDt: "2026-09-11 09:00:00",
+  bidClseDt: "2026-09-29 18:00:00",
+  asignBdgtAmt: "30000000",
+  g2bNoticeType: "goods",
+  bidNtceUrl: "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK00000004"
+};
+
 
 assert.strictEqual(isArchitecturalArtCommission(BUILDING_ART_NOTICE), true);
 assert.strictEqual(isArchitecturalArtCommission(NON_BUILDING_ART_NOTICE), false);
 assert.strictEqual(isArchitecturalArtCommission(RESULT_NOTICE), false);
+assert.strictEqual(isArchitecturalArtCommission(LOW_BUDGET_GOODS_NOTICE), true);
+
+const rawCandidates = mergeActiveG2bArtCandidates(
+  [BUILDING_ART_NOTICE],
+  [BUILDING_ART_NOTICE, LOW_BUDGET_GOODS_NOTICE, NON_BUILDING_ART_NOTICE],
+  "2026-09-11"
+);
+
+assert.strictEqual(rawCandidates.length, 2, "일반 대시보드 필터와 무관하게 미술 공고 원본을 보존해야 합니다.");
+assert.strictEqual(
+  combineG2bSources([BUILDING_ART_NOTICE], rawCandidates).length,
+  2,
+  "일반/미술 전용 G2B 데이터는 공고번호 기준으로 합쳐야 합니다."
+);
 
 const result = importG2bArtCommissions({
   dryRun: true,

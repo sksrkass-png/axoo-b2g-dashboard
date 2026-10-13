@@ -1,6 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 
+const {
+  isArchitecturalArtCommission,
+  mergeActiveG2bArtCandidates
+} = require("./import_g2b_art_commissions");
+
 
 /* =========================================================
    CONFIG
@@ -18,8 +23,32 @@ const META_FILE = path.join(
   "dashboard_meta.json"
 );
 
-const API_URL =
-  "https://apis.data.go.kr/1230000/ad/BidPublicInfoService/getBidPblancListInfoServc";
+const G2B_ART_FILE = path.join(
+  process.cwd(),
+  "data",
+  "g2b_art_commissions.json"
+);
+
+const API_BASE_URL =
+  "https://apis.data.go.kr/1230000/ad/BidPublicInfoService";
+
+const API_ENDPOINTS = [
+  {
+    id: "service",
+    label: "용역",
+    operation: "getBidPblancListInfoServc"
+  },
+  {
+    id: "goods",
+    label: "물품",
+    operation: "getBidPblancListInfoThng"
+  },
+  {
+    id: "construction",
+    label: "공사",
+    operation: "getBidPblancListInfoCnstwk"
+  }
+];
 
 const SERVICE_KEY =
   String(
@@ -1079,6 +1108,7 @@ function sleep(
 
 
 async function fetchJson(
+  endpoint,
   pageNo,
   begin,
   end
@@ -1111,7 +1141,7 @@ async function fetchJson(
 
       const url =
         new URL(
-          API_URL
+          API_BASE_URL + "/" + endpoint.operation
         );
 
 
@@ -1249,7 +1279,7 @@ async function fetchJson(
       ) {
 
         console.log(
-          "[G2B] API 재시도 " +
+          "[G2B/" + endpoint.label + "] API 재시도 " +
           attempt +
           "/" +
           MAX_FETCH_ATTEMPTS
@@ -1698,10 +1728,6 @@ async function collectRecentNotices() {
     [];
 
 
-  let page =
-    1;
-
-
   console.log(
     "[G2B] 조회 기간:",
     beginDate,
@@ -1710,66 +1736,65 @@ async function collectRecentNotices() {
   );
 
 
-  while (
-    page <=
-    MAX_PAGES
-  ) {
+  let successfulEndpointCount = 0;
 
-    console.log(
-      "[G2B] page",
-      page
-    );
+  for (const endpoint of API_ENDPOINTS) {
+    let page = 1;
+    let endpointReceived = 0;
+    let endpointSucceeded = false;
 
+    try {
+      while (page <= MAX_PAGES) {
+        console.log(
+          "[G2B/" + endpoint.label + "] page",
+          page
+        );
 
-    const data =
-      await fetchJson(
-        page,
-        begin,
-        end
-      );
+        const data = await fetchJson(
+          endpoint,
+          page,
+          begin,
+          end
+        );
+        const items = extractItems(data).map(item => ({
+          ...item,
+          g2bNoticeType: endpoint.id
+        }));
+        const totalCount = extractTotalCount(data);
 
+        endpointSucceeded = true;
+        endpointReceived += items.length;
+        all.push(...items);
 
-    const items =
-      extractItems(
-        data
-      );
-
-
-    const totalCount =
-      extractTotalCount(
-        data
-      );
-
-
-    all.push(
-      ...items
-    );
-
-
-    console.log(
-      "[G2B] 수신:",
-      items.length,
-      "/ total:",
-      totalCount
-    );
-
-
-    if (
-      items.length === 0 ||
-      (
-        totalCount > 0 &&
-        all.length >=
+        console.log(
+          "[G2B/" + endpoint.label + "] 수신:",
+          items.length,
+          "/ total:",
           totalCount
-      ) ||
-      items.length <
-        NUM_OF_ROWS
-    ) {
+        );
 
-      break;
+        if (
+          items.length === 0 ||
+          (totalCount > 0 && endpointReceived >= totalCount) ||
+          items.length < NUM_OF_ROWS
+        ) {
+          break;
+        }
+
+        page += 1;
+      }
+    } catch (error) {
+      console.warn(
+        "::warning title=G2B " + endpoint.label + " 수집 실패::" +
+        String(error && error.message ? error.message : error)
+      );
     }
 
+    if (endpointSucceeded) successfulEndpointCount += 1;
+  }
 
-    page += 1;
+  if (successfulEndpointCount === 0) {
+    throw new Error("G2B 용역·물품·공사 API가 모두 실패했습니다.");
   }
 
 
@@ -3855,6 +3880,22 @@ async function main() {
   const discovered =
     await collectRecentNotices();
 
+  const existingArtCandidates = readJson(
+    G2B_ART_FILE,
+    []
+  );
+
+  const artCandidates = mergeActiveG2bArtCandidates(
+    existingArtCandidates,
+    discovered.filter(isArchitecturalArtCommission),
+    koreaDateString()
+  );
+
+  writeJson(
+    G2B_ART_FILE,
+    artCandidates
+  );
+
 
   const filterStats =
     createFilterStats();
@@ -3988,6 +4029,11 @@ async function main() {
     existing.length
   );
 
+  console.log(
+    "건축물 미술작품 원본 후보:",
+    artCandidates.length
+  );
+
 
   console.log(
     "최종 표시 후보:",
@@ -4029,17 +4075,26 @@ async function main() {
 }
 
 
-main()
-  .catch(
-    error => {
+if (require.main === module) {
+  main()
+    .catch(
+      error => {
 
-      console.error(
-        "[AXOO G2B COLLECTOR]",
-        error
-      );
+        console.error(
+          "[AXOO G2B COLLECTOR]",
+          error
+        );
 
 
-      process.exitCode =
-        1;
-    }
-  );
+        process.exitCode =
+          1;
+      }
+    );
+}
+
+
+module.exports = {
+  API_ENDPOINTS,
+  collectRecentNotices,
+  mergeItems
+};

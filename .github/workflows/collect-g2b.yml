@@ -39,6 +39,14 @@ jobs:
           node-version: "20"
 
 
+      - name: Test G2B collection coverage
+        run: |
+          node --check scripts/collect_g2b_opportunities.js
+          node --check scripts/import_g2b_art_commissions.js
+          node scripts/test_g2b_collection_coverage.js
+          node scripts/test_import_g2b_art_commissions.js
+
+
       # --------------------------------------------------
       # 3. G2B 수집
       #
@@ -113,6 +121,7 @@ jobs:
         run: |
           if git diff --quiet -- \
             data/b2g_opportunities.json \
+            data/g2b_art_commissions.json \
             data/priority_projects.json \
             data/dashboard_meta.json; then
 
@@ -143,6 +152,7 @@ jobs:
 
           git add \
             data/b2g_opportunities.json \
+            data/g2b_art_commissions.json \
             data/priority_projects.json \
             data/dashboard_meta.json
 
@@ -150,5 +160,8 @@ jobs:
           git commit \
             -m "Collect G2B opportunities"
 
+          git fetch origin main
 
-          git push
+          git rebase origin/main
+
+          git push origin HEAD:main

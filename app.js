@@ -1,6 +1,7 @@
 let allItems = [];
 let targetAgencies = [];
 let artCommissions = [];
+let artCommissionArchive = [];
 let localProjects = [];
 let dashboardMeta = {};
 
@@ -211,6 +212,59 @@ function getAgencyReviewKey(item) {
 
 function getArtReviewKey(item) {
   return `art-${item.bidNtceNo || item.title || ""}-${item.deadline || ""}`;
+}
+
+function getArtItemKey(item) {
+  const sourceUrl = plainText(
+    item && (item.sourceUrl || item.originalUrl || item.url)
+  )
+    .replace(/\/+$/, "")
+    .toLowerCase();
+
+  if (sourceUrl) return `url:${sourceUrl}`;
+
+  const noticeNo = plainText(item && (item.bidNtceNo || item.noticeNo));
+  if (noticeNo) return `notice:${noticeNo}`;
+
+  const id = plainText(item && item.id);
+  if (id) return `id:${id}`;
+
+  return [
+    "fallback",
+    plainText(item && item.title),
+    plainText(item && item.agency),
+    plainText(item && (item.publishedDate || item.postedDate))
+  ].join(":").toLowerCase();
+}
+
+function buildArtDisplayItems(liveItems, archiveItems) {
+  const live = Array.isArray(liveItems) ? liveItems : [];
+  const archive = Array.isArray(archiveItems) ? archiveItems : [];
+  const byKey = new Map();
+
+  archive.forEach(item => {
+    if (!item) return;
+
+    byKey.set(getArtItemKey(item), {
+      ...item,
+      _artLifecycle: "past"
+    });
+  });
+
+  live.forEach(item => {
+    if (!item) return;
+
+    const key = getArtItemKey(item);
+    const archived = byKey.get(key) || {};
+
+    byKey.set(key, {
+      ...archived,
+      ...item,
+      _artLifecycle: "current"
+    });
+  });
+
+  return Array.from(byKey.values());
 }
 
 function getLocalReviewKey(item) {
@@ -625,7 +679,14 @@ function renderAgencyCards() {
 }
 
 function getArtSourceValue(item) {
-  return item.source || item.region || item.agency || "";
+  return [
+    item.source,
+    item.sourceName,
+    item.region,
+    item.sourceRegion,
+    item.agency,
+    item.organization
+  ].map(plainText).join(" ");
 }
 
 function getArtSourceLabel(item) {
@@ -640,13 +701,14 @@ function createArtCard(item) {
   const sourceUrl = safeUrl(item.sourceUrl);
   const reviewKey = getArtReviewKey(item);
   const deadlineInfo = getDDay(item.deadline);
+  const lifecycleLabel = item._artLifecycle === "past" ? "지난 공고" : "진행 공고";
 
   card.innerHTML = `
     <div class="card-top">
       <div class="badges">
         <span class="badge category">${escapeHtml(safeText(getArtSourceLabel(item)))}</span>
         <span class="badge category">${escapeHtml(safeText(item.category || "건축물 미술작품"))}</span>
-        <span class="badge category">${escapeHtml(safeText(item.status || "공모"))}</span>
+        <span class="badge category">${escapeHtml(lifecycleLabel)}</span>
       </div>
 
       <div class="score-group">
@@ -688,15 +750,21 @@ function renderArtCards() {
   const cards = document.getElementById("artCards");
   const artSearchInput = document.getElementById("artSearchInput");
   const artSourceFilter = document.getElementById("artSourceFilter");
+  const artStatusFilter = document.getElementById("artStatusFilter");
   const artReviewFilter = document.getElementById("artReviewFilter");
 
   if (!cards) return;
 
   const searchValue = plainText(artSearchInput?.value).toLowerCase();
   const sourceValue = artSourceFilter?.value || "all";
+  const statusValue = artStatusFilter?.value || "current";
   const reviewValue = artReviewFilter?.value || "all";
+  const displayItems = buildArtDisplayItems(
+    artCommissions,
+    artCommissionArchive
+  );
 
-  const filtered = artCommissions.filter(item => {
+  const filtered = displayItems.filter(item => {
     const keywords = Array.isArray(item.keywords) ? item.keywords : [];
 
     const searchTarget = [
@@ -715,12 +783,22 @@ function renderArtCards() {
 
     const matchesSearch = !searchValue || searchTarget.includes(searchValue);
     const matchesSource = sourceValue === "all" || sourceTarget.includes(sourceValue);
+    const matchesStatus = statusValue === "all" || item._artLifecycle === statusValue;
     const matchesReview = reviewValue === "all" || itemReviewStatus === reviewValue;
 
-    return matchesSearch && matchesSource && matchesReview;
+    return matchesSearch && matchesSource && matchesStatus && matchesReview;
   });
 
   filtered.sort((a, b) => {
+    if (a._artLifecycle !== b._artLifecycle) {
+      return a._artLifecycle === "current" ? -1 : 1;
+    }
+
+    if (a._artLifecycle === "past") {
+      return String(b.deadline || b.publishedDate || "")
+        .localeCompare(String(a.deadline || a.publishedDate || ""));
+    }
+
     const aDeadline = getDDay(a.deadline).sortDays;
     const bDeadline = getDDay(b.deadline).sortDays;
 
@@ -1036,6 +1114,7 @@ function bindFilterControls() {
 
   const artSearchInput = document.getElementById("artSearchInput");
   const artSourceFilter = document.getElementById("artSourceFilter");
+  const artStatusFilter = document.getElementById("artStatusFilter");
   const artReviewFilter = document.getElementById("artReviewFilter");
 
   const localSearchInput = document.getElementById("localSearchInput");
@@ -1059,6 +1138,7 @@ function bindFilterControls() {
 
   if (artSearchInput) artSearchInput.addEventListener("input", renderArtCards);
   if (artSourceFilter) artSourceFilter.addEventListener("change", renderArtCards);
+  if (artStatusFilter) artStatusFilter.addEventListener("change", renderArtCards);
   if (artReviewFilter) artReviewFilter.addEventListener("change", renderArtCards);
 
   if (localSearchInput) localSearchInput.addEventListener("input", renderLocalProjectCards);
@@ -1075,6 +1155,7 @@ async function init() {
   allItems = await loadJson("data/b2g_opportunities.json", []);
   targetAgencies = await loadJson("data/target_agencies.json", []);
   artCommissions = await loadJson("data/art_commissions.json", []);
+  artCommissionArchive = await loadJson("data/art_commissions_archive.json", []);
   localProjects = await loadJson("data/local_projects.json", []);
   dashboardMeta = await loadJson("data/dashboard_meta.json", {});
 
@@ -1092,4 +1173,14 @@ async function init() {
   setTimeout(notifyRendered, 250);
 }
 
-document.addEventListener("DOMContentLoaded", init);
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", init);
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    getArtItemKey,
+    buildArtDisplayItems,
+    getArtSourceValue
+  };
+}

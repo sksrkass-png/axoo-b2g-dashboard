@@ -18,6 +18,7 @@ const {
 const DATA_FILE = path.join(process.cwd(), "data", "art_commissions.json");
 const ARCHIVE_FILE = path.join(process.cwd(), "data", "art_commissions_archive.json");
 const G2B_FILE = path.join(process.cwd(), "data", "b2g_opportunities.json");
+const G2B_ART_FILE = path.join(process.cwd(), "data", "g2b_art_commissions.json");
 const HEALTH_FILE = path.join(process.cwd(), "data", "art_commission_collection_health.json");
 
 const SOURCE_ID = "g2b_architectural_art";
@@ -30,7 +31,9 @@ const EXCLUDE_KEYWORDS = [
   "선정결과",
   "선정 결과",
   "낙찰자 선정",
-  "계약 결과"
+  "계약 결과",
+  "취소공고",
+  "취소 공고"
 ];
 
 // 나라장터 기관명에는 광역시·도명이 빠지고 시·군명만 오는 경우가 많다.
@@ -123,9 +126,70 @@ function isArchitecturalArtCommission(item) {
   }
 
   const explicitBuildingArt = /건축물\s*미술작품|건축물미술작품|미술장식품|미술장식/.test(value);
-  const artInstallation = /미술\s*작품|미술작품/.test(value) && /제작|설치|공모|구매|조형물/.test(value);
+  const artInstallation = /미술\s*작품|미술작품|미술품|조형물|조각\s*작품/.test(value) && /제작|설치|공모|구매/.test(value);
 
   return explicitBuildingArt || artInstallation;
+}
+
+
+function noticeKey(item) {
+  const noticeNo = text(item && (item.bidNtceNo || item.noticeNo));
+  if (noticeNo) return "notice:" + noticeNo;
+
+  const url = itemUrl(item).replace(/\/+$/, "").toLowerCase();
+  if (url) return "url:" + url;
+
+  return [
+    "fallback",
+    text(item && (item.title || item.bidNtceNm)),
+    text(item && (item.ntceInsttNm || item.agency)),
+    text(item && (item.bidNtceDt || item.publishedDate))
+  ].join(":").toLowerCase();
+}
+
+
+function activeDeadline(item, today) {
+  const value = normalizeDate(
+    item && (item.deadline || item.deadlineDate || item.bidClseDt || item.opengDt)
+  );
+
+  return !value || value >= today;
+}
+
+
+function mergeActiveG2bArtCandidates(existing, discovered, today = todayKst()) {
+  const byKey = new Map();
+
+  [...(Array.isArray(existing) ? existing : []), ...(Array.isArray(discovered) ? discovered : [])]
+    .filter(isArchitecturalArtCommission)
+    .filter(item => activeDeadline(item, today))
+    .forEach(item => {
+      const key = noticeKey(item);
+      const previous = byKey.get(key) || {};
+
+      byKey.set(key, {
+        ...previous,
+        ...item,
+        g2bArtCandidate: true,
+        collectedAt: previous.collectedAt || item.collectedAt || today,
+        updatedAt: today
+      });
+    });
+
+  return Array.from(byKey.values());
+}
+
+
+function combineG2bSources(primary, artCandidates) {
+  const byKey = new Map();
+
+  [...(Array.isArray(primary) ? primary : []), ...(Array.isArray(artCandidates) ? artCandidates : [])]
+    .forEach(item => {
+      if (!item) return;
+      byKey.set(noticeKey(item), { ...(byKey.get(noticeKey(item)) || {}), ...item });
+    });
+
+  return Array.from(byKey.values());
 }
 
 
@@ -254,7 +318,10 @@ function mergeByUrl(existing, incoming, today, isArchive) {
 
 function importG2bArtCommissions(options = {}) {
   const today = options.today || todayKst();
-  const g2b = options.g2b || readArray(G2B_FILE);
+  const g2b = options.g2b || combineG2bSources(
+    readArray(G2B_FILE),
+    readArray(G2B_ART_FILE)
+  );
   const live = options.live || readArray(DATA_FILE);
   const archive = options.archive || readArray(ARCHIVE_FILE);
   const matches = g2b.filter(isArchitecturalArtCommission);
@@ -295,6 +362,8 @@ if (require.main === module) {
 
 module.exports = {
   isArchitecturalArtCommission,
+  mergeActiveG2bArtCandidates,
+  combineG2bSources,
   buildItem,
   mergeByUrl,
   importG2bArtCommissions

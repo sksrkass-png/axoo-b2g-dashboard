@@ -14,24 +14,21 @@ on:
     branches:
       - main
     paths:
-      - "data/art_commissions.json"
       - "data/b2g_opportunities.json"
+      - "data/g2b_art_commissions.json"
 
 permissions:
   contents: write
 
 
 concurrency:
-  group: collect-art-commissions
+  group: axoo-dashboard-data-write
   cancel-in-progress: false
 
 
 jobs:
 
   collect:
-
-    # Collector 자신의 commit으로 무한 재실행되는 것 방지
-    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
 
     runs-on: ubuntu-latest
 
@@ -90,6 +87,7 @@ jobs:
         run: |
           node scripts/filter_art_commission_results.js --self-test
           node scripts/test_import_g2b_art_commissions.js
+          node scripts/test_art_dashboard_archive.js
           node scripts/test_validate_art_commission_sources.js
 
 
