@@ -18,12 +18,87 @@
 
   <link
     rel="stylesheet"
-    href="style.css?v=200"
+    href="style.css?v=201"
   />
 </head>
 
 
 <body>
+
+  <div class="desktop-shell">
+
+    <aside class="dashboard-sidebar" aria-label="대시보드 주요 메뉴">
+
+      <div class="sidebar-brand">
+        <span class="sidebar-brand-mark" aria-hidden="true">A</span>
+
+        <div>
+          <strong>AXOO B2G</strong>
+          <small>PROJECT RESEARCH</small>
+        </div>
+      </div>
+
+      <div class="sidebar-section-label">WORKSPACE</div>
+
+      <nav class="sidebar-navigation" aria-label="프로젝트 탐색 메뉴">
+        <a class="sidebar-overview-link" href="#todayOverview">
+          <span class="sidebar-nav-index">00</span>
+          <span>대시보드</span>
+        </a>
+
+        <button type="button" class="tab-button dashboard-nav-button" data-tab="art">
+          <span class="sidebar-nav-index">01</span>
+          <span>건축물 미술작품</span>
+        </button>
+
+        <button type="button" class="tab-button dashboard-nav-button" data-tab="mural">
+          <span class="sidebar-nav-index">02</span>
+          <span>벽화 · 조형물</span>
+        </button>
+
+        <button type="button" class="tab-button dashboard-nav-button" data-tab="exhibition">
+          <span class="sidebar-nav-index">03</span>
+          <span>전시 콘텐츠</span>
+        </button>
+
+        <button type="button" class="tab-button dashboard-nav-button" data-tab="support">
+          <span class="sidebar-nav-index">04</span>
+          <span>예술 · 콘텐츠 지원</span>
+        </button>
+
+        <button type="button" class="tab-button dashboard-nav-button" data-tab="other">
+          <span class="sidebar-nav-index">05</span>
+          <span>기타 AXOO 핏</span>
+        </button>
+
+        <button type="button" class="tab-button dashboard-nav-button" data-tab="agencies">
+          <span class="sidebar-nav-index">06</span>
+          <span>기관 타깃</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-collection-card">
+        <div class="sidebar-collection-head">
+          <span class="system-live-dot"></span>
+          <strong>COLLECTOR ACTIVE</strong>
+        </div>
+
+        <p>전국 17개 시도와 나라장터 공고를 매일 확인합니다.</p>
+
+        <div class="sidebar-collection-meta">
+          <span>REGION <strong>17</strong></span>
+          <span>CYCLE <strong>DAILY</strong></span>
+        </div>
+      </div>
+
+      <a class="sidebar-status-link" href="#systemStatus">
+        시스템 운영 현황
+        <span aria-hidden="true">→</span>
+      </a>
+
+    </aside>
+
+    <div class="desktop-workspace">
 
   <!-- =====================================================
        HEADER
@@ -91,7 +166,7 @@
          TODAY / SUMMARY
     ==================================================== -->
 
-    <section class="summary-panel today-panel">
+    <section id="todayOverview" class="summary-panel today-panel">
 
       <div class="section-heading-row">
 
@@ -1349,7 +1424,7 @@
          SYSTEM STATUS
     ==================================================== -->
 
-    <section class="system-status-panel">
+    <section id="systemStatus" class="system-status-panel">
 
       <div>
 
@@ -1453,6 +1528,10 @@
     </div>
 
   </footer>
+
+    </div>
+
+  </div>
 
 
 
