@@ -1,5 +1,5 @@
 {
-  "validatedAt": "2026-10-12",
+  "validatedAt": "2026-10-13",
   "channelCount": 33,
   "reachableCount": 31,
   "unreachableCount": 2,
@@ -16,7 +16,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1007,
+      "elapsedMs": 1555,
       "error": ""
     },
     {
@@ -31,7 +31,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 983,
+      "elapsedMs": 836,
       "error": ""
     },
     {
@@ -46,7 +46,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1466,
+      "elapsedMs": 1428,
       "error": ""
     },
     {
@@ -61,7 +61,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1263,
+      "elapsedMs": 1741,
       "error": ""
     },
     {
@@ -76,7 +76,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 1271,
+      "elapsedMs": 1692,
       "error": "fetch failed"
     },
     {
@@ -86,13 +86,13 @@
       "sourceType": "local_art_portal",
       "crawlMode": "keyword_search",
       "configuredUrl": "https://www.busan.go.kr",
-      "finalUrl": "https://www.busan.go.kr/index",
-      "reachable": true,
-      "status": 200,
-      "redirected": true,
-      "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 3531,
-      "error": ""
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
+      "redirected": false,
+      "contentType": "",
+      "elapsedMs": 1681,
+      "error": "fetch failed"
     },
     {
       "id": "artnuri_art_commission",
@@ -106,7 +106,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 3745,
+      "elapsedMs": 4391,
       "error": ""
     },
     {
@@ -121,7 +121,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1765,
+      "elapsedMs": 1178,
       "error": ""
     },
     {
@@ -136,7 +136,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 2225,
+      "elapsedMs": 2222,
       "error": ""
     },
     {
@@ -151,7 +151,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1513,
+      "elapsedMs": 1537,
       "error": ""
     },
     {
@@ -166,7 +166,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1908,
+      "elapsedMs": 1710,
       "error": ""
     },
     {
@@ -181,7 +181,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1150,
+      "elapsedMs": 3696,
       "error": ""
     },
     {
@@ -196,7 +196,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 2305,
+      "elapsedMs": 3590,
       "error": ""
     },
     {
@@ -211,7 +211,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1097,
+      "elapsedMs": 1108,
       "error": ""
     },
     {
@@ -226,7 +226,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 4015,
+      "elapsedMs": 5060,
       "error": ""
     },
     {
@@ -241,7 +241,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 948,
+      "elapsedMs": 2402,
       "error": ""
     },
     {
@@ -256,7 +256,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1205,
+      "elapsedMs": 2683,
       "error": ""
     },
     {
@@ -271,7 +271,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1725,
+      "elapsedMs": 2260,
       "error": ""
     },
     {
@@ -286,7 +286,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 3281,
+      "elapsedMs": 2855,
       "error": ""
     },
     {
@@ -301,7 +301,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1965,
+      "elapsedMs": 1791,
       "error": ""
     },
     {
@@ -316,7 +316,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 2843,
+      "elapsedMs": 2157,
       "error": ""
     },
     {
@@ -331,7 +331,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 14158,
+      "elapsedMs": 6793,
       "error": ""
     },
     {
@@ -346,7 +346,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 3662,
+      "elapsedMs": 2351,
       "error": ""
     },
     {
@@ -356,13 +356,13 @@
       "sourceType": "public_corporation",
       "crawlMode": "keyword_search",
       "configuredUrl": "https://www.jndc.co.kr",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
-      "redirected": false,
-      "contentType": "",
-      "elapsedMs": 15000,
-      "error": "timeout"
+      "finalUrl": "https://www.jndc.co.kr/web/main/main",
+      "reachable": true,
+      "status": 200,
+      "redirected": true,
+      "contentType": "text/html; charset=UTF-8",
+      "elapsedMs": 8699,
+      "error": ""
     },
     {
       "id": "jeonnam_notice",
@@ -376,7 +376,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 4439,
+      "elapsedMs": 6436,
       "error": ""
     },
     {
@@ -391,7 +391,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 2494,
+      "elapsedMs": 4354,
       "error": ""
     },
     {
@@ -406,7 +406,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 3519,
+      "elapsedMs": 5843,
       "error": ""
     },
     {
@@ -421,7 +421,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 8525,
+      "elapsedMs": 5189,
       "error": ""
     },
     {
@@ -436,7 +436,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 7771,
+      "elapsedMs": 2604,
       "error": ""
     },
     {
@@ -451,7 +451,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 7334,
+      "elapsedMs": 2014,
       "error": ""
     },
     {
@@ -466,7 +466,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 7546,
+      "elapsedMs": 1714,
       "error": ""
     },
     {
@@ -481,7 +481,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1927,
+      "elapsedMs": 906,
       "error": ""
     },
     {
@@ -496,7 +496,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1983,
+      "elapsedMs": 1645,
       "error": ""
     }
   ]
