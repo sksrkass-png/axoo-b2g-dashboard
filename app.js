@@ -1116,6 +1116,8 @@ function bindFilterControls() {
   const artSourceFilter = document.getElementById("artSourceFilter");
   const artStatusFilter = document.getElementById("artStatusFilter");
   const artReviewFilter = document.getElementById("artReviewFilter");
+  const artFilterToggle = document.getElementById("artFilterToggle");
+  const artFilters = document.querySelector("#artTab .research-filters");
 
   const localSearchInput = document.getElementById("localSearchInput");
   const localRegionFilter = document.getElementById("localRegionFilter");
@@ -1140,6 +1142,19 @@ function bindFilterControls() {
   if (artSourceFilter) artSourceFilter.addEventListener("change", renderArtCards);
   if (artStatusFilter) artStatusFilter.addEventListener("change", renderArtCards);
   if (artReviewFilter) artReviewFilter.addEventListener("change", renderArtCards);
+  if (artFilterToggle && artFilters) {
+    artFilterToggle.addEventListener("click", () => {
+      const expanded = artFilters.classList.toggle("expanded");
+
+      artFilterToggle.setAttribute("aria-expanded", String(expanded));
+
+      const label = artFilterToggle.querySelector("span:first-child");
+      const icon = artFilterToggle.querySelector(".filter-toggle-icon");
+
+      if (label) label.textContent = expanded ? "필터 닫기" : "상세 필터";
+      if (icon) icon.textContent = expanded ? "−" : "+";
+    });
+  }
 
   if (localSearchInput) localSearchInput.addEventListener("input", renderLocalProjectCards);
   if (localRegionFilter) localRegionFilter.addEventListener("change", renderLocalProjectCards);

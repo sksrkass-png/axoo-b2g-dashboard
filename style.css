@@ -4371,6 +4371,13 @@ select:focus-visible {
 }
 
 
+.filter-toggle {
+
+  display:
+    none;
+}
+
+
 @media
 (
   min-width:
@@ -4737,6 +4744,50 @@ select:focus-visible {
 
     color:
       #ffffff;
+  }
+
+
+  .sidebar-support-button {
+
+    min-height:
+      42px;
+
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      space-between;
+
+    margin-top:
+      12px;
+
+    padding:
+      0 12px;
+
+    border:
+      1px solid
+      var(--line);
+
+    border-radius:
+      10px;
+
+    background:
+      var(--surface-soft);
+
+    color:
+      var(--text);
+
+    text-decoration:
+      none;
+
+    font-size:
+      10px;
+
+    font-weight:
+      900;
   }
 
 
@@ -5207,6 +5258,565 @@ select:focus-visible {
 
     padding-bottom:
       4px;
+  }
+
+
+  .research-heading,
+  .research-category-grid,
+  .research-tabs {
+
+    display:
+      none;
+  }
+
+
+  .research-filters:not(.expanded) >
+  select:not(#artStatusFilter) {
+
+    display:
+      none !important;
+  }
+
+
+  .research-filters:not(.expanded) {
+
+    flex-wrap:
+      nowrap;
+  }
+
+
+  .research-filters:not(.expanded)
+  .search-field {
+
+    flex-basis:
+      auto;
+  }
+
+
+  .filter-toggle {
+
+    min-width:
+      106px;
+
+    height:
+      38px;
+
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      space-between;
+
+    gap:
+      10px;
+
+    padding:
+      0 11px;
+
+    border:
+      1px solid
+      var(--line);
+
+    border-radius:
+      var(--radius-sm);
+
+    background:
+      #ffffff;
+
+    color:
+      var(--text-soft);
+
+    font-size:
+      10px;
+
+    font-weight:
+      850;
+  }
+
+
+  .filter-toggle:hover {
+
+    border-color:
+      var(--text);
+
+    color:
+      var(--text);
+  }
+
+
+  .filter-toggle-icon {
+
+    font-size:
+      15px;
+
+    line-height:
+      1;
+  }
+
+}
+
+
+/* =========================================================
+   DESKTOP DENSITY & READABILITY
+   Reduce decorative height while increasing the contrast and
+   size of information used for actual review decisions.
+========================================================= */
+
+@media
+(
+  min-width:
+  761px
+) {
+
+  .site-header {
+
+    padding-bottom:
+      12px;
+  }
+
+
+  .header-inner {
+
+    min-height:
+      112px;
+
+    padding:
+      18px 22px;
+  }
+
+
+  .brand-block h1 {
+
+    font-size:
+      clamp(
+        30px,
+        3vw,
+        38px
+      );
+
+    line-height:
+      .96;
+
+    letter-spacing:
+      -.055em;
+  }
+
+
+  .brand-block h1 br {
+
+    display:
+      none;
+  }
+
+
+  .subtitle {
+
+    margin-top:
+      9px;
+
+    font-size:
+      11px;
+  }
+
+
+  .header-status {
+
+    min-width:
+      210px;
+
+    gap:
+      8px;
+  }
+
+
+  .system-live-badge {
+
+    padding:
+      7px 10px;
+
+    font-size:
+      9px;
+  }
+
+
+  .header-update-card strong {
+
+    font-size:
+      10px;
+  }
+
+
+  .summary-panel {
+
+    display:
+      grid;
+
+    grid-template-columns:
+      minmax(
+        150px,
+        .32fr
+      )
+      minmax(
+        0,
+        1.68fr
+      );
+
+    align-items:
+      center;
+
+    gap:
+      18px;
+
+    padding:
+      16px 18px;
+  }
+
+
+  .today-panel
+  .section-heading-row {
+
+    display:
+      block;
+
+    margin:
+      0;
+  }
+
+
+  .today-panel
+  .section-caption {
+
+    display:
+      none;
+  }
+
+
+  .section-heading-row h2 {
+
+    font-size:
+      20px;
+  }
+
+
+  .today-grid,
+  .summary-grid {
+
+    gap:
+      7px;
+  }
+
+
+  .summary-card {
+
+    min-height:
+      74px;
+
+    padding:
+      11px 13px;
+  }
+
+
+  .summary-card span {
+
+    font-size:
+      10px;
+  }
+
+
+  .summary-card strong {
+
+    margin-top:
+      7px;
+
+    font-size:
+      25px;
+  }
+
+
+  .summary-card small {
+
+    margin-top:
+      6px;
+
+    font-size:
+      8px;
+  }
+
+
+  .research-shell {
+
+    padding:
+      18px;
+  }
+
+
+  .research-heading {
+
+    margin-bottom:
+      13px;
+  }
+
+
+  .meta-bar,
+  .research-category-grid {
+
+    gap:
+      7px;
+
+    margin-bottom:
+      13px;
+  }
+
+
+  .meta-card {
+
+    min-height:
+      66px;
+
+    display:
+      grid;
+
+    grid-template-columns:
+      26px
+      minmax(
+        0,
+        1fr
+      )
+      auto;
+
+    align-items:
+      center;
+
+    gap:
+      8px;
+
+    padding:
+      11px 12px;
+  }
+
+
+  .meta-index {
+
+    font-size:
+      8px;
+  }
+
+
+  .meta-label {
+
+    margin-top:
+      0;
+
+    font-size:
+      12px;
+  }
+
+
+  .meta-value {
+
+    margin-top:
+      0;
+
+    font-size:
+      20px;
+  }
+
+
+  .tabs {
+
+    min-height:
+      42px;
+
+    margin-bottom:
+      18px;
+  }
+
+
+  .tab-button {
+
+    min-height:
+      34px;
+
+    padding:
+      0 11px;
+
+    font-size:
+      10px;
+  }
+
+
+  .my-projects-nav-button {
+
+    min-height:
+      34px !important;
+
+    padding:
+      0 12px !important;
+
+    font-size:
+      10px !important;
+  }
+
+
+  .panel-toolbar {
+
+    padding:
+      0 0 12px;
+  }
+
+
+  .panel-number {
+
+    min-width:
+      38px;
+
+    height:
+      38px;
+  }
+
+
+  .panel-title-block {
+
+    gap:
+      10px;
+  }
+
+
+  .panel-title-block h2 {
+
+    font-size:
+      19px;
+  }
+
+
+  .research-filters {
+
+    gap:
+      6px;
+
+    margin-bottom:
+      13px;
+
+    padding:
+      10px;
+  }
+
+
+  .search-field,
+  .filters input,
+  .filters select,
+  .filter-check {
+
+    height:
+      38px;
+
+    min-height:
+      38px;
+  }
+
+
+  .search-field {
+
+    padding:
+      0 11px;
+  }
+
+
+  .filters input,
+  .filters select {
+
+    padding:
+      0 10px;
+
+    font-size:
+      11px;
+  }
+
+
+  .list-head {
+
+    padding:
+      0 14px 6px;
+
+    font-size:
+      9px;
+  }
+
+
+  .cards,
+  .priority-card-grid {
+
+    gap:
+      6px;
+  }
+
+
+  .accordion-summary {
+
+    min-height:
+      62px;
+
+    padding:
+      10px 14px;
+  }
+
+
+  .summary-source {
+
+    height:
+      28px;
+  }
+
+
+  .priority-grade {
+
+    height:
+      28px;
+  }
+
+
+  .summary-title {
+
+    font-size:
+      15px;
+
+    line-height:
+      1.35;
+  }
+
+
+  .summary-period strong,
+  .summary-deadline strong {
+
+    font-size:
+      12px;
+  }
+
+
+  .system-status-panel {
+
+    padding:
+      20px;
+  }
+
+
+  .system-status-item {
+
+    min-height:
+      86px;
+
+    padding:
+      12px;
+  }
+
+
+  .system-status-item strong {
+
+    font-size:
+      20px;
   }
 
 }
