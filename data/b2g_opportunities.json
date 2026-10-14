@@ -130,7 +130,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 272362000,
-    "daysLeft": 17,
+    "daysLeft": 16,
     "score": 80,
     "fitScore": 80,
     "grade": "A",
@@ -199,7 +199,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   },
   {
     "bidNtceNo": "R26BK01765507",
@@ -332,7 +332,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 80700000,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "score": 80,
     "fitScore": 80,
     "grade": "A",
@@ -397,7 +397,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   },
   {
     "bidNtceNo": "R26BK01758456",
@@ -529,7 +529,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 120000000,
-    "daysLeft": 6,
+    "daysLeft": 5,
     "score": 76,
     "fitScore": 76,
     "grade": "A",
@@ -594,7 +594,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-07",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   },
   {
     "bidNtceNo": "R26BK01758765",
@@ -726,7 +726,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 91580000,
-    "daysLeft": 6,
+    "daysLeft": 5,
     "score": 76,
     "fitScore": 76,
     "grade": "A",
@@ -791,7 +791,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-07",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   },
   {
     "bidNtceNo": "R26BK01760756",
@@ -923,7 +923,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 285000000,
-    "daysLeft": 6,
+    "daysLeft": 5,
     "score": 73,
     "fitScore": 73,
     "grade": "A",
@@ -991,7 +991,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-08",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   },
   {
     "bidNtceNo": "R26BK01758601",
@@ -1124,7 +1124,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 798607464,
-    "daysLeft": 15,
+    "daysLeft": 14,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1179,7 +1179,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   },
   {
     "bidNtceNo": "R26BK01761443",
@@ -1311,7 +1311,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 596220000,
-    "daysLeft": 16,
+    "daysLeft": 15,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -1363,7 +1363,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-08",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   },
   {
     "bidNtceNo": "R26BK01764801",
@@ -1484,12 +1484,12 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 139000000,
-    "daysLeft": 7,
+    "daysLeft": 6,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
-    "executionScore": 45,
-    "priorityScore": 57,
+    "executionScore": 38,
+    "priorityScore": 56,
     "category": "public_art",
     "categoryLabel": "공공미술",
     "matchedCategories": [
@@ -1526,15 +1526,15 @@
     ],
     "executionReasons": [
       "1억원 이상",
-      "검토·제안 준비기간 적정"
+      "검토 가능한 마감 일정"
     ],
-    "fitReason": "핵심 수행영역: 벽화·조형물. AXOO FIT 60점 / A등급. 실행조건 45점 (1억원 이상, 검토·제안 준비기간 적정).",
+    "fitReason": "핵심 수행영역: 벽화·조형물. AXOO FIT 60점 / A등급. 실행조건 38점 (1억원 이상, 검토 가능한 마감 일정).",
     "recommendedAction": "AXOO 적합도 높음 — 과업지시서 확인 후 지원 판단",
     "scoringVersion": "axoo_bid_fit_v6",
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   },
   {
     "bidNtceNo": "R26BK01763982",
@@ -1697,7 +1697,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 57710000,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -1747,6 +1747,6 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-13"
+    "updatedAt": "2026-10-14"
   }
 ]
