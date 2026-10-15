@@ -1,5 +1,204 @@
 [
   {
+    "bidNtceNo": "R26BK01770700",
+    "bidNtceOrd": "000",
+    "reNtceYn": "N",
+    "rgstTyNm": "조달청 또는 나라장터 자체 공고건",
+    "ntceKindNm": "등록공고",
+    "intrbidYn": "N",
+    "bidNtceDt": "2026-10-14 14:55:13",
+    "refNo": "(재)진주문화관광재단 공고 제2026 – 145호",
+    "bidNtceNm": "지역예술공감展 전시공간 연출 및 조성 용역",
+    "ntceInsttCd": "Z043641",
+    "ntceInsttNm": "진주문화관광재단",
+    "dminsttCd": "Z043641",
+    "dminsttNm": "진주문화관광재단",
+    "bidMethdNm": "전자입찰",
+    "cntrctCnclsMthdNm": "제한경쟁",
+    "ntceInsttOfclNm": "이수현",
+    "ntceInsttOfclTelNo": "055-795-3205",
+    "ntceInsttOfclEmailAdrs": "",
+    "exctvNm": "이수현",
+    "bidQlfctRgstDt": "2026-10-27 16:00",
+    "cmmnSpldmdAgrmntRcptdocMethd": "없음",
+    "cmmnSpldmdAgrmntClseDt": "",
+    "cmmnSpldmdCorpRgnLmtYn": "N",
+    "bidBeginDt": "2026-10-23 09:00:00",
+    "bidClseDt": "2026-10-27 16:00:00",
+    "opengDt": "2026-10-29 17:00:00",
+    "ntceSpecDocUrl1": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01770700&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "ntceSpecDocUrl2": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01770700&bidPbancOrd=000&fileType=&fileSeq=2&prcmBsneSeCd=03",
+    "ntceSpecDocUrl3": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01770700&bidPbancOrd=000&fileType=&fileSeq=3&prcmBsneSeCd=03",
+    "ntceSpecDocUrl4": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01770700&bidPbancOrd=000&fileType=&fileSeq=4&prcmBsneSeCd=03",
+    "ntceSpecDocUrl5": "",
+    "ntceSpecDocUrl6": "",
+    "ntceSpecDocUrl7": "",
+    "ntceSpecDocUrl8": "",
+    "ntceSpecDocUrl9": "",
+    "ntceSpecDocUrl10": "",
+    "ntceSpecFileNm1": "(붙임1) 지역예술공감전 전시공간 연출 및 조성 용역 공고문.hwp",
+    "ntceSpecFileNm2": "(붙임1) 지역예술공감전 전시공간 연출 및 조성 용역 공고문.pdf",
+    "ntceSpecFileNm3": "(붙임2) 지역예술공감전 전시공간 연출 및 조성 용역 과업지시서.hwpx",
+    "ntceSpecFileNm4": "(붙임3) 지역예술공감전 전시공간 연출 및 조성 용역 제안요청서.hwp",
+    "ntceSpecFileNm5": "",
+    "ntceSpecFileNm6": "",
+    "ntceSpecFileNm7": "",
+    "ntceSpecFileNm8": "",
+    "ntceSpecFileNm9": "",
+    "ntceSpecFileNm10": "",
+    "rbidPermsnYn": "",
+    "pqApplDocRcptMthdNm": "",
+    "pqApplDocRcptDt": "",
+    "tpEvalApplMthdNm": "",
+    "tpEvalApplClseDt": "",
+    "jntcontrctDutyRgnNm1": "",
+    "jntcontrctDutyRgnNm2": "",
+    "jntcontrctDutyRgnNm3": "",
+    "rgnDutyJntcontrctRt": "",
+    "dtlsBidYn": "",
+    "bidPrtcptLmtYn": "N",
+    "prearngPrceDcsnMthdNm": "비예가",
+    "totPrdprcNum": "",
+    "drwtPrdprcNum": "",
+    "asignBdgtAmt": "50000000",
+    "presmptPrce": "45454545",
+    "opengPlce": "국가종합전자조달시스템(나라장터)",
+    "dcmtgOprtnDt": "",
+    "dcmtgOprtnPlce": "",
+    "bidNtceDtlUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01770700&bidPbancOrd=000",
+    "bidNtceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01770700&bidPbancOrd=000",
+    "bidPrtcptFeePaymntYn": "",
+    "bidPrtcptFee": "0",
+    "bidGrntymnyPaymntYn": "",
+    "crdtrNm": "진주문화관광재단 대표이사",
+    "ppswGnrlSrvceYn": "N",
+    "srvceDivNm": "일반용역",
+    "prdctClsfcLmtYn": "N",
+    "mnfctYn": "",
+    "purchsObjPrdctList": "",
+    "untyNtceNo": "R26BM00996290",
+    "cmmnSpldmdMethdCd": "",
+    "cmmnSpldmdMethdNm": "(없음)공동수급불허",
+    "stdNtceDocUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01770700&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "brffcBidprcPermsnYn": "",
+    "dsgntCmptYn": "N",
+    "arsltCmptYn": "N",
+    "pqEvalYn": "",
+    "tpEvalYn": "",
+    "ntceDscrptYn": "",
+    "rsrvtnPrceReMkngMthdNm": "",
+    "arsltApplDocRcptMthdNm": "",
+    "arsltReqstdocRcptDt": "",
+    "orderPlanUntyNo": "R26DD20895230",
+    "sucsfbidLwltRate": "",
+    "rgstDt": "2026-10-14 14:55:13",
+    "bfSpecRgstNo": "",
+    "infoBizYn": "",
+    "sucsfbidMthdCd": "낙030005",
+    "sucsfbidMthdNm": "협상에의한계약-협상에 의한 낙찰자 결정",
+    "chgDt": "",
+    "dminsttOfclEmailAdrs": "",
+    "indstrytyLmtYn": "Y",
+    "chgNtceRsn": "",
+    "rbidOpengDt": "2026-10-29 17:00:00",
+    "VAT": "4545455",
+    "indutyVAT": "",
+    "rgnLmtBidLocplcJdgmBssCd": "",
+    "rgnLmtBidLocplcJdgmBssNm": "",
+    "pubPrcrmntLrgClsfcNm": "행사관리 및 기타 사업 지원서비스 ",
+    "pubPrcrmntMidClsfcNm": "행사 기획 및 대행",
+    "pubPrcrmntClsfcNo": "80141988",
+    "pubPrcrmntClsfcNm": "전시회기획및대행서비스",
+    "techAbltEvlRt": "80",
+    "bidPrceEvlRt": "20",
+    "sucsfbidMthdAppStd": "",
+    "befBidBbancNo": "",
+    "g2bNoticeType": "service",
+    "sourceType": "입찰공고",
+    "sourceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01770700&bidPbancOrd=000",
+    "title": "지역예술공감展 전시공간 연출 및 조성 용역",
+    "agency": "진주문화관광재단",
+    "noticeAgency": "진주문화관광재단",
+    "demandAgency": "진주문화관광재단",
+    "contractMethod": "협상에의한계약-협상에 의한 낙찰자 결정",
+    "noticeNo": "R26BK01770700",
+    "publishedDate": "2026-10-14",
+    "postedDate": "2026-10-14",
+    "noticeDate": "2026-10-14",
+    "deadline": "2026-10-27",
+    "deadlineDate": "2026-10-27",
+    "opportunityStatus": "진행중",
+    "projectScale": "중형",
+    "budgetAmount": 50000000,
+    "daysLeft": 12,
+    "score": 80,
+    "fitScore": 80,
+    "grade": "A",
+    "executionScore": 87,
+    "priorityScore": 81,
+    "category": "design",
+    "categoryLabel": "공간·공공디자인",
+    "matchedCategories": [
+      "design"
+    ],
+    "visualArtKeywords": [
+      "공간 연출"
+    ],
+    "hardFilterPassed": true,
+    "hardFilterVersion": "axoo_hard_filter_v1",
+    "strongFitConcepts": [
+      "space_creative"
+    ],
+    "strongFitLabels": [
+      "공간연출·공간브랜딩"
+    ],
+    "strongFitKeywords": [
+      "공간 연출"
+    ],
+    "mediumFitConcepts": [
+      "generic_exhibition"
+    ],
+    "mediumFitLabels": [
+      "전시"
+    ],
+    "mediumFitKeywords": [
+      "전시"
+    ],
+    "matchedKeywords": [
+      "공간 연출",
+      "전시"
+    ],
+    "directFitKeywords": [
+      "공간 연출"
+    ],
+    "supportFitKeywords": [
+      "전시"
+    ],
+    "hardExcludeKeywords": [],
+    "procurementFitLabels": [
+      "전시회 기획·대행 서비스"
+    ],
+    "scoreReasons": [
+      "핵심 수행영역: 공간연출·공간브랜딩",
+      "보조 적합요소: 전시",
+      "조달 분류: 전시회 기획·대행 서비스"
+    ],
+    "executionReasons": [
+      "5천만원 이상",
+      "검토·제안 준비기간 적정",
+      "협상에 의한 계약",
+      "문화·예술·관광·콘텐츠 관련 기관",
+      "기술평가 비중 80% 이상"
+    ],
+    "fitReason": "핵심 수행영역: 공간연출·공간브랜딩. 보조 적합요소: 전시. 조달 분류: 전시회 기획·대행 서비스. AXOO FIT 80점 / A등급. 실행조건 87점 (5천만원 이상, 검토·제안 준비기간 적정, 협상에 의한 계약, 문화·예술·관광·콘텐츠 관련 기관, 기술평가 비중 80% 이상).",
+    "recommendedAction": "우선 검토 — 수행범위·예산·참가자격 확인",
+    "scoringVersion": "axoo_bid_fit_v6",
+    "collectionSourceId": "g2b_bid_public_info_servc",
+    "collectionVersion": "1.2.0",
+    "collectedAt": "2026-10-15",
+    "updatedAt": "2026-10-15"
+  },
+  {
     "bidNtceNo": "R26BK01767133",
     "bidNtceOrd": "000",
     "reNtceYn": "N",
@@ -130,7 +329,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 272362000,
-    "daysLeft": 16,
+    "daysLeft": 15,
     "score": 80,
     "fitScore": 80,
     "grade": "A",
@@ -199,7 +398,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   },
   {
     "bidNtceNo": "R26BK01765507",
@@ -332,7 +531,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 80700000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 80,
     "fitScore": 80,
     "grade": "A",
@@ -397,7 +596,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   },
   {
     "bidNtceNo": "R26BK01758456",
@@ -529,7 +728,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 120000000,
-    "daysLeft": 5,
+    "daysLeft": 4,
     "score": 76,
     "fitScore": 76,
     "grade": "A",
@@ -594,7 +793,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-07",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   },
   {
     "bidNtceNo": "R26BK01758765",
@@ -726,7 +925,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 91580000,
-    "daysLeft": 5,
+    "daysLeft": 4,
     "score": 76,
     "fitScore": 76,
     "grade": "A",
@@ -791,7 +990,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-07",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   },
   {
     "bidNtceNo": "R26BK01760756",
@@ -923,7 +1122,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 285000000,
-    "daysLeft": 5,
+    "daysLeft": 4,
     "score": 73,
     "fitScore": 73,
     "grade": "A",
@@ -991,7 +1190,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-08",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   },
   {
     "bidNtceNo": "R26BK01758601",
@@ -1124,7 +1323,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 798607464,
-    "daysLeft": 14,
+    "daysLeft": 13,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1179,7 +1378,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   },
   {
     "bidNtceNo": "R26BK01761443",
@@ -1311,7 +1510,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 596220000,
-    "daysLeft": 15,
+    "daysLeft": 14,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -1363,7 +1562,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-08",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   },
   {
     "bidNtceNo": "R26BK01764801",
@@ -1484,7 +1683,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 139000000,
-    "daysLeft": 6,
+    "daysLeft": 5,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -1534,7 +1733,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   },
   {
     "bidNtceNo": "R26BK01763982",
@@ -1697,7 +1896,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 57710000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -1747,6 +1946,6 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-13",
-    "updatedAt": "2026-10-14"
+    "updatedAt": "2026-10-15"
   }
 ]
