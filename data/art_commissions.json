@@ -105,7 +105,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "마감일 확인 필요",
     "staleReason": ""
   },
@@ -161,7 +161,7 @@
         "value": "2026-10-15",
         "raw": "2026-10-15",
         "label": "등록일",
-        "evidence": "등록일 2026-10-15 조회수 587",
+        "evidence": "등록일 2026-10-15 조회수 771",
         "confidence": "high"
       },
       "agency": {
@@ -215,7 +215,7 @@
     "isStaleCandidate": false,
     "deadlineStatus": "마감일 확인 필요",
     "collectedAt": "2026-10-15",
-    "updatedAt": "2026-10-17",
+    "updatedAt": "2026-10-18",
     "collectionSourceId": "lh_notice",
     "collectionVersion": "nationwide-generic-1.5.0",
     "detailFetchStatus": "ok",
@@ -229,7 +229,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "staleReason": ""
   },
   {
@@ -284,7 +284,7 @@
         "value": "2026-10-15",
         "raw": "2026-10-15",
         "label": "등록일",
-        "evidence": "등록일 2026-10-15 조회수 586",
+        "evidence": "등록일 2026-10-15 조회수 770",
         "confidence": "high"
       },
       "agency": {
@@ -338,7 +338,7 @@
     "isStaleCandidate": false,
     "deadlineStatus": "마감일 확인 필요",
     "collectedAt": "2026-10-15",
-    "updatedAt": "2026-10-17",
+    "updatedAt": "2026-10-18",
     "collectionSourceId": "lh_notice",
     "collectionVersion": "nationwide-generic-1.5.0",
     "detailFetchStatus": "ok",
@@ -352,7 +352,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "staleReason": ""
   },
   {
@@ -462,7 +462,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -573,7 +573,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -684,7 +684,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -795,7 +795,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -906,7 +906,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -959,8 +959,8 @@
     "detailFetchStatus": "not_requested",
     "detailFetchError": "",
     "rawText": "서당골천 경관개선을 위한 조형물 제작.설치 서당골천 경관개선을 위한 조형물 제작.설치(조형물).xlsx 서당골천 경관개선을 위한 조형물 제작·설치_시방서.docx 지명경쟁 입찰 공고_서당골천 경관개선을 위한 조형물 제작 설치 .hwpx 지명경쟁 입찰 공고_서당골천 경관개선을 위한 조형물 제작 설치 .pdf ",
-    "collectedAt": "2026-10-17",
-    "updatedAt": "2026-10-17",
+    "collectedAt": "2026-10-18",
+    "updatedAt": "2026-10-18",
     "periodStart": "",
     "periodEnd": "",
     "detailTextSample": "접근 가능 브라우저 안내 나라장터 국가종합전자조달 접근 가능 브라우저 안내 차세대 나라장터 안정적인 지원을 위해 HTML5를 지원 하는 브라우저로 접근 가능합니다. 크롬, 엣지 브라우저로 접근 부탁 드립니다.",
@@ -973,7 +973,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1084,7 +1084,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1195,7 +1195,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1306,7 +1306,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1416,7 +1416,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1462,7 +1462,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-17",
+    "dateNormalizedAt": "2026-10-18",
     "deadlineStatus": "진행중",
     "staleReason": ""
   }
