@@ -127,6 +127,9 @@ function rowHtml(r){
       ${evidence.length?evidence.map(x=>`<p><b>${escape(x.field)}</b> ${escape(shorten(x.quote,250))}</p>`).join(""):"<p>신청 대상의 명시적 근거가 부족합니다.</p>"}
       ${constraints.length?`<div><b>제한조건 단서</b> ${constraints.map(x=>escape(x.label+": "+shorten(x.quote,85))).join(" / ")}</div>`:""}
       ${r.review?.submissionDocuments?.length?`<div><b>제출서류 단서</b> ${escape(r.review.submissionDocuments.join(" · "))}</div>`:""}
+      ${r.documents?.snippets?.length?`<div><b>첨부파일 문구 (해당 사업과의 관련성 확인 필요)</b>
+        ${r.documents.snippets.slice(0,5).map(x=>`<p>${escape(x.label)}: ${escape(shorten(x.quote,185))}</p>`).join("")}
+        </div>`:""}
       ${docFiles.map(x=>`<p>· ${safeUrl(x.url)?`<a href="${escape(x.url)}" target="_blank" rel="noopener noreferrer">${escape(shorten(x.label||x.format||"첨부파일",55))}</a>`:escape(shorten(x.label||"첨부파일",55))} — ${escape(x.status)}${x.reason?" ("+escape(shorten(x.reason,70))+")":""}</p>`).join("")}
     </details>`: "";
  return `<tr><td class="ax-year">${escape(r.year||"확인")}</td>
