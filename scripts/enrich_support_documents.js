@@ -99,9 +99,26 @@ function extractFile(format,bytes){
   if(proc.error||proc.status!==0)return {status:"failed",text:"",reason:trim(proc.stderr||proc.error?.message||"parser failed").slice(0,120)};
   try{return JSON.parse(proc.stdout)}catch{return {status:"failed",text:"",reason:"invalid extractor response"}}
 }
+// Persist short, explicitly provisional document snippets, never entire downloaded PDFs.
+function extractDocumentSnippets(text,url){
+  const source=String(text||"");
+  const keys=[["지원 자격 문구",/(지원대상|신청자격|공모대상|응모자격)/],
+              ["지원 규모 문구",/(지원규모|지원금액|지원금|총\s*사업비)/],
+              ["제출서류 문구",/(제출서류|필수\s*서류|사업계획서)/],
+              ["부담·제한 문구",/(자부담|대응자금|소재지|업력)/]];
+  const found=[];
+  for(const [label,pattern] of keys){
+    const m=pattern.exec(source);
+    if(!m)continue;
+    const start=Math.max(0,m.index-35),end=Math.min(source.length,m.index+195);
+    found.push({label,quote:trim(source.slice(start,end)).slice(0,225),sourceUrl:url||""});
+  }
+  return found;
+}
+
 async function auditOne(row){
   const source=row.sourceUrl||row.originalUrl||"";
-  const result={status:"not_scanned",reviewedAt:NOW,documentUrl:"",files:[],extractedText:""};
+  const result={status:"not_scanned",reviewedAt:NOW,documentUrl:"",files:[],snippets:[]};
   if(!/^https:\/\//.test(source)){result.status="no_official_url";return result}
   let html;
   try{html=await getPage(source)}catch(e){result.status="source_unavailable";result.reason=String(e.message).slice(0,90);return result}
@@ -124,14 +141,14 @@ async function auditOne(row){
         file.characters=(parsed.text||"").length;
         file.pages=parsed.pages||0;
         if(parsed.status==="parsed"){
-          supportedCount++;result.extractedText+=(parsed.text||"").slice(0,14000)+"\n";
+          supportedCount++;result.snippets.push(...extractDocumentSnippets(parsed.text||"",data.finalUrl));
           if(!result.documentUrl)result.documentUrl=data.finalUrl;
         }
       }
     }catch(e){file.status="failed";file.reason=String(e.message).slice(0,110)}
     result.files.push(file);
   }
-  result.extractedText=result.extractedText.slice(0,23000);
+  result.snippets=result.snippets.slice(0,7);
   result.status=supportedCount?"parsed":result.files.some(x=>x.status==="unsupported")?"manual_review_required":"attachment_not_readable";
   return result;
 }
@@ -164,7 +181,13 @@ async function main(){
   }
   for(const row of all){
     const {entry}=docFromCache(row,store.items);
-    const audit=entry||{status:"pending_review",files:[],extractedText:""};
+    const audit=entry||{status:"pending_review",files:[],snippets:[]};
+    // Migrate older cache: remove verbatim extracted PDF text from public JSON.
+    if(typeof audit.extractedText==="string"){
+      if(!Array.isArray(audit.snippets)||!audit.snippets.length)
+        audit.snippets=extractDocumentSnippets(audit.extractedText,audit.documentUrl||row.sourceUrl);
+      delete audit.extractedText;
+    }
     row.documentReview=audit;
     const review=extractApplicationReview(row);
     row.applicationReview=review;
