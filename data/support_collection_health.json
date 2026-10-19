@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T08:19:20.990Z",
+  "updatedAt": "2026-10-19T08:22:05.380Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-19T08:19:20.990Z",
-      "lastSuccessAt": "2026-10-19T08:19:20.990Z",
+      "checkedAt": "2026-10-19T08:22:05.381Z",
+      "lastSuccessAt": "2026-10-19T08:22:05.381Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -22,12 +22,14 @@
       "name": "경기문화재단",
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
-      "state": "ok",
-      "checkedAt": "2026-10-19T08:19:37.262Z",
-      "lastSuccessAt": "2026-10-19T08:19:37.262Z",
-      "found": 2,
-      "verified": 2,
-      "errors": []
+      "state": "failed",
+      "checkedAt": "2026-10-19T08:22:17.158Z",
+      "found": 0,
+      "verified": 0,
+      "errors": [
+        "HTTP 403"
+      ],
+      "lastSuccessAt": "2026-10-19T08:19:37.262Z"
     },
     {
       "code": "IFAC",
@@ -35,11 +37,11 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "failed",
-      "checkedAt": "2026-10-19T08:19:41.509Z",
+      "checkedAt": "2026-10-19T08:22:18.221Z",
       "found": 0,
       "verified": 0,
       "errors": [
-        "No recognized official grant links; selector may have changed. HTML length=123856 candidate anchors=80 samples=https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 주요 지원사업 | https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 예술창작활동 지원 | https://ifac.or.kr/ifacintro/mainSupProjects/residentOrganization.do?key=m2501143833614 공연장상주단체 지원 | https://ifac.or.kr/ifacintro/mainSupProjects/artActivation/about.do?key=m2501143848514 미술활성화 기획지원 | https://ifac.or.kr/ifacintro/mainSupProjects/civicCulture.do?key=m2501143833943 시민문화 프로젝트 | https://ifac.or.kr/ifacintro/mainSupProjects/educationCulture.do?key=m2501143834258 문화예술교육 지원 | https://ifac.or.kr/ifacintro/mainProjects/youthCulture/about.do?key=m2501143880431 청년문화사업(시작공간일부) | https://ifac.or.kr/ifacintro/mainProjects/educationSupCenter/about.do?key=m2501143881005 문화예술교육지원센터 nearMarker= <dl class=\"title\"> <dt class=\"blind\">제목</dt> <dd> 2027 인천문화재단 청년예술활동지원 공모 안내 <span class=\"notice\">공지</span> </dd> </dl> "
+        "No recognized official grant links; selector may have changed. HTML length=123856 candidate anchors=80 samples=https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 주요 지원사업 | https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 예술창작활동 지원 | https://ifac.or.kr/ifacintro/mainSupProjects/residentOrganization.do?key=m2501143833614 공연장상주단체 지원 | https://ifac.or.kr/ifacintro/mainSupProjects/artActivation/about.do?key=m2501143848514 미술활성화 기획지원 | https://ifac.or.kr/ifacintro/mainSupProjects/civicCulture.do?key=m2501143833943 시민문화 프로젝트 | https://ifac.or.kr/ifacintro/mainSupProjects/educationCulture.do?key=m2501143834258 문화예술교육 지원 | https://ifac.or.kr/ifacintro/mainProjects/youthCulture/about.do?key=m2501143880431 청년문화사업(시작공간일부) | https://ifac.or.kr/ifacintro/mainProjects/educationSupCenter/about.do?key=m2501143881005 문화예술교육지원센터 nearMarker= <dd>예술지원팀</dd> </dl> </a> </li> <li> <a href=\"#none\" onclick=\"goView('236090', '');\"> <dl class=\"team\"> <dt class=\"blind\"></dt> <dd>지원사업</dd> </dl> <dl class=\"title\"> <dt class=\"blind\">제목</dt> <dd> 2027 인천문화재단 청년예술활동지원 공모 안내 <span class=\"notice\">공지</span> </dd> </dl> "
       ]
     },
     {
@@ -47,13 +49,12 @@
       "name": "부산문화재단",
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
-      "state": "failed",
-      "checkedAt": "2026-10-19T08:19:47.137Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "No recognized official grant links; selector may have changed. HTML length=180200 candidate anchors=59 samples=https://www.bscf.or.kr/view.do?no=1003 감만창의문화촌 | https://www.bscf.or.kr/view.do?no=1009 장애 예술인 창작공간 온그루 | https://www.bscf.or.kr/view.do?no=1010 공모·참여 안내 | https://www.bscf.or.kr/view.do?no=1030 예술인생활안내서 | https://www.bscf.or.kr/view.do?no=1016 문화예술행사정보 | https://www.bscf.or.kr/view.do?no=1027 부산문화재단에 바란다 | https://www.bscf.or.kr/view.do?no=1032 지원심의 옴부즈만 | https://www.bscf.or.kr/view.do?no=1105 부산문화예술지원사업 nearMarker=> <div class=\"writer\"><span>담당부서</span><span>창작지원2팀</span></div> <div class=\"date\"><span>등록일</span><span>2026-02-06</span></div> <div class=\"visited\"><span>조회수</span><span>5735</span></div> </div> </a> </div> <div class=\"file\"> <img src=\"/share/portal/img/default/icon_file.svg\" alt=\"파일아이콘\"> </div> <div class=\"state ing \"> 진행중 </div> </li> <li> <div class=\"number\"> <span>343</span> </div> <div class=\"subject\"> <a href=\"javascript:void(0);\" onclick=\"javascript:show('2437');\" class=\"cont\"> <div class=\"title\"> <span class=\"label \"> 공고 </span> <span class=\"txt\">[모집] 2026년 D.O.C&#40;Dance On the CATs&#41; 참가자 모집</span> </div> <div class=\"desc\"> <div class=\"writer\"><span>담당부서</span><span>청년융합예술팀</span></div> <div class=\"date\"><span>등록일</span><span>2026-10-12</span></div> <div class=\"visited\"><span>조회수</span><span>264</span></div> </div> </a> </div> <div class=\"file\"> <img src=\"/share/portal/img/default/icon_file.svg\" alt=\"파일아이콘\"> </div> <div class=\"state ing \"> 진행중 </div> </li> <li> <div class=\"number\"> <span>342</span> </div> <div class=\"subject\"> <a href=\"javascript:void(0);\" onclick=\"javascript:show('2436');\" class=\"cont\"> <div class=\"title\"> <span class=\"label result\"> 결과 </span> <span class=\"txt\">2027년도 부산문화예술지원사업 &lt;우수예술-공연예술&gt; 상반기공모 선정결과</span> </div> <div class=\"desc\"> <div class=\"writer\"><span>담당부서</span><span>창작지원1팀</span><"
-      ]
+      "state": "ok",
+      "checkedAt": "2026-10-19T08:22:23.268Z",
+      "lastSuccessAt": "2026-10-19T08:22:23.268Z",
+      "found": 10,
+      "verified": 10,
+      "errors": []
     },
     {
       "code": "SEOUL",
@@ -61,8 +62,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-19T08:19:49.025Z",
-      "lastSuccessAt": "2026-10-19T08:19:49.025Z",
+      "checkedAt": "2026-10-19T08:22:29.669Z",
+      "lastSuccessAt": "2026-10-19T08:22:29.669Z",
       "found": 9,
       "verified": 8,
       "errors": [
