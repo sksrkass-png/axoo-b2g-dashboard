@@ -34,8 +34,10 @@ function anchors(html,base) {
     const attr=m[1],inner=m[2];
     let h=attr.match(/\bhref\s*=\s*["']([^"']+)["']/i)?.[1]||"";
     if(!h||/^javascript:/i.test(h)){
+      const bscf=attr.match(/\bshow\(\s*['"](\d+)['"]\s*\)/i);
+      if(bscf&&base.includes("bscf.or.kr"))h="/view.do?no=1010&pgMode=show&pbancSn="+bscf[1]+"&siteId=SITE003";
       const js=attr.match(/(?:\/biz\/detail\/\d+|\/boards\/businessNotices\/articles\/\d+|\/artsSupProjects\/supProjects\/view\.do\?[^"' ]+|\/gongmo\/\d+)/i);
-      if(js)h=js[0];
+      if(js&&!h)h=js[0];
     }
     const u=urlOf(h,base);
     if(!u)continue;
@@ -156,7 +158,7 @@ async function processSource(source,oldRows) {
       const samples=anchors(html,source.url).filter(x=>GRANT.test(x.title)).slice(0,8).map(x=>x.url+" "+x.title.slice(0,50));
       const marker=source.code==="IFAC"?"2027 인천문화재단":source.code==="BSCF"?"2026년":"미디어아트";
       const at=html.indexOf(marker);
-      const snippet=at>=0?html.slice(Math.max(0,at-850),at+1100).replace(/\s+/g," "):"not found";
+      const snippet=at>=0?html.slice(Math.max(0,at-(source.code==="IFAC"?2600:850)),at+650).replace(/\s+/g," "):"not found";
       throw Error("No recognized official grant links; selector may have changed. HTML length="+html.length+" candidate anchors="+anchors(html,source.url).length+" samples="+samples.join(" | ")+" nearMarker="+snippet);
     }
     const rows=[];const errors=[];
