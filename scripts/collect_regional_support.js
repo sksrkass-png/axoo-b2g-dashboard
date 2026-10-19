@@ -33,7 +33,7 @@ function anchors(html,base) {
   while((m=pattern.exec(html))){
     const attr=m[1],inner=m[2];
     let h=attr.match(/\bhref\s*=\s*["']([^"']+)["']/i)?.[1]||"";
-    if(!h||/^javascript:/i.test(h)){
+    if(!h||/^(?:javascript:|#)/i.test(h)){
       const bscf=attr.match(/\bshow\(\s*['"](\d+)['"]\s*\)/i);
       if(bscf&&base.includes("bscf.or.kr"))h="/view.do?no=1010&pgMode=show&pbancSn="+bscf[1]+"&siteId=SITE003";
       const ifac=attr.match(/\bgoView\(\s*['"](\d+)['"]/i);
