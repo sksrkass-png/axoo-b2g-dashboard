@@ -213,8 +213,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -368,8 +368,8 @@
     "status": "마감",
     "statusBasis": "신청접수 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -484,13 +484,59 @@
       "detailQuality": "eligibility_parsed",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "attachment_not_readable",
+        "files": [
+          {
+            "url": "https://ifac.or.kr/cmm/fileDown.do?key=226722&type=bbs",
+            "label": "2026 서울무역센터(코엑스) 연계 미디어아트 작품 공모 공고문 ( 0.12766742706298828 MB)",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          },
+          {
+            "url": "https://ifac.or.kr/cmm/fileDown.do?key=226725&type=bbs",
+            "label": "WTCS 배기구 매체 가이드 ( 16.821216583251953 MB)",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          },
+          {
+            "url": "https://ifac.or.kr/cmm/fileDown.do?key=226723&type=bbs",
+            "label": "참여 작가 신청서 양식 ( 0.07128620147705078 MB)",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          }
+        ]
       }
     },
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=226722&type=bbs",
+          "label": "2026 서울무역센터(코엑스) 연계 미디어아트 작품 공모 공고문 ( 0.12766742706298828 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=226725&type=bbs",
+          "label": "WTCS 배기구 매체 가이드 ( 16.821216583251953 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=226723&type=bbs",
+          "label": "참여 작가 신청서 양식 ( 0.07128620147705078 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
       "snippets": []
     },
     "score": 54,
@@ -528,8 +574,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:36:41.302Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:41.302Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:55.394Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:55.394Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -846,8 +892,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -981,8 +1027,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -1124,8 +1170,8 @@
     "status": "마감",
     "statusBasis": "신청접수 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -1238,13 +1284,45 @@
       "detailQuality": "eligibility_parsed",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "attachment_not_readable",
+        "files": [
+          {
+            "url": "https://ifac.or.kr/cmm/fileDown.do?key=227737&type=bbs",
+            "label": "[붙임1] 공고 안내문(최종) ( 0.05517578125 MB)",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          },
+          {
+            "url": "https://ifac.or.kr/cmm/fileDown.do?key=227736&type=bbs",
+            "label": "[붙임2] 공모 신청서_양식 ( 0.0849609375 MB)",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          }
+        ]
       }
     },
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=227737&type=bbs",
+          "label": "[붙임1] 공고 안내문(최종) ( 0.05517578125 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=227736&type=bbs",
+          "label": "[붙임2] 공모 신청서_양식 ( 0.0849609375 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
       "snippets": []
     },
     "score": 39,
@@ -1786,7 +1864,7 @@
     "endDate": "",
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
-    "verificationStatus": "date_unconfirmed",
+    "verificationStatus": "source_unavailable",
     "collectionVerifiedAt": "2026-10-19T10:35:52.200Z",
     "sourceLastCheckedAt": "2026-10-19T10:35:52.200Z",
     "sourceDetailVerified": true,
@@ -2374,12 +2452,14 @@
       "detailQuality": "eligibility_parsed",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
       "files": [],
       "snippets": []
     },
@@ -2533,12 +2613,14 @@
       "detailQuality": "eligibility_parsed",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
       "files": [],
       "snippets": []
     },
@@ -2577,8 +2659,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2713,8 +2795,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2849,8 +2931,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -3121,8 +3203,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:36:41.302Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:41.302Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:55.394Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:55.394Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3467,8 +3549,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:36:41.302Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:41.302Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:55.394Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:55.394Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3788,8 +3870,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:36:41.302Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:41.302Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:55.394Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:55.394Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3883,13 +3965,31 @@
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "manual_review_required",
+        "files": [
+          {
+            "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280254",
+            "label": "공고문_최종.hwp",
+            "format": "hwp",
+            "status": "unsupported",
+            "reason": "Binary HWP requires manual conversion"
+          }
+        ]
       }
     },
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
+      "status": "manual_review_required",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280254",
+          "label": "공고문_최종.hwp",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        }
+      ],
       "snippets": []
     },
     "score": 34,
@@ -3927,14 +4027,14 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:36:41.302Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:41.302Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:55.394Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:55.394Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
     "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000786",
     "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000786",
-    "documentUrl": "",
+    "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -4021,13 +4121,53 @@
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
+            "label": "공고문.pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 3854,
+            "pages": 5
+          },
+          {
+            "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282139",
+            "label": "제출서류서식.hwpx",
+            "format": "hwpx",
+            "status": "parsed",
+            "reason": "",
+            "characters": 1576,
+            "pages": 0
+          }
+        ]
       }
     },
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
+      "status": "parsed",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
+      "files": [
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
+          "label": "공고문.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 3854,
+          "pages": 5
+        },
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282139",
+          "label": "제출서류서식.hwpx",
+          "format": "hwpx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 1576,
+          "pages": 0
+        }
+      ],
       "snippets": []
     },
     "score": 34,
@@ -4221,8 +4361,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -4375,8 +4515,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -4584,8 +4724,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -4793,8 +4933,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -5002,8 +5142,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -5367,14 +5507,14 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
     "sourceUrl": "https://www.scas.kr/biz/detail/498?page=1",
     "originalUrl": "https://www.scas.kr/biz/detail/498?page=1",
-    "documentUrl": "",
+    "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -5462,14 +5602,88 @@
       "detailQuality": "eligibility_short",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx",
+            "label": "1-1. [양식] 지원신청서_신청자(단체)명.hwpx",
+            "format": "hwpx",
+            "status": "parsed",
+            "reason": "",
+            "characters": 2880,
+            "pages": 0
+          },
+          {
+            "url": "https://www.scas.kr/s/f/file/download?filesn=1006667&filename=22ea8454-fec9-440f-8fdc-ebf576b92e67.docx",
+            "label": "1-2. [양식] 지원신청서_신청자(단체)명.docx",
+            "format": "docx",
+            "status": "parsed",
+            "reason": "",
+            "characters": 3296,
+            "pages": 0
+          },
+          {
+            "url": "https://www.scas.kr/s/f/file/download?filesn=1006668&filename=77b24479-aab1-4f06-a12d-e2fb74c9dd9b.pdf",
+            "label": "2. [붙임] 지원신청 부적격 요건.pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 1723,
+            "pages": 1
+          }
+        ]
       }
     },
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
-      "snippets": []
+      "status": "parsed",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx",
+      "files": [
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx",
+          "label": "1-1. [양식] 지원신청서_신청자(단체)명.hwpx",
+          "format": "hwpx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 2880,
+          "pages": 0
+        },
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1006667&filename=22ea8454-fec9-440f-8fdc-ebf576b92e67.docx",
+          "label": "1-2. [양식] 지원신청서_신청자(단체)명.docx",
+          "format": "docx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 3296,
+          "pages": 0
+        },
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1006668&filename=77b24479-aab1-4f06-a12d-e2fb74c9dd9b.pdf",
+          "label": "2. [붙임] 지원신청 부적격 요건.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 1723,
+          "pages": 1
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 규모 문구",
+          "quote": "로젝트 2026년 지원내역 연번 지원기관명 지원사업명 지원내용 지원금(원) (직접지원일 경우 작성) 예시 △△문화재단 대관료 지원사업 대관료 지원 5,000,000원 예시 ㅁㅁ예술협회 ㅁㅁㅁ축제 공연 초청료 3,000,000원 예시 OO 갤러리 OO사업 발표 공간 제공 - 1 2 ☞ 본 공모에 신청하는 프로젝트와 관련하여 2026년에 받은 직접지원(재정지원) 및 간접지원(비재정지원) 내역이 있는 경우",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "젝트 2026 년 지원내역 연번 지원기관명 지원사업명 지원내용 지원금 ( 원 ) ( 직접지원일 경우 작성 ) 예시 △△ 문화재단 대관료 지원사업 대관료 지원 5,000,000 원 예시 ㅁㅁ 예술협회 ㅁㅁㅁ 축제 공연 초청료 3,000,000 원 예시 OO 갤러리 OO 사업 발표 공간 제공 - 1 2 ☞ 본 공모에 신청하는 프로젝트와 관련하여 2026 년에 받은 직접지원 ( 재정지원 ) 및 간접지원 (",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1006667&filename=22ea8454-fec9-440f-8fdc-ebf576b92e67.docx"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "부적격 기준- 보조금 관계 법령 및 서울문화재단 문예지원사업 지원금 관리규정을 위반한 예술인 또는 예술단체- 서울문화재단의 예술지원사업에 선정되었으나, 제재 조치 중인 예술인 또는 예술단체 (정산ㆍ성과보고 지연제출/미제출/미완료, 임의포기, 환수 대상자 등) ※ 재단이 정당한 사유로 승인한 경우는 예외로 함불공정 행위 등 범죄 및 법률 위반 관련 부적격 기준- 범죄의 혐의와 관련하여 수사를 받거나 또",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1006668&filename=77b24479-aab1-4f06-a12d-e2fb74c9dd9b.pdf"
+        }
+      ]
     },
     "score": 29,
     "axooFitScore": 29,
@@ -5506,8 +5720,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5658,8 +5872,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5787,8 +6001,8 @@
     "status": "마감",
     "statusBasis": "신청기간 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5890,13 +6104,31 @@
       "detailQuality": "eligibility_parsed",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "attachment_not_readable",
+        "files": [
+          {
+            "url": "https://ifac.or.kr/cmm/fileDown.do?key=228409&type=bbs",
+            "label": "2026 인천예술인 심리상담 및 심리검사 지원 공고문 ( 0.11572265625 MB)",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          }
+        ]
       }
     },
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=228409&type=bbs",
+          "label": "2026 인천예술인 심리상담 및 심리검사 지원 공고문 ( 0.11572265625 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
       "snippets": []
     },
     "score": 26,
@@ -6119,8 +6351,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -6321,8 +6553,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -6518,8 +6750,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -6715,8 +6947,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:36:41.302Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:41.302Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:55.394Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:55.394Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -6852,8 +7084,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -7492,7 +7724,7 @@
     "endDate": "",
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
-    "verificationStatus": "date_unconfirmed",
+    "verificationStatus": "source_unavailable",
     "collectionVerifiedAt": "2026-10-19T10:35:52.200Z",
     "sourceLastCheckedAt": "2026-10-19T10:35:52.200Z",
     "sourceDetailVerified": true,
@@ -7624,8 +7856,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -7755,8 +7987,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -7886,8 +8118,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -8017,8 +8249,8 @@
     "status": "마감",
     "statusBasis": "접수기간 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -8104,14 +8336,17 @@
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "source_unavailable",
         "files": []
       }
     },
     "documentReview": {
-      "status": "pending_review",
+      "status": "source_unavailable",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "reason": "html_too_large"
     },
     "score": 19,
     "axooFitScore": 19,
@@ -8552,14 +8787,14 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:36:41.302Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:41.302Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:55.394Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:55.394Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
     "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000784",
     "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000784",
-    "documentUrl": "",
+    "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -8641,14 +8876,61 @@
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
+            "label": "공고문.pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 2219,
+            "pages": 4
+          },
+          {
+            "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280848",
+            "label": "(붙임)제출서류.hwp",
+            "format": "hwp",
+            "status": "unsupported",
+            "reason": "Binary HWP requires manual conversion"
+          }
+        ]
       }
     },
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
-      "snippets": []
+      "status": "parsed",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
+      "files": [
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
+          "label": "공고문.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 2219,
+          "pages": 4
+        },
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280848",
+          "label": "(붙임)제출서류.hwp",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "기간 : 2026. 10. 8.(목) ~ 11. 8.(일) ㅇ 응모자격 : 누구나(전국 단위 공모) ㅇ 공모주제 : 도심 쓰레기 문제 해결 아이디어 - 사람이 많이 모이는 행사장이나 홍대 등 번화가 쓰레기 문제 해결 ㅇ 공모분야 : ① 아이디어 공모전 ② 아이디어 한 줄 톡! ① 개인/팀(3인) 참여, 그림, 카드뉴스, 웹툰, 동영상 등 형식 제한 없이 제안 ② 아이디어는 있지만 공모전 응모가 부담스",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "법 : 이메일 제출 zeroseoul26@gmail.com - 제출서류 작성 후 서명하여 아이디어 파일(그림, 영상, 글 등)과 함께 제출 ㅇ 제출서류 : 참가신청서, 개인정보 수집·이용 동의서, 청렴서약서 ㅇ 응모제한 - 타 공모전 입상·수상작, 서울시 타 공모전에서 표절·중복응모·도용 등 부정행위 발생으로 수상 취소 및 상금·부상 환수 이력이 있는 자 ※ 청렴서약서 제출(‘타 공모전 수상 경력없음",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847"
+        }
+      ]
     },
     "score": 19,
     "axooFitScore": 19,
@@ -8912,12 +9194,14 @@
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
       "files": [],
       "snippets": []
     },
@@ -8956,8 +9240,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -9094,8 +9378,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-19T10:36:34.886Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:34.886Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:49.092Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:49.092Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -9545,8 +9829,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "신청기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:56.138Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:56.138Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:13.393Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:13.393Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -9744,8 +10028,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -9948,8 +10232,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -10152,8 +10436,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:36:41.302Z",
-    "sourceLastCheckedAt": "2026-10-19T10:36:41.302Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:55.394Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:55.394Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -11031,14 +11315,14 @@
     "status": "접수 예정",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-19T10:35:40.776Z",
-    "sourceLastCheckedAt": "2026-10-19T10:35:40.776Z",
+    "collectionVerifiedAt": "2026-10-19T10:39:01.108Z",
+    "sourceLastCheckedAt": "2026-10-19T10:39:01.108Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
     "sourceUrl": "https://www.scas.kr/biz/detail/510?page=1",
     "originalUrl": "https://www.scas.kr/biz/detail/510?page=1",
-    "documentUrl": "",
+    "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -11119,14 +11403,99 @@
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf",
+            "label": "붙임1. 2027 예술지원 통합공모 안내책자.pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 26000,
+            "pages": 51
+          },
+          {
+            "url": "https://www.scas.kr/s/f/file/download?filesn=1026678&filename=c61a4ccd-ab8e-40cf-b0f1-5f151cae951b.hwp",
+            "label": "2-1. [양식] 2027년 공연장상주단체지원 지원신청서(공연단체)_공연단체명.hwp",
+            "format": "hwp",
+            "status": "unsupported",
+            "reason": "Binary HWP requires manual conversion"
+          },
+          {
+            "url": "https://www.scas.kr/s/f/file/download?filesn=1026679&filename=045a5e2a-9daa-4e8d-bf00-f919b5e2766b.docx",
+            "label": "2-2. [양식] 2027년 공연장상주단체지원 지원신청서(공연단체)_공연단체명.docx",
+            "format": "docx",
+            "status": "parsed",
+            "reason": "",
+            "characters": 6748,
+            "pages": 0
+          }
+        ]
       }
     },
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
-      "snippets": []
+      "status": "parsed",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf",
+      "files": [
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf",
+          "label": "붙임1. 2027 예술지원 통합공모 안내책자.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 26000,
+          "pages": 51
+        },
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1026678&filename=c61a4ccd-ab8e-40cf-b0f1-5f151cae951b.hwp",
+          "label": "2-1. [양식] 2027년 공연장상주단체지원 지원신청서(공연단체)_공연단체명.hwp",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        },
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1026679&filename=045a5e2a-9daa-4e8d-bf00-f919b5e2766b.docx",
+          "label": "2-2. [양식] 2027년 공연장상주단체지원 지원신청서(공연단체)_공연단체명.docx",
+          "format": "docx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 6748,
+          "pages": 0
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "업 간 2. 지원신청 단계별 유의사항 지원신청 시 - 지원신청 필수서류(해당 사업, 해당 분야, 해당 연도의 지정양식 필수 사용) 미제출/미사용 시 심의 제외 - 지원신청 시 제시하는 아래 내용 동의 및 서약 필수(지정양식) •지원신청자의 ‘개인정보 수집·이용 동의서’ •문화예술계 성희롱·성폭력 근절을 위한 ‘성희롱·성폭력 예방실천 관련 서약’ •지원자 책임 신청제 등 ‘지원신청자 확인 내용’ - 동",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "하여야 함 ◦ 선정 이후 과도한 변경 시 변경조치 기준에 따라 지원금 삭감 또는 취소 조치가 있을 수 있으므로, 실현가능성을 고려하여 신중하게 작성해주시기 바랍니다. ※ 선정 이후 변경조치 기준 별도 안내 예정 지원신청 마감일 ◦ 공연 단체 지원신청은 1 0 월 27 일(화)부터 1 1월 1 7 일( 화 ) 18시 (KST, 한국 표준시) 까지입니다 . ◦ 2027년 서울예술지원 통합공모 1차 접수는",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026679&filename=045a5e2a-9daa-4e8d-bf00-f919b5e2766b.docx"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "동일한 내용의 파일 2개를 제출해 주시기 바랍니다. ※ 필수 제출서류(지원신청서) 외 첨부된 자료는 심의 시 반영되지 않습니다 . 유의사항 ◦ 본 지원신청서는 심의기준에 따라 항목별로 내용을 작성하도록 구성되어 있습니다. 파란색 글씨로 작성된 안내 문구를 반드시 확인하신 후, 작성해 주시기 바랍니다. ◦ 지원신청서 및 첨부 링크 등 제출한 내용이 잘 열리는지 반드시 확인하여 주시기 바랍니다. 열람이 ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026679&filename=045a5e2a-9daa-4e8d-bf00-f919b5e2766b.docx"
+        },
+        {
+          "label": "부담·제한 문구",
+          "quote": "표일 경우 모두 기재 공연장명 ※ 제공 공연장 모두 기재 단체 소재지 ☐ 서울 ☐ 서울 외 ※ 단체 등록증 기준 ‘소재지’ 표시( ) 공연장 주소 홈페이지(링크) ※ 공식 홈페이지, SNS 등 홈페이지(링크) ※ 공식 홈페이지, SNS 등 실무자 성명/직책 실무자 성명/직책 연락처 연락처 이메일 이메일 분야 ☐ 연극 ☐ 무용 ☐ 음악 ☐ 전통 세부분야 1-2. 지원신청액 ※ 지원신청액은 심의 시 반영",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026679&filename=045a5e2a-9daa-4e8d-bf00-f919b5e2766b.docx"
+        }
+      ]
     },
     "score": 0,
     "axooFitScore": 0,

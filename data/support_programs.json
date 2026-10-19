@@ -378,7 +378,9 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
       "files": [],
       "snippets": []
     },
@@ -394,7 +396,7 @@
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
@@ -3673,7 +3675,9 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
       "files": [],
       "snippets": []
     },
@@ -3709,7 +3713,7 @@
       "detailQuality": "eligibility_parsed",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
@@ -3971,7 +3975,9 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "documentUrl": "",
       "files": [],
       "snippets": []
     },
@@ -4002,7 +4008,7 @@
       "detailQuality": "eligibility_parsed",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
