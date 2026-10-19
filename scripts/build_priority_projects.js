@@ -957,6 +957,14 @@ function mapSupportItem(item) {
     companyEligible:
       item.companyEligible === true,
 
+    // P0/P1 assessment is evidence-based and separate from the creative fit score.
+    participationCode: text(item.participationCode),
+    participationLabel: text(item.participationLabel),
+    applicationReview: item.applicationReview && typeof item.applicationReview === "object"
+      ? item.applicationReview : null,
+    documentReview: item.documentReview && typeof item.documentReview === "object"
+      ? item.documentReview : null,
+
     score:
       score,
 
