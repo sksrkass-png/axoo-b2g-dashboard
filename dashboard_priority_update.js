@@ -54,7 +54,7 @@
       type: "priority",
       category: "arts_content_support",
       description:
-        "AXOO가 실제 기업·법인·사업자로 검토할 수 있는 예술·콘텐츠 지원사업을 모아봅니다.",
+        "예술·콘텐츠 지원사업을 연간 공고 원장으로 관리합니다. 법인·협업·작가 지원을 모두 검토하고 참고 이력과 실시간 수집을 구분합니다.",
       sources: [
         "KAMS · 예술경영지원센터",
         "ARKO · 한국문화예술위원회",
@@ -3319,6 +3319,17 @@
       !panel ||
       !config
     ) {
+      return;
+    }
+
+    // Annual opportunity ledger is isolated to tab 04. Other categories stay unchanged.
+    if (tab === "support" && window.AXOOSupportLedger) {
+      window.AXOOSupportLedger.render(panel, state.projects);
+      updateSummaryCounts(
+        state.projects.filter(function (project) {
+          return getProjectCategory(project) === "arts_content_support";
+        })
+      );
       return;
     }
 
