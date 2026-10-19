@@ -25,7 +25,10 @@ function extractApplicationReview(item){
   // A portal filter header such as "지원대상 전체" is NOT applicant evidence.
   const generic=/^(?:지원대상|신청자격|지원자격|모집대상)?\s*(?:전체|전국|모두|전체\s*지역\s*전국)?$/;
   const eligible=generic.test(raw)||raw.length<12?"":raw;
-  const body=[eligible,documents].filter(Boolean).join(" ");
+  // A generic application manual may mention company registration, but that does not
+  // mean this particular grant is open to corporations. Applicant status must come
+  // from the notice's OWN eligibility field, not an attached platform user guide.
+  const body=eligible;
   const text=[body,application,support].join(" ");
   const flags=Object.entries(RESTRICTIONS).flatMap(([code,v])=>{
     const m=text.match(v.re);
@@ -33,7 +36,7 @@ function extractApplicationReview(item){
     const index=text.indexOf(m[0]);
     return [{code,label:v.label,quote:cut(text.slice(Math.max(0,index-35),index+125),160)}];
   });
-  const submission=[...new Set([...(application+" "+documents).matchAll(DOCUMENT_PATTERNS)].map(m=>m[0]))].slice(0,12);
+  const submission=[...new Set([...application.matchAll(DOCUMENT_PATTERNS)].map(m=>m[0]))].slice(0,12);
   const direct=DIRECT.exec(body),arts=ARTS.exec(body),partner=PARTNER.exec(body);
   const negative=NEGATIVE.exec(body),individual=INDIVIDUAL.exec(body);
   let code="needs_review",label="자격 확인 필요",basis="";
@@ -50,15 +53,16 @@ function extractApplicationReview(item){
   }
   const evidence=[];
   if(basis&&eligible.includes(basis))evidence.push({field:"신청 자격",quote:cut(eligible.slice(Math.max(0,eligible.indexOf(basis)-60),eligible.indexOf(basis)+200),260),source:item?.sourceUrl||"",sourceType:"공고 자격 안내"});
-  else if(basis&&documents.includes(basis))evidence.push({field:"신청 자격",quote:cut(documents.slice(Math.max(0,documents.indexOf(basis)-60),documents.indexOf(basis)+200),260),source:(item?.documentReview?.documentUrl||item?.sourceUrl||""),sourceType:"추출된 첨부 원문"});
+  // Machine-readable attachment text is displayed for human review only until
+  // its project-specific relevance is verified; it never grants corporate eligibility.
   return {
     version:"p0_eligibility_review_v1",participationCode:code,participationLabel:label,
     applicantBasis:cut(basis,80),evidence,
     restrictions:flags,
     submissionDocuments:submission,
-    missingEvidence:!eligible&&!documents,
+    missingEvidence:!eligible,
     detailQuality:eligible.length>=28?"eligibility_parsed":eligible?"eligibility_short":"not_verified",
-    decisionNote:"자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+    decisionNote:"신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
     documentAudit:{status:item?.documentReview?.status||"not_scanned",files:Array.isArray(item?.documentReview?.files)?item.documentReview.files:[]}
   };
 }
