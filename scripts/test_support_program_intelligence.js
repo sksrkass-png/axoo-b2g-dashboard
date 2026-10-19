@@ -58,7 +58,7 @@ assert.ok(excluded.score <= 35);
 
 
 // AXOO_EVIDENCE_QA_V1: generic navigation is not program eligibility.
-const noisyHtml = \`
+const noisyHtml = `
 <html>
   <head><title>공지사항</title></head>
   <body>
@@ -70,7 +70,7 @@ const noisyHtml = \`
     </main>
     <footer>사업자 법인 컨소시엄 지원내용 1억원</footer>
   </body>
-</html>\`;
+</html>`;
 const noisyDetails = extractSupportDetail(noisyHtml);
 assert.strictEqual(noisyDetails.eligibility, "지원대상 전체");
 assert.strictEqual(noisyDetails.supportDetails, "");
