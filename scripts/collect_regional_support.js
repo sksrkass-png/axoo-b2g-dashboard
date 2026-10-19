@@ -36,6 +36,8 @@ function anchors(html,base) {
     if(!h||/^javascript:/i.test(h)){
       const bscf=attr.match(/\bshow\(\s*['"](\d+)['"]\s*\)/i);
       if(bscf&&base.includes("bscf.or.kr"))h="/view.do?no=1010&pgMode=show&pbancSn="+bscf[1]+"&siteId=SITE003";
+      const ifac=attr.match(/\bgoView\(\s*['"](\d+)['"]/i);
+      if(ifac&&base.includes("ifac.or.kr"))h="/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn="+ifac[1];
       const js=attr.match(/(?:\/biz\/detail\/\d+|\/boards\/businessNotices\/articles\/\d+|\/artsSupProjects\/supProjects\/view\.do\?[^"' ]+|\/gongmo\/\d+)/i);
       if(js&&!h)h=js[0];
     }
