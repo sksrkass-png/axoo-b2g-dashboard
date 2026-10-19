@@ -43,8 +43,16 @@ jobs:
 
 
       # ------------------------------------------
-      # 3. 문화예술 지원사업 수집
-      # 현재 KAMS부터 운영
+      # 3. 상세 공고 분석·점수 계산 자체 테스트
+      # ------------------------------------------
+
+      - name: Test support program intelligence
+        run: node scripts/test_support_program_intelligence.js
+
+
+      # ------------------------------------------
+      # 4. 문화예술 지원사업 수집
+      # KAMS + ARKO + KCDF + KOCCA
       # ------------------------------------------
 
       - name: Collect support programs
@@ -52,7 +60,7 @@ jobs:
 
 
       # ------------------------------------------
-      # 4. Priority 데이터 통합 생성
+      # 5. Priority 데이터 통합 생성
       # support_programs + G2B
       # ------------------------------------------
 
@@ -61,7 +69,7 @@ jobs:
 
 
       # ------------------------------------------
-      # 5. 결과 확인
+      # 6. 결과 확인
       # ------------------------------------------
 
       - name: Show collection result
@@ -138,7 +146,7 @@ jobs:
 
 
       # ------------------------------------------
-      # 6. 샘플 데이터 잔존 여부 QA
+      # 7. 샘플 데이터 잔존 여부 QA
       # ------------------------------------------
 
       - name: Validate support dashboard data
@@ -191,6 +199,21 @@ jobs:
             process.exit(1);
           }
 
+          const invalidAnalysis = support.filter(
+            item =>
+              !item.businessArea ||
+              !item.businessAreaLabel ||
+              !Array.isArray(item.scoreBreakdown)
+          );
+
+          if (invalidAnalysis.length > 0) {
+            console.error(
+              '❌ 사업영역 또는 상세 점수 데이터가 누락되었습니다.'
+            );
+
+            process.exit(1);
+          }
+
           console.log(
             '✅ 샘플 데이터 없음'
           );
@@ -203,7 +226,7 @@ jobs:
 
 
       # ------------------------------------------
-      # 7. 변경 여부 확인
+      # 8. 변경 여부 확인
       # ------------------------------------------
 
       - name: Check changes
@@ -225,7 +248,7 @@ jobs:
 
 
       # ------------------------------------------
-      # 8. 데이터 저장
+      # 9. 데이터 저장
       # ------------------------------------------
 
       - name: Commit support dashboard data

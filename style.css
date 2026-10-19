@@ -100,6 +100,131 @@
     );
 }
 
+/* 예술·콘텐츠 지원사업 상세 분석 */
+.support-area-filter {
+  margin: 0 0 12px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border: 1px solid #dce7df;
+  border-radius: 14px;
+  background: #f5faf6;
+}
+
+.support-area-filter > strong {
+  margin-right: 4px;
+  font-size: 13px;
+}
+
+.support-fit-score {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.support-fit-score > strong {
+  font-size: 24px;
+  line-height: 1;
+  color: #173f2b;
+}
+
+.support-fit-score > span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #54705f;
+}
+
+.support-score-breakdown,
+.support-detail-analysis {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #dfe7e1;
+  border-radius: 14px;
+  background: #fbfdfb;
+}
+
+.support-score-breakdown > strong,
+.support-analysis-heading > strong {
+  color: #173f2b;
+  font-size: 13px;
+}
+
+.support-score-breakdown > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.support-score-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #e9f4ec;
+  color: #315a3f;
+  font-size: 12px;
+}
+
+.support-score-chip b {
+  color: #173f2b;
+}
+
+.support-score-chip.is-penalty {
+  background: #fff0ed;
+  color: #9a4033;
+}
+
+.support-analysis-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.support-analysis-heading span {
+  color: #6f7f74;
+  font-size: 11px;
+}
+
+.support-detail-row {
+  display: grid;
+  grid-template-columns: minmax(76px, 110px) 1fr;
+  gap: 12px;
+  padding: 11px 0;
+  border-top: 1px solid #e7ece8;
+}
+
+.support-detail-row strong {
+  font-size: 12px;
+  color: #54705f;
+}
+
+.support-detail-row p,
+.support-detail-empty {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #414a44;
+}
+
+@media (max-width: 680px) {
+  .support-detail-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .support-analysis-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 
 /* =========================================================
    RESET

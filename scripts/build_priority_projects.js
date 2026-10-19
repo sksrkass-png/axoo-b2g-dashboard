@@ -884,6 +884,20 @@ function mapSupportItem(item) {
       item.field ||
       matched.join(" / "),
 
+    businessArea:
+      item.businessArea ||
+      "other",
+
+    businessAreaLabel:
+      item.businessAreaLabel ||
+      item.field ||
+      "기타",
+
+    businessAreas:
+      Array.isArray(item.businessAreas)
+        ? item.businessAreas
+        : [],
+
     matchedPriorityKeywords:
       matched,
 
@@ -904,6 +918,31 @@ function mapSupportItem(item) {
     grade:
       grade,
 
+    fitVerdict:
+      item.fitVerdict ||
+      "검토 필요",
+
+    scoreBreakdown:
+      Array.isArray(item.scoreBreakdown)
+        ? item.scoreBreakdown
+        : [],
+
+    scoreReasons:
+      Array.isArray(item.scoreReasons)
+        ? item.scoreReasons
+        : [],
+
+    analysisBasis:
+      item.analysisBasis ||
+      "공고 제목",
+
+    analysisConfidence:
+      item.analysisConfidence ||
+      "low",
+
+    companyEligible:
+      item.companyEligible === true,
+
     score:
       score,
 
@@ -915,6 +954,18 @@ function mapSupportItem(item) {
 
     axooFitReason:
       gradeReason,
+
+    detailSummary:
+      text(item.detailSummary),
+
+    eligibility:
+      text(item.eligibility),
+
+    supportDetails:
+      text(item.supportDetails),
+
+    application:
+      text(item.application),
 
     nextAction:
       nextAction,

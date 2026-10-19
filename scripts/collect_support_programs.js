@@ -1,6 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const {
+  analyzeSupportProgram,
+  extractSupportDetail
+} = require("./support_program_intelligence");
 
 const OUTPUT_FILE = path.join(
   process.cwd(),
@@ -33,7 +37,7 @@ const KOCCA_LIST =
   "https://www.kocca.kr/kocca/pims/list.do?menuNo=204104";
 
 const COLLECTOR_VERSION =
-  "support_programs_kams_arko_kcdf_kocca_v4.1";
+  "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring";
 
 
 /* =========================================================
@@ -446,6 +450,31 @@ async function fetchHtml(url) {
 }
 
 
+async function getGenericSupportDetail(detailUrl) {
+  try {
+    const html = await fetchHtml(detailUrl);
+    return extractSupportDetail(html);
+  }
+
+  catch (error) {
+    console.warn(
+      "⚠️ support detail fetch failed:",
+      detailUrl,
+      error.message
+    );
+
+    return {
+      detailText: "",
+      detailSummary: "",
+      eligibility: "",
+      supportDetails: "",
+      application: "",
+      supportAmount: 0
+    };
+  }
+}
+
+
 /* =========================================================
    AXOO FIT
 ========================================================= */
@@ -688,195 +717,14 @@ const HARD_EXCLUDE_KEYWORDS = [
 ];
 
 
-function analyzeAxooFit(value) {
-  const source =
-    text(
-      value
-    )
-      .toLowerCase();
-
-
-  const strongMatches =
-    STRONG_KEYWORDS.filter(
-      keyword =>
-        source.includes(
-          keyword.toLowerCase()
-        )
-    );
-
-
-  const supportMatches =
-    SUPPORT_KEYWORDS.filter(
-      keyword =>
-        source.includes(
-          keyword.toLowerCase()
-        )
-    );
-
-
-  const negativeMatches =
-    NEGATIVE_KEYWORDS.filter(
-      keyword =>
-        source.includes(
-          keyword.toLowerCase()
-        )
-    );
-
-
-  const hardExcludeMatches =
-    HARD_EXCLUDE_KEYWORDS.filter(
-      keyword =>
-        source.includes(
-          keyword.toLowerCase()
-        )
-    );
-
-
-  let score =
-    45;
-
-
-  score +=
-    Math.min(
-      strongMatches.length * 12,
-      48
-    );
-
-
-  score +=
-    Math.min(
-      supportMatches.length * 6,
-      24
-    );
-
-
-  score -=
-    Math.min(
-      negativeMatches.length * 25,
-      60
-    );
-
-
-  score =
-    Math.max(
-      0,
-      Math.min(
-        100,
-        score
-      )
-    );
-
-
-  if (
-    hardExcludeMatches.length
-  ) {
-    score =
-      Math.min(
-        score,
-        45
-      );
-  }
-
-
-  let grade =
-    "C";
-
-
-  if (
-    score >= 85
-  ) {
-    grade =
-      "S";
-  }
-
-  else if (
-    score >= 70
-  ) {
-    grade =
-      "A";
-  }
-
-  else if (
-    score >= 50
-  ) {
-    grade =
-      "B";
-  }
-
-
-  const matchedKeywords = [
-    ...new Set([
-      ...strongMatches,
-      ...supportMatches
-    ])
-  ];
-
-
-  let reason =
-    "문화예술 지원사업으로 확인되며 AXOO 사업 연계 가능성을 검토합니다.";
-
-
-  if (
-    strongMatches.length
-  ) {
-    reason =
-      `AXOO 핵심 영역인 ${strongMatches
-        .slice(
-          0,
-          4
-        )
-        .join(
-          ", "
-        )} 관련성이 확인됩니다.`;
-  }
-
-  else if (
-    supportMatches.length
-  ) {
-    reason =
-      `${supportMatches
-        .slice(
-          0,
-          4
-        )
-        .join(
-          ", "
-        )} 키워드가 있어 사업 연계 가능성을 검토할 가치가 있습니다.`;
-  }
-
-
-  if (
-    negativeMatches.length
-  ) {
-    reason +=
-      ` 다만 ${negativeMatches.join(", ")} 성격이 포함되어 우선순위를 낮췄습니다.`;
-  }
-
-
-  if (
-    hardExcludeMatches.length
-  ) {
-    reason +=
-      ` ${hardExcludeMatches.join(", ")} 유형은 AXOO 직접 사업 참여 대상에서 제외합니다.`;
-  }
-
-
-  return {
-    score,
-    grade,
-
-    matchedKeywords,
-
-    negativeMatches,
-
-    hardExcludeMatches,
-
-    reason,
-
-    isExcluded:
-      score < 50 ||
-      hardExcludeMatches.length > 0
-  };
+function analyzeAxooFit(value, detail = {}, sourceCode = "") {
+  return analyzeSupportProgram({
+    title: text(value),
+    detailText: detail.detailText || "",
+    eligibility: detail.eligibility || "",
+    supportDetails: detail.supportDetails || "",
+    sourceCode
+  });
 }
 
 
@@ -916,20 +764,14 @@ const ARKO_HARD_EXCLUDE_TITLE_PATTERNS = [
 
 function analyzeArkoFit(
   title,
-  summary = ""
+  summary = "",
+  detail = {}
 ) {
   const base =
     analyzeAxooFit(
-      [
-        title,
-        summary
-      ]
-        .filter(
-          Boolean
-        )
-        .join(
-          " "
-        )
+      [title, summary].filter(Boolean).join(" "),
+      detail,
+      "ARKO"
     );
 
 
@@ -1261,7 +1103,9 @@ function makeSupportRecord({
 
   documentUrl = "",
 
-  fit
+  fit,
+
+  detail = {}
 }) {
   const nextAction =
     fit.grade === "S" ||
@@ -1329,9 +1173,11 @@ function makeSupportRecord({
 
 
     budget:
+      detail.supportAmount ||
       null,
 
     supportAmount:
+      detail.supportAmount ||
       null,
 
 
@@ -1344,10 +1190,21 @@ function makeSupportRecord({
 
 
     field:
-      fit.matchedKeywords
-        .join(
-          " / "
-        ),
+      fit.businessAreaLabel ||
+      fit.matchedKeywords.join(" / "),
+
+    businessArea:
+      fit.businessArea ||
+      "other",
+
+    businessAreaLabel:
+      fit.businessAreaLabel ||
+      "기타",
+
+    businessAreas:
+      Array.isArray(fit.businessAreas)
+        ? fit.businessAreas
+        : [],
 
 
     matchedKeywords:
@@ -1366,12 +1223,49 @@ function makeSupportRecord({
     grade:
       fit.grade,
 
+    fitVerdict:
+      fit.fitVerdict ||
+      "검토 필요",
+
+    scoreBreakdown:
+      Array.isArray(fit.scoreBreakdown)
+        ? fit.scoreBreakdown
+        : [],
+
+    scoreReasons:
+      Array.isArray(fit.scoreReasons)
+        ? fit.scoreReasons
+        : [],
+
+    analysisBasis:
+      fit.analysisBasis ||
+      "공고 제목",
+
+    analysisConfidence:
+      fit.analysisConfidence ||
+      "low",
+
+    companyEligible:
+      fit.companyEligible === true,
+
 
     axooFitReason:
       fit.reason,
 
     gradeReason:
       fit.reason,
+
+    detailSummary:
+      text(detail.detailSummary),
+
+    eligibility:
+      text(detail.eligibility),
+
+    supportDetails:
+      text(detail.supportDetails),
+
+    application:
+      text(detail.application),
 
 
     recommendedAction:
@@ -1390,7 +1284,7 @@ function makeSupportRecord({
 
     exclusionReason:
       fit.isExcluded
-        ? "AXOO 시각예술·공간·콘텐츠 사업과의 직접 적합도가 낮거나 직접 참여형 공모가 아님"
+        ? "결과·채용·교육 등 현재 지원할 수 없는 공고"
         : "",
 
 
@@ -1404,6 +1298,47 @@ function makeSupportRecord({
     collectionVersion:
       COLLECTOR_VERSION
   };
+}
+
+
+function upgradeLegacySupportRecord(item) {
+  if (
+    item &&
+    item.businessArea &&
+    Array.isArray(item.scoreBreakdown)
+  ) {
+    return item;
+  }
+
+  const detail = {
+    detailText: text(item && item.detailText),
+    detailSummary: text(item && item.detailSummary),
+    eligibility: text(item && item.eligibility),
+    supportDetails: text(item && item.supportDetails),
+    application: text(item && item.application),
+    supportAmount: Number(item && item.supportAmount) || 0
+  };
+
+  const fit = analyzeAxooFit(
+    item && item.title,
+    detail,
+    item && item.sourceCode
+  );
+
+  return makeSupportRecord({
+    id: item.id,
+    source: item.source || item.organization || item.agency,
+    sourceCode: item.sourceCode || "",
+    title: item.title,
+    startDate: item.startDate || "",
+    deadline: item.deadline || item.endDate || "",
+    postedDate: item.postedDate || "",
+    publishedDate: item.publishedDate || "",
+    sourceUrl: item.sourceUrl || item.originalUrl || "",
+    documentUrl: item.documentUrl || "",
+    fit,
+    detail
+  });
 }
 
 
@@ -1643,6 +1578,11 @@ async function getKamsDetailInfo(detailUrl) {
         raw
       );
 
+    const extracted =
+      extractSupportDetail(
+        html
+      );
+
 
     const patterns = [
       [
@@ -1693,6 +1633,8 @@ async function getKamsDetailInfo(detailUrl) {
         match
       ) {
         return {
+          ...extracted,
+
           postedDate:
             normalizeDate(
               match[1]
@@ -1703,6 +1645,8 @@ async function getKamsDetailInfo(detailUrl) {
 
 
     return {
+      ...extracted,
+
       postedDate:
         ""
     };
@@ -1717,6 +1661,13 @@ async function getKamsDetailInfo(detailUrl) {
 
 
     return {
+      detailText: "",
+      detailSummary: "",
+      eligibility: "",
+      supportDetails: "",
+      application: "",
+      supportAmount: 0,
+
       postedDate:
         ""
     };
@@ -1908,15 +1859,17 @@ async function collectKams() {
         item.detailUrl
     )
   ) {
-    const fit =
-      analyzeAxooFit(
-        item.title
-      );
-
-
     const detailInfo =
       await getKamsDetailInfo(
         item.detailUrl
+      );
+
+
+    const fit =
+      analyzeAxooFit(
+        item.title,
+        detailInfo,
+        "KAMS"
       );
 
 
@@ -1946,7 +1899,10 @@ async function collectKams() {
         sourceUrl:
           item.detailUrl,
 
-        fit
+        fit,
+
+        detail:
+          detailInfo
       })
     );
   }
@@ -2603,24 +2559,32 @@ async function collectArko() {
 
 
   const results =
-    uniqueBy(
-      candidates,
-      item =>
-        item.detailUrl ||
-        `${item.title}|${item.deadline}`
-    )
-      .map(
-        item => {
+    await Promise.all(
+      uniqueBy(
+        candidates,
+        item =>
+          item.detailUrl ||
+          `${item.title}|${item.deadline}`
+      )
+        .map(
+          async item => {
           /*
             v4.1:
             analyzeAxooFit 대신
             ARKO 전용 보정기를 사용한다.
           */
 
+          const detail =
+            await getGenericSupportDetail(
+              item.detailUrl
+            );
+
+
           const fit =
             analyzeArkoFit(
               item.title,
-              item.summary
+              item.summary,
+              detail
             );
 
 
@@ -2650,7 +2614,9 @@ async function collectArko() {
               sourceUrl:
                 item.detailUrl,
 
-              fit
+              fit,
+
+              detail
             });
 
 
@@ -2664,8 +2630,9 @@ async function collectArko() {
 
 
           return result;
-        }
-      );
+          }
+        )
+    );
 
 
   console.log(
@@ -2892,6 +2859,12 @@ async function getKcdfDetailInfo(detailUrl) {
       );
 
 
+    const extracted =
+      extractSupportDetail(
+        html
+      );
+
+
     const plain =
       stripTags(
         html
@@ -2950,6 +2923,8 @@ async function getKcdfDetailInfo(detailUrl) {
 
 
     return {
+      ...extracted,
+
       startDate:
         periodMatch
           ? normalizeDate(
@@ -2977,6 +2952,13 @@ async function getKcdfDetailInfo(detailUrl) {
 
 
     return {
+      detailText: "",
+      detailSummary: "",
+      eligibility: "",
+      supportDetails: "",
+      application: "",
+      supportAmount: 0,
+
       startDate:
         "",
 
@@ -3198,14 +3180,11 @@ async function collectKcdf() {
     }
 
 
-    /*
-      KCDF는 상세 페이지 전체가 아닌
-      제목만 점수 계산에 사용한다.
-    */
-
     const fit =
       analyzeAxooFit(
-        item.title
+        item.title,
+        detail,
+        "KCDF"
       );
 
 
@@ -3236,7 +3215,9 @@ async function collectKcdf() {
         documentUrl:
           detail.documentUrl,
 
-        fit
+        fit,
+
+        detail
       });
 
 
@@ -3634,9 +3615,17 @@ async function collectKocca() {
         item.detailUrl
     )
   ) {
+    const detail =
+      await getGenericSupportDetail(
+        item.detailUrl
+      );
+
+
     const fit =
-      analyzeKoccaFit(
-        item.title
+      analyzeAxooFit(
+        item.title,
+        detail,
+        "KOCCA"
       );
 
 
@@ -3669,7 +3658,9 @@ async function collectKocca() {
         sourceUrl:
           item.detailUrl,
 
-        fit
+        fit,
+
+        detail
       });
 
 
@@ -3840,7 +3831,9 @@ const kocca =
     ...arko,
     ...kcdf,
     ...kocca
-  ];
+  ].map(
+    upgradeLegacySupportRecord
+  );
 
 
   if (
@@ -3912,7 +3905,7 @@ const kocca =
 
 
   console.log(
-    "✅ KAMS + ARKO + KCDF + KOCCA v4.1 수집 완료"
+    "✅ KAMS + ARKO + KCDF + KOCCA v5.0 상세 분석 완료"
   );
 
 

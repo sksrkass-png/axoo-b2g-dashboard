@@ -92,6 +92,17 @@
     { code: "KOCCA", label: "KOCCA" }
   ];
 
+  const SUPPORT_AREA_FILTERS = [
+    { code: "ALL", label: "전체 영역" },
+    { code: "exhibition_space", label: "전시·공간" },
+    { code: "public_art_design", label: "공공미술·디자인" },
+    { code: "digital_media", label: "미디어아트·기술" },
+    { code: "content_brand", label: "콘텐츠·브랜딩" },
+    { code: "business_distribution", label: "사업화·유통" },
+    { code: "collaboration_global", label: "협업·해외진출" },
+    { code: "other", label: "기타" }
+  ];
+
   const SUPPORT_QUICK_FILTERS = [
     { code: "ALL", label: "전체" },
     { code: "RECENT", label: "NEW·최근" },
@@ -120,6 +131,7 @@
     currentTab: "art",
 
     supportSource: "ALL",
+    supportArea: "ALL",
     supportQuick: "ALL",
     supportSort: "RECOMMENDED",
     supportQuery: "",
@@ -287,6 +299,16 @@
     );
   }
 
+  function isAllowedSupportArea(
+    value
+  ) {
+    return SUPPORT_AREA_FILTERS.some(
+      function (item) {
+        return item.code === value;
+      }
+    );
+  }
+
   function isAllowedSupportQuick(
     value
   ) {
@@ -319,6 +341,9 @@
 
         supportSource:
           state.supportSource,
+
+        supportArea:
+          state.supportArea,
 
         supportQuick:
           state.supportQuick,
@@ -384,6 +409,16 @@
 
       if (
         saved &&
+        isAllowedSupportArea(
+          saved.supportArea
+        )
+      ) {
+        state.supportArea =
+          saved.supportArea;
+      }
+
+      if (
+        saved &&
         isAllowedSupportQuick(
           saved.supportQuick
         )
@@ -418,6 +453,8 @@
         state.currentTab ===
           "support" ||
         state.supportSource !==
+          "ALL" ||
+        state.supportArea !==
           "ALL" ||
         state.supportQuick !==
           "ALL" ||
@@ -891,6 +928,25 @@
     );
   }
 
+  function getSupportBusinessAreaCode(
+    project
+  ) {
+    return String(
+      project.businessArea ||
+      "other"
+    ).trim();
+  }
+
+  function getSupportBusinessAreaLabel(
+    project
+  ) {
+    return (
+      project.businessAreaLabel ||
+      project.field ||
+      "기타"
+    );
+  }
+
   function getProjectKeywords(
     project
   ) {
@@ -962,6 +1018,12 @@
   function getSupportFieldLabel(
     project
   ) {
+    if (
+      project.businessAreaLabel
+    ) {
+      return project.businessAreaLabel;
+    }
+
     const keywords =
       getProjectKeywords(
         project
@@ -1597,6 +1659,37 @@
     );
   }
 
+  function filterSupportByArea(
+    projects
+  ) {
+    if (
+      state.supportArea ===
+      "ALL"
+    ) {
+      return projects;
+    }
+
+    return projects.filter(
+      function (project) {
+        const areas =
+          Array.isArray(project.businessAreas)
+            ? project.businessAreas.map(
+                function (area) {
+                  return typeof area === "string"
+                    ? area
+                    : area.code;
+                }
+              )
+            : [];
+
+        return (
+          getSupportBusinessAreaCode(project) === state.supportArea ||
+          areas.includes(state.supportArea)
+        );
+      }
+    );
+  }
+
   function getSupportSearchText(
     project
   ) {
@@ -1745,9 +1838,14 @@
         all
       );
 
+    const bySourceAndArea =
+      filterSupportByArea(
+        bySource
+      );
+
     const bySourceAndQuery =
       filterSupportByQuery(
-        bySource
+        bySourceAndArea
       );
 
     const filtered =
@@ -1763,6 +1861,7 @@
     return {
       all,
       bySource,
+      bySourceAndArea,
       bySourceAndQuery,
       filtered,
       final
@@ -2436,6 +2535,54 @@
     `;
   }
 
+  function getSupportAreaCount(
+    projects,
+    code
+  ) {
+    if (code === "ALL") {
+      return projects.length;
+    }
+
+    return projects.filter(
+      function (project) {
+        const areas = Array.isArray(project.businessAreas)
+          ? project.businessAreas.map(
+              function (area) {
+                return typeof area === "string" ? area : area.code;
+              }
+            )
+          : [];
+
+        return (
+          getSupportBusinessAreaCode(project) === code ||
+          areas.includes(code)
+        );
+      }
+    ).length;
+  }
+
+  function renderSupportAreaFilters(
+    projects
+  ) {
+    return `
+      <section class="support-area-filter" aria-label="사업 영역 필터">
+        <strong>사업 영역</strong>
+
+        ${SUPPORT_AREA_FILTERS.map(
+          function (item) {
+            return renderPillButton(
+              "data-support-area",
+              item.code,
+              item.label,
+              state.supportArea === item.code,
+              getSupportAreaCount(projects, item.code)
+            );
+          }
+        ).join("")}
+      </section>
+    `;
+  }
+
   function getQuickFilterCount(
     projects,
     code
@@ -2649,6 +2796,8 @@
             시각예술, 전시, 공간, 디자인,
             브랜드, 콘텐츠 제작,
             기업 협업과의 연결성을 우선합니다.
+            현재 지원 가능한 공고는 낮은 점수도 숨기지 않고 모두 표시하며,
+            사업영역·지원자격·수행역량·사업성·상세근거를 합산해 100점으로 평가합니다.
             게재 후 3일 이내 공고는 NEW,
             7일 이내 공고는 최근 등록으로 표시되며,
             마감된 공고는 한국시간 기준으로 자동 숨김 처리합니다.
@@ -2682,6 +2831,73 @@
   /* =========================================================
      CARD
   ========================================================= */
+
+  function renderSupportScoreBreakdown(
+    project
+  ) {
+    const rows = Array.isArray(project.scoreBreakdown)
+      ? project.scoreBreakdown
+      : [];
+
+    if (!rows.length) {
+      return "";
+    }
+
+    return `
+      <section class="support-score-breakdown" aria-label="적합도 점수 구성">
+        <strong>적합도 점수 구성</strong>
+        <div>
+          ${rows.map(function (row) {
+            const value = Number(row.score || 0);
+            return `
+              <span class="support-score-chip ${value < 0 ? "is-penalty" : ""}">
+                ${esc(row.label || row.code || "항목")}
+                <b>${value > 0 ? "+" : ""}${esc(value)}</b>
+              </span>
+            `;
+          }).join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  function renderSupportDetailAnalysis(
+    project
+  ) {
+    const fields = [
+      ["지원자격", project.eligibility],
+      ["지원내용", project.supportDetails || project.detailSummary],
+      ["신청방법", project.application]
+    ].filter(function (entry) {
+      return String(entry[1] || "").trim();
+    });
+
+    return `
+      ${renderSupportScoreBreakdown(project)}
+
+      <section class="support-detail-analysis">
+        <div class="support-analysis-heading">
+          <strong>상세 공고 분석</strong>
+          <span>${esc(project.analysisBasis || "공고 제목")} 기준</span>
+        </div>
+
+        ${fields.length
+          ? fields.map(function (entry) {
+              return `
+                <div class="support-detail-row">
+                  <strong>${esc(entry[0])}</strong>
+                  <p>${esc(entry[1])}</p>
+                </div>
+              `;
+            }).join("")
+          : `
+              <p class="support-detail-empty">
+                상세 본문을 충분히 읽지 못해 제목 기준으로 보수적으로 평가했습니다. 원문에서 지원자격과 제출조건을 확인해 주세요.
+              </p>
+            `}
+      </section>
+    `;
+  }
 
   function renderPriorityAccordion(
     project,
@@ -2921,16 +3137,16 @@
 
 
               <div
-                class="score-group"
+                class="score-group support-fit-score"
               >
-
-                <span
-                  class="score"
-                >
-                  ${esc(
-                    nextAction
-                  )}
-                </span>
+                ${tab === "support"
+                  ? `
+                      <strong>${esc(getProjectScore(project))}점</strong>
+                      <span>${esc(project.fitVerdict || nextAction)}</span>
+                    `
+                  : `
+                      <span class="score">${esc(nextAction)}</span>
+                    `}
 
               </div>
 
@@ -3037,6 +3253,13 @@
                 nextAction
               )}
             </p>
+
+
+            ${
+              tab === "support"
+                ? renderSupportDetailAnalysis(project)
+                : ""
+            }
 
 
             ${
@@ -3248,6 +3471,16 @@
           "support"
           ? renderSupportSourceFilters(
               allProjects
+            )
+          : ""
+      }
+
+
+      ${
+        tab ===
+          "support"
+          ? renderSupportAreaFilters(
+              supportContext.bySource
             )
           : ""
       }
@@ -4262,6 +4495,42 @@
           }
 
 
+          /* 사업 영역 */
+
+          const areaButton =
+            event.target.closest(
+              "[data-support-area]"
+            );
+
+          if (
+            areaButton
+          ) {
+            event.preventDefault();
+            event.stopPropagation();
+            clearSupportSearchTimer();
+
+            state.supportInteracted = true;
+
+            const area = String(
+              areaButton.getAttribute(
+                "data-support-area"
+              ) || "ALL"
+            ).trim();
+
+            state.supportArea =
+              isAllowedSupportArea(area)
+                ? area
+                : "ALL";
+
+            savePreferences();
+            renderPriorityPanel(
+              "support",
+              "arts_content_support"
+            );
+            return;
+          }
+
+
           /* 빠른 필터 */
 
           const quickButton =
@@ -4379,6 +4648,9 @@
               true;
 
             state.supportSource =
+              "ALL";
+
+            state.supportArea =
               "ALL";
 
             state.supportQuick =
