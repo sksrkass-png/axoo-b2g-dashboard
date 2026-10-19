@@ -14,6 +14,7 @@ assert(!("fldTo44rlhm7Pr6Oe" in mapped),"Do not reset registration status");
 assert(!("fld1zUvi8HAqISxmA" in mapped),"Do not alter linked application");
 assert.equal(status({deadline:"2025-01-01"}),"마감");
 assert.equal(status({deadline:"2099-01-01",verificationStatus:"source_unavailable"}),"원문 재확인");
-assert.equal(status({deadline:"2099-01-01",startDate:"2098-01-01"}),"기간상 접수 가능");
+assert.equal(status({deadline:"2099-01-01",startDate:"2098-01-01"}),"접수 예정");
+assert.equal(status({deadline:"2099-01-01",startDate:"2020-01-01"}),"기간상 접수 가능");
 assert.ok(mapped["fld9RQNIGOv04uMsD"]?.startsWith("https://")||!mapped["fld9RQNIGOv04uMsD"]);
 console.log("Airtable mirror checks passed; source-only fields, no staff work overwritten; "+real.length+" public candidates");
