@@ -141,7 +141,8 @@ function rowHtml(r){
  <td class="ax-ledger-benefit">${escape(shorten(r.benefit,180))}</td>
  <td class="ax-ledger-target">${escape(shorten(r.applicants,145))}</td>
  <td class="ax-ledger-mode"><strong>${escape(r.mode)}</strong><small>${escape(r.kind==="live"?"자동 판별 · 자격 확정 아님":shorten(r.collaborationNote,100)||"참고 이력")}</small>${evidenceHtml}</td>
- <td class="ax-ledger-score">${r.score==null?"—":escape(r.score+"점")}<small>${escape(r.kind==="live"?r.grade:"미평가")}</small></td></tr>`;
+ <td class="ax-ledger-score">${r.score==null?"—":escape(r.score+"점")}<small>${escape(r.kind==="live"?r.grade:"미평가")}</small></td>
+ <td class="ax-ledger-pipeline-action">${window.AXOOSupportPipeline?.buttonFor(r)||""}</td></tr>`;
 }
 function store(){try{window.localStorage.setItem(KEY,JSON.stringify(FILTERS))}catch(e){}}
 function draw(panel,live){
@@ -176,7 +177,7 @@ function draw(panel,live){
   <small>최근 실행: ${escape(health?.updatedAt?new Date(health.updatedAt).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"}):"확인 중")} · 실패한 기관은 오래된 기록을 신규 공고로 간주하지 않습니다.</small>
  </section>
  <section class="ax-ledger-now"><div class="ax-ledger-section-title"><h3>지금 검토할 공고</h3><small>기간상 신청 가능 공고 · 실제 접수 및 신청 자격은 원문 재확인</small></div>
- <div class="ax-ledger-nowgrid">${now.length?now.map(r=>`<article class="ax-ledger-nowcard"><span>마감 ${escape(r.deadline||"확인")} · ${escape(r.organization)}</span>${aLink(r,escape(r.title))}<small>${escape(r.mode)} · ${r.score}점</small></article>`).join(""):`<p class="ax-ledger-empty">현재 접수 기간이 확인된 공고가 없습니다. 아래 원장에서 예상·참고 공고를 확인하세요.</p>`}</div></section>
+ <div class="ax-ledger-nowgrid">${now.length?now.map(r=>`<article class="ax-ledger-nowcard"><span>마감 ${escape(r.deadline||"확인")} · ${escape(r.organization)}</span>${aLink(r,escape(r.title))}<small>${escape(r.mode)} · ${r.score}점</small>${window.AXOOSupportPipeline?.buttonFor(r)||""}</article>`).join(""):`<p class="ax-ledger-empty">현재 접수 기간이 확인된 공고가 없습니다. 아래 원장에서 예상·참고 공고를 확인하세요.</p>`}</div></section>
  <section class="ax-ledger-controls" aria-label="지원사업 필터">
  ${chipRow("사업연도","year",[...allOption,...years.map(x=>[x,x+"년"])],rows)}
  ${chipRow("지역","region",[...allOption,["전국","전국"],["서울","서울"],["기타","경기·인천·기타"]],rows)}
@@ -192,12 +193,13 @@ function draw(panel,live){
  </div>
  </section>
  <div class="ax-ledger-results"><strong>검색 결과 <b>${displayed.length}</b>건</strong><small>자동 수집 ${displayed.filter(x=>x.kind==="live").length}건 · 참고자료 ${displayed.filter(x=>x.kind==="reference").length}건 · 자격 자동분류 ${displayed.filter(x=>x.review).length}건 · 첨부 분석 ${displayed.filter(x=>x.documents?.status==="parsed").length}건</small></div>
- <div class="ax-ledger-tablebox"><table class="ax-ledger-table"><thead><tr><th>사업연도</th><th>상태</th><th>주관 기관</th><th>사업명</th><th>유형</th><th>접수·공고 기간</th><th>지원 규모·내용</th><th>지원 대상</th><th>참여 방식 / 연계 메모</th><th>AXOO 점수</th></tr></thead>
- <tbody>${displayed.length?displayed.map(rowHtml).join(""):`<tr><td colspan="10" class="ax-ledger-empty">검색 조건에 맞는 공고가 없습니다. 필터를 줄여보세요.</td></tr>`}</tbody></table></div>
+ <div class="ax-ledger-tablebox"><table class="ax-ledger-table"><thead><tr><th>사업연도</th><th>상태</th><th>주관 기관</th><th>사업명</th><th>유형</th><th>접수·공고 기간</th><th>지원 규모·내용</th><th>지원 대상</th><th>참여 방식 / 연계 메모</th><th>AXOO 점수</th><th>지원 관리</th></tr></thead>
+ <tbody>${displayed.length?displayed.map(rowHtml).join(""):`<tr><td colspan="11" class="ax-ledger-empty">검색 조건에 맞는 공고가 없습니다. 필터를 줄여보세요.</td></tr>`}</tbody></table></div>
  <div class="ax-ledger-notes"><p><strong>자료 구분:</strong> 자동 수집은 KAMS·ARKO·KCDF·KOCCA 및 지역 공식 기관 홈페이지에서 수집한 공고이며, 참고자료는 사용자 제공 <em>시각예술 지원사업 2025–2026</em>(2026.10.14 기준)에서 가져온 과거·예상 공고입니다. 참고자료는 원문·현재 일정 재검증 전이며 ‘예상 일정’은 확정 공고가 아닙니다.</p>
  <p><strong>자격·점수:</strong> ‘법인·단체 검토’는 신청 가능 확정이 아닙니다. 참여 방식은 공고 본문·참고 메모 기반의 분류이며 반드시 신청 주체, 업력, 소재지 및 협약 조건을 확인하세요. 적합도 점수는 자동 수집 공고에만 제공됩니다.</p>
  <p>${referenceError?"참고 원장을 불러오지 못했습니다. 새로고침 후 다시 확인하세요.":!reference?"참고 원장을 불러오는 중입니다…":"참고 공고는 실시간 수집과 구분 표시됩니다."}</p></div>
  </section>`;
+ window.AXOOSupportPipeline?.render(panel,rows,()=>draw(panel,live));
 }
 function attach(panel,live){
  if(hooked.has(panel))return;
