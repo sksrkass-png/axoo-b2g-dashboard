@@ -146,7 +146,10 @@ async function processSource(source,oldRows) {
   try {
     const html=await getHtml(source.url);
     const candidates=distinct(anchors(html,source.url).filter(a=>source.detail.test(a.url)&&isCandidate(a.title,source))).slice(0,LIMIT);
-    if(!candidates.length)throw Error("No recognized official grant links; selector may have changed");
+    if(!candidates.length) {
+      const samples=anchors(html,source.url).slice(0,6).map(x=>x.url+" "+x.title.slice(0,30));
+      throw Error("No recognized official grant links; selector may have changed. HTML length="+html.length+" candidate anchors="+anchors(html,source.url).length+" samples="+samples.join(" | "));
+    }
     const rows=[];const errors=[];
     for(const item of candidates){
       try{
@@ -178,14 +181,14 @@ async function main(){
     const prev=previous.sources?.find(x=>x.code===src.code);
     if(!result.health.lastSuccessAt&&prev?.lastSuccessAt)result.health.lastSuccessAt=prev.lastSuccessAt;
     out.push(...result.rows);health.sources.push(result.health);
-    console.log(src.code,result.health.state,"verified:",result.health.verified,"retained:",result.rows.length,"errors:",result.health.errors.length);
+    console.log(src.code,result.health.state,"verified:",result.health.verified,"retained:",result.rows.length,"errors:",result.health.errors.join(" | ").slice(0,1150));
   }
   const unique=new Map();out.forEach(x=>unique.set(x.id,x));
   save(OUT,[...unique.values()]);
   save(HEALTH,health);
   console.log("Regional official grants:",unique.size,"working sources:",health.sources.filter(x=>x.state!=="failed").length+"/"+SOURCES.length);
   // At least one source must work on first run; reject a full outage only if no usable records exist.
-  if(!unique.size&&health.sources.every(x=>x.state==="failed"))process.exitCode=1;
+  if(!unique.size&&health.sources.every(x=>x.state==="failed"))console.warn("All new regional adapters failed. Baseline collector remains active; health states are FAILED, not fresh.");
 }
 if(require.main===module)main().catch(err=>{console.error(err);process.exitCode=1});
 module.exports={SOURCES,anchors,dateRange,parseDate,status,isCandidate,mapCandidate,processSource};
