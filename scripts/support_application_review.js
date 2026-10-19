@@ -62,7 +62,7 @@ function extractApplicationReview(item){
     submissionDocuments:submission,
     missingEvidence:!eligible,
     detailQuality:eligible.length>=28?"eligibility_parsed":eligible?"eligibility_short":"not_verified",
-    decisionNote:"신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
+    decisionNote:"자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
     documentAudit:{status:item?.documentReview?.status||"not_scanned",files:Array.isArray(item?.documentReview?.files)?item.documentReview.files:[]}
   };
 }
