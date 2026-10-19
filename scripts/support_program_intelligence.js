@@ -135,29 +135,35 @@ function decodeEntities(value) {
 }
 
 function htmlToText(html) {
-  return cleanText(
-    decodeEntities(
-      String(html == null ? "" : html)
-        .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
-        .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
-        .replace(/<br\s*\/?\s*>/gi, "\n")
-        .replace(/<\/(?:p|div|li|tr|h[1-6]|section|article)>/gi, "\n")
-        .replace(/<[^>]+>/g, " ")
-    )
-  );
+  // AXOO_EVIDENCE_QA_V1: Ignore global menus, headers, and footer text.
+  const raw = String(html == null ? "" : html);
+  const cleaned = raw
+    .replace(/<head\b[\s\S]*?<\/head>/gi, " ")
+    .replace(/<(script|style|noscript|svg|nav|header|footer|aside)\b[^>]*>[\s\S]*?<\/\1>/gi, " ");
+  const main = cleaned.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
+  const body = main ? main[1] : cleaned;
+  return cleanText(decodeEntities(
+    body.replace(/<br\s*\/?\s*>/gi, "\n")
+      .replace(/<\/(?:p|div|li|tr|h[1-6]|section|article)>/gi, "\n")
+      .replace(/<[^>]+>/g, " ")
+  ));
 }
 
-function extractLabelWindow(text, labels, length = 360) {
+function extractLabelWindow(text, labels, length = 360, stopLabels = []) {
   const source = cleanText(text);
   let best = "";
-
-  labels.forEach(label => {
-    const index = source.toLowerCase().indexOf(label.toLowerCase());
-    if (index === -1) return;
-    const candidate = cleanText(source.slice(index, index + length));
-    if (candidate.length > best.length) best = candidate;
-  });
-
+  for (const label of labels) {
+    const index = source.indexOf(label);
+    if (index < 0) continue;
+    const window = source.slice(index + label.length, index + length);
+    let end = window.length;
+    for (const stop of stopLabels) {
+      const at = window.indexOf(stop);
+      if (at >= 0 && at < end) end = at;
+    }
+    const candidate = cleanText(label + " " + window.slice(0, end));
+    if (candidate.length > label.length + 2 && candidate.length > best.length) best = candidate;
+  }
   return best;
 }
 
@@ -185,28 +191,25 @@ function parseMoneyAmount(value) {
 function extractSupportDetail(html) {
   const text = htmlToText(html);
   const eligibility = extractLabelWindow(
-    text,
-    ["지원대상", "신청자격", "지원자격", "공모대상", "신청대상", "모집대상"],
-    420
+    text, ["지원대상", "신청자격", "지원자격", "공모대상", "신청대상", "모집대상"],
+    420, [" 지역 ", " 신청기간", " 사업유형", " 온라인신청", " 첨부파일", " 지원내용", " 신청방법", " 접수방법"]
   );
   const supportDetails = extractLabelWindow(
-    text,
-    ["지원내용", "지원규모", "사업내용", "지원분야", "사업목적", "공모내용"],
-    520
+    text, ["지원내용", "지원규모", "사업내용", "지원분야", "사업목적", "공모내용"],
+    520, [" 신청방법", " 접수방법", " 제출서류", " 신청기간", " 지원대상", " 신청자격", " 첨부파일"]
   );
   const application = extractLabelWindow(
-    text,
-    ["신청방법", "접수방법", "제출서류", "신청기간", "접수기간"],
-    360
+    text, ["신청방법", "접수방법", "제출서류", "신청기간", "접수기간"],
+    360, [" 지원대상", " 지원내용", " 첨부파일", " 지원자격", " 사업유형"]
   );
-
   return {
     detailText: text.slice(0, 12000),
-    detailSummary: supportDetails || text.slice(0, 700),
+    // Do not claim the site's menu text is a support-program description.
+    detailSummary: supportDetails,
     eligibility,
     supportDetails,
     application,
-    supportAmount: parseMoneyAmount(`${supportDetails} ${text.slice(0, 6000)}`)
+    supportAmount: parseMoneyAmount(supportDetails)
   };
 }
 
@@ -216,7 +219,14 @@ function unique(values) {
 
 function findMatches(source, values) {
   const normalized = cleanText(source).toLowerCase();
-  return unique(values.filter(value => normalized.includes(value.toLowerCase())));
+  return unique(values.filter(value => {
+    const keyword = value.toLowerCase();
+    // AI / XR / VR / AR must match as tokens, not portions of English words.
+    if (/^[a-z]{1,3}$/.test(keyword)) {
+      return new RegExp("(^|[^a-z0-9])" + keyword + "(?=$|[^a-z0-9])").test(normalized);
+    }
+    return normalized.includes(keyword);
+  }));
 }
 
 function classifyBusinessAreas(value, titleValue = "") {
@@ -255,29 +265,33 @@ function analyzeSupportProgram({
   supportDetails = "",
   sourceCode = ""
 } = {}) {
-  const combined = cleanText([title, detailText, eligibility, supportDetails].join(" "));
-  const categorySource = cleanText(
-    [title, supportDetails, eligibility].join(" ")
-  );
+  // Full website text is not reliable scoring evidence; use explicit sections.
+  const combined = cleanText([title, eligibility, supportDetails].join(" "));
+  const categorySource = combined;
   const areas = classifyBusinessAreas(categorySource, title);
   const matchedKeywords = unique(areas.flatMap(area => area.keywords));
-  const hardExcluded = hasAnyPattern(`${title} ${supportDetails}`, HARD_EXCLUDE_PATTERNS);
-  const companyEligible = hasAnyPattern(eligibility || combined, COMPANY_ELIGIBILITY_PATTERNS);
+  const hardExcluded = hasAnyPattern(title, HARD_EXCLUDE_PATTERNS);
+  // Only positive eligibility statements can establish a plausible corporate applicant.
+  const eligibilityBody = cleanText(eligibility.replace(/^(?:지원대상|신청자격|지원자격|공모대상|신청대상|모집대상)\s*[:：]?/, ""));
+  const companyEligible = eligibilityBody.length >= 5 &&
+    hasAnyPattern(eligibilityBody.slice(0, 160), COMPANY_ELIGIBILITY_PATTERNS);
   const individualOnly = hasAnyPattern(eligibility, INDIVIDUAL_ONLY_PATTERNS);
   const deliveryMatches = countPatternMatches(combined, DELIVERY_PATTERNS);
   const commercialMatches = countPatternMatches(combined, COMMERCIAL_PATTERNS);
   const downrankMatches = countPatternMatches(`${title} ${supportDetails}`, DOWNRANK_PATTERNS);
-  const hasDetail = cleanText(detailText).length >= 120;
+  const hasDetail = cleanText(detailText).length >= 90 &&
+    (cleanText(supportDetails).length >= 20 || eligibilityBody.length >= 16);
 
   const relevance = Math.min(38, areas[0].code === "other" ? 8 : 20 + matchedKeywords.length * 3);
   const eligibilityScore = individualOnly ? 0 : companyEligible ? 18 : 8;
   const executionScore = Math.min(18, deliveryMatches * 4);
   const businessScore = Math.min(16, commercialMatches * 3);
-  const evidenceScore = hasDetail ? 8 : 3;
+  const evidenceScore = hasDetail ? 10 : 3;
   const penalty = Math.min(55, downrankMatches * 22 + (individualOnly ? 25 : 0));
 
   let score = relevance + eligibilityScore + executionScore + businessScore + evidenceScore - penalty;
   if (hardExcluded) score = Math.min(score, 35);
+  if (!hasDetail) score = Math.min(score, 69);
   score = Math.max(0, Math.min(100, Math.round(score)));
 
   const grade = score >= 85 ? "S" : score >= 70 ? "A" : score >= 55 ? "B" : "C";
@@ -288,7 +302,7 @@ function analyzeSupportProgram({
 
   const evidence = [];
   if (areas[0].code !== "other") evidence.push(`${areas[0].label} 사업영역과 연결`);
-  if (companyEligible) evidence.push("기업·법인 참여 가능성 확인");
+  if (companyEligible) evidence.push("기업·법인·단체 참여 단서(자격 재확인 필요)");
   if (deliveryMatches) evidence.push("기획·제작·운영 수행역량 활용 가능");
   if (commercialMatches) evidence.push("사업화·유통·지원금 요소 확인");
   if (individualOnly) evidence.push("개인 전용 가능성 있어 자격 재확인 필요");
@@ -311,7 +325,7 @@ function analyzeSupportProgram({
       { code: "eligibility", label: "지원자격", score: eligibilityScore, maxScore: 18 },
       { code: "execution", label: "수행역량", score: executionScore, maxScore: 18 },
       { code: "business", label: "사업성", score: businessScore, maxScore: 16 },
-      { code: "evidence", label: "상세근거", score: evidenceScore, maxScore: 8 },
+      { code: "evidence", label: "상세근거", score: evidenceScore, maxScore: 10 },
       { code: "penalty", label: "감점", score: -penalty, maxScore: 0 }
     ],
     scoreReasons: evidence,
