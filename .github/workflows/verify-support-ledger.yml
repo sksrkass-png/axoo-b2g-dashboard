@@ -10,6 +10,8 @@ on:
       - "support_pipeline.js"
       - "support_pipeline.css"
       - "scripts/test_support_pipeline.js"
+      - "scripts/sync_airtable_support_candidates.js"
+      - "scripts/test_airtable_candidate_sync.js"
       - "dashboard_priority_update.js"
       - "index.html"
       - "scripts/test_support_ledger.js"
@@ -37,3 +39,5 @@ jobs:
         run: node scripts/test_support_ledger.js
       - name: Verify P2 application management
         run: node scripts/test_support_pipeline.js
+      - name: Verify Airtable candidate mirror field safety
+        run: node scripts/test_airtable_candidate_sync.js
