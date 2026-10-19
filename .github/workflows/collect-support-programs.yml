@@ -10,6 +10,8 @@ on:
       - "scripts/collect_support_programs.js"
       - "scripts/collect_regional_support.js"
       - "scripts/test_regional_support.js"
+      - "scripts/sync_airtable_support_candidates.js"
+      - "scripts/test_airtable_candidate_sync.js"
       - "scripts/support_application_review.js"
       - "scripts/enrich_support_documents.js"
       - "scripts/extract_support_attachment.py"
@@ -342,3 +344,15 @@ jobs:
           done
           echo "Failed to publish collector outputs after four attempts"
           exit 1
+
+      # ------------------------------------------
+      # 10. Secure candidate-only Airtable mirror
+      # ------------------------------------------
+      - name: Verify Airtable candidate field mapping
+        run: node scripts/test_airtable_candidate_sync.js
+
+      - name: Sync official support candidates to Airtable
+        continue-on-error: true
+        env:
+          AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
+        run: node scripts/sync_airtable_support_candidates.js
