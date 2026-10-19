@@ -15,7 +15,7 @@ const SOURCES = [
   { code:"BSCF", name:"부산문화재단", level:"광역", region:"기타", url:"https://www.bscf.or.kr/view.do?no=1010", detail:/pbancSn=\d+/i },
   { code:"SEOUL", name:"서울특별시", level:"광역", region:"서울", url:"https://mediahub.seoul.go.kr/competition/competitionList.do", detail:/\/(?:gongmo\/\d+|competition\/(?:competitionView|competitionDetail)\.do)/i }
 ];
-const REJECT=/(선정\s*결과|선정자\s*발표|결과\s*발표|최종\s*결과|합격자|입찰|용역|채용|수강생|교육생|조사\s*설문|만족도\s*조사|당첨자)/;
+const REJECT=/(선정\s*결과|최종\s*선정|선정\s*안내|선정자\s*발표|결과\s*발표|최종\s*결과|합격자|입찰|용역|채용|인턴십|수강생|교육생|조사\s*설문|만족도\s*조사|당첨자)/;
 const GRANT=/(지원|공모|모집|전시|기획|시각|미술|예술|콘텐츠|크리에이티브|디자인|미디어|창업|프로젝트|문화)/;
 const LIMIT=20; // Max detail pages per source and run.
 const JST=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
@@ -39,7 +39,7 @@ function anchors(html,base) {
     }
     const u=urlOf(h,base);
     if(!u)continue;
-    let title=clean(textFromHtml(inner));
+    let title=clean(textFromHtml(inner.replace(/<!--[\s\S]*?-->/g," ")));
     // List links often wrap visible title and badges in the same anchor.
     title=title.replace(/^(?:공모|지원사업|모집|공고|진행중|마감|접수중)\s+/,"");
     if(title.length<7||title.length>230)continue;
@@ -101,7 +101,7 @@ function mapCandidate({source,detailUrl,title,html,verifiedAt}){
   const detail=extractSupportDetail(html);
   const full=textFromHtml(html);
   // Some sites wrap the notice in a non-heading template: preserve list title.
-  const canonicalTitle=getTitle(html,title);
+  const canonicalTitle=title; // Listing title is the stable official announcement heading; site h3 may be navigation.
   if(!isCandidate(title,source)||!isCandidate(canonicalTitle,source))return null;
   const dates=dateRange(full);
   const fit=analyzeSupportProgram({title:canonicalTitle,...detail,sourceCode:source.code});
@@ -147,8 +147,11 @@ async function processSource(source,oldRows) {
     const html=await getHtml(source.url);
     const candidates=distinct(anchors(html,source.url).filter(a=>source.detail.test(a.url)&&isCandidate(a.title,source))).slice(0,LIMIT);
     if(!candidates.length) {
-      const samples=anchors(html,source.url).slice(0,6).map(x=>x.url+" "+x.title.slice(0,30));
-      throw Error("No recognized official grant links; selector may have changed. HTML length="+html.length+" candidate anchors="+anchors(html,source.url).length+" samples="+samples.join(" | "));
+      const samples=anchors(html,source.url).filter(x=>GRANT.test(x.title)).slice(0,8).map(x=>x.url+" "+x.title.slice(0,50));
+      const marker=source.code==="IFAC"?"2027":source.code==="BSCF"?"지원공모":"미디어아트";
+      const at=html.indexOf(marker);
+      const snippet=at>=0?html.slice(Math.max(0,at-180),at+250).replace(/\s+/g," "):"not found";
+      throw Error("No recognized official grant links; selector may have changed. HTML length="+html.length+" candidate anchors="+anchors(html,source.url).length+" samples="+samples.join(" | ")+" nearMarker="+snippet);
     }
     const rows=[];const errors=[];
     for(const item of candidates){
@@ -156,11 +159,12 @@ async function processSource(source,oldRows) {
         const detailHtml=await getHtml(item.url);
         const row=mapCandidate({source,detailUrl:item.url,title:item.title,html:detailHtml,verifiedAt:checkedAt});
         if(row)rows.push(row);
+        else errors.push("Rejected candidate "+item.title.slice(0,90));
       } catch(err){errors.push(item.url+" "+err.message)}
     }
-    if(!rows.length)throw Error("Detail verification failed for all "+candidates.length+" links: "+errors.slice(0,2).join("; "));
+    if(!rows.length)throw Error("Detail verification failed for all "+candidates.length+" links: "+errors.slice(0,3).join("; ")+" titles="+candidates.slice(0,3).map(x=>x.title).join(" | "));
     // Preserve items from previous successful visits for archiving, but don't label stale items current.
-    const byId=new Map(oldRows.filter(x=>x.sourceCode===source.code).map(x=>[x.id,x]));
+    const byId=new Map(oldRows.filter(x=>x.sourceCode===source.code&&isCandidate(x.title,source)).map(x=>[x.id,x]));
     for(const x of rows)byId.set(x.id,x);
     const merged=[...byId.values()].map(x=>{
       if(rows.some(r=>r.id===x.id))return x;
@@ -168,7 +172,7 @@ async function processSource(source,oldRows) {
     }).slice(0,120);
     return {rows:merged,health:{code:source.code,name:source.name,url:source.url,region:source.region,state:errors.length?"partial":"ok",checkedAt,lastSuccessAt:checkedAt,found:candidates.length,verified:rows.length,errors:errors.slice(0,4)}};
   }catch(err){
-    const held=oldRows.filter(x=>x.sourceCode===source.code).map(x=>({...x,verificationStatus:"source_unavailable",status:"확인 필요"}));
+    const held=oldRows.filter(x=>x.sourceCode===source.code&&isCandidate(x.title,source)).map(x=>({...x,verificationStatus:"source_unavailable",status:"확인 필요"}));
     return {rows:held,health:{code:source.code,name:source.name,url:source.url,region:source.region,state:"failed",checkedAt,found:0,verified:0,errors:[err.message]}};
   }
 }
