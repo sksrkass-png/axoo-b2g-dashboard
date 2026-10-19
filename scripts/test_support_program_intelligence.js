@@ -91,7 +91,7 @@ assert.strictEqual(englishWord.businessArea, "other");
 
 const explicitEligibility = analyzeSupportProgram({
   title: "공공미술 디자인 전시 설치 사업",
-  detailText: "문화예술 법인 및 사업자 등이 공공미술 사업에 신청할 수 있으며, 지역별 공간 설치 지원을 포함합니다. 지원자는 계획을 제안해야 합니다.",
+  detailText: "문화예술 법인 및 사업자 등이 공공미술 사업에 신청할 수 있으며, 지역별 공간 설치 지원을 포함합니다. 지원자는 계획을 제안해야 합니다. 선정된 법인과 단체는 공공공간 조형물의 구체적인 기획과 제작 및 운영을 책임지고, 세부 예산과 실행계획서를 작성하여 심사에 제출합니다.",
   eligibility: "지원대상: 문화예술 법인 및 사업자",
   supportDetails: "지원내용: 공공미술 디자인 기획·제작·설치 및 전시 운영 사업화 지원"
 });
