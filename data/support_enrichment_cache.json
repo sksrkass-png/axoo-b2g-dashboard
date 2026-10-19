@@ -1037,71 +1037,37 @@
     },
     "kocca-326D00034008|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [],
       "snippets": []
     },
     "seoul-8f04c919b2144a|https://mediahub.seoul.go.kr/gongmo/2000784": {
-      "status": "parsed",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
-      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
-      "files": [
-        {
-          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
-          "label": "공고문.pdf",
-          "format": "pdf",
-          "status": "parsed",
-          "reason": "",
-          "characters": 2219,
-          "pages": 4
-        },
-        {
-          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280848",
-          "label": "(붙임)제출서류.hwp",
-          "format": "hwp",
-          "status": "unsupported",
-          "reason": "Binary HWP requires manual conversion"
-        }
-      ],
-      "snippets": [
-        {
-          "label": "지원 자격 문구",
-          "quote": "기간 : 2026. 10. 8.(목) ~ 11. 8.(일) ㅇ 응모자격 : 누구나(전국 단위 공모) ㅇ 공모주제 : 도심 쓰레기 문제 해결 아이디어 - 사람이 많이 모이는 행사장이나 홍대 등 번화가 쓰레기 문제 해결 ㅇ 공모분야 : ① 아이디어 공모전 ② 아이디어 한 줄 톡! ① 개인/팀(3인) 참여, 그림, 카드뉴스, 웹툰, 동영상 등 형식 제한 없이 제안 ② 아이디어는 있지만 공모전 응모가 부담스",
-          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847"
-        },
-        {
-          "label": "제출서류 문구",
-          "quote": "법 : 이메일 제출 zeroseoul26@gmail.com - 제출서류 작성 후 서명하여 아이디어 파일(그림, 영상, 글 등)과 함께 제출 ㅇ 제출서류 : 참가신청서, 개인정보 수집·이용 동의서, 청렴서약서 ㅇ 응모제한 - 타 공모전 입상·수상작, 서울시 타 공모전에서 표절·중복응모·도용 등 부정행위 발생으로 수상 취소 및 상금·부상 환수 이력이 있는 자 ※ 청렴서약서 제출(‘타 공모전 수상 경력없음",
-          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847"
-        }
-      ]
+      "status": "source_unavailable",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
+      "documentUrl": "",
+      "files": [],
+      "snippets": [],
+      "reason": "fetch failed"
     },
     "seoul-3fe6492becb7fb|https://mediahub.seoul.go.kr/gongmo/2000783": {
-      "status": "manual_review_required",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "status": "source_unavailable",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
-      "files": [
-        {
-          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280254",
-          "label": "공고문_최종.hwp",
-          "format": "hwp",
-          "status": "unsupported",
-          "reason": "Binary HWP requires manual conversion"
-        }
-      ],
-      "snippets": []
+      "files": [],
+      "snippets": [],
+      "reason": "fetch failed"
     },
     "arko-239201|https://theater.arko.or.kr/Rent/Notice/239201/?q=null": {
       "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [],
       "snippets": []
     },
     "seoul-636b66cf2f51ba|https://mediahub.seoul.go.kr/gongmo/2000786": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
       "files": [
         {
@@ -1127,7 +1093,7 @@
     },
     "scas-91e983e3dec123|https://www.scas.kr/biz/detail/510?page=1": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf",
       "files": [
         {
@@ -1191,14 +1157,14 @@
     },
     "kocca-326D00034004|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034004&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [],
       "snippets": []
     },
     "scas-09d4de2de885de|https://www.scas.kr/biz/detail/498?page=1": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx",
       "files": [
         {
@@ -1249,7 +1215,7 @@
     },
     "ifac-ded1f48724b646|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=235996": {
       "status": "attachment_not_readable",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [
         {
@@ -1278,7 +1244,7 @@
     },
     "ifac-5547b967eb81e9|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236038": {
       "status": "source_unavailable",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [],
       "snippets": [],
@@ -1286,7 +1252,7 @@
     },
     "ifac-70c79c6a141f34|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236051": {
       "status": "attachment_not_readable",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [
         {
@@ -1308,7 +1274,7 @@
     },
     "ifac-65799bc417ca2d|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236121": {
       "status": "attachment_not_readable",
-      "reviewedAt": "2026-10-19T10:40:04.041Z",
+      "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [
         {
@@ -1322,5 +1288,5 @@
       "snippets": []
     }
   },
-  "updatedAt": "2026-10-19T10:40:04.041Z"
+  "updatedAt": "2026-10-19T10:42:59.376Z"
 }
