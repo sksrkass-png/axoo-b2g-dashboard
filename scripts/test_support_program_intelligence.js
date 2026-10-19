@@ -56,4 +56,48 @@ const excluded = analyzeSupportProgram({
 assert.strictEqual(excluded.isExcluded, true);
 assert.ok(excluded.score <= 35);
 
+
+// AXOO_EVIDENCE_QA_V1: generic navigation is not program eligibility.
+const noisyHtml = \`
+<html>
+  <head><title>공지사항</title></head>
+  <body>
+    <nav>기업지원 사업화 프로젝트 콘텐츠 미디어아트</nav>
+    <main>
+      <h1>문화예술 참여 안내</h1>
+      <div>지원대상 전체 지역 전국 신청기간 2026-10-01 ~ 2026-11-01 사업유형 창작</div>
+      <div>온라인신청 첨부파일 확인</div>
+    </main>
+    <footer>사업자 법인 컨소시엄 지원내용 1억원</footer>
+  </body>
+</html>\`;
+const noisyDetails = extractSupportDetail(noisyHtml);
+assert.strictEqual(noisyDetails.eligibility, "지원대상 전체");
+assert.strictEqual(noisyDetails.supportDetails, "");
+assert.strictEqual(noisyDetails.supportAmount, 0);
+assert.ok(!noisyDetails.detailText.includes("기업지원 사업화"));
+
+const uncertainFit = analyzeSupportProgram({
+  title: "문화예술 참여 안내",
+  ...noisyDetails
+});
+assert.strictEqual(uncertainFit.companyEligible, false);
+assert.strictEqual(uncertainFit.analysisConfidence, "low");
+assert.ok(uncertainFit.score <= 69);
+assert.strictEqual(uncertainFit.isExcluded, false);
+
+const englishWord = analyzeSupportProgram({ title: "Art Residency Program" });
+assert.strictEqual(englishWord.businessArea, "other");
+
+const explicitEligibility = analyzeSupportProgram({
+  title: "공공미술 디자인 전시 설치 사업",
+  detailText: "문화예술 법인 및 사업자 등이 공공미술 사업에 신청할 수 있으며, 지역별 공간 설치 지원을 포함합니다. 지원자는 계획을 제안해야 합니다.",
+  eligibility: "지원대상: 문화예술 법인 및 사업자",
+  supportDetails: "지원내용: 공공미술 디자인 기획·제작·설치 및 전시 운영 사업화 지원"
+});
+assert.strictEqual(explicitEligibility.companyEligible, true);
+assert.ok(explicitEligibility.score > uncertainFit.score);
+assert.strictEqual(explicitEligibility.analysisConfidence, "high");
+assert.ok(explicitEligibility.scoreBreakdown.reduce((n, v) => n + v.score, 0) === explicitEligibility.score);
+
 console.log("support program intelligence tests passed");
