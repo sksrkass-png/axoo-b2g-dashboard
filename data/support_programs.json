@@ -102,7 +102,7 @@
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:52:39.324Z",
+      "reviewedAt": "2026-10-19T10:55:08.961Z",
       "documentUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf",
       "files": [
         {
@@ -563,9 +563,9 @@
     "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "detailSummary": "",
-    "eligibility": "지원대상 전체",
+    "eligibility": "",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -754,9 +754,9 @@
     "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 단체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
