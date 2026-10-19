@@ -18,6 +18,12 @@ const SUPPORT_FILE = path.join(
   "support_programs.json"
 );
 
+const REGIONAL_SUPPORT_FILE = path.join(
+  process.cwd(),
+  "data",
+  "support_regional_programs.json"
+);
+
 const PRIORITY_FILE = path.join(
   process.cwd(),
   "data",
@@ -854,7 +860,15 @@ function mapSupportItem(item) {
 
     status:
       item.status ||
-      "진행중",
+      "확인 필요",
+
+    statusBasis: text(item.statusBasis),
+    verificationStatus: text(item.verificationStatus),
+    collectionVerifiedAt: text(item.collectionVerifiedAt || item.collectedAt),
+    sourceLastCheckedAt: text(item.sourceLastCheckedAt),
+    sourceDetailVerified: item.sourceDetailVerified === true,
+    sourceLevel: text(item.sourceLevel || (["KAMS","ARKO","KCDF","KOCCA"].includes(item.sourceCode) ? "국가" : "")),
+    region: text(item.region || (["KAMS","ARKO","KCDF","KOCCA"].includes(item.sourceCode) ? "전국" : "")),
 
     sourceUrl:
       sourceUrl,
@@ -1162,6 +1176,16 @@ function main() {
   }
 
 
+  const regionalSupport =
+    readJson(
+      REGIONAL_SUPPORT_FILE,
+      []
+    );
+
+  if (!Array.isArray(regionalSupport)) {
+    throw new Error("data/support_regional_programs.json 은 배열이어야 합니다.");
+  }
+
   const existing =
     readJson(
       PRIORITY_FILE,
@@ -1222,14 +1246,18 @@ function main() {
     최신 지원사업
   */
 
-  const latestSupport =
-    supportPrograms
-      .map(
-        mapSupportItem
-      )
-      .sort(
-        sortSupport
-      );
+  // Only new verified-site records enter live data; reference history stays separate.
+  // Avoid duplicate notice URLs when two collectors discover the same project.
+  const normalizedSupport = [...supportPrograms, ...regionalSupport].map(mapSupportItem);
+  const keyedSupport = new Map();
+  const seenUrls = new Set();
+  for (const item of normalizedSupport) {
+    const url = String(item.sourceUrl || "").split("#")[0].trim().toLowerCase();
+    if (url && seenUrls.has(url)) continue;
+    if (url) seenUrls.add(url);
+    if (!keyedSupport.has(item.id)) keyedSupport.set(item.id, item);
+  }
+  const latestSupport = [...keyedSupport.values()].sort(sortSupport);
 
 
   /*
