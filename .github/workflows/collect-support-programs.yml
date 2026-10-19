@@ -274,26 +274,46 @@ jobs:
         shell: bash
 
         run: |
-          git config user.name \
-            "github-actions[bot]"
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git config user.email \
-            "41898282+github-actions[bot]@users.noreply.github.com"
+          # Preserve only this collector's outputs outside the Git working tree.
+          # Another workflow may update priority_projects.json while we collect.
+          SNAPSHOT_DIR="$(mktemp -d)"
+          cp data/support_programs.json "$SNAPSHOT_DIR/support_programs.json"
+          cp data/support_regional_programs.json "$SNAPSHOT_DIR/support_regional_programs.json"
+          cp data/support_collection_health.json "$SNAPSHOT_DIR/support_collection_health.json"
 
-          git add \
-            data/support_programs.json \
-            data/support_regional_programs.json \
-            data/support_collection_health.json \
-            data/priority_projects.json
+          for attempt in 1 2 3 4; do
+            echo "Data publish attempt $attempt"
+            git fetch origin main
+            git reset --hard origin/main
 
-          git commit \
-            -m "Refresh official support sources and AXOO opportunity ledger"
+            cp "$SNAPSHOT_DIR/support_programs.json" data/support_programs.json
+            cp "$SNAPSHOT_DIR/support_regional_programs.json" data/support_regional_programs.json
+            cp "$SNAPSHOT_DIR/support_collection_health.json" data/support_collection_health.json
 
-          for attempt in 1 2 3; do
-            git pull --rebase origin main
+            # Rebuild on the freshest upstream G2B files to prevent lost updates.
+            node scripts/build_priority_projects.js
+
+            git add \
+              data/support_programs.json \
+              data/support_regional_programs.json \
+              data/support_collection_health.json \
+              data/priority_projects.json
+
+            if git diff --cached --quiet; then
+              echo "No new data differences after sync"
+              exit 0
+            fi
+
+            git diff --cached --check
+            git commit -m "Refresh official support sources and AXOO opportunity ledger"
             if git push origin HEAD:main; then
               exit 0
             fi
-            sleep 3
+            sleep 4
           done
+          echo "Failed to publish collector outputs after four attempts"
           exit 1
