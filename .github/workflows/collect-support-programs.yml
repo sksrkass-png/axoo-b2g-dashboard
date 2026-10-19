@@ -352,7 +352,7 @@ jobs:
         run: node scripts/test_airtable_candidate_sync.js
 
       - name: Sync official support candidates to Airtable
-        continue-on-error: true
+        # Missing AIRTABLE_PAT is a documented setup state; actual sync failures must fail the run.
         env:
           AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
         run: node scripts/sync_airtable_support_candidates.js
