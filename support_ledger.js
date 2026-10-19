@@ -129,7 +129,7 @@ function draw(panel,live){
  const rows=build(live);
  const displayed=rows.filter(matches).sort(comparator);
  const counts=(code)=>rows.filter(r=>r.status.code===code).length;
- const now=rows.filter(r=>r.kind==="live"&&r.status.code==="open"&&!r.excluded).sort(comparator).slice(0,5);
+ const now=rows.filter(r=>r.kind==="live"&&r.status.code==="open"&&!r.excluded&&r.score>=40&&["법인·단체 검토","협업·컨소시엄"].includes(r.mode)).sort(comparator).slice(0,5);
  const years=[...new Set(rows.map(r=>String(r.year)).filter(x=>/^\d{4}$/.test(x)))].sort((a,b)=>Number(b)-Number(a));
  const types=Object.keys(TYPE).filter(x=>x!=="bid").map(x=>[x,TYPE[x]]);
  const modes=["법인·단체 검토","협업·컨소시엄","작가·개인","자격 확인"];
