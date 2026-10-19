@@ -1410,7 +1410,116 @@
       "documentUrl": "",
       "files": [],
       "snippets": []
+    },
+    "ifac-a273659674ec5f|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236138": {
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-19T11:01:17.510Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=229432&type=bbs",
+          "label": "[참고] 전년도 건강검진 미수검자 검진신청 매뉴얼 ( 0.9598674774169922 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=229433&type=bbs",
+          "label": "2026_예술인종합건강검진안내 1_검단탑병원 ( 0.21092987060546875 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=229434&type=bbs",
+          "label": "2026_예술인종합건강검진안내 2_나은병원 ( 0.21686744689941406 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": []
+    },
+    "ifac-3d8935992e9dbf|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236127": {
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-19T11:01:17.510Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=228771&type=bbs",
+          "label": "2026 서울무역센터(코엑스) 연계 미디어아트 작품 선정 공고 ( 0.08689022064208984 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=228772&type=bbs",
+          "label": "선정내역 및 심의총평 ( 0.07878398895263672 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": []
+    },
+    "ifac-53bb97e8005e6f|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236120": {
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-19T11:01:17.510Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=228399&type=bbs",
+          "label": "[참고] 전년도 건강검진 미수검자 검진신청 매뉴얼 ( 0.9598674774169922 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=228400&type=bbs",
+          "label": "2026_예술인종합건강검진안내 1_검단탑병원 ( 0.21092987060546875 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=228401&type=bbs",
+          "label": "2026_예술인종합건강검진안내 2_나은병원 ( 0.21686744689941406 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": []
+    },
+    "ifac-c94bd15ee542a8|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236106": {
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-19T11:01:17.510Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=228359&type=bbs",
+          "label": "[공고문]인천예술인이음카드 추가 캐시백 한시적 항도 상향 안내 공고문 ( 0.033203125 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=228361&type=bbs",
+          "label": "홍보 이미지 ( 0.1439971923828125 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": []
+    },
+    "ifac-eec27b37b9e464|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=235920": {
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T11:01:17.510Z",
+      "documentUrl": "",
+      "files": [],
+      "snippets": []
     }
   },
-  "updatedAt": "2026-10-19T10:55:08.961Z"
+  "updatedAt": "2026-10-19T11:01:17.510Z"
 }
