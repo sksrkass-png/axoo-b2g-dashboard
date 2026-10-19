@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T08:24:23.263Z",
+  "updatedAt": "2026-10-19T08:29:25.318Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-19T08:24:23.263Z",
-      "lastSuccessAt": "2026-10-19T08:24:23.263Z",
+      "checkedAt": "2026-10-19T08:29:25.319Z",
+      "lastSuccessAt": "2026-10-19T08:29:25.319Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -23,8 +23,8 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-19T08:24:41.738Z",
-      "lastSuccessAt": "2026-10-19T08:24:41.738Z",
+      "checkedAt": "2026-10-19T08:29:36.156Z",
+      "lastSuccessAt": "2026-10-19T08:29:36.156Z",
       "found": 2,
       "verified": 2,
       "errors": []
@@ -34,13 +34,12 @@
       "name": "인천문화재단",
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
-      "state": "failed",
-      "checkedAt": "2026-10-19T08:24:46.461Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "No recognized official grant links; selector may have changed. HTML length=123856 candidate anchors=80 samples=https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 주요 지원사업 | https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 예술창작활동 지원 | https://ifac.or.kr/ifacintro/mainSupProjects/residentOrganization.do?key=m2501143833614 공연장상주단체 지원 | https://ifac.or.kr/ifacintro/mainSupProjects/artActivation/about.do?key=m2501143848514 미술활성화 기획지원 | https://ifac.or.kr/ifacintro/mainSupProjects/civicCulture.do?key=m2501143833943 시민문화 프로젝트 | https://ifac.or.kr/ifacintro/mainSupProjects/educationCulture.do?key=m2501143834258 문화예술교육 지원 | https://ifac.or.kr/ifacintro/mainProjects/youthCulture/about.do?key=m2501143880431 청년문화사업(시작공간일부) | https://ifac.or.kr/ifacintro/mainProjects/educationSupCenter/about.do?key=m2501143881005 문화예술교육지원센터 nearMarker= <dd>예술지원팀</dd> </dl> </a> </li> <li> <a href=\"#none\" onclick=\"goView('236090', '');\"> <dl class=\"team\"> <dt class=\"blind\"></dt> <dd>지원사업</dd> </dl> <dl class=\"title\"> <dt class=\"blind\">제목</dt> <dd> 2027 인천문화재단 청년예술활동지원 공모 안내 <span class=\"notice\">공지</span> </dd> </dl> "
-      ]
+      "state": "ok",
+      "checkedAt": "2026-10-19T08:29:40.040Z",
+      "lastSuccessAt": "2026-10-19T08:29:40.040Z",
+      "found": 10,
+      "verified": 10,
+      "errors": []
     },
     {
       "code": "BSCF",
@@ -48,8 +47,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-19T08:24:52.263Z",
-      "lastSuccessAt": "2026-10-19T08:24:52.263Z",
+      "checkedAt": "2026-10-19T08:30:19.037Z",
+      "lastSuccessAt": "2026-10-19T08:30:19.037Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -60,8 +59,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-19T08:25:02.308Z",
-      "lastSuccessAt": "2026-10-19T08:25:02.308Z",
+      "checkedAt": "2026-10-19T08:30:27.643Z",
+      "lastSuccessAt": "2026-10-19T08:30:27.643Z",
       "found": 9,
       "verified": 8,
       "errors": [
