@@ -6,15 +6,15 @@
  * are NEVER overwritten by this importer.
  */
 const fs=require("node:fs");
-const BASE="app59It3ijZvl0szJ",TABLE="tblsWgVeEHJB1Tbtb";
+const BASE="applM2n5kScusEfYr",TABLE="tblwuEYAPKkA5BEVs";
 const API="https://api.airtable.com/v0/"+BASE+"/"+TABLE;
 const KEYS={
-title:"fldiCBkIAl1hNXb8g",id:"fldVj9VooEtVzFaU7",url:"fld9RQNIGOv04uMsD",
-org:"fld3PTOKLYNFUanRk",status:"fld7ThoMU1V4HV9IP",
-deadline:"fld9ybp0z05kEi4ya",mode:"fldonkOJBOPmpQ3pa",
-score:"fldZycGG3GsunqXu1",category:"fldLziXPPclkyE6iW",
-region:"fldnBIqSjSp87HRNQ",basis:"fld9rrPOAs3AVHm69",
-collected:"fldVasuvcu8Aejajw",registered:"fldTo44rlhm7Pr6Oe"
+title:"fldNCe5SdjlOFVB7O",id:"flddGu8HySNRqIoyJ",url:"fldkvwwF165BU1L4r",
+org:"fld5kIh1Ogf3JlzYz",status:"fldpF1bms8kq8H4fj",
+deadline:"fldgZX910ImKkPKUE",mode:"fldYX0kJwLMPAAa5N",
+score:"fldjA4F9QIT9wHyfN",category:"fldaz6wliRTwjbkR5",
+region:"fld0XHCOjH2s4qHy4",basis:"fldl8lmYMSDTSAi1j",
+collected:"fldjdNubKVffi9so7",registered:"fldKNS0du4E4Pl68X"
 };
 const CODES=new Set(["법인 직접 신청 검토","작가·예술단체 협업 검토","컨소시엄 참여 검토","개인 신청 중심","법인 신청 제한 단서","자격 확인 필요"]);
 const STATES=new Set(["기간상 접수 가능","접수 예정","마감","일정 확인","원문 재확인"]);
