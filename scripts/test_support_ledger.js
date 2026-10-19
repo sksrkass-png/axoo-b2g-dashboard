@@ -25,8 +25,9 @@
   const context={
     window:{localStorage:{getItem(k){return store[k]||null},setItem(k,v){store[k]=v}}},
     fetch:async url=>{
-      assert.equal(url,"data/support_ledger_reference.json");
-      return{ok:true,json:async()=>ref};
+      if(url==="data/support_ledger_reference.json")return{ok:true,json:async()=>ref};
+      if(url==="data/support_collection_health.json")return{ok:true,json:async()=>({sources:[],updatedAt:"2026-10-19T00:00:00Z"})};
+      throw Error("Unexpected support fetch "+url);
     },
     console,Intl,Date,WeakSet
   };
