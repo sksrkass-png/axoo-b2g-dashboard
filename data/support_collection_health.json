@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-19T08:14:02.862Z",
+  "interval": "every 2 hours (GitHub Actions cron; not live push)",
+  "sources": [
+    {
+      "code": "SCAS",
+      "name": "서울문화재단",
+      "url": "https://www.scas.kr/biz/list",
+      "region": "서울",
+      "state": "failed",
+      "checkedAt": "2026-10-19T08:14:02.862Z",
+      "found": 0,
+      "verified": 0,
+      "errors": [
+        "Detail verification failed for all 12 links: "
+      ]
+    },
+    {
+      "code": "GGCF",
+      "name": "경기문화재단",
+      "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
+      "region": "기타",
+      "state": "ok",
+      "checkedAt": "2026-10-19T08:14:15.239Z",
+      "lastSuccessAt": "2026-10-19T08:14:15.239Z",
+      "found": 4,
+      "verified": 4,
+      "errors": []
+    },
+    {
+      "code": "IFAC",
+      "name": "인천문화재단",
+      "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
+      "region": "기타",
+      "state": "failed",
+      "checkedAt": "2026-10-19T08:14:20.153Z",
+      "found": 0,
+      "verified": 0,
+      "errors": [
+        "No recognized official grant links; selector may have changed. HTML length=123856 candidate anchors=80 samples=https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255#contentsFocus 본문 바로가기 | https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255#gnb 주메뉴 바로가기 | https://ifac.or.kr/ifacintro/intro/about.do?key=m2501136422568 소개 및 인사말 | https://ifac.or.kr/ifacintro/organizations.do?key=m2501143809919 조직도 및 부서 안내 | https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 주요 지원사업 | https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 예술창작활동 지원"
+      ]
+    },
+    {
+      "code": "BSCF",
+      "name": "부산문화재단",
+      "url": "https://www.bscf.or.kr/view.do?no=1010",
+      "region": "기타",
+      "state": "failed",
+      "checkedAt": "2026-10-19T08:14:25.653Z",
+      "found": 0,
+      "verified": 0,
+      "errors": [
+        "No recognized official grant links; selector may have changed. HTML length=180200 candidate anchors=59 samples=https://www.bscf.or.kr/view.do?no=1010#gnb 상단주메뉴 바로가기 | https://www.bscf.or.kr/view.do?no=1003 감만창의문화촌 | https://www.bscf.or.kr/view.do?no=1004 조선통신사역사관 | https://www.bscf.or.kr/view.do?no=1107 사상인디스테이션 | https://www.bscf.or.kr/view.do?no=1006 한성1918 B-Culture PLAZA | https://www.bscf.or.kr/view.do?no=1008 창작공간 두구"
+      ]
+    },
+    {
+      "code": "SEOUL",
+      "name": "서울특별시",
+      "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
+      "region": "서울",
+      "state": "failed",
+      "checkedAt": "2026-10-19T08:14:27.362Z",
+      "found": 0,
+      "verified": 0,
+      "errors": [
+        "Detail verification failed for all 9 links: "
+      ]
+    }
+  ]
+}
