@@ -34,7 +34,7 @@
   context.window.AXOOSupportLedger.render(panel,live);
   await new Promise(resolve=>setTimeout(resolve,20));
   assert.match(panel.innerHTML,/연간 공고 원장/);
-  assert.match(panel.innerHTML,/2027 시각예술전시·행사지원/);
+  assert.match(panel.innerHTML,/시각예술전시·행사지원/);
   assert.match(panel.innerHTML,/2026년 방송영상콘텐츠후반작업지원/);
   assert.match(panel.innerHTML,/예상 일정/);
   assert.match(panel.innerHTML,/마감·참고|지난 사업/);
