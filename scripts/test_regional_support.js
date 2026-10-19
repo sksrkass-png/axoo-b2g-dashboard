@@ -18,6 +18,14 @@ const html='<a href="/biz/detail/514"><strong>2027 시각예술 기획전 지원
 const found=anchors(html,"https://www.scas.kr/biz/list");
 assert.equal(found.length,2);
 assert.equal(found[0].url,"https://www.scas.kr/biz/detail/514");
+
+const incheon=anchors('<a href="#none" onclick="goView(\'236090\', \'\');">2027 인천문화재단 청년예술활동지원 공모 안내</a>',
+ "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255");
+assert.equal(incheon[0].url,"https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236090");
+const busan=anchors('<a href="javascript:void(0);" onclick="javascript:show(\'2437\');">2026년 예술 창작 지원 공모</a>',
+ "https://www.bscf.or.kr/view.do?no=1010");
+assert.ok(busan[0].url.includes("pbancSn=2437"));
+
 const record=mapCandidate({
  source:SOURCES[0],
  title:"2027 시각예술 기획전 지원사업",
