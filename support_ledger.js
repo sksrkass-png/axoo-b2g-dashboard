@@ -40,11 +40,9 @@ function statusOf(x){
  const now=today();
  if(x.kind==="reference"){
    if(x.expected)return {code:"forecast",label:"예상 일정",rank:3};
-   if(x.deadline&&x.deadline<now)return{code:"closed",label:"마감·참고",rank:5};
+   // The supplied 2026-10-14 reference explicitly treated all non-future, non-forecast records as closed.
    if(x.deadline&&x.deadline>=now)return{code:"verify",label:"접수 확인 필요",rank:1};
-   if(x.year<Number(now.slice(0,4)))return{code:"closed",label:"지난 사업",rank:5};
-   if(x.year>Number(now.slice(0,4)))return{code:"verify",label:"일정 확인",rank:4};
-   return{code:"verify",label:"일정 확인",rank:4};
+   return{code:"closed",label:"마감·참고",rank:5};
  }
  if(x.deadline&&x.deadline<now)return{code:"closed",label:"마감",rank:5};
  if(x.deadline&&x.startDate&&x.startDate>now)return{code:"scheduled",label:"접수 예정",rank:2};
@@ -124,7 +122,7 @@ function draw(panel,live){
  const rows=build(live);
  const displayed=rows.filter(matches).sort(comparator);
  const counts=(code)=>rows.filter(r=>r.status.code===code).length;
- const now=rows.filter(r=>r.status.code==="open").sort(comparator).slice(0,5);
+ const now=rows.filter(r=>r.kind==="live"&&r.status.code==="open"&&!r.excluded).sort(comparator).slice(0,5);
  const years=[...new Set(rows.map(r=>String(r.year)).filter(x=>/^\d{4}$/.test(x)))].sort((a,b)=>Number(b)-Number(a));
  const types=Object.keys(TYPE).filter(x=>x!=="bid").map(x=>[x,TYPE[x]]);
  const modes=["법인·단체 검토","협업·컨소시엄","작가·개인","자격 확인"];
