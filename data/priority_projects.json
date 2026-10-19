@@ -1,44 +1,60 @@
 [
   {
-    "id": "kcdf-9134",
-    "source": "한국공예·디자인문화진흥원",
-    "sourceCode": "KCDF",
+    "id": "kocca-326D00088011",
+    "source": "한국콘텐츠진흥원",
+    "sourceCode": "KOCCA",
     "sourceType": "지원사업",
-    "title": "2026 공공디자인 라운드 4차 참여자 모집 공모",
-    "organization": "한국공예·디자인문화진흥원",
-    "agency": "한국공예·디자인문화진흥원",
+    "title": "2026년 KOCCA CKL TOKYO 입주기업 모집",
+    "organization": "한국콘텐츠진흥원",
+    "agency": "한국콘텐츠진흥원",
     "amount": 0,
     "budget": null,
     "supportAmount": null,
-    "publishedDate": "2026-10-01",
-    "postedDate": "2026-10-01",
-    "startDate": "2026-10-01",
-    "deadline": "2026-10-27",
-    "deadlineDate": "2026-10-27",
-    "endDate": "2026-10-27",
+    "publishedDate": "2026-10-14",
+    "postedDate": "2026-10-14",
+    "startDate": "2026-10-14",
+    "deadline": "2026-11-04",
+    "deadlineDate": "2026-11-04",
+    "endDate": "2026-11-04",
     "status": "진행중",
-    "sourceUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9134&brdCodeValue=&searchField=titlecontent",
-    "originalUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9134&brdCodeValue=&searchField=titlecontent",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
     "documentUrl": "",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
     "priorityCategoryLabel": "예술·콘텐츠 지원사업",
     "priorityRank": 0,
-    "field": "공공미술·디자인",
-    "businessArea": "public_art_design",
-    "businessAreaLabel": "공공미술·디자인",
+    "field": "콘텐츠 제작·브랜딩",
+    "businessArea": "content_brand",
+    "businessAreaLabel": "콘텐츠 제작·브랜딩",
     "businessAreas": [
       {
-        "code": "public_art_design",
-        "label": "공공미술·디자인"
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      },
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      },
+      {
+        "code": "digital_media",
+        "label": "미디어아트·기술"
       }
     ],
     "matchedPriorityKeywords": [
-      "공공디자인"
+      "콘텐츠",
+      "콘텐츠 제작",
+      "영상",
+      "공간",
+      "신기술"
     ],
     "matchedKeywords": [
-      "공공디자인"
+      "콘텐츠",
+      "콘텐츠 제작",
+      "영상",
+      "공간",
+      "신기술"
     ],
     "isPriority": true,
     "isExcludedFromPriority": false,
@@ -49,7 +65,7 @@
       {
         "code": "relevance",
         "label": "사업영역",
-        "score": 23,
+        "score": 35,
         "maxScore": 38
       },
       {
@@ -61,20 +77,20 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 18,
+        "score": 8,
         "maxScore": 18
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 12,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 10,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -84,27 +100,26 @@
       }
     ],
     "scoreReasons": [
-      "공공미술·디자인 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
+      "기획·제작·운영 수행역량 활용 가능"
     ],
     "analysisBasis": "상세 공고문",
     "analysisConfidence": "high",
     "companyEligible": true,
-    "score": 79,
-    "axooFitScore": 79,
-    "gradeReason": "적합도 높음: 공공미술·디자인 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "적합도 높음: 공공미술·디자인 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "한국공예·디자인문화진흥원 --> --> 건너뛰기링크 본문 바로가기 주메뉴 바로가기 하단 바로가기 로그인 회원가입 ENGLISH 한국공예·디자인문화진흥원 한복진흥센터 한국공예·디자인문화진흥원 한복진흥센터 한국공예·디자인문화진흥원 한복진흥센터 한국공예·디자인문화진흥원 한복진흥센터 알림소식 알림소식 행사소식 KCDF소식 보도자료 뉴스레터 유관기관소식 공지사항 공지사항 사업공모 사업공모 공모결과 입찰공고 입찰공고 채용공고 채용공고 채용결과 사업안내 사업안내 공예 KCDF갤러리 운영 KCDF기획 및 공모전시 정기간행물 발행 전통문화유산활용 상품개발 공예문화산업 연구조사 우수공예품 지정 및 보급 활성화 우수문화상품 지정제 활성화 공예트렌드페어 공예 유통망 기반조성 공예주간 공예창작지원센터 운영지원 공예 전문인력 양성 한국공예 해외유통망 개척 중동지역 해외 상설전시관 운영 한국공예 쇼케이스 공예 청년 인턴십 지원 공예 디지털 인프라 구축 산업단지 청년공예 오픈스튜디오 조성 찾아가는 공예 명작전 디자인 공공디자인 페스티벌 대한민국 공공디자인 대상 공공디자인 토론회 공공디자인 컨설팅 공공디자인 파일럿 공공디자인 실험실 공공디자인 전문인력 양성 공공디자인 교육 공공디자인 종합정보시스템 운영 공공디자인 실태조사 및 연구 구 서울역사 활용사업 전통생활문화 한지분야 육성지원 한식분야 육성지원 전통문화포털 운영 오늘전통 예비 창업 아이디어 공모전 전통문화 청",
-    "eligibility": "",
-    "supportDetails": "",
-    "application": "",
+    "score": 71,
+    "axooFitScore": 71,
+    "gradeReason": "적합도 높음: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능",
+    "axooFitReason": "적합도 높음: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능",
+    "detailSummary": "지원규모 : 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인되었을 시 입주 협약 해지 사유가 됨 - 입주기간 중 월 상주율 50% 이상 유지 * 상주율은 해당 월의 영업일을 기준으로 산정하며, 상주인력 중 1명 이상이 입주공간에 출근하여 근무한 경우 해당 일을 상주일로 인정 신청서 접수기간 ㅇ 공고기간: 공고게시일 ~ 2026.11.04.(수), 15:00까지 ㅇ 접수기간 : ’2026.10.14.(수) ~ 2026.11.04.(수) 15:00까지 ※ 신청 마감시간까지 사업관리시스템에 접수(파일 업로드 포함)된 건만 인정 (접수 마감시간에 시스템이 자동 종료되",
+    "eligibility": "모집대상 : 일본 진출을 희망하는 국내 콘텐츠 제작사 또는 콘텐츠 IP 보유 기업 - 공고일 기준 「중소기업기본법」에서 정의하는 중소기업 및 「중견기업법」에 따른 중견기업 - 「콘텐츠산업 진흥법」에서 정의하는 콘텐츠제작자 또는 콘텐츠사업자에 해당되는 기업 - 입주기간 동안 수행할 사업 결과물은 대중문화공연, 방송, 영상, 애니메이션, 만화, 스토리, 캐릭터, 음악, 패션, 신기술 등의 콘텐츠 분야를 포함하여야 함 ㅇ",
+    "supportDetails": "지원규모 : 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인되었을 시 입주 협약 해지 사유가 됨 - 입주기간 중 월 상주율 50% 이상 유지 * 상주율은 해당 월의 영업일을 기준으로 산정하며, 상주인력 중 1명 이상이 입주공간에 출근하여 근무한 경우 해당 일을 상주일로 인정 신청서 접수기간 ㅇ 공고기간: 공고게시일 ~ 2026.11.04.(수), 15:00까지 ㅇ 접수기간 : ’2026.10.14.(수) ~ 2026.11.04.(수) 15:00까지 ※ 신청 마감시간까지 사업관리시스템에 접수(파일 업로드 포함)된 건만 인정 (접수 마감시간에 시스템이 자동 종료되",
+    "application": "접수방법 ㅇ 접수방법: KOCCA 사업관리시스템을 통한 온라인 접수(https://pms.kocca.kr 회원 가입 후 접수) ① KOCCA 사업관리시스템(pms.kocca.kr) 접속 후 회원가입 및 로그인 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기’ 버튼을 클릭해서 접속하실 수도 있습니다. ② KOCCA 사업관리시스템(pms.kocca.kr) - 지원사업 신청/접수 → 공고조회/신청 메뉴에서 ‘2026년 KOCCA CKL TOKYO 입주기업 모집’ 공고 확인 ③ 공고명 클릭하여 하단 ‘파일첨부’에서 필요양식 다운로드 후 신청내역 작성 ④ ‘신청접수’ 클릭하여 신청서 작성 및 제출파일 업로",
     "nextAction": "공고문과 지원자격을 우선 확인",
     "recommendedAction": "공고문과 지원자격을 우선 확인",
-    "searchText": "2026 공공디자인 라운드 4차 참여자 모집 공모 한국공예·디자인문화진흥원 한국공예·디자인문화진흥원 예술 콘텐츠 지원사업 공공미술·디자인 공공디자인",
-    "collectionSourceId": "support_kcdf",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "searchText": "2026년 KOCCA CKL TOKYO 입주기업 모집 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 콘텐츠 콘텐츠 제작 영상 공간 신기술",
+    "collectionSourceId": "support_kocca",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
@@ -177,478 +192,7 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
         "score": 12,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": -22,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 63,
-    "axooFitScore": 63,
-    "gradeReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원내용 ㅇ 후반작업 전반 종합지원 - CG, VFX, 뷰티, DI, 고난이도 에셋 제작, 디지털휴먼, 버츄얼 스튜디오, 타이틀 제작 등 - 사운드 디자인, 사운드 믹싱, 음원 구매,교체, 제작 등 - 편집실(장비포함) 임차, 편집기사, VFX 슈퍼바이저,코디네이터 인건비, CG/VFX 작업자 인건비 등 ㅇ 지원규모 : 최대 7.5억 원 / 1개 내외 ㅇ 지원요건 : 공고문 참조 신청서 접수기간 ㅇ 공고기간 : 2026. 10. 13.(화) - 2026.10.29.(목) ㅇ 접수기간 : 2026. 10. 19.(월) - 2026.10.29.(목) 14:00까지 ※ 접수기간 외 접수 불가하니 마감 시한을 지켜 주시기를 바랍니다. 신청방법 ㅇ e나라도움을 통한 접수(KOCCA 홈페이지, 우편 및 방문 신청 불가) - KOCCA 홈페이지 접속 후 해당사업 신청서 양식을 다운받아 작성하여 첨부서류와 함께 e나라도움 홈페이지 통해 접수 ※ e나라도움 시스템 관련 문의는 한국재정정보원 e나라도움 고객센터로 문의하시기를 바랍니다.",
-    "eligibility": "지원대상 - 방송영상독립제작사(국내 법인, 개인 사업자) - 방송영상독립제작사-후반작업기업 컨소시엄 ※ 주관기관은 방송영상독립제작사(독립제작사신고필증제출 필수)이며, CG/VFX 등 실제 제작에 참여하는 후반작업 기업만 컨소시엄으로 참여가능 ※ 중소/중견/대기업 참여 가능하나, 방송법 제2조 3항의 방송사업자는 신청불가 ※ 지원결과물이 해외방송사 및 OTT 플랫폼으로부터 제작비 전액 이상을 투자받아 해당 플랫폼에 1차 독점 전송·방영하는 경우(바이아웃(Buyout), 올라이트 판매(All rights sales) 등) 선정 및 협약이 취소되며, 협약 종료 이후에도 동일하게 적용되어 위반 시 지원금이 환수될 수 있습니다. (단, 국내 동시공개/방영은 가능) ※ 영화, 애니메이션은 지원대상이 아님 지원내용 ㅇ 후반작업 전반 종합지원 - CG, V",
-    "supportDetails": "지원내용 ㅇ 후반작업 전반 종합지원 - CG, VFX, 뷰티, DI, 고난이도 에셋 제작, 디지털휴먼, 버츄얼 스튜디오, 타이틀 제작 등 - 사운드 디자인, 사운드 믹싱, 음원 구매,교체, 제작 등 - 편집실(장비포함) 임차, 편집기사, VFX 슈퍼바이저,코디네이터 인건비, CG/VFX 작업자 인건비 등 ㅇ 지원규모 : 최대 7.5억 원 / 1개 내외 ㅇ 지원요건 : 공고문 참조 신청서 접수기간 ㅇ 공고기간 : 2026. 10. 13.(화) - 2026.10.29.(목) ㅇ 접수기간 : 2026. 10. 19.(월) - 2026.10.29.(목) 14:00까지 ※ 접수기간 외 접수 불가하니 마감 시한을 지켜 주시기를 바랍니다. 신청방법 ㅇ e나라도움을 통한 접수(KOCCA 홈페이지, 우편 및 방문 신청 불가) - KOCCA 홈페이지 접속 후 해당사업 신청서 양식을 다운받아 작성하여 첨부서류와 함께 e나라도움 홈페이지 통해 접수 ※ e나라도움 시스템 관련 문의는 한국재정정보원 e나라도움 고객센터로 문의하시기를 바랍니다.",
-    "application": "신청방법 ㅇ e나라도움을 통한 접수(KOCCA 홈페이지, 우편 및 방문 신청 불가) - KOCCA 홈페이지 접속 후 해당사업 신청서 양식을 다운받아 작성하여 첨부서류와 함께 e나라도움 홈페이지 통해 접수 ※ e나라도움 시스템 관련 문의는 한국재정정보원 e나라도움 고객센터로 문의하시기를 바랍니다. ※ e나라도움 신청시 ‘사업명’은 KOCCA 지원사업명이 아닌, ‘작품 명’을 의미하며, ‘작품명’에는 특수문자 사용 불가 선정절차 및 평가기준 ㅇ 선정절차 안내 : 1차 서면평가 → 2차 발표평가 → 체불신고 및 체불사업주 조회 → 종합심의 및 사업비 조정 → 협약체결 ㅇ 1차 서면평가 - 평가방법 : 과제 신청 시 제출한 과제신청서 및 제작계",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2026년 방송영상콘텐츠후반작업지원 추가공고 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 콘텐츠 영상 투자",
-    "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-a7bc3632ba31",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "2027년 국제협업지원(창･제작)",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDztQ2kylQHZEY8CVJZTTmwEPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDztQ2kylQHZEY8CVJZTTmwEPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "협업·해외진출",
-    "businessArea": "collaboration_global",
-    "businessAreaLabel": "협업·해외진출",
-    "businessAreas": [
-      {
-        "code": "collaboration_global",
-        "label": "협업·해외진출"
-      },
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "협업",
-      "영상"
-    ],
-    "matchedKeywords": [
-      "협업",
-      "영상"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 26,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 8,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "협업·해외진출 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 63,
-    "axooFitScore": 63,
-    "gradeReason": "조건부 검토: 협업·해외진출 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 협업·해외진출 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 전체 지역 전국, 해외 신청기간 2026-10-08 ~ 2026-11-05 사업유형 국제 창작 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 국제협업지원(창&middot;제작).pdf 미리보기 미리보기 새창 2027년도 국제협업지원(창&middot;제작_다년) 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년도 국제협업지원(창&middot;제작_단년) 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국문화예술위원회 교류협력팀 연락처: 02-760-4554, 4558 목록보",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 국제 창작 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 국제협업지원(창&middot;제작).pdf 미리보기 미리보기 새창 2027년도 국제협업지원(창&middot;제작_다년) 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년도 국제협업지원(창&middot;제작_단년) 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처:",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 국제협업지원(창･제작) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 협업·해외진출 협업 영상",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-67c2f5a0fa11",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "2027년 국제협업지원(기획･네트워크)",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2oIW650hEulqLto2J%2FPBFkPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2oIW650hEulqLto2J%2FPBFkPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "협업·해외진출",
-    "businessArea": "collaboration_global",
-    "businessAreaLabel": "협업·해외진출",
-    "businessAreas": [
-      {
-        "code": "collaboration_global",
-        "label": "협업·해외진출"
-      },
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "협업",
-      "영상"
-    ],
-    "matchedKeywords": [
-      "협업",
-      "영상"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 26,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 8,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "협업·해외진출 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 63,
-    "axooFitScore": 63,
-    "gradeReason": "조건부 검토: 협업·해외진출 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 협업·해외진출 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 전체 지역 전국, 해외 신청기간 2026-10-08 ~ 2026-11-05 사업유형 국제 창작 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 국제협업지원(기획&middot;네트워크).pdf 미리보기 미리보기 새창 2027년도 국제협업지원(기획&middot;네트워크_다년) 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년도 국제협업지원(기획&middot;네트워크_단년) 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국문화예술위원회 교류협력팀 연락처: 02-760-4554,",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 국제 창작 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 국제협업지원(기획&middot;네트워크).pdf 미리보기 미리보기 새창 2027년도 국제협업지원(기획&middot;네트워크_다년) 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년도 국제협업지원(기획&middot;네트워크_단년) 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 국제협업지원(기획･네트워크) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 협업·해외진출 협업 영상",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-18fc24e54294",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "2027년 국제협업지원(ARKO사업연계)",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDznlfS0lbtipaN4kwqvLbnMPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDznlfS0lbtipaN4kwqvLbnMPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "미디어아트·기술",
-    "businessArea": "digital_media",
-    "businessAreaLabel": "미디어아트·기술",
-    "businessAreas": [
-      {
-        "code": "digital_media",
-        "label": "미디어아트·기술"
-      },
-      {
-        "code": "collaboration_global",
-        "label": "협업·해외진출"
-      },
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "ar",
-      "협업",
-      "영상"
-    ],
-    "matchedKeywords": [
-      "ar",
-      "협업",
-      "영상"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 29,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 4,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "미디어아트·기술 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 62,
-    "axooFitScore": 62,
-    "gradeReason": "조건부 검토: 미디어아트·기술 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 미디어아트·기술 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 전체 지역 전국, 해외 신청기간 2026-10-08 ~ 2026-11-05 사업유형 국제 창작 행사·참여 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 국제협업지원(ARKO사업연계).pdf 미리보기 미리보기 새창 2027년도 국제협업지원(ARKO사업연계) 지원신청서(국문)_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년도 국제협업지원(ARKO사업연계) 지원신청서(영문)_신청자(단체)명.docx 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국문화예술위원회 교류협력팀 연락처: 02-760-4553, 4558 목록보",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 국제 창작 행사·참여 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 국제협업지원(ARKO사업연계).pdf 미리보기 미리보기 새창 2027년도 국제협업지원(ARKO사업연계) 지원신청서(국문)_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년도 국제협업지원(ARKO사업연계) 지원신청서(영문)_신청자(단체)명.docx 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처:",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 국제협업지원(ARKO사업연계) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 미디어아트·기술 ar 협업 영상",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "kocca-326D00034008",
-    "source": "한국콘텐츠진흥원",
-    "sourceCode": "KOCCA",
-    "sourceType": "지원사업",
-    "title": "2026년 제 2차 글로벌게임허브센터 게임벤처4.0 신규 입주기업 모집",
-    "organization": "한국콘텐츠진흥원",
-    "agency": "한국콘텐츠진흥원",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-13",
-    "postedDate": "2026-10-13",
-    "startDate": "2026-10-15",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "협업·해외진출",
-    "businessArea": "collaboration_global",
-    "businessAreaLabel": "협업·해외진출",
-    "businessAreas": [
-      {
-        "code": "collaboration_global",
-        "label": "협업·해외진출"
-      },
-      {
-        "code": "exhibition_space",
-        "label": "전시·공간"
-      },
-      {
-        "code": "business_distribution",
-        "label": "사업화·유통"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "해외진출",
-      "글로벌",
-      "공간",
-      "창업"
-    ],
-    "matchedKeywords": [
-      "해외진출",
-      "글로벌",
-      "공간",
-      "창업"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 32,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 16,
         "maxScore": 18
       },
       {
@@ -660,8 +204,8 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 10,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -671,8 +215,8 @@
       }
     ],
     "scoreReasons": [
-      "협업·해외진출 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
       "기획·제작·운영 수행역량 활용 가능",
       "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점"
@@ -680,19 +224,19 @@
     "analysisBasis": "상세 공고문",
     "analysisConfidence": "high",
     "companyEligible": true,
-    "score": 61,
-    "axooFitScore": 61,
-    "gradeReason": "조건부 검토: 협업·해외진출 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 협업·해외진출 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원내용 - 임대료 및 관리비 전액 지원 신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외) · 공고일 현재 창업(사업자등록 또는 법인설립 등기)을 하지 않은 자로 입주 후 1년 이내 사업자등록 가능자 · 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문 첨부파일 내 각 유형별 모집 공고문 참고 주요 지원내용 ㅇ 게임 개발을 위한 소프트웨어 지원(유니티 등) ㅇ 게임 산업, 기술 등에 관한 세미나 개최 등 교육 운영 ㅇ 게임 컨설팅(제작, 퍼블리싱/서비스, 자금확보, 해외진출 등) ㅇ 경영 컨설팅(세무/회계, 법률/법무, 인사/노무 등)",
-    "eligibility": "신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외) · 공고일 현재 창업(사업자등록 또는 법인설립 등기)을 하지 않은 자로 입주 후 1년 이내 사업자등록 가능자 · 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문 첨부파일 내 각 유형별 모집 공고문 참고 주요 지원내용 ㅇ 게임 개발을 위한 소프트웨어 지원(유니티 등) ㅇ 게임 산업, 기술 등에 관한 세미나 개최",
-    "supportDetails": "지원내용 - 임대료 및 관리비 전액 지원 신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외) · 공고일 현재 창업(사업자등록 또는 법인설립 등기)을 하지 않은 자로 입주 후 1년 이내 사업자등록 가능자 · 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문 첨부파일 내 각 유형별 모집 공고문 참고 주요 지원내용 ㅇ 게임 개발을 위한 소프트웨어 지원(유니티 등) ㅇ 게임 산업, 기술 등에 관한 세미나 개최 등 교육 운영 ㅇ 게임 컨설팅(제작, 퍼블리싱/서비스, 자금확보, 해외진출 등) ㅇ 경영 컨설팅(세무/회계, 법률/법무, 인사/노무 등)",
-    "application": "신청방법 ㅇ 접수기간: 2026. 10. 15.(목) ~ 2026. 11. 5.(목) 11:00까지 ㅇ 접수방법: KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기(신청접수)’ 버튼을 클릭해서 접속하실 수도 있습니다. ㅇ 제출서류: 공고문 내 각 유형별 모집 공고문 참고 유의사항 ㅇ 본 모집공고 내 양식 및 유의사항을 반드시 숙지 후 접수 바랍니다. ㅇ 입주신청 전 입주시설 사전방문 및 답사를 권장합니다. ㅇ 접수마감 이후 추가 신청은 불가하며, 접수마감 전 사전 제출 권장합니다. ㅇ 제출서류는 접",
+    "score": 56,
+    "axooFitScore": 56,
+    "gradeReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "axooFitReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "detailSummary": "지원내용 ㅇ 후반작업 전반 종합지원 - CG, VFX, 뷰티, DI, 고난이도 에셋 제작, 디지털휴먼, 버츄얼 스튜디오, 타이틀 제작 등 - 사운드 디자인, 사운드 믹싱, 음원 구매,교체, 제작 등 - 편집실(장비포함) 임차, 편집기사, VFX 슈퍼바이저,코디네이터 인건비, CG/VFX 작업자 인건비 등 ㅇ 지원규모 : 최대 7.5억 원 / 1개 내외 ㅇ 지원요건 : 공고문 참조 신청서 접수기간 ㅇ 공고기간 : 2026. 10. 13.(화) - 2026.10.29.(목) ㅇ 접수기간 : 2026. 10. 19.(월) - 2026.10.29.(목) 14:00까지 ※ 접수기간 외 접수 불가하니 마감 시한을 지켜 주시기를 바랍니다.",
+    "eligibility": "지원대상 - 방송영상독립제작사(국내 법인, 개인 사업자) - 방송영상독립제작사-후반작업기업 컨소시엄 ※ 주관기관은 방송영상독립제작사(독립제작사신고필증제출 필수)이며, CG/VFX 등 실제 제작에 참여하는 후반작업 기업만 컨소시엄으로 참여가능 ※ 중소/중견/대기업 참여 가능하나, 방송법 제2조 3항의 방송사업자는 신청불가 ※ 지원결과물이 해외방송사 및 OTT 플랫폼으로부터 제작비 전액 이상을 투자받아 해당 플랫폼에 1차 독점 전송·방영하는 경우(바이아웃(Buyout), 올라이트 판매(All rights sales) 등) 선정 및 협약이 취소되며, 협약 종료 이후에도 동일하게 적용되어 위반 시 지원금이 환수될 수 있습니다. (단, 국내 동시공개/방영은 가능) ※ 영화, 애니메이션은 지원대상이 아님",
+    "supportDetails": "지원내용 ㅇ 후반작업 전반 종합지원 - CG, VFX, 뷰티, DI, 고난이도 에셋 제작, 디지털휴먼, 버츄얼 스튜디오, 타이틀 제작 등 - 사운드 디자인, 사운드 믹싱, 음원 구매,교체, 제작 등 - 편집실(장비포함) 임차, 편집기사, VFX 슈퍼바이저,코디네이터 인건비, CG/VFX 작업자 인건비 등 ㅇ 지원규모 : 최대 7.5억 원 / 1개 내외 ㅇ 지원요건 : 공고문 참조 신청서 접수기간 ㅇ 공고기간 : 2026. 10. 13.(화) - 2026.10.29.(목) ㅇ 접수기간 : 2026. 10. 19.(월) - 2026.10.29.(목) 14:00까지 ※ 접수기간 외 접수 불가하니 마감 시한을 지켜 주시기를 바랍니다.",
+    "application": "신청방법 ㅇ e나라도움을 통한 접수(KOCCA 홈페이지, 우편 및 방문 신청 불가) - KOCCA 홈페이지 접속 후 해당사업 신청서 양식을 다운받아 작성하여 첨부서류와 함께 e나라도움 홈페이지 통해 접수 ※ e나라도움 시스템 관련 문의는 한국재정정보원 e나라도움 고객센터로 문의하시기를 바랍니다. ※ e나라도움 신청시 ‘사업명’은 KOCCA 지원사업명이 아닌, ‘작품 명’을 의미하며, ‘작품명’에는 특수문자 사용 불가 선정절차 및 평가기준 ㅇ 선정절차 안내 : 1차 서면평가 → 2차 발표평가 → 체불신고 및 체불사업주 조회 → 종합심의 및 사업비 조정 → 협약체결 ㅇ 1차 서면평가 - 평가방법 : 과제 신청 시 제출한 과제신청서 및 제작계",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2026년 제 2차 글로벌게임허브센터 게임벤처4.0 신규 입주기업 모집 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 협업·해외진출 해외진출 글로벌 공간 창업",
+    "searchText": "2026년 방송영상콘텐츠후반작업지원 추가공고 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 콘텐츠 영상 투자",
     "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
@@ -733,25 +277,23 @@
     "matchedPriorityKeywords": [
       "콘텐츠",
       "콘텐츠 제작",
-      "제작지원",
-      "영상"
+      "제작지원"
     ],
     "matchedKeywords": [
       "콘텐츠",
       "콘텐츠 제작",
-      "제작지원",
-      "영상"
+      "제작지원"
     ],
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
       {
         "code": "relevance",
         "label": "사업영역",
-        "score": 32,
+        "score": 29,
         "maxScore": 38
       },
       {
@@ -763,20 +305,20 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 16,
+        "score": 12,
         "maxScore": 18
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 6,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 10,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -787,35 +329,141 @@
     ],
     "scoreReasons": [
       "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
       "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점"
     ],
     "analysisBasis": "상세 공고문",
     "analysisConfidence": "high",
     "companyEligible": true,
-    "score": 58,
-    "axooFitScore": 58,
-    "gradeReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원내용 ㅇ 이용자 평가 - 희망업체 대상 개별 맞춤형 이용자평가 추진 - 맞춤형 평가문항 자체 개발 - 분야별 평가 보고서 제공 - 과제당 최소 20명 이상 평가단 구성 예정 참가지원 신청서 제출방법 ㅇ 신청기간: 2026. 10. 15.(목) ~ 10. 28.(수) 14시까지 ㅇ 신청방법: 한국콘텐츠진흥원 사업관리시스템을 통한 온라인 접수 ※ 제출기한 이후에 접수된 신청서는 무효 처리됩니다.('작성완료'건만 접수 인정) ※ 별도의 메일 및 우편 접수 불가 제출서류 ㅇ 아래 제출 서류(필수제출)(하나의 알집 파일로 제출) - 참가지원신청서 - 직접참여인력 및 이해관계자 리스트 - 개인정보 수집·이용·제공 동의서 - 사업자등록증 - 국세,지방세,4대보험 납세/완납증명서 - 개발 게임 시연 영상 - 중소기업확인서 ※ 신청서 무효 처리 유의: 서명, 날인란에 서명/날인이 없는 경우, 국세 납세증명서 및 지방세 납세증명서 유효기간 만료 등 ※ 개인정보 활용동의서의 참여인력은 지원신청한 게임의 대표자와 과제 책임자를 기재 선",
-    "eligibility": "모집대상 - 국내 중소게임기업이 개발 중인 게임이나, 서비스 운영 중인 게임 - 온라인 이용자평가가 가능한 분야(PC, 모바일, 콘솔 등)만 가능 참여제한/제외대상 ㅇ 신청일 또는 이후 국세 및 지방세 체납한 경우 신청 불가 ㅇ 기술료 미납, 참여제한 조치 등으로 한국콘텐츠진흥원 사업 참여에 제재조치를 받은 기업 신청 불가 지원내용 ㅇ 이용자 평가 - 희망업체 대상 개별 맞춤형 이용자평가 추진 - 맞춤형 평가문항 자체 개발 - 분야별 평가 보고서 제공 - 과제당 최소 20명 이상 평가단 구성 예정 참가지원 신청서 제출방법 ㅇ 신청기간: 2026. 10. 15.(목) ~ 10. 28.(수) 14시까지 ㅇ 신청방법: 한국콘텐츠진흥원 사업관리시스템을 통한 온라인 접수 ※ 제출기한 이후에 접수된 신청서는 무효 처리됩니다.('작성완료'건만 접수 인정)",
-    "supportDetails": "지원내용 ㅇ 이용자 평가 - 희망업체 대상 개별 맞춤형 이용자평가 추진 - 맞춤형 평가문항 자체 개발 - 분야별 평가 보고서 제공 - 과제당 최소 20명 이상 평가단 구성 예정 참가지원 신청서 제출방법 ㅇ 신청기간: 2026. 10. 15.(목) ~ 10. 28.(수) 14시까지 ㅇ 신청방법: 한국콘텐츠진흥원 사업관리시스템을 통한 온라인 접수 ※ 제출기한 이후에 접수된 신청서는 무효 처리됩니다.('작성완료'건만 접수 인정) ※ 별도의 메일 및 우편 접수 불가 제출서류 ㅇ 아래 제출 서류(필수제출)(하나의 알집 파일로 제출) - 참가지원신청서 - 직접참여인력 및 이해관계자 리스트 - 개인정보 수집·이용·제공 동의서 - 사업자등록증 - 국세,지방세,4대보험 납세/완납증명서 - 개발 게임 시연 영상 - 중소기업확인서 ※ 신청서 무효 처리 유의: 서명, 날인란에 서명/날인이 없는 경우, 국세 납세증명서 및 지방세 납세증명서 유효기간 만료 등 ※ 개인정보 활용동의서의 참여인력은 지원신청한 게임의 대표자와 과제 책임자를 기재 선",
-    "application": "제출서류 ㅇ 아래 제출 서류(필수제출)(하나의 알집 파일로 제출) - 참가지원신청서 - 직접참여인력 및 이해관계자 리스트 - 개인정보 수집·이용·제공 동의서 - 사업자등록증 - 국세,지방세,4대보험 납세/완납증명서 - 개발 게임 시연 영상 - 중소기업확인서 ※ 신청서 무효 처리 유의: 서명, 날인란에 서명/날인이 없는 경우, 국세 납세증명서 및 지방세 납세증명서 유효기간 만료 등 ※ 개인정보 활용동의서의 참여인력은 지원신청한 게임의 대표자와 과제 책임자를 기재 선정절차 ㅇ 선정평가 - 평가방법: 접수된 신청서와 시연영상 기반 서면평가 - 평가항목: 완성도(40점), 적절성(30점), 상용화(30점) - 선정기준: 최고·최저점을 제외한 평",
+    "score": 47,
+    "axooFitScore": 47,
+    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "detailSummary": "지원내용 ㅇ 이용자 평가 - 희망업체 대상 개별 맞춤형 이용자평가 추진 - 맞춤형 평가문항 자체 개발 - 분야별 평가 보고서 제공 - 과제당 최소 20명 이상 평가단 구성 예정 참가지원 신청서 제출방법 ㅇ",
+    "eligibility": "모집대상 - 국내 중소게임기업이 개발 중인 게임이나, 서비스 운영 중인 게임 - 온라인 이용자평가가 가능한 분야(PC, 모바일, 콘솔 등)만 가능 참여제한/제외대상 ㅇ 신청일 또는 이후 국세 및 지방세 체납한 경우 신청 불가 ㅇ 기술료 미납, 참여제한 조치 등으로 한국콘텐츠진흥원 사업 참여에 제재조치를 받은 기업 신청 불가",
+    "supportDetails": "지원내용 ㅇ 이용자 평가 - 희망업체 대상 개별 맞춤형 이용자평가 추진 - 맞춤형 평가문항 자체 개발 - 분야별 평가 보고서 제공 - 과제당 최소 20명 이상 평가단 구성 예정 참가지원 신청서 제출방법 ㅇ",
+    "application": "신청방법 : 한국콘텐츠진흥원 사업관리시스템을 통한 온라인 접수 ※ 제출기한 이후에 접수된 신청서는 무효 처리됩니다.('작성완료'건만 접수 인정) ※ 별도의 메일 및 우편 접수 불가 제출서류 ㅇ 아래 제출 서류(필수제출)(하나의 알집 파일로 제출) - 참가지원신청서 - 직접참여인력 및 이해관계자 리스트 - 개인정보 수집·이용·제공 동의서 - 사업자등록증 - 국세,지방세,4대보험 납세/완납증명서 - 개발 게임 시연 영상 - 중소기업확인서 ※ 신청서 무효 처리 유의: 서명, 날인란에 서명/날인이 없는 경우, 국세 납세증명서 및 지방세 납세증명서 유효기간 만료 등 ※ 개인정보 활용동의서의 참여인력은 지원신청한 게임의 대표자와 과제 책임자를 기재",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "<2026년 게임콘텐츠 제작지원 이용자평가 및 QA 지원> 과제 모집공고 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 콘텐츠 콘텐츠 제작 제작지원 영상",
+    "searchText": "<2026년 게임콘텐츠 제작지원 이용자평가 및 QA 지원> 과제 모집공고 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 콘텐츠 콘텐츠 제작 제작지원",
     "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
-    "id": "arko-04f87e7f7dcb",
+    "id": "kcdf-9134",
+    "source": "한국공예·디자인문화진흥원",
+    "sourceCode": "KCDF",
+    "sourceType": "지원사업",
+    "title": "2026 공공디자인 라운드 4차 참여자 모집 공모",
+    "organization": "한국공예·디자인문화진흥원",
+    "agency": "한국공예·디자인문화진흥원",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-01",
+    "postedDate": "2026-10-01",
+    "startDate": "2026-10-01",
+    "deadline": "2026-10-27",
+    "deadlineDate": "2026-10-27",
+    "endDate": "2026-10-27",
+    "status": "진행중",
+    "sourceUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9134&brdCodeValue=&searchField=titlecontent",
+    "originalUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9134&brdCodeValue=&searchField=titlecontent",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "공공미술·디자인",
+    "businessArea": "public_art_design",
+    "businessAreaLabel": "공공미술·디자인",
+    "businessAreas": [
+      {
+        "code": "public_art_design",
+        "label": "공공미술·디자인"
+      }
+    ],
+    "matchedPriorityKeywords": [
+      "공공디자인"
+    ],
+    "matchedKeywords": [
+      "공공디자인"
+    ],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "공공미술·디자인 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 38,
+    "axooFitScore": 38,
+    "gradeReason": "낮은 적합도: 공공미술·디자인 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 공공미술·디자인 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "",
+    "supportDetails": "",
+    "application": "",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2026 공공디자인 라운드 4차 참여자 모집 공모 한국공예·디자인문화진흥원 한국공예·디자인문화진흥원 예술 콘텐츠 지원사업 공공미술·디자인 공공디자인",
+    "collectionSourceId": "support_kcdf",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "arko-a7bc3632ba31",
     "source": "한국문화예술위원회",
     "sourceCode": "ARKO",
     "sourceType": "지원사업",
-    "title": "2027년 인바운드국제협력강화(인바운드리서치지원)",
+    "title": "2027년 국제협업지원(창･제작)",
     "organization": "한국문화예술위원회",
     "agency": "한국문화예술위원회",
     "amount": 0,
@@ -828,34 +476,34 @@
     "deadlineDate": "2026-11-05",
     "endDate": "2026-11-05",
     "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDztQ2kylQHZEY8CVJZTTmwEPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDztQ2kylQHZEY8CVJZTTmwEPBZm1EJpnMlsBwvsh76BM",
     "documentUrl": "",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
     "priorityCategoryLabel": "예술·콘텐츠 지원사업",
     "priorityRank": 0,
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "field": "협업·해외진출",
+    "businessArea": "collaboration_global",
+    "businessAreaLabel": "협업·해외진출",
     "businessAreas": [
       {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
+        "code": "collaboration_global",
+        "label": "협업·해외진출"
       }
     ],
     "matchedPriorityKeywords": [
-      "영상"
+      "협업"
     ],
     "matchedKeywords": [
-      "영상"
+      "협업"
     ],
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
       {
         "code": "relevance",
@@ -866,7 +514,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 18,
+        "score": 8,
         "maxScore": 18
       },
       {
@@ -878,14 +526,14 @@
       {
         "code": "business",
         "label": "사업성",
-        "score": 3,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 3,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -895,35 +543,34 @@
       }
     ],
     "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
+      "협업·해외진출 사업영역과 연결",
       "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
+      "상세 본문 부족으로 보수적 평가"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 56,
-    "axooFitScore": 56,
-    "gradeReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 전체 지역 전국 신청기간 2026-10-08 ~ 2026-11-05 사업유형 교육 창작 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 인바운드국제협력강화(인바운드리서치지원).pdf 미리보기 미리보기 새창 2027년도 인바운드리서치지원 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국문화예술위원회 교류협력팀 연락처: 02-760-4564, 4558 목록보기 아트누리 소개 개인정보처리방침 저작권정책 맨 위로 이동 아트누리 로고 ADD --> 전남광주통합특별시 나주시 빛가람로640 한국문화예술",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 38,
+    "axooFitScore": 38,
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 전체",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 교육 창작 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 인바운드국제협력강화(인바운드리서치지원).pdf 미리보기 미리보기 새창 2027년도 인바운드리서치지원 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국문화예술위원회 교류협력팀 연락처: 02-760-4564, 4558 목록보기 아트누리 소개 개인정보처리방침 저작권정책 맨 위로 이",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 인바운드국제협력강화(인바운드리서치지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 영상",
+    "searchText": "2027년 국제협업지원(창･제작) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 협업·해외진출 협업",
     "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
-    "id": "arko-ddb71cf7de41",
+    "id": "arko-67c2f5a0fa11",
     "source": "한국문화예술위원회",
     "sourceCode": "ARKO",
     "sourceType": "지원사업",
-    "title": "2027년 해외레지던시및프로그램참가지원",
+    "title": "2027년 국제협업지원(기획･네트워크)",
     "organization": "한국문화예술위원회",
     "agency": "한국문화예술위원회",
     "amount": 0,
@@ -936,34 +583,34 @@
     "deadlineDate": "2026-11-05",
     "endDate": "2026-11-05",
     "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD6pDx%2BABF3dZKRwuIqwjzWUPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD6pDx%2BABF3dZKRwuIqwjzWUPBZm1EJpnMlsBwvsh76BM",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2oIW650hEulqLto2J%2FPBFkPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2oIW650hEulqLto2J%2FPBFkPBZm1EJpnMlsBwvsh76BM",
     "documentUrl": "",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
     "priorityCategoryLabel": "예술·콘텐츠 지원사업",
     "priorityRank": 0,
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "field": "협업·해외진출",
+    "businessArea": "collaboration_global",
+    "businessAreaLabel": "협업·해외진출",
     "businessAreas": [
       {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
+        "code": "collaboration_global",
+        "label": "협업·해외진출"
       }
     ],
     "matchedPriorityKeywords": [
-      "영상"
+      "협업"
     ],
     "matchedKeywords": [
-      "영상"
+      "협업"
     ],
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
       {
         "code": "relevance",
@@ -974,7 +621,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 18,
+        "score": 8,
         "maxScore": 18
       },
       {
@@ -986,14 +633,14 @@
       {
         "code": "business",
         "label": "사업성",
-        "score": 3,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 3,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -1003,27 +650,26 @@
       }
     ],
     "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
+      "협업·해외진출 사업영역과 연결",
       "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
+      "상세 본문 부족으로 보수적 평가"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 56,
-    "axooFitScore": 56,
-    "gradeReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 전체 지역 전국, 해외 신청기간 2026-10-08 ~ 2026-11-05 사업유형 국제 창작 행사·참여 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 해외레지던시및프로그램참가지원.pdf 미리보기 미리보기 새창 2027년도 해외레지던시및프로그램참가지원 지원신청서_신청자(단체)명__.hwp 미리보기 미리보기 새창 2027년도 해외레지던시및프로그램참가지원(지정형 9개소) 지원신청서(영문) 양식_.zip 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국문화예술위원회 교류협력팀 연락처: (문학) 02-760-4564, 4558",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 38,
+    "axooFitScore": 38,
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 전체",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 국제 창작 행사·참여 온라인신청 신청사이트 바로가기 분야 전체 첨부파일 (공고문) 해외레지던시및프로그램참가지원.pdf 미리보기 미리보기 새창 2027년도 해외레지던시및프로그램참가지원 지원신청서_신청자(단체)명__.hwp 미리보기 미리보기 새창 2027년도 해외레지던시및프로그램참가지원(지정형 9개소) 지원신청서(영문) 양식_.zip 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 해외레지던시및프로그램참가지원 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 영상",
+    "searchText": "2027년 국제협업지원(기획･네트워크) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 협업·해외진출 협업",
     "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
@@ -1076,8 +722,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
       {
         "code": "relevance",
@@ -1094,20 +740,20 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 16,
+        "score": 4,
         "maxScore": 18
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 9,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 10,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -1118,255 +764,26 @@
     ],
     "scoreReasons": [
       "협업·해외진출 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
       "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점"
     ],
     "analysisBasis": "상세 공고문",
     "analysisConfidence": "high",
     "companyEligible": true,
-    "score": 55,
-    "axooFitScore": 55,
-    "gradeReason": "조건부 검토: 협업·해외진출 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "조건부 검토: 협업·해외진출 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입(양식1) ㅇ 입주기간(변경) - 입주사 :기본 2년 (최대 5년, 연장평가 결과에 따라 기본 2년에서, 1차연장 2년, 2차연장 1년 연장가능) 단, 4년차에서 5년차로의 연장(2차 연장)은 우수 성과기업에 한함 ㅇ 입주 지원내용 - 입주사: 임대료 80%, 관리비 50% 지원 (임대료 및 관리비 분기별 선납) * 입주사는 입주 계약 시 보증금 납부 필수 (보증금은 관리비 및 임대료 3개월분으로 산정) 신청자격 ㅇ 국내 중소 게임 법인 기업 - 공고일 기준 「중소기업기본법」 제2조에 따른 중소기업 - 게임개발업체, 게임개발 관련 기술 보유업체 등 게임 관련 업체에 해당하는 기업으로, 게임 콘텐츠 및 관련 기술을 개발 중이거나 개발 예정인 법인 기업 ㅇ 선정 이후 입주사 필수조건 - 한국콘텐츠진흥원과 임대차 계약 체결 및 [산업집적활성화 및 공장설립에 관한 법률]에 따른 입주 계약(관리기관 : 경기도시공사), 사업개시신고 등의 절차 진행 - 입주 계약시 보",
-    "eligibility": "신청자격 ㅇ 국내 중소 게임 법인 기업 - 공고일 기준 「중소기업기본법」 제2조에 따른 중소기업 - 게임개발업체, 게임개발 관련 기술 보유업체 등 게임 관련 업체에 해당하는 기업으로, 게임 콘텐츠 및 관련 기술을 개발 중이거나 개발 예정인 법인 기업 ㅇ 선정 이후 입주사 필수조건 - 한국콘텐츠진흥원과 임대차 계약 체결 및 [산업집적활성화 및 공장설립에 관한 법률]에 따른 입주 계약(관리기관 : 경기도시공사), 사업개시신고 등의 절차 진행 - 입주 계약시 보증금 납입 - 입주계약 체결 후, 30일 이내 입주 및 사업자등록증 상 본사 사무실 주소지를 글로벌게임허브센터로 이전 ㅇ 선정대상 제외 경우: 공고문 첨부파일 내 각 유형별 모집 공고문 참고 입주기업 주요지원 내용 ㅇ 게임 개발을 위한 소프트웨어 지원(유니티 등) ㅇ 게임 산업, 기술 등에",
-    "supportDetails": "지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입(양식1) ㅇ 입주기간(변경) - 입주사 :기본 2년 (최대 5년, 연장평가 결과에 따라 기본 2년에서, 1차연장 2년, 2차연장 1년 연장가능) 단, 4년차에서 5년차로의 연장(2차 연장)은 우수 성과기업에 한함 ㅇ 입주 지원내용 - 입주사: 임대료 80%, 관리비 50% 지원 (임대료 및 관리비 분기별 선납) * 입주사는 입주 계약 시 보증금 납부 필수 (보증금은 관리비 및 임대료 3개월분으로 산정) 신청자격 ㅇ 국내 중소 게임 법인 기업 - 공고일 기준 「중소기업기본법」 제2조에 따른 중소기업 - 게임개발업체, 게임개발 관련 기술 보유업체 등 게임 관련 업체에 해당하는 기업으로, 게임 콘텐츠 및 관련 기술을 개발 중이거나 개발 예정인 법인 기업 ㅇ 선정 이후 입주사 필수조건 - 한국콘텐츠진흥원과 임대차 계약 체결 및 [산업집적활성화 및 공장설립에 관한 법률]에 따른 입주 계약(관리기관 : 경기도시공사), 사업개시신고 등의 절차 진행 - 입주 계약시 보",
-    "application": "신청방법 ㅇ 접수기간: 2026. 10. 12.(월) ~ 상시모집 ㅇ 접수방법: KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기(신청접수)’ 버튼을 클릭해서 접속하실 수도 있습니다. ㅇ 제출서류: 공고문 내 각 유형별 모집 공고문 참고 유의사항 ㅇ 본 모집공고 내 양식 및 유의사항을 반드시 숙지 후 접수 바랍니다. ㅇ 입주신청 전 입주시설 사전방문 및 답사를 권장합니다. ㅇ 접수마감 이후 추가 신청은 불가하며, 접수마감 전 사전 제출 권장합니다. ㅇ 제출서류는 접수 후 임의로 추가 또는 보완될 수",
+    "score": 36,
+    "axooFitScore": 36,
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "detailSummary": "지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입(양식1) ㅇ 입주기간(변경) - 입주사 :기본 2년 (최대 5년, 연장평가 결과에 따라 기본 2년에서, 1차연장 2년, 2차연장 1년 연장가능) 단, 4년차에서 5년차로의 연장(2차 연장)은 우수 성과기업에 한함 ㅇ 입주 지원내용 - 입주사: 임대료 80%, 관리비 50% 지원 (임대료 및 관리비 분기별 선납) * 입주사는 입주 계약 시 보증금 납부 필수 (보증금은 관리비 및 임대료 3개월분으로 산정)",
+    "eligibility": "신청자격 ㅇ 국내 중소 게임 법인 기업 - 공고일 기준 「중소기업기본법」 제2조에 따른 중소기업 - 게임개발업체, 게임개발 관련 기술 보유업체 등 게임 관련 업체에 해당하는 기업으로, 게임 콘텐츠 및 관련 기술을 개발 중이거나 개발 예정인 법인 기업 ㅇ 선정 이후 입주사 필수조건 - 한국콘텐츠진흥원과 임대차 계약 체결 및 [산업집적활성화 및 공장설립에 관한 법률]에 따른 입주 계약(관리기관 : 경기도시공사), 사업개시신고 등의 절차 진행 - 입주 계약시 보증금 납입 - 입주계약 체결 후, 30일 이내 입주 및 사업자등록증 상 본사 사무실 주소지를 글로벌게임허브센터로 이전 ㅇ 선정대상 제외 경우: 공고문",
+    "supportDetails": "지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입(양식1) ㅇ 입주기간(변경) - 입주사 :기본 2년 (최대 5년, 연장평가 결과에 따라 기본 2년에서, 1차연장 2년, 2차연장 1년 연장가능) 단, 4년차에서 5년차로의 연장(2차 연장)은 우수 성과기업에 한함 ㅇ 입주 지원내용 - 입주사: 임대료 80%, 관리비 50% 지원 (임대료 및 관리비 분기별 선납) * 입주사는 입주 계약 시 보증금 납부 필수 (보증금은 관리비 및 임대료 3개월분으로 산정)",
+    "application": "접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기(신청접수)’ 버튼을 클릭해서 접속하실 수도 있습니다. ㅇ 제출서류: 공고문 내 각 유형별 모집 공고문 참고 유의사항 ㅇ 본 모집공고 내 양식 및 유의사항을 반드시 숙지 후 접수 바랍니다. ㅇ 입주신청 전 입주시설 사전방문 및 답사를 권장합니다. ㅇ 접수마감 이후 추가 신청은 불가하며, 접수마감 전 사전 제출 권장합니다. ㅇ 제출서류는 접수 후 임의로 추가 또는 보완될 수 없으며, 일체의 서류는 반환되지 않습니다. ㅇ 최종 선정결과는 신청기",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "searchText": "[수정/상시공고] 2026년 글로벌게임허브센터 신규 입주기업 추가모집(상시) 수정공고 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 협업·해외진출 글로벌 콘텐츠",
     "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-6c9132dd59d9",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "2027년 공연예술창작주체(공연장기획제작지원)",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxYxRhim%2FzZoNvFBlbIP%2F8wPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxYxRhim%2FzZoNvFBlbIP%2F8wPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
-    "businessAreas": [
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      },
-      {
-        "code": "exhibition_space",
-        "label": "전시·공간"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "제작지원",
-      "영상",
-      "공간"
-    ],
-    "matchedKeywords": [
-      "제작지원",
-      "영상",
-      "공간"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 29,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 12,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": -22,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 48,
-    "axooFitScore": 48,
-    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 단체 지역 전국 신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 공간·시설 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 공연예술창작주체(공연장기획제작지원).pdf 미리보기 미리보기 새창 2027년 공연예술창작주체(공연장기획제작지원) 참여인력 구성계획 및 예산집행계획_신청단체명.xlsx 미리보기 미리보기 새창 2027년 공연예술창작주체(공연장기획제작지원) 사업 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 공연예술창작주체(공연장기획제작지원) 공모사업 자주묻는 질문(FAQ).pdf 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 공간·시설 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 공연예술창작주체(공연장기획제작지원).pdf 미리보기 미리보기 새창 2027년 공연예술창작주체(공연장기획제작지원) 참여인력 구성계획 및 예산집행계획_신청단체명.xlsx 미리보기 미리보기 새창 2027년 공연예술창작주체(공연장기획제작지원) 사업 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 공연예술창작주체(공연장기획제작지원) 공모사업 자주묻는 질문(FAQ).pdf 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 공연예술창작주체(공연장기획제작지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 제작지원 영상 공간",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-24a527d60ffe",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "2027년 공연예술창작산실(2차 제작지원)",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD1GweGAsBYCEmz2GVsgjSt0PBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD1GweGAsBYCEmz2GVsgjSt0PBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
-    "businessAreas": [
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "제작지원",
-      "영상"
-    ],
-    "matchedKeywords": [
-      "제작지원",
-      "영상"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 26,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 8,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": -22,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 41,
-    "axooFitScore": 41,
-    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 개인 단체 지역 전국 신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 공연예술창작산실(2차 제작지원).pdf 미리보기 미리보기 새창 (양식) 1. 2027년 2차 제작지원(○○분야)_지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 (양식) 2. 2027년 2차 제작지원(○○분야)_예산집행계획서_신청자(단체)명.xlsx 미리보기 미리보기 새창 (양식) 3. 2027년 2차 제작지원(○○분야)_핵심 창작진 참여 동의서_신청자(단체)명.hwpx 미리보기 미리보기 새창 2027년 지원신청 공통 사항확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 공연예술창작산실(2차 제작지원).pdf 미리보기 미리보기 새창 (양식) 1. 2027년 2차 제작지원(○○분야)_지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 (양식) 2. 2027년 2차 제작지원(○○분야)_예산집행계획서_신청자(단체)명.xlsx 미리보기 미리보기 새창 (양식) 3. 2027년 2차 제작지원(○○분야)_핵심 창작진 참여 동의서_신청자(단체)명.hwpx 미리보기 미리보기 새창 2027년 지원신청 공통 사항확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 공연예술창작산실(2차 제작지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 제작지원 영상",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
@@ -1395,14 +812,10 @@
     "priorityCategory": "arts_content_support",
     "priorityCategoryLabel": "예술·콘텐츠 지원사업",
     "priorityRank": 0,
-    "field": "미디어아트·기술",
-    "businessArea": "digital_media",
-    "businessAreaLabel": "미디어아트·기술",
+    "field": "사업화·유통",
+    "businessArea": "business_distribution",
+    "businessAreaLabel": "사업화·유통",
     "businessAreas": [
-      {
-        "code": "digital_media",
-        "label": "미디어아트·기술"
-      },
       {
         "code": "business_distribution",
         "label": "사업화·유통"
@@ -1410,21 +823,23 @@
       {
         "code": "public_art_design",
         "label": "공공미술·디자인"
+      },
+      {
+        "code": "digital_media",
+        "label": "미디어아트·기술"
       }
     ],
     "matchedPriorityKeywords": [
-      "ai",
-      "ar",
       "유통",
       "창업",
-      "공예"
+      "공예",
+      "ai"
     ],
     "matchedKeywords": [
-      "ai",
-      "ar",
       "유통",
       "창업",
-      "공예"
+      "공예",
+      "ai"
     ],
     "isPriority": false,
     "isExcludedFromPriority": true,
@@ -1435,7 +850,126 @@
       {
         "code": "relevance",
         "label": "사업영역",
-        "score": 35,
+        "score": 32,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 10,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능",
+      "사업화·유통·지원금 요소 확인"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": false,
+    "score": 35,
+    "axooFitScore": 35,
+    "gradeReason": "낮은 적합도: 사업화·유통 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "axooFitReason": "낮은 적합도: 사업화·유통 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "detailSummary": "",
+    "eligibility": "모집대상 교육기간 교육시간 교육회수 교육장소 AI 실습과정 30 명 * 온라인이론 수강자 우선선발 2026.11.21.( 토) ,11.28.( 토) 매주 토요일 오전 10:00~12:00, 오후 13:00~15:00 4 강 대면 실습 강의장 (1:1 피드백) ● 선발 절차 모집공고 &rarr; 실습생선발 &rarr; AI 실습교육 (4 강) &rarr; 수료&middot; 사후관리 2. 신청 자격 ● 만 19세 이상으로 온라인 유통&middot;AI 활용에 실질적 의지와 관심이 있으며, 아래 요건 중 하나 이상을 갖춘 자 우대 - 경력 2년 이상의 공예작가 (작품 활동 증빙 가능한 자) - 공예 갤러리 운영자 또는 공예 기반 1인 창업자 - 공예 관련 유통사업자 (온&middot;오프라인 유통업 종사자, 사업자등록 또는 재직 증빙 가능한 자)",
+    "supportDetails": "",
+    "application": "신청방법 : 한국공예&middot;디자인문화진흥원 누리집( www.kcdf.or.kr ) 및 온라인 공예 전문인력 양성 공식 채널 공고 구글폼(Google Forms) 신청서 작성 및 제출 6. 전형 방법 구분 내용 전형일정 - AI 실습 합격자 발표: 2026. 10. 28(수) 위 두건 한국공예&middot;디자인문화진흥원 누리집 통해 공지 선발기준 &middot; 경력 및 전문성 (40점) &middot; 참여 의지 및 학습 목표의 구체성 (30점) &middot; 온라인 유통&middot;AI 활용 필요도 및 활용 계획 (30점) &middot; 가점사항 : 온라인 플랫폼 입점&middot;유통 활동 경력, 브랜드 운영 경험, 공예",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "[AI활용 교육] 2026 공예 온라인 유통 및 AI활용 역량 강화 교육 프로그램 교육생 모집 한국공예·디자인문화진흥원 한국공예·디자인문화진흥원 예술 콘텐츠 지원사업 사업화·유통 유통 창업 공예 ai",
+    "collectionSourceId": "support_kcdf",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "kocca-326D00034008",
+    "source": "한국콘텐츠진흥원",
+    "sourceCode": "KOCCA",
+    "sourceType": "지원사업",
+    "title": "2026년 제 2차 글로벌게임허브센터 게임벤처4.0 신규 입주기업 모집",
+    "organization": "한국콘텐츠진흥원",
+    "agency": "한국콘텐츠진흥원",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-13",
+    "postedDate": "2026-10-13",
+    "startDate": "2026-10-15",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
+    "status": "진행중",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "협업·해외진출",
+    "businessArea": "collaboration_global",
+    "businessAreaLabel": "협업·해외진출",
+    "businessAreas": [
+      {
+        "code": "collaboration_global",
+        "label": "협업·해외진출"
+      },
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      },
+      {
+        "code": "business_distribution",
+        "label": "사업화·유통"
+      }
+    ],
+    "matchedPriorityKeywords": [
+      "글로벌",
+      "공간",
+      "창업"
+    ],
+    "matchedKeywords": [
+      "글로벌",
+      "공간",
+      "창업"
+    ],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 29,
         "maxScore": 38
       },
       {
@@ -1447,50 +981,49 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 18,
+        "score": 0,
         "maxScore": 18
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 15,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 10,
+        "maxScore": 10
       },
       {
         "code": "penalty",
         "label": "감점",
-        "score": 0,
+        "score": -22,
         "maxScore": 0
       }
     ],
     "scoreReasons": [
-      "미디어아트·기술 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
+      "협업·해외진출 사업영역과 연결",
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
+      "AXOO 비핵심 장르 비중으로 감점"
     ],
     "analysisBasis": "상세 공고문",
     "analysisConfidence": "high",
     "companyEligible": true,
     "score": 35,
     "axooFitScore": 35,
-    "gradeReason": "낮은 적합도: 미디어아트·기술 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "낮은 적합도: 미디어아트·기술 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "한국공예·디자인문화진흥원 --> --> 건너뛰기링크 본문 바로가기 주메뉴 바로가기 하단 바로가기 로그인 회원가입 ENGLISH 한국공예·디자인문화진흥원 한복진흥센터 한국공예·디자인문화진흥원 한복진흥센터 한국공예·디자인문화진흥원 한복진흥센터 한국공예·디자인문화진흥원 한복진흥센터 알림소식 알림소식 행사소식 KCDF소식 보도자료 뉴스레터 유관기관소식 공지사항 공지사항 사업공모 사업공모 공모결과 입찰공고 입찰공고 채용공고 채용공고 채용결과 사업안내 사업안내 공예 KCDF갤러리 운영 KCDF기획 및 공모전시 정기간행물 발행 전통문화유산활용 상품개발 공예문화산업 연구조사 우수공예품 지정 및 보급 활성화 우수문화상품 지정제 활성화 공예트렌드페어 공예 유통망 기반조성 공예주간 공예창작지원센터 운영지원 공예 전문인력 양성 한국공예 해외유통망 개척 중동지역 해외 상설전시관 운영 한국공예 쇼케이스 공예 청년 인턴십 지원 공예 디지털 인프라 구축 산업단지 청년공예 오픈스튜디오 조성 찾아가는 공예 명작전 디자인 공공디자인 페스티벌 대한민국 공공디자인 대상 공공디자인 토론회 공공디자인 컨설팅 공공디자인 파일럿 공공디자인 실험실 공공디자인 전문인력 양성 공공디자인 교육 공공디자인 종합정보시스템 운영 공공디자인 실태조사 및 연구 구 서울역사 활용사업 전통생활문화 한지분야 육성지원 한식분야 육성지원 전통문화포털 운영 오늘전통 예비 창업 아이디어 공모전 전통문화 청",
-    "eligibility": "모집대상 교육기간 교육시간 교육회수 교육장소 AI 실습과정 30 명 * 온라인이론 수강자 우선선발 2026.11.21.( 토) ,11.28.( 토) 매주 토요일 오전 10:00~12:00, 오후 13:00~15:00 4 강 대면 실습 강의장 (1:1 피드백) ● 선발 절차 모집공고 &rarr; 실습생선발 &rarr; AI 실습교육 (4 강) &rarr; 수료&middot; 사후관리 2. 신청 자격 ● 만 19세 이상으로 온라인 유통&middot;AI 활용에 실질적 의지와 관심이 있으며, 아래 요건 중 하나 이상을 갖춘 자 우대 - 경력 2년 이상의 공예작가 (작품 활동 증빙 가능한 자) - 공예 갤러리 운영자 또는 공예 기반 1인 창업자 - 공예 관련 유통사업자 (온&middot;오프라인 유통업 종사자, 사업자등록 또는 재직 증빙 가능한 자)",
-    "supportDetails": "",
-    "application": "신청방법: 한국공예&middot;디자인문화진흥원 누리집( www.kcdf.or.kr ) 및 온라인 공예 전문인력 양성 공식 채널 공고 구글폼(Google Forms) 신청서 작성 및 제출 6. 전형 방법 구분 내용 전형일정 - AI 실습 합격자 발표: 2026. 10. 28(수) 위 두건 한국공예&middot;디자인문화진흥원 누리집 통해 공지 선발기준 &middot; 경력 및 전문성 (40점) &middot; 참여 의지 및 학습 목표의 구체성 (30점) &middot; 온라인 유통&middot;AI 활용 필요도 및 활용 계획 (30점) &middot; 가점사항 : 온라인 플랫폼 입점&middot;유통 활동 경력, 브랜드 운영 경험, 공예",
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · AXOO 비핵심 장르 비중으로 감점",
+    "detailSummary": "지원내용 - 임대료 및 관리비 전액 지원",
+    "eligibility": "신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외) · 공고일 현재 창업(사업자등록 또는 법인설립 등기)을 하지 않은 자로 입주 후 1년 이내 사업자등록 가능자 · 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문",
+    "supportDetails": "지원내용 - 임대료 및 관리비 전액 지원",
+    "application": "접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기(신청접수)’ 버튼을 클릭해서 접속하실 수도 있습니다. ㅇ 제출서류: 공고문 내 각 유형별 모집 공고문 참고 유의사항 ㅇ 본 모집공고 내 양식 및 유의사항을 반드시 숙지 후 접수 바랍니다. ㅇ 입주신청 전 입주시설 사전방문 및 답사를 권장합니다. ㅇ 접수마감 이후 추가 신청은 불가하며, 접수마감 전 사전 제출 권장합니다. ㅇ 제출서류는 접수 후 임의로 추가 또는 보완될 수 없으며, 일체의 서류는 반환되지 않습니다. ㅇ 최종 선정결과는 신청기",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "[AI활용 교육] 2026 공예 온라인 유통 및 AI활용 역량 강화 교육 프로그램 교육생 모집 한국공예·디자인문화진흥원 한국공예·디자인문화진흥원 예술 콘텐츠 지원사업 미디어아트·기술 ai ar 유통 창업 공예",
-    "collectionSourceId": "support_kcdf",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "searchText": "2026년 제 2차 글로벌게임허브센터 게임벤처4.0 신규 입주기업 모집 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 협업·해외진출 글로벌 공간 창업",
+    "collectionSourceId": "support_kocca",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
@@ -1510,7 +1043,7 @@
     "deadline": "2026-10-02",
     "deadlineDate": "2026-10-02",
     "endDate": "2026-10-02",
-    "status": "진행중",
+    "status": "마감",
     "sourceUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45",
     "originalUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45",
     "documentUrl": "",
@@ -1674,7 +1207,7 @@
         "code": "evidence",
         "label": "상세근거",
         "score": 3,
-        "maxScore": 8
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -1702,15 +1235,15 @@
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "searchText": "2026년 크라우드펀딩 확산사업 <크라우드펀딩 챌린지> 2차 공모(공고연장) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 사업화·유통 크라우드펀딩",
     "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
-    "id": "arko-fbbb8b195fff",
+    "id": "arko-18fc24e54294",
     "source": "한국문화예술위원회",
     "sourceCode": "ARKO",
     "sourceType": "지원사업",
-    "title": "2027년 대한민국공연예술제",
+    "title": "2027년 국제협업지원(ARKO사업연계)",
     "organization": "한국문화예술위원회",
     "agency": "한국문화예술위원회",
     "amount": 0,
@@ -1723,28 +1256,28 @@
     "deadlineDate": "2026-11-05",
     "endDate": "2026-11-05",
     "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2dc3QlWH2dX3oBhTrp0XP0PBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2dc3QlWH2dX3oBhTrp0XP0PBZm1EJpnMlsBwvsh76BM",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDznlfS0lbtipaN4kwqvLbnMPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDznlfS0lbtipaN4kwqvLbnMPBZm1EJpnMlsBwvsh76BM",
     "documentUrl": "",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
     "priorityCategoryLabel": "예술·콘텐츠 지원사업",
     "priorityRank": 0,
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "field": "협업·해외진출",
+    "businessArea": "collaboration_global",
+    "businessAreaLabel": "협업·해외진출",
     "businessAreas": [
       {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
+        "code": "collaboration_global",
+        "label": "협업·해외진출"
       }
     ],
     "matchedPriorityKeywords": [
-      "영상"
+      "협업"
     ],
     "matchedKeywords": [
-      "영상"
+      "협업"
     ],
     "isPriority": true,
     "isExcludedFromPriority": false,
@@ -1761,330 +1294,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 4,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
         "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": -22,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 34,
-    "axooFitScore": 34,
-    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 단체 지역 전국 신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 대한민국공연예술제.pdf 미리보기 미리보기 새창 2027년 대한민국공연예술제 참여인력 구성계획 및 예산집행계획_신청단체명.xlsx 미리보기 미리보기 새창 2027년 대한민국공연예술제 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 지원신청 공통 사항확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국문화예술위원회 연극무용팀/음악전통팀 연락처: 연극･뮤지컬 061-900-2207 / 무용 061-900-2224",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 대한민국공연예술제.pdf 미리보기 미리보기 새창 2027년 대한민국공연예술제 참여인력 구성계획 및 예산집행계획_신청단체명.xlsx 미리보기 미리보기 새창 2027년 대한민국공연예술제 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 지원신청 공통 사항확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해 주시기 바랍니다. 문의처: 한국문화예술위원회 연극무용팀/음악",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 대한민국공연예술제 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 영상",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-418d2ba0f400",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "2027년 공연예술비평활동활성화지원",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD4XPCWwjivUlPkskx%2BtAklsPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD4XPCWwjivUlPkskx%2BtAklsPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
-    "businessAreas": [
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "영상"
-    ],
-    "matchedKeywords": [
-      "영상"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 23,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 4,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": -22,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 34,
-    "axooFitScore": 34,
-    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 전체 지역 전국 신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 문화일반 첨부파일 (공고문) 공연예술비평활동활성화지원.pdf 미리보기 미리보기 새창 2027년 공연예술비평활동활성화지원사업 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년 공연예술비평활동활성화지원사업 참여인력 구성계획 및 예산집행계획_신청자(단체)명.xlsx 미리보기 미리보기 새창 2027년 공연예술비평활동활성화지원사업 자주 묻는 질문(FAQ).pdf 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당 주관기관으로 문의해",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 문화일반 첨부파일 (공고문) 공연예술비평활동활성화지원.pdf 미리보기 미리보기 새창 2027년 공연예술비평활동활성화지원사업 지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 2027년 공연예술비평활동활성화지원사업 참여인력 구성계획 및 예산집행계획_신청자(단체)명.xlsx 미리보기 미리보기 새창 2027년 공연예술비평활동활성화지원사업 자주 묻는 질문(FAQ).pdf 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 공연예술비평활동활성화지원 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 영상",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-360bd6a9eb60",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "2027년 공연예술창작주체(중장기단체도약지원)",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxeWBfXYq5PfDFvTFxDIKHgPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxeWBfXYq5PfDFvTFxDIKHgPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
-    "businessAreas": [
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "영상"
-    ],
-    "matchedKeywords": [
-      "영상"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 23,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 4,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": -22,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 34,
-    "axooFitScore": 34,
-    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 단체 지역 전국 신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 공연예술창작주체(중장기단체도약지원).pdf 미리보기 미리보기 새창 2027년 공연예술창작주체(중장기단체도약지원) 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 공연예술창작주체(중장기단체도약지원) 참여인력 구성계획 및 예산집행계획_신청단체명.xlsx 미리보기 미리보기 새창 2027년 공연예술창작주체(중장기단체도약지원) 공모사업 자주묻는 질문(FAQ).pdf 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년 공모사업 지원신청 안내 영상 ☞ 위 사업에 대한 보다 자세하고 구체적인 내용은 해당",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 공연예술창작주체(중장기단체도약지원).pdf 미리보기 미리보기 새창 2027년 공연예술창작주체(중장기단체도약지원) 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 공연예술창작주체(중장기단체도약지원) 참여인력 구성계획 및 예산집행계획_신청단체명.xlsx 미리보기 미리보기 새창 2027년 공연예술창작주체(중장기단체도약지원) 공모사업 자주묻는 질문(FAQ).pdf 미리보기 미리보기 새창 2027년 지원신청 공통사항 확인하기 ☞ 2027년 지원사업 공모 한눈에 보기 ☞ 2027년",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 공연예술창작주체(중장기단체도약지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 영상",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-239201",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "아르코·대학로예술극장 2027년 대관 창작자(단체) 공모",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-16",
-    "deadlineDate": "2026-11-16",
-    "endDate": "2026-11-16",
-    "status": "진행중",
-    "sourceUrl": "https://theater.arko.or.kr/Rent/Notice/239201/?q=null",
-    "originalUrl": "https://theater.arko.or.kr/Rent/Notice/239201/?q=null",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "기타",
-    "businessArea": "other",
-    "businessAreaLabel": "기타",
-    "businessAreas": [
-      {
-        "code": "other",
-        "label": "기타"
-      }
-    ],
-    "matchedPriorityKeywords": [],
-    "matchedKeywords": [],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 8,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
         "maxScore": 18
       },
       {
@@ -2103,7 +1313,7 @@
         "code": "evidence",
         "label": "상세근거",
         "score": 3,
-        "maxScore": 8
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -2113,33 +1323,147 @@
       }
     ],
     "scoreReasons": [
-      "기업·법인 참여 가능성 확인",
+      "협업·해외진출 사업영역과 연결",
       "상세 본문 부족으로 보수적 평가"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
-    "companyEligible": true,
-    "score": 29,
-    "axooFitScore": 29,
-    "gradeReason": "낮은 적합도: 기업·법인 참여 가능성 확인 · 상세 본문 부족으로 보수적 평가",
-    "axooFitReason": "낮은 적합도: 기업·법인 참여 가능성 확인 · 상세 본문 부족으로 보수적 평가",
+    "companyEligible": false,
+    "score": 34,
+    "axooFitScore": 34,
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 전체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "아르코·대학로예술극장 2027년 대관 창작자(단체) 공모 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "searchText": "2027년 국제협업지원(ARKO사업연계) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 협업·해외진출 협업",
     "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
-    "id": "kocca-326D00088011",
+    "id": "kocca-326D00110005",
     "source": "한국콘텐츠진흥원",
     "sourceCode": "KOCCA",
     "sourceType": "지원사업",
-    "title": "2026년 KOCCA CKL TOKYO 입주기업 모집",
+    "title": "2026 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(3차/태국)",
+    "organization": "한국콘텐츠진흥원",
+    "agency": "한국콘텐츠진흥원",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-10-22",
+    "deadlineDate": "2026-10-22",
+    "endDate": "2026-10-22",
+    "status": "진행중",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110005&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110005&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "전시·공간",
+    "businessArea": "exhibition_space",
+    "businessAreaLabel": "전시·공간",
+    "businessAreas": [
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      },
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedPriorityKeywords": [
+      "쇼케이스",
+      "콘텐츠"
+    ],
+    "matchedKeywords": [
+      "쇼케이스",
+      "콘텐츠"
+    ],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 26,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 10,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "전시·공간 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능",
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": false,
+    "score": 33,
+    "axooFitScore": 33,
+    "gradeReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
+    "detailSummary": "사업내용 문의 - 대중음악산업팀 이하영 대리(061-900-6452 / hyl93@kocca.kr) ㅇ 접수페이지(시스템) 문의 : 스펙토리(02-6953-1310) 공고관련자료확인 정책자료 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기",
+    "eligibility": "신청자격 ㅇ 신청일 기준 국내 음반 발매 경력이 있고 국내에서 활동 중인 한국 대중음악 뮤지션(국내 음악 제작사에 소속되어 있거나 소속사가 없을 경우 한국 국적인 뮤지션) ㅇ 클래식, 오페라, 국악 제외한 대중음악 전 장르 뮤지션 ㅇ 본인 곡으로 30분 내외 단독 공연이 가능한 뮤지션 신청서 접수 ㅇ 공고/접수기간: 2026. 10. 8.(목) ~ 2026. 10. 22.(목) / 11:00까지 ㅇ 접수페이지 링크: https://kocca.spectory.net/spotlightbangkok ㅇ 제출서류 - 접수페이지 직접 입력 - 접수페이지 내 파일첨부(참가신청서(필수), 뮤지션 추가 소개자료(선택)) *세부사항 공고문 참조 선정방법 및 기준 ㅇ 선정방법: 1차 서면평가, 2차 현지 디렉터 평가를 통한 뮤지션 선정 ㅇ 평가기준(1차 서면평",
+    "supportDetails": "사업내용 문의 - 대중음악산업팀 이하영 대리(061-900-6452 / hyl93@kocca.kr) ㅇ 접수페이지(시스템) 문의 : 스펙토리(02-6953-1310) 공고관련자료확인 정책자료 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기",
+    "application": "제출서류 - 접수페이지 직접 입력 - 접수페이지 내 파일첨부(참가신청서(필수), 뮤지션 추가 소개자료(선택)) *세부사항 공고문 참조 선정방법 및 기준 ㅇ 선정방법: 1차 서면평가, 2차 현지 디렉터 평가를 통한 뮤지션 선정 ㅇ 평가기준(1차 서면평가) - 뮤지션 역량(30점), 해외진출 전략_사전(30점), 해외진출 전략_사후(30점), Chartmetric 점수(10점) - 가점: 2025년 지역 음악창작소 사업 참여 뮤지션(2점) * 한국콘텐츠진흥원이 지원하는 지역 음악창작소의 2025년 사업에 참여한 이력이 있는 뮤지션 ** 참가신청서 내 2025년 지역 음악창작소 참가뮤지션 해당여부 표기 후 제출 필수, 진흥원에서 검토 후 가점",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2026 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(3차/태국) 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 전시·공간 쇼케이스 콘텐츠",
+    "collectionSourceId": "support_kocca",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "kocca-326D00110006",
+    "source": "한국콘텐츠진흥원",
+    "sourceCode": "KOCCA",
+    "sourceType": "지원사업",
+    "title": "2027 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(1차/스페인)",
     "organization": "한국콘텐츠진흥원",
     "agency": "한국콘텐츠진흥원",
     "amount": 0,
@@ -2148,12 +1472,126 @@
     "publishedDate": "2026-10-14",
     "postedDate": "2026-10-14",
     "startDate": "2026-10-14",
-    "deadline": "2026-11-04",
-    "deadlineDate": "2026-11-04",
-    "endDate": "2026-11-04",
+    "deadline": "2026-10-30",
+    "deadlineDate": "2026-10-30",
+    "endDate": "2026-10-30",
     "status": "진행중",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "전시·공간",
+    "businessArea": "exhibition_space",
+    "businessAreaLabel": "전시·공간",
+    "businessAreas": [
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      },
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedPriorityKeywords": [
+      "쇼케이스",
+      "콘텐츠"
+    ],
+    "matchedKeywords": [
+      "쇼케이스",
+      "콘텐츠"
+    ],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 26,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 10,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "전시·공간 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능",
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": false,
+    "score": 29,
+    "axooFitScore": 29,
+    "gradeReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
+    "detailSummary": "사업내용 문의 : 대중음악산업팀 (061-900-6455 / friendly@kocca.kr) ㅇ 접수페이지(시스템) 문의 : IDC (061-900-6080) 공고관련자료확인 정책자료 사업관리시스템 바로가기 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기",
+    "eligibility": "신청자격 ㅇ 모집대상 : 2027년 소나르 페스티벌 참가를 희망하는 국내 뮤지션 ㅇ 신청자격 : 소나르 페스티벌의 취지 및 주요 공연 장르에 부합하는 대중음악 뮤지션 (클래식, 오페라, 국악 장르 제외) - 신청일 기준 국내 음반 발매 경력이 있고 국내에서 활동 중인 대중음악 뮤지션(국내 소속사가 있거나, 소속사가 없을 경우 한국 국적인 뮤지션) - 본인 곡으로 60분 내외 단독 공연이 가능한 뮤지션 * 세부사항 공고문 참조 신청서 접수 ㅇ 선정규모 : 2팀 (Live Act 1팀 / DJ Set 1팀) *중복신청 불가 ㅇ 공고/접수기간 : 2026. 10. 14.(수) ~ 2026. 10. 30.(금) / 11:00까지 ㅇ",
+    "supportDetails": "사업내용 문의 : 대중음악산업팀 (061-900-6455 / friendly@kocca.kr) ㅇ 접수페이지(시스템) 문의 : IDC (061-900-6080) 공고관련자료확인 정책자료 사업관리시스템 바로가기 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기",
+    "application": "제출서류 : 참가신청서(필수), 영문 소개자료(선택) * 세부사항 공고문 참조 선정방법 및 기준 ㅇ 선정방법 : 1차 서면평가, 2차 현지 디렉터평가를 통한 뮤지션 선정 ㅇ 평가기준 - (1차 서면평가) 페스티벌 장르 적합성(30점), 뮤지션 역량(30점), 해외진출 전략(30점), Chartmetric 점수(10점) - (2차 현지 디렉터평가) 페스티벌 사무국 내부 심사에 따른 최종선정 접수 주의사항 ㅇ 접수페이지 외 이메일, 우편, 방문 등을 통한 접수 불가 ㅇ 접수마감일에는 트래픽으로 인한 시스템 장애가 발생할 수 있으니 마감기한 1일 전 접수완료 권장 ㅇ 한 기획사가 여러 팀의 뮤지션을 신청할 시 뮤지션별 나누어 신청 * 한 신청",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2027 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(1차/스페인) 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 전시·공간 쇼케이스 콘텐츠",
+    "collectionSourceId": "support_kocca",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "arko-24a527d60ffe",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
+    "sourceType": "지원사업",
+    "title": "2027년 공연예술창작산실(2차 제작지원)",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
+    "status": "진행중",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD1GweGAsBYCEmz2GVsgjSt0PBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD1GweGAsBYCEmz2GVsgjSt0PBZm1EJpnMlsBwvsh76BM",
     "documentUrl": "",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
@@ -2167,29 +1605,13 @@
       {
         "code": "content_brand",
         "label": "콘텐츠 제작·브랜딩"
-      },
-      {
-        "code": "exhibition_space",
-        "label": "전시·공간"
-      },
-      {
-        "code": "digital_media",
-        "label": "미디어아트·기술"
       }
     ],
     "matchedPriorityKeywords": [
-      "콘텐츠",
-      "콘텐츠 제작",
-      "영상",
-      "공간",
-      "신기술"
+      "제작지원"
     ],
     "matchedKeywords": [
-      "콘텐츠",
-      "콘텐츠 제작",
-      "영상",
-      "공간",
-      "신기술"
+      "제작지원"
     ],
     "isPriority": true,
     "isExcludedFromPriority": false,
@@ -2200,7 +1622,7 @@
       {
         "code": "relevance",
         "label": "사업영역",
-        "score": 35,
+        "score": 23,
         "maxScore": 38
       },
       {
@@ -2212,59 +1634,59 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 16,
+        "score": 4,
         "maxScore": 18
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 6,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 3,
+        "maxScore": 10
       },
       {
         "code": "penalty",
         "label": "감점",
-        "score": -55,
+        "score": -22,
         "maxScore": 0
       }
     ],
     "scoreReasons": [
       "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인 참여 가능성 확인",
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
       "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
     "companyEligible": true,
-    "score": 28,
-    "axooFitScore": 28,
-    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원내용 ㅇ 모집대상: 일본 진출을 희망하는 국내 콘텐츠 제작사 또는 콘텐츠 IP 보유 기업 - 공고일 기준 「중소기업기본법」에서 정의하는 중소기업 및 「중견기업법」에 따른 중견기업 - 「콘텐츠산업 진흥법」에서 정의하는 콘텐츠제작자 또는 콘텐츠사업자에 해당되는 기업 - 입주기간 동안 수행할 사업 결과물은 대중문화공연, 방송, 영상, 애니메이션, 만화, 스토리, 캐릭터, 음악, 패션, 신기술 등의 콘텐츠 분야를 포함하여야 함 ㅇ 지원내용: KOCCA CKL TOKYO 사무공간 및 지원 프로그램 제공 ㅇ 지원규모: 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인",
-    "eligibility": "모집대상: 일본 진출을 희망하는 국내 콘텐츠 제작사 또는 콘텐츠 IP 보유 기업 - 공고일 기준 「중소기업기본법」에서 정의하는 중소기업 및 「중견기업법」에 따른 중견기업 - 「콘텐츠산업 진흥법」에서 정의하는 콘텐츠제작자 또는 콘텐츠사업자에 해당되는 기업 - 입주기간 동안 수행할 사업 결과물은 대중문화공연, 방송, 영상, 애니메이션, 만화, 스토리, 캐릭터, 음악, 패션, 신기술 등의 콘텐츠 분야를 포함하여야 함 ㅇ 지원내용: KOCCA CKL TOKYO 사무공간 및 지원 프로그램 제공 ㅇ 지원규모: 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 -",
-    "supportDetails": "지원내용 ㅇ 모집대상: 일본 진출을 희망하는 국내 콘텐츠 제작사 또는 콘텐츠 IP 보유 기업 - 공고일 기준 「중소기업기본법」에서 정의하는 중소기업 및 「중견기업법」에 따른 중견기업 - 「콘텐츠산업 진흥법」에서 정의하는 콘텐츠제작자 또는 콘텐츠사업자에 해당되는 기업 - 입주기간 동안 수행할 사업 결과물은 대중문화공연, 방송, 영상, 애니메이션, 만화, 스토리, 캐릭터, 음악, 패션, 신기술 등의 콘텐츠 분야를 포함하여야 함 ㅇ 지원내용: KOCCA CKL TOKYO 사무공간 및 지원 프로그램 제공 ㅇ 지원규모: 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인",
-    "application": "접수방법 ㅇ 접수방법: KOCCA 사업관리시스템을 통한 온라인 접수(https://pms.kocca.kr 회원 가입 후 접수) ① KOCCA 사업관리시스템(pms.kocca.kr) 접속 후 회원가입 및 로그인 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기’ 버튼을 클릭해서 접속하실 수도 있습니다. ② KOCCA 사업관리시스템(pms.kocca.kr) - 지원사업 신청/접수 → 공고조회/신청 메뉴에서 ‘2026년 KOCCA CKL TOKYO 입주기업 모집’ 공고 확인 ③ 공고명 클릭하여 하단 ‘파일첨부’에서 필요양식 다운로드 후 신청내역 작성 ④ ‘신청접수’ 클릭하여 신청서 작성 및 제출파일 업로",
+    "score": 26,
+    "axooFitScore": 26,
+    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "detailSummary": "",
+    "eligibility": "지원대상 개인 단체",
+    "supportDetails": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2026년 KOCCA CKL TOKYO 입주기업 모집 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 콘텐츠 콘텐츠 제작 영상 공간 신기술",
-    "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "searchText": "2027년 공연예술창작산실(2차 제작지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 제작지원",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
-    "id": "arko-0c1f64768485",
+    "id": "arko-ddb71cf7de41",
     "source": "한국문화예술위원회",
     "sourceCode": "ARKO",
     "sourceType": "지원사업",
-    "title": "2027년 어린이청소년을위한공연예술지원",
+    "title": "2027년 해외레지던시및프로그램참가지원",
     "organization": "한국문화예술위원회",
     "agency": "한국문화예술위원회",
     "amount": 0,
@@ -2277,8 +1699,8 @@
     "deadlineDate": "2026-11-05",
     "endDate": "2026-11-05",
     "status": "진행중",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD7s7MarnkJQYIUP8ctK9D2UPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD7s7MarnkJQYIUP8ctK9D2UPBZm1EJpnMlsBwvsh76BM",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD6pDx%2BABF3dZKRwuIqwjzWUPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD6pDx%2BABF3dZKRwuIqwjzWUPBZm1EJpnMlsBwvsh76BM",
     "documentUrl": "",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
@@ -2311,13 +1733,13 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 18,
+        "score": 8,
         "maxScore": 18
       },
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 8,
+        "score": 0,
         "maxScore": 18
       },
       {
@@ -2329,8 +1751,114 @@
       {
         "code": "evidence",
         "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 22,
+    "axooFitScore": 22,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 전체",
+    "supportDetails": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2027년 해외레지던시및프로그램참가지원 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "arko-6c9132dd59d9",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
+    "sourceType": "지원사업",
+    "title": "2027년 공연예술창작주체(공연장기획제작지원)",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
+    "status": "진행중",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxYxRhim%2FzZoNvFBlbIP%2F8wPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxYxRhim%2FzZoNvFBlbIP%2F8wPBZm1EJpnMlsBwvsh76BM",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "콘텐츠 제작·브랜딩",
+    "businessArea": "content_brand",
+    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "businessAreas": [
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedPriorityKeywords": [
+      "제작지원"
+    ],
+    "matchedKeywords": [
+      "제작지원"
+    ],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
         "score": 8,
-        "maxScore": 8
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -2340,27 +1868,128 @@
       }
     ],
     "scoreReasons": [
-      "기업·법인 참여 가능성 확인",
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
       "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 23,
-    "axooFitScore": 23,
-    "gradeReason": "낮은 적합도: 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
-    "axooFitReason": "낮은 적합도: 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 단체 지역 전국 신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 문화일반 첨부파일 (공고문) 어린이청소년을위한공연예술지원.pdf 미리보기 미리보기 새창 2027년 어린이청소년을위한공연예술지원사업(신작제작) 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 어린이청소년을위한공연예술지원사업(2차제작) 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 어린이청소년을위한공연예술지원사업 참여인력 구성계획 및 예산집행계획_신청단체명.xlsx 미리보기 미리보기 새창 별첨_2027년도 어린이청소년극장 협력 연계지원_어린이청소년을위한공연예술지원.pdf 미리보기 미리보기 새창 2027년 어린이청소년을위한예술지원사업 자주 묻는 질문(FAQ).p",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 20,
+    "axooFitScore": 20,
+    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 단체",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 문화일반 첨부파일 (공고문) 어린이청소년을위한공연예술지원.pdf 미리보기 미리보기 새창 2027년 어린이청소년을위한공연예술지원사업(신작제작) 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 어린이청소년을위한공연예술지원사업(2차제작) 지원신청서_신청단체명.hwp 미리보기 미리보기 새창 2027년 어린이청소년을위한공연예술지원사업 참여인력 구성계획 및 예산집행계획_신청단체명.xlsx 미리보기 미리보기 새창 별첨_2027년도 어린이청소년극장 협력 연계지원_어린이청소년을위한공연예술지원.pdf 미리보기",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 어린이청소년을위한공연예술지원 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "searchText": "2027년 공연예술창작주체(공연장기획제작지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 제작지원",
     "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "arko-04f87e7f7dcb",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
+    "sourceType": "지원사업",
+    "title": "2027년 인바운드국제협력강화(인바운드리서치지원)",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
+    "status": "진행중",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedPriorityKeywords": [],
+    "matchedKeywords": [],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 19,
+    "axooFitScore": 19,
+    "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "",
+    "supportDetails": "",
+    "application": "",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2027년 인바운드국제협력강화(인바운드리서치지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
@@ -2434,7 +2063,108 @@
         "code": "evidence",
         "label": "상세근거",
         "score": 3,
-        "maxScore": 8
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 19,
+    "axooFitScore": 19,
+    "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 단체",
+    "supportDetails": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2027년 인바운드국제협력강화(인바운드레지던시지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "arko-239201",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
+    "sourceType": "지원사업",
+    "title": "아르코·대학로예술극장 2027년 대관 창작자(단체) 공모",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-16",
+    "deadlineDate": "2026-11-16",
+    "endDate": "2026-11-16",
+    "status": "진행중",
+    "sourceUrl": "https://theater.arko.or.kr/Rent/Notice/239201/?q=null",
+    "originalUrl": "https://theater.arko.or.kr/Rent/Notice/239201/?q=null",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedPriorityKeywords": [],
+    "matchedKeywords": [],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -2459,9 +2189,9 @@
     "application": "",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 인바운드국제협력강화(인바운드레지던시지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "searchText": "아르코·대학로예술극장 2027년 대관 창작자(단체) 공모 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
     "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
@@ -2522,20 +2252,20 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 4,
+        "score": 0,
         "maxScore": 18
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 3,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 3,
+        "maxScore": 10
       },
       {
         "code": "penalty",
@@ -2545,84 +2275,65 @@
       }
     ],
     "scoreReasons": [
-      "기업·법인 참여 가능성 확인",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
     "companyEligible": true,
-    "score": 19,
-    "axooFitScore": 19,
-    "gradeReason": "낮은 적합도: 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
-    "axooFitReason": "낮은 적합도: 기업·법인 참여 가능성 확인 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
-    "detailSummary": "지원사업 찾기 | 아트누리 이 누리집은 대한민국 공식 전자정부 누리집입니다. 공식 누리집 확인방법 열기 공식 누리집 주소 확인하기 go.kr 주소를 사용하는 누리집은 대한민국 정부기관이 관리하는 누리집입니다. 이 밖에 or.kr 또는 .kr등 다른 도메인 주소를 사용하고 있다면 아래 URL에서 도메인 주소를 확인해 보세요. 운영중인 공식 누리집보기 본문영역 바로가기 메인메뉴 바로가기 하단링크 바로가기 아트누리 로고 --> 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나를 위한 지원사업 제도안내 예술인복지 예술활동증명 예술활동준비금지원 예술인국민연금보험료지원 예술인산재보험 예술인고용보험 예술인실업급여 예술인생활안정자금(융자) 예술인파견지원 예술인자녀돌봄지원 예술인출산전후급여 예술인주거공간지원 예술인권리보장 예술인권리침해 성희롱·성폭력 피해신고·상담) 서면계약 위반신고 예술인 법률상담ㆍ컨설팅 예술인 심리상담 예술인 권리보호 교육 저작권 조정신청 저작권 보호 법률 컨설팅 저작권 비즈니스 지원센터 알림마당 공지사항 자료실 행사소식 뉴스레터 마이페이지 회원정보 수정 스크랩 정보 공고등록신청 로그인 회원가입 검색하기 SEARCH 검색하기 닫기 전체 메뉴 한눈에 보기 SITE MAP 주요메뉴 아트누리 소개 이용안내 한국지역 문화지원협의회 정보제공기관 지원사업 지원사업 찾기 해외레지던스 나",
-    "eligibility": "지원대상 개인 단체 지역 전국 신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 공연예술창작산실(올해의신작).pdf 미리보기 미리보기 새창 (양식) 1. 2027년 올해의신작(○○분야)_지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 (양식) 2. 2027년 올해의신작(○○분야)_예산집행계획서_신청자(단체)명.xlsx 미리보기 미리보기 새창 (양식) 3. 2027년 올해의신작(○○분야)_핵심 창작진 참여 동의서_신청자(단체)명.hwpx 미리보기 미리보기 새창 (양식) 4. 2027년 올해의신작(○○분야)_대본_신청자(단체)명.hwp 미리보기 미리보기 새창 (참고) 2027년 공연예술창작산실 올해의신작 실연심의 상세 안내.pdf 미리",
+    "score": 7,
+    "axooFitScore": 7,
+    "gradeReason": "낮은 적합도: 기업·법인·단체 참여 단서(자격 재확인 필요) · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 기업·법인·단체 참여 단서(자격 재확인 필요) · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 개인 단체",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05 사업유형 창작 온라인신청 신청사이트 바로가기 분야 연극 뮤지컬 무용 음악 전통예술 첨부파일 (공고문) 공연예술창작산실(올해의신작).pdf 미리보기 미리보기 새창 (양식) 1. 2027년 올해의신작(○○분야)_지원신청서_신청자(단체)명.hwp 미리보기 미리보기 새창 (양식) 2. 2027년 올해의신작(○○분야)_예산집행계획서_신청자(단체)명.xlsx 미리보기 미리보기 새창 (양식) 3. 2027년 올해의신작(○○분야)_핵심 창작진 참여 동의서_신청자(단체)명.hwpx 미리보기 미리보기 새창 (양식) 4. 2027년 올해의신작(○○분야)_대본_신청자(단체)명.hwp 미리보기 미리보기 새창",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "searchText": "2027년 공연예술창작산실(올해의신작) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
     "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
-    "id": "kocca-326D00110005",
-    "source": "한국콘텐츠진흥원",
-    "sourceCode": "KOCCA",
+    "id": "arko-0c1f64768485",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
     "sourceType": "지원사업",
-    "title": "2026 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(3차/태국)",
-    "organization": "한국콘텐츠진흥원",
-    "agency": "한국콘텐츠진흥원",
+    "title": "2027년 어린이청소년을위한공연예술지원",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
     "amount": 0,
     "budget": null,
     "supportAmount": null,
     "publishedDate": "2026-10-08",
     "postedDate": "2026-10-08",
     "startDate": "2026-10-08",
-    "deadline": "2026-10-22",
-    "deadlineDate": "2026-10-22",
-    "endDate": "2026-10-22",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
     "status": "진행중",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110005&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110005&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD7s7MarnkJQYIUP8ctK9D2UPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD7s7MarnkJQYIUP8ctK9D2UPBZm1EJpnMlsBwvsh76BM",
     "documentUrl": "",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
     "priorityCategoryLabel": "예술·콘텐츠 지원사업",
     "priorityRank": 0,
-    "field": "전시·공간",
-    "businessArea": "exhibition_space",
-    "businessAreaLabel": "전시·공간",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
     "businessAreas": [
       {
-        "code": "exhibition_space",
-        "label": "전시·공간"
-      },
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      },
-      {
-        "code": "business_distribution",
-        "label": "사업화·유통"
+        "code": "other",
+        "label": "기타"
       }
     ],
-    "matchedPriorityKeywords": [
-      "쇼케이스",
-      "콘텐츠",
-      "영상",
-      "마케팅"
-    ],
-    "matchedKeywords": [
-      "쇼케이스",
-      "콘텐츠",
-      "영상",
-      "마케팅"
-    ],
+    "matchedPriorityKeywords": [],
+    "matchedKeywords": [],
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
@@ -2632,7 +2343,7 @@
       {
         "code": "relevance",
         "label": "사업영역",
-        "score": 32,
+        "score": 8,
         "maxScore": 38
       },
       {
@@ -2644,107 +2355,87 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 16,
+        "score": 0,
         "maxScore": 18
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 6,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 3,
+        "maxScore": 10
       },
       {
         "code": "penalty",
         "label": "감점",
-        "score": -55,
+        "score": -22,
         "maxScore": 0
       }
     ],
     "scoreReasons": [
-      "전시·공간 사업영역과 연결",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
     "companyEligible": false,
-    "score": 15,
-    "axooFitScore": 15,
-    "gradeReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
-    "axooFitReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
-    "detailSummary": "사업내용 문의 - 대중음악산업팀 이하영 대리(061-900-6452 / hyl93@kocca.kr) ㅇ 접수페이지(시스템) 문의 : 스펙토리(02-6953-1310) 공고관련자료확인 정책자료 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기 관련기관 새창열기\"> 게임물관리위원회 국립박물관문화재단 국악방송 한국국제교류재단 영상물등급위원회 영화진흥위원회 예술경영지원센터 아르코·대학로예술극장 한국관광공사 한국문학번역원 한국문화관광연구원 한국국제문화교류진흥원 한국문화예술위원회 한국언론진흥재단 한국영상자료원 한국저작권위원회 한국출판문화산업진흥원 청와대 문화체육관광부 방송통신위원회 한국문화원 행정안전부 수출 플러스 지원단 이전 시작 정지 다음 관련기관 전체보기 관련기관 바로가기 사업별사이트 지원과제안내 문화체육관광기술진흥센터 R&D정보서비스 기업부설창작연구소 콘텐츠코리아랩 뉴콘텐츠기업지원센터 콘텐츠수출 마케팅플랫폼(welcon) 해외비즈니스센터 콘텐츠가치평",
-    "eligibility": "신청자격 ㅇ 신청일 기준 국내 음반 발매 경력이 있고 국내에서 활동 중인 한국 대중음악 뮤지션(국내 음악 제작사에 소속되어 있거나 소속사가 없을 경우 한국 국적인 뮤지션) ㅇ 클래식, 오페라, 국악 제외한 대중음악 전 장르 뮤지션 ㅇ 본인 곡으로 30분 내외 단독 공연이 가능한 뮤지션 신청서 접수 ㅇ 공고/접수기간: 2026. 10. 8.(목) ~ 2026. 10. 22.(목) / 11:00까지 ㅇ 접수페이지 링크: https://kocca.spectory.net/spotlightbangkok ㅇ 제출서류 - 접수페이지 직접 입력 - 접수페이지 내 파일첨부(참가신청서(필수), 뮤지션 추가 소개자료(선택)) *세부사항 공고문 참조 선정방법 및 기준 ㅇ 선정방법: 1차 서면평가, 2차 현지 디렉터 평가를 통한 뮤지션 선정 ㅇ 평가기준(1차 서면평",
-    "supportDetails": "사업내용 문의 - 대중음악산업팀 이하영 대리(061-900-6452 / hyl93@kocca.kr) ㅇ 접수페이지(시스템) 문의 : 스펙토리(02-6953-1310) 공고관련자료확인 정책자료 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기 관련기관 새창열기\"> 게임물관리위원회 국립박물관문화재단 국악방송 한국국제교류재단 영상물등급위원회 영화진흥위원회 예술경영지원센터 아르코·대학로예술극장 한국관광공사 한국문학번역원 한국문화관광연구원 한국국제문화교류진흥원 한국문화예술위원회 한국언론진흥재단 한국영상자료원 한국저작권위원회 한국출판문화산업진흥원 청와대 문화체육관광부 방송통신위원회 한국문화원 행정안전부 수출 플러스 지원단 이전 시작 정지 다음 관련기관 전체보기 관련기관 바로가기 사업별사이트 지원과제안내 문화체육관광기술진흥센터 R&D정보서비스 기업부설창작연구소 콘텐츠코리아랩 뉴콘텐츠기업지원센터 콘텐츠수출 마케팅플랫폼(welcon) 해외비즈니스센터 콘텐츠가치평",
-    "application": "제출서류 - 접수페이지 직접 입력 - 접수페이지 내 파일첨부(참가신청서(필수), 뮤지션 추가 소개자료(선택)) *세부사항 공고문 참조 선정방법 및 기준 ㅇ 선정방법: 1차 서면평가, 2차 현지 디렉터 평가를 통한 뮤지션 선정 ㅇ 평가기준(1차 서면평가) - 뮤지션 역량(30점), 해외진출 전략_사전(30점), 해외진출 전략_사후(30점), Chartmetric 점수(10점) - 가점: 2025년 지역 음악창작소 사업 참여 뮤지션(2점) * 한국콘텐츠진흥원이 지원하는 지역 음악창작소의 2025년 사업에 참여한 이력이 있는 뮤지션 ** 참가신청서 내 2025년 지역 음악창작소 참가뮤지션 해당여부 표기 후 제출 필수, 진흥원에서 검토 후 가점",
+    "score": 0,
+    "axooFitScore": 0,
+    "gradeReason": "낮은 적합도: AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 단체",
+    "supportDetails": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2026 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(3차/태국) 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 전시·공간 쇼케이스 콘텐츠 영상 마케팅",
-    "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "searchText": "2027년 어린이청소년을위한공연예술지원 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
-    "id": "kocca-326D00110006",
-    "source": "한국콘텐츠진흥원",
-    "sourceCode": "KOCCA",
+    "id": "arko-fbbb8b195fff",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
     "sourceType": "지원사업",
-    "title": "2027 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(1차/스페인)",
-    "organization": "한국콘텐츠진흥원",
-    "agency": "한국콘텐츠진흥원",
+    "title": "2027년 대한민국공연예술제",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
     "amount": 0,
     "budget": null,
     "supportAmount": null,
-    "publishedDate": "2026-10-14",
-    "postedDate": "2026-10-14",
-    "startDate": "2026-10-14",
-    "deadline": "2026-10-30",
-    "deadlineDate": "2026-10-30",
-    "endDate": "2026-10-30",
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
     "status": "진행중",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2dc3QlWH2dX3oBhTrp0XP0PBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2dc3QlWH2dX3oBhTrp0XP0PBZm1EJpnMlsBwvsh76BM",
     "documentUrl": "",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
     "priorityCategoryLabel": "예술·콘텐츠 지원사업",
     "priorityRank": 0,
-    "field": "전시·공간",
-    "businessArea": "exhibition_space",
-    "businessAreaLabel": "전시·공간",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
     "businessAreas": [
       {
-        "code": "exhibition_space",
-        "label": "전시·공간"
-      },
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      },
-      {
-        "code": "business_distribution",
-        "label": "사업화·유통"
+        "code": "other",
+        "label": "기타"
       }
     ],
-    "matchedPriorityKeywords": [
-      "쇼케이스",
-      "콘텐츠",
-      "영상",
-      "마케팅"
-    ],
-    "matchedKeywords": [
-      "쇼케이스",
-      "콘텐츠",
-      "영상",
-      "마케팅"
-    ],
+    "matchedPriorityKeywords": [],
+    "matchedKeywords": [],
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
@@ -2754,7 +2445,7 @@
       {
         "code": "relevance",
         "label": "사업영역",
-        "score": 32,
+        "score": 8,
         "maxScore": 38
       },
       {
@@ -2766,50 +2457,252 @@
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 16,
+        "score": 0,
         "maxScore": 18
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 6,
+        "score": 0,
         "maxScore": 16
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 8,
-        "maxScore": 8
+        "score": 3,
+        "maxScore": 10
       },
       {
         "code": "penalty",
         "label": "감점",
-        "score": -55,
+        "score": -22,
         "maxScore": 0
       }
     ],
     "scoreReasons": [
-      "전시·공간 사업영역과 연결",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인",
-      "AXOO 비핵심 장르 비중으로 감점"
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
     "companyEligible": false,
-    "score": 15,
-    "axooFitScore": 15,
-    "gradeReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
-    "axooFitReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
-    "detailSummary": "사업내용 문의 : 대중음악산업팀 (061-900-6455 / friendly@kocca.kr) ㅇ 접수페이지(시스템) 문의 : IDC (061-900-6080) 공고관련자료확인 정책자료 사업관리시스템 바로가기 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기 관련기관 새창열기\"> 게임물관리위원회 국립박물관문화재단 국악방송 한국국제교류재단 영상물등급위원회 영화진흥위원회 예술경영지원센터 아르코·대학로예술극장 한국관광공사 한국문학번역원 한국문화관광연구원 한국국제문화교류진흥원 한국문화예술위원회 한국언론진흥재단 한국영상자료원 한국저작권위원회 한국출판문화산업진흥원 청와대 문화체육관광부 방송통신위원회 한국문화원 행정안전부 수출 플러스 지원단 이전 시작 정지 다음 관련기관 전체보기 관련기관 바로가기 사업별사이트 지원과제안내 문화체육관광기술진흥센터 R&D정보서비스 기업부설창작연구소 콘텐츠코리아랩 뉴콘텐츠기업지원센터 콘텐츠수출 마케팅플랫폼(welcon) 해외비즈니",
-    "eligibility": "신청자격 ㅇ 모집대상 : 2027년 소나르 페스티벌 참가를 희망하는 국내 뮤지션 ㅇ 신청자격 : 소나르 페스티벌의 취지 및 주요 공연 장르에 부합하는 대중음악 뮤지션 (클래식, 오페라, 국악 장르 제외) - 신청일 기준 국내 음반 발매 경력이 있고 국내에서 활동 중인 대중음악 뮤지션(국내 소속사가 있거나, 소속사가 없을 경우 한국 국적인 뮤지션) - 본인 곡으로 60분 내외 단독 공연이 가능한 뮤지션 * 세부사항 공고문 참조 신청서 접수 ㅇ 선정규모 : 2팀 (Live Act 1팀 / DJ Set 1팀) *중복신청 불가 ㅇ 공고/접수기간 : 2026. 10. 14.(수) ~ 2026. 10. 30.(금) / 11:00까지 ㅇ 접수방법 : KOCCA 홈페이지 공고 및 온라인 접수 ㅇ 제출서류 : 참가신청서(필수), 영문 소개자료(선택) * 세부",
-    "supportDetails": "사업내용 문의 : 대중음악산업팀 (061-900-6455 / friendly@kocca.kr) ㅇ 접수페이지(시스템) 문의 : IDC (061-900-6080) 공고관련자료확인 정책자료 사업관리시스템 바로가기 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기 관련기관 새창열기\"> 게임물관리위원회 국립박물관문화재단 국악방송 한국국제교류재단 영상물등급위원회 영화진흥위원회 예술경영지원센터 아르코·대학로예술극장 한국관광공사 한국문학번역원 한국문화관광연구원 한국국제문화교류진흥원 한국문화예술위원회 한국언론진흥재단 한국영상자료원 한국저작권위원회 한국출판문화산업진흥원 청와대 문화체육관광부 방송통신위원회 한국문화원 행정안전부 수출 플러스 지원단 이전 시작 정지 다음 관련기관 전체보기 관련기관 바로가기 사업별사이트 지원과제안내 문화체육관광기술진흥센터 R&D정보서비스 기업부설창작연구소 콘텐츠코리아랩 뉴콘텐츠기업지원센터 콘텐츠수출 마케팅플랫폼(welcon) 해외비즈니",
-    "application": "제출서류 : 참가신청서(필수), 영문 소개자료(선택) * 세부사항 공고문 참조 선정방법 및 기준 ㅇ 선정방법 : 1차 서면평가, 2차 현지 디렉터평가를 통한 뮤지션 선정 ㅇ 평가기준 - (1차 서면평가) 페스티벌 장르 적합성(30점), 뮤지션 역량(30점), 해외진출 전략(30점), Chartmetric 점수(10점) - (2차 현지 디렉터평가) 페스티벌 사무국 내부 심사에 따른 최종선정 접수 주의사항 ㅇ 접수페이지 외 이메일, 우편, 방문 등을 통한 접수 불가 ㅇ 접수마감일에는 트래픽으로 인한 시스템 장애가 발생할 수 있으니 마감기한 1일 전 접수완료 권장 ㅇ 한 기획사가 여러 팀의 뮤지션을 신청할 시 뮤지션별 나누어 신청 * 한 신청",
+    "score": 0,
+    "axooFitScore": 0,
+    "gradeReason": "낮은 적합도: AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 단체",
+    "supportDetails": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(1차/스페인) 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 전시·공간 쇼케이스 콘텐츠 영상 마케팅",
-    "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "searchText": "2027년 대한민국공연예술제 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "arko-418d2ba0f400",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
+    "sourceType": "지원사업",
+    "title": "2027년 공연예술비평활동활성화지원",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
+    "status": "진행중",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD4XPCWwjivUlPkskx%2BtAklsPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD4XPCWwjivUlPkskx%2BtAklsPBZm1EJpnMlsBwvsh76BM",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedPriorityKeywords": [],
+    "matchedKeywords": [],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 0,
+    "axooFitScore": 0,
+    "gradeReason": "낮은 적합도: AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 전체",
+    "supportDetails": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2027년 공연예술비평활동활성화지원 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "arko-360bd6a9eb60",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
+    "sourceType": "지원사업",
+    "title": "2027년 공연예술창작주체(중장기단체도약지원)",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
+    "status": "진행중",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxeWBfXYq5PfDFvTFxDIKHgPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxeWBfXYq5PfDFvTFxDIKHgPBZm1EJpnMlsBwvsh76BM",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedPriorityKeywords": [],
+    "matchedKeywords": [],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "score": 0,
+    "axooFitScore": 0,
+    "gradeReason": "낮은 적합도: AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "detailSummary": "",
+    "eligibility": "지원대상 단체",
+    "supportDetails": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2027년 공연예술창작주체(중장기단체도약지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
