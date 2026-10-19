@@ -1,8 +1,8 @@
 {
-  "validatedAt": "2026-10-18",
+  "validatedAt": "2026-10-19",
   "channelCount": 33,
-  "reachableCount": 19,
-  "unreachableCount": 14,
+  "reachableCount": 31,
+  "unreachableCount": 2,
   "channels": [
     {
       "id": "gyeonggi_public_art",
@@ -11,13 +11,13 @@
       "sourceType": "official_portal",
       "crawlMode": "board",
       "configuredUrl": "https://www.gg.go.kr/publicart/main.do",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://www.gg.go.kr/publicart/main.do",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10558,
-      "error": "fetch failed"
+      "contentType": "text/html;charset=utf-8",
+      "elapsedMs": 1134,
+      "error": ""
     },
     {
       "id": "sh_notice",
@@ -31,7 +31,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 795,
+      "elapsedMs": 1240,
       "error": ""
     },
     {
@@ -46,7 +46,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 461,
+      "elapsedMs": 924,
       "error": ""
     },
     {
@@ -56,13 +56,13 @@
       "sourceType": "official_board",
       "crawlMode": "board",
       "configuredUrl": "https://www.incheon.go.kr/culture/CU070302",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://www.incheon.go.kr/culture/CU070302",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10493,
-      "error": "fetch failed"
+      "contentType": "text/html;charset=UTF-8",
+      "elapsedMs": 1564,
+      "error": ""
     },
     {
       "id": "busan_city_notice",
@@ -76,7 +76,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10490,
+      "elapsedMs": 1292,
       "error": "fetch failed"
     },
     {
@@ -91,7 +91,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10488,
+      "elapsedMs": 1304,
       "error": "fetch failed"
     },
     {
@@ -106,7 +106,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 6080,
+      "elapsedMs": 3922,
       "error": ""
     },
     {
@@ -121,7 +121,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2822,
+      "elapsedMs": 1776,
       "error": ""
     },
     {
@@ -131,13 +131,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://www.daejeon.go.kr/drh/depart/board/boardNormalList.do?boardId=normal_0167&menuSeq=1453",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://www.daejeon.go.kr/drh/depart/board/boardNormalList.do?boardId=normal_0167&menuSeq=1453",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10371,
-      "error": "fetch failed"
+      "contentType": "text/html; charset=UTF-8",
+      "elapsedMs": 1604,
+      "error": ""
     },
     {
       "id": "gangwon_development_corporation",
@@ -151,7 +151,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 863,
+      "elapsedMs": 1585,
       "error": ""
     },
     {
@@ -166,7 +166,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1234,
+      "elapsedMs": 2107,
       "error": ""
     },
     {
@@ -176,13 +176,13 @@
       "sourceType": "local_art_portal",
       "crawlMode": "generic_board_discovery",
       "configuredUrl": "https://www.gyeongnam.go.kr/culture/index.do?siteCd=001",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://www.gyeongnam.go.kr/culture/index.do?siteCd=001",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10346,
-      "error": "fetch failed"
+      "contentType": "text/html;charset=UTF-8",
+      "elapsedMs": 2088,
+      "error": ""
     },
     {
       "id": "gyeongbuk_notice",
@@ -191,13 +191,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://www.gb.go.kr/Main/page.do?BD_CODE=gosi_notice&URL=%2Fcommon%2Fboard%2Fboard.do&cmd=1&mnu_uid=6789",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
-      "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10494,
-      "error": "fetch failed"
+      "finalUrl": "https://www.gb.go.kr/page/10109/67.do",
+      "reachable": true,
+      "status": 200,
+      "redirected": true,
+      "contentType": "text/html; charset=UTF-8",
+      "elapsedMs": 2753,
+      "error": ""
     },
     {
       "id": "gyeongbuk_development_corporation",
@@ -211,7 +211,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1067,
+      "elapsedMs": 1416,
       "error": ""
     },
     {
@@ -221,13 +221,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://www.daegu.go.kr/index.do?menu_id=00940170",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://www.daegu.go.kr/index.do?menu_id=00940170",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10492,
-      "error": "fetch failed"
+      "contentType": "text/html;charset=UTF-8",
+      "elapsedMs": 1786,
+      "error": ""
     },
     {
       "id": "daegu_urban_development",
@@ -241,7 +241,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 1337,
+      "elapsedMs": 988,
       "error": ""
     },
     {
@@ -256,7 +256,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1246,
+      "elapsedMs": 1320,
       "error": ""
     },
     {
@@ -266,13 +266,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://www.ulsan.go.kr/u/rep/transfer/notice/list.ulsan?mId=001004002000000000",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://www.ulsan.go.kr/u/rep/transfer/notice/list.ulsan?mId=001004002000000000",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10152,
-      "error": "fetch failed"
+      "contentType": "text/html; charset=UTF-8",
+      "elapsedMs": 1600,
+      "error": ""
     },
     {
       "id": "ulsan_urban_corporation",
@@ -286,7 +286,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1636,
+      "elapsedMs": 4577,
       "error": ""
     },
     {
@@ -301,7 +301,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 735,
+      "elapsedMs": 1802,
       "error": ""
     },
     {
@@ -311,13 +311,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://cncms.chungnam.go.kr/cnportal/province/province/list.do?menuNo=500487",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://cncms.chungnam.go.kr/cnportal/province/province/list.do?menuNo=500487",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10039,
-      "error": "fetch failed"
+      "contentType": "text/html; charset=utf-8",
+      "elapsedMs": 2053,
+      "error": ""
     },
     {
       "id": "chungbuk_development_corporation",
@@ -331,7 +331,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 6052,
+      "elapsedMs": 7790,
       "error": ""
     },
     {
@@ -346,7 +346,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1559,
+      "elapsedMs": 3098,
       "error": ""
     },
     {
@@ -361,7 +361,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 7769,
+      "elapsedMs": 12706,
       "error": ""
     },
     {
@@ -371,13 +371,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://www.jeonnam.go.kr/J0203/boardList.do?menuId=jeonnam0203000000",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://www.jeonnam.go.kr/J0203/boardList.do?menuId=jeonnam0203000000",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10201,
-      "error": "fetch failed"
+      "contentType": "text/html; charset=UTF-8",
+      "elapsedMs": 4557,
+      "error": ""
     },
     {
       "id": "jeonbuk_development_corporation",
@@ -391,7 +391,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 814,
+      "elapsedMs": 2329,
       "error": ""
     },
     {
@@ -404,9 +404,9 @@
       "finalUrl": "https://www.jeonbuk.go.kr/board/list.jeonbuk?boardId=BBS_0000129&menuCd=DOM_000000102002003001",
       "reachable": true,
       "status": 200,
-      "redirected": false,
+      "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2354,
+      "elapsedMs": 8928,
       "error": ""
     },
     {
@@ -416,13 +416,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://state.gwd.go.kr/portal/bulletin/notification",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://state.gwd.go.kr/portal/bulletin/notification",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10176,
-      "error": "fetch failed"
+      "contentType": "text/html;charset=UTF-8",
+      "elapsedMs": 5157,
+      "error": ""
     },
     {
       "id": "jeju_development_corporation",
@@ -436,7 +436,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1792,
+      "elapsedMs": 4783,
       "error": ""
     },
     {
@@ -451,7 +451,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1311,
+      "elapsedMs": 4954,
       "error": ""
     },
     {
@@ -466,7 +466,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 730,
+      "elapsedMs": 4832,
       "error": ""
     },
     {
@@ -476,13 +476,13 @@
       "sourceType": "official_board",
       "crawlMode": "board",
       "configuredUrl": "https://sido.jeonnam.go.kr/citynet/jsp/sap/SAPGosiBizProcess.do?command=searchList&conIfmEnddt=99991231&conIfmStdt=20260701&flag=gosiGL&svp=Y",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
+      "finalUrl": "https://sido.jeonnam.go.kr/citynet/jsp/sap/SAPGosiBizProcess.do?command=searchList&conIfmEnddt=99991231&conIfmStdt=20260701&flag=gosiGL&svp=Y",
+      "reachable": true,
+      "status": 200,
       "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10493,
-      "error": "fetch failed"
+      "contentType": "text/html;charset=UTF-8",
+      "elapsedMs": 2879,
+      "error": ""
     },
     {
       "id": "g2b_architectural_art",
@@ -491,13 +491,13 @@
       "sourceType": "national_procurement",
       "crawlMode": "dataset_import",
       "configuredUrl": "https://www.g2b.go.kr",
-      "finalUrl": "",
-      "reachable": false,
-      "status": 0,
-      "redirected": false,
-      "contentType": "",
-      "elapsedMs": 10469,
-      "error": "fetch failed"
+      "finalUrl": "https://www.g2b.go.kr/",
+      "reachable": true,
+      "status": 200,
+      "redirected": true,
+      "contentType": "text/html;charset=UTF-8",
+      "elapsedMs": 4123,
+      "error": ""
     }
   ]
 }
