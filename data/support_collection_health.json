@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T10:33:39.144Z",
+  "updatedAt": "2026-10-19T10:35:40.776Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-19T10:33:39.144Z",
-      "lastSuccessAt": "2026-10-19T10:33:39.144Z",
+      "checkedAt": "2026-10-19T10:35:40.776Z",
+      "lastSuccessAt": "2026-10-19T10:35:40.776Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -22,14 +22,12 @@
       "name": "경기문화재단",
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
-      "state": "failed",
-      "checkedAt": "2026-10-19T10:33:52.054Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "HTTP 403"
-      ],
-      "lastSuccessAt": "2026-10-19T08:29:36.156Z"
+      "state": "ok",
+      "checkedAt": "2026-10-19T10:35:52.200Z",
+      "lastSuccessAt": "2026-10-19T10:35:52.200Z",
+      "found": 2,
+      "verified": 2,
+      "errors": []
     },
     {
       "code": "IFAC",
@@ -37,8 +35,8 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-19T10:33:52.877Z",
-      "lastSuccessAt": "2026-10-19T10:33:52.877Z",
+      "checkedAt": "2026-10-19T10:35:56.138Z",
+      "lastSuccessAt": "2026-10-19T10:35:56.138Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -49,8 +47,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-19T10:34:21.073Z",
-      "lastSuccessAt": "2026-10-19T10:34:21.073Z",
+      "checkedAt": "2026-10-19T10:36:34.886Z",
+      "lastSuccessAt": "2026-10-19T10:36:34.886Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -61,8 +59,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-19T10:34:31.384Z",
-      "lastSuccessAt": "2026-10-19T10:34:31.384Z",
+      "checkedAt": "2026-10-19T10:36:41.302Z",
+      "lastSuccessAt": "2026-10-19T10:36:41.302Z",
       "found": 9,
       "verified": 8,
       "errors": [
