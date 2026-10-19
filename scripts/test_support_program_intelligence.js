@@ -86,6 +86,14 @@ assert.strictEqual(uncertainFit.analysisConfidence, "low");
 assert.ok(uncertainFit.score <= 69);
 assert.strictEqual(uncertainFit.isExcluded, false);
 
+const officeTenancy = analyzeSupportProgram({
+  title: "2026년 해외 입주기업 모집",
+  eligibility: "모집대상: 국내 콘텐츠 기업",
+  supportDetails: "공유오피스 입주 및 지사 설립, 사무실 임대 지원"
+});
+assert.strictEqual(officeTenancy.isExcluded, true);
+assert.ok(officeTenancy.score <= 35);
+
 const englishWord = analyzeSupportProgram({ title: "Art Residency Program" });
 assert.strictEqual(englishWord.businessArea, "other");
 
