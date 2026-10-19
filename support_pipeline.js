@@ -1,9 +1,9 @@
 (function P2Module(){
 "use strict";
 const STORAGE="axoo_b2g_support_pipeline_p2_v1", VERSION=1;
-const AIRTABLE_BASE="https://airtable.com/app59It3ijZvl0szJ";
-const AIRTABLE_CANDIDATES="https://airtable.com/app59It3ijZvl0szJ/pagI1t6L5vcCxrmlM";
-const AIRTABLE_DIRECTOR="https://airtable.com/app59It3ijZvl0szJ/pagfegIAOu6xEalVV";
+const AIRTABLE_BASE="https://airtable.com/applM2n5kScusEfYr";
+const AIRTABLE_CANDIDATES="https://airtable.com/applM2n5kScusEfYr/pag9HMvdDhUYq7ORu";
+const AIRTABLE_DIRECTOR="https://airtable.com/applM2n5kScusEfYr/pagL4ZaUaOndFiVoS";
 const STATUS=[["INTEREST","관심 등록"],["ELIGIBILITY","적격성 검토"],["DECIDED","지원 결정"],["PREPARING","서류 준비"],["INTERNAL_REVIEW","내부 검토"],["SUBMITTED","제출 완료"],["AWAITING","결과 대기"],["AWARDED","선정"],["DECLINED","미선정"],["ON_HOLD","보류"]];
 const TASKS=["원문·신청자격 확인","지원 여부 결정","증빙·제출서류 확보","신청서·예산서 작성","제출·접수증 보관"];
 const name=x=>STATUS.find(a=>a[0]===x)?.[1]||"관심 등록";
