@@ -1,0 +1,33 @@
+name: Verify Annual Support Ledger
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "data/support_ledger_reference.json"
+      - "support_ledger.js"
+      - "support_ledger.css"
+      - "dashboard_priority_update.js"
+      - "index.html"
+      - "scripts/test_support_ledger.js"
+      - ".github/workflows/verify-support-ledger.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check UI JavaScript syntax
+        run: |
+          node --check support_ledger.js
+          node --check dashboard_priority_update.js
+      - name: Verify annual grant ledger
+        run: node scripts/test_support_ledger.js
