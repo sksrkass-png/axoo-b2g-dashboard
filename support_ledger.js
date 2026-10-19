@@ -13,7 +13,7 @@ const safeUrl=u=>/^https?:\/\/[^\s"'<>]+$/i.test(String(u||""))?String(u):"";
 function today(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
 function normal(v){return String(v||"").toLowerCase().replace(/[^\p{L}\p{N}]/gu,"");}
 function dateValue(v){return /^\d{4}-\d{2}-\d{2}$/.test(String(v||""))?v:"";}
-function yearOf(x){const m=String(x.title||"").match(/(?:^|[^\d])(202[5-9])(?:년|[^\d]|$)/);return m?Number(m[1]):Number((x.deadline||x.publishedDate||"").slice(0,4))||null;}
+function yearOf(x){const m=String(x.title||"").match(/(?:^|[^\d])(202[5-9])(?:년|[^\d]|$)/);return m?Number(m[1]):(x.sourceCode==="SCAS"?null:(Number((x.deadline||x.publishedDate||"").slice(0,4))||null));}
 function typeOf(x){
   const v=String(x.title||"")+" "+String(x.businessAreaLabel||"");
   if(/비평|연구|매체/.test(v))return"critic";
