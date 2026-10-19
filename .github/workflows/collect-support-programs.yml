@@ -3,6 +3,13 @@ name: Collect Support Programs
 on:
   workflow_dispatch:
 
+  push:
+    paths:
+      - "scripts/support_program_intelligence.js"
+      - "scripts/test_support_program_intelligence.js"
+      - "scripts/collect_support_programs.js"
+      - ".github/workflows/collect-support-programs.yml"
+
   schedule:
     # GitHub Actions cron = UTC
     # 00:40 UTC = 한국시간 오전 09:40
