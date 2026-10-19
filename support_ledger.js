@@ -57,8 +57,8 @@ function statusOf(x){
 }
 function fromLive(x){
  const y=yearOf(x);
- const row={id:"live-"+x.id,year:y,level:x.sourceLevel||"국가",region:x.region||"전국",organization:x.organization||x.agency||x.source||"발주기관",title:x.title||"",typeCode:typeOf(x),period:[x.startDate,x.deadline].filter(Boolean).join(" ~ ")||"원문 확인",benefit:x.supportDetails||x.detailSummary||"지원 규모는 원문 확인",applicants:x.eligibility||"원문 확인",collaborationNote:x.gradeReason||"",url:x.sourceUrl||x.originalUrl||"",deadline:dateValue(x.deadline||x.endDate),startDate:dateValue(x.startDate),kind:"live",score:Number(x.score)||0,grade:x.grade||"C",sourceCode:x.sourceCode||"",sourceStatus:x.status||"",verificationStatus:x.verificationStatus||"",verifiedAt:x.collectionVerifiedAt||x.collectedAt||"",sourceLastCheckedAt:x.sourceLastCheckedAt||"",companyEligible:x.companyEligible,excluded:x.isExcludedFromPriority===true,confidence:x.analysisConfidence||"low",supportAmount:Number(x.supportAmount)||0,verified:"자동 수집 · 신청자격 원문 재확인"};
- row.mode=participation(row.applicants,row.collaborationNote,x);
+ const row={id:"live-"+x.id,year:y,level:x.sourceLevel||"국가",region:x.region||"전국",organization:x.organization||x.agency||x.source||"발주기관",title:x.title||"",typeCode:typeOf(x),period:[x.startDate,x.deadline].filter(Boolean).join(" ~ ")||"원문 확인",benefit:x.supportDetails||x.detailSummary||"지원 규모는 원문 확인",applicants:x.eligibility||"원문 확인",collaborationNote:x.gradeReason||"",url:x.sourceUrl||x.originalUrl||"",deadline:dateValue(x.deadline||x.endDate),startDate:dateValue(x.startDate),kind:"live",score:Number(x.score)||0,grade:x.grade||"C",sourceCode:x.sourceCode||"",sourceStatus:x.status||"",verificationStatus:x.verificationStatus||"",verifiedAt:x.collectionVerifiedAt||x.collectedAt||"",sourceLastCheckedAt:x.sourceLastCheckedAt||"",review:x.applicationReview||null,documents:x.documentReview||null,companyEligible:x.companyEligible,excluded:x.isExcludedFromPriority===true,confidence:x.analysisConfidence||"low",supportAmount:Number(x.supportAmount)||0,verified:"자동 수집 · 신청자격 원문 재확인"};
+ row.mode=(row.review&&row.review.participationLabel)||participation(row.applicants,row.collaborationNote,x);
  row.status=statusOf(row);return row;
 }
 function fromRef(x){
@@ -112,6 +112,23 @@ function aLink(r,txt){const u=safeUrl(r.url);return u?`<a href="${escape(u)}" ta
 function shorten(s,n=160){const t=String(s||"").replace(/\s+/g," ").trim();return t.length>n?t.slice(0,n)+"…":t;}
 function rowHtml(r){
  const note=r.kind==="reference"?"참고자료":(r.confidence==="high"?"공식 출처 수집 · 신청자격 재확인":"자동 수집 · 근거 보완 필요");
+ const evidence=r.review?.evidence||[];
+ const constraints=r.review?.restrictions||[];
+ const docFiles=r.documents?.files||[];
+ const auditState={
+   parsed:"첨부 원문 읽힘",no_attachment_detected:"첨부파일 없음",
+   attachment_not_readable:"첨부 텍스트 미확인",manual_review_required:"수동 확인 필요",
+   source_unavailable:"공식 사이트 접근 실패",pending_review:"첨부 분석 대기",
+   not_scanned:"첨부 미분석",no_official_url:"링크 미확인"
+ }[r.documents?.status]||"첨부 분석 대기";
+ const evidenceHtml=r.kind==="live"
+  ?`<details class="ax-ledger-evidence"><summary>검증 근거 · ${escape(auditState)}</summary>
+      <div><strong>신청 자격 판단</strong> ${escape(r.review?.decisionNote||"자동 판별 미완료. 신청 주체와 조건을 공고에서 확인하세요.")}</div>
+      ${evidence.length?evidence.map(x=>`<p><b>${escape(x.field)}</b> ${escape(shorten(x.quote,250))}</p>`).join(""):"<p>신청 대상의 명시적 근거가 부족합니다.</p>"}
+      ${constraints.length?`<div><b>제한조건 단서</b> ${constraints.map(x=>escape(x.label+": "+shorten(x.quote,85))).join(" / ")}</div>`:""}
+      ${r.review?.submissionDocuments?.length?`<div><b>제출서류 단서</b> ${escape(r.review.submissionDocuments.join(" · "))}</div>`:""}
+      ${docFiles.map(x=>`<p>· ${safeUrl(x.url)?`<a href="${escape(x.url)}" target="_blank" rel="noopener noreferrer">${escape(shorten(x.label||x.format||"첨부파일",55))}</a>`:escape(shorten(x.label||"첨부파일",55))} — ${escape(x.status)}${x.reason?" ("+escape(shorten(x.reason,70))+")":""}</p>`).join("")}
+    </details>`: "";
  return `<tr><td class="ax-year">${escape(r.year||"확인")}</td>
  <td><span class="ax-ledger-status ax-${escape(r.status.code)}">${escape(r.status.label)}</span></td>
  <td class="ax-ledger-agency">${escape(r.organization)}<small>${escape(r.level)} · ${escape(r.region)}</small></td>
@@ -120,7 +137,7 @@ function rowHtml(r){
  <td class="ax-ledger-date">${escape(r.period||r.deadline||"확인 필요")}</td>
  <td class="ax-ledger-benefit">${escape(shorten(r.benefit,180))}</td>
  <td class="ax-ledger-target">${escape(shorten(r.applicants,145))}</td>
- <td class="ax-ledger-mode"><strong>${escape(r.mode)}</strong><small>${escape(shorten(r.collaborationNote,100)||"원문에서 자격 확인")}</small></td>
+ <td class="ax-ledger-mode"><strong>${escape(r.mode)}</strong><small>${escape(r.kind==="live"?"자동 판별 · 자격 확정 아님":shorten(r.collaborationNote,100)||"참고 이력")}</small>${evidenceHtml}</td>
  <td class="ax-ledger-score">${r.score==null?"—":escape(r.score+"점")}<small>${escape(r.kind==="live"?r.grade:"미평가")}</small></td></tr>`;
 }
 function store(){try{window.localStorage.setItem(KEY,JSON.stringify(FILTERS))}catch(e){}}
@@ -129,10 +146,13 @@ function draw(panel,live){
  const rows=build(live);
  const displayed=rows.filter(matches).sort(comparator);
  const counts=(code)=>rows.filter(r=>r.status.code===code).length;
- const now=rows.filter(r=>r.kind==="live"&&r.status.code==="open"&&!r.excluded&&r.score>=40&&["법인·단체 검토","협업·컨소시엄"].includes(r.mode)).sort(comparator).slice(0,5);
+ const now=rows.filter(r=>r.kind==="live"&&r.status.code==="open"&&!r.excluded&&r.score>=40&&["corporate_review","artist_collab_review","consortium_review"].includes(r.review?.participationCode)).sort(comparator).slice(0,5);
  const years=[...new Set(rows.map(r=>String(r.year)).filter(x=>/^\d{4}$/.test(x)))].sort((a,b)=>Number(b)-Number(a));
  const types=Object.keys(TYPE).filter(x=>x!=="bid").map(x=>[x,TYPE[x]]);
- const modes=["법인·단체 검토","협업·컨소시엄","작가·개인","자격 확인"];
+ const modes=[...new Set(rows.map(r=>r.mode))].sort((a,b)=>{
+   const priority=["법인 직접 신청 검토","작가·예술단체 협업 검토","컨소시엄 참여 검토","자격 확인 필요","개인 신청 중심","법인 신청 제한 단서","법인·단체 검토","협업·컨소시엄","작가·개인","자격 확인"];
+   return priority.indexOf(a)-priority.indexOf(b);
+ });
  const sources=[...new Map(rows.filter(r=>r.kind==="live").map(r=>[r.sourceCode,r.organization])).entries()].sort((a,b)=>a[0].localeCompare(b[0]));
  const sourceSummary=Array.isArray(health?.sources)?health.sources:[];
  const allOption=[["전체","전체"]];
@@ -168,7 +188,7 @@ function draw(panel,live){
   <button type="button" data-ledger-reset class="ax-ledger-reset">초기화</button>
  </div>
  </section>
- <div class="ax-ledger-results"><strong>검색 결과 <b>${displayed.length}</b>건</strong><small>자동 수집 ${displayed.filter(x=>x.kind==="live").length}건 · 참고자료 ${displayed.filter(x=>x.kind==="reference").length}건 · 지원금/자격은 공고문 확인</small></div>
+ <div class="ax-ledger-results"><strong>검색 결과 <b>${displayed.length}</b>건</strong><small>자동 수집 ${displayed.filter(x=>x.kind==="live").length}건 · 참고자료 ${displayed.filter(x=>x.kind==="reference").length}건 · 자격 자동분류 ${displayed.filter(x=>x.review).length}건 · 첨부 분석 ${displayed.filter(x=>x.documents?.status==="parsed").length}건</small></div>
  <div class="ax-ledger-tablebox"><table class="ax-ledger-table"><thead><tr><th>사업연도</th><th>상태</th><th>주관 기관</th><th>사업명</th><th>유형</th><th>접수·공고 기간</th><th>지원 규모·내용</th><th>지원 대상</th><th>참여 방식 / 연계 메모</th><th>AXOO 점수</th></tr></thead>
  <tbody>${displayed.length?displayed.map(rowHtml).join(""):`<tr><td colspan="10" class="ax-ledger-empty">검색 조건에 맞는 공고가 없습니다. 필터를 줄여보세요.</td></tr>`}</tbody></table></div>
  <div class="ax-ledger-notes"><p><strong>자료 구분:</strong> 자동 수집은 KAMS·ARKO·KCDF·KOCCA 및 지역 공식 기관 홈페이지에서 수집한 공고이며, 참고자료는 사용자 제공 <em>시각예술 지원사업 2025–2026</em>(2026.10.14 기준)에서 가져온 과거·예상 공고입니다. 참고자료는 원문·현재 일정 재검증 전이며 ‘예상 일정’은 확정 공고가 아닙니다.</p>
