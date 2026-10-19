@@ -58,21 +58,23 @@ function days(dateText){
 }
 const select=(v,values)=>values.map(x=>`<option value="${escape(x[0])}" ${v===x[0]?"selected":""}>${escape(x[1])}</option>`).join("");
 function board(){
- const list=Object.values(records).sort((a,b)=>(a.deadline||"9999").localeCompare(b.deadline||"9999")||b.updatedAt.localeCompare(a.updatedAt));
+ const rank={HIGH:0,MEDIUM:1,LOW:2};
+ const list=Object.values(records).sort((a,b)=>(rank[a.priority]??1)-(rank[b.priority]??1)||(a.deadline||"9999").localeCompare(b.deadline||"9999")||b.updatedAt.localeCompare(a.updatedAt));
  const active=list.filter(x=>!["AWARDED","DECLINED","ON_HOLD"].includes(x.status)).length;
  const filtered=list.filter(x=>(filter==="ALL"||x.status===filter)&&(!search||[x.title,x.organization,x.owner,x.nextAction].join(" ").toLowerCase().includes(search.toLowerCase())));
  return `<div class="ax-p2-stats"><span><b>${list.length}</b>등록 공고</span><span><b>${active}</b>진행 중</span><span><b>${list.filter(x=>["SUBMITTED","AWAITING"].includes(x.status)).length}</b>제출·결과 대기</span><span><b>${list.filter(x=>x.status==="AWARDED").length}</b>선정</span></div>
  <div class="ax-p2-tools"><label>단계 <select data-p2-filter>${select(filter,[["ALL","전체"],...STATUS])}</select></label>
  <label>검색 <input type="search" data-p2-query value="${escape(search)}" placeholder="사업명·담당자·기관"></label>
- <button type="button" data-p2-export>JSON 내보내기</button>
+ <button type="button" data-p2-csv>CSV 보고용 내보내기</button>
+ <button type="button" data-p2-export>JSON 백업</button>
  <label class="ax-p2-import">JSON 가져오기<input data-p2-import type="file" accept=".json,application/json" hidden></label></div>
- <div class="ax-p2-scroll"><table class="ax-p2-table"><thead><tr><th>관심 사업·기관</th><th>진행 단계</th><th>담당자</th><th>내부 마감</th><th>진행률</th><th>다음 작업</th><th>관리</th></tr></thead>
+ <div class="ax-p2-scroll"><table class="ax-p2-table"><thead><tr><th>관심 사업·기관</th><th>진행 단계</th><th>우선순위</th><th>담당자</th><th>내부 마감</th><th>진행률</th><th>다음 작업</th><th>관리</th></tr></thead>
  <tbody>${filtered.map(v=>`<tr><td><b>${escape(v.title)}</b><small>${escape(v.organization)} · ${v.sourceKind==="reference"?"참고자료":"공식 수집"}</small></td>
- <td>${escape(name(v.status))}</td><td>${escape(v.owner||"미배정")}</td>
+ <td>${escape(name(v.status))}</td><td><span class="ax-p2-priority ax-${escape(v.priority.toLowerCase())}">${v.priority==="HIGH"?"높음":v.priority==="LOW"?"낮음":"보통"}</span></td><td>${escape(v.owner||"미배정")}</td>
  <td>${escape(v.deadline||"미정")}<small>${escape(days(v.deadline))}</small></td>
  <td><div class="ax-p2-progress"><i style="width:${v.progress}%"></i></div>${v.progress}%</td>
  <td>${escape(v.nextAction||"미입력")}</td>
- <td><button data-p2-edit="${escape(v.id)}" type="button">관리</button></td></tr>`).join("")||`<tr><td colspan="7" class="ax-p2-empty">등록된 공고가 없습니다. 하단 공고의 ‘검토 등록’을 눌러 추가하세요.</td></tr>`}</tbody></table></div>`;
+ <td><button data-p2-edit="${escape(v.id)}" type="button">관리</button></td></tr>`).join("")||`<tr><td colspan="8" class="ax-p2-empty">등록된 공고가 없습니다. 하단 공고의 ‘검토 등록’을 눌러 추가하세요.</td></tr>`}</tbody></table></div>`;
 }
 function form(){
  const v=records[selected];if(!v)return"";
@@ -113,11 +115,22 @@ function edit(id){
  selected=id;draw();
  panel.querySelector(".ax-p2-edit")?.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
+function download(text,type,filename){
+ const url=URL.createObjectURL(new Blob([text],{type}));
+ const a=document.createElement("a");a.href=url;a.download=filename;
+ document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+function exportCsv(){
+ const columns=["공고 ID","사업명","기관","구분","공식 원문","진행 단계","우선순위","담당자","공고 마감","내부 마감","진행률(%)","다음 실행 업무","세부 검토 내용","최종 결과","체크리스트 완료(개)","최종 수정일"];
+ const field=v=>{const raw=String(v??"");const safe=/^[=+@\-\t\r]/.test(raw)?"\u0027"+raw:raw;return "\u0022"+safe.replace(/\u0022/g,"\u0022\u0022")+"\u0022"};
+ const lines=[columns.map(field).join(",")];
+ Object.values(records).forEach(v=>lines.push([v.id,v.title,v.organization,v.sourceKind,v.sourceUrl,name(v.status),v.priority,v.owner,v.sourceDeadline,v.deadline,v.progress,v.nextAction,v.detail,v.result,v.tasks.filter(x=>x.done).length,v.updatedAt].map(field).join(",")));
+ download("\uFEFF"+lines.join("\r\n"),"text/csv;charset=utf-8","AXOO_support_pipeline_"+timestamp().slice(0,10)+".csv");
+ notice="CSV 보고용 파일을 내보냈습니다. 내부 업무 정보가 포함될 수 있으므로 공유 대상에 주의하세요.";draw();
+}
 function exportJson(){
  const data=JSON.stringify({format:"AXOO_P2",version:VERSION,exportedAt:timestamp(),records:Object.values(records)},null,2);
- const url=URL.createObjectURL(new Blob([data],{type:"application/json;charset=utf-8"}));
- const a=document.createElement("a");a.href=url;a.download="AXOO_support_pipeline_"+timestamp().slice(0,10)+".json";
- document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+ download(data,"application/json;charset=utf-8","AXOO_support_pipeline_"+timestamp().slice(0,10)+".json");
  notice="이 브라우저의 지원관리 기록을 JSON 파일로 내보냈습니다.";draw();
 }
 async function importJson(file){
@@ -139,12 +152,13 @@ async function importJson(file){
 function listen(host){
  if(host._axP2Bound)return;host._axP2Bound=true;
  host.addEventListener("click",e=>{
-  const b=e.target.closest("[data-p2-add],[data-p2-edit],[data-p2-close],[data-p2-remove],[data-p2-export]");
+  const b=e.target.closest("[data-p2-add],[data-p2-edit],[data-p2-close],[data-p2-remove],[data-p2-export],[data-p2-csv]");
   if(!b||!host.contains(b))return;
   if(b.hasAttribute("data-p2-add")){edit(b.dataset.p2Add);return}
   if(b.hasAttribute("data-p2-edit")){edit(b.dataset.p2Edit);return}
   if(b.hasAttribute("data-p2-close")){selected="";notice="";draw();return}
   if(b.hasAttribute("data-p2-export")){exportJson();return}
+  if(b.hasAttribute("data-p2-csv")){exportCsv();return}
   if(b.hasAttribute("data-p2-remove")){
    if(!window.confirm("이 브라우저에 저장된 지원관리 기록을 삭제할까요?"))return;
    delete records[b.dataset.p2Remove];selected="";save();notice="관리 목록에서 제외했습니다.";callback?.();return;
