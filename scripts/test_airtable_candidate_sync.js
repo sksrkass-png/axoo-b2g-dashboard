@@ -1,7 +1,7 @@
 "use strict";
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
-const {fields,status}=require("./sync_airtable_support_candidates");
+const {fields,status,changed}=require("./sync_airtable_support_candidates");
 const real=JSON.parse(fs.readFileSync("data/priority_projects.json","utf8"))
  .filter(x=>x.priorityCategory==="arts_content_support");
 assert(real.length>=1,"At least one eligible source record required");
@@ -12,6 +12,9 @@ assert.equal(typeof mapped["fldZycGG3GsunqXu1"],"number");
 assert(!("fldwnx5fWNknJ8jGk" in mapped),"Do not reset human selection");
 assert(!("fldTo44rlhm7Pr6Oe" in mapped),"Do not reset registration status");
 assert(!("fld1zUvi8HAqISxmA" in mapped),"Do not alter linked application");
+assert.equal(changed(mapped,mapped),false,"Skip identical candidate updates");
+assert.equal(changed({...mapped,fldTo44rlhm7Pr6Oe:"등록 완료"},mapped),false,"Ignore team-managed fields");
+assert.equal(changed({...mapped,fldiCBkIAl1hNXb8g:"OLD NAME"},mapped),true,"Update changed official metadata");
 assert.equal(status({deadline:"2025-01-01"}),"마감");
 assert.equal(status({deadline:"2099-01-01",verificationStatus:"source_unavailable"}),"원문 재확인");
 assert.equal(status({deadline:"2099-01-01",startDate:"2098-01-01"}),"접수 예정");
