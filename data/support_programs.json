@@ -21,7 +21,7 @@
     "supportAmount": null,
     "originalUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45",
     "sourceUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45",
-    "documentUrl": "",
+    "documentUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf",
     "field": "사업화·유통",
     "businessArea": "business_distribution",
     "businessAreaLabel": "사업화·유통",
@@ -101,9 +101,58 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
-      "snippets": []
+      "status": "parsed",
+      "reviewedAt": "2026-10-19T10:52:39.324Z",
+      "documentUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf",
+      "files": [
+        {
+          "url": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf",
+          "label": "[공모] 2026 예술산업 금융지원 시범사업(융자) 5차 공모요강(1).pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 7700,
+          "pages": 7
+        },
+        {
+          "url": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%841.%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%20%ec%9c%b5%ec%9e%90%ec%8b%a0%ec%b2%ad%ec%84%9c%281%29.hwp",
+          "label": "붙임1. 2026 예술산업 금융지원 시범사업(융자) 5차 공모 융자신청서(1).hwp",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        },
+        {
+          "url": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf",
+          "label": "붙임2. 자주 묻는 질문(FAQ)(16).pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 3044,
+          "pages": 4
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "공모기간)2026.9.14.(월)~10.2.(금)16:00ㅇ (지원대상)예술 분야 사업자*(민간예술시설업체,예술서비스업체)* 「문화예술진흥법」 제2조제1호에 따른 문학, 미술, 음악(대중음악 제외), 무용, 연극, 국악, 뮤지컬 등과 관련된 예술작품 및 상품을 기획·제작·유통하거나 이를 지원하는 경제활동을 주된 사업으로 영위하는 사업자ㅇ (융자규모)‘26년 총 500억원(추경예산 포함)ㅇ (융자방식)",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "5년 (2년 거치, 3년 분할상환) - 4 - Ⅴ 신청방법 및 제출서류ㅇ (접수기간)2026.9.14.(월)~10.2.(금)16:00까지 * 취급은행 영업점에 방문하여 사전 대출상담을 진행하고 ‘대출심사 사전 확인서’를 발급받아 제출하여야 하며, 영업점별 ‘확인서’ 발급 시일이 상이하므로(최대 1주일 소요) 신청 시 유의 바람ㅇ (접수방법)국가문화예술지원시스템(www.ncas.or.kr)을 통한 온라",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf"
+        },
+        {
+          "label": "지원 자격 문구",
+          "quote": "- 자주 묻는 질문 (FAQ) 0000000000000 1. 신청자격Q1 업력이 1년 미만인데도 신청 가능한가요?A1 본 사업은 업력 제한이 없습니다. 다만 비즈니스모델이 확립되지 않았거나 매출이 발생하지 않았다면 은행 대출에 어려움이 있을 수 있으니 참고 바랍니다.Q2 대출금리 우대조건인 ‘청년’의 기준은 무엇인가요?A2 본 사업에서 청년 기준은 사업 공고일을 기준으로 합니다. 공고일 당일, 대표자",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf"
+        },
+        {
+          "label": "부담·제한 문구",
+          "quote": "는 질문 (FAQ) 0000000000000 1. 신청자격Q1 업력이 1년 미만인데도 신청 가능한가요?A1 본 사업은 업력 제한이 없습니다. 다만 비즈니스모델이 확립되지 않았거나 매출이 발생하지 않았다면 은행 대출에 어려움이 있을 수 있으니 참고 바랍니다.Q2 대출금리 우대조건인 ‘청년’의 기준은 무엇인가요?A2 본 사업에서 청년 기준은 사업 공고일을 기준으로 합니다. 공고일 당일, 대표자의 연령이 ",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf"
+        }
+      ]
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -117,8 +166,34 @@
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf",
+            "label": "[공모] 2026 예술산업 금융지원 시범사업(융자) 5차 공모요강(1).pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 7700,
+            "pages": 7
+          },
+          {
+            "url": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%841.%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%20%ec%9c%b5%ec%9e%90%ec%8b%a0%ec%b2%ad%ec%84%9c%281%29.hwp",
+            "label": "붙임1. 2026 예술산업 금융지원 시범사업(융자) 5차 공모 융자신청서(1).hwp",
+            "format": "hwp",
+            "status": "unsupported",
+            "reason": "Binary HWP requires manual conversion"
+          },
+          {
+            "url": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf",
+            "label": "붙임2. 자주 묻는 질문(FAQ)(16).pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 3044,
+            "pages": 4
+          }
+        ]
       }
     },
     "participationCode": "needs_review",
@@ -488,9 +563,9 @@
     "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 전체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -679,9 +754,9 @@
     "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "detailSummary": "",
-    "eligibility": "지원대상 단체",
+    "eligibility": "",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
