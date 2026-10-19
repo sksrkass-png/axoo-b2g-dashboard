@@ -8,12 +8,15 @@ on:
       - "scripts/support_program_intelligence.js"
       - "scripts/test_support_program_intelligence.js"
       - "scripts/collect_support_programs.js"
+      - "scripts/collect_regional_support.js"
+      - "scripts/test_regional_support.js"
+      - "scripts/build_priority_projects.js"
       - ".github/workflows/collect-support-programs.yml"
 
   schedule:
     # GitHub Actions cron = UTC
-    # 00:40 UTC = 한국시간 오전 09:40
-    - cron: "40 0 * * *"
+    # Two-hour official source checks (UTC 00,02,...22:40); no instant website push.
+    - cron: "40 */2 * * *"
 
 permissions:
   contents: write
@@ -64,6 +67,12 @@ jobs:
 
       - name: Collect support programs
         run: node scripts/collect_support_programs.js
+
+      - name: Test regional grant parsing and validation
+        run: node scripts/test_regional_support.js
+
+      - name: Collect additional official regional grants
+        run: node scripts/collect_regional_support.js
 
 
       # ------------------------------------------
@@ -243,6 +252,8 @@ jobs:
         run: |
           if git diff --quiet -- \
             data/support_programs.json \
+            data/support_regional_programs.json \
+            data/support_collection_health.json \
             data/priority_projects.json; then
 
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -271,9 +282,18 @@ jobs:
 
           git add \
             data/support_programs.json \
+            data/support_regional_programs.json \
+            data/support_collection_health.json \
             data/priority_projects.json
 
           git commit \
-            -m "Update support program dashboard data"
+            -m "Refresh official support sources and AXOO opportunity ledger"
 
-          git push
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep 3
+          done
+          exit 1
