@@ -80,3 +80,11 @@
 .ax-ledger-bottomcontrols{grid-template-columns:1fr 1.05fr .8fr 1.25fr 2fr auto}
 @media(max-width:1120px){.ax-ledger-bottomcontrols{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:640px){.ax-ledger-bottomcontrols{grid-template-columns:repeat(2,minmax(0,1fr))}.ax-ledger-source-status{padding:11px}}
+
+/* P0 applicant evidence and P1 linked-document audit */
+.ax-ledger-evidence{margin-top:9px;border-top:1px solid #dee6ed;padding-top:7px;white-space:normal}
+.ax-ledger-evidence summary{color:#2e57a2;cursor:pointer;font-weight:700;font-size:10.5px;line-height:1.5;white-space:normal}
+.ax-ledger-evidence[open] summary{margin-bottom:7px}
+.ax-ledger-evidence>div,.ax-ledger-evidence>p{margin:5px 0;line-height:1.55;font-size:10.5px;color:#4e5d70}
+.ax-ledger-evidence a{color:#2352bf;word-break:break-all}
+.ax-ledger-evidence strong,.ax-ledger-evidence b{color:#27354a;font-weight:750}
