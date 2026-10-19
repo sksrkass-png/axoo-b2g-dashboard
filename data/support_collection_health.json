@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T15:51:42.287Z",
+  "updatedAt": "2026-10-19T21:14:11.391Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-19T15:51:42.287Z",
-      "lastSuccessAt": "2026-10-19T15:51:42.287Z",
+      "checkedAt": "2026-10-19T21:14:11.391Z",
+      "lastSuccessAt": "2026-10-19T21:14:11.391Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -23,8 +23,8 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-19T15:51:54.010Z",
-      "lastSuccessAt": "2026-10-19T15:51:54.010Z",
+      "checkedAt": "2026-10-19T21:14:24.969Z",
+      "lastSuccessAt": "2026-10-19T21:14:24.969Z",
       "found": 2,
       "verified": 2,
       "errors": []
@@ -34,14 +34,12 @@
       "name": "인천문화재단",
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
-      "state": "failed",
-      "checkedAt": "2026-10-19T15:51:57.671Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "fetch failed"
-      ],
-      "lastSuccessAt": "2026-10-19T11:00:04.079Z"
+      "state": "ok",
+      "checkedAt": "2026-10-19T21:14:29.388Z",
+      "lastSuccessAt": "2026-10-19T21:14:29.388Z",
+      "found": 10,
+      "verified": 10,
+      "errors": []
     },
     {
       "code": "BSCF",
@@ -49,8 +47,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-19T15:52:08.163Z",
-      "lastSuccessAt": "2026-10-19T15:52:08.163Z",
+      "checkedAt": "2026-10-19T21:15:10.300Z",
+      "lastSuccessAt": "2026-10-19T21:15:10.300Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -61,8 +59,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-19T15:52:17.205Z",
-      "lastSuccessAt": "2026-10-19T15:52:17.205Z",
+      "checkedAt": "2026-10-19T21:15:21.006Z",
+      "lastSuccessAt": "2026-10-19T21:15:21.006Z",
       "found": 9,
       "verified": 8,
       "errors": [
