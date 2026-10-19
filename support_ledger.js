@@ -116,7 +116,7 @@ function rowHtml(r){
  const constraints=r.review?.restrictions||[];
  const docFiles=r.documents?.files||[];
  const auditState={
-   parsed:"첨부 원문 읽힘",no_attachment_detected:"첨부파일 없음",
+   parsed:"파일 텍스트 추출 · 공고 관련성 확인 필요",no_attachment_detected:"첨부파일 없음",
    attachment_not_readable:"첨부 텍스트 미확인",manual_review_required:"수동 확인 필요",
    source_unavailable:"공식 사이트 접근 실패",pending_review:"첨부 분석 대기",
    not_scanned:"첨부 미분석",no_official_url:"링크 미확인"
