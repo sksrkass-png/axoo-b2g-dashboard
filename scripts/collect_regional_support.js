@@ -101,9 +101,15 @@ function mapCandidate({source,detailUrl,title,html,verifiedAt}){
   const detail=extractSupportDetail(html);
   const full=textFromHtml(html);
   // Some sites wrap the notice in a non-heading template: preserve list title.
-  const canonicalTitle=title; // Listing title is the stable official announcement heading; site h3 may be navigation.
+  const canonicalTitle=title
+    .replace(/\s+대상\s+.*$/,"")
+    .replace(/\s+20\d{2}[.\-/]\d{1,2}[.\-/]\d{1,2}[.\s\S]*$/,"")
+    .trim(); // Remove list-only applicant and date badges, preserve announcement identity.
   if(!isCandidate(title,source)||!isCandidate(canonicalTitle,source))return null;
   const dates=dateRange(full);
+  // SCAS displays applicant eligibility in the listing card when the notice body has none.
+  const listingApplicant=title.match(/\s대상\s(.+?)\s(?:진행중|진행예정|마감|~20\d{2})/)?.[1]||"";
+  if(!detail.eligibility&&listingApplicant)detail.eligibility="지원대상: "+listingApplicant;
   const fit=analyzeSupportProgram({title:canonicalTitle,...detail,sourceCode:source.code});
   const flagged=fit.isExcluded===true;
   const description=detail.supportDetails||detail.detailSummary||"";
@@ -148,9 +154,9 @@ async function processSource(source,oldRows) {
     const candidates=distinct(anchors(html,source.url).filter(a=>source.detail.test(a.url)&&isCandidate(a.title,source))).slice(0,LIMIT);
     if(!candidates.length) {
       const samples=anchors(html,source.url).filter(x=>GRANT.test(x.title)).slice(0,8).map(x=>x.url+" "+x.title.slice(0,50));
-      const marker=source.code==="IFAC"?"2027":source.code==="BSCF"?"지원공모":"미디어아트";
+      const marker=source.code==="IFAC"?"2027 인천문화재단":source.code==="BSCF"?"2026년":"미디어아트";
       const at=html.indexOf(marker);
-      const snippet=at>=0?html.slice(Math.max(0,at-180),at+250).replace(/\s+/g," "):"not found";
+      const snippet=at>=0?html.slice(Math.max(0,at-850),at+1100).replace(/\s+/g," "):"not found";
       throw Error("No recognized official grant links; selector may have changed. HTML length="+html.length+" candidate anchors="+anchors(html,source.url).length+" samples="+samples.join(" | ")+" nearMarker="+snippet);
     }
     const rows=[];const errors=[];
