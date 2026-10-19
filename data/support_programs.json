@@ -99,7 +99,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-57e328b201a6",
@@ -201,7 +224,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-239201",
@@ -298,7 +344,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-04f87e7f7dcb",
@@ -395,7 +464,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-54a4b2c41697",
@@ -492,7 +584,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-18fc24e54294",
@@ -594,7 +709,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-a7bc3632ba31",
@@ -697,7 +835,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-67c2f5a0fa11",
@@ -800,7 +961,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-ddb71cf7de41",
@@ -898,7 +1082,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-0c1f64768485",
@@ -996,7 +1203,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-fbbb8b195fff",
@@ -1094,7 +1324,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-418d2ba0f400",
@@ -1192,7 +1445,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-6c9132dd59d9",
@@ -1296,7 +1572,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-360bd6a9eb60",
@@ -1394,7 +1693,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-24a527d60ffe",
@@ -1499,7 +1821,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "arko-9f334661f83a",
@@ -1598,7 +1943,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "kcdf-9213",
@@ -1715,7 +2083,47 @@
     "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "documentUrl": "",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "artist_collab_review",
+      "participationLabel": "작가·예술단체 협업 검토",
+      "applicantBasis": "작가",
+      "evidence": [
+        {
+          "field": "신청 자격",
+          "quote": "I 활용에 실질적 의지와 관심이 있으며, 아래 요건 중 하나 이상을 갖춘 자 우대 - 경력 2년 이상의 공예작가 (작품 활동 증빙 가능한 자) - 공예 갤러리 운영자 또는 공예 기반 1인 창업자 - 공예 관련 유통사업자 (온&middot;오프라인 유통업 종사자, 사업자등록 또는 재직 증빙 가능한 자)",
+          "source": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9213&brdCodeValue=&searchField=titlecontent",
+          "sourceType": "공고 자격 안내"
+        }
+      ],
+      "restrictions": [
+        {
+          "code": "age",
+          "label": "연령",
+          "quote": "&rarr; 수료&middot; 사후관리 2. 신청 자격 ● 만 19세 이상으로 온라인 유통&middot;AI 활용에 실질적 의지와 관심이 있으며, 아래 요건 중 하나 이상을 갖춘 자 우대 - 경력 2년 이상의 공예작가 (작품 활동 증빙 가능한 자) - 공예 갤러리 운영자 또는 공예"
+        }
+      ],
+      "submissionDocuments": [
+        "신청서"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "no_attachment_detected",
+        "files": []
+      }
+    },
+    "participationCode": "artist_collab_review",
+    "participationLabel": "작가·예술단체 협업 검토"
   },
   {
     "id": "kcdf-9134",
@@ -1818,7 +2226,30 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "kocca-326D00108003",
@@ -1926,7 +2357,48 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "not_eligible",
+      "participationLabel": "법인 신청 제한 단서",
+      "applicantBasis": "기업 신청 불가",
+      "evidence": [
+        {
+          "field": "신청 자격",
+          "quote": "체납한 경우 신청 불가 ㅇ 기술료 미납, 참여제한 조치 등으로 한국콘텐츠진흥원 사업 참여에 제재조치를 받은 기업 신청 불가",
+          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00108003&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+          "sourceType": "공고 자격 안내"
+        }
+      ],
+      "restrictions": [
+        {
+          "code": "credentials",
+          "label": "신청 증빙·등록",
+          "quote": "및 이해관계자 리스트 - 개인정보 수집·이용·제공 동의서 - 사업자등록증 - 국세,지방세,4대보험 납세/완납증명서 - 개발 게임 시연 영상 - 중소기업확인서 ※ 신청서 무효 처리 유의: 서명, 날인란에 서명/날인이 없는 경우, 국세 납세증명서 및 지방세 납세증명서 유효기간 만료 등 ※"
+        }
+      ],
+      "submissionDocuments": [
+        "신청서",
+        "제출서류",
+        "동의서",
+        "사업자등록증"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "not_eligible",
+    "participationLabel": "법인 신청 제한 단서"
   },
   {
     "id": "kocca-326D00110006",
@@ -2036,7 +2508,40 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "artist_collab_review",
+      "participationLabel": "작가·예술단체 협업 검토",
+      "applicantBasis": "뮤지션",
+      "evidence": [
+        {
+          "field": "신청 자격",
+          "quote": "신청자격 ㅇ 모집대상 : 2027년 소나르 페스티벌 참가를 희망하는 국내 뮤지션 ㅇ 신청자격 : 소나르 페스티벌의 취지 및 주요 공연 장르에 부합하는 대중음악 뮤지션 (클래식, 오페라, 국악 장르 제외) - 신청일 기준 국내 음반 발매 경력이 있고 국내에서 활동 중인 대중음악 뮤지션(국내 소속사가 있거나, 소속사가 없을 경우 한국 국적인 뮤지션) - 본인 곡으로 60분 내외 단독 공연이 가능한 뮤지션 * 세부사항 공고문 참조 신",
+          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+          "sourceType": "공고 자격 안내"
+        }
+      ],
+      "restrictions": [],
+      "submissionDocuments": [
+        "제출서류",
+        "신청서"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "artist_collab_review",
+    "participationLabel": "작가·예술단체 협업 검토"
   },
   {
     "id": "kocca-326D00088011",
@@ -2155,7 +2660,32 @@
     "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [
+        "신청서"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요"
   },
   {
     "id": "kocca-126D00107006",
@@ -2268,7 +2798,45 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "consortium_review",
+      "participationLabel": "컨소시엄 참여 검토",
+      "applicantBasis": "컨소시엄",
+      "evidence": [
+        {
+          "field": "신청 자격",
+          "quote": "지원대상 - 방송영상독립제작사(국내 법인, 개인 사업자) - 방송영상독립제작사-후반작업기업 컨소시엄 ※ 주관기관은 방송영상독립제작사(독립제작사신고필증제출 필수)이며, CG/VFX 등 실제 제작에 참여하는 후반작업 기업만 컨소시엄으로 참여가능 ※ 중소/중견/대기업 참여 가능하나, 방송법 제2조 3항의 방송사업자는 신청불가 ※ 지원결과물이 해외방송사 및 OTT 플랫폼으로부터 제작비 전액 이상을 투자받아 해당 플랫폼에 1차 독점 전송·방영하는 경우(바",
+          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=126D00107006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+          "sourceType": "공고 자격 안내"
+        }
+      ],
+      "restrictions": [
+        {
+          "code": "credentials",
+          "label": "신청 증빙·등록",
+          "quote": "립제작사-후반작업기업 컨소시엄 ※ 주관기관은 방송영상독립제작사(독립제작사신고필증제출 필수)이며, CG/VFX 등 실제 제작에 참여하는 후반작업 기업만 컨소시엄으로 참여가능 ※ 중소/중견/대기업 참여 가능하나, 방송법 제2조 3항의 방송사업자는 신청불가 ※ 지원결과물이 해외방송사 및 OT"
+        }
+      ],
+      "submissionDocuments": [
+        "신청서"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "consortium_review",
+    "participationLabel": "컨소시엄 참여 검토"
   },
   {
     "id": "kocca-326D00034008",
@@ -2383,7 +2951,50 @@
     "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "corporate_review",
+      "participationLabel": "법인 직접 신청 검토",
+      "applicantBasis": "사업자등록증",
+      "evidence": [
+        {
+          "field": "신청 자격",
+          "quote": "· 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문",
+          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+          "sourceType": "공고 자격 안내"
+        }
+      ],
+      "restrictions": [
+        {
+          "code": "tenure",
+          "label": "업력",
+          "quote": "신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외"
+        },
+        {
+          "code": "credentials",
+          "label": "신청 증빙·등록",
+          "quote": "창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문 접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문"
+        }
+      ],
+      "submissionDocuments": [
+        "제출서류"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "corporate_review",
+    "participationLabel": "법인 직접 신청 검토"
   },
   {
     "id": "kocca-326D00110005",
@@ -2493,7 +3104,42 @@
     "exclusionReason": "",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "documentUrl": "",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "artist_collab_review",
+      "participationLabel": "작가·예술단체 협업 검토",
+      "applicantBasis": "뮤지션",
+      "evidence": [
+        {
+          "field": "신청 자격",
+          "quote": "신청자격 ㅇ 신청일 기준 국내 음반 발매 경력이 있고 국내에서 활동 중인 한국 대중음악 뮤지션(국내 음악 제작사에 소속되어 있거나 소속사가 없을 경우 한국 국적인 뮤지션) ㅇ 클래식, 오페라, 국악 제외한 대중음악 전 장르 뮤지션 ㅇ 본인 곡으로 30분 내외 단독 공연이 가능한 뮤지션 신청서 접수 ㅇ 공고/접수기간: 2026. 10. 8.(목) ~ 2026. 10. 22.(목) / 11:00까지 ㅇ 접수페이지 링크: https://kocca.",
+          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110005&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+          "sourceType": "공고 자격 안내"
+        }
+      ],
+      "restrictions": [],
+      "submissionDocuments": [
+        "제출서류",
+        "신청서"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "no_attachment_detected",
+        "files": []
+      }
+    },
+    "participationCode": "artist_collab_review",
+    "participationLabel": "작가·예술단체 협업 검토"
   },
   {
     "id": "kocca-326D00034004",
@@ -2603,6 +3249,44 @@
     "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
     "collectedAt": "2026-10-19",
     "updatedAt": "2026-10-19",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa"
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "extractedText": ""
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "corporate_review",
+      "participationLabel": "법인 직접 신청 검토",
+      "applicantBasis": "사업자등록증",
+      "evidence": [
+        {
+          "field": "신청 자격",
+          "quote": "), 사업개시신고 등의 절차 진행 - 입주 계약시 보증금 납입 - 입주계약 체결 후, 30일 이내 입주 및 사업자등록증 상 본사 사무실 주소지를 글로벌게임허브센터로 이전 ㅇ 선정대상 제외 경우: 공고문",
+          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034004&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+          "sourceType": "공고 자격 안내"
+        }
+      ],
+      "restrictions": [
+        {
+          "code": "credentials",
+          "label": "신청 증빙·등록",
+          "quote": "약시 보증금 납입 - 입주계약 체결 후, 30일 이내 입주 및 사업자등록증 상 본사 사무실 주소지를 글로벌게임허브센터로 이전 ㅇ 선정대상 제외 경우: 공고문 접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA"
+        }
+      ],
+      "submissionDocuments": [
+        "제출서류"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "corporate_review",
+    "participationLabel": "법인 직접 신청 검토"
   }
 ]
