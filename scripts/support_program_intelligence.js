@@ -61,6 +61,9 @@ const HARD_EXCLUDE_PATTERNS = [
   /채용/i,
   /교육생\s*모집/i,
   /수강생\s*모집/i,
+  // Office tenancy is not an AXOO art-project grant or commission.
+  /입주\s*기업\s*모집/i,
+  /신규\s*입주\s*기업/i,
   /후보자?\s*추천/i
 ];
 
