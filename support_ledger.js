@@ -147,14 +147,20 @@ function draw(panel,live){
  <div class="ax-ledger-statrow">
  ${[["전체 공고",rows.length],["기간상 접수 가능",counts("open")],["접수 확인 필요",counts("verify")],["예상 일정",counts("forecast")],["지난 사업·마감",counts("closed")]].map(([k,v])=>`<div class="ax-ledger-stat"><span>${escape(k)}</span><strong>${v}</strong></div>`).join("")}
  </div>
- <section class="ax-ledger-now"><div class="ax-ledger-section-title"><h3>지금 검토할 공고</h3><small>자동 수집 건 중 마감일 확인 가능 · 자격 요건은 원문 재확인</small></div>
- <div class="ax-ledger-nowgrid">${now.length?now.map(r=>`<article class="ax-ledger-nowcard"><span>마감 ${escape(r.deadline||"확인")} · ${escape(r.organization)}</span>${aLink(r,escape(r.title))}<small>${escape(r.mode)} · ${r.score}점</small></article>`).join(""):`<p class="ax-ledger-empty">현재 마감일이 확인된 접수 중 공고가 없습니다. 아래 원장에서 예상·참고 공고를 확인하세요.</p>`}</div></section>
+ <section class="ax-ledger-source-status" aria-label="공식 기관 수집 상태">
+  <strong>공식 수집원 모니터링 · 2시간 간격</strong>
+  <div>${sourceSummary.length?sourceSummary.map(x=>`<span class="ax-ledger-source ${x.state==="failed"?"is-failed":x.state==="partial"?"is-partial":"is-ok"}" title="${escape(x.checkedAt||"")}">${escape(x.name)} · ${x.state==="failed"?"수집 실패":x.state==="partial"?"부분 성공":"수집 정상"} (${Number(x.verified)||0}건)</span>`).join(""):"<span>지역 수집원 확인 결과를 불러오는 중입니다. 기존 4개 국가기관은 별도 자동 수집합니다.</span>"}</div>
+  <small>최근 실행: ${escape(health?.updatedAt?new Date(health.updatedAt).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"}):"확인 중")} · 실패한 기관은 오래된 기록을 신규 공고로 간주하지 않습니다.</small>
+ </section>
+ <section class="ax-ledger-now"><div class="ax-ledger-section-title"><h3>지금 검토할 공고</h3><small>기간상 신청 가능 공고 · 실제 접수 및 신청 자격은 원문 재확인</small></div>
+ <div class="ax-ledger-nowgrid">${now.length?now.map(r=>`<article class="ax-ledger-nowcard"><span>마감 ${escape(r.deadline||"확인")} · ${escape(r.organization)}</span>${aLink(r,escape(r.title))}<small>${escape(r.mode)} · ${r.score}점</small></article>`).join(""):`<p class="ax-ledger-empty">현재 접수 기간이 확인된 공고가 없습니다. 아래 원장에서 예상·참고 공고를 확인하세요.</p>`}</div></section>
  <section class="ax-ledger-controls" aria-label="지원사업 필터">
  ${chipRow("사업연도","year",[...allOption,...years.map(x=>[x,x+"년"])],rows)}
  ${chipRow("지역","region",[...allOption,["전국","전국"],["서울","서울"],["기타","경기·인천·기타"]],rows)}
  ${chipRow("상태","status",[...allOption,["open","기간상 접수 가능"],["scheduled","접수 예정"],["verify","원문 확인 필요"],["forecast","예상 일정"],["closed","마감·지난 사업"]],rows)}
  ${chipRow("참여 방식","mode",[...allOption,...modes.map(x=>[x,x])],rows)}
  <div class="ax-ledger-bottomcontrols">
+  ${selectControl("source","수집 기관",[...allOption,...sources])}
   ${selectControl("type","사업 유형",[...allOption,...types])}
   ${selectControl("level","기관 구분",[...allOption,...["국가","광역","기초","민간"].map(x=>[x,x])])}
   ${selectControl("sort","정렬",[["STATUS","현재 검토 우선"],["YEAR","사업연도 최신순"],["DEADLINE","마감일 빠른순"],["NEWEST","자동 수집 최신순"],["AMOUNT","개별 지원액 큰순(추출값)"],["FIT","AXOO 적합도순(자동 수집)"]])}
