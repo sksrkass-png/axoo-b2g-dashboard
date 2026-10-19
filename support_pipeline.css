@@ -53,3 +53,8 @@
 .ax-p2 button:focus-visible,.ax-p2 input:focus-visible,.ax-p2 select:focus-visible,.ax-p2 textarea:focus-visible{outline:2px solid #2855b2;outline-offset:2px}
 @media(max-width:900px){.ax-p2-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.ax-p2-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:590px){.ax-p2{padding:12px}.ax-p2-fields{grid-template-columns:1fr}.ax-p2-tools label{min-width:100px}.ax-p2-tools [data-p2-query]{min-width:130px}}
+
+.ax-p2-priority{display:inline-block;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:750;white-space:nowrap;background:#ebeff6;color:#506579}
+.ax-p2-priority.ax-high{background:#ffece9;color:#b1443b}
+.ax-p2-priority.ax-medium{background:#eaf1ff;color:#355da0}
+.ax-p2-priority.ax-low{background:#edf4ee;color:#506d56}
