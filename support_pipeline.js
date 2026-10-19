@@ -1,6 +1,9 @@
 (function P2Module(){
 "use strict";
 const STORAGE="axoo_b2g_support_pipeline_p2_v1", VERSION=1;
+const AIRTABLE_BASE="https://airtable.com/app59It3ijZvl0szJ";
+const AIRTABLE_CANDIDATES="https://airtable.com/app59It3ijZvl0szJ/pagI1t6L5vcCxrmlM";
+const AIRTABLE_DIRECTOR="https://airtable.com/app59It3ijZvl0szJ/pagfegIAOu6xEalVV";
 const STATUS=[["INTEREST","관심 등록"],["ELIGIBILITY","적격성 검토"],["DECIDED","지원 결정"],["PREPARING","서류 준비"],["INTERNAL_REVIEW","내부 검토"],["SUBMITTED","제출 완료"],["AWAITING","결과 대기"],["AWARDED","선정"],["DECLINED","미선정"],["ON_HOLD","보류"]];
 const TASKS=["원문·신청자격 확인","지원 여부 결정","증빙·제출서류 확보","신청서·예산서 작성","제출·접수증 보관"];
 const name=x=>STATUS.find(a=>a[0]===x)?.[1]||"관심 등록";
@@ -103,7 +106,7 @@ function draw(){
  const anchor=panel.querySelector(".ax-ledger-now");if(!anchor)return;
  panel.querySelector(".ax-p2")?.remove();
  const section=document.createElement("section");section.className="ax-p2";section.id="axooSupportPipeline";
- section.innerHTML=`<div class="ax-p2-heading"><span>AXOO / P2 · APPLICATION PIPELINE</span><h3>⭐ 관심 공고 · 지원 진행 관리</h3>
+ section.innerHTML=`<div class="ax-p21-shared"><div><strong>👥 P2.1 · Airtable 공동 지원관리</strong><p>회사 팀원이 함께 관리하는 DB입니다. ‘05 자동수집 공고 후보’에서 검토 대상으로 선택하면, Airtable 자동화 활성화 후 공동 지원관리로 전환됩니다.</p></div><div class="ax-p21-links"><a href="${AIRTABLE_CANDIDATES}" target="_blank" rel="noopener noreferrer">공고 후보에서 선택 ↗</a><a href="${AIRTABLE_DIRECTOR}" target="_blank" rel="noopener noreferrer">디렉터 검토 원장 ↗</a></div></div><div class="ax-p2-heading"><span>AXOO / P2 · BROWSER-LOCAL BACKUP</span><h3>⭐ 브라우저 임시 지원관리</h3>
  <p>관심 → 적격성 검토 → 지원 결정 → 서류 준비 → 제출 → 결과 관리. <b>현재 브라우저에만 저장됩니다.</b> 팀원·다른 기기에 자동 동기화되지 않으므로 JSON 내보내기/가져오기로 백업·전달해 주세요.</p></div>
  ${notice?`<p class="ax-p2-notice" role="status">${escape(notice)}</p>`:""}
  ${board()}${form()}`;
@@ -196,7 +199,7 @@ function listen(host){
 }
 records=read();
 window.AXOOSupportPipeline={
- buttonFor(r){return `<button type="button" class="ax-p2-row-add" data-p2-add="${escape(r.id)}">${records[r.id]?"✎ "+escape(name(records[r.id].status)):"+ 검토 등록"}</button>`},
+ buttonFor(r){return `<button type="button" class="ax-p2-row-add" data-p2-add="${escape(r.id)}">${records[r.id]?"✎ 로컬 "+escape(name(records[r.id].status)):"+ 로컬 검토 등록"}</button>`},
  render(host,list,redraw){panel=host;callback=redraw;rows=new Map((list||[]).map(x=>[x.id,x]));listen(host);syncSource();draw()},
  getSnapshot(){return Object.values(records).map(x=>({id:x.id,status:x.status,owner:x.owner,deadline:x.deadline,progress:x.progress}))},
  getStorageInfo(){return {storage:"browser-local",key:STORAGE,count:Object.keys(records).length}}
