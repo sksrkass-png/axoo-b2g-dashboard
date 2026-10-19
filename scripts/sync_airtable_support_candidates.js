@@ -61,21 +61,28 @@ async function request(method,url,token,body){
 }
 async function existing(token){
  const index=new Map();let offset="";
+ const sourceKeys=Object.entries(KEYS).filter(([name])=>name!=="registered").map(([,id])=>id);
  for(let n=0;n<30;n++){
   const url=new URL(API);
   url.searchParams.set("pageSize","100");
-  url.searchParams.set("fields[]",KEYS.id);
+  url.searchParams.set("returnFieldsByFieldId","true");
+  for(const id of sourceKeys)url.searchParams.append("fields[]",id);
   if(offset)url.searchParams.set("offset",offset);
   const page=await request("GET",url.toString(),token);
   for(const record of page.records||[]){
    const id=record.fields?.[KEYS.id]||record.fields?.["Research ID"];
-   if(id)index.set(id,record.id);
+   if(id)index.set(id,{id:record.id,fields:record.fields||{}});
   }
   if(!page.offset)return index;
   offset=page.offset;
   await delay(260);
  }
  throw Error("Airtable pagination max 3000 records reached");
+}
+function changed(previous,current){
+ // Only compare official source columns. Staff checkboxes/links are not fetched or written.
+ return Object.entries(current).some(([field,value])=>
+  String(previous?.[field]??"")!==String(value??""));
 }
 async function main(){
  const token=process.env.AIRTABLE_PAT;
@@ -88,8 +95,8 @@ async function main(){
  const old=await existing(token);
  const creates=[],updates=[];
  for(const item of candidates){
-  const row=fields(item),id=row[KEYS.id],airtableId=old.get(id);
-  if(airtableId)updates.push({id:airtableId,fields:row});
+  const row=fields(item),id=row[KEYS.id],previous=old.get(id);
+  if(previous){if(changed(previous.fields,row))updates.push({id:previous.id,fields:row});}
   else creates.push({fields:{...row,[KEYS.registered]:"미등록"}});
  }
  let created=0,updated=0;
@@ -101,8 +108,8 @@ async function main(){
   const result=await request("PATCH",API,token,{records:updates.slice(i,i+10),typecast:false});
   updated+=(result.records||[]).length;await delay(300);
  }
- console.log("[AXOO P2.1] Airtable candidate mirror updated",{total:candidates.length,created,updated,retainedHistorical:old.size-updated});
+ console.log("[AXOO P2.1] Airtable candidate mirror updated",{total:candidates.length,created,updated,unchanged:candidates.length-created-updated,previousCount:old.size});
  console.log("[AXOO P2.1] Human fields and support-management records were not touched");
 }
 if(require.main===module)main().catch(e=>{console.error("[AXOO P2.1]",e.message);process.exitCode=1});
-module.exports={fields,status};
+module.exports={fields,status,changed};
