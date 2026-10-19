@@ -1,128 +1,5 @@
 [
   {
-    "id": "kocca-326D00088011",
-    "source": "한국콘텐츠진흥원",
-    "sourceCode": "KOCCA",
-    "sourceType": "지원사업",
-    "title": "2026년 KOCCA CKL TOKYO 입주기업 모집",
-    "organization": "한국콘텐츠진흥원",
-    "agency": "한국콘텐츠진흥원",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-14",
-    "postedDate": "2026-10-14",
-    "startDate": "2026-10-14",
-    "deadline": "2026-11-04",
-    "deadlineDate": "2026-11-04",
-    "endDate": "2026-11-04",
-    "status": "진행중",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
-    "businessAreas": [
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      },
-      {
-        "code": "exhibition_space",
-        "label": "전시·공간"
-      },
-      {
-        "code": "digital_media",
-        "label": "미디어아트·기술"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "콘텐츠",
-      "콘텐츠 제작",
-      "영상",
-      "공간",
-      "신기술"
-    ],
-    "matchedKeywords": [
-      "콘텐츠",
-      "콘텐츠 제작",
-      "영상",
-      "공간",
-      "신기술"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "A",
-    "fitVerdict": "적합도 높음",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 35,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 8,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 0,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 10,
-        "maxScore": 10
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "기업·법인·단체 참여 단서(자격 재확인 필요)",
-      "기획·제작·운영 수행역량 활용 가능"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 71,
-    "axooFitScore": 71,
-    "gradeReason": "적합도 높음: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능",
-    "axooFitReason": "적합도 높음: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능",
-    "detailSummary": "지원규모 : 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인되었을 시 입주 협약 해지 사유가 됨 - 입주기간 중 월 상주율 50% 이상 유지 * 상주율은 해당 월의 영업일을 기준으로 산정하며, 상주인력 중 1명 이상이 입주공간에 출근하여 근무한 경우 해당 일을 상주일로 인정 신청서 접수기간 ㅇ 공고기간: 공고게시일 ~ 2026.11.04.(수), 15:00까지 ㅇ 접수기간 : ’2026.10.14.(수) ~ 2026.11.04.(수) 15:00까지 ※ 신청 마감시간까지 사업관리시스템에 접수(파일 업로드 포함)된 건만 인정 (접수 마감시간에 시스템이 자동 종료되",
-    "eligibility": "모집대상 : 일본 진출을 희망하는 국내 콘텐츠 제작사 또는 콘텐츠 IP 보유 기업 - 공고일 기준 「중소기업기본법」에서 정의하는 중소기업 및 「중견기업법」에 따른 중견기업 - 「콘텐츠산업 진흥법」에서 정의하는 콘텐츠제작자 또는 콘텐츠사업자에 해당되는 기업 - 입주기간 동안 수행할 사업 결과물은 대중문화공연, 방송, 영상, 애니메이션, 만화, 스토리, 캐릭터, 음악, 패션, 신기술 등의 콘텐츠 분야를 포함하여야 함 ㅇ",
-    "supportDetails": "지원규모 : 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인되었을 시 입주 협약 해지 사유가 됨 - 입주기간 중 월 상주율 50% 이상 유지 * 상주율은 해당 월의 영업일을 기준으로 산정하며, 상주인력 중 1명 이상이 입주공간에 출근하여 근무한 경우 해당 일을 상주일로 인정 신청서 접수기간 ㅇ 공고기간: 공고게시일 ~ 2026.11.04.(수), 15:00까지 ㅇ 접수기간 : ’2026.10.14.(수) ~ 2026.11.04.(수) 15:00까지 ※ 신청 마감시간까지 사업관리시스템에 접수(파일 업로드 포함)된 건만 인정 (접수 마감시간에 시스템이 자동 종료되",
-    "application": "접수방법 ㅇ 접수방법: KOCCA 사업관리시스템을 통한 온라인 접수(https://pms.kocca.kr 회원 가입 후 접수) ① KOCCA 사업관리시스템(pms.kocca.kr) 접속 후 회원가입 및 로그인 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기’ 버튼을 클릭해서 접속하실 수도 있습니다. ② KOCCA 사업관리시스템(pms.kocca.kr) - 지원사업 신청/접수 → 공고조회/신청 메뉴에서 ‘2026년 KOCCA CKL TOKYO 입주기업 모집’ 공고 확인 ③ 공고명 클릭하여 하단 ‘파일첨부’에서 필요양식 다운로드 후 신청내역 작성 ④ ‘신청접수’ 클릭하여 신청서 작성 및 제출파일 업로",
-    "nextAction": "공고문과 지원자격을 우선 확인",
-    "recommendedAction": "공고문과 지원자격을 우선 확인",
-    "searchText": "2026년 KOCCA CKL TOKYO 입주기업 모집 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 콘텐츠 콘텐츠 제작 영상 공간 신기술",
-    "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
     "id": "kocca-126D00107006",
     "source": "한국콘텐츠진흥원",
     "sourceCode": "KOCCA",
@@ -673,120 +550,6 @@
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
-    "id": "kocca-326D00034004",
-    "source": "한국콘텐츠진흥원",
-    "sourceCode": "KOCCA",
-    "sourceType": "지원사업",
-    "title": "[수정/상시공고] 2026년 글로벌게임허브센터 신규 입주기업 추가모집(상시) 수정공고",
-    "organization": "한국콘텐츠진흥원",
-    "agency": "한국콘텐츠진흥원",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-04-23",
-    "postedDate": "2026-04-23",
-    "startDate": "2026-04-27",
-    "deadline": "2026-12-31",
-    "deadlineDate": "2026-12-31",
-    "endDate": "2026-12-31",
-    "status": "진행중",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034004&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034004&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "documentUrl": "",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "협업·해외진출",
-    "businessArea": "collaboration_global",
-    "businessAreaLabel": "협업·해외진출",
-    "businessAreas": [
-      {
-        "code": "collaboration_global",
-        "label": "협업·해외진출"
-      },
-      {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
-      }
-    ],
-    "matchedPriorityKeywords": [
-      "글로벌",
-      "콘텐츠"
-    ],
-    "matchedKeywords": [
-      "글로벌",
-      "콘텐츠"
-    ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 26,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 18,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 4,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 0,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 10,
-        "maxScore": 10
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": -22,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "협업·해외진출 사업영역과 연결",
-      "기업·법인·단체 참여 단서(자격 재확인 필요)",
-      "기획·제작·운영 수행역량 활용 가능",
-      "AXOO 비핵심 장르 비중으로 감점"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "score": 36,
-    "axooFitScore": 36,
-    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
-    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
-    "detailSummary": "지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입(양식1) ㅇ 입주기간(변경) - 입주사 :기본 2년 (최대 5년, 연장평가 결과에 따라 기본 2년에서, 1차연장 2년, 2차연장 1년 연장가능) 단, 4년차에서 5년차로의 연장(2차 연장)은 우수 성과기업에 한함 ㅇ 입주 지원내용 - 입주사: 임대료 80%, 관리비 50% 지원 (임대료 및 관리비 분기별 선납) * 입주사는 입주 계약 시 보증금 납부 필수 (보증금은 관리비 및 임대료 3개월분으로 산정)",
-    "eligibility": "신청자격 ㅇ 국내 중소 게임 법인 기업 - 공고일 기준 「중소기업기본법」 제2조에 따른 중소기업 - 게임개발업체, 게임개발 관련 기술 보유업체 등 게임 관련 업체에 해당하는 기업으로, 게임 콘텐츠 및 관련 기술을 개발 중이거나 개발 예정인 법인 기업 ㅇ 선정 이후 입주사 필수조건 - 한국콘텐츠진흥원과 임대차 계약 체결 및 [산업집적활성화 및 공장설립에 관한 법률]에 따른 입주 계약(관리기관 : 경기도시공사), 사업개시신고 등의 절차 진행 - 입주 계약시 보증금 납입 - 입주계약 체결 후, 30일 이내 입주 및 사업자등록증 상 본사 사무실 주소지를 글로벌게임허브센터로 이전 ㅇ 선정대상 제외 경우: 공고문",
-    "supportDetails": "지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입(양식1) ㅇ 입주기간(변경) - 입주사 :기본 2년 (최대 5년, 연장평가 결과에 따라 기본 2년에서, 1차연장 2년, 2차연장 1년 연장가능) 단, 4년차에서 5년차로의 연장(2차 연장)은 우수 성과기업에 한함 ㅇ 입주 지원내용 - 입주사: 임대료 80%, 관리비 50% 지원 (임대료 및 관리비 분기별 선납) * 입주사는 입주 계약 시 보증금 납부 필수 (보증금은 관리비 및 임대료 3개월분으로 산정)",
-    "application": "접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기(신청접수)’ 버튼을 클릭해서 접속하실 수도 있습니다. ㅇ 제출서류: 공고문 내 각 유형별 모집 공고문 참고 유의사항 ㅇ 본 모집공고 내 양식 및 유의사항을 반드시 숙지 후 접수 바랍니다. ㅇ 입주신청 전 입주시설 사전방문 및 답사를 권장합니다. ㅇ 접수마감 이후 추가 신청은 불가하며, 접수마감 전 사전 제출 권장합니다. ㅇ 제출서류는 접수 후 임의로 추가 또는 보완될 수 없으며, 일체의 서류는 반환되지 않습니다. ㅇ 최종 선정결과는 신청기",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "[수정/상시공고] 2026년 글로벌게임허브센터 신규 입주기업 추가모집(상시) 수정공고 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 협업·해외진출 글로벌 콘텐츠",
-    "collectionSourceId": "support_kocca",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
     "id": "kcdf-9213",
     "source": "한국공예·디자인문화진흥원",
     "sourceCode": "KCDF",
@@ -908,6 +671,129 @@
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
+    "id": "kocca-326D00088011",
+    "source": "한국콘텐츠진흥원",
+    "sourceCode": "KOCCA",
+    "sourceType": "지원사업",
+    "title": "2026년 KOCCA CKL TOKYO 입주기업 모집",
+    "organization": "한국콘텐츠진흥원",
+    "agency": "한국콘텐츠진흥원",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-14",
+    "postedDate": "2026-10-14",
+    "startDate": "2026-10-14",
+    "deadline": "2026-11-04",
+    "deadlineDate": "2026-11-04",
+    "endDate": "2026-11-04",
+    "status": "진행중",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "콘텐츠 제작·브랜딩",
+    "businessArea": "content_brand",
+    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "businessAreas": [
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      },
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      },
+      {
+        "code": "digital_media",
+        "label": "미디어아트·기술"
+      }
+    ],
+    "matchedPriorityKeywords": [
+      "콘텐츠",
+      "콘텐츠 제작",
+      "영상",
+      "공간",
+      "신기술"
+    ],
+    "matchedKeywords": [
+      "콘텐츠",
+      "콘텐츠 제작",
+      "영상",
+      "공간",
+      "신기술"
+    ],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 35,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 18,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 10,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
+      "기획·제작·운영 수행역량 활용 가능"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": true,
+    "score": 35,
+    "axooFitScore": 35,
+    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능",
+    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능",
+    "detailSummary": "지원규모 : 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인되었을 시 입주 협약 해지 사유가 됨 - 입주기간 중 월 상주율 50% 이상 유지 * 상주율은 해당 월의 영업일을 기준으로 산정하며, 상주인력 중 1명 이상이 입주공간에 출근하여 근무한 경우 해당 일을 상주일로 인정 신청서 접수기간 ㅇ 공고기간: 공고게시일 ~ 2026.11.04.(수), 15:00까지 ㅇ 접수기간 : ’2026.10.14.(수) ~ 2026.11.04.(수) 15:00까지 ※ 신청 마감시간까지 사업관리시스템에 접수(파일 업로드 포함)된 건만 인정 (접수 마감시간에 시스템이 자동 종료되",
+    "eligibility": "모집대상 : 일본 진출을 희망하는 국내 콘텐츠 제작사 또는 콘텐츠 IP 보유 기업 - 공고일 기준 「중소기업기본법」에서 정의하는 중소기업 및 「중견기업법」에 따른 중견기업 - 「콘텐츠산업 진흥법」에서 정의하는 콘텐츠제작자 또는 콘텐츠사업자에 해당되는 기업 - 입주기간 동안 수행할 사업 결과물은 대중문화공연, 방송, 영상, 애니메이션, 만화, 스토리, 캐릭터, 음악, 패션, 신기술 등의 콘텐츠 분야를 포함하여야 함 ㅇ",
+    "supportDetails": "지원규모 : 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인되었을 시 입주 협약 해지 사유가 됨 - 입주기간 중 월 상주율 50% 이상 유지 * 상주율은 해당 월의 영업일을 기준으로 산정하며, 상주인력 중 1명 이상이 입주공간에 출근하여 근무한 경우 해당 일을 상주일로 인정 신청서 접수기간 ㅇ 공고기간: 공고게시일 ~ 2026.11.04.(수), 15:00까지 ㅇ 접수기간 : ’2026.10.14.(수) ~ 2026.11.04.(수) 15:00까지 ※ 신청 마감시간까지 사업관리시스템에 접수(파일 업로드 포함)된 건만 인정 (접수 마감시간에 시스템이 자동 종료되",
+    "application": "접수방법 ㅇ 접수방법: KOCCA 사업관리시스템을 통한 온라인 접수(https://pms.kocca.kr 회원 가입 후 접수) ① KOCCA 사업관리시스템(pms.kocca.kr) 접속 후 회원가입 및 로그인 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기’ 버튼을 클릭해서 접속하실 수도 있습니다. ② KOCCA 사업관리시스템(pms.kocca.kr) - 지원사업 신청/접수 → 공고조회/신청 메뉴에서 ‘2026년 KOCCA CKL TOKYO 입주기업 모집’ 공고 확인 ③ 공고명 클릭하여 하단 ‘파일첨부’에서 필요양식 다운로드 후 신청내역 작성 ④ ‘신청접수’ 클릭하여 신청서 작성 및 제출파일 업로",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2026년 KOCCA CKL TOKYO 입주기업 모집 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 콘텐츠 제작·브랜딩 콘텐츠 콘텐츠 제작 영상 공간 신기술",
+    "collectionSourceId": "support_kocca",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
     "id": "kocca-326D00034008",
     "source": "한국콘텐츠진흥원",
     "sourceCode": "KOCCA",
@@ -960,9 +846,9 @@
       "공간",
       "창업"
     ],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -1022,6 +908,120 @@
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "searchText": "2026년 제 2차 글로벌게임허브센터 게임벤처4.0 신규 입주기업 모집 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 협업·해외진출 글로벌 공간 창업",
+    "collectionSourceId": "support_kocca",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
+    "id": "kocca-326D00034004",
+    "source": "한국콘텐츠진흥원",
+    "sourceCode": "KOCCA",
+    "sourceType": "지원사업",
+    "title": "[수정/상시공고] 2026년 글로벌게임허브센터 신규 입주기업 추가모집(상시) 수정공고",
+    "organization": "한국콘텐츠진흥원",
+    "agency": "한국콘텐츠진흥원",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-04-23",
+    "postedDate": "2026-04-23",
+    "startDate": "2026-04-27",
+    "deadline": "2026-12-31",
+    "deadlineDate": "2026-12-31",
+    "endDate": "2026-12-31",
+    "status": "진행중",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034004&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034004&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "협업·해외진출",
+    "businessArea": "collaboration_global",
+    "businessAreaLabel": "협업·해외진출",
+    "businessAreas": [
+      {
+        "code": "collaboration_global",
+        "label": "협업·해외진출"
+      },
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedPriorityKeywords": [
+      "글로벌",
+      "콘텐츠"
+    ],
+    "matchedKeywords": [
+      "글로벌",
+      "콘텐츠"
+    ],
+    "isPriority": false,
+    "isExcludedFromPriority": true,
+    "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 26,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 18,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 10,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "협업·해외진출 사업영역과 연결",
+      "기업·법인·단체 참여 단서(자격 재확인 필요)",
+      "기획·제작·운영 수행역량 활용 가능",
+      "AXOO 비핵심 장르 비중으로 감점"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": true,
+    "score": 35,
+    "axooFitScore": 35,
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기업·법인·단체 참여 단서(자격 재확인 필요) · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "detailSummary": "지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입(양식1) ㅇ 입주기간(변경) - 입주사 :기본 2년 (최대 5년, 연장평가 결과에 따라 기본 2년에서, 1차연장 2년, 2차연장 1년 연장가능) 단, 4년차에서 5년차로의 연장(2차 연장)은 우수 성과기업에 한함 ㅇ 입주 지원내용 - 입주사: 임대료 80%, 관리비 50% 지원 (임대료 및 관리비 분기별 선납) * 입주사는 입주 계약 시 보증금 납부 필수 (보증금은 관리비 및 임대료 3개월분으로 산정)",
+    "eligibility": "신청자격 ㅇ 국내 중소 게임 법인 기업 - 공고일 기준 「중소기업기본법」 제2조에 따른 중소기업 - 게임개발업체, 게임개발 관련 기술 보유업체 등 게임 관련 업체에 해당하는 기업으로, 게임 콘텐츠 및 관련 기술을 개발 중이거나 개발 예정인 법인 기업 ㅇ 선정 이후 입주사 필수조건 - 한국콘텐츠진흥원과 임대차 계약 체결 및 [산업집적활성화 및 공장설립에 관한 법률]에 따른 입주 계약(관리기관 : 경기도시공사), 사업개시신고 등의 절차 진행 - 입주 계약시 보증금 납입 - 입주계약 체결 후, 30일 이내 입주 및 사업자등록증 상 본사 사무실 주소지를 글로벌게임허브센터로 이전 ㅇ 선정대상 제외 경우: 공고문",
+    "supportDetails": "지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입(양식1) ㅇ 입주기간(변경) - 입주사 :기본 2년 (최대 5년, 연장평가 결과에 따라 기본 2년에서, 1차연장 2년, 2차연장 1년 연장가능) 단, 4년차에서 5년차로의 연장(2차 연장)은 우수 성과기업에 한함 ㅇ 입주 지원내용 - 입주사: 임대료 80%, 관리비 50% 지원 (임대료 및 관리비 분기별 선납) * 입주사는 입주 계약 시 보증금 납부 필수 (보증금은 관리비 및 임대료 3개월분으로 산정)",
+    "application": "접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기(신청접수)’ 버튼을 클릭해서 접속하실 수도 있습니다. ㅇ 제출서류: 공고문 내 각 유형별 모집 공고문 참고 유의사항 ㅇ 본 모집공고 내 양식 및 유의사항을 반드시 숙지 후 접수 바랍니다. ㅇ 입주신청 전 입주시설 사전방문 및 답사를 권장합니다. ㅇ 접수마감 이후 추가 신청은 불가하며, 접수마감 전 사전 제출 권장합니다. ㅇ 제출서류는 접수 후 임의로 추가 또는 보완될 수 없으며, 일체의 서류는 반환되지 않습니다. ㅇ 최종 선정결과는 신청기",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "[수정/상시공고] 2026년 글로벌게임허브센터 신규 입주기업 추가모집(상시) 수정공고 한국콘텐츠진흥원 한국콘텐츠진흥원 예술 콘텐츠 지원사업 협업·해외진출 글로벌 콘텐츠",
     "collectionSourceId": "support_kocca",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
