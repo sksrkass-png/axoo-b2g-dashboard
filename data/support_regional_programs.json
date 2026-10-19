@@ -1,38 +1,38 @@
 [
   {
-    "id": "ggcf-58e0a30338f052",
+    "id": "scas-515abc3fedccf0",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
     "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "source": "경기문화재단",
-    "sourceCode": "GGCF",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
     "sourceType": "지원사업",
-    "title": "교육 2026년 경기지역문화기획학교: 지역문화기획자 인턴십 과정 2기 <어느새 [ ] 기획자> 최종 선정 안내 --> 2026.08.14 작성자 : 관리자 -->",
-    "organization": "경기문화재단",
-    "agency": "경기문화재단",
+    "title": "예술창작지원-A트랙 대상 예술가 또는 예술단체 진행중 ~2026.10.23 지원금 ,시각 ,연극 ,무용 ,음악 ,전통",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
     "sourceLevel": "광역",
-    "region": "기타",
-    "sourceUrl": "https://www.ggcf.kr/boards/businessNotices/articles/21508",
-    "originalUrl": "https://www.ggcf.kr/boards/businessNotices/articles/21508",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/495?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/495?page=1",
     "documentUrl": "",
-    "startDate": "",
-    "deadline": "",
-    "endDate": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
     "postedDate": "",
     "publishedDate": "",
-    "status": "확인 필요",
-    "statusBasis": "원문에서 접수 일정 추출 실패",
-    "collectionVerifiedAt": "2026-10-19T08:14:15.239Z",
-    "sourceLastCheckedAt": "2026-10-19T08:14:15.239Z",
-    "verificationStatus": "date_unconfirmed",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
     "sourceDetailVerified": true,
     "supportAmount": null,
     "budget": null,
     "eligibility": "",
     "supportDetails": "",
     "detailSummary": "",
-    "application": "",
+    "application": "접수기간 2026-09-30 11:00 ~ 2026-10-23 18:00 대상 예술가 또는 예술단체 구분 예술가, 예술단체 계층 신진 문의 분야별 상이 ※본문 확인",
     "field": "기타",
     "businessArea": "other",
     "businessAreaLabel": "기타",
@@ -44,8 +44,431 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "score": 23,
-    "axooFitScore": 23,
+    "score": 0,
+    "axooFitScore": 0,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -55,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-2a7788fc904a07",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "예술창작지원-B트랙 대상 예술가 또는 예술단체 진행중 ~2026.10.23 지원금 ,시각 ,연극 ,무용 ,음악 ,전통",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/496?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/496?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 2026-09-30 11:00 ~ 2026-10-23 18:00 대상 예술가 또는 예술단체 구분 예술가, 예술단체 계층 유망 문의 분야별 상이 ※본문 확인",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 0,
+    "axooFitScore": 0,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -55,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-1b446ace9eb2c9",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "예술창작지원-C트랙 대상 예술가 또는 예술단체 진행중 ~2026.10.23 지원금 ,시각 ,연극 ,무용 ,음악 ,전통",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/497?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/497?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 2026-09-30 11:00 ~ 2026-10-23 18:00 대상 예술가 또는 예술단체 구분 예술가, 예술단체 계층 중견 문의 분야별 상이 ※본문 확인",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 0,
+    "axooFitScore": 0,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -55,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-ab662b9c035bba",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "예술창작지원-다원 대상 예술가 또는 예술단체 진행중 ~2026.10.23 지원금 ,다원",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/507?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/507?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 2026-09-30 11:00 ~ 2026-10-23 18:00 대상 예술가 또는 예술단체 구분 예술가, 예술단체 계층 청년, 신진, 유망, 중견, 원로 문의 02-807-4144,4145",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 22,
+    "axooFitScore": 22,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-2a67445ba4e4a9",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "예술창작지원-시각 기획전 대상 시각예술분야 기획자 진행중 ~2026.10.23 지원금 ,시각",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/508?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/508?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 2026-09-30 11:00 ~ 2026-10-23 18:00 대상 시각예술분야 기획자 구분 예술가, 예술단체 계층 청년, 신진, 유망, 중견 문의 02-807-4135, 4145",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 26,
+    "axooFitScore": 26,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -70,7 +493,7 @@
       {
         "code": "business",
         "label": "사업성",
-        "score": 0,
+        "score": 3,
         "maxScore": 16
       },
       {
@@ -88,13 +511,763 @@
     ],
     "scoreReasons": [
       "기획·제작·운영 수행역량 활용 가능",
+      "사업화·유통·지원금 요소 확인",
       "상세 본문 부족으로 보수적 평가"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "gradeReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
-    "axooFitReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "gradeReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-9490ab9a672018",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "예술창작지원-문학 첫 책 발간지원 대상 예술가 진행중 ~2026.10.23 지원금 ,문학",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/505?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/505?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "신청방법 : 서울문화예술지원시스템 (SCAS) 을 통한 온라인 지원신청 예술지원 통합공모 안내영상 : 서울문화재단 공식 유튜브 채널 업로드 ▶ 지원신청서 작성 &sdot; 제출방법 안내영상 : 2026.9.30.( 수 ) 업로드 예정 ▶ 2027 년 예술지원 통합공모 안내 영상 : 2026.10.6.( 화 ) 업로드 예정 서울문화재단 예술지원 통합공모 지원사업명 지원목적 접수기간 발표시기 예술창작 지원 공연예술 공연예술분야에서 활동하는 예술인 또는 예술단체의 창작작업을 지원하며 다양한 작품들의 발표 기회 도모 2026.9.30.( 수 )~10.23.( 금 ) 18 시 27 년 1 월 예정 시각예술 시각예술분야에서 활동하는 예술인 또는 예",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 0,
+    "axooFitScore": 0,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-35a046129f51a8",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "예술창작지원-문학 창작집 발간지원 대상 예술가 진행중 ~2026.10.23 지원금 ,문학",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/506?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/506?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "신청방법 : 서울문화예술지원시스템 (SCAS) 을 통한 온라인 지원신청 예술지원 통합공모 안내영상 : 서울문화재단 공식 유튜브 채널 업로드 ▶ 지원신청서 작성 &sdot; 제출방법 안내영상 : 2026.9.30.( 수 ) 업로드 예정 ▶ 2027 년 예술지원 통합공모 안내 영상 : 2026.10.6.( 화 ) 업로드 예정 서울문화재단 예술지원 통합공모 지원사업명 지원목적 접수기간 발표시기 예술창작 지원 공연예술 공연예술분야에서 활동하는 예술인 또는 예술단체의 창작작업을 지원하며 다양한 작품들의 발표 기회 도모 2026.9.30.( 수 )~10.23.( 금 ) 18 시 27 년 1 월 예정 시각예술 시각예술분야에서 활동하는 예술인 또는 예",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 0,
+    "axooFitScore": 0,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-0e8b03281a8530",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "청년예술지원 대상 청년예술인 진행중 ~2026.10.23 지원금 ,예술일반",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/504?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/504?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 2026-09-30 11:00 ~ 2026-10-23 18:00 대상 청년예술인 구분 예술가, 예술단체 계층 청년 문의 02-362-9742",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 22,
+    "axooFitScore": 22,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-91e983e3dec123",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "공연장상주단체지원(공연단체) 대상 공연장 진행예정 D-8 지원금 ,연극 ,무용 ,음악 ,전통",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/510?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/510?page=1",
+    "documentUrl": "",
+    "startDate": "2026-10-27",
+    "deadline": "2026-11-17",
+    "endDate": "2026-11-17",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "접수 예정",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 2026-10-27 00:00 ~ 2026-11-17 18:00 대상 공연장 구분 예술단체 계층 신진, 유망, 중견 문의 02-302-2550, 2551",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 0,
+    "axooFitScore": 0,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -55,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-aea2abd004a4b7",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "공연장상주단체지원(공연장) 대상 공연장 진행중 ~2026.10.19 지원금 ,기타",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/509?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/509?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-19",
+    "endDate": "2026-10-19",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 2026-09-30 11:00 ~ 2026-10-19 18:00 대상 공연장 구분 예술단체 계층 신진, 유망, 중견 문의 02-302-2550, 2551",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 0,
+    "axooFitScore": 0,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-c88cd1f35724ec",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "2027년 연희문학창작촌 입주작가 정기공모 (6개월) 대상 한국문학 작가 및 문학 번역가 진행중 ~2026.10.23 입주작가(단체) ,문학",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/511?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/511?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "신청자격 한국문학 작가 및 문학 번역가 &bull; 작품창작을 계획 중인 대한민국 국적의 한국문학 작가 및 문학 번역가 ❶ 문학작가 : 국내 신춘문예 및 문예공모를 통해 창작 활동 중인 작가 또는 개인창작집 발간 작가 ※ 희곡작가의 경우 공연 실적 ( 본인 명의 작품 ) 이 있는 작가로 , 공동 집필 , 쇼케이스 공연 , 낭독극 , 졸업작품 제외 ❷ 문학번역가 : 전문 출판사 간행 경험이 있는 한국문학 외국어 번역가 및 외국문학 한국어 번역가 ❸ 청년예비작가 : 창작 활동 이력이 있고 , 작품 활동 및 발표를 위한 노력과 준비를 한 만 39 세 이하 작가 ( 최근 3 년 이내 독립 출판 , 브런치 , 텀블벅 등을 통해 작품을 지속적으로 발표해본 경험이 있는 작가 ) ※ 1987 년 1 월 1 일 이후 출생자 ※ 청년예비작가는 [2 &middo",
+    "supportDetails": "공모내용 &bull; 공모 트랙 [ 6 개월] 및 [ 2 ‧ 3 개 월] 입주 중 1개 선택 및 지원 신청 (* 트랙 [6 개월 ] 및 [2 ‧ 3 개월 ] 간 교차 신청 불가 ) 구분 [ 6 개월 ] 입주 [2 ‧ 3 개월 ] 입주 입주기간 -상반기 : 2027 년 1 월 ~6 월 - 하반기 : 2027 년 7 월 ~12 월 * 상 ‧ 하반 기 중복 신청 가능 -1 분기 : 2027 년 1~3 월 -2 분기 : 2027 년 4~6 월 -3 분기 : 2027 년 7~9 월 -4 분기 : 2027 년 11~12 월 (*2개월) *최대 두 개 분기 중복 신청 가능 운영 규모 4 개 집필실 14 개 집필실 선정인원 총 8 명 총 48 명 지원분야 시 , 소설 , 어린이 &middot; 청소년문학 , 그림책 , 희곡 , 수필 , 번역 , 비평",
+    "detailSummary": "공모내용 &bull; 공모 트랙 [ 6 개월] 및 [ 2 ‧ 3 개 월] 입주 중 1개 선택 및 지원 신청 (* 트랙 [6 개월 ] 및 [2 ‧ 3 개월 ] 간 교차 신청 불가 ) 구분 [ 6 개월 ] 입주 [2 ‧ 3 개월 ] 입주 입주기간 -상반기 : 2027 년 1 월 ~6 월 - 하반기 : 2027 년 7 월 ~12 월 * 상 ‧ 하반 기 중복 신청 가능 -1 분기 : 2027 년 1~3 월 -2 분기 : 2027 년 4~6 월 -3 분기 : 2027 년 7~9 월 -4 분기 : 2027 년 11~12 월 (*2개월) *최대 두 개 분기 중복 신청 가능 운영 규모 4 개 집필실 14 개 집필실 선정인원 총 8 명 총 48 명 지원분야 시 , 소설 , 어린이 &middot; 청소년문학 , 그림책 , 희곡 , 수필 , 번역 , 비평",
+    "application": "신청기간 및 방법 &bull; 신청기간 : 2026.09.30.(수 ) ~ 10.23.(금 ) 18:00 마감 &bull; 신청방법 : 서울문화예술지원시스템 (SCAS) 온라인 접수 ( http://scas.kr/scas ) ※ 반드시 서울문화예술지원시스템 (SCAS) 을 통한 신청 접수만 가능 ( 우편 , 이메일 및 방문 등 접수 불가 ) ※ 접수 마감일에는 조기 접수 권고 ( 접수마감 1 시간 전까지 완료 권장 ) ■ 문의 연희문학창작촌 운영사무실 &bull; 연락처 : 02-324-4621, 4600 yeonhui@sfac.or.kr &bull; 위치 : 서울시 서대문구 증가로 2 길 6-7 &bull; 운영시간 : 월 ~ 금 (",
+    "field": "전시·공간",
+    "businessArea": "exhibition_space",
+    "businessAreaLabel": "전시·공간",
+    "businessAreas": [
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      }
+    ],
+    "matchedKeywords": [
+      "쇼케이스"
+    ],
+    "matchedPriorityKeywords": [
+      "쇼케이스"
+    ],
+    "score": 23,
+    "axooFitScore": 23,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 10,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "전시·공간 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능",
+      "AXOO 비핵심 장르 비중으로 감점"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "scas-3d05c4df4132fa",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울문화재단",
+    "sourceCode": "SCAS",
+    "sourceType": "지원사업",
+    "title": "2027년 연희문학창작촌 입주작가 정기공모 (2·3개월) 대상 한국문학 작가 및 문학 번역가 진행중 ~2026.10.23 입주작가(단체) ,문학",
+    "organization": "서울문화재단",
+    "agency": "서울문화재단",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://www.scas.kr/biz/detail/512?page=1",
+    "originalUrl": "https://www.scas.kr/biz/detail/512?page=1",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-23",
+    "endDate": "2026-10-23",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:16:38.188Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:38.188Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "신청자격 한국문학 작가 및 문학 번역가 &bull; 작품창작을 계획 중인 대한민국 국적의 한국문학 작가 및 문학 번역가 ❶ 문학작가 : 국내 신춘문예 및 문예공모를 통해 창작 활동 중인 작가 또는 개인창작집 발간 작가 ※ 희곡작가의 경우 공연 실적 ( 본인 명의 작품 ) 이 있는 작가로 , 공동 집필 , 쇼케이스 공연 , 낭독극 , 졸업작품 제외 ❷ 문학번역가 : 전문 출판사 간행 경험이 있는 한국문학 외국어 번역가 및 외국문학 한국어 번역가 ❸ 청년예비작가 : 창작 활동 이력이 있고 , 작품 활동 및 발표를 위한 노력과 준비를 한 만 39 세 이하 작가 ( 최근 3 년 이내 독립 출판 , 브런치 , 텀블벅 등을 통해 작품을 지속적으로 발표해본 경험이 있는 작가 ) ※ 1987 년 1 월 1 일 이후 출생자 ※ 청년예비작가는 [2 &middo",
+    "supportDetails": "공모내용 &bull; 공모 트랙 [ 6 개월] 및 [ 2 ‧ 3 개월] 입주 중 1개 선택 및 지원 신청 (* 트랙 [6 개월 ] 및 [2 ‧ 3 개월 ] 간 교차 신청 불가 ) 구분 [ 6 개월 ] 입주 [2 ‧ 3 개월 ] 입주 입주기간 -상반기 : 2027 년 1 월 ~6 월 - 하반기 : 2027 년 7 월 ~12 월 *상 ‧ 하반기 중복 신청 가능 -1 분기 : 2027 년 1~3 월 -2 분기 : 2027 년 4~6 월 -3 분기 : 2027 년 7~9 월 -4 분기 : 2027 년 11~12 월 (*2개월) *최대 두 개 분기 중복 신청 가능 운영 규모 4 개 집필실 14 개 집필실 선정인원 총 8 명 총 48 명 지원분야 시 , 소설 , 어린이 &middot; 청소년문학 , 그림책 , 희곡 , 수필 , 번역 , 비평",
+    "detailSummary": "공모내용 &bull; 공모 트랙 [ 6 개월] 및 [ 2 ‧ 3 개월] 입주 중 1개 선택 및 지원 신청 (* 트랙 [6 개월 ] 및 [2 ‧ 3 개월 ] 간 교차 신청 불가 ) 구분 [ 6 개월 ] 입주 [2 ‧ 3 개월 ] 입주 입주기간 -상반기 : 2027 년 1 월 ~6 월 - 하반기 : 2027 년 7 월 ~12 월 *상 ‧ 하반기 중복 신청 가능 -1 분기 : 2027 년 1~3 월 -2 분기 : 2027 년 4~6 월 -3 분기 : 2027 년 7~9 월 -4 분기 : 2027 년 11~12 월 (*2개월) *최대 두 개 분기 중복 신청 가능 운영 규모 4 개 집필실 14 개 집필실 선정인원 총 8 명 총 48 명 지원분야 시 , 소설 , 어린이 &middot; 청소년문학 , 그림책 , 희곡 , 수필 , 번역 , 비평",
+    "application": "신청기간 및 방법 &bull; 신청기간 : 2026.09.30.(수 ) ~ 10.23.(금 ) 18:00 마감 &bull; 신청방법 : 서울문화예술지원시스템 (SCAS) 온라인 접수 ( http://scas.kr/scas ) ※ 반드시 서울문화예술지원시스템 (SCAS) 을 통한 신청 접수만 가능 ( 우편 , 이메일 및 방문 등 접수 불가 ) ※ 접수 마감일에는 조기 접수 권고 ( 접수마감 1 시간 전까지 완료 권장 ) ■ 문의 연희문학창작촌 운영사무실 &bull; 연락처 : 02-324-4621, 4600 yeonhui@sfac.or.kr &bull; 위치 : 서울시 서대문구 증가로 2 길 6-7 &bull; 운영시간 : 월 ~ 금 (",
+    "field": "전시·공간",
+    "businessArea": "exhibition_space",
+    "businessAreaLabel": "전시·공간",
+    "businessAreas": [
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      }
+    ],
+    "matchedKeywords": [
+      "쇼케이스"
+    ],
+    "matchedPriorityKeywords": [
+      "쇼케이스"
+    ],
+    "score": 23,
+    "axooFitScore": 23,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 10,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "전시·공간 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능",
+      "AXOO 비핵심 장르 비중으로 감점"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
+    "axooFitReason": "낮은 적합도: 전시·공간 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점",
     "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
     "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
     "isPriority": true,
@@ -113,7 +1286,7 @@
     "source": "경기문화재단",
     "sourceCode": "GGCF",
     "sourceType": "지원사업",
-    "title": "교육 종료 문화예술교육 매개자 대상 <내 수업에 AI가 들어온다면> 참여자 모집 --> 2026.07.13 작성자 : 관리자 -->",
+    "title": "교육 종료 문화예술교육 매개자 대상 <내 수업에 AI가 들어온다면> 참여자 모집 2026.07.13",
     "organization": "경기문화재단",
     "agency": "경기문화재단",
     "sourceLevel": "광역",
@@ -128,8 +1301,8 @@
     "publishedDate": "",
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
-    "collectionVerifiedAt": "2026-10-19T08:14:15.239Z",
-    "sourceLastCheckedAt": "2026-10-19T08:14:15.239Z",
+    "collectionVerifiedAt": "2026-10-19T08:16:50.217Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:50.217Z",
     "verificationStatus": "date_unconfirmed",
     "sourceDetailVerified": true,
     "supportAmount": null,
@@ -214,111 +1387,6 @@
     "collectionVersion": "regional_official_html_v1"
   },
   {
-    "id": "ggcf-6e289a7974dae6",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "source": "경기문화재단",
-    "sourceCode": "GGCF",
-    "sourceType": "지원사업",
-    "title": "교육 종료 2026 경기지역문화기획학교: 문화기획자 인턴십 과정 2기 <어느새 [ ] 기획자> 참여 모집 --> 2026.07.08 작성자 : 관리자 -->",
-    "organization": "경기문화재단",
-    "agency": "경기문화재단",
-    "sourceLevel": "광역",
-    "region": "기타",
-    "sourceUrl": "https://www.ggcf.kr/boards/businessNotices/articles/21408",
-    "originalUrl": "https://www.ggcf.kr/boards/businessNotices/articles/21408",
-    "documentUrl": "",
-    "startDate": "",
-    "deadline": "",
-    "endDate": "",
-    "postedDate": "",
-    "publishedDate": "",
-    "status": "확인 필요",
-    "statusBasis": "원문에서 접수 일정 추출 실패",
-    "collectionVerifiedAt": "2026-10-19T08:14:15.239Z",
-    "sourceLastCheckedAt": "2026-10-19T08:14:15.239Z",
-    "verificationStatus": "date_unconfirmed",
-    "sourceDetailVerified": true,
-    "supportAmount": null,
-    "budget": null,
-    "eligibility": "",
-    "supportDetails": "",
-    "detailSummary": "",
-    "application": "",
-    "field": "기타",
-    "businessArea": "other",
-    "businessAreaLabel": "기타",
-    "businessAreas": [
-      {
-        "code": "other",
-        "label": "기타"
-      }
-    ],
-    "matchedKeywords": [],
-    "matchedPriorityKeywords": [],
-    "score": 23,
-    "axooFitScore": 23,
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 8,
-        "maxScore": 38
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 8,
-        "maxScore": 18
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 4,
-        "maxScore": 18
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 0,
-        "maxScore": 16
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 3,
-        "maxScore": 10
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "기획·제작·운영 수행역량 활용 가능",
-      "상세 본문 부족으로 보수적 평가"
-    ],
-    "analysisBasis": "공고 제목",
-    "analysisConfidence": "low",
-    "companyEligible": false,
-    "gradeReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
-    "axooFitReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
-    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
-    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "collectedAt": "2026-10-19",
-    "updatedAt": "2026-10-19",
-    "collectionVersion": "regional_official_html_v1"
-  },
-  {
     "id": "ggcf-c76ba2c3b29280",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
@@ -327,7 +1395,7 @@
     "source": "경기문화재단",
     "sourceCode": "GGCF",
     "sourceType": "지원사업",
-    "title": "교육 종료 2026년 경기문화예술교육 기반구축 판로지원 <노는예술> 2차 공모 안내 --> 2026.06.10 작성자 : 관리자 -->",
+    "title": "교육 종료 2026년 경기문화예술교육 기반구축 판로지원 <노는예술> 2차 공모 안내 2026.06.10",
     "organization": "경기문화재단",
     "agency": "경기문화재단",
     "sourceLevel": "광역",
@@ -342,8 +1410,8 @@
     "publishedDate": "",
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
-    "collectionVerifiedAt": "2026-10-19T08:14:15.239Z",
-    "sourceLastCheckedAt": "2026-10-19T08:14:15.239Z",
+    "collectionVerifiedAt": "2026-10-19T08:16:50.217Z",
+    "sourceLastCheckedAt": "2026-10-19T08:16:50.217Z",
     "verificationStatus": "date_unconfirmed",
     "sourceDetailVerified": true,
     "supportAmount": null,
@@ -419,6 +1487,990 @@
     "companyEligible": false,
     "gradeReason": "낮은 적합도: 사업화·유통 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
     "axooFitReason": "낮은 적합도: 사업화·유통 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-86386eeb4ff162",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "2026 서울영상공모전 <서울 밤로그> 2026.09.30. ~ 2026.10.27. 영상, 숏폼",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000778",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000778",
+    "documentUrl": "",
+    "startDate": "2026-09-30",
+    "deadline": "2026-10-27",
+    "endDate": "2026-10-27",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 : 2026.09.30. 10:00 ~ 2026.10.27. 17:00 공모부문 : 영상, 숏폼 2026 서울영상공모전 < 서울 밤로그 > ☑ 공모주제 : 매력있는 &lsquo; 서울의 밤 &rsquo; 을 향유하는 다양한 야간 루틴 소개 영상 - &lsquo;24 시간 활력경제도시 서울 &rsquo; 관련 사업 최소 2 개 이상 포함해 제작 ( ※ 관련 사업은 공고문 붙임 참조) ☑ 공모분야 : 세로형 숏폼 영상 ( 유튜브 쇼츠 , 인스타그램 릴스 ) ☑ 응모대상 : 국내거주 내 &middot; 외국인 누구나 ( 개인 , 3 인 이하 팀 ) ☑ 공모기간 : 2026. 9. 30.( 수 ) 10 시 ~ 10. 27.( 화 ) 1",
+    "field": "콘텐츠 제작·브랜딩",
+    "businessArea": "content_brand",
+    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "businessAreas": [
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedKeywords": [
+      "영상"
+    ],
+    "matchedPriorityKeywords": [
+      "영상"
+    ],
+    "score": 34,
+    "axooFitScore": 34,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-7c13e35b85aff9",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "2026년 겨울편 서울꿈새김판 문안 공모전 2026.10.19. ~ 2026.10.28. 서울꿈새김판",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000788",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000788",
+    "documentUrl": "",
+    "startDate": "2026-10-19",
+    "deadline": "2026-10-28",
+    "endDate": "2026-10-28",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "공모대상 : 서울을 사랑하는 모든 분 (연령 및 거주지 제한 없음) ㅇ 공모주제 : 추운 겨울을 녹이는 온기와 사랑을 담은 글귀 ㅇ 공모문안 : 한글 자수 30자 이내(띄어쓰기 제외) 시민 창작 문안 ㅇ 응모방법 : 서울시 누리집(seoul.go.kr) 온라인 신청 및 우편신청 － 우편접수 : (04524) 서울특별시 중구 세종대로 110 서울시청 2층 홍보담당관 서울꿈새김판 담당자 앞 좋아요 0 트위터 페이스북 카카오톡 참가 신청하기 목록 전체 서비스 바로 가기 뉴스 기획·이슈 핫이슈 특별기획 전문칼럼 테마 뉴스 분야별 뉴스 문화 / 경제 복지 / 교통 환경 / 주택 안전 / 행정 비주얼 뉴스 사진 뉴스 영상 뉴스 카드 뉴스 우리동네 뉴스 시민기자 뉴스 취재 뉴스 사진 뉴스 영상 뉴스 테마 뉴스 시민기자 안내 알림방 마이페이지 영상 생중계",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 : 2026.10.19. 09:00 ~ 2026.10.28. 23:59 공모부문 : 서울꿈새김판 ㅇ 공모명 : 2026년 겨울편 서울꿈새김판 문안 공모 ㅇ 공모기간 : 2026. 10. 19.(월) ～ 10. 28.(수), 10일간 ㅇ 공모대상 : 서울을 사랑하는 모든 분 (연령 및 거주지 제한 없음) ㅇ 공모주제 : 추운 겨울을 녹이는 온기와 사랑을 담은 글귀 ㅇ 공모문안 : 한글 자수 30자 이내(띄어쓰기 제외) 시민 창작 문안 ㅇ 응모방법 : 서울시 누리집(seoul.go.kr) 온라인 신청 및 우편신청 － 우편접수 : (04524) 서울특별시 중구 세종대로 110 서울시청 2층 홍보담당관 서울꿈새김판 담당자 앞 좋아요 0",
+    "field": "콘텐츠 제작·브랜딩",
+    "businessArea": "content_brand",
+    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "businessAreas": [
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedKeywords": [
+      "영상",
+      "홍보"
+    ],
+    "matchedPriorityKeywords": [
+      "영상",
+      "홍보"
+    ],
+    "score": 48,
+    "axooFitScore": 48,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 26,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 10,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능",
+    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-d2155f8f7bf5af",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "시민의 시선으로 기록하는 노들글로벌예술섬 사진&middot;숏폼 공모전 2026.09.28. ~ 2026.10.30. 사진, 숏폼",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000779",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000779",
+    "documentUrl": "",
+    "startDate": "2026-09-28",
+    "deadline": "2026-10-30",
+    "endDate": "2026-10-30",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 : 2026.09.28. 00:00 ~ 2026.10.30. 18:00 공모부문 : 사진, 숏폼 서울특별시공고 제2026-2737호 시민의 시선으로 기록하는 노들글로벌예술섬 사진&middot;짧은 영상(숏폼) 공모 서울특별시에서는 노들글로벌예술섬 &lsquo;수변문화공간&rsquo; 개방을 계기로 시민의 시선으로 담아낸 노들섬의 변화된 모습을 공유하고, 수상정원&middot;하늘예술정원 등 향후 조성될 공간에 대한 기대를 나누기 위한 사진&middot;숏폼 공모전을 실시합니다. 출품작에 대한 공정한 심사를 거쳐 사진(8점)&middot;숏폼(5점), 총 13점의 수상작을 선정하며, 수상작은 누리집&middot;SNS 등 노들글로",
+    "field": "협업·해외진출",
+    "businessArea": "collaboration_global",
+    "businessAreaLabel": "협업·해외진출",
+    "businessAreas": [
+      {
+        "code": "collaboration_global",
+        "label": "협업·해외진출"
+      }
+    ],
+    "matchedKeywords": [
+      "글로벌"
+    ],
+    "matchedPriorityKeywords": [
+      "글로벌"
+    ],
+    "score": 34,
+    "axooFitScore": 34,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "협업·해외진출 사업영역과 연결",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-6f19dda6c32c5f",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "2026 서울로미디어캔버스 네이처 프로젝트전 2차 공모 2026.10.01. ~ 2026.10.31. 미디어아트",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000781",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000781",
+    "documentUrl": "",
+    "startDate": "2026-10-01",
+    "deadline": "2026-10-31",
+    "endDate": "2026-10-31",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "제출서류 의 누락 또는 미비 시 심사대상에서 제외되므로, 제출기한 내 필수제출서류를 빠짐없이 제출해야 함 ㅇ 응모작품은 작가 본인의 순수 창작 작품이어야 하며, 최종 선정 이후라도 모작(위작) 등의 논란 발생 시 당선이 취소됨 □ 문의 ㅇ 서울로미디어캔버스 운영사무국 010-5964-6860 ※자세한 사항은 붙임 공고문 참고 좋아요 0 트위터 페이스북 카카오톡 목록 전체 서비스 바로 가기 뉴스 기획·이슈 핫이슈 특별기획 전문칼럼 테마 뉴스 분야별 뉴스 문화 / 경제 복지 / 교통 환경 / 주택 안전 / 행정 비주얼 뉴스 사진 뉴스 영상 뉴스 카드 뉴스 우리동네 뉴스 시민기자 뉴스 취재 뉴스 사진 뉴스 영상 뉴스 테마 뉴스 시민기자 안내 알",
+    "field": "미디어아트·기술",
+    "businessArea": "digital_media",
+    "businessAreaLabel": "미디어아트·기술",
+    "businessAreas": [
+      {
+        "code": "digital_media",
+        "label": "미디어아트·기술"
+      }
+    ],
+    "matchedKeywords": [
+      "미디어아트"
+    ],
+    "matchedPriorityKeywords": [
+      "미디어아트"
+    ],
+    "score": 38,
+    "axooFitScore": 38,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "미디어아트·기술 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 미디어아트·기술 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 미디어아트·기술 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-3cc3d0de10e042",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "2026 서울로미디어캔버스 단편 애니메이션전 공모 2026.10.01. ~ 2026.10.31. 미디어아트",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000782",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000782",
+    "documentUrl": "",
+    "startDate": "2026-10-01",
+    "deadline": "2026-10-31",
+    "endDate": "2026-10-31",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수방법 : 이메일 접수 (seoullomecan@gmail.com) □ 지원사항 : 각 작가별 작품(제작)창작비 일백오십만원(1,500,000원),「서울미디어아트」 매거진에 작품수록 □ 제출자료 1. 참가신청서, 참가동의서, 작가약력 각1부 [서식1~3호] 2. 전시계획서 1부(A4 1~2장) [서식4호] ※ 리플렛 등 작품 설명 자료로 사용 예정 3. 작품(동영상) 1점 : 기존작품 또는 신규작품 Ⅱ 전시개요 □ 전 시 명 : 2026 서울로미디어캔버스 네 번째 전시 &lsquo;단편 애니메이션전&rsquo; □ 전시기간 : 2026. 12. 1.~ 2027. 2. 28. (3개월 전시) □ 전시장소 : 서울로미디어캔버스(서울시 중구",
+    "field": "미디어아트·기술",
+    "businessArea": "digital_media",
+    "businessAreaLabel": "미디어아트·기술",
+    "businessAreas": [
+      {
+        "code": "digital_media",
+        "label": "미디어아트·기술"
+      }
+    ],
+    "matchedKeywords": [
+      "미디어아트"
+    ],
+    "matchedPriorityKeywords": [
+      "미디어아트"
+    ],
+    "score": 12,
+    "axooFitScore": 12,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "미디어아트·기술 사업영역과 연결",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 미디어아트·기술 사업영역과 연결 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 미디어아트·기술 사업영역과 연결 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-8f04c919b2144a",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "도심 쓰레기 처방전 공모 2026.10.08. ~ 2026.11.08. 환경",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000784",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000784",
+    "documentUrl": "",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-08",
+    "endDate": "2026-11-08",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "제출서류 .hwp 바로보기 바로듣기 좋아요 0 트위터 페이스북 카카오톡 공모명 : 도심 쓰레기 처방전 공모 응모자격 : 시민 누구나 접수기간 : 2026.10.08. 00:00 ~ 2026.11.08. 23:59 공모부문 : 환경 나만의 &lsquo;도심 쓰레기 처방전&rsquo;을 제안해주세요! 행사장부터 홍대 같은 번화가까지, 도심 곳곳의 쓰레기 문제를 해결할 톡톡 튀는 아이디어를 기다립니다! - 공모 주제 사람이 많이 모이는 행사장이나 번화가의 쓰레기 문제를 해결할 수 있는 아이디어 - 참여 대상 : 시민 누구나 ※ 개인 또는 3인 이하 팀 참여 가능 ※ 중복 접수 가능, 중복 수상 불가 - 공모 기간 : 2026. 10. 08.(목",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "score": 19,
+    "axooFitScore": 19,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-3fe6492becb7fb",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "「자전거타기 좋은 서울」 영상 공모전 2026.10.08. ~ 2026.11.09. 자전거&middot;PM",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000783",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000783",
+    "documentUrl": "",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-09",
+    "endDate": "2026-11-09",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "제출서류 양식 - 작품 【 파일명 : 공모부문 _ 성명 _ 작품제목 】 예시 ) 자전거 &middot;PM 등 안전 _ 홍길동 _ 서울자전거 - 공모전 참가 신청서 【 파일명 : 참가신청서 _ 성명 _ 작품제목 】 예시 ) 참가신청서 _ 홍길동 _ 서울자전거 5. 문의처 ㅇ 공모전 운영 사무국 : 02-6205-6106 ㅇ 서울시 자전거 PM 과 : 02-2133-2418 ㅇ 공모전 접수처 이메일 : sj.kim@bitsol.kr 좋아요 0 트위터 페이스북 카카오톡 목록 전체 서비스 바로 가기 뉴스 기획·이슈 핫이슈 특별기획 전문칼럼 테마 뉴스 분야별 뉴스 문화 / 경제 복지 / 교통 환경 / 주택 안전 / 행정 비주얼 뉴스 사진 뉴스",
+    "field": "콘텐츠 제작·브랜딩",
+    "businessArea": "content_brand",
+    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "businessAreas": [
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedKeywords": [
+      "영상"
+    ],
+    "matchedPriorityKeywords": [
+      "영상"
+    ],
+    "score": 34,
+    "axooFitScore": 34,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-8641bcb9a85172",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "제12회 서울 29초 영화제 2026.10.01. ~ 2026.11.10. 영상 콘텐츠",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000780",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000780",
+    "documentUrl": "",
+    "startDate": "2026-10-01",
+    "deadline": "2026-11-10",
+    "endDate": "2026-11-10",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "접수기간 : 2026.10.01. 00:00 ~ 2026.11.10. 17:00 공모부문 : 영상 콘텐츠 [제12회 서울 29초영화제] 1.주제 &ldquo;서울의 밤은 계속된다!&rdquo; 해가 진 뒤에도 서울의 하루는 계속됩니다 퇴근 후 한강에서 즐기는 축제, 남산에 번지는 야경, 야장에서 만나는 다양한 먹거리, 밤에도 활기 넘치는 골목상권&hellip; 24시간 살아 움직이는 서울의 밤 을 29초 영화로 만들어 주세요! 2.출품안내 -출품기간: 2026.10.1.(목) ~ 2026.11.10.(화) 17:00 -출품방법: 29초영화제 홈페이지( www.29sfilm.com ) 온라인 출품 -출품자격: 제한없음 (국내외 누구나) -",
+    "field": "콘텐츠 제작·브랜딩",
+    "businessArea": "content_brand",
+    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "businessAreas": [
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedKeywords": [
+      "콘텐츠",
+      "영상"
+    ],
+    "matchedPriorityKeywords": [
+      "콘텐츠",
+      "영상"
+    ],
+    "score": 19,
+    "axooFitScore": 19,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 26,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 4,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -22,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
+      "기획·제작·운영 수행역량 활용 가능",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족으로 보수적 평가",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-19",
+    "updatedAt": "2026-10-19",
+    "collectionVersion": "regional_official_html_v1"
+  },
+  {
+    "id": "seoul-636b66cf2f51ba",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "서울특별시",
+    "sourceCode": "SEOUL",
+    "sourceType": "지원사업",
+    "title": "「2026 서울라이트 광화문」미디어파사드 작품 공모전 2026.10.14. ~ 2026.11.16. 미디어파사드",
+    "organization": "서울특별시",
+    "agency": "서울특별시",
+    "sourceLevel": "광역",
+    "region": "서울",
+    "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000786",
+    "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000786",
+    "documentUrl": "",
+    "startDate": "2026-10-14",
+    "deadline": "2026-11-16",
+    "endDate": "2026-11-16",
+    "postedDate": "",
+    "publishedDate": "",
+    "status": "기간상 접수 가능",
+    "statusBasis": "접수기간",
+    "collectionVerifiedAt": "2026-10-19T08:17:01.072Z",
+    "sourceLastCheckedAt": "2026-10-19T08:17:01.072Z",
+    "verificationStatus": "date_extracted",
+    "sourceDetailVerified": true,
+    "supportAmount": null,
+    "budget": null,
+    "eligibility": "",
+    "supportDetails": "",
+    "detailSummary": "",
+    "application": "제출서류 서식.hwpx 바로보기 바로듣기 좋아요 0 트위터 페이스북 카카오톡 공모명 : 「2026 서울라이트 광화문」미디어파사드 작품 공모전 응모자격 : 대한민국 국적 누구나 접수기간 : 2026.10.14. 00:00 ~ 2026.11.16. 18:00 공모부문 : 미디어파사드 「2026 서울라이트 광화문」미디어파사드 작품 공모전 서울특별시가 주최하는「2026 서울라이트 광화문」은 &lsquo;윤슬 : 시간의 수면(Yunseul : Shimmer of Time)&rsquo;이라는 주제 아래, 광화문 미디어파사드와 빛 조형물 전시, 시민참여 콘텐츠 등 다채로운 콘텐츠를 통해 예술과 기술이 만나는 특별한 순간을 선사하는 빛축제입니다. 세종문",
+    "field": "미디어아트·기술",
+    "businessArea": "digital_media",
+    "businessAreaLabel": "미디어아트·기술",
+    "businessAreas": [
+      {
+        "code": "digital_media",
+        "label": "미디어아트·기술"
+      }
+    ],
+    "matchedKeywords": [
+      "미디어파사드"
+    ],
+    "matchedPriorityKeywords": [
+      "미디어파사드"
+    ],
+    "score": 34,
+    "axooFitScore": 34,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 38
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 8,
+        "maxScore": 18
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 18
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 0,
+        "maxScore": 16
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 3,
+        "maxScore": 10
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "미디어아트·기술 사업영역과 연결",
+      "상세 본문 부족으로 보수적 평가"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "gradeReason": "낮은 적합도: 미디어아트·기술 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 미디어아트·기술 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
     "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
     "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
     "isPriority": true,

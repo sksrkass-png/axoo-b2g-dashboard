@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-19T08:14:02.862Z",
+  "updatedAt": "2026-10-19T08:16:38.188Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -8,13 +8,12 @@
       "name": "서울문화재단",
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
-      "state": "failed",
-      "checkedAt": "2026-10-19T08:14:02.862Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "Detail verification failed for all 12 links: "
-      ]
+      "state": "ok",
+      "checkedAt": "2026-10-19T08:16:38.188Z",
+      "lastSuccessAt": "2026-10-19T08:16:38.188Z",
+      "found": 12,
+      "verified": 12,
+      "errors": []
     },
     {
       "code": "GGCF",
@@ -22,10 +21,10 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-19T08:14:15.239Z",
-      "lastSuccessAt": "2026-10-19T08:14:15.239Z",
-      "found": 4,
-      "verified": 4,
+      "checkedAt": "2026-10-19T08:16:50.217Z",
+      "lastSuccessAt": "2026-10-19T08:16:50.217Z",
+      "found": 2,
+      "verified": 2,
       "errors": []
     },
     {
@@ -34,11 +33,11 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "failed",
-      "checkedAt": "2026-10-19T08:14:20.153Z",
+      "checkedAt": "2026-10-19T08:16:54.234Z",
       "found": 0,
       "verified": 0,
       "errors": [
-        "No recognized official grant links; selector may have changed. HTML length=123856 candidate anchors=80 samples=https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255#contentsFocus 본문 바로가기 | https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255#gnb 주메뉴 바로가기 | https://ifac.or.kr/ifacintro/intro/about.do?key=m2501136422568 소개 및 인사말 | https://ifac.or.kr/ifacintro/organizations.do?key=m2501143809919 조직도 및 부서 안내 | https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 주요 지원사업 | https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 예술창작활동 지원"
+        "No recognized official grant links; selector may have changed. HTML length=123856 candidate anchors=80 samples=https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 주요 지원사업 | https://ifac.or.kr/ifacintro/mainSupProjects/artCreation.do?key=m2501143830408 예술창작활동 지원 | https://ifac.or.kr/ifacintro/mainSupProjects/residentOrganization.do?key=m2501143833614 공연장상주단체 지원 | https://ifac.or.kr/ifacintro/mainSupProjects/artActivation/about.do?key=m2501143848514 미술활성화 기획지원 | https://ifac.or.kr/ifacintro/mainSupProjects/civicCulture.do?key=m2501143833943 시민문화 프로젝트 | https://ifac.or.kr/ifacintro/mainSupProjects/educationCulture.do?key=m2501143834258 문화예술교육 지원 | https://ifac.or.kr/ifacintro/mainProjects/youthCulture/about.do?key=m2501143880431 청년문화사업(시작공간일부) | https://ifac.or.kr/ifacintro/mainProjects/educationSupCenter/about.do?key=m2501143881005 문화예술교육지원센터 nearMarker= 2027 인천문화재단 청년예술활동지원 공모 안내 <span class=\"notice\">공지</span> "
       ]
     },
     {
@@ -47,11 +46,11 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "failed",
-      "checkedAt": "2026-10-19T08:14:25.653Z",
+      "checkedAt": "2026-10-19T08:16:59.484Z",
       "found": 0,
       "verified": 0,
       "errors": [
-        "No recognized official grant links; selector may have changed. HTML length=180200 candidate anchors=59 samples=https://www.bscf.or.kr/view.do?no=1010#gnb 상단주메뉴 바로가기 | https://www.bscf.or.kr/view.do?no=1003 감만창의문화촌 | https://www.bscf.or.kr/view.do?no=1004 조선통신사역사관 | https://www.bscf.or.kr/view.do?no=1107 사상인디스테이션 | https://www.bscf.or.kr/view.do?no=1006 한성1918 B-Culture PLAZA | https://www.bscf.or.kr/view.do?no=1008 창작공간 두구"
+        "No recognized official grant links; selector may have changed. HTML length=180200 candidate anchors=59 samples=https://www.bscf.or.kr/view.do?no=1003 감만창의문화촌 | https://www.bscf.or.kr/view.do?no=1009 장애 예술인 창작공간 온그루 | https://www.bscf.or.kr/view.do?no=1010 공모·참여 안내 | https://www.bscf.or.kr/view.do?no=1030 예술인생활안내서 | https://www.bscf.or.kr/view.do?no=1016 문화예술행사정보 | https://www.bscf.or.kr/view.do?no=1027 부산문화재단에 바란다 | https://www.bscf.or.kr/view.do?no=1032 지원심의 옴부즈만 | https://www.bscf.or.kr/view.do?no=1105 부산문화예술지원사업 nearMarker=not found"
       ]
     },
     {
@@ -59,13 +58,12 @@
       "name": "서울특별시",
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
-      "state": "failed",
-      "checkedAt": "2026-10-19T08:14:27.362Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "Detail verification failed for all 9 links: "
-      ]
+      "state": "ok",
+      "checkedAt": "2026-10-19T08:17:01.072Z",
+      "lastSuccessAt": "2026-10-19T08:17:01.072Z",
+      "found": 9,
+      "verified": 9,
+      "errors": []
     }
   ]
 }
