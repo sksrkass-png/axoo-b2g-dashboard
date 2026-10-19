@@ -37,7 +37,7 @@ const KOCCA_LIST =
   "https://www.kocca.kr/kocca/pims/list.do?menuNo=204104";
 
 const COLLECTOR_VERSION =
-  "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring";
+  "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa";
 
 
 /* =========================================================
@@ -1151,7 +1151,7 @@ function makeSupportRecord({
 
 
     status:
-      "진행중",
+      deadline && isExpired(deadline) ? "마감" : "진행중",
 
 
     postedDate,
@@ -1307,7 +1307,11 @@ function upgradeLegacySupportRecord(item) {
     item.businessArea &&
     Array.isArray(item.scoreBreakdown)
   ) {
-    return item;
+    // Cached records must not continue claiming '진행중' after the deadline.
+    return {
+      ...item,
+      status: isExpired(item.deadline || item.endDate) ? "마감" : (item.status || "진행중")
+    };
   }
 
   const detail = {
