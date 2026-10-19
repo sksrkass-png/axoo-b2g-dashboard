@@ -103,7 +103,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -115,7 +115,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -226,9 +226,26 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
-      "extractedText": ""
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-19T09:58:39.569Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037436",
+          "label": "(공고문) 2026년 크라우드펀딩 확산 사업 2차 공모(공고연장).pdf",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037437",
+          "label": "(지원신청서) 2026년 크라우드펀딩 확산 사업_신청자(단체)명.hwp",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -240,10 +257,25 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "attachment_not_readable",
+        "files": [
+          {
+            "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037436",
+            "label": "(공고문) 2026년 크라우드펀딩 확산 사업 2차 공모(공고연장).pdf",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          },
+          {
+            "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037437",
+            "label": "(지원신청서) 2026년 크라우드펀딩 확산 사업_신청자(단체)명.hwp",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          }
+        ]
       }
     },
     "participationCode": "needs_review",
@@ -348,7 +380,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -360,7 +392,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -391,7 +423,7 @@
     "supportAmount": null,
     "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM",
     "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "",
+    "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
     "field": "기타",
     "businessArea": "other",
     "businessAreaLabel": "기타",
@@ -454,9 +486,9 @@
     "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 전체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -466,9 +498,56 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
-      "extractedText": ""
+      "status": "parsed",
+      "reviewedAt": "2026-10-19T09:58:39.569Z",
+      "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+      "files": [
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036371",
+          "label": "(공고문) 인바운드국제협력강화(인바운드리서치지원).pdf",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036592",
+          "label": "2027년도 인바운드리서치지원 지원신청서_신청자(단체)명.hwp",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+          "label": "",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 19644,
+          "pages": 31
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인서, 신청자격 체크리스트, 청렴이행서약서(감사실), 성희롱·성폭력 방지 등에 관한 서약서에 동의해야 지원신청을 등록하실 수 있습니다.• 어떤 사업에 신청해야 할지 모르실 경우, 맞춤형 공모사업 찾기 서비스(바로가기)와 AI 안내 챗봇(바로가기)을 이용해 도움받으실 수 있습니다. 5 Q. 심의는 어떤 절차로 진행되나요?A. 사업별로 다릅니다. 대",
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "다음 회차 지원심의에 반영될 수 있고, 다년 사업은 다음 해 지원금이 늘거나 줄어들 수 있습니다. 7 ② 신청 자격과 선정 제한Q. 누가 신청할 수 있고, 신청할 수 없는 경우는 무엇인가요?A. 문화예술 단체 및 예술인이 신청할 수 있으며, 단체는 사업자등록번호·법인번호· 고유번호 중 하나를 갖고 있어야 합니다. 다음에 해당하면 부적격 처리되며, 모든 심의 항목에서 ‘최하점’을 받습니다.• 대한민국 ",
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "다른 사업을 선택해 신청한 경우• 지원신청서 또는 사업별 필수 제출서류를 내지 않은 경우• 다른 사업의 신청서 양식을 쓴 경우, 첨부파일이 빠지거나 열리지 않은 경우• 그밖에 사업별 공고문에서 결격으로 정한 경우※ 첨부파일은 전체 파일 용량에는 제한이 없으나, zip 파일과 1개 파일당 100mb 이상 첨부가 불가합니다. 제출 전에 파일이 정상적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인",
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+        },
+        {
+          "label": "부담·제한 문구",
+          "quote": "인바운드국제협력강화(인바운드리서치지원) 12 ④ 예산 편성Q. 자부담을 반드시 편성해야 하나요?A. 자기부담금을 의무적으로 편성해야 하는 비율은 없습니다. 다만 다음의 경우는 유의해 주시기 바랍니다.• 과세사업자는 보조금에 공급가액만 편성할 수 있으며, 부가가치세는 e나라도움에서‘사업비 외 자부담’으로 집행해야 합니다. 겸업사업자는 해당 보조사업의 과세/면세 여부 확인이 필요합니다. • 문화예술연수단",
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+        }
+      ]
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -480,10 +559,34 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036371",
+            "label": "(공고문) 인바운드국제협력강화(인바운드리서치지원).pdf",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          },
+          {
+            "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036592",
+            "label": "2027년도 인바운드리서치지원 지원신청서_신청자(단체)명.hwp",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          },
+          {
+            "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+            "label": "",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 19644,
+            "pages": 31
+          }
+        ]
       }
     },
     "participationCode": "needs_review",
@@ -574,9 +677,9 @@
     "axooFitReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "gradeReason": "낮은 적합도: 상세 본문 부족으로 보수적 평가",
     "detailSummary": "",
-    "eligibility": "지원대상 단체",
+    "eligibility": "",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -588,7 +691,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -600,7 +703,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -713,7 +816,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -725,7 +828,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -839,7 +942,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -851,7 +954,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -965,7 +1068,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -977,7 +1080,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -1086,7 +1189,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1098,7 +1201,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -1207,7 +1310,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1219,7 +1322,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -1328,7 +1431,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1340,7 +1443,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -1449,7 +1552,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1461,7 +1564,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -1576,7 +1679,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1588,7 +1691,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -1697,7 +1800,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1709,7 +1812,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -1825,7 +1928,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1837,7 +1940,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -1947,7 +2050,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1959,7 +2062,7 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -2089,7 +2192,7 @@
       "reviewedAt": "2026-10-19T09:48:54.935Z",
       "documentUrl": "",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -2116,7 +2219,7 @@
       ],
       "missingEvidence": false,
       "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "no_attachment_detected",
         "files": []
@@ -2228,9 +2331,11 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T09:58:39.569Z",
+      "documentUrl": "",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -2242,9 +2347,9 @@
       "submissionDocuments": [],
       "missingEvidence": true,
       "detailQuality": "not_verified",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
@@ -2359,9 +2464,11 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T09:58:39.569Z",
+      "documentUrl": "",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -2391,9 +2498,9 @@
       ],
       "missingEvidence": false,
       "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
@@ -2510,9 +2617,11 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T09:58:39.569Z",
+      "documentUrl": "",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -2534,9 +2643,9 @@
       ],
       "missingEvidence": false,
       "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
@@ -2662,9 +2771,11 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-19T09:58:39.569Z",
+      "documentUrl": "",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -2678,9 +2789,9 @@
       ],
       "missingEvidence": false,
       "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
+        "status": "no_attachment_detected",
         "files": []
       }
     },
@@ -2800,9 +2911,26 @@
     "updatedAt": "2026-10-19",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
-      "status": "pending_review",
-      "files": [],
-      "extractedText": ""
+      "status": "manual_review_required",
+      "reviewedAt": "2026-10-19T09:58:39.569Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://www.kocca.kr/download/e-naraguide.zip",
+          "label": "e나라도움사용설명서",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "file_too_large"
+        },
+        {
+          "url": "https://www.kocca.kr/about/laws/rule/pimslaws.zip",
+          "label": "관련규정 다운로드",
+          "format": "archive_unknown",
+          "status": "unsupported",
+          "reason": "Zip document with unrecognized format"
+        }
+      ],
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -2829,10 +2957,25 @@
       ],
       "missingEvidence": false,
       "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
-        "status": "pending_review",
-        "files": []
+        "status": "manual_review_required",
+        "files": [
+          {
+            "url": "https://www.kocca.kr/download/e-naraguide.zip",
+            "label": "e나라도움사용설명서",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "file_too_large"
+          },
+          {
+            "url": "https://www.kocca.kr/about/laws/rule/pimslaws.zip",
+            "label": "관련규정 다운로드",
+            "format": "archive_unknown",
+            "status": "unsupported",
+            "reason": "Zip document with unrecognized format"
+          }
+        ]
       }
     },
     "participationCode": "consortium_review",
@@ -2955,7 +3098,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -2987,7 +3130,7 @@
       ],
       "missingEvidence": false,
       "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
@@ -3110,7 +3253,7 @@
       "reviewedAt": "2026-10-19T09:48:54.935Z",
       "documentUrl": "",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -3132,7 +3275,7 @@
       ],
       "missingEvidence": false,
       "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "no_attachment_detected",
         "files": []
@@ -3253,7 +3396,7 @@
     "documentReview": {
       "status": "pending_review",
       "files": [],
-      "extractedText": ""
+      "snippets": []
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -3280,7 +3423,7 @@
       ],
       "missingEvidence": false,
       "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류는 신청 자격 확정이 아닙니다. 신청 주체, 공고 원문 및 제한조건을 담당자가 검토해야 합니다.",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "pending_review",
         "files": []
