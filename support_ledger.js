@@ -58,7 +58,7 @@ function statusOf(x){
 }
 function fromLive(x){
  const y=yearOf(x);
- const row={id:"live-"+x.id,year:y,level:x.sourceLevel||"국가",region:x.region||"전국",organization:x.organization||x.agency||x.source||"발주기관",title:x.title||"",typeCode:typeOf(x),period:[x.startDate,x.deadline].filter(Boolean).join(" ~ ")||"원문 확인",benefit:x.supportDetails||x.detailSummary||"지원 규모는 원문 확인",applicants:x.eligibility||"원문 확인",collaborationNote:x.gradeReason||"",url:x.sourceUrl||x.originalUrl||"",deadline:dateValue(x.deadline||x.endDate),startDate:dateValue(x.startDate),kind:"live",score:Number(x.score)||0,grade:x.grade||"C",sourceCode:x.sourceCode||"",sourceStatus:x.status||"",verificationStatus:x.verificationStatus||"",verifiedAt:x.collectionVerifiedAt||x.collectedAt||"",sourceLastCheckedAt:x.sourceLastCheckedAt||"",review:x.applicationReview||null,documents:x.documentReview||null,companyEligible:x.companyEligible,excluded:x.isExcludedFromPriority===true,confidence:x.analysisConfidence||"low",supportAmount:Number(x.supportAmount)||0,verified:"자동 수집 · 신청자격 원문 재확인"};
+ const row={id:"live-"+x.id,year:y,level:x.sourceLevel||"국가",region:x.region||"전국",organization:x.organization||x.agency||x.source||"발주기관",title:x.title||"",typeCode:typeOf(x),period:[x.startDate,x.deadline].filter(Boolean).join(" ~ ")||"원문 확인",benefit:x.supportDetails||x.detailSummary||"지원 규모는 원문 확인",applicants:x.eligibility||"원문 확인",collaborationNote:x.gradeReason||"",url:x.sourceUrl||x.originalUrl||"",deadline:dateValue(x.deadline||x.endDate),startDate:dateValue(x.startDate),kind:"live",score:Number(x.score)||0,grade:x.grade||"C",scoreBreakdown:Array.isArray(x.scoreBreakdown)?x.scoreBreakdown:[],analysisBasis:x.analysisBasis||"공고 제목",scoreReasons:Array.isArray(x.scoreReasons)?x.scoreReasons:[],sourceCode:x.sourceCode||"",sourceStatus:x.status||"",verificationStatus:x.verificationStatus||"",verifiedAt:x.collectionVerifiedAt||x.collectedAt||"",sourceLastCheckedAt:x.sourceLastCheckedAt||"",review:x.applicationReview||null,documents:x.documentReview||null,companyEligible:x.companyEligible,excluded:x.isExcludedFromPriority===true,confidence:x.analysisConfidence||"low",supportAmount:Number(x.supportAmount)||0,verified:"자동 수집 · 신청자격 원문 재확인"};
  row.mode=(row.review&&row.review.participationLabel)||participation(row.applicants,row.collaborationNote,x);
  row.status=statusOf(row);return row;
 }
@@ -117,6 +117,12 @@ function rowHtml(r){
  const evidence=r.review?.evidence||[];
  const constraints=r.review?.restrictions||[];
  const docFiles=r.documents?.files||[];
+ const shortSummary=window.AXOOSupportSummary?.summarize(r)||{scale:"공고문 확인 필요",content:"공고문 확인 필요",eligibility:"공고문 확인 필요"};
+ const scoring=Array.isArray(r.scoreBreakdown)?r.scoreBreakdown:[];
+ const scoreDetails=r.kind==="live"&&scoring.length
+   ?`<details class="ax-ledger-score-detail"><summary>배점 보기</summary><ul>${scoring.map(x=>`<li><span>${escape(x.label||"평가항목")}</span><strong>${escape((Number(x.score)||0)>0?"+":"")}${escape(Number(x.score)||0)}점</strong></li>`).join("")}</ul>
+     <p>평가 근거: ${escape(r.analysisBasis||"자동 분석")} · 실제 신청 자격·선정 가능성은 별도 검토</p></details>`
+   :"";
  const auditState={
    parsed:"파일 텍스트 추출 · 공고 관련성 확인 필요",no_attachment_detected:"첨부파일 없음",
    attachment_not_readable:"첨부 텍스트 미확인",manual_review_required:"수동 확인 필요",
@@ -140,10 +146,15 @@ function rowHtml(r){
  <td class="ax-ledger-name">${aLink(r,escape(r.title))}<small>${escape(note)}${r.excluded?" · 적합도 낮음":""}${r.kind==="live"&&r.verifiedAt?" · 수집 "+escape(r.verifiedAt.slice(0,10)):""}</small></td>
  <td><span class="ax-ledger-tag">${escape(TYPE[r.typeCode]||"기타")}</span></td>
  <td class="ax-ledger-date">${escape(r.period||r.deadline||"확인 필요")}</td>
- <td class="ax-ledger-benefit">${escape(shorten(r.benefit,180))}</td>
- <td class="ax-ledger-target">${escape(shorten(r.applicants,145))}</td>
+ <td class="ax-ledger-benefit">
+   <div class="ax-ledger-summary-line"><strong>✦ 지원규모</strong><span>${escape(shortSummary.scale)}</span></div>
+   <div class="ax-ledger-summary-line"><strong>✦ 지원내용</strong><span>${escape(shortSummary.content)}</span></div>
+ </td>
+ <td class="ax-ledger-target">
+   <div class="ax-ledger-summary-line"><strong>✦ 신청자격</strong><span>${escape(shortSummary.eligibility)}</span></div>
+ </td>
  <td class="ax-ledger-mode"><strong>${escape(r.mode)}</strong><small>${escape(r.kind==="live"?"자동 판별 · 자격 확정 아님":shorten(r.collaborationNote,100)||"참고 이력")}</small>${evidenceHtml}</td>
- <td class="ax-ledger-score">${r.score==null?"—":escape(r.score+"점")}<small>${escape(r.kind==="live"?r.grade:"미평가")}</small></td>
+ <td class="ax-ledger-score">${r.score==null?"—":escape(r.score+"점")}<small>${escape(r.kind==="live"?r.grade:"미평가")}</small>${scoreDetails}</td>
  <td class="ax-ledger-pipeline-action">${window.AXOOSupportPipeline?.buttonFor(r)||""}</td></tr>`;
 }
 function store(){try{window.localStorage.setItem(KEY,JSON.stringify(FILTERS))}catch(e){}}
@@ -224,7 +235,7 @@ function draw(panel,live){
  <div class="ax-ledger-tablebox"><table class="ax-ledger-table"><thead><tr><th>사업연도</th><th>상태</th><th>주관 기관</th><th>사업명</th><th>유형</th><th>접수·공고 기간</th><th>지원 규모·내용</th><th>지원 대상</th><th>참여 방식 / 연계 메모</th><th>AXOO 점수</th><th>내 관심 공고</th></tr></thead>
  <tbody>${displayed.length?displayed.map(rowHtml).join(""):`<tr><td colspan="11" class="ax-ledger-empty">검색 조건에 맞는 공고가 없습니다. 필터를 줄여보세요.</td></tr>`}</tbody></table></div>
  <div class="ax-ledger-notes"><p><strong>자료 구분:</strong> 자동 수집은 KAMS·ARKO·KCDF·KOCCA 및 지역 공식 기관 홈페이지에서 수집한 공고이며, 참고자료는 사용자 제공 <em>시각예술 지원사업 2025–2026</em>(2026.10.14 기준)에서 가져온 과거·예상 공고입니다. 참고자료는 원문·현재 일정 재검증 전이며 ‘예상 일정’은 확정 공고가 아닙니다.</p>
- <p><strong>자격·점수:</strong> ‘법인·단체 검토’는 신청 가능 확정이 아닙니다. 참여 방식은 공고 본문·참고 메모 기반의 분류이며 반드시 신청 주체, 업력, 소재지 및 협약 조건을 확인하세요. 적합도 점수는 자동 수집 공고에만 제공됩니다.</p>
+ <p><strong>자격·점수:</strong> ‘법인·단체 검토’는 신청 가능 확정이 아닙니다. 참여 방식은 공고 본문·참고 메모 기반의 분류이며 반드시 신청 주체, 업력, 소재지 및 협약 조건을 확인하세요. 적합도 점수는 자동 수집 공고에만 제공되며, 점수 아래 ‘배점 보기’에서 자동 평가 근거를 확인할 수 있습니다.</p>
   <p>${referenceError?"참고 공고 목록을 불러오지 못했습니다. 새로고침 후 다시 확인하세요.":!reference?"참고 공고 목록을 불러오는 중입니다…":"참고 공고는 실시간 수집과 구분 표시됩니다."}</p></div>
  </section>`;
  updateSummaryKpis(displayed);
