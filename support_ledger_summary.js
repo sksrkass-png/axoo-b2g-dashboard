@@ -71,8 +71,8 @@ function contentOf(row){
  if(!source)return VERIFY;
  // Reference records often contain "amount, benefit" in one sentence.
  const parts=source.split(/[,，]\s*/);
- const descriptive=parts.find(x=>x.length>=8&&!/^(?:총|예산|규모|건당|최소|최대|최종|연간)\s*[\d,.]+/.test(x)
-  &&!/(?:접수|선정)\s*\d+\s*건/.test(x)
+ const descriptive=parts.find(x=>x.length>=8&&!/^(?:(?:총|전체|예산|규모|건당|단체당|매체당|최소|최대|최종|연간|1인)\s*){0,3}[\d,.]+\s*(?:조|억|천만|백만|만)?\s*원?(?:\s|$)/.test(x)
+  &&!/(?:접수|선정)\s*\d+\s*건|\d+\s*건\s*(?:접수|선정)/.test(x)
   &&(!/\d[\d,.]*\s*(?:억원|억|만원|천만원|원)\b/.test(x)||/지원|전시|제작|운영|공간|프로그램|기획|구축|교육|활동|공연|해외|유통|임대료/.test(x)));
  if(descriptive)return shortenMeaningful(descriptive,120);
  if(/^\s*(?:지원내용|사업내용|참여내용|활동내용)/.test(source))return shortenMeaningful(source,120);
