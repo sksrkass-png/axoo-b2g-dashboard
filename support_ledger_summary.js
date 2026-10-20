@@ -69,6 +69,8 @@ function contentOf(row){
  const section=firstSection(source,["지원내용","지원혜택","사업내용","공모내용"]);
  if(section)return shortenMeaningful(section,120)||VERIFY;
  if(!source)return VERIFY;
+ // A scale-only section is not evidence of which services or benefits are provided.
+ if(firstSection(source,["지원규모","지원금액","사업규모","지원금"]))return VERIFY;
  // Reference records often contain "amount, benefit" in one sentence.
  const parts=source.split(/[,，]\s*/);
  const descriptive=parts.find(x=>x.length>=8&&!/^(?:(?:총|전체|예산|규모|건당|단체당|매체당|최소|최대|최종|연간|1인)\s*){0,3}[\d,.]+\s*(?:조|억|천만|백만|만)?\s*원?(?:\s|$)/.test(x)
