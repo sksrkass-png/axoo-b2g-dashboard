@@ -69,3 +69,14 @@
 .ax-p21-links a:nth-child(2){background:white;color:#24553b}
 .ax-p21-links a:hover{opacity:.84}
 @media(max-width:640px){.ax-p21-shared{padding:12px}.ax-p21-links{width:100%}.ax-p21-links a{flex:1;white-space:normal;text-align:center}}
+
+/* Protected Airtable director KPI shortcuts on GitHub dashboard overview */
+.ax-director-links{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin:0 0 17px;padding:14px 17px;border:1px solid #d6dfd9;border-radius:12px;background:linear-gradient(125deg,#f1f8f1,#f8faf9)}
+.ax-director-intro{display:grid;gap:4px;flex:1;min-width:210px}
+.ax-director-intro strong{font-size:11px;color:#2b5b40;font-weight:800;letter-spacing:.045em}
+.ax-director-intro span{font-size:11px;color:#65756d;line-height:1.55}
+.ax-director-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ax-director-actions a{border:1px solid #2a6346;border-radius:8px;padding:8px 13px;color:#fff;background:#2b6344;text-decoration:none;font-size:11px;font-weight:750;line-height:1.3;white-space:nowrap}
+.ax-director-actions a+ a{background:white;color:#2b6344}
+.ax-director-actions a:hover{opacity:.84}
+@media(max-width:640px){.ax-director-links{padding:12px}.ax-director-actions{width:100%}.ax-director-actions a{flex:1;white-space:normal;text-align:center}}
