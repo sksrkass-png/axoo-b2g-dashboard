@@ -98,7 +98,7 @@
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.0_detail_scoring",
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:55:08.961Z",
+      "reviewedAt": "2026-10-20T08:00:52.678Z",
       "documentUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf",
       "files": [
         {
@@ -134,6 +134,11 @@
           "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf"
         },
         {
+          "label": "지원 내용 문구",
+          "quote": "위조된 서류를 제출한 경우⑦ 타 기관 융자 지원사업에 동일한 사업내용으로 지원받은 경우⑧ 기타 융자사업 지원 조건에 부적합한 경우ㅇ (지원 시 유의사항) ① 융자금은 ’26년 이내 집행 가능한 금액만 신청할 수 있으며, ’26년 사업으로 소진되어야 함. * 시설자금의 경우, 잔금 집행이 완료되지 않은 건에 한하여 2026년 3월 16일(융자사업 1차 공모일) 이후 발생한 기지출 건도 지원 가능② 융자",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf"
+        },
+        {
           "label": "제출서류 문구",
           "quote": "5년 (2년 거치, 3년 분할상환) - 4 - Ⅴ 신청방법 및 제출서류ㅇ (접수기간)2026.9.14.(월)~10.2.(금)16:00까지 * 취급은행 영업점에 방문하여 사전 대출상담을 진행하고 ‘대출심사 사전 확인서’를 발급받아 제출하여야 하며, 영업점별 ‘확인서’ 발급 시일이 상이하므로(최대 1주일 소요) 신청 시 유의 바람ㅇ (접수방법)국가문화예술지원시스템(www.ncas.or.kr)을 통한 온라",
           "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf"
@@ -144,11 +149,17 @@
           "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf"
         },
         {
+          "label": "지원 내용 문구",
+          "quote": "을 이미 지원받았는데 신청 가능한가요?A3 타 기관에서 동일한 사업내용으로 지원받은 경우 신청 불가합니다. 다만, 운전자금과 동일 시설이 아닌 시설자금은 중복신청에 해당하지 않으므로 신청 가능합니다.Q4 보조금을 지원받았는데 동일 사업으로 융자 신청이 불가능한가요?A4 보조금과 융자사업은 지원의 성격이 다르므로 보조금을 지원받았더라도 신청 가능합니다. - 2 - 2. 사업내용Q5 예술산업 융자사업과 ",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "는 질문 (FAQ) 0000000000000 1. 신청자격Q1 업력이 1년 미만인데도 신청 가능한가요?A1 본 사업은 업력 제한이 없습니다. 다만 비즈니스모델이 확립되지 않았거나 매출이 발생하지 않았다면 은행 대출에 어려움이 있을 수 있으니 참고 바랍니다.Q2 대출금리 우대조건인 ‘청년’의 기준은 무엇인가요?A2 본 사업에서 청년 기준은 사업 공고일을 기준으로 합니다. 공고일 당일, 대표자의 연령이 ",
           "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",

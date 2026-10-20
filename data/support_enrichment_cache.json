@@ -1291,7 +1291,7 @@
     },
     "scas-09d4de2de885de|https://www.scas.kr/biz/detail/498?page=1": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:42:59.376Z",
+      "reviewedAt": "2026-10-20T08:00:52.678Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx",
       "files": [
         {
@@ -1329,8 +1329,18 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx"
         },
         {
+          "label": "지원 내용 문구",
+          "quote": "신청 프로젝트 2026년 지원내역 연번 지원기관명 지원사업명 지원내용 지원금(원) (직접지원일 경우 작성) 예시 △△문화재단 대관료 지원사업 대관료 지원 5,000,000원 예시 ㅁㅁ예술협회 ㅁㅁㅁ축제 공연 초청료 3,000,000원 예시 OO 갤러리 OO사업 발표 공간 제공 - 1 2 ☞ 본 공모에 신청하는 프로젝트와 관련하여 2026년에 받은 직접지원(재정지원) 및 간접지원(비재정지원) 내역이 있",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1006666&filename=a2abc2ad-d5d8-454d-a8b4-ac51af45731a.hwpx"
+        },
+        {
           "label": "지원 규모 문구",
           "quote": "젝트 2026 년 지원내역 연번 지원기관명 지원사업명 지원내용 지원금 ( 원 ) ( 직접지원일 경우 작성 ) 예시 △△ 문화재단 대관료 지원사업 대관료 지원 5,000,000 원 예시 ㅁㅁ 예술협회 ㅁㅁㅁ 축제 공연 초청료 3,000,000 원 예시 OO 갤러리 OO 사업 발표 공간 제공 - 1 2 ☞ 본 공모에 신청하는 프로젝트와 관련하여 2026 년에 받은 직접지원 ( 재정지원 ) 및 간접지원 (",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1006667&filename=22ea8454-fec9-440f-8fdc-ebf576b92e67.docx"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "신청 프로젝트 2026 년 지원내역 연번 지원기관명 지원사업명 지원내용 지원금 ( 원 ) ( 직접지원일 경우 작성 ) 예시 △△ 문화재단 대관료 지원사업 대관료 지원 5,000,000 원 예시 ㅁㅁ 예술협회 ㅁㅁㅁ 축제 공연 초청료 3,000,000 원 예시 OO 갤러리 OO 사업 발표 공간 제공 - 1 2 ☞ 본 공모에 신청하는 프로젝트와 관련하여 2026 년에 받은 직접지원 ( 재정지원 ) 및 간",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1006667&filename=22ea8454-fec9-440f-8fdc-ebf576b92e67.docx"
         },
         {
@@ -1338,7 +1348,8 @@
           "quote": "부적격 기준- 보조금 관계 법령 및 서울문화재단 문예지원사업 지원금 관리규정을 위반한 예술인 또는 예술단체- 서울문화재단의 예술지원사업에 선정되었으나, 제재 조치 중인 예술인 또는 예술단체 (정산ㆍ성과보고 지연제출/미제출/미완료, 임의포기, 환수 대상자 등) ※ 재단이 정당한 사유로 승인한 경우는 예외로 함불공정 행위 등 범죄 및 법률 위반 관련 부적격 기준- 범죄의 혐의와 관련하여 수사를 받거나 또",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1006668&filename=77b24479-aab1-4f06-a12d-e2fb74c9dd9b.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "ifac-ded1f48724b646|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=235996": {
       "status": "attachment_not_readable",
@@ -1416,7 +1427,7 @@
     },
     "kams-2832|https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:55:08.961Z",
+      "reviewedAt": "2026-10-20T08:00:52.678Z",
       "documentUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf",
       "files": [
         {
@@ -1452,6 +1463,11 @@
           "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf"
         },
         {
+          "label": "지원 내용 문구",
+          "quote": "위조된 서류를 제출한 경우⑦ 타 기관 융자 지원사업에 동일한 사업내용으로 지원받은 경우⑧ 기타 융자사업 지원 조건에 부적합한 경우ㅇ (지원 시 유의사항) ① 융자금은 ’26년 이내 집행 가능한 금액만 신청할 수 있으며, ’26년 사업으로 소진되어야 함. * 시설자금의 경우, 잔금 집행이 완료되지 않은 건에 한하여 2026년 3월 16일(융자사업 1차 공모일) 이후 발생한 기지출 건도 지원 가능② 융자",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf"
+        },
+        {
           "label": "제출서류 문구",
           "quote": "5년 (2년 거치, 3년 분할상환) - 4 - Ⅴ 신청방법 및 제출서류ㅇ (접수기간)2026.9.14.(월)~10.2.(금)16:00까지 * 취급은행 영업점에 방문하여 사전 대출상담을 진행하고 ‘대출심사 사전 확인서’를 발급받아 제출하여야 하며, 영업점별 ‘확인서’ 발급 시일이 상이하므로(최대 1주일 소요) 신청 시 유의 바람ㅇ (접수방법)국가문화예술지원시스템(www.ncas.or.kr)을 통한 온라",
           "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf"
@@ -1462,11 +1478,17 @@
           "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf"
         },
         {
+          "label": "지원 내용 문구",
+          "quote": "을 이미 지원받았는데 신청 가능한가요?A3 타 기관에서 동일한 사업내용으로 지원받은 경우 신청 불가합니다. 다만, 운전자금과 동일 시설이 아닌 시설자금은 중복신청에 해당하지 않으므로 신청 가능합니다.Q4 보조금을 지원받았는데 동일 사업으로 융자 신청이 불가능한가요?A4 보조금과 융자사업은 지원의 성격이 다르므로 보조금을 지원받았더라도 신청 가능합니다. - 2 - 2. 사업내용Q5 예술산업 융자사업과 ",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "는 질문 (FAQ) 0000000000000 1. 신청자격Q1 업력이 1년 미만인데도 신청 가능한가요?A1 본 사업은 업력 제한이 없습니다. 다만 비즈니스모델이 확립되지 않았거나 매출이 발생하지 않았다면 은행 대출에 어려움이 있을 수 있으니 참고 바랍니다.Q2 대출금리 우대조건인 ‘청년’의 기준은 무엇인가요?A2 본 사업에서 청년 기준은 사업 공고일을 기준으로 합니다. 공고일 당일, 대표자의 연령이 ",
           "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%842.%20%ec%9e%90%ec%a3%bc%20%eb%ac%bb%eb%8a%94%20%ec%a7%88%eb%ac%b8%28FAQ%29%2816%29.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "bscf-685f28731d188d|https://www.bscf.or.kr/view.do?no=1010&pgMode=show&pbancSn=2194&siteId=SITE003": {
       "status": "no_attachment_detected",
@@ -1673,7 +1695,7 @@
     },
     "ggcf-c76ba2c3b29280|https://www.ggcf.kr/boards/businessNotices/articles/21337": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T15:52:24.158Z",
+      "reviewedAt": "2026-10-20T08:00:52.678Z",
       "documentUrl": "https://www.ggcf.kr/attachment/19829/download",
       "files": [
         {
@@ -1714,6 +1736,11 @@
           "sourceUrl": "https://www.ggcf.kr/attachment/19829/download"
         },
         {
+          "label": "지원 내용 문구",
+          "quote": "일 이내 - 반드시 12월 이내 정산 기한 엄수 -3- Ⅲ세부 사업내용○ 경기문화예술교육 기반구축 판로지원 <노는예술> 2차 공모 구 분 세부 내용지원목적◾ 경기도 문화예술교육 생태계의 자생력 강화와 문화예술교육 판로 개척을 위한 도내 문화예술교육 단체와 문화예술교육 프로그램 수요처의 프로그램 운영지원 지원내용◾ 프로 그 램 의 안 정 적 실 행 을 위 한 프 로 그 램 운 영 지 원 및 사 업 연 ",
+          "sourceUrl": "https://www.ggcf.kr/attachment/19829/download"
+        },
+        {
           "label": "제출서류 문구",
           "quote": "원신청이 완료되지 않았을 경우, 접수를 인정하지 않습니다. ◾ 제출서류 : 지원신청서(사업계획서) 1부. (※ pdf로 제출) - 수요처 및 공급처의 사업자등록증(고유번호증) 사본 등 지원신청서 내 첨부된 필수서류 일체 문의◾ 문의 : 경기문화재단 예술교육팀 (031-231-0833) / playart@ggcf.or.kr -7- Ⅳ신청 방법 ○ 국가문화예술지원시스템 NCAS (ncas.or.kr)을 ",
           "sourceUrl": "https://www.ggcf.kr/attachment/19829/download"
@@ -1732,14 +1759,10 @@
           "label": "제출서류 문구",
           "quote": "진행사항은 자체적으로 진행하되, 관련 책임은 단체에게 있음 - 사업계획서 및 정산보고서에 금액 활용계획 및 사용 내역서 증빙 필요 ○ 참여인력(강사 등)의 교통비는 프로그램 운영과 직접 관계된 일정에 한하여 증빙서류(영수증, 출장보고서)로 지출 가능 ○ 인건비 : 사업예산의 70% 이하로 편성 ※ 예술인고용보험 해당 시, 예술인부담분의 보험료(0.8%) 포함 1) 인건비 중복·교차 지원 불가 예시) ",
           "sourceUrl": "https://www.ggcf.kr/attachment/19827/download"
-        },
-        {
-          "label": "부담·제한 문구",
-          "quote": "액에 따라 세부 예산계획을 재수립하여야 하며, 재단 협의 없이 자부담 예산으로 선 지출한 비용은 지원금으로 보전할 수 없음○ 수요시설(기관)의 자기사업비율 의무 공모(자부담 금액에 대해서도 집행 정산 진행 예정) - 일반시설(기관)의 경우 지원금 대비 30% 이상 자부담 예산을 책정하고 경기문화재단 지원금 집행금액 기준 동일한 비율 이상을 집행하여야 함 예시) 지원금 1,000만원 교부 및 집행→ 자",
-          "sourceUrl": "https://www.ggcf.kr/attachment/19827/download"
         }
-      ]
+      ],
+      "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-20T07:55:42.375Z"
+  "updatedAt": "2026-10-20T08:00:52.678Z"
 }
