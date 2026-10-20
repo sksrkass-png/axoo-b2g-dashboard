@@ -12,6 +12,8 @@ on:
       - "scripts/test_support_pipeline.js"
       - "scripts/sync_airtable_support_candidates.js"
       - "scripts/test_airtable_candidate_sync.js"
+      - "scripts/create_support_alerts.js"
+      - "scripts/test_support_alerts.js"
       - "dashboard_priority_update.js"
       - "index.html"
       - "scripts/test_support_ledger.js"
@@ -41,3 +43,5 @@ jobs:
         run: node scripts/test_support_pipeline.js
       - name: Verify Airtable candidate mirror field safety
         run: node scripts/test_airtable_candidate_sync.js
+      - name: Verify P5 grant notifications
+        run: node scripts/test_support_alerts.js
