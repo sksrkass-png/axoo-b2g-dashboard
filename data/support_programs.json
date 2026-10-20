@@ -558,9 +558,9 @@
     "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "지원대상 전체",
+    "eligibility": "",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -699,8 +699,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 23,
-    "score": 23,
+    "axooFitScore": 33,
+    "score": 33,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -713,7 +713,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 10,
+        "score": 20,
         "maxScore": 20
       },
       {
@@ -742,18 +742,19 @@
       }
     ],
     "scoreReasons": [
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "사업화·유통·지원금 요소 확인",
       "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 단체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
