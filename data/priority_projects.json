@@ -205,8 +205,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -394,8 +394,8 @@
     "status": "마감",
     "statusBasis": "신청접수 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -1126,8 +1126,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:08:37.455Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:37.455Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:38.497Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:38.497Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2164,14 +2164,14 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:09:35.643Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:35.643Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:32.601Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:32.601Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
     "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000786",
     "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000786",
-    "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
+    "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282139",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -2264,11 +2264,9 @@
           {
             "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
             "label": "공고문.pdf",
-            "format": "pdf",
-            "status": "parsed",
-            "reason": "",
-            "characters": 3854,
-            "pages": 5
+            "format": "unknown",
+            "status": "failed",
+            "reason": "fetch failed"
           },
           {
             "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282139",
@@ -2284,17 +2282,15 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:42:59.376Z",
-      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282139",
       "files": [
         {
           "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
           "label": "공고문.pdf",
-          "format": "pdf",
-          "status": "parsed",
-          "reason": "",
-          "characters": 3854,
-          "pages": 5
+          "format": "unknown",
+          "status": "failed",
+          "reason": "fetch failed"
         },
         {
           "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282139",
@@ -2306,7 +2302,8 @@
           "pages": 0
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2
     },
     "score": 35,
     "axooFitScore": 35,
@@ -2500,8 +2497,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2639,8 +2636,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2778,8 +2775,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2917,8 +2914,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3046,7 +3043,7 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf",
       "files": [
         {
@@ -3077,8 +3074,18 @@
       ],
       "snippets": [
         {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
+        },
+        {
           "label": "지원 규모 문구",
           "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
         },
         {
@@ -3087,11 +3094,17 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
         },
         {
+          "label": "지원 규모 문구",
+          "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026631&filename=2d1c1f1b-061e-4d4c-8772-d8439e6f6493.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026631&filename=2d1c1f1b-061e-4d4c-8772-d8439e6f6493.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 33,
     "axooFitScore": 33,
@@ -3128,8 +3141,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3257,7 +3270,7 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf",
       "files": [
         {
@@ -3288,8 +3301,18 @@
       ],
       "snippets": [
         {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
+        },
+        {
           "label": "지원 규모 문구",
           "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
         },
         {
@@ -3298,11 +3321,17 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
         },
         {
+          "label": "지원 규모 문구",
+          "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026635&filename=31ddcbed-4fab-4325-a735-ea1220a3bec0.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026635&filename=31ddcbed-4fab-4325-a735-ea1220a3bec0.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 33,
     "axooFitScore": 33,
@@ -3339,8 +3368,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3468,7 +3497,7 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf",
       "files": [
         {
@@ -3499,8 +3528,18 @@
       ],
       "snippets": [
         {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
+        },
+        {
           "label": "지원 규모 문구",
           "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
         },
         {
@@ -3509,11 +3548,17 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
         },
         {
+          "label": "지원 규모 문구",
+          "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026639&filename=5700e6ce-c972-4c9c-a8b4-d4587d34b1f5.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026639&filename=5700e6ce-c972-4c9c-a8b4-d4587d34b1f5.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 33,
     "axooFitScore": 33,
@@ -3550,8 +3595,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3679,7 +3724,7 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf",
       "files": [
         {
@@ -3710,8 +3755,18 @@
       ],
       "snippets": [
         {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
+        },
+        {
           "label": "지원 규모 문구",
           "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
         },
         {
@@ -3720,11 +3775,17 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
         },
         {
+          "label": "지원 규모 문구",
+          "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026612&filename=108dbbd6-81c4-4b17-bc41-70c7816b3df2.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026612&filename=108dbbd6-81c4-4b17-bc41-70c7816b3df2.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 33,
     "axooFitScore": 33,
@@ -3768,7 +3829,7 @@
     "region": "전국",
     "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD0mTniArRVouwj7U5teZEgUPBZm1EJpnMlsBwvsh76BM",
     "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD0mTniArRVouwj7U5teZEgUPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+    "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -3868,12 +3929,12 @@
             "reason": "HTTP_404"
           },
           {
-            "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+            "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
             "label": "",
             "format": "pdf",
             "status": "parsed",
             "reason": "",
-            "characters": 19644,
+            "characters": 19666,
             "pages": 31
           }
         ]
@@ -3881,8 +3942,8 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:36:50.246Z",
-      "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
+      "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
       "files": [
         {
           "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036369",
@@ -3899,12 +3960,12 @@
           "reason": "HTTP_404"
         },
         {
-          "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+          "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
           "label": "",
           "format": "pdf",
           "status": "parsed",
           "reason": "",
-          "characters": 19644,
+          "characters": 19666,
           "pages": 31
         }
       ],
@@ -3912,24 +3973,25 @@
         {
           "label": "지원 자격 문구",
           "quote": "적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인서, 신청자격 체크리스트, 청렴이행서약서(감사실), 성희롱·성폭력 방지 등에 관한 서약서에 동의해야 지원신청을 등록하실 수 있습니다.• 어떤 사업에 신청해야 할지 모르실 경우, 맞춤형 공모사업 찾기 서비스(바로가기)와 AI 안내 챗봇(바로가기)을 이용해 도움받으실 수 있습니다. 5 Q. 심의는 어떤 절차로 진행되나요?A. 사업별로 다릅니다. 대",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
         },
         {
           "label": "지원 규모 문구",
           "quote": "다음 회차 지원심의에 반영될 수 있고, 다년 사업은 다음 해 지원금이 늘거나 줄어들 수 있습니다. 7 ② 신청 자격과 선정 제한Q. 누가 신청할 수 있고, 신청할 수 없는 경우는 무엇인가요?A. 문화예술 단체 및 예술인이 신청할 수 있으며, 단체는 사업자등록번호·법인번호· 고유번호 중 하나를 갖고 있어야 합니다. 다음에 해당하면 부적격 처리되며, 모든 심의 항목에서 ‘최하점’을 받습니다.• 대한민국 ",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
         },
         {
           "label": "제출서류 문구",
           "quote": "다른 사업을 선택해 신청한 경우• 지원신청서 또는 사업별 필수 제출서류를 내지 않은 경우• 다른 사업의 신청서 양식을 쓴 경우, 첨부파일이 빠지거나 열리지 않은 경우• 그밖에 사업별 공고문에서 결격으로 정한 경우※ 첨부파일은 전체 파일 용량에는 제한이 없으나, zip 파일과 1개 파일당 100mb 이상 첨부가 불가합니다. 제출 전에 파일이 정상적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
         },
         {
           "label": "부담·제한 문구",
           "quote": "인바운드국제협력강화(인바운드리서치지원) 12 ④ 예산 편성Q. 자부담을 반드시 편성해야 하나요?A. 자기부담금을 의무적으로 편성해야 하는 비율은 없습니다. 다만 다음의 경우는 유의해 주시기 바랍니다.• 과세사업자는 보조금에 공급가액만 편성할 수 있으며, 부가가치세는 e나라도움에서‘사업비 외 자부담’으로 집행해야 합니다. 겸업사업자는 해당 보조사업의 과세/면세 여부 확인이 필요합니다. • 문화예술연수단",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 33,
     "axooFitScore": 33,
@@ -3966,8 +4028,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -4181,8 +4243,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -4303,7 +4365,7 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026614&filename=1a6e87a5-321a-46a2-b7ad-dbcfba305f17.pdf",
       "files": [
         {
@@ -4334,8 +4396,18 @@
       ],
       "snippets": [
         {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026614&filename=1a6e87a5-321a-46a2-b7ad-dbcfba305f17.pdf"
+        },
+        {
           "label": "지원 규모 문구",
           "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026614&filename=1a6e87a5-321a-46a2-b7ad-dbcfba305f17.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026614&filename=1a6e87a5-321a-46a2-b7ad-dbcfba305f17.pdf"
         },
         {
@@ -4344,11 +4416,17 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026614&filename=1a6e87a5-321a-46a2-b7ad-dbcfba305f17.pdf"
         },
         {
+          "label": "지원 규모 문구",
+          "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026617&filename=8d4dce6e-e6dc-4e5f-ab7d-e40cb59c90a0.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026614&filename=1a6e87a5-321a-46a2-b7ad-dbcfba305f17.pdf"
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026617&filename=8d4dce6e-e6dc-4e5f-ab7d-e40cb59c90a0.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 31,
     "axooFitScore": 31,
@@ -4385,8 +4463,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -4587,8 +4665,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -4787,8 +4865,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -5131,8 +5209,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:09:35.643Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:35.643Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:32.601Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:32.601Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -5281,8 +5359,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5482,8 +5560,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5616,8 +5694,8 @@
     "status": "마감",
     "statusBasis": "신청기간 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5784,8 +5862,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5920,8 +5998,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:09:35.643Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:35.643Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:32.601Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:32.601Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -6555,7 +6633,7 @@
     "region": "전국",
     "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM",
     "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+    "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -6654,12 +6732,12 @@
             "reason": "HTTP_404"
           },
           {
-            "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+            "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
             "label": "",
             "format": "pdf",
             "status": "parsed",
             "reason": "",
-            "characters": 19644,
+            "characters": 19666,
             "pages": 31
           }
         ]
@@ -6667,8 +6745,8 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
+      "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
       "files": [
         {
           "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036371",
@@ -6685,12 +6763,12 @@
           "reason": "HTTP_404"
         },
         {
-          "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf",
+          "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
           "label": "",
           "format": "pdf",
           "status": "parsed",
           "reason": "",
-          "characters": 19644,
+          "characters": 19666,
           "pages": 31
         }
       ],
@@ -6698,24 +6776,25 @@
         {
           "label": "지원 자격 문구",
           "quote": "적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인서, 신청자격 체크리스트, 청렴이행서약서(감사실), 성희롱·성폭력 방지 등에 관한 서약서에 동의해야 지원신청을 등록하실 수 있습니다.• 어떤 사업에 신청해야 할지 모르실 경우, 맞춤형 공모사업 찾기 서비스(바로가기)와 AI 안내 챗봇(바로가기)을 이용해 도움받으실 수 있습니다. 5 Q. 심의는 어떤 절차로 진행되나요?A. 사업별로 다릅니다. 대",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
         },
         {
           "label": "지원 규모 문구",
           "quote": "다음 회차 지원심의에 반영될 수 있고, 다년 사업은 다음 해 지원금이 늘거나 줄어들 수 있습니다. 7 ② 신청 자격과 선정 제한Q. 누가 신청할 수 있고, 신청할 수 없는 경우는 무엇인가요?A. 문화예술 단체 및 예술인이 신청할 수 있으며, 단체는 사업자등록번호·법인번호· 고유번호 중 하나를 갖고 있어야 합니다. 다음에 해당하면 부적격 처리되며, 모든 심의 항목에서 ‘최하점’을 받습니다.• 대한민국 ",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
         },
         {
           "label": "제출서류 문구",
           "quote": "다른 사업을 선택해 신청한 경우• 지원신청서 또는 사업별 필수 제출서류를 내지 않은 경우• 다른 사업의 신청서 양식을 쓴 경우, 첨부파일이 빠지거나 열리지 않은 경우• 그밖에 사업별 공고문에서 결격으로 정한 경우※ 첨부파일은 전체 파일 용량에는 제한이 없으나, zip 파일과 1개 파일당 100mb 이상 첨부가 불가합니다. 제출 전에 파일이 정상적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
         },
         {
           "label": "부담·제한 문구",
           "quote": "인바운드국제협력강화(인바운드리서치지원) 12 ④ 예산 편성Q. 자부담을 반드시 편성해야 하나요?A. 자기부담금을 의무적으로 편성해야 하는 비율은 없습니다. 다만 다음의 경우는 유의해 주시기 바랍니다.• 과세사업자는 보조금에 공급가액만 편성할 수 있으며, 부가가치세는 e나라도움에서‘사업비 외 자부담’으로 집행해야 합니다. 겸업사업자는 해당 보조사업의 과세/면세 여부 확인이 필요합니다. • 문화예술연수단",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/arko_2027_faq.pdf"
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 23,
     "axooFitScore": 23,
@@ -6931,8 +7010,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:09:35.643Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:35.643Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:32.601Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:32.601Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -7067,8 +7146,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -7202,8 +7281,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -7337,8 +7416,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:08:37.455Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:37.455Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:38.497Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:38.497Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -7505,14 +7584,14 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:09:35.643Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:35.643Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:32.601Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:32.601Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
     "sourceUrl": "https://mediahub.seoul.go.kr/gongmo/2000778",
     "originalUrl": "https://mediahub.seoul.go.kr/gongmo/2000778",
-    "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100",
+    "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2278429",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
     "priorityCategory": "arts_content_support",
@@ -7598,9 +7677,11 @@
           {
             "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2278429",
             "label": "2026서울영상공모전서울밤로그_청렴서약서.hwpx",
-            "format": "unknown",
-            "status": "failed",
-            "reason": "fetch failed"
+            "format": "hwpx",
+            "status": "parsed",
+            "reason": "",
+            "characters": 254,
+            "pages": 0
           },
           {
             "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100",
@@ -7616,15 +7697,17 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2278429",
       "files": [
         {
           "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2278429",
           "label": "2026서울영상공모전서울밤로그_청렴서약서.hwpx",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "fetch failed"
+          "format": "hwpx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 254,
+          "pages": 0
         },
         {
           "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100",
@@ -7641,8 +7724,14 @@
           "label": "지원 자격 문구",
           "quote": "지 ○활용계획:<내손안에서울>누리집,서울시SNS등홍보매체활용2.응모자격및제한 ○응모자격:국내거주내·외국인누구나(개인,3인이하팀) ○응모제한: 타공 모 전및이 벤 트입 상·수 상또 는표 절·중 복 응 모·도 용등부 정 행 위발 생시수 상 취 소,상 금·부 상환 수,향 후5년 간공 모 전응 시 참 여제 한 - 2 - 3.응모방법 ○접수방법 ①제 작 한숏 폼영 상 을개 인S N S계 정(유 튜 브쇼 츠,인",
           "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "5 - 붙임 24시간 활력경제도시 서울 주요 사업(예시)구 분 사업내용야간 문화생활▸박물관·미술관·한옥 등 시설 야간개방(서울 컬처나잇)▸야외도서관, 야간 콘서트 등 야간 특화프로그램야간 체육·웰니스▸운동장, 체육관 등 체육시설 야간개방▸나이트런, 7979 서울 러닝크루, 운동하는 서울광장 등 야간 특화프로그램 펀스테이션▸러너스테이션, 핏스테이션, 러너지원공간, K-문화스테이션 등 야간 이용▸야간 특",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 20,
     "axooFitScore": 20,
@@ -7843,8 +7932,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:09:35.643Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:35.643Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:32.601Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:32.601Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -8010,8 +8099,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -8144,8 +8233,8 @@
     "status": "마감",
     "statusBasis": "접수기간 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -8279,8 +8368,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:09:35.643Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:35.643Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:32.601Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:32.601Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -8416,8 +8505,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:09:35.643Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:35.643Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:32.601Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:32.601Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -9002,8 +9091,8 @@
     "status": "마감",
     "statusBasis": "신청접수 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10087,8 +10176,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10253,8 +10342,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10390,8 +10479,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10532,8 +10621,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T07:09:19.239Z",
-    "sourceLastCheckedAt": "2026-10-20T07:09:19.239Z",
+    "collectionVerifiedAt": "2026-10-20T07:55:21.943Z",
+    "sourceLastCheckedAt": "2026-10-20T07:55:21.943Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10817,8 +10906,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "신청기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:41.800Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:41.800Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:43.368Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:43.368Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -11023,8 +11112,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -11153,7 +11242,7 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026618&filename=2de1ceef-a4f2-4676-ab92-7ecd2b03af78.pdf",
       "files": [
         {
@@ -11184,8 +11273,18 @@
       ],
       "snippets": [
         {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026618&filename=2de1ceef-a4f2-4676-ab92-7ecd2b03af78.pdf"
+        },
+        {
           "label": "지원 규모 문구",
           "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026618&filename=2de1ceef-a4f2-4676-ab92-7ecd2b03af78.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026618&filename=2de1ceef-a4f2-4676-ab92-7ecd2b03af78.pdf"
         },
         {
@@ -11194,11 +11293,17 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026618&filename=2de1ceef-a4f2-4676-ab92-7ecd2b03af78.pdf"
         },
         {
+          "label": "지원 규모 문구",
+          "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026619&filename=fd5d385d-69f1-465d-abf2-62fa7c0d6944.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026618&filename=2de1ceef-a4f2-4676-ab92-7ecd2b03af78.pdf"
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026619&filename=fd5d385d-69f1-465d-abf2-62fa7c0d6944.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 0,
     "axooFitScore": 0,
@@ -11235,8 +11340,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -11365,7 +11470,7 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026621&filename=19014d93-509f-4e8a-a0e0-700976b17122.pdf",
       "files": [
         {
@@ -11396,8 +11501,18 @@
       ],
       "snippets": [
         {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026621&filename=19014d93-509f-4e8a-a0e0-700976b17122.pdf"
+        },
+        {
           "label": "지원 규모 문구",
           "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026621&filename=19014d93-509f-4e8a-a0e0-700976b17122.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026621&filename=19014d93-509f-4e8a-a0e0-700976b17122.pdf"
         },
         {
@@ -11406,11 +11521,17 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026621&filename=19014d93-509f-4e8a-a0e0-700976b17122.pdf"
         },
         {
+          "label": "지원 규모 문구",
+          "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026622&filename=8ee3318e-226f-4fba-bbe7-739d64024d0a.pdf"
+        },
+        {
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026621&filename=19014d93-509f-4e8a-a0e0-700976b17122.pdf"
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026622&filename=8ee3318e-226f-4fba-bbe7-739d64024d0a.pdf"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 0,
     "axooFitScore": 0,
@@ -11633,8 +11754,8 @@
     "status": "접수 예정",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T07:08:23.019Z",
-    "sourceLastCheckedAt": "2026-10-20T07:08:23.019Z",
+    "collectionVerifiedAt": "2026-10-20T07:54:21.711Z",
+    "sourceLastCheckedAt": "2026-10-20T07:54:21.711Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -11761,7 +11882,7 @@
     },
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-19T10:42:59.376Z",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
       "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf",
       "files": [
         {
@@ -11802,6 +11923,11 @@
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf"
         },
         {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf"
+        },
+        {
           "label": "제출서류 문구",
           "quote": "업 간 2. 지원신청 단계별 유의사항 지원신청 시 - 지원신청 필수서류(해당 사업, 해당 분야, 해당 연도의 지정양식 필수 사용) 미제출/미사용 시 심의 제외 - 지원신청 시 제시하는 아래 내용 동의 및 서약 필수(지정양식) •지원신청자의 ‘개인정보 수집·이용 동의서’ •문화예술계 성희롱·성폭력 근절을 위한 ‘성희롱·성폭력 예방실천 관련 서약’ •지원자 책임 신청제 등 ‘지원신청자 확인 내용’ - 동",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026674&filename=43bb7e09-f4f9-4009-9f86-8fe58d1e807d.pdf"
@@ -11821,7 +11947,8 @@
           "quote": "표일 경우 모두 기재 공연장명 ※ 제공 공연장 모두 기재 단체 소재지 ☐ 서울 ☐ 서울 외 ※ 단체 등록증 기준 ‘소재지’ 표시( ) 공연장 주소 홈페이지(링크) ※ 공식 홈페이지, SNS 등 홈페이지(링크) ※ 공식 홈페이지, SNS 등 실무자 성명/직책 실무자 성명/직책 연락처 연락처 이메일 이메일 분야 ☐ 연극 ☐ 무용 ☐ 음악 ☐ 전통 세부분야 1-2. 지원신청액 ※ 지원신청액은 심의 시 반영",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026679&filename=045a5e2a-9daa-4e8d-bf00-f919b5e2766b.docx"
         }
-      ]
+      ],
+      "snippetVersion": 2
     },
     "score": 0,
     "axooFitScore": 0,
