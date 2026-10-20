@@ -167,7 +167,9 @@ async function main(){
   // Prioritize reviewable notices with upcoming deadlines; postpone expired/unavailable sources.
   const candidates=all.slice().sort((a,b)=>{
     const aa=a.deadline&&a.deadline>=NOW.slice(0,10)?0:1,bb=b.deadline&&b.deadline>=NOW.slice(0,10)?0:1;
-    return aa-bb||String(a.deadline||"9999").localeCompare(String(b.deadline||"9999"));
+    const missing=x=>Number(!trim(x.supportDetails||""))+Number(!trim(x.eligibility||""));
+    // Official current notices with missing scale/content/applicant evidence are reviewed first.
+    return aa-bb||missing(b)-missing(a)||String(a.deadline||"9999").localeCompare(String(b.deadline||"9999"));
   });
   for(const row of candidates){
     const {key,entry}=docFromCache(row,store.items);
