@@ -40,7 +40,7 @@ function main(){
   const old=JSON.parse(fs.readFileSync(file,"utf8"));
   if(!Array.isArray(old))throw Error("Expected array in "+file);
   const rows=old.map(scoreRecord);
-  if(rows.some(x=>x.scoreBreakdown.length!==6||x.scoringVersion!==FIT_SCORING_VERSION))throw Error("Scoring invalid "+file);
+  if(rows.some(x=>x.scoreBreakdown.length<6||x.scoreBreakdown.length>7||x.scoringVersion!==FIT_SCORING_VERSION||x.scoreBreakdown.reduce((n,z)=>n+z.score,0)!==x.score))throw Error("Scoring invalid "+file);
   const before=fs.readFileSync(file,"utf8"),after=JSON.stringify(rows,null,2)+"\n";
   if(before!==after)fs.writeFileSync(file,after,"utf8");
   totals[file]={count:rows.length,changed:rows.filter((x,i)=>x.score!==old[i].score||x.scoringVersion!==old[i].scoringVersion).length,
