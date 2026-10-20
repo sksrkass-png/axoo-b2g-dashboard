@@ -3,7 +3,9 @@
   const assert=require("node:assert/strict");
   const fs=require("node:fs");
   const vm=require("node:vm");
+  const {generate}=require("./score_support_reference");
   const ref=JSON.parse(fs.readFileSync("data/support_ledger_reference.json","utf8"));
+  const referenceScores=generate(ref);
   const live=JSON.parse(fs.readFileSync("data/priority_projects.json","utf8"))
     .filter(x=>x.priorityCategory==="arts_content_support");
   assert.equal(ref.rows.length,73,"73 reference grants");
@@ -38,6 +40,7 @@
     document,
     fetch:async url=>{
       if(url==="data/support_ledger_reference.json")return{ok:true,json:async()=>ref};
+      if(url==="data/support_ledger_reference_scores.json")return{ok:true,json:async()=>referenceScores};
       if(url==="data/support_collection_health.json")return{ok:true,json:async()=>({sources:[],updatedAt:"2026-10-19T00:00:00Z"})};
       throw Error("Unexpected support fetch "+url);
     },
@@ -62,6 +65,11 @@
   listeners.click({target:{closest(){return{hasAttribute(name){return name==="data-ledger-closed-toggle"},dataset:{}}}}});
   assert.ok(panel.innerHTML.includes("시각예술 창작산실 (단년·다년)"));
   assert.match(panel.innerHTML,/마감 공고 숨기기/);
+  assert.match(panel.innerHTML,/임시 평가/,"References must show a provisional rating");
+  assert.match(panel.innerHTML,/원문 미확인/,"Provisional evidence limitation must be visible");
+  assert.match(panel.innerHTML,/배점 보기/,"Reference provisional scores should explain their calculation");
+  assert.ok(!panel.innerHTML.includes("<small>미평가</small>"),"73 reference grants must receive a provisional grade");
+  assert.equal(referenceScores.rows.length,ref.rows.length);
   assert.match(summaryCaption.textContent,/마감 공고 포함/);
   // Clicking a year chip must filter without changing other panels.
   listeners.click({target:{closest(){return{hasAttribute(){return false},dataset:{ledgerGroup:"year",ledgerValue:"2027"}}}}});
