@@ -229,7 +229,7 @@ function analyzeSupportProgram({
   // P2 applicant assessment still determines *actual* corporate eligibility.
   // This score only indicates that the notice states an applicant category (individual included).
   const eligibilityBody = cleanText(eligibility.replace(/^(?:지원대상|신청자격|지원자격|공모대상|신청대상|모집대상)\s*[:：]?/, ""));
-  const applicantEvidence = eligibilityBody.length >= 5 &&
+  const applicantEvidence = eligibilityBody.length >= 2 &&
     !/^(전체|전국|모두|해당없음|상관없음)$/.test(eligibilityBody) &&
     hasAnyPattern(eligibilityBody.slice(0, 260), APPLICANT_ELIGIBILITY_PATTERNS);
   const companyEligible = eligibilityBody.length >= 5 &&
