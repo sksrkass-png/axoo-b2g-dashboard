@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-20T01:53:30.512Z",
+  "updatedAt": "2026-10-20T01:57:32.961Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-20T01:53:30.512Z",
-      "lastSuccessAt": "2026-10-20T01:53:30.512Z",
+      "checkedAt": "2026-10-20T01:57:32.961Z",
+      "lastSuccessAt": "2026-10-20T01:57:32.961Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -23,8 +23,8 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-20T01:53:46.991Z",
-      "lastSuccessAt": "2026-10-20T01:53:46.991Z",
+      "checkedAt": "2026-10-20T01:57:47.909Z",
+      "lastSuccessAt": "2026-10-20T01:57:47.909Z",
       "found": 2,
       "verified": 2,
       "errors": []
@@ -35,8 +35,8 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-20T01:53:52.145Z",
-      "lastSuccessAt": "2026-10-20T01:53:52.145Z",
+      "checkedAt": "2026-10-20T01:57:51.847Z",
+      "lastSuccessAt": "2026-10-20T01:57:51.847Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -47,8 +47,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-20T01:55:14.889Z",
-      "lastSuccessAt": "2026-10-20T01:55:14.889Z",
+      "checkedAt": "2026-10-20T01:58:39.295Z",
+      "lastSuccessAt": "2026-10-20T01:58:39.295Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -59,8 +59,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-20T01:55:30.546Z",
-      "lastSuccessAt": "2026-10-20T01:55:30.546Z",
+      "checkedAt": "2026-10-20T01:58:47.382Z",
+      "lastSuccessAt": "2026-10-20T01:58:47.382Z",
       "found": 9,
       "verified": 8,
       "errors": [
