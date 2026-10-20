@@ -46,6 +46,7 @@ function sections(value){
 function meaningful(value,type){
  const t=plain(value).replace(/^[:：•\-–,·\s]+|[:：•\-–,·\s]+$/g,"").trim();
  if(!t||GENERIC.test(t)||CONNECTORS.test(t))return false;
+ if(/^(?:지원(?:규모|내용|대상|금액|자격)|신청자격|모집대상|공고내용)\s*(?:원문\s*확인|확인(?:\s*필요)?|미확인|참조|미정)$/.test(t))return false;
  if(/^(?:및|또는|혹은|그리고)\s|(?:\s|^)(?:및|또는|혹은|그리고)$/.test(t))return false;
  if(/^(?:공고문|붙임|별첨|첨부파일)\s*(?:참조|확인)/.test(t))return false;
  if(/^(?:접수기간|신청방법|전형절차|서류제출|문의처|문의사항|제출서류|심사방법|선정결과)\b/.test(t))return false;
