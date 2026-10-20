@@ -6,6 +6,8 @@ on:
     paths:
       - "data/support_ledger_reference.json"
       - "support_ledger.js"
+      - "support_ledger_summary.js"
+      - "scripts/test_support_ledger_summary.js"
       - "support_ledger.css"
       - "support_pipeline.js"
       - "support_pipeline.css"
@@ -38,11 +40,14 @@ jobs:
       - name: Check UI JavaScript syntax
         run: |
           node --check support_ledger.js
+          node --check support_ledger_summary.js
           node --check support_pipeline.js
           node --check dashboard_priority_update.js
           node --check dashboard_ui_update.js
       - name: Verify annual grant ledger
         run: node scripts/test_support_ledger.js
+      - name: Verify source-grounded scale, support and eligibility summaries
+        run: node scripts/test_support_ledger_summary.js
       - name: Verify P2 application management
         run: node scripts/test_support_pipeline.js
       - name: Verify Airtable candidate mirror field safety
