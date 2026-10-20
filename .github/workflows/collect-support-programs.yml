@@ -7,6 +7,9 @@ on:
     paths:
       - "scripts/support_program_intelligence.js"
       - "scripts/regrade_support_programs.js"
+      - "scripts/score_support_reference.js"
+      - "scripts/test_support_reference_scores.js"
+      - "data/support_ledger_reference.json"
       - "scripts/test_fit_scoring_v2.js"
       - "scripts/test_support_program_intelligence.js"
       - "scripts/collect_support_programs.js"
@@ -105,6 +108,11 @@ jobs:
 
       - name: Regrade all cached notices with current AXOO FIT v2
         run: node scripts/regrade_support_programs.js
+
+      - name: Score reference grants as provisional, never verified
+        run: |
+          node scripts/test_support_reference_scores.js
+          node scripts/score_support_reference.js
 
 
       # ------------------------------------------
@@ -287,7 +295,9 @@ jobs:
             data/support_regional_programs.json \
             data/support_collection_health.json \
             data/support_enrichment_cache.json \
-            data/priority_projects.json; then
+            data/priority_projects.json \
+            data/support_ledger_reference_scores.json && \
+            test -z "$(git ls-files --others --exclude-standard -- data/support_ledger_reference_scores.json)"; then
 
             echo "changed=false" >> "$GITHUB_OUTPUT"
 
@@ -329,15 +339,17 @@ jobs:
             cp "$SNAPSHOT_DIR/support_collection_health.json" data/support_collection_health.json
             cp "$SNAPSHOT_DIR/support_enrichment_cache.json" data/support_enrichment_cache.json
 
-            # Rebuild on the freshest upstream G2B files to prevent lost updates.
+            # Rebuild on the freshest upstream G2B and user-provided reference source.
             node scripts/build_priority_projects.js
+            node scripts/score_support_reference.js
 
             git add \
               data/support_programs.json \
               data/support_regional_programs.json \
               data/support_collection_health.json \
               data/support_enrichment_cache.json \
-              data/priority_projects.json
+              data/priority_projects.json \
+              data/support_ledger_reference_scores.json
 
             if git diff --cached --quiet; then
               echo "No new data differences after sync"
