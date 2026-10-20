@@ -26,6 +26,8 @@ render();
 assert(added.at(-1).includes("브라우저 임시 지원관리"));
 assert(added.at(-1).includes("Airtable 공동 지원관리"));
 assert(added.at(-1).includes("applM2n5kScusEfYr"));
+assert(added.at(-1).includes("paga5K65AZi8SHJIi"),"P5 shared Airtable inbox must be linked");
+assert(added.at(-1).includes("pag6YNkNTdWNaIFrV"),"P5 policy settings must be linked");
 assert.match(api.buttonFor(row),/검토 등록/);
 const addButton={dataset:{p2Add:row.id},hasAttribute:(x)=>x==="data-p2-add"};
 listeners.click({target:{closest:()=>addButton}});
