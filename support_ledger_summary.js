@@ -107,7 +107,7 @@ function monetaryScale(source){
  if(match){
   const left=text.slice(Math.max(0,match.index-36),match.index);
   if(/(?:보증금|자부담|납부|수수료|참가비|등록비|과태료|지출|계약보증금)\s*$/.test(left))return"";
-  const qualifier=/(?:총\s*(?:사업비|지원액|예산|지원금|기금)?|전체\s*(?:사업비|예산|지원금)?|건당|개사당|단체당|팀당|1\s*인(?:당)?|최대|최소|예산)\s*$/.exec(left)?.[0]||"";
+  const qualifier=/(?:(?:건당|개사당|단체당|팀당|1\s*인(?:당)?)\s*(?:최대|최소)?|총\s*(?:사업비|지원액|예산|지원금|기금)?|전체\s*(?:사업비|예산|지원금)?|최대|최소|예산)\s*$/.exec(left)?.[0]||"";
   const phrase=qualifier+match[0];
   return concise(phrase,"scale",100);
  }
