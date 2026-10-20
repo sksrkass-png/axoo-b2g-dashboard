@@ -91,3 +91,18 @@
 .ax-ledger-evidence>div,.ax-ledger-evidence>p{margin:5px 0;line-height:1.55;font-size:10.5px;color:#4e5d70}
 .ax-ledger-evidence a{color:#2352bf;word-break:break-all}
 .ax-ledger-evidence strong,.ax-ledger-evidence b{color:#27354a;font-weight:750}
+
+/* AXOO 04: concise source-grounded support scale/content/applicant breakdown */
+.ax-ledger-benefit{min-width:235px;max-width:320px}
+.ax-ledger-target{min-width:205px;max-width:280px}
+.ax-ledger-summary-line{display:flex;flex-direction:column;gap:3px;margin:0 0 11px;word-break:keep-all}
+.ax-ledger-summary-line:last-child{margin-bottom:0}
+.ax-ledger-summary-line>strong{font-size:10.5px;font-weight:800;color:#2c5783;line-height:1.35}
+.ax-ledger-summary-line>span{font-size:11.5px;font-weight:450;line-height:1.52;color:#35465b;overflow-wrap:anywhere}
+.ax-ledger-score-detail{white-space:normal;margin-top:8px;min-width:105px}
+.ax-ledger-score-detail summary{font-size:10.5px;font-weight:750;color:#315b9b;cursor:pointer}
+.ax-ledger-score-detail ul{list-style:none;margin:8px 0 0;padding:0}
+.ax-ledger-score-detail li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #e9edf3;padding:3px 0;font-size:10px;line-height:1.35}
+.ax-ledger-score-detail li span{color:#53627b}
+.ax-ledger-score-detail li strong{font-weight:750;color:#263b55;white-space:nowrap}
+.ax-ledger-score-detail p{white-space:normal;color:#6f7890;margin:6px 0 0;font-size:9.5px;line-height:1.45}
