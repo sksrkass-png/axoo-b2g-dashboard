@@ -1,0 +1,4135 @@
+{
+  "version": 1,
+  "scoringVersion": "AXOO_FIT_V2_2026_10",
+  "assessment": "provisional_reference_only",
+  "sourceReferenceAsOf": "2026-10-14",
+  "note": "임시 점수. 사용자 제공 참고자료만 분석했으며 공고 원문/신청 자격은 검증되지 않았습니다.",
+  "rows": [
+    {
+      "id": "reference-001",
+      "score": 44,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-002",
+      "score": 41,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-003",
+      "score": 36,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 12,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 6,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-004",
+      "score": 45,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 12,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-005",
+      "score": 45,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 12,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-006",
+      "score": 26,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-007",
+      "score": 50,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-008",
+      "score": 29,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-009",
+      "score": 25,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-010",
+      "score": 40,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-011",
+      "score": 25,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-012",
+      "score": 49,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "아트페어",
+        "브랜드"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-013",
+      "score": 39,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-014",
+      "score": 39,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-015",
+      "score": 54,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-016",
+      "score": 49,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 6,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "아트페어"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-017",
+      "score": 33,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "아트페어"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-018",
+      "score": 36,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "아트페어"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-019",
+      "score": 35,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 9,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-020",
+      "score": 57,
+      "grade": "B",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 6,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "미디어아트·기술 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "미디어아트·기술",
+      "matchedKeywords": [
+        "AI"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-021",
+      "score": 49,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 6,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "사업화·유통 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "사업화·유통",
+      "matchedKeywords": [
+        "사업화"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-022",
+      "score": 46,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "사업화·유통 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "사업화·유통",
+      "matchedKeywords": [
+        "투자"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-023",
+      "score": 43,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "사업화·유통 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "사업화·유통",
+      "matchedKeywords": [
+        "예술기업"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-024",
+      "score": 43,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 29,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "전시기획",
+        "박람회"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-025",
+      "score": 46,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-026",
+      "score": 18,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-027",
+      "score": 18,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-028",
+      "score": 18,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-029",
+      "score": 21,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-030",
+      "score": 31,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-031",
+      "score": 22,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-032",
+      "score": 31,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-033",
+      "score": 25,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-034",
+      "score": 50,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-035",
+      "score": 49,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "미디어아트·기술 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "미디어아트·기술",
+      "matchedKeywords": [
+        "미디어아트",
+        "미디어파사드"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-036",
+      "score": 31,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-037",
+      "score": 31,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-038",
+      "score": 0,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": -25,
+          "maxScore": 0
+        },
+        {
+          "code": "cap_adjustment",
+          "label": "제외·근거부족 상한 보정",
+          "score": 3,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "AXOO 비핵심 장르 비중으로 감점",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-039",
+      "score": 46,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-040",
+      "score": 29,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-041",
+      "score": 46,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "미디어아트·기술 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "미디어아트·기술",
+      "matchedKeywords": [
+        "미디어아트"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-042",
+      "score": 33,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-043",
+      "score": 33,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-044",
+      "score": 51,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 12,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가",
+        "공공미술"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-045",
+      "score": 47,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가",
+        "공공미술"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-046",
+      "score": 41,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-047",
+      "score": 41,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-048",
+      "score": 33,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-049",
+      "score": 33,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-050",
+      "score": 42,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 29,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "작가",
+        "미디어아트"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-051",
+      "score": 40,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-052",
+      "score": 44,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-053",
+      "score": 47,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-054",
+      "score": 40,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-055",
+      "score": 46,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 29,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "갤러리",
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-056",
+      "score": 39,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 29,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "갤러리",
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-057",
+      "score": 45,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 9,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-058",
+      "score": 22,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-059",
+      "score": 26,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-060",
+      "score": 31,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-061",
+      "score": 31,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-062",
+      "score": 21,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-063",
+      "score": 49,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "아트페어",
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-064",
+      "score": 31,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-065",
+      "score": 21,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-066",
+      "score": 40,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 26,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시",
+        "아트페어"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-067",
+      "score": 18,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-068",
+      "score": 25,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-069",
+      "score": 33,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "작가"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-070",
+      "score": 44,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 23,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 8,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "전시·공간 사업영역과 연결",
+        "기획·제작·운영 수행역량 활용 가능",
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "전시·공간",
+      "matchedKeywords": [
+        "전시"
+      ],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-071",
+      "score": 21,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-072",
+      "score": 32,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 20,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 4,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 0,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+        "기획·제작·운영 수행역량 활용 가능",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    },
+    {
+      "id": "reference-073",
+      "score": 21,
+      "grade": "C",
+      "scoreBreakdown": [
+        {
+          "code": "relevance",
+          "label": "사업영역",
+          "score": 8,
+          "maxScore": 40
+        },
+        {
+          "code": "eligibility",
+          "label": "지원자격",
+          "score": 10,
+          "maxScore": 20
+        },
+        {
+          "code": "execution",
+          "label": "수행역량",
+          "score": 0,
+          "maxScore": 20
+        },
+        {
+          "code": "business",
+          "label": "사업성",
+          "score": 3,
+          "maxScore": 15
+        },
+        {
+          "code": "evidence",
+          "label": "상세근거",
+          "score": 0,
+          "maxScore": 5
+        },
+        {
+          "code": "penalty",
+          "label": "감점",
+          "score": 0,
+          "maxScore": 0
+        }
+      ],
+      "scoreReasons": [
+        "사업화·유통·지원금 요소 확인",
+        "공고 상세 근거 미확인"
+      ],
+      "businessAreaLabel": "기타",
+      "matchedKeywords": [],
+      "scoringVersion": "AXOO_FIT_V2_2026_10",
+      "evaluationStatus": "provisional_reference_only",
+      "analysisBasis": "참고자료 사업명·지원규모/내용·신청대상 요약만 사용 · 공식 원문 미확인",
+      "analysisConfidence": "reference",
+      "verified": false
+    }
+  ]
+}
