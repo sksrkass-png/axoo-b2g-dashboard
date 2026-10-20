@@ -22,55 +22,51 @@
     "originalUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45",
     "sourceUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2832&page=1&txtKeyword=&ddlKeyfield=45",
     "documentUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%20%ea%b8%88%ec%9c%b5%ec%a7%80%ec%9b%90%20%ec%8b%9c%eb%b2%94%ec%82%ac%ec%97%85%28%ec%9c%b5%ec%9e%90%29%205%ec%b0%a8%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95%281%29.pdf",
-    "field": "사업화·유통",
-    "businessArea": "business_distribution",
-    "businessAreaLabel": "사업화·유통",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
     "businessAreas": [
       {
-        "code": "business_distribution",
-        "label": "사업화·유통"
+        "code": "other",
+        "label": "기타"
       }
     ],
-    "matchedKeywords": [
-      "예술산업"
-    ],
-    "matchedPriorityKeywords": [
-      "예술산업"
-    ],
-    "axooFitScore": 34,
-    "score": 34,
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "axooFitScore": 23,
+    "score": 23,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
       {
         "code": "relevance",
         "label": "사업영역",
-        "score": 23,
-        "maxScore": 38
+        "score": 8,
+        "maxScore": 40
       },
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 8,
-        "maxScore": 18
+        "score": 10,
+        "maxScore": 20
       },
       {
         "code": "execution",
         "label": "수행역량",
         "score": 0,
-        "maxScore": 18
+        "maxScore": 20
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 0,
-        "maxScore": 16
+        "score": 3,
+        "maxScore": 15
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 3,
-        "maxScore": 8
+        "score": 2,
+        "maxScore": 5
       },
       {
         "code": "penalty",
@@ -80,14 +76,14 @@
       }
     ],
     "scoreReasons": [
-      "사업화·유통 사업영역과 연결",
-      "상세 본문 부족으로 보수적 평가"
+      "사업화·유통·지원금 요소 확인",
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
-    "gradeReason": "낮은 적합도: 사업화·유통 사업영역과 연결 · 상세 본문 부족으로 보수적 평가",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "",
     "supportDetails": "",
@@ -197,7 +193,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-57e328b201a6",
@@ -233,8 +230,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 18,
-    "score": 18,
+    "axooFitScore": 20,
+    "score": 20,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -265,7 +262,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -276,13 +273,13 @@
       }
     ],
     "scoreReasons": [
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "",
     "supportDetails": "",
@@ -349,7 +346,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-239201",
@@ -471,7 +469,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-04f87e7f7dcb",
@@ -507,8 +506,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 21,
-    "score": 21,
+    "axooFitScore": 23,
+    "score": 23,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -539,7 +538,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -551,13 +550,13 @@
     ],
     "scoreReasons": [
       "사업화·유통·지원금 요소 확인",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 전체",
     "supportDetails": "",
@@ -663,7 +662,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-54a4b2c41697",
@@ -699,8 +699,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 21,
-    "score": 21,
+    "axooFitScore": 23,
+    "score": 23,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -731,7 +731,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -743,13 +743,13 @@
     ],
     "scoreReasons": [
       "사업화·유통·지원금 요소 확인",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "",
     "supportDetails": "",
@@ -855,7 +855,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-18fc24e54294",
@@ -895,8 +896,8 @@
     "matchedPriorityKeywords": [
       "협업"
     ],
-    "axooFitScore": 36,
-    "score": 36,
+    "axooFitScore": 38,
+    "score": 38,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -927,7 +928,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -940,13 +941,13 @@
     "scoreReasons": [
       "협업·해외진출 사업영역과 연결",
       "사업화·유통·지원금 요소 확인",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 전체",
     "supportDetails": "",
@@ -1027,7 +1028,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-a7bc3632ba31",
@@ -1067,8 +1069,8 @@
     "matchedPriorityKeywords": [
       "협업"
     ],
-    "axooFitScore": 40,
-    "score": 40,
+    "axooFitScore": 42,
+    "score": 42,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -1099,7 +1101,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -1113,13 +1115,13 @@
       "협업·해외진출 사업영역과 연결",
       "기획·제작·운영 수행역량 활용 가능",
       "사업화·유통·지원금 요소 확인",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 전체",
     "supportDetails": "",
@@ -1200,7 +1202,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-67c2f5a0fa11",
@@ -1240,8 +1243,8 @@
     "matchedPriorityKeywords": [
       "협업"
     ],
-    "axooFitScore": 40,
-    "score": 40,
+    "axooFitScore": 42,
+    "score": 42,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -1272,7 +1275,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -1286,13 +1289,13 @@
       "협업·해외진출 사업영역과 연결",
       "기획·제작·운영 수행역량 활용 가능",
       "사업화·유통·지원금 요소 확인",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 전체",
     "supportDetails": "",
@@ -1373,7 +1376,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-ddb71cf7de41",
@@ -1409,8 +1413,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 21,
-    "score": 21,
+    "axooFitScore": 23,
+    "score": 23,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -1441,7 +1445,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -1453,13 +1457,13 @@
     ],
     "scoreReasons": [
       "사업화·유통·지원금 요소 확인",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 전체",
     "supportDetails": "",
@@ -1540,7 +1544,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-0c1f64768485",
@@ -1576,8 +1581,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 0,
-    "score": 0,
+    "axooFitScore": 8,
+    "score": 8,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -1590,7 +1595,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 10,
+        "score": 20,
         "maxScore": 20
       },
       {
@@ -1608,7 +1613,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -1619,15 +1624,16 @@
       }
     ],
     "scoreReasons": [
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 단체",
     "supportDetails": "",
@@ -1708,7 +1714,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-fbbb8b195fff",
@@ -1744,8 +1751,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 0,
-    "score": 0,
+    "axooFitScore": 8,
+    "score": 8,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -1758,7 +1765,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 10,
+        "score": 20,
         "maxScore": 20
       },
       {
@@ -1776,7 +1783,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -1787,15 +1794,16 @@
       }
     ],
     "scoreReasons": [
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 단체",
     "supportDetails": "",
@@ -1876,7 +1884,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-418d2ba0f400",
@@ -1944,7 +1953,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -1952,18 +1961,24 @@
         "label": "감점",
         "score": -25,
         "maxScore": 0
+      },
+      {
+        "code": "cap_adjustment",
+        "label": "제외·근거부족 상한 보정",
+        "score": 2,
+        "maxScore": 0
       }
     ],
     "scoreReasons": [
       "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 전체",
     "supportDetails": "",
@@ -2044,7 +2059,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-6c9132dd59d9",
@@ -2080,8 +2096,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 4,
-    "score": 4,
+    "axooFitScore": 16,
+    "score": 16,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -2094,7 +2110,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 10,
+        "score": 20,
         "maxScore": 20
       },
       {
@@ -2112,7 +2128,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -2123,16 +2139,17 @@
       }
     ],
     "scoreReasons": [
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "기획·제작·운영 수행역량 활용 가능",
       "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
     "detailSummary": "",
     "eligibility": "지원대상 단체",
     "supportDetails": "",
@@ -2213,7 +2230,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-360bd6a9eb60",
@@ -2249,8 +2267,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 0,
-    "score": 0,
+    "axooFitScore": 8,
+    "score": 8,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -2263,7 +2281,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 10,
+        "score": 20,
         "maxScore": 20
       },
       {
@@ -2281,7 +2299,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -2292,15 +2310,16 @@
       }
     ],
     "scoreReasons": [
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 단체",
     "supportDetails": "",
@@ -2381,7 +2400,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-24a527d60ffe",
@@ -2417,8 +2437,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 10,
-    "score": 10,
+    "axooFitScore": 12,
+    "score": 12,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -2449,7 +2469,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -2464,7 +2484,7 @@
       "기획·제작·운영 수행역량 활용 가능",
       "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
@@ -2551,7 +2571,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "arko-9f334661f83a",
@@ -2587,8 +2608,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 6,
-    "score": 6,
+    "axooFitScore": 8,
+    "score": 8,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -2619,7 +2640,7 @@
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 0,
+        "score": 2,
         "maxScore": 5
       },
       {
@@ -2633,13 +2654,13 @@
       "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "사업화·유통·지원금 요소 확인",
       "AXOO 비핵심 장르 비중으로 감점",
-      "공고 상세 근거 미확인"
+      "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": true,
-    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
-    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 공고 상세 근거 미확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
     "eligibility": "지원대상 개인 단체",
     "supportDetails": "",
@@ -2720,7 +2741,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kcdf-9213",
@@ -2814,6 +2836,12 @@
         "label": "감점",
         "score": 0,
         "maxScore": 0
+      },
+      {
+        "code": "cap_adjustment",
+        "label": "제외·근거부족 상한 보정",
+        "score": -19,
+        "maxScore": 0
       }
     ],
     "scoreReasons": [
@@ -2834,7 +2862,7 @@
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
+    "exclusionReason": "결과·채용·교육 등 비지원 공고",
     "collectedAt": "2026-10-20",
     "updatedAt": "2026-10-20",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
@@ -2877,7 +2905,8 @@
       }
     },
     "participationCode": "artist_collab_review",
-    "participationLabel": "작가·예술단체 협업 검토"
+    "participationLabel": "작가·예술단체 협업 검토",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kcdf-9134",
@@ -3005,7 +3034,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kocca-326D00108003",
@@ -3147,7 +3177,8 @@
       }
     },
     "participationCode": "not_eligible",
-    "participationLabel": "법인 신청 제한 단서"
+    "participationLabel": "법인 신청 제한 단서",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kocca-326D00110006",
@@ -3277,7 +3308,8 @@
       }
     },
     "participationCode": "artist_collab_review",
-    "participationLabel": "작가·예술단체 협업 검토"
+    "participationLabel": "작가·예술단체 협업 검토",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kocca-326D00088011",
@@ -3357,6 +3389,12 @@
         "label": "감점",
         "score": 0,
         "maxScore": 0
+      },
+      {
+        "code": "cap_adjustment",
+        "label": "제외·근거부족 상한 보정",
+        "score": -20,
+        "maxScore": 0
       }
     ],
     "scoreReasons": [
@@ -3378,7 +3416,7 @@
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
+    "exclusionReason": "결과·채용·교육 등 비지원 공고",
     "collectedAt": "2026-10-20",
     "updatedAt": "2026-10-20",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
@@ -3408,7 +3446,8 @@
       }
     },
     "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요"
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kocca-126D00107006",
@@ -3582,7 +3621,8 @@
       }
     },
     "participationCode": "consortium_review",
-    "participationLabel": "컨소시엄 참여 검토"
+    "participationLabel": "컨소시엄 참여 검토",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kocca-326D00034008",
@@ -3658,6 +3698,12 @@
         "label": "감점",
         "score": 0,
         "maxScore": 0
+      },
+      {
+        "code": "cap_adjustment",
+        "label": "제외·근거부족 상한 보정",
+        "score": -5,
+        "maxScore": 0
       }
     ],
     "scoreReasons": [
@@ -3678,7 +3724,7 @@
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
+    "exclusionReason": "결과·채용·교육 등 비지원 공고",
     "collectedAt": "2026-10-20",
     "updatedAt": "2026-10-20",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
@@ -3726,7 +3772,8 @@
       }
     },
     "participationCode": "corporate_review",
-    "participationLabel": "법인 직접 신청 검토"
+    "participationLabel": "법인 직접 신청 검토",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kocca-326D00110005",
@@ -3858,7 +3905,8 @@
       }
     },
     "participationCode": "artist_collab_review",
-    "participationLabel": "작가·예술단체 협업 검토"
+    "participationLabel": "작가·예술단체 협업 검토",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
     "id": "kocca-326D00034004",
@@ -3934,6 +3982,12 @@
         "label": "감점",
         "score": 0,
         "maxScore": 0
+      },
+      {
+        "code": "cap_adjustment",
+        "label": "제외·근거부족 상한 보정",
+        "score": -5,
+        "maxScore": 0
       }
     ],
     "scoreReasons": [
@@ -3954,7 +4008,7 @@
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": false,
     "isExcludedFromPriority": true,
-    "exclusionReason": "결과·채용·교육 등 현재 지원할 수 없는 공고",
+    "exclusionReason": "결과·채용·교육 등 비지원 공고",
     "collectedAt": "2026-10-20",
     "updatedAt": "2026-10-20",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
@@ -3997,6 +4051,7 @@
       }
     },
     "participationCode": "corporate_review",
-    "participationLabel": "법인 직접 신청 검토"
+    "participationLabel": "법인 직접 신청 검토",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
   }
 ]
