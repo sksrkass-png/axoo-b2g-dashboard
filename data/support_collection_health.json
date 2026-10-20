@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-20T18:42:42.884Z",
+  "updatedAt": "2026-10-20T23:23:14.502Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-20T18:42:42.885Z",
-      "lastSuccessAt": "2026-10-20T18:42:42.885Z",
+      "checkedAt": "2026-10-20T23:23:14.503Z",
+      "lastSuccessAt": "2026-10-20T23:23:14.503Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -22,28 +22,24 @@
       "name": "경기문화재단",
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
-      "state": "failed",
-      "checkedAt": "2026-10-20T18:42:54.472Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "HTTP 403"
-      ],
-      "lastSuccessAt": "2026-10-20T07:59:41.939Z"
+      "state": "ok",
+      "checkedAt": "2026-10-20T23:23:25.652Z",
+      "lastSuccessAt": "2026-10-20T23:23:25.652Z",
+      "found": 2,
+      "verified": 2,
+      "errors": []
     },
     {
       "code": "IFAC",
       "name": "인천문화재단",
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
-      "state": "failed",
-      "checkedAt": "2026-10-20T18:42:56.056Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "fetch failed"
-      ],
-      "lastSuccessAt": "2026-10-20T13:50:48.870Z"
+      "state": "ok",
+      "checkedAt": "2026-10-20T23:23:30.079Z",
+      "lastSuccessAt": "2026-10-20T23:23:30.079Z",
+      "found": 10,
+      "verified": 10,
+      "errors": []
     },
     {
       "code": "BSCF",
@@ -51,8 +47,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-20T18:43:06.548Z",
-      "lastSuccessAt": "2026-10-20T18:43:06.548Z",
+      "checkedAt": "2026-10-20T23:24:08.555Z",
+      "lastSuccessAt": "2026-10-20T23:24:08.555Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -63,8 +59,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "ok",
-      "checkedAt": "2026-10-20T18:43:13.135Z",
-      "lastSuccessAt": "2026-10-20T18:43:13.135Z",
+      "checkedAt": "2026-10-20T23:24:16.501Z",
+      "lastSuccessAt": "2026-10-20T23:24:16.501Z",
       "found": 9,
       "verified": 9,
       "errors": []
