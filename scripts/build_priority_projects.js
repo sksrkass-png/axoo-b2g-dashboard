@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const {scoreRecord} = require("./regrade_support_programs");
 
 
 /* =========================================================
@@ -936,6 +937,8 @@ function mapSupportItem(item) {
       item.fitVerdict ||
       "검토 필요",
 
+    scoringVersion: text(item.scoringVersion),
+
     scoreBreakdown:
       Array.isArray(item.scoreBreakdown)
         ? item.scoreBreakdown
@@ -1256,7 +1259,7 @@ function main() {
 
   // Only new verified-site records enter live data; reference history stays separate.
   // Avoid duplicate notice URLs when two collectors discover the same project.
-  const normalizedSupport = [...supportPrograms, ...regionalSupport].map(mapSupportItem);
+  const normalizedSupport = [...supportPrograms, ...regionalSupport].map(scoreRecord).map(mapSupportItem);
   const keyedSupport = new Map();
   const seenUrls = new Set();
   for (const item of normalizedSupport) {
