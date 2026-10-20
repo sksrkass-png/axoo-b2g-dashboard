@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-20T13:50:36.346Z",
+  "updatedAt": "2026-10-20T18:42:42.884Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-20T13:50:36.346Z",
-      "lastSuccessAt": "2026-10-20T13:50:36.346Z",
+      "checkedAt": "2026-10-20T18:42:42.885Z",
+      "lastSuccessAt": "2026-10-20T18:42:42.885Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -23,7 +23,7 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "failed",
-      "checkedAt": "2026-10-20T13:50:47.814Z",
+      "checkedAt": "2026-10-20T18:42:54.472Z",
       "found": 0,
       "verified": 0,
       "errors": [
@@ -36,12 +36,14 @@
       "name": "인천문화재단",
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
-      "state": "ok",
-      "checkedAt": "2026-10-20T13:50:48.870Z",
-      "lastSuccessAt": "2026-10-20T13:50:48.870Z",
-      "found": 10,
-      "verified": 10,
-      "errors": []
+      "state": "failed",
+      "checkedAt": "2026-10-20T18:42:56.056Z",
+      "found": 0,
+      "verified": 0,
+      "errors": [
+        "fetch failed"
+      ],
+      "lastSuccessAt": "2026-10-20T13:50:48.870Z"
     },
     {
       "code": "BSCF",
@@ -49,8 +51,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-20T13:51:16.962Z",
-      "lastSuccessAt": "2026-10-20T13:51:16.962Z",
+      "checkedAt": "2026-10-20T18:43:06.548Z",
+      "lastSuccessAt": "2026-10-20T18:43:06.548Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -60,14 +62,12 @@
       "name": "서울특별시",
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
-      "state": "partial",
-      "checkedAt": "2026-10-20T13:51:28.521Z",
-      "lastSuccessAt": "2026-10-20T13:51:28.521Z",
+      "state": "ok",
+      "checkedAt": "2026-10-20T18:43:13.135Z",
+      "lastSuccessAt": "2026-10-20T18:43:13.135Z",
       "found": 9,
-      "verified": 8,
-      "errors": [
-        "Rejected candidate 제12회 서울 29초 영화제 2026.10.01. ~ 2026.11.10. 영상 콘텐츠"
-      ]
+      "verified": 9,
+      "errors": []
     }
   ]
 }

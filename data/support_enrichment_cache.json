@@ -1762,7 +1762,65 @@
         }
       ],
       "snippetVersion": 2
+    },
+    "seoul-56ad89dc1363cb|https://mediahub.seoul.go.kr/gongmo/2000759": {
+      "status": "parsed",
+      "reviewedAt": "2026-10-20T18:43:20.917Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272849",
+      "files": [
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272849",
+          "label": "공고문_서울시민먹거리조사_공고번호게시.hwpx",
+          "format": "hwpx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 7750,
+          "pages": 0
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "교육·홍보자료 보급 및 먹거리 정책 수립 기초자료 활용 2. 응모자격 및 제한 ○ 참가자격 : 전 국민(청소년, 대학(원)생, 일반 시민, 연구자 등) - 개인 또는 팀(3인 이내) 구성 참여 가능 - 1팀이 여러 개의 작품 제출 가능(단, 중복당선 시 최상위 순위 1점만 시상) ○ 참가제한 : 타 공모전 및 경진대회 입상·수상작 또는 표절·중복응모·도용 등 부정행위 발생 시 수상 취소, 향후 5년간",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272849"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "차 전문가 최종심사 - 1차 예비심사 : 기본 요건 충족 여부(제출서류 구비, 공모작 규격 등) - 2차 최종심사 : 분야별 심사위원회가 평가표에 따라 심사 후 고득점순 선정 ○ 분야별 심사기준(심사배점, 100점 기준) 구 분 심사항목 심사배점 (100점 기준) 세부평가기준 ① 대시민 콘텐츠 적합성 25 주제부합 및 정책 취지 반영 정도 작품성 25 정보전달력, 완성도, 시각적 직관성 활용성 25 ",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272849"
+        }
+      ],
+      "snippetVersion": 2
+    },
+    "seoul-c6c9edbd574207|https://mediahub.seoul.go.kr/gongmo/2000760": {
+      "status": "parsed",
+      "reviewedAt": "2026-10-20T18:43:20.917Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272852",
+      "files": [
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272852",
+          "label": "공고문_서울시민먹거리조사_공고번호게시.hwpx",
+          "format": "hwpx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 7750,
+          "pages": 0
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "교육·홍보자료 보급 및 먹거리 정책 수립 기초자료 활용 2. 응모자격 및 제한 ○ 참가자격 : 전 국민(청소년, 대학(원)생, 일반 시민, 연구자 등) - 개인 또는 팀(3인 이내) 구성 참여 가능 - 1팀이 여러 개의 작품 제출 가능(단, 중복당선 시 최상위 순위 1점만 시상) ○ 참가제한 : 타 공모전 및 경진대회 입상·수상작 또는 표절·중복응모·도용 등 부정행위 발생 시 수상 취소, 향후 5년간",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272852"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "차 전문가 최종심사 - 1차 예비심사 : 기본 요건 충족 여부(제출서류 구비, 공모작 규격 등) - 2차 최종심사 : 분야별 심사위원회가 평가표에 따라 심사 후 고득점순 선정 ○ 분야별 심사기준(심사배점, 100점 기준) 구 분 심사항목 심사배점 (100점 기준) 세부평가기준 ① 대시민 콘텐츠 적합성 25 주제부합 및 정책 취지 반영 정도 작품성 25 정보전달력, 완성도, 시각적 직관성 활용성 25 ",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272852"
+        }
+      ],
+      "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-20T13:51:36.362Z"
+  "updatedAt": "2026-10-20T18:43:20.917Z"
 }
