@@ -1,5 +1,5 @@
 
-/* P2 local-first support application management; scoped to grant tab 04 */
+/* Browser-local "내 관심 공고" management; scoped to grant tab 04 */
 .ax-p2{border:1px solid #cbd8e7;border-radius:15px;padding:17px;margin:16px 0 22px;background:#f5f8fc;color:#202d40;}
 .ax-p2 *{box-sizing:border-box}
 .ax-p2-heading>span{display:block;color:#496691;font-size:10px;font-weight:800;letter-spacing:.1em}
@@ -58,25 +58,3 @@
 .ax-p2-priority.ax-high{background:#ffece9;color:#b1443b}
 .ax-p2-priority.ax-medium{background:#eaf1ff;color:#355da0}
 .ax-p2-priority.ax-low{background:#edf4ee;color:#506d56}
-
-/* P2.1 shared Airtable workspace, kept visually separate from browser-only P2 */
-.ax-p21-shared{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;border:1px solid #c9d6cf;background:#eaf5ed;padding:14px 16px;border-radius:10px;margin:0 0 16px}
-.ax-p21-shared>div:first-child{flex:1;min-width:200px}
-.ax-p21-shared strong{display:block;font-size:13px;color:#204b35;margin-bottom:5px}
-.ax-p21-shared p{font-size:11px;line-height:1.6;color:#536c5d;max-width:660px;margin:0}
-.ax-p21-links{display:flex;flex-wrap:wrap;gap:7px}
-.ax-p21-links a{display:inline-flex;align-items:center;justify-content:center;border-radius:7px;background:#24553b;border:1px solid #24553b;color:white;padding:9px 12px;font-size:11.5px;font-weight:750;text-decoration:none;white-space:nowrap}
-.ax-p21-links a:nth-child(2){background:white;color:#24553b}
-.ax-p21-links a:hover{opacity:.84}
-@media(max-width:640px){.ax-p21-shared{padding:12px}.ax-p21-links{width:100%}.ax-p21-links a{flex:1;white-space:normal;text-align:center}}
-
-/* Protected Airtable director KPI shortcuts on GitHub dashboard overview */
-.ax-director-links{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin:0 0 17px;padding:14px 17px;border:1px solid #d6dfd9;border-radius:12px;background:linear-gradient(125deg,#f1f8f1,#f8faf9)}
-.ax-director-intro{display:grid;gap:4px;flex:1;min-width:210px}
-.ax-director-intro strong{font-size:11px;color:#2b5b40;font-weight:800;letter-spacing:.045em}
-.ax-director-intro span{font-size:11px;color:#65756d;line-height:1.55}
-.ax-director-actions{display:flex;gap:8px;flex-wrap:wrap}
-.ax-director-actions a{border:1px solid #2a6346;border-radius:8px;padding:8px 13px;color:#fff;background:#2b6344;text-decoration:none;font-size:11px;font-weight:750;line-height:1.3;white-space:nowrap}
-.ax-director-actions a+ a{background:white;color:#2b6344}
-.ax-director-actions a:hover{opacity:.84}
-@media(max-width:640px){.ax-director-links{padding:12px}.ax-director-actions{width:100%}.ax-director-actions a{flex:1;white-space:normal;text-align:center}}

@@ -3,11 +3,12 @@
 const REF_URL="data/support_ledger_reference.json";
 const HEALTH_URL="data/support_collection_health.json";
 const TYPE={create:"창작·발표",curate:"전시기획",space:"공간·레지던시",public:"공공미술·건축미술",media:"미디어아트",fair:"페스티벌·아트페어",market:"유통·미술시장",intl:"해외진출",critic:"비평·매체",welfare:"생활·준비금",tech:"기술융합·AI",biz:"예술기업",bid:"입찰·용역"};
-const FILTERS={year:"전체",type:"전체",region:"전체",status:"전체",mode:"전체",level:"전체",source:"전체",sort:"STATUS",query:""};
+const FILTERS={year:"전체",type:"전체",region:"전체",status:"전체",mode:"전체",level:"전체",source:"전체",sort:"STATUS",query:"",showClosed:false};
 const KEY="axoo_support_ledger_preferences_v1";
 let reference=null,referenceError=false,pending=null,health=null,healthPending=null;
-const hooked=new WeakSet();
-try{const saved=JSON.parse(window.localStorage.getItem(KEY)||"{}");Object.keys(FILTERS).forEach(k=>{if(typeof saved[k]==="string")FILTERS[k]=saved[k]})}catch(e){}
+let lastLive=[];
+const hooked=new WeakSet(),liveByPanel=new WeakMap();
+try{const saved=JSON.parse(window.localStorage.getItem(KEY)||"{}");Object.keys(FILTERS).forEach(k=>{if(k!=="showClosed"&&typeof saved[k]===typeof FILTERS[k])FILTERS[k]=saved[k]});if(FILTERS.status==="closed")FILTERS.status="전체"}catch(e){}
 const escape=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\/[^\s"'<>]+$/i.test(String(u||""))?String(u):"";
 function today(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
@@ -76,7 +77,8 @@ function build(live){
 function textValue(r){return [r.title,r.organization,r.level,r.region,TYPE[r.typeCode],r.benefit,r.applicants,r.collaborationNote,r.period,r.mode,r.sourceCode].join(" ").toLowerCase();}
 function matches(r){
  const f=FILTERS;
- return (f.source==="전체"||r.sourceCode===f.source)
+ return (f.showClosed||r.status.code!=="closed")
+ &&(f.source==="전체"||r.sourceCode===f.source)
  &&(f.year==="전체"||String(r.year)===f.year)
  &&(f.type==="전체"||r.typeCode===f.type)
  &&(f.region==="전체"||r.region===f.region)
@@ -145,12 +147,37 @@ function rowHtml(r){
  <td class="ax-ledger-pipeline-action">${window.AXOOSupportPipeline?.buttonFor(r)||""}</td></tr>`;
 }
 function store(){try{window.localStorage.setItem(KEY,JSON.stringify(FILTERS))}catch(e){}}
+function daysUntil(dateText){
+ if(!dateText)return null;
+ return Math.round((Date.parse(dateText+"T00:00:00Z")-Date.parse(today()+"T00:00:00Z"))/86400000);
+}
+function updateSummaryKpis(rows){
+ if(typeof document==="undefined")return;
+ const list=Array.isArray(rows)?rows:[];
+ const metrics=[
+  ["totalCount","진행 중","OPEN",list.filter(r=>r.status.code==="open").length],
+  ["sCount","7일 내 마감","D-7",list.filter(r=>{const days=daysUntil(r.deadline);return r.status.code==="open"&&days!==null&&days>=0&&days<=7}).length],
+  ["aCount","우선 검토","HIGH FIT",list.filter(r=>r.kind==="live"&&r.status.code!=="closed"&&!r.excluded&&(r.grade==="S"||r.grade==="A"||r.score>=70)).length],
+  ["bCount","확인 필요","REVIEW",list.filter(r=>r.status.code==="verify").length]
+ ];
+ metrics.forEach(([id,label,caption,value])=>{
+  const valueNode=document.getElementById(id);if(!valueNode)return;
+  valueNode.textContent=String(value);
+  const card=valueNode.closest?.(".summary-card");
+  const labelNode=card?.querySelector("span"),captionNode=card?.querySelector("small");
+  if(labelNode)labelNode.textContent=label;
+  if(captionNode)captionNode.textContent=caption;
+ });
+ const caption=document.querySelector?.(".today-panel .section-caption");
+ if(caption)caption.textContent=`지원사업 필터 기준 · 마감 공고 ${FILTERS.showClosed?"포함":"제외"}`;
+}
 function draw(panel,live){
  if(!panel||!panel.isConnected)return;
+ lastLive=Array.isArray(live)?live:[];
  const rows=build(live);
  const displayed=rows.filter(matches).sort(comparator);
  const counts=(code)=>rows.filter(r=>r.status.code===code).length;
- const now=rows.filter(r=>r.kind==="live"&&r.status.code==="open"&&!r.excluded&&r.score>=40&&["corporate_review","artist_collab_review","consortium_review"].includes(r.review?.participationCode)).sort(comparator).slice(0,5);
+ const now=displayed.filter(r=>r.kind==="live"&&r.status.code==="open"&&!r.excluded&&r.score>=40&&["corporate_review","artist_collab_review","consortium_review"].includes(r.review?.participationCode)).slice(0,5);
  const years=[...new Set(rows.map(r=>String(r.year)).filter(x=>/^\d{4}$/.test(x)))].sort((a,b)=>Number(b)-Number(a));
  const types=Object.keys(TYPE).filter(x=>x!=="bid").map(x=>[x,TYPE[x]]);
  const modes=[...new Set(rows.map(r=>r.mode))].sort((a,b)=>{
@@ -161,12 +188,12 @@ function draw(panel,live){
  const sourceSummary=Array.isArray(health?.sources)?health.sources:[];
  const allOption=[["전체","전체"]];
  panel.innerHTML=`
- <section class="ax-ledger" aria-label="예술·콘텐츠 연간 지원사업 공고 원장">
+ <section class="ax-ledger" aria-label="예술·콘텐츠 지원사업 공고 모아보기">
  <div class="ax-ledger-head">
-  <div><span class="ax-ledger-kicker">AXOO / 04 · SUPPORT OPPORTUNITY LEDGER</span>
-  <h2>예술·콘텐츠 지원사업 <em>연간 공고 원장</em></h2>
-  <p>국가·광역·기초·민간 지원사업을 폭넓게 검토합니다. 지원 자격과 AXOO 적합도는 별도 판단하며, 입찰·용역은 기존 분류에서 확인하세요.</p></div>
-  <div class="ax-ledger-head-meta"><strong>${rows.length}건</strong><span>자동 수집 + 참고 이력</span></div>
+  <div><span class="ax-ledger-kicker">AXOO / 04 · SUPPORT OPPORTUNITIES</span>
+  <h2>예술·콘텐츠 지원사업 공고 모아보기</h2>
+  <p>여러 기관의 지원사업 공고를 한곳에서 찾고 비교할 수 있습니다. 현재 접수 가능한 공고를 먼저 보여주며, 신청 자격과 일정은 공식 공고에서 다시 확인하세요.</p></div>
+  <div class="ax-ledger-head-meta"><strong>${displayed.length}건</strong><span>현재 조건에 표시</span></div>
  </div>
  <div class="ax-ledger-statrow">
  ${[["전체 공고",rows.length],["기간상 접수 가능",counts("open")],["접수 확인 필요",counts("verify")],["예상 일정",counts("forecast")],["지난 사업·마감",counts("closed")]].map(([k,v])=>`<div class="ax-ledger-stat"><span>${escape(k)}</span><strong>${v}</strong></div>`).join("")}
@@ -177,7 +204,7 @@ function draw(panel,live){
   <small>최근 실행: ${escape(health?.updatedAt?new Date(health.updatedAt).toLocaleString("ko-KR",{timeZone:"Asia/Seoul"}):"확인 중")} · 실패한 기관은 오래된 기록을 신규 공고로 간주하지 않습니다.</small>
  </section>
  <section class="ax-ledger-now"><div class="ax-ledger-section-title"><h3>지금 검토할 공고</h3><small>기간상 신청 가능 공고 · 실제 접수 및 신청 자격은 원문 재확인</small></div>
- <div class="ax-ledger-nowgrid">${now.length?now.map(r=>`<article class="ax-ledger-nowcard"><span>마감 ${escape(r.deadline||"확인")} · ${escape(r.organization)}</span>${aLink(r,escape(r.title))}<small>${escape(r.mode)} · ${r.score}점</small>${window.AXOOSupportPipeline?.buttonFor(r)||""}</article>`).join(""):`<p class="ax-ledger-empty">현재 접수 기간이 확인된 공고가 없습니다. 아래 원장에서 예상·참고 공고를 확인하세요.</p>`}</div></section>
+ <div class="ax-ledger-nowgrid">${now.length?now.map(r=>`<article class="ax-ledger-nowcard"><span>마감 ${escape(r.deadline||"확인")} · ${escape(r.organization)}</span>${aLink(r,escape(r.title))}<small>${escape(r.mode)} · ${r.score}점</small>${window.AXOOSupportPipeline?.buttonFor(r)||""}</article>`).join(""):`<p class="ax-ledger-empty">현재 접수 기간이 확인된 공고가 없습니다. 아래 목록에서 예상·참고 공고를 확인하세요.</p>`}</div></section>
  <section class="ax-ledger-controls" aria-label="지원사업 필터">
  ${chipRow("사업연도","year",[...allOption,...years.map(x=>[x,x+"년"])],rows)}
  ${chipRow("지역","region",[...allOption,["전국","전국"],["서울","서울"],["기타","경기·인천·기타"]],rows)}
@@ -188,40 +215,44 @@ function draw(panel,live){
   ${selectControl("type","사업 유형",[...allOption,...types])}
   ${selectControl("level","기관 구분",[...allOption,...["국가","광역","기초","민간"].map(x=>[x,x])])}
   ${selectControl("sort","정렬",[["STATUS","현재 검토 우선"],["YEAR","사업연도 최신순"],["DEADLINE","마감일 빠른순"],["NEWEST","자동 수집 최신순"],["AMOUNT","개별 지원액 큰순(추출값)"],["FIT","AXOO 적합도순(자동 수집)"]])}
+   <button type="button" class="ax-ledger-closed-toggle ${FILTERS.showClosed?"is-active":""}" data-ledger-closed-toggle aria-pressed="${FILTERS.showClosed}">${FILTERS.showClosed?"마감 공고 숨기기":"마감 공고 보기"} <small>${counts("closed")}</small></button>
   <label class="ax-ledger-search">검색<input data-ledger-query type="search" autocomplete="off" placeholder="기관·사업·지원규모·대상·참여 방식" value="${escape(FILTERS.query)}"></label>
   <button type="button" data-ledger-reset class="ax-ledger-reset">초기화</button>
  </div>
  </section>
  <div class="ax-ledger-results"><strong>검색 결과 <b>${displayed.length}</b>건</strong><small>자동 수집 ${displayed.filter(x=>x.kind==="live").length}건 · 참고자료 ${displayed.filter(x=>x.kind==="reference").length}건 · 자격 자동분류 ${displayed.filter(x=>x.review).length}건 · 첨부 분석 ${displayed.filter(x=>x.documents?.status==="parsed").length}건</small></div>
- <div class="ax-ledger-tablebox"><table class="ax-ledger-table"><thead><tr><th>사업연도</th><th>상태</th><th>주관 기관</th><th>사업명</th><th>유형</th><th>접수·공고 기간</th><th>지원 규모·내용</th><th>지원 대상</th><th>참여 방식 / 연계 메모</th><th>AXOO 점수</th><th>지원 관리</th></tr></thead>
+ <div class="ax-ledger-tablebox"><table class="ax-ledger-table"><thead><tr><th>사업연도</th><th>상태</th><th>주관 기관</th><th>사업명</th><th>유형</th><th>접수·공고 기간</th><th>지원 규모·내용</th><th>지원 대상</th><th>참여 방식 / 연계 메모</th><th>AXOO 점수</th><th>내 관심 공고</th></tr></thead>
  <tbody>${displayed.length?displayed.map(rowHtml).join(""):`<tr><td colspan="11" class="ax-ledger-empty">검색 조건에 맞는 공고가 없습니다. 필터를 줄여보세요.</td></tr>`}</tbody></table></div>
  <div class="ax-ledger-notes"><p><strong>자료 구분:</strong> 자동 수집은 KAMS·ARKO·KCDF·KOCCA 및 지역 공식 기관 홈페이지에서 수집한 공고이며, 참고자료는 사용자 제공 <em>시각예술 지원사업 2025–2026</em>(2026.10.14 기준)에서 가져온 과거·예상 공고입니다. 참고자료는 원문·현재 일정 재검증 전이며 ‘예상 일정’은 확정 공고가 아닙니다.</p>
  <p><strong>자격·점수:</strong> ‘법인·단체 검토’는 신청 가능 확정이 아닙니다. 참여 방식은 공고 본문·참고 메모 기반의 분류이며 반드시 신청 주체, 업력, 소재지 및 협약 조건을 확인하세요. 적합도 점수는 자동 수집 공고에만 제공됩니다.</p>
- <p>${referenceError?"참고 원장을 불러오지 못했습니다. 새로고침 후 다시 확인하세요.":!reference?"참고 원장을 불러오는 중입니다…":"참고 공고는 실시간 수집과 구분 표시됩니다."}</p></div>
+  <p>${referenceError?"참고 공고 목록을 불러오지 못했습니다. 새로고침 후 다시 확인하세요.":!reference?"참고 공고 목록을 불러오는 중입니다…":"참고 공고는 실시간 수집과 구분 표시됩니다."}</p></div>
  </section>`;
+ updateSummaryKpis(displayed);
  window.AXOOSupportPipeline?.render(panel,rows,()=>draw(panel,live));
 }
 function attach(panel,live){
  if(hooked.has(panel))return;
  hooked.add(panel);
  panel.addEventListener("click",event=>{
- const btn=event.target.closest("[data-ledger-group],[data-ledger-reset]");if(!btn||!panel.contains(btn))return;
- if(btn.hasAttribute("data-ledger-reset"))Object.keys(FILTERS).forEach(k=>FILTERS[k]=k==="sort"?"STATUS":"전체"),FILTERS.query="";
- else FILTERS[btn.dataset.ledgerGroup]=btn.dataset.ledgerValue;
- store();draw(panel,live);
+ const btn=event.target.closest("[data-ledger-group],[data-ledger-reset],[data-ledger-closed-toggle]");if(!btn||!panel.contains(btn))return;
+ if(btn.hasAttribute("data-ledger-reset"))Object.assign(FILTERS,{year:"전체",type:"전체",region:"전체",status:"전체",mode:"전체",level:"전체",source:"전체",sort:"STATUS",query:"",showClosed:false});
+ else if(btn.hasAttribute("data-ledger-closed-toggle")){FILTERS.showClosed=!FILTERS.showClosed;if(!FILTERS.showClosed&&FILTERS.status==="closed")FILTERS.status="전체";}
+ else {FILTERS[btn.dataset.ledgerGroup]=btn.dataset.ledgerValue;if(btn.dataset.ledgerGroup==="status"&&btn.dataset.ledgerValue==="closed")FILTERS.showClosed=true;}
+ store();draw(panel,liveByPanel.get(panel)||live);
  });
  panel.addEventListener("change",event=>{
  const el=event.target.closest("[data-ledger-select]");if(!el)return;
- FILTERS[el.dataset.ledgerSelect]=el.value;store();draw(panel,live);
+ FILTERS[el.dataset.ledgerSelect]=el.value;store();draw(panel,liveByPanel.get(panel)||live);
  });
  panel.addEventListener("input",event=>{
  const el=event.target.closest("[data-ledger-query]");if(!el)return;
- const cursor=el.selectionStart;FILTERS.query=el.value;store();draw(panel,live);
+ const cursor=el.selectionStart;FILTERS.query=el.value;store();draw(panel,liveByPanel.get(panel)||live);
  const replacement=panel.querySelector("[data-ledger-query]");if(replacement){replacement.focus();if(cursor!==null)replacement.setSelectionRange(cursor,cursor)}
  });
 }
 window.AXOOSupportLedger={
  render(panel,live){
+   liveByPanel.set(panel,Array.isArray(live)?live:[]);
    attach(panel,live);
    draw(panel,live);
    if(health===null&&!healthPending){
@@ -230,6 +261,7 @@ window.AXOOSupportLedger={
    if(reference===null&&!pending){
      pending=fetch(REF_URL,{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("Reference load "+r.status);return r.json()}).then(x=>{if(!Array.isArray(x.rows))throw Error("Reference invalid");reference=x;draw(panel,live)}).catch(e=>{referenceError=true;console.warn("[AXOO 04] support ledger reference fetch failed",e);draw(panel,live)});
    }
- }
+  },
+  refreshSummary(){updateSummaryKpis(build(lastLive).filter(matches).sort(comparator));}
 };
 })();

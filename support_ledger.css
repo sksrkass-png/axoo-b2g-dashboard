@@ -35,7 +35,10 @@
 .ax-ledger-bottomcontrols{border-top:1px solid var(--ax-line);padding-top:12px;display:grid;grid-template-columns:1.1fr .8fr 1.4fr 2fr auto;gap:8px;align-items:end;}
 .ax-ledger-select,.ax-ledger-search{display:flex;flex-direction:column;gap:5px;font-size:10.5px;font-weight:700;color:#566275;min-width:0;}
 .ax-ledger-select select,.ax-ledger-search input{width:100%;font:inherit;font-size:12px;font-weight:500;min-width:0;background:#fff;border:1px solid #cfd7e2;border-radius:8px;padding:8px 9px;color:#263346;min-height:36px;}
-.ax-ledger-reset{border:1px solid #cfd7e2;border-radius:8px;background:#f8f9fb;font-size:12px;font-weight:700;min-height:36px;padding:8px 11px;cursor:pointer;color:#445469;}
+.ax-ledger-reset,.ax-ledger-closed-toggle{border:1px solid #cfd7e2;border-radius:8px;background:#f8f9fb;font-size:12px;font-weight:700;min-height:36px;padding:8px 11px;cursor:pointer;color:#445469;white-space:nowrap;}
+.ax-ledger-closed-toggle{border-color:#d8b981;background:#fff9ed;color:#80551b;}
+.ax-ledger-closed-toggle small{font-size:10px;opacity:.7;margin-left:2px;}
+.ax-ledger-closed-toggle.is-active{border-color:#8d672c;background:#8d672c;color:#fff;}
 .ax-ledger-results{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin:17px 2px 8px;}
 .ax-ledger-results strong{font-size:13px;}
 .ax-ledger-results b{color:var(--ax-blue);}
@@ -77,9 +80,9 @@
 .ax-ledger-source.is-failed{background:#fceded;color:#923636;border-color:#efc7c7}
 .ax-ledger-source.is-partial{background:#fff4df;color:#906019;border-color:#ecd7b0}
 .ax-ledger-source-status>small{font-size:10.5px;color:#5d7082}
-.ax-ledger-bottomcontrols{grid-template-columns:1fr 1.05fr .8fr 1.25fr 2fr auto}
+.ax-ledger-bottomcontrols{grid-template-columns:1fr 1.05fr .8fr 1.25fr auto 2fr auto}
 @media(max-width:1120px){.ax-ledger-bottomcontrols{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:640px){.ax-ledger-bottomcontrols{grid-template-columns:repeat(2,minmax(0,1fr))}.ax-ledger-source-status{padding:11px}}
+@media(max-width:640px){.ax-ledger-bottomcontrols{grid-template-columns:repeat(2,minmax(0,1fr))}.ax-ledger-source-status{padding:11px}.ax-ledger-closed-toggle{grid-column:span 2}.ax-ledger-reset{grid-column:span 2}}
 
 /* P0 applicant evidence and P1 linked-document audit */
 .ax-ledger-evidence{margin-top:9px;border-top:1px solid #dee6ed;padding-top:7px;white-space:normal}

@@ -23,12 +23,10 @@ const row={id:"live-test-01",title:"2027 전시 기획 지원",organization:"테
 const ref={id:"reference-002",title:"2025 예상 공고",organization:"참고 기관",kind:"reference",deadline:"",url:""};
 function render(){api.render(host,[row,ref],render)}
 render();
-assert(added.at(-1).includes("브라우저 임시 지원관리"));
-assert(added.at(-1).includes("Airtable 공동 지원관리"));
-assert(added.at(-1).includes("applM2n5kScusEfYr"));
-assert(added.at(-1).includes("paga5K65AZi8SHJIi"),"P5 shared Airtable inbox must be linked");
-assert(added.at(-1).includes("pag6YNkNTdWNaIFrV"),"P5 policy settings must be linked");
-assert.match(api.buttonFor(row),/검토 등록/);
+assert(added.at(-1).includes("내 관심 공고"));
+assert(added.at(-1).includes("지금 사용하는 브라우저에만 저장"));
+assert(!added.at(-1).includes("Airtable"),"04 should stay inside the dashboard");
+assert.match(api.buttonFor(row),/내 관심 공고/);
 const addButton={dataset:{p2Add:row.id},hasAttribute:(x)=>x==="data-p2-add"};
 listeners.click({target:{closest:()=>addButton}});
 assert.equal(api.getSnapshot().length,1);

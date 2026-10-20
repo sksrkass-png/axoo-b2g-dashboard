@@ -1,13 +1,6 @@
 (function P2Module(){
 "use strict";
 const STORAGE="axoo_b2g_support_pipeline_p2_v1", VERSION=1;
-const AIRTABLE_BASE="https://airtable.com/applM2n5kScusEfYr";
-const AIRTABLE_CANDIDATES="https://airtable.com/applM2n5kScusEfYr/pag9HMvdDhUYq7ORu";
-const AIRTABLE_DIRECTOR="https://airtable.com/applM2n5kScusEfYr/pagL4ZaUaOndFiVoS";
-const AIRTABLE_OKR="https://airtable.com/applM2n5kScusEfYr/pagqzuJ2xAZRvWhKI";
-const AIRTABLE_WEEKLY="https://airtable.com/applM2n5kScusEfYr/pagyPm1Iy0f8v9r19";
-const AIRTABLE_ALERTS="https://airtable.com/applM2n5kScusEfYr/paga5K65AZi8SHJIi";
-const AIRTABLE_ALERT_SETTINGS="https://airtable.com/applM2n5kScusEfYr/pag6YNkNTdWNaIFrV";
 const STATUS=[["INTEREST","관심 등록"],["ELIGIBILITY","적격성 검토"],["DECIDED","지원 결정"],["PREPARING","서류 준비"],["INTERNAL_REVIEW","내부 검토"],["SUBMITTED","제출 완료"],["AWAITING","결과 대기"],["AWARDED","선정"],["DECLINED","미선정"],["ON_HOLD","보류"]];
 const TASKS=["원문·신청자격 확인","지원 여부 결정","증빙·제출서류 확보","신청서·예산서 작성","제출·접수증 보관"];
 const name=x=>STATUS.find(a=>a[0]===x)?.[1]||"관심 등록";
@@ -81,7 +74,7 @@ function board(){
  <td>${escape(v.deadline||"미정")}<small>${escape(days(v.deadline))}</small></td>
  <td><div class="ax-p2-progress"><i style="width:${v.progress}%"></i></div>${v.progress}%</td>
  <td>${escape(v.nextAction||"미입력")}</td>
- <td><button data-p2-edit="${escape(v.id)}" type="button">관리</button></td></tr>`).join("")||`<tr><td colspan="8" class="ax-p2-empty">등록된 공고가 없습니다. 하단 공고의 ‘검토 등록’을 눌러 추가하세요.</td></tr>`}</tbody></table></div>`;
+ <td><button data-p2-edit="${escape(v.id)}" type="button">관리</button></td></tr>`).join("")||`<tr><td colspan="8" class="ax-p2-empty">저장한 관심 공고가 없습니다. 하단의 ‘내 관심 공고’ 버튼으로 추가하세요.</td></tr>`}</tbody></table></div>`;
 }
 function form(){
  const v=records[selected];if(!v)return"";
@@ -101,7 +94,7 @@ function form(){
  <fieldset><legend>지원 준비 체크리스트</legend><div class="ax-p2-tasks">${TASKS.map((t,i)=>`<label><input type="checkbox" name="task${i}" ${v.tasks[i].done?"checked":""}>${escape(t)}</label>`).join("")}</div></fieldset>
  <div class="ax-p2-actions"><button type="submit" class="ax-p2-save">변경사항 저장</button>
  ${link(v.sourceUrl)?`<a target="_blank" rel="noopener noreferrer" href="${escape(v.sourceUrl)}">공식 공고 열기 ↗</a>`:""}
- <button type="button" data-p2-remove="${escape(v.id)}">관리 목록에서 제외</button></div>
+ <button type="button" data-p2-remove="${escape(v.id)}">내 관심 공고에서 삭제</button></div>
  ${recent.length?`<div class="ax-p2-history"><b>최근 변경 이력</b>${recent.map(h=>`<p>${escape(h.at.slice(0,10))} · ${escape(h.note)}</p>`).join("")}</div>`:""}
  </form>`;
 }
@@ -110,14 +103,14 @@ function draw(){
  const anchor=panel.querySelector(".ax-ledger-now");if(!anchor)return;
  panel.querySelector(".ax-p2")?.remove();
  const section=document.createElement("section");section.className="ax-p2";section.id="axooSupportPipeline";
- section.innerHTML=`<div class="ax-p21-shared"><div><strong>👥 P2.1 · Airtable 공동 지원관리</strong><p>회사 팀원이 함께 관리하는 DB입니다. ‘05 자동수집 공고 후보’에서 검토 대상으로 선택하면, Airtable 자동화 활성화 후 공동 지원관리로 전환됩니다.</p></div><div class="ax-p21-links"><a href="${AIRTABLE_CANDIDATES}" target="_blank" rel="noopener noreferrer">공고 후보에서 선택 ↗</a><a href="${AIRTABLE_OKR}" target="_blank" rel="noopener noreferrer">📊 디렉터 KPI·OKR ↗</a><a href="${AIRTABLE_WEEKLY}" target="_blank" rel="noopener noreferrer">⏰ 이번주 마감·우선순위 ↗</a><a href="${AIRTABLE_DIRECTOR}" target="_blank" rel="noopener noreferrer">디렉터 검토 원장 ↗</a><a href="${AIRTABLE_ALERTS}" target="_blank" rel="noopener noreferrer">🔔 신규·마감 알림함 ↗</a><a href="${AIRTABLE_ALERT_SETTINGS}" target="_blank" rel="noopener noreferrer">알림 설정 ↗</a></div></div><div class="ax-p2-heading"><span>AXOO / P2 · BROWSER-LOCAL BACKUP</span><h3>⭐ 브라우저 임시 지원관리</h3>
- <p>관심 → 적격성 검토 → 지원 결정 → 서류 준비 → 제출 → 결과 관리. <b>현재 브라우저에만 저장됩니다.</b> 팀원·다른 기기에 자동 동기화되지 않으므로 JSON 내보내기/가져오기로 백업·전달해 주세요.</p></div>
+ section.innerHTML=`<div class="ax-p2-heading"><span>AXOO / MY INTEREST</span><h3>⭐ 내 관심 공고</h3>
+ <p>관심 있는 공고를 저장하고 검토 단계·담당자·마감일을 기록할 수 있습니다. <b>이 목록은 지금 사용하는 브라우저에만 저장됩니다.</b> 다른 기기나 팀원과 자동으로 공유되지 않으므로 필요하면 JSON 백업을 내려받아 보관하세요.</p></div>
  ${notice?`<p class="ax-p2-notice" role="status">${escape(notice)}</p>`:""}
  ${board()}${form()}`;
  anchor.insertAdjacentElement("beforebegin",section);
 }
 function edit(id){
- const r=rows.get(id);if(!records[id]&&r){records[id]=snapshot(r);notice="검토 목록에 등록했습니다. 현재 브라우저에만 저장됩니다.";save()}
+ const r=rows.get(id);if(!records[id]&&r){records[id]=snapshot(r);notice="내 관심 공고에 추가했습니다. 이 브라우저에만 저장됩니다.";save()}
  if(!records[id]){notice="해당 공고의 저장기록이 없습니다.";draw();return}
  selected=id;draw();
  panel.querySelector(".ax-p2-edit")?.scrollIntoView({behavior:"smooth",block:"nearest"});
@@ -138,14 +131,14 @@ function exportCsv(){
 function exportJson(){
  const data=JSON.stringify({format:"AXOO_P2",version:VERSION,exportedAt:timestamp(),records:Object.values(records)},null,2);
  download(data,"application/json;charset=utf-8","AXOO_support_pipeline_"+timestamp().slice(0,10)+".json");
- notice="이 브라우저의 지원관리 기록을 JSON 파일로 내보냈습니다.";draw();
+ notice="이 브라우저의 내 관심 공고를 JSON 파일로 내보냈습니다.";draw();
 }
 async function importJson(file){
  if(!file)return;
  if(file.size>1500000){notice="파일 용량은 1.5MB 이하여야 합니다.";draw();return}
  try{
   const data=JSON.parse(await file.text());
-  if(data.format!=="AXOO_P2"||data.version!==VERSION||!Array.isArray(data.records)||data.records.length>600)throw Error("지원관리 파일 형식이 맞지 않습니다.");
+  if(data.format!=="AXOO_P2"||data.version!==VERSION||!Array.isArray(data.records)||data.records.length>600)throw Error("내 관심 공고 백업 파일 형식이 맞지 않습니다.");
   let accepted=0;
   for(const x of data.records){
    if(typeof x?.id!=="string"||!/^(live-|reference-)/.test(x.id))continue;
@@ -167,8 +160,8 @@ function listen(host){
   if(b.hasAttribute("data-p2-export")){exportJson();return}
   if(b.hasAttribute("data-p2-csv")){exportCsv();return}
   if(b.hasAttribute("data-p2-remove")){
-   if(!window.confirm("이 브라우저에 저장된 지원관리 기록을 삭제할까요?"))return;
-   delete records[b.dataset.p2Remove];selected="";save();notice="관리 목록에서 제외했습니다.";callback?.();return;
+   if(!window.confirm("이 브라우저에 저장된 관심 공고를 삭제할까요?"))return;
+   delete records[b.dataset.p2Remove];selected="";save();notice="내 관심 공고에서 삭제했습니다.";callback?.();return;
   }
  });
  host.addEventListener("change",async e=>{
@@ -198,12 +191,12 @@ function listen(host){
   v.updatedAt=timestamp();
   v.history.push({at:v.updatedAt,note:prev===v.status?"진척 사항 수정":`${name(prev)} → ${name(v.status)}`});
   v.history=v.history.slice(-25);
-  save();notice="지원관리 내용을 저장했습니다.";callback?.();
+  save();notice="내 관심 공고 내용을 저장했습니다.";callback?.();
  });
 }
 records=read();
 window.AXOOSupportPipeline={
- buttonFor(r){return `<button type="button" class="ax-p2-row-add" data-p2-add="${escape(r.id)}">${records[r.id]?"✎ 로컬 "+escape(name(records[r.id].status)):"+ 로컬 검토 등록"}</button>`},
+ buttonFor(r){return `<button type="button" class="ax-p2-row-add" data-p2-add="${escape(r.id)}">${records[r.id]?"✎ 내 관심 공고 · "+escape(name(records[r.id].status)):"+ 내 관심 공고"}</button>`},
  render(host,list,redraw){panel=host;callback=redraw;rows=new Map((list||[]).map(x=>[x.id,x]));listen(host);syncSource();draw()},
  getSnapshot(){return Object.values(records).map(x=>({id:x.id,status:x.status,owner:x.owner,deadline:x.deadline,progress:x.progress}))},
  getStorageInfo(){return {storage:"browser-local",key:STORAGE,count:Object.keys(records).length}}

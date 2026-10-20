@@ -9,6 +9,8 @@ on:
       - "support_ledger.css"
       - "support_pipeline.js"
       - "support_pipeline.css"
+      - "style.css"
+      - "dashboard_ui_update.js"
       - "scripts/test_support_pipeline.js"
       - "scripts/sync_airtable_support_candidates.js"
       - "scripts/test_airtable_candidate_sync.js"
@@ -38,6 +40,7 @@ jobs:
           node --check support_ledger.js
           node --check support_pipeline.js
           node --check dashboard_priority_update.js
+          node --check dashboard_ui_update.js
       - name: Verify annual grant ledger
         run: node scripts/test_support_ledger.js
       - name: Verify P2 application management
@@ -46,5 +49,5 @@ jobs:
         run: node scripts/test_airtable_candidate_sync.js
       - name: Verify P5 grant notifications
         run: node scripts/test_support_alerts.js
-      - name: Verify P6 protected director KPI navigation
+      - name: Verify dashboard-only support UX and KPI delegation
         run: node scripts/test_b2g_director_dashboard.js

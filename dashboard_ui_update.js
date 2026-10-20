@@ -1479,25 +1479,50 @@
 
   function updateToday() {
 
+    const supportTab =
+      document.querySelector(
+        '.tab-button[data-tab="support"].active'
+      );
+
+    if (
+      supportTab &&
+      window.AXOOSupportLedger &&
+      typeof window.AXOOSupportLedger.refreshSummary ===
+        "function"
+    ) {
+      window.AXOOSupportLedger.refreshSummary();
+      return;
+    }
+
+    const caption =
+      document.querySelector(
+        ".today-panel .section-caption"
+      );
+
+    setText(
+      caption,
+      "선택한 카테고리를 기준으로 표시합니다."
+    );
+
     const labels = [
 
       [
-        "진행중",
-        "ACTIVE"
+        "진행 중",
+        "OPEN"
       ],
 
       [
-        "마감임박",
+        "7일 내 마감",
         "D-7"
       ],
 
       [
-        "HIGH",
-        "PRIORITY"
+        "우선 검토",
+        "HIGH FIT"
       ],
 
       [
-        "검토중",
+        "확인 필요",
         "REVIEW"
       ]
     ];
