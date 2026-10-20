@@ -104,6 +104,7 @@ function extractDocumentSnippets(text,url){
   const source=String(text||"");
   const keys=[["지원 자격 문구",/(지원대상|신청자격|공모대상|응모자격)/],
               ["지원 규모 문구",/(지원규모|지원금액|지원금|총\s*사업비)/],
+              ["지원 내용 문구",/(지원내용|지원혜택|사업내용|공모내용)/],
               ["제출서류 문구",/(제출서류|필수\s*서류|사업계획서)/],
               ["부담·제한 문구",/(자부담|대응자금|소재지|업력)/]];
   const found=[];
@@ -172,9 +173,14 @@ async function main(){
     const {key,entry}=docFromCache(row,store.items);
     const timestamp=Date.parse(entry?.reviewedAt||"");
     const fresh=Number.isFinite(timestamp)&&Date.now()-timestamp<CACHE_HOURS*3600000;
-    if(!fresh&&attempted<LIMIT&&row.verificationStatus!=="source_unavailable"&&row.verificationStatus!=="stale_previous_run"){
+    // Once only: refresh old parsed document caches to obtain a dedicated support-content snippet.
+    const missingContentSnippet=entry?.status==="parsed"&&entry.snippetVersion!==2&&
+      !entry.snippets?.some(s=>s.label==="지원 내용 문구")&&
+      !(row.supportDetails||"").trim();
+    if((!fresh||missingContentSnippet)&&attempted<LIMIT&&row.verificationStatus!=="source_unavailable"&&row.verificationStatus!=="stale_previous_run"){
       const scan=await auditOne(row);
-      store.items[key]=scan;
+      if(scan.status==="parsed"||!entry)store.items[key]={...scan,snippetVersion:2};
+      else store.items[key]={...entry,snippetVersion:2,refreshWarning:scan.status};
       attempted++;if(scan.status==="parsed")parsed++;
       console.log("P1",row.sourceCode,row.id,scan.status,"files",scan.files.length);
     }
