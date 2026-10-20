@@ -20,10 +20,10 @@ function getSections(value){
  for(const match of text.matchAll(new RegExp(labelRE.source,"gi"))){
   const label=match[1],start=match.index+match[0].length;
   if(label==="지원금"&&/^(?:액|융자)/.test(text.slice(start)))continue;
-  matches.push({label,start,end:start});
+  matches.push({label,start,offset:match.index});
  }
  for(let i=0;i<matches.length;i++){
-  const end=i+1<matches.length?matches[i+1].start-matches[i+1].label.length:text.length;
+  const end=i+1<matches.length?matches[i+1].offset:text.length;
   matches[i].text=text.slice(matches[i].start,Math.max(matches[i].start,end))
    .replace(/^\s*[:：]\s*/,"").replace(/^\s*(?:ㅇ|○|●|■|·|[-–])\s*/,"").trim();
  }
