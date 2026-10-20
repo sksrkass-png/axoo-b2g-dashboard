@@ -1,59 +1,39 @@
 "use strict";
 
+const FIT_SCORING_VERSION = "AXOO_FIT_V2_2026_10";
+
 const BUSINESS_AREAS = [
   {
     code: "exhibition_space",
     label: "전시·공간",
-    keywords: [
-      "전시", "전시기획", "전시 기획", "공간", "공간디자인", "공간 디자인",
-      "아트페어", "갤러리", "팝업", "쇼케이스", "박람회"
-    ]
+    keywords: ["전시", "전시 기획", "전시기획", "공간디자인", "공간 디자인", "아트페어", "갤러리", "팝업", "박람회", "작가"]
   },
   {
     code: "public_art_design",
     label: "공공미술·디자인",
-    keywords: [
-      "공공미술", "공공 미술", "공공예술", "공공 예술", "조형", "조형물",
-      "설치미술", "설치 미술", "벽화", "공예", "공공디자인", "공공 디자인"
-    ]
+    keywords: ["공공미술", "공공 미술", "조형물", "설치미술", "설치 미술", "벽화", "공예", "공공 디자인", "공공디자인"]
   },
   {
     code: "digital_media",
     label: "미디어아트·기술",
-    keywords: [
-      "미디어아트", "미디어 아트", "미디어파사드", "미디어 파사드", "실감콘텐츠",
-      "실감 콘텐츠", "인터랙티브", "예술기술", "예술 기술", "문화기술", "문화 기술",
-      "인공지능", "ai", "xr", "vr", "ar", "메타버스", "신기술"
-    ]
+    keywords: ["미디어아트", "미디어 아트", "미디어파사드", "미디어 파사드", "실감콘텐츠", "실감 콘텐츠", "인터렉티브", "인터랙티브", "AI", "XR", "VR", "AR"]
   },
   {
     code: "content_brand",
     label: "콘텐츠 제작·브랜딩",
-    keywords: [
-      "콘텐츠", "콘텐츠 제작", "제작지원", "제작 지원", "브랜드", "브랜딩",
-      "디자인개발", "디자인 개발", "문화상품", "문화 상품", "제품개발", "제품 개발",
-      "영상", "홍보", "프로모션"
-    ]
+    keywords: ["IP", "시각콘텐츠", "시각 콘텐츠", "브랜딩", "브랜드", "디자인 개발", "디자인개발", "문화 상품", "문화상품", "영상 미술", "영상미술", "프로모션"]
   },
   {
     code: "business_distribution",
     label: "사업화·유통",
-    keywords: [
-      "사업화", "유통", "전시유통", "전시 유통", "창업", "예술기업", "예술 기업",
-      "예술산업", "예술 산업", "크라우드펀딩", "투자", "판로", "마케팅"
-    ]
+    keywords: ["사업화", "전시유통", "전시 유통", "예술기업", "예술 기업", "예술경영", "예술 경영", "예술마케팅", "예술 마케팅", "투자", "판로", "개척", "확장"]
   },
   {
     code: "collaboration_global",
     label: "협업·해외진출",
-    keywords: [
-      "협업", "콜라보레이션", "기업협력", "기업 협력", "기업연계", "기업 연계",
-      "수요기업", "수요 기업", "공급기업", "공급 기업", "해외진출", "해외 진출",
-      "글로벌", "국제교류", "국제 협력", "파트너사"
-    ]
+    keywords: ["협업", "콜라보레이션", "기업협력", "기업 협력", "수요기업", "수요 기업", "글로벌 미술시장", "글로벌미술시장", "국제교류", "국제 교류", "작가 육성", "작가육성"]
   }
 ];
-
 const HARD_EXCLUDE_PATTERNS = [
   /선정\s*결과/i,
   /결과\s*발표/i,
@@ -67,56 +47,25 @@ const HARD_EXCLUDE_PATTERNS = [
   /후보자?\s*추천/i
 ];
 
-const COMPANY_ELIGIBILITY_PATTERNS = [
-  /기업/i,
-  /법인/i,
-  /사업자/i,
-  /단체/i,
-  /기관/i,
-  /컨소시엄/i
-];
-
-const INDIVIDUAL_ONLY_PATTERNS = [
-  /개인만\s*(?:신청|지원|참여)/i,
-  /개인에\s*한함/i,
-  /개인\s*예술가만/i
+const APPLICANT_ELIGIBILITY_PATTERNS = [
+  /개인/i, /기업/i, /법인/i, /사업자/i, /단체/i, /기관/i, /컨소시엄/i
 ];
 
 const DELIVERY_PATTERNS = [
-  /기획/i,
-  /제작/i,
-  /설치/i,
-  /운영/i,
-  /디자인/i,
-  /콘텐츠/i,
-  /프로젝트/i
+  /기획/i, /제작/i, /설치/i, /운영/i, /시각\s*예술/i,
+  /에이전시/i, /디자인/i, /프로젝트/i, /예산/i, /글로벌/i
 ];
 
 const COMMERCIAL_PATTERNS = [
-  /지원금/i,
-  /사업화/i,
-  /유통/i,
-  /판로/i,
-  /투자/i,
-  /해외/i,
-  /마케팅/i,
-  /프로모션/i
+  /지원금/i, /사업화/i, /유통/i, /판로/i, /투자/i,
+  /프로젝트/i, /해외\s*진출/i, /마케팅/i, /프로모션/i,
+  /지원/i, /육성/i
 ];
 
 const DOWNRANK_PATTERNS = [
-  /공연/i,
-  /연극/i,
-  /뮤지컬/i,
-  /무용/i,
-  /국악/i,
-  /음악/i,
-  /문학/i,
-  /웹툰/i,
-  /게임/i,
-  /애니메이션/i,
-  /방송/i,
-  /영화/i,
-  /출판/i
+  /공연/i, /연극/i, /뮤지컬/i, /무용/i, /국악/i,
+  /웹툰/i, /문학/i, /온라인\s*방송/i, /축제/i,
+  /출판/i, /유튜브/i, /대회/i
 ];
 
 function cleanText(value) {
@@ -266,7 +215,10 @@ function analyzeSupportProgram({
   detailText = "",
   eligibility = "",
   supportDetails = "",
-  sourceCode = ""
+  sourceCode = "",
+  documentReview = null,
+  analysisBasis = "",
+  analysisConfidence = ""
 } = {}) {
   // Full website text is not reliable scoring evidence; use explicit sections.
   const combined = cleanText([title, eligibility, supportDetails].join(" "));
@@ -274,23 +226,34 @@ function analyzeSupportProgram({
   const areas = classifyBusinessAreas(categorySource, title);
   const matchedKeywords = unique(areas.flatMap(area => area.keywords));
   const hardExcluded = hasAnyPattern(title, HARD_EXCLUDE_PATTERNS);
-  // Only positive eligibility statements can establish a plausible corporate applicant.
+  // P2 applicant assessment still determines *actual* corporate eligibility.
+  // This score only indicates that the notice states an applicant category (individual included).
   const eligibilityBody = cleanText(eligibility.replace(/^(?:지원대상|신청자격|지원자격|공모대상|신청대상|모집대상)\s*[:：]?/, ""));
+  const applicantEvidence = eligibilityBody.length >= 5 &&
+    !/^(전체|전국|모두|해당없음|상관없음)$/.test(eligibilityBody) &&
+    hasAnyPattern(eligibilityBody.slice(0, 260), APPLICANT_ELIGIBILITY_PATTERNS);
   const companyEligible = eligibilityBody.length >= 5 &&
-    hasAnyPattern(eligibilityBody.slice(0, 160), COMPANY_ELIGIBILITY_PATTERNS);
-  const individualOnly = hasAnyPattern(eligibility, INDIVIDUAL_ONLY_PATTERNS);
+    hasAnyPattern(eligibilityBody.slice(0, 160), [/기업/i, /법인/i, /사업자/i, /단체/i, /기관/i, /컨소시엄/i]);
+  const individualOnly = /개인만\s*(?:신청|지원|참여)|개인에\s*한함|개인\s*예술가만/.test(eligibilityBody);
   const deliveryMatches = countPatternMatches(combined, DELIVERY_PATTERNS);
   const commercialMatches = countPatternMatches(combined, COMMERCIAL_PATTERNS);
   const downrankMatches = countPatternMatches(`${title} ${supportDetails}`, DOWNRANK_PATTERNS);
-  const hasDetail = cleanText(detailText).length >= 90 &&
-    (cleanText(supportDetails).length >= 20 || eligibilityBody.length >= 16);
+  // A previously verified original HTML detail may no longer be cached as text.
+  // Preserve its analysis-grade evidence only when real, usable section text survives.
+  const hasUsefulSections = cleanText(supportDetails).length >= 20 || eligibilityBody.length >= 16;
+  const hasDetail = hasUsefulSections &&
+    (cleanText(detailText).length >= 90 ||
+      (analysisConfidence === "high" && analysisBasis === "상세 공고문"));
+  const files = Array.isArray(documentReview?.files) ? documentReview.files : [];
+  const hasAttachment = files.some(f => f && (f.url || f.status === "parsed" || f.status === "unsupported"))
+    || /^https?:\/\//i.test(documentReview?.documentUrl || "");
 
-  const relevance = Math.min(38, areas[0].code === "other" ? 8 : 20 + matchedKeywords.length * 3);
-  const eligibilityScore = individualOnly ? 0 : companyEligible ? 18 : 8;
-  const executionScore = Math.min(18, deliveryMatches * 4);
-  const businessScore = Math.min(16, commercialMatches * 3);
-  const evidenceScore = hasDetail ? 10 : 3;
-  const penalty = Math.min(55, downrankMatches * 22 + (individualOnly ? 25 : 0));
+  const relevance = Math.min(40, areas[0].code === "other" ? 8 : 20 + matchedKeywords.length * 3);
+  const eligibilityScore = applicantEvidence ? 20 : 10;
+  const executionScore = Math.min(20, deliveryMatches * 4);
+  const businessScore = Math.min(15, commercialMatches * 3);
+  const evidenceScore = hasDetail ? 5 : hasAttachment ? 2 : 0;
+  const penalty = Math.min(50, downrankMatches * 25);
 
   let score = relevance + eligibilityScore + executionScore + businessScore + evidenceScore - penalty;
   if (hardExcluded) score = Math.min(score, 35);
@@ -305,12 +268,12 @@ function analyzeSupportProgram({
 
   const evidence = [];
   if (areas[0].code !== "other") evidence.push(`${areas[0].label} 사업영역과 연결`);
-  if (companyEligible) evidence.push("기업·법인·단체 참여 단서(자격 재확인 필요)");
+  if (applicantEvidence) evidence.push("개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)");
   if (deliveryMatches) evidence.push("기획·제작·운영 수행역량 활용 가능");
   if (commercialMatches) evidence.push("사업화·유통·지원금 요소 확인");
-  if (individualOnly) evidence.push("개인 전용 가능성 있어 자격 재확인 필요");
+  if (individualOnly) evidence.push("개인 전용 가능성은 실제 법인 신청 자격에서 별도 확인");
   if (downrankMatches) evidence.push("AXOO 비핵심 장르 비중으로 감점");
-  if (!hasDetail) evidence.push("상세 본문 부족으로 보수적 평가");
+  if (!hasDetail) evidence.push(hasAttachment ? "상세 본문 부족 · 첨부파일 근거만 확인" : "공고 상세 근거 미확인");
 
   const reason = `${fitVerdict}: ${evidence.slice(0, 4).join(" · ") || "상세 자격과 수행범위 확인 필요"}`;
 
@@ -318,17 +281,18 @@ function analyzeSupportProgram({
     score,
     grade,
     fitVerdict,
+    scoringVersion: FIT_SCORING_VERSION,
     reason,
     matchedKeywords,
     businessArea: areas[0].code,
     businessAreaLabel: areas[0].label,
     businessAreas: areas.map(area => ({ code: area.code, label: area.label })),
     scoreBreakdown: [
-      { code: "relevance", label: "사업영역", score: relevance, maxScore: 38 },
-      { code: "eligibility", label: "지원자격", score: eligibilityScore, maxScore: 18 },
-      { code: "execution", label: "수행역량", score: executionScore, maxScore: 18 },
-      { code: "business", label: "사업성", score: businessScore, maxScore: 16 },
-      { code: "evidence", label: "상세근거", score: evidenceScore, maxScore: 10 },
+      { code: "relevance", label: "사업영역", score: relevance, maxScore: 40 },
+      { code: "eligibility", label: "지원자격", score: eligibilityScore, maxScore: 20 },
+      { code: "execution", label: "수행역량", score: executionScore, maxScore: 20 },
+      { code: "business", label: "사업성", score: businessScore, maxScore: 15 },
+      { code: "evidence", label: "상세근거", score: evidenceScore, maxScore: 5 },
       { code: "penalty", label: "감점", score: -penalty, maxScore: 0 }
     ],
     scoreReasons: evidence,
@@ -345,6 +309,7 @@ function analyzeSupportProgram({
 
 module.exports = {
   BUSINESS_AREAS,
+  FIT_SCORING_VERSION,
   analyzeSupportProgram,
   classifyBusinessAreas,
   extractSupportDetail,
