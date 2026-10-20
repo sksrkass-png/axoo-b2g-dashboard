@@ -1,6 +1,9 @@
 (function ledger(){
 "use strict";
 const REF_URL="data/support_ledger_reference.json";
+const REF_SCORES_URL="data/support_ledger_reference_scores.json";
+const REFERENCE_SCORE_VERSION="AXOO_FIT_V2_2026_10";
+let referenceScores=new Map(),referenceScoresError=false;
 const HEALTH_URL="data/support_collection_health.json";
 const TYPE={create:"창작·발표",curate:"전시기획",space:"공간·레지던시",public:"공공미술·건축미술",media:"미디어아트",fair:"페스티벌·아트페어",market:"유통·미술시장",intl:"해외진출",critic:"비평·매체",welfare:"생활·준비금",tech:"기술융합·AI",biz:"예술기업",bid:"입찰·용역"};
 const FILTERS={year:"전체",type:"전체",region:"전체",status:"전체",mode:"전체",level:"전체",source:"전체",sort:"STATUS",query:"",showClosed:false};
@@ -63,7 +66,14 @@ function fromLive(x){
  row.status=statusOf(row);return row;
 }
 function fromRef(x){
- const row={...x,kind:"reference",score:null,grade:"",startDate:"",excluded:false,confidence:"reference",verified:"2026.10.14 참고자료 · 실시간 검증 전"};
+ const grade=referenceScores.get(x.id);
+ const valid=grade&&grade.scoringVersion===REFERENCE_SCORE_VERSION&&grade.evaluationStatus==="provisional_reference_only"&&Number.isFinite(grade.score);
+ const row={...x,kind:"reference",score:valid?grade.score:null,grade:valid?grade.grade:"",
+  scoreBreakdown:valid&&Array.isArray(grade.scoreBreakdown)?grade.scoreBreakdown:[],
+  analysisBasis:valid?grade.analysisBasis:"참고자료 · 원문 미검증",
+  scoreReasons:valid?grade.scoreReasons:[],
+  startDate:"",excluded:false,confidence:"reference",
+  verified:"2026.10.14 참고자료 · 실시간 검증 전"};
  row.mode=participation(row.applicants,row.collaborationNote,null);
  row.status=statusOf(row);return row;
 }
@@ -113,13 +123,13 @@ function selectControl(group,label,options){return `<label class="ax-ledger-sele
 function aLink(r,txt){const u=safeUrl(r.url);return u?`<a href="${escape(u)}" target="_blank" rel="noopener noreferrer">${txt}</a>`:txt;}
 function shorten(s,n=160){const t=String(s||"").replace(/\s+/g," ").trim();return t.length>n?t.slice(0,n)+"…":t;}
 function rowHtml(r){
- const note=r.kind==="reference"?"참고자료":(r.confidence==="high"?"공식 출처 수집 · 신청자격 재확인":"자동 수집 · 근거 보완 필요");
+ const note=r.kind==="reference"?(r.score!=null?"참고자료 · 임시 채점":"참고자료 · 원문 미확인"):(r.confidence==="high"?"공식 출처 수집 · 신청자격 재확인":"자동 수집 · 근거 보완 필요");
  const evidence=r.review?.evidence||[];
  const constraints=r.review?.restrictions||[];
  const docFiles=r.documents?.files||[];
  const shortSummary=window.AXOOSupportSummary?.summarize(r)||{scale:"공고문 확인 필요",content:"공고문 확인 필요",eligibility:"공고문 확인 필요"};
  const scoring=Array.isArray(r.scoreBreakdown)?r.scoreBreakdown:[];
- const scoreDetails=r.kind==="live"&&scoring.length
+ const scoreDetails=scoring.length
    ?`<details class="ax-ledger-score-detail"><summary>배점 보기</summary><ul>${scoring.map(x=>`<li><span>${escape(x.label||"평가항목")}</span><strong>${escape((Number(x.score)||0)>0?"+":"")}${escape(Number(x.score)||0)}점</strong></li>`).join("")}</ul>
      <p>평가 근거: ${escape(r.analysisBasis||"자동 분석")} · 실제 신청 자격·선정 가능성은 별도 검토</p></details>`
    :"";
@@ -154,7 +164,7 @@ function rowHtml(r){
    <div class="ax-ledger-summary-line"><strong>✦ 신청자격</strong><span>${escape(shortSummary.eligibility)}</span></div>
  </td>
  <td class="ax-ledger-mode"><strong>${escape(r.mode)}</strong><small>${escape(r.kind==="live"?"자동 판별 · 자격 확정 아님":shorten(r.collaborationNote,100)||"참고 이력")}</small>${evidenceHtml}</td>
- <td class="ax-ledger-score">${r.score==null?"—":escape(r.score+"점")}<small>${escape(r.kind==="live"?r.grade:"미평가")}</small>${scoreDetails}</td>
+ <td class="ax-ledger-score">${r.score==null?"—":escape(r.score+"점")}<small>${escape(r.kind==="reference"?(r.score==null?"미평가":r.grade+" · 임시 평가"):r.grade)}</small>${scoreDetails}</td>
  <td class="ax-ledger-pipeline-action">${window.AXOOSupportPipeline?.buttonFor(r)||""}</td></tr>`;
 }
 function store(){try{window.localStorage.setItem(KEY,JSON.stringify(FILTERS))}catch(e){}}
@@ -225,7 +235,7 @@ function draw(panel,live){
   ${selectControl("source","수집 기관",[...allOption,...sources])}
   ${selectControl("type","사업 유형",[...allOption,...types])}
   ${selectControl("level","기관 구분",[...allOption,...["국가","광역","기초","민간"].map(x=>[x,x])])}
-  ${selectControl("sort","정렬",[["STATUS","현재 검토 우선"],["YEAR","사업연도 최신순"],["DEADLINE","마감일 빠른순"],["NEWEST","자동 수집 최신순"],["AMOUNT","개별 지원액 큰순(추출값)"],["FIT","AXOO 적합도순(자동 수집)"]])}
+  ${selectControl("sort","정렬",[["STATUS","현재 검토 우선"],["YEAR","사업연도 최신순"],["DEADLINE","마감일 빠른순"],["NEWEST","자동 수집 최신순"],["AMOUNT","개별 지원액 큰순(추출값)"],["FIT","AXOO 적합도순(임시 점수 포함)"]])}
    <button type="button" class="ax-ledger-closed-toggle ${FILTERS.showClosed?"is-active":""}" data-ledger-closed-toggle aria-pressed="${FILTERS.showClosed}">${FILTERS.showClosed?"마감 공고 숨기기":"마감 공고 보기"} <small>${counts("closed")}</small></button>
   <label class="ax-ledger-search">검색<input data-ledger-query type="search" autocomplete="off" placeholder="기관·사업·지원규모·대상·참여 방식" value="${escape(FILTERS.query)}"></label>
   <button type="button" data-ledger-reset class="ax-ledger-reset">초기화</button>
@@ -235,8 +245,8 @@ function draw(panel,live){
  <div class="ax-ledger-tablebox"><table class="ax-ledger-table"><thead><tr><th>사업연도</th><th>상태</th><th>주관 기관</th><th>사업명</th><th>유형</th><th>접수·공고 기간</th><th>지원 규모·내용</th><th>지원 대상</th><th>참여 방식 / 연계 메모</th><th>AXOO 점수</th><th>내 관심 공고</th></tr></thead>
  <tbody>${displayed.length?displayed.map(rowHtml).join(""):`<tr><td colspan="11" class="ax-ledger-empty">검색 조건에 맞는 공고가 없습니다. 필터를 줄여보세요.</td></tr>`}</tbody></table></div>
  <div class="ax-ledger-notes"><p><strong>자료 구분:</strong> 자동 수집은 KAMS·ARKO·KCDF·KOCCA 및 지역 공식 기관 홈페이지에서 수집한 공고이며, 참고자료는 사용자 제공 <em>시각예술 지원사업 2025–2026</em>(2026.10.14 기준)에서 가져온 과거·예상 공고입니다. 참고자료는 원문·현재 일정 재검증 전이며 ‘예상 일정’은 확정 공고가 아닙니다.</p>
- <p><strong>자격·점수:</strong> ‘법인·단체 검토’는 신청 가능 확정이 아닙니다. 참여 방식은 공고 본문·참고 메모 기반의 분류이며 반드시 신청 주체, 업력, 소재지 및 협약 조건을 확인하세요. 적합도 점수는 자동 수집 공고에만 제공되며, 점수 아래 ‘배점 보기’에서 자동 평가 근거를 확인할 수 있습니다.</p>
-  <p>${referenceError?"참고 공고 목록을 불러오지 못했습니다. 새로고침 후 다시 확인하세요.":!reference?"참고 공고 목록을 불러오는 중입니다…":"참고 공고는 실시간 수집과 구분 표시됩니다."}</p></div>
+ <p><strong>자격·점수:</strong> ‘법인·단체 검토’는 신청 가능 확정이 아닙니다. 참여 방식은 공고 본문·참고 메모 기반의 분류이며 반드시 신청 주체, 업력, 소재지 및 협약 조건을 확인하세요. AXOO FIT v2는 자동 수집 공고와 참고자료에 모두 적용합니다. 참고자료의 점수는 제목·짧은 요약만으로 계산한 ‘임시 평가’이며, 공고 원문 검증·법인 신청자격 확인과 무관합니다. 점수 아래 ‘배점 보기’에서 산출 근거를 확인하세요.</p>
+  <p>${referenceError?"참고 공고 목록을 불러오지 못했습니다. 새로고침 후 다시 확인하세요.":!reference?"참고 공고 목록을 불러오는 중입니다…":referenceScoresError?"임시 평가 점수 파일을 확인하지 못했습니다. 참고 공고는 원문 확인 전까지 미평가로 표시됩니다.":"참고 공고는 임시 점수와 원문 미검증 상태를 함께 표시합니다."}</p></div>
  </section>`;
  updateSummaryKpis(displayed);
  window.AXOOSupportPipeline?.render(panel,rows,()=>draw(panel,live));
@@ -270,7 +280,28 @@ window.AXOOSupportLedger={
     healthPending=fetch(HEALTH_URL,{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("Regional health unavailable");return r.json()}).then(x=>{health=x;draw(panel,live)}).catch(e=>{console.warn("[AXOO 04] regional collection health not loaded",e);draw(panel,live)});
    }
    if(reference===null&&!pending){
-     pending=fetch(REF_URL,{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("Reference load "+r.status);return r.json()}).then(x=>{if(!Array.isArray(x.rows))throw Error("Reference invalid");reference=x;draw(panel,live)}).catch(e=>{referenceError=true;console.warn("[AXOO 04] support ledger reference fetch failed",e);draw(panel,live)});
+     pending=fetch(REF_URL,{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("Reference load "+r.status);return r.json()}).then(async x=>{
+       if(!Array.isArray(x.rows))throw Error("Reference invalid");
+       reference=x;
+       try {
+         const result=await fetch(REF_SCORES_URL,{cache:"no-store"});
+         if(!result.ok)throw Error("Reference provisional score load "+result.status);
+         const rated=await result.json();
+         if(rated.scoringVersion!==REFERENCE_SCORE_VERSION||rated.sourceReferenceAsOf!==x.referenceAsOf||!Array.isArray(rated.rows)||rated.rows.length!==x.rows.length)
+           throw Error("Reference provisional scores stale or incomplete");
+         const byId=new Map(rated.rows.map(z=>[z.id,z]));
+         if(byId.size!==x.rows.length||x.rows.some(z=>!byId.has(z.id)))
+           throw Error("Reference provisional score ID mismatch");
+         if(rated.rows.some(z=>z.evaluationStatus!=="provisional_reference_only"||z.verified!==false||!Number.isFinite(z.score)||z.score>69||z.score<0))
+           throw Error("Reference provisional scores have invalid evidence state");
+         referenceScores=byId;
+         referenceScoresError=false;
+       } catch(err) {
+         referenceScoresError=true;
+         console.warn("[AXOO 04] reference provisional scoring unavailable; preserving original references",err);
+       }
+       draw(panel,live);
+     }).catch(e=>{referenceError=true;console.warn("[AXOO 04] support ledger reference fetch failed",e);draw(panel,live)});
    }
   },
   refreshSummary(){updateSummaryKpis(build(lastLive).filter(matches).sort(comparator));}
