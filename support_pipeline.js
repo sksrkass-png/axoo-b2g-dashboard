@@ -4,6 +4,8 @@ const STORAGE="axoo_b2g_support_pipeline_p2_v1", VERSION=1;
 const AIRTABLE_BASE="https://airtable.com/applM2n5kScusEfYr";
 const AIRTABLE_CANDIDATES="https://airtable.com/applM2n5kScusEfYr/pag9HMvdDhUYq7ORu";
 const AIRTABLE_DIRECTOR="https://airtable.com/applM2n5kScusEfYr/pagL4ZaUaOndFiVoS";
+const AIRTABLE_OKR="https://airtable.com/applM2n5kScusEfYr/pagqzuJ2xAZRvWhKI";
+const AIRTABLE_WEEKLY="https://airtable.com/applM2n5kScusEfYr/pagyPm1Iy0f8v9r19";
 const AIRTABLE_ALERTS="https://airtable.com/applM2n5kScusEfYr/paga5K65AZi8SHJIi";
 const AIRTABLE_ALERT_SETTINGS="https://airtable.com/applM2n5kScusEfYr/pag6YNkNTdWNaIFrV";
 const STATUS=[["INTEREST","관심 등록"],["ELIGIBILITY","적격성 검토"],["DECIDED","지원 결정"],["PREPARING","서류 준비"],["INTERNAL_REVIEW","내부 검토"],["SUBMITTED","제출 완료"],["AWAITING","결과 대기"],["AWARDED","선정"],["DECLINED","미선정"],["ON_HOLD","보류"]];
@@ -108,7 +110,7 @@ function draw(){
  const anchor=panel.querySelector(".ax-ledger-now");if(!anchor)return;
  panel.querySelector(".ax-p2")?.remove();
  const section=document.createElement("section");section.className="ax-p2";section.id="axooSupportPipeline";
- section.innerHTML=`<div class="ax-p21-shared"><div><strong>👥 P2.1 · Airtable 공동 지원관리</strong><p>회사 팀원이 함께 관리하는 DB입니다. ‘05 자동수집 공고 후보’에서 검토 대상으로 선택하면, Airtable 자동화 활성화 후 공동 지원관리로 전환됩니다.</p></div><div class="ax-p21-links"><a href="${AIRTABLE_CANDIDATES}" target="_blank" rel="noopener noreferrer">공고 후보에서 선택 ↗</a><a href="${AIRTABLE_DIRECTOR}" target="_blank" rel="noopener noreferrer">디렉터 검토 원장 ↗</a><a href="${AIRTABLE_ALERTS}" target="_blank" rel="noopener noreferrer">🔔 신규·마감 알림함 ↗</a><a href="${AIRTABLE_ALERT_SETTINGS}" target="_blank" rel="noopener noreferrer">알림 설정 ↗</a></div></div><div class="ax-p2-heading"><span>AXOO / P2 · BROWSER-LOCAL BACKUP</span><h3>⭐ 브라우저 임시 지원관리</h3>
+ section.innerHTML=`<div class="ax-p21-shared"><div><strong>👥 P2.1 · Airtable 공동 지원관리</strong><p>회사 팀원이 함께 관리하는 DB입니다. ‘05 자동수집 공고 후보’에서 검토 대상으로 선택하면, Airtable 자동화 활성화 후 공동 지원관리로 전환됩니다.</p></div><div class="ax-p21-links"><a href="${AIRTABLE_CANDIDATES}" target="_blank" rel="noopener noreferrer">공고 후보에서 선택 ↗</a><a href="${AIRTABLE_OKR}" target="_blank" rel="noopener noreferrer">📊 디렉터 KPI·OKR ↗</a><a href="${AIRTABLE_WEEKLY}" target="_blank" rel="noopener noreferrer">⏰ 이번주 마감·우선순위 ↗</a><a href="${AIRTABLE_DIRECTOR}" target="_blank" rel="noopener noreferrer">디렉터 검토 원장 ↗</a><a href="${AIRTABLE_ALERTS}" target="_blank" rel="noopener noreferrer">🔔 신규·마감 알림함 ↗</a><a href="${AIRTABLE_ALERT_SETTINGS}" target="_blank" rel="noopener noreferrer">알림 설정 ↗</a></div></div><div class="ax-p2-heading"><span>AXOO / P2 · BROWSER-LOCAL BACKUP</span><h3>⭐ 브라우저 임시 지원관리</h3>
  <p>관심 → 적격성 검토 → 지원 결정 → 서류 준비 → 제출 → 결과 관리. <b>현재 브라우저에만 저장됩니다.</b> 팀원·다른 기기에 자동 동기화되지 않으므로 JSON 내보내기/가져오기로 백업·전달해 주세요.</p></div>
  ${notice?`<p class="ax-p2-notice" role="status">${escape(notice)}</p>`:""}
  ${board()}${form()}`;
