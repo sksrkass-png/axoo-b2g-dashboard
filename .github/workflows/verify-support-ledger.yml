@@ -5,6 +5,9 @@ on:
   push:
     paths:
       - "data/support_ledger_reference.json"
+      - "data/support_ledger_reference_scores.json"
+      - "scripts/score_support_reference.js"
+      - "scripts/test_support_reference_scores.js"
       - "support_ledger.js"
       - "support_ledger_summary.js"
       - "scripts/test_support_ledger_summary.js"
@@ -44,6 +47,10 @@ jobs:
           node --check support_pipeline.js
           node --check dashboard_priority_update.js
           node --check dashboard_ui_update.js
+      - name: Verify AXOO FIT v2 provisional reference grading
+        run: |
+          node scripts/test_support_reference_scores.js
+          node --check scripts/score_support_reference.js
       - name: Verify annual grant ledger
         run: node scripts/test_support_ledger.js
       - name: Verify source-grounded scale, support and eligibility summaries
