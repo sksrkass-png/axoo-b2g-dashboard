@@ -1,0 +1,34 @@
+name: Verify Airtable P2.1 Integration
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/verify-airtable-sync-integration.yml'
+      - 'scripts/test_airtable_sync_integration.js'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: axoo-airtable-integration-smoke
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate P2.1 script syntax and source-field protection
+        run: |
+          node --check scripts/sync_airtable_support_candidates.js
+          node --check scripts/test_airtable_sync_integration.js
+          node scripts/test_airtable_candidate_sync.js
+      - name: Create and remove one temporary candidate (live Airtable test)
+        env:
+          AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
+        run: node scripts/test_airtable_sync_integration.js
