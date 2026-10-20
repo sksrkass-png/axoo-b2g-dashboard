@@ -6,6 +6,8 @@ on:
   push:
     paths:
       - "scripts/support_program_intelligence.js"
+      - "scripts/regrade_support_programs.js"
+      - "scripts/test_fit_scoring_v2.js"
       - "scripts/test_support_program_intelligence.js"
       - "scripts/collect_support_programs.js"
       - "scripts/collect_regional_support.js"
@@ -66,7 +68,9 @@ jobs:
       # ------------------------------------------
 
       - name: Test support program intelligence
-        run: node scripts/test_support_program_intelligence.js
+        run: |
+          node scripts/test_support_program_intelligence.js
+          node scripts/test_fit_scoring_v2.js
 
 
       # ------------------------------------------
@@ -98,6 +102,9 @@ jobs:
 
       - name: Enrich grants with applicant and document evidence
         run: node scripts/enrich_support_documents.js
+
+      - name: Regrade all cached notices with current AXOO FIT v2
+        run: node scripts/regrade_support_programs.js
 
 
       # ------------------------------------------
