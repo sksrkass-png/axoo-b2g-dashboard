@@ -255,10 +255,12 @@ function analyzeSupportProgram({
   const evidenceScore = hasDetail ? 5 : hasAttachment ? 2 : 0;
   const penalty = Math.min(50, downrankMatches * 25);
 
-  let score = relevance + eligibilityScore + executionScore + businessScore + evidenceScore - penalty;
+  const rawScore = relevance + eligibilityScore + executionScore + businessScore + evidenceScore - penalty;
+  let score = rawScore;
   if (hardExcluded) score = Math.min(score, 35);
   if (!hasDetail) score = Math.min(score, 69);
   score = Math.max(0, Math.min(100, Math.round(score)));
+  const scoreCapAdjustment = score - rawScore;
 
   const grade = score >= 85 ? "S" : score >= 70 ? "A" : score >= 55 ? "B" : "C";
   const fitVerdict =
@@ -293,7 +295,8 @@ function analyzeSupportProgram({
       { code: "execution", label: "수행역량", score: executionScore, maxScore: 20 },
       { code: "business", label: "사업성", score: businessScore, maxScore: 15 },
       { code: "evidence", label: "상세근거", score: evidenceScore, maxScore: 5 },
-      { code: "penalty", label: "감점", score: -penalty, maxScore: 0 }
+      { code: "penalty", label: "감점", score: -penalty, maxScore: 0 },
+      ...(scoreCapAdjustment ? [{ code: "cap_adjustment", label: "제외·근거부족 상한 보정", score: scoreCapAdjustment, maxScore: 0 }] : [])
     ],
     scoreReasons: evidence,
     analysisConfidence: hasDetail ? "high" : "low",
