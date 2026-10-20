@@ -24,7 +24,7 @@ assert.equal(get(empty,"eligibility"),10);
 assert.equal(get(empty,"execution"),0);
 assert.equal(get(empty,"business"),0);
 assert.equal(get(empty,"evidence"),0);
-const match=sample({title:"전시 작가 갤러리 팝업 박람회 아트페어 기획"});
+const match=sample({title:"전시 작가 갤러리 팝업 박람회 아트페어 공간디자인 기획"});
 assert.equal(get(match,"relevance"),40);
 assert.equal(get(match,"execution"),4);
 assert.equal(get(sample({eligibility:"지원대상: 개인 창작자"}),"eligibility"),20);
