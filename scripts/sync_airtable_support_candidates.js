@@ -87,7 +87,8 @@ function changed(previous,current){
 async function main(){
  const token=process.env.AIRTABLE_PAT;
  if(!token){console.warn("[AXOO P2.1] AIRTABLE_PAT secret missing; candidate sync SKIPPED. Existing Airtable records remain unchanged.");return}
- const all=JSON.parse(fs.readFileSync("data/priority_projects.json","utf8"));
+ const sourcePath=process.env.AXOO_SUPPORT_SYNC_SOURCE_FILE||"data/priority_projects.json";
+ const all=JSON.parse(fs.readFileSync(sourcePath,"utf8"));
  if(!Array.isArray(all))throw Error("priority data invalid");
  const candidates=all.filter(x=>x.priorityCategory==="arts_content_support"&&x.id&&x.title);
  const ids=new Set(candidates.map(x=>x.id));
