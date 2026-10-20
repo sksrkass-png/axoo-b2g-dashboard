@@ -20,7 +20,7 @@ assert.match(s.scale,/예산 13.5억/);
 assert.equal(s.content,"상세내용 확인 필요");
 assert.equal(s.eligibility,"신청자격 미확인");
 s=summarize(make("창작공간 운영 지원","시각예술 공간"));
-assert.equal(s.scale,"공고문 확인 필요");
+assert.equal(s.scale,"지원금액 미확인");
 assert.equal(s.content,"창작공간 운영 지원");
 assert.equal(s.eligibility,"시각예술 공간");
 s=summarize(make("지원규모 확인하여 최소 상주 근무인력에 맞게 입주 희망유형 기입","지원대상 전체"));
