@@ -12,6 +12,8 @@ on:
       - "scripts/test_regional_support.js"
       - "scripts/sync_airtable_support_candidates.js"
       - "scripts/test_airtable_candidate_sync.js"
+      - "scripts/create_support_alerts.js"
+      - "scripts/test_support_alerts.js"
       - "scripts/support_application_review.js"
       - "scripts/enrich_support_documents.js"
       - "scripts/extract_support_attachment.py"
@@ -356,3 +358,14 @@ jobs:
         env:
           AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
         run: node scripts/sync_airtable_support_candidates.js
+
+      # ------------------------------------------
+      # 11. P5 new grant and D-7/D-3 notification inbox
+      # ------------------------------------------
+      - name: Test support notification windows and deduplication
+        run: node scripts/test_support_alerts.js
+
+      - name: Create Airtable grant alerts without replaying history
+        env:
+          AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
+        run: node scripts/create_support_alerts.js
