@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-21T17:38:08.434Z",
+  "updatedAt": "2026-10-21T21:58:28.424Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -8,14 +8,14 @@
       "name": "서울문화재단",
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
-      "state": "failed",
-      "checkedAt": "2026-10-21T17:38:08.435Z",
-      "found": 0,
-      "verified": 0,
+      "state": "partial",
+      "checkedAt": "2026-10-21T21:58:28.424Z",
+      "lastSuccessAt": "2026-10-21T21:58:28.424Z",
+      "found": 12,
+      "verified": 11,
       "errors": [
-        "fetch failed"
-      ],
-      "lastSuccessAt": "2026-10-21T12:20:08.292Z"
+        "Rejected candidate 청년예술지원 대상 청년예술인 진행중 ~2026.10.23 지원금 ,예술일반"
+      ]
     },
     {
       "code": "GGCF",
@@ -23,8 +23,8 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-21T17:38:18.993Z",
-      "lastSuccessAt": "2026-10-21T17:38:18.993Z",
+      "checkedAt": "2026-10-21T21:58:45.606Z",
+      "lastSuccessAt": "2026-10-21T21:58:45.606Z",
       "found": 2,
       "verified": 2,
       "errors": []
@@ -35,8 +35,8 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-21T17:38:23.435Z",
-      "lastSuccessAt": "2026-10-21T17:38:23.435Z",
+      "checkedAt": "2026-10-21T21:58:50.236Z",
+      "lastSuccessAt": "2026-10-21T21:58:50.236Z",
       "found": 11,
       "verified": 11,
       "errors": []
@@ -47,8 +47,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-21T17:38:57.818Z",
-      "lastSuccessAt": "2026-10-21T17:38:57.818Z",
+      "checkedAt": "2026-10-21T21:59:36.383Z",
+      "lastSuccessAt": "2026-10-21T21:59:36.383Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -58,14 +58,12 @@
       "name": "서울특별시",
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
-      "state": "failed",
-      "checkedAt": "2026-10-21T17:39:06.240Z",
-      "found": 0,
-      "verified": 0,
-      "errors": [
-        "fetch failed"
-      ],
-      "lastSuccessAt": "2026-10-21T12:21:29.446Z"
+      "state": "ok",
+      "checkedAt": "2026-10-21T21:59:53.749Z",
+      "lastSuccessAt": "2026-10-21T21:59:53.749Z",
+      "found": 9,
+      "verified": 9,
+      "errors": []
     }
   ]
 }
