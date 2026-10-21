@@ -1820,7 +1820,78 @@
         }
       ],
       "snippetVersion": 2
+    },
+    "kcdf-9218|https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9218&brdCodeValue=&searchField=titlecontent": {
+      "status": "parsed",
+      "reviewedAt": "2026-10-21T05:17:33.929Z",
+      "documentUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+      "files": [
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+          "label": "붙임1. 2027 KCDF 공예·디자인 공모전시 모집 공고문.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 6779,
+          "pages": 8
+        },
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30789&_ck=4dc2431efd474539be1f5cf7edfead38",
+          "label": "붙임2. KCDF갤러리 전시장 현황.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 462,
+          "pages": 9
+        },
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30790&_ck=e47257118da548e5a29dcb4a298ae6ad",
+          "label": "붙임3. [양식] 2027 KCDF 공예·디자인 공모전시 지원서류.zip",
+          "format": "archive_unknown",
+          "status": "unsupported",
+          "reason": "Zip document with unrecognized format"
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "법:이메일접수(gongmo@kcdf.kr) □ 지원 세부내용ㅇ 지원대상:공예·디자인분야작가본인이기획·창작한작품으로전시(신작필수포함),또는기획자본인이기획·창작한전시 ※제외대상-대한민국국적이아닌자-당해연도(2027)동일또는유사한사업계획으로다른기관으로부터보조금을지원받는자-국세,지방세,4대보험중어느하나라도체납중인자-학위청구전,졸업전,그룹(단체)정기전(예:동문전,회원전,후원전포함)등다른전시목적이있거나관례적인성",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "및세부사항별도협의 지원내용KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*10건-중견1,000만원*6건-단체1,000만원*3건 KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*8건-중견·그룹1,300만원*5건-기획자최대2,500만원*1건*심사에따라지원금액조정가능심사절차신진,중견:서류심사→선정단체:서류심사→발표심사→선정공통:서류→심층면접→선정(심사단계보완,현장모니터링강화)□ 공모개",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "룹3주/기획자4주*아트리움공간활용시전시운영기간및세부사항별도협의 지원내용KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*10건-중견1,000만원*6건-단체1,000만원*3건 KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*8건-중견·그룹1,300만원*5건-기획자최대2,500만원*1건*심사에따라지원금액조정가능심사절차신진,중견:서류심사→선정단체:서류심사→발표심사→선정공통:서류→심층면접",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "조정될수있음ㅇ 심사방법구분대상진행내용비고(1차)서류심사공통•필수제출서류확인및작성기준준수여부•제출서류근거심의기준에따라종합평가심의결과개별통보및누리집게시(2차)심층면접공통•전시기획에대한심층인터뷰•제출서류및인터뷰근거심의기준에따라종합평가※12월2-3주차KCDF갤러리다목적홀진행예정으로세부일정개별연락ㅇ 심사기준구분심사기준배점1차심사완결성및기획력•전시주제및기획의도의명확성·독창성•작품의창의성및완성도•자격요건(전시콘텐",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        }
+      ],
+      "snippetVersion": 2
+    },
+    "ifac-333d71bdaf494e|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236140": {
+      "status": "manual_review_required",
+      "reviewedAt": "2026-10-21T05:17:33.929Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=229512&type=bbs",
+          "label": "(붙임)인터뷰심의 안내문 ( 0.04150390625 MB)",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        }
+      ],
+      "snippets": [],
+      "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-20T23:24:24.724Z"
+  "updatedAt": "2026-10-21T05:17:33.929Z"
 }

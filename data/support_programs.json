@@ -569,9 +569,9 @@
     "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "지원대상 전체",
+    "eligibility": "",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -711,8 +711,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 23,
-    "score": 23,
+    "axooFitScore": 33,
+    "score": 33,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -725,7 +725,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 10,
+        "score": 20,
         "maxScore": 20
       },
       {
@@ -754,18 +754,19 @@
       }
     ],
     "scoreReasons": [
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "사업화·유통·지원금 요소 확인",
       "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 단체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -2749,6 +2750,220 @@
             "format": "unknown",
             "status": "failed",
             "reason": "HTTP_404"
+          }
+        ]
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
+  },
+  {
+    "id": "kcdf-9218",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "한국공예·디자인문화진흥원",
+    "sourceCode": "KCDF",
+    "sourceType": "지원사업",
+    "title": "2027 KCDF 공예·디자인 공모전시 모집 공고",
+    "organization": "한국공예·디자인문화진흥원",
+    "agency": "한국공예·디자인문화진흥원",
+    "status": "진행중",
+    "postedDate": "",
+    "publishedDate": "2026-10-21",
+    "startDate": "2026-10-21",
+    "endDate": "2026-11-20",
+    "deadline": "2026-11-20",
+    "budget": 25000000,
+    "supportAmount": 25000000,
+    "originalUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9218&brdCodeValue=&searchField=titlecontent",
+    "sourceUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9218&brdCodeValue=&searchField=titlecontent",
+    "documentUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+    "field": "전시·공간",
+    "businessArea": "exhibition_space",
+    "businessAreaLabel": "전시·공간",
+    "businessAreas": [
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      },
+      {
+        "code": "public_art_design",
+        "label": "공공미술·디자인"
+      }
+    ],
+    "matchedKeywords": [
+      "전시",
+      "갤러리",
+      "공예"
+    ],
+    "matchedPriorityKeywords": [
+      "전시",
+      "갤러리",
+      "공예"
+    ],
+    "axooFitScore": 72,
+    "score": 72,
+    "grade": "A",
+    "fitVerdict": "적합도 높음",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 29,
+        "maxScore": 40
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 12,
+        "maxScore": 20
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 6,
+        "maxScore": 15
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 5,
+        "maxScore": 5
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "전시·공간 사업영역과 연결",
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+      "기획·제작·운영 수행역량 활용 가능",
+      "사업화·유통·지원금 요소 확인"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": true,
+    "axooFitReason": "적합도 높음: 전시·공간 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "gradeReason": "적합도 높음: 전시·공간 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "detailSummary": "지원내용 KCDF 갤러리 전시공간 지원 전시 홍보지원 전시 지원금 - 신진 500 만원 *10 건 - 중견 1,000 만원 *6 건 - 단체 1,000 만원 *3 건 KCDF 갤러리 전시공간 지원 전시 홍보지원 전시 지원금 - 신진 500 만원 *8 건 - 중견 &middot; 그룹 1,300 만원 *5 건 - 기획자 최대 2,500 만원 *1 건 * 심사에 따라 지원금액 조정 가능 심사절차 신진 , 중견 : 서류심사 &rarr; 선정 단체 : 서류심사 &rarr; 발표심사 &rarr; 선정 공통 : 서류 &rarr; 심층면접 &rarr; 선정 ( 심사단계 보완 , 현장 모니터링 강화 ) □ 공모개요 ㅇ 공 모 명 : 2027 KCDF 공예 &middot; 디자인 공모전시 ㅇ 목 적 : 공예 &middot; 디자인 분야의 다양하고 전문적인 전시 구현 지원을 통한 창작 활성화 및 국민의 문화예술 향유기회 확대 ㅇ 공모기간 : 2026. 10 21.( 수 ) ~ 11. 20.( 금 ) 14 시까지 / 31 일간 ㅇ 공모분",
+    "eligibility": "신청자격 ( 필수요건 ) &bull; 연나이 39 세 이하 ( 기준일 2027.1.1, 1988 년 1 월 1 일 이후 출생자 ) &bull; 공예 ‧ 디자인 분야 개인전 및 단체전에 3 회 이상 참여한 자 * 증빙서류 제출이 가능한 전시만 인정 ※ 2027 년 신작을 3 점 이상 포함 하여 전시하여야 함 전시장소 &bull; KCDF 윈도우갤러리 전시기간 &bull; 4 주 ( 설치 / 철수기간 포함 ) 지원금액 &bull; 500 만원 * e 나라도움 ( www.gosims.go.kr) 시스템에서 지원금 집행 &middot; 정산 ② 중견 ( 개인 ) 및 그룹 선정규모 &bull; 5 명 ( 또는 그룹 ) * 접수 및 심사 결과에 따라 , 아트리움 공간 전시 1 건 내외 선정 예정. 지원 없을 시 해당사항 없음 신청자격 ( 필수요건 ) &",
+    "supportDetails": "지원내용 KCDF 갤러리 전시공간 지원 전시 홍보지원 전시 지원금 - 신진 500 만원 *10 건 - 중견 1,000 만원 *6 건 - 단체 1,000 만원 *3 건 KCDF 갤러리 전시공간 지원 전시 홍보지원 전시 지원금 - 신진 500 만원 *8 건 - 중견 &middot; 그룹 1,300 만원 *5 건 - 기획자 최대 2,500 만원 *1 건 * 심사에 따라 지원금액 조정 가능 심사절차 신진 , 중견 : 서류심사 &rarr; 선정 단체 : 서류심사 &rarr; 발표심사 &rarr; 선정 공통 : 서류 &rarr; 심층면접 &rarr; 선정 ( 심사단계 보완 , 현장 모니터링 강화 ) □ 공모개요 ㅇ 공 모 명 : 2027 KCDF 공예 &middot; 디자인 공모전시 ㅇ 목 적 : 공예 &middot; 디자인 분야의 다양하고 전문적인 전시 구현 지원을 통한 창작 활성화 및 국민의 문화예술 향유기회 확대 ㅇ 공모기간 : 2026. 10 21.( 수 ) ~ 11. 20.( 금 ) 14 시까지 / 31 일간 ㅇ 공모분",
+    "application": "제출서류 확인 및 작성 기준 준수 여부 &bull; 제출서류 근거 심의 기준에 따라 종합 평가 심의 결과 개별 통보 및 누리집 게시 (2 차 ) 심층면접 공통 &bull; 전시기획에 대한 심층 인터뷰 &bull; 제출서류 및 인터뷰 근거 심의 기준에 따라 종합 평가 ※ 12 월 2-3 주차 KCDF 갤러리 다목적홀 진행 예정으로 세부일정 개별연락 ㅇ 심사기준 구분 심사기준 배점 1 차심사 완결성 및 기획력 &bull; 전시 주제 및 기획의도의 명확성 &middot; 독창성 &bull; 작품의 창의성 및 완성도 &bull; 자격요건 ( 전시콘텐츠 및 신작 등 ) 의 충실성 40 수행역량 및 실행력 &bull; 전시 구성 및 구현계획의 구체",
+    "recommendedAction": "공고문과 지원자격을 우선 확인",
+    "nextAction": "공고문과 지원자격을 우선 확인",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-21",
+    "updatedAt": "2026-10-21",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "parsed",
+      "reviewedAt": "2026-10-21T05:17:33.929Z",
+      "documentUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+      "files": [
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+          "label": "붙임1. 2027 KCDF 공예·디자인 공모전시 모집 공고문.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 6779,
+          "pages": 8
+        },
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30789&_ck=4dc2431efd474539be1f5cf7edfead38",
+          "label": "붙임2. KCDF갤러리 전시장 현황.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 462,
+          "pages": 9
+        },
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30790&_ck=e47257118da548e5a29dcb4a298ae6ad",
+          "label": "붙임3. [양식] 2027 KCDF 공예·디자인 공모전시 지원서류.zip",
+          "format": "archive_unknown",
+          "status": "unsupported",
+          "reason": "Zip document with unrecognized format"
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "법:이메일접수(gongmo@kcdf.kr) □ 지원 세부내용ㅇ 지원대상:공예·디자인분야작가본인이기획·창작한작품으로전시(신작필수포함),또는기획자본인이기획·창작한전시 ※제외대상-대한민국국적이아닌자-당해연도(2027)동일또는유사한사업계획으로다른기관으로부터보조금을지원받는자-국세,지방세,4대보험중어느하나라도체납중인자-학위청구전,졸업전,그룹(단체)정기전(예:동문전,회원전,후원전포함)등다른전시목적이있거나관례적인성",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "및세부사항별도협의 지원내용KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*10건-중견1,000만원*6건-단체1,000만원*3건 KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*8건-중견·그룹1,300만원*5건-기획자최대2,500만원*1건*심사에따라지원금액조정가능심사절차신진,중견:서류심사→선정단체:서류심사→발표심사→선정공통:서류→심층면접→선정(심사단계보완,현장모니터링강화)□ 공모개",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "룹3주/기획자4주*아트리움공간활용시전시운영기간및세부사항별도협의 지원내용KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*10건-중견1,000만원*6건-단체1,000만원*3건 KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*8건-중견·그룹1,300만원*5건-기획자최대2,500만원*1건*심사에따라지원금액조정가능심사절차신진,중견:서류심사→선정단체:서류심사→발표심사→선정공통:서류→심층면접",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "조정될수있음ㅇ 심사방법구분대상진행내용비고(1차)서류심사공통•필수제출서류확인및작성기준준수여부•제출서류근거심의기준에따라종합평가심의결과개별통보및누리집게시(2차)심층면접공통•전시기획에대한심층인터뷰•제출서류및인터뷰근거심의기준에따라종합평가※12월2-3주차KCDF갤러리다목적홀진행예정으로세부일정개별연락ㅇ 심사기준구분심사기준배점1차심사완결성및기획력•전시주제및기획의도의명확성·독창성•작품의창의성및완성도•자격요건(전시콘텐",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        }
+      ],
+      "snippetVersion": 2
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [
+        "제출서류"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
+      "documentAudit": {
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+            "label": "붙임1. 2027 KCDF 공예·디자인 공모전시 모집 공고문.pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 6779,
+            "pages": 8
+          },
+          {
+            "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30789&_ck=4dc2431efd474539be1f5cf7edfead38",
+            "label": "붙임2. KCDF갤러리 전시장 현황.pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 462,
+            "pages": 9
+          },
+          {
+            "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30790&_ck=e47257118da548e5a29dcb4a298ae6ad",
+            "label": "붙임3. [양식] 2027 KCDF 공예·디자인 공모전시 지원서류.zip",
+            "format": "archive_unknown",
+            "status": "unsupported",
+            "reason": "Zip document with unrecognized format"
           }
         ]
       }

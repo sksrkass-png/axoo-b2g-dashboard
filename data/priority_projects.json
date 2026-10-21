@@ -1,5 +1,230 @@
 [
   {
+    "id": "kcdf-9218",
+    "source": "한국공예·디자인문화진흥원",
+    "sourceCode": "KCDF",
+    "sourceType": "지원사업",
+    "title": "2027 KCDF 공예·디자인 공모전시 모집 공고",
+    "organization": "한국공예·디자인문화진흥원",
+    "agency": "한국공예·디자인문화진흥원",
+    "amount": 25000000,
+    "budget": 25000000,
+    "supportAmount": 25000000,
+    "publishedDate": "2026-10-21",
+    "postedDate": "2026-10-21",
+    "startDate": "2026-10-21",
+    "deadline": "2026-11-20",
+    "deadlineDate": "2026-11-20",
+    "endDate": "2026-11-20",
+    "status": "진행중",
+    "statusBasis": "",
+    "verificationStatus": "",
+    "collectionVerifiedAt": "2026-10-21",
+    "sourceLastCheckedAt": "",
+    "sourceDetailVerified": false,
+    "sourceLevel": "국가",
+    "region": "전국",
+    "sourceUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9218&brdCodeValue=&searchField=titlecontent",
+    "originalUrl": "https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9218&brdCodeValue=&searchField=titlecontent",
+    "documentUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "전시·공간",
+    "businessArea": "exhibition_space",
+    "businessAreaLabel": "전시·공간",
+    "businessAreas": [
+      {
+        "code": "exhibition_space",
+        "label": "전시·공간"
+      },
+      {
+        "code": "public_art_design",
+        "label": "공공미술·디자인"
+      }
+    ],
+    "matchedPriorityKeywords": [
+      "전시",
+      "갤러리",
+      "공예"
+    ],
+    "matchedKeywords": [
+      "전시",
+      "갤러리",
+      "공예"
+    ],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "A",
+    "fitVerdict": "적합도 높음",
+    "scoringVersion": "AXOO_FIT_V2_2026_10",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 29,
+        "maxScore": 40
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 12,
+        "maxScore": 20
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 6,
+        "maxScore": 15
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 5,
+        "maxScore": 5
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "전시·공간 사업영역과 연결",
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+      "기획·제작·운영 수행역량 활용 가능",
+      "사업화·유통·지원금 요소 확인"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": true,
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요",
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [
+        "제출서류"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
+      "documentAudit": {
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+            "label": "붙임1. 2027 KCDF 공예·디자인 공모전시 모집 공고문.pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 6779,
+            "pages": 8
+          },
+          {
+            "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30789&_ck=4dc2431efd474539be1f5cf7edfead38",
+            "label": "붙임2. KCDF갤러리 전시장 현황.pdf",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 462,
+            "pages": 9
+          },
+          {
+            "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30790&_ck=e47257118da548e5a29dcb4a298ae6ad",
+            "label": "붙임3. [양식] 2027 KCDF 공예·디자인 공모전시 지원서류.zip",
+            "format": "archive_unknown",
+            "status": "unsupported",
+            "reason": "Zip document with unrecognized format"
+          }
+        ]
+      }
+    },
+    "documentReview": {
+      "status": "parsed",
+      "reviewedAt": "2026-10-21T05:17:33.929Z",
+      "documentUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+      "files": [
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284",
+          "label": "붙임1. 2027 KCDF 공예·디자인 공모전시 모집 공고문.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 6779,
+          "pages": 8
+        },
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30789&_ck=4dc2431efd474539be1f5cf7edfead38",
+          "label": "붙임2. KCDF갤러리 전시장 현황.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 462,
+          "pages": 9
+        },
+        {
+          "url": "https://www.kcdf.or.kr/com/file/filedown?_ci=30790&_ck=e47257118da548e5a29dcb4a298ae6ad",
+          "label": "붙임3. [양식] 2027 KCDF 공예·디자인 공모전시 지원서류.zip",
+          "format": "archive_unknown",
+          "status": "unsupported",
+          "reason": "Zip document with unrecognized format"
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "법:이메일접수(gongmo@kcdf.kr) □ 지원 세부내용ㅇ 지원대상:공예·디자인분야작가본인이기획·창작한작품으로전시(신작필수포함),또는기획자본인이기획·창작한전시 ※제외대상-대한민국국적이아닌자-당해연도(2027)동일또는유사한사업계획으로다른기관으로부터보조금을지원받는자-국세,지방세,4대보험중어느하나라도체납중인자-학위청구전,졸업전,그룹(단체)정기전(예:동문전,회원전,후원전포함)등다른전시목적이있거나관례적인성",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "및세부사항별도협의 지원내용KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*10건-중견1,000만원*6건-단체1,000만원*3건 KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*8건-중견·그룹1,300만원*5건-기획자최대2,500만원*1건*심사에따라지원금액조정가능심사절차신진,중견:서류심사→선정단체:서류심사→발표심사→선정공통:서류→심층면접→선정(심사단계보완,현장모니터링강화)□ 공모개",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "룹3주/기획자4주*아트리움공간활용시전시운영기간및세부사항별도협의 지원내용KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*10건-중견1,000만원*6건-단체1,000만원*3건 KCDF갤러리전시공간지원전시홍보지원전시지원금-신진500만원*8건-중견·그룹1,300만원*5건-기획자최대2,500만원*1건*심사에따라지원금액조정가능심사절차신진,중견:서류심사→선정단체:서류심사→발표심사→선정공통:서류→심층면접",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "조정될수있음ㅇ 심사방법구분대상진행내용비고(1차)서류심사공통•필수제출서류확인및작성기준준수여부•제출서류근거심의기준에따라종합평가심의결과개별통보및누리집게시(2차)심층면접공통•전시기획에대한심층인터뷰•제출서류및인터뷰근거심의기준에따라종합평가※12월2-3주차KCDF갤러리다목적홀진행예정으로세부일정개별연락ㅇ 심사기준구분심사기준배점1차심사완결성및기획력•전시주제및기획의도의명확성·독창성•작품의창의성및완성도•자격요건(전시콘텐",
+          "sourceUrl": "https://www.kcdf.or.kr/com/file/filedown?_ci=30788&_ck=35051bda55624f209434213ef48a3284"
+        }
+      ],
+      "snippetVersion": 2
+    },
+    "score": 72,
+    "axooFitScore": 72,
+    "gradeReason": "적합도 높음: 전시·공간 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "axooFitReason": "적합도 높음: 전시·공간 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "detailSummary": "지원내용 KCDF 갤러리 전시공간 지원 전시 홍보지원 전시 지원금 - 신진 500 만원 *10 건 - 중견 1,000 만원 *6 건 - 단체 1,000 만원 *3 건 KCDF 갤러리 전시공간 지원 전시 홍보지원 전시 지원금 - 신진 500 만원 *8 건 - 중견 &middot; 그룹 1,300 만원 *5 건 - 기획자 최대 2,500 만원 *1 건 * 심사에 따라 지원금액 조정 가능 심사절차 신진 , 중견 : 서류심사 &rarr; 선정 단체 : 서류심사 &rarr; 발표심사 &rarr; 선정 공통 : 서류 &rarr; 심층면접 &rarr; 선정 ( 심사단계 보완 , 현장 모니터링 강화 ) □ 공모개요 ㅇ 공 모 명 : 2027 KCDF 공예 &middot; 디자인 공모전시 ㅇ 목 적 : 공예 &middot; 디자인 분야의 다양하고 전문적인 전시 구현 지원을 통한 창작 활성화 및 국민의 문화예술 향유기회 확대 ㅇ 공모기간 : 2026. 10 21.( 수 ) ~ 11. 20.( 금 ) 14 시까지 / 31 일간 ㅇ 공모분",
+    "eligibility": "신청자격 ( 필수요건 ) &bull; 연나이 39 세 이하 ( 기준일 2027.1.1, 1988 년 1 월 1 일 이후 출생자 ) &bull; 공예 ‧ 디자인 분야 개인전 및 단체전에 3 회 이상 참여한 자 * 증빙서류 제출이 가능한 전시만 인정 ※ 2027 년 신작을 3 점 이상 포함 하여 전시하여야 함 전시장소 &bull; KCDF 윈도우갤러리 전시기간 &bull; 4 주 ( 설치 / 철수기간 포함 ) 지원금액 &bull; 500 만원 * e 나라도움 ( www.gosims.go.kr) 시스템에서 지원금 집행 &middot; 정산 ② 중견 ( 개인 ) 및 그룹 선정규모 &bull; 5 명 ( 또는 그룹 ) * 접수 및 심사 결과에 따라 , 아트리움 공간 전시 1 건 내외 선정 예정. 지원 없을 시 해당사항 없음 신청자격 ( 필수요건 ) &",
+    "supportDetails": "지원내용 KCDF 갤러리 전시공간 지원 전시 홍보지원 전시 지원금 - 신진 500 만원 *10 건 - 중견 1,000 만원 *6 건 - 단체 1,000 만원 *3 건 KCDF 갤러리 전시공간 지원 전시 홍보지원 전시 지원금 - 신진 500 만원 *8 건 - 중견 &middot; 그룹 1,300 만원 *5 건 - 기획자 최대 2,500 만원 *1 건 * 심사에 따라 지원금액 조정 가능 심사절차 신진 , 중견 : 서류심사 &rarr; 선정 단체 : 서류심사 &rarr; 발표심사 &rarr; 선정 공통 : 서류 &rarr; 심층면접 &rarr; 선정 ( 심사단계 보완 , 현장 모니터링 강화 ) □ 공모개요 ㅇ 공 모 명 : 2027 KCDF 공예 &middot; 디자인 공모전시 ㅇ 목 적 : 공예 &middot; 디자인 분야의 다양하고 전문적인 전시 구현 지원을 통한 창작 활성화 및 국민의 문화예술 향유기회 확대 ㅇ 공모기간 : 2026. 10 21.( 수 ) ~ 11. 20.( 금 ) 14 시까지 / 31 일간 ㅇ 공모분",
+    "application": "제출서류 확인 및 작성 기준 준수 여부 &bull; 제출서류 근거 심의 기준에 따라 종합 평가 심의 결과 개별 통보 및 누리집 게시 (2 차 ) 심층면접 공통 &bull; 전시기획에 대한 심층 인터뷰 &bull; 제출서류 및 인터뷰 근거 심의 기준에 따라 종합 평가 ※ 12 월 2-3 주차 KCDF 갤러리 다목적홀 진행 예정으로 세부일정 개별연락 ㅇ 심사기준 구분 심사기준 배점 1 차심사 완결성 및 기획력 &bull; 전시 주제 및 기획의도의 명확성 &middot; 독창성 &bull; 작품의 창의성 및 완성도 &bull; 자격요건 ( 전시콘텐츠 및 신작 등 ) 의 충실성 40 수행역량 및 실행력 &bull; 전시 구성 및 구현계획의 구체",
+    "nextAction": "공고문과 지원자격을 우선 확인",
+    "recommendedAction": "공고문과 지원자격을 우선 확인",
+    "searchText": "2027 KCDF 공예·디자인 공모전시 모집 공고 한국공예·디자인문화진흥원 한국공예·디자인문화진흥원 예술 콘텐츠 지원사업 전시·공간 전시 갤러리 공예",
+    "collectionSourceId": "support_kcdf",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
     "id": "kocca-126D00107006",
     "source": "한국콘텐츠진흥원",
     "sourceCode": "KOCCA",
@@ -205,8 +430,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -394,8 +619,8 @@
     "status": "마감",
     "statusBasis": "신청접수 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -1125,7 +1350,7 @@
     "endDate": "",
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
-    "verificationStatus": "date_unconfirmed",
+    "verificationStatus": "source_unavailable",
     "collectionVerifiedAt": "2026-10-20T23:23:25.652Z",
     "sourceLastCheckedAt": "2026-10-20T23:23:25.652Z",
     "sourceDetailVerified": true,
@@ -2498,8 +2723,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2637,8 +2862,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2776,8 +3001,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -2915,8 +3140,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3142,8 +3367,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3369,8 +3594,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3596,8 +3821,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -3804,6 +4029,212 @@
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
+    "id": "arko-54a4b2c41697",
+    "source": "한국문화예술위원회",
+    "sourceCode": "ARKO",
+    "sourceType": "지원사업",
+    "title": "2027년 인바운드국제협력강화(인바운드레지던시지원)",
+    "organization": "한국문화예술위원회",
+    "agency": "한국문화예술위원회",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "2026-10-08",
+    "postedDate": "2026-10-08",
+    "startDate": "2026-10-08",
+    "deadline": "2026-11-05",
+    "deadlineDate": "2026-11-05",
+    "endDate": "2026-11-05",
+    "status": "진행중",
+    "statusBasis": "",
+    "verificationStatus": "",
+    "collectionVerifiedAt": "2026-10-21",
+    "sourceLastCheckedAt": "",
+    "sourceDetailVerified": false,
+    "sourceLevel": "국가",
+    "region": "전국",
+    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD0mTniArRVouwj7U5teZEgUPBZm1EJpnMlsBwvsh76BM",
+    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD0mTniArRVouwj7U5teZEgUPBZm1EJpnMlsBwvsh76BM",
+    "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedPriorityKeywords": [],
+    "matchedKeywords": [],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoringVersion": "AXOO_FIT_V2_2026_10",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 40
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 15
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 2,
+        "maxScore": 5
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+      "사업화·유통·지원금 요소 확인",
+      "상세 본문 부족 · 첨부파일 근거만 확인"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요",
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
+      "documentAudit": {
+        "status": "parsed",
+        "files": [
+          {
+            "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036369",
+            "label": "(공고문) 인바운드국제협력강화(인바운드레지던시지원).pdf",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          },
+          {
+            "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036591",
+            "label": "2027년도 인바운드레지던시지원 지원신청서_신청단체명.hwp",
+            "format": "unknown",
+            "status": "failed",
+            "reason": "HTTP_404"
+          },
+          {
+            "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
+            "label": "",
+            "format": "pdf",
+            "status": "parsed",
+            "reason": "",
+            "characters": 19666,
+            "pages": 31
+          }
+        ]
+      }
+    },
+    "documentReview": {
+      "status": "parsed",
+      "reviewedAt": "2026-10-20T07:55:42.375Z",
+      "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
+      "files": [
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036369",
+          "label": "(공고문) 인바운드국제협력강화(인바운드레지던시지원).pdf",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036591",
+          "label": "2027년도 인바운드레지던시지원 지원신청서_신청단체명.hwp",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
+          "label": "",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 19666,
+          "pages": 31
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인서, 신청자격 체크리스트, 청렴이행서약서(감사실), 성희롱·성폭력 방지 등에 관한 서약서에 동의해야 지원신청을 등록하실 수 있습니다.• 어떤 사업에 신청해야 할지 모르실 경우, 맞춤형 공모사업 찾기 서비스(바로가기)와 AI 안내 챗봇(바로가기)을 이용해 도움받으실 수 있습니다. 5 Q. 심의는 어떤 절차로 진행되나요?A. 사업별로 다릅니다. 대",
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "다음 회차 지원심의에 반영될 수 있고, 다년 사업은 다음 해 지원금이 늘거나 줄어들 수 있습니다. 7 ② 신청 자격과 선정 제한Q. 누가 신청할 수 있고, 신청할 수 없는 경우는 무엇인가요?A. 문화예술 단체 및 예술인이 신청할 수 있으며, 단체는 사업자등록번호·법인번호· 고유번호 중 하나를 갖고 있어야 합니다. 다음에 해당하면 부적격 처리되며, 모든 심의 항목에서 ‘최하점’을 받습니다.• 대한민국 ",
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "다른 사업을 선택해 신청한 경우• 지원신청서 또는 사업별 필수 제출서류를 내지 않은 경우• 다른 사업의 신청서 양식을 쓴 경우, 첨부파일이 빠지거나 열리지 않은 경우• 그밖에 사업별 공고문에서 결격으로 정한 경우※ 첨부파일은 전체 파일 용량에는 제한이 없으나, zip 파일과 1개 파일당 100mb 이상 첨부가 불가합니다. 제출 전에 파일이 정상적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인",
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
+        },
+        {
+          "label": "부담·제한 문구",
+          "quote": "인바운드국제협력강화(인바운드리서치지원) 12 ④ 예산 편성Q. 자부담을 반드시 편성해야 하나요?A. 자기부담금을 의무적으로 편성해야 하는 비율은 없습니다. 다만 다음의 경우는 유의해 주시기 바랍니다.• 과세사업자는 보조금에 공급가액만 편성할 수 있으며, 부가가치세는 e나라도움에서‘사업비 외 자부담’으로 집행해야 합니다. 겸업사업자는 해당 보조사업의 과세/면세 여부 확인이 필요합니다. • 문화예술연수단",
+          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
+        }
+      ],
+      "snippetVersion": 2
+    },
+    "score": 33,
+    "axooFitScore": 33,
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "detailSummary": "",
+    "eligibility": "지원대상 단체",
+    "supportDetails": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "searchText": "2027년 인바운드국제협력강화(인바운드레지던시지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_arko",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
     "id": "scas-09d4de2de885de",
     "source": "서울문화재단",
     "sourceCode": "SCAS",
@@ -3823,8 +4254,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -4049,8 +4480,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -4269,8 +4700,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -4471,8 +4902,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -4671,8 +5102,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -5015,8 +5446,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -5165,8 +5596,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5366,8 +5797,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5500,8 +5931,8 @@
     "status": "마감",
     "statusBasis": "신청기간 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5668,8 +6099,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -5804,8 +6235,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -6618,217 +7049,12 @@
     "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "지원대상 전체",
-    "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 인바운드국제협력강화(인바운드리서치지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
-    "collectionSourceId": "support_arko",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
-    "priorityVersion": "priority_g2b_support_v2.0"
-  },
-  {
-    "id": "arko-54a4b2c41697",
-    "source": "한국문화예술위원회",
-    "sourceCode": "ARKO",
-    "sourceType": "지원사업",
-    "title": "2027년 인바운드국제협력강화(인바운드레지던시지원)",
-    "organization": "한국문화예술위원회",
-    "agency": "한국문화예술위원회",
-    "amount": 0,
-    "budget": null,
-    "supportAmount": null,
-    "publishedDate": "2026-10-08",
-    "postedDate": "2026-10-08",
-    "startDate": "2026-10-08",
-    "deadline": "2026-11-05",
-    "deadlineDate": "2026-11-05",
-    "endDate": "2026-11-05",
-    "status": "진행중",
-    "statusBasis": "",
-    "verificationStatus": "",
-    "collectionVerifiedAt": "2026-10-21",
-    "sourceLastCheckedAt": "",
-    "sourceDetailVerified": false,
-    "sourceLevel": "국가",
-    "region": "전국",
-    "sourceUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD0mTniArRVouwj7U5teZEgUPBZm1EJpnMlsBwvsh76BM",
-    "originalUrl": "https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD0mTniArRVouwj7U5teZEgUPBZm1EJpnMlsBwvsh76BM",
-    "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "priorityRank": 0,
-    "field": "기타",
-    "businessArea": "other",
-    "businessAreaLabel": "기타",
-    "businessAreas": [
-      {
-        "code": "other",
-        "label": "기타"
-      }
-    ],
-    "matchedPriorityKeywords": [],
-    "matchedKeywords": [],
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoringVersion": "AXOO_FIT_V2_2026_10",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 8,
-        "maxScore": 40
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 10,
-        "maxScore": 20
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 0,
-        "maxScore": 20
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 15
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 2,
-        "maxScore": 5
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "사업화·유통·지원금 요소 확인",
-      "상세 본문 부족 · 첨부파일 근거만 확인"
-    ],
-    "analysisBasis": "공고 제목",
-    "analysisConfidence": "low",
-    "companyEligible": false,
-    "participationCode": "needs_review",
-    "participationLabel": "자격 확인 필요",
-    "applicationReview": {
-      "version": "p0_eligibility_review_v1",
-      "participationCode": "needs_review",
-      "participationLabel": "자격 확인 필요",
-      "applicantBasis": "",
-      "evidence": [],
-      "restrictions": [],
-      "submissionDocuments": [],
-      "missingEvidence": true,
-      "detailQuality": "not_verified",
-      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
-      "documentAudit": {
-        "status": "parsed",
-        "files": [
-          {
-            "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036369",
-            "label": "(공고문) 인바운드국제협력강화(인바운드레지던시지원).pdf",
-            "format": "unknown",
-            "status": "failed",
-            "reason": "HTTP_404"
-          },
-          {
-            "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036591",
-            "label": "2027년도 인바운드레지던시지원 지원신청서_신청단체명.hwp",
-            "format": "unknown",
-            "status": "failed",
-            "reason": "HTTP_404"
-          },
-          {
-            "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
-            "label": "",
-            "format": "pdf",
-            "status": "parsed",
-            "reason": "",
-            "characters": 19666,
-            "pages": 31
-          }
-        ]
-      }
-    },
-    "documentReview": {
-      "status": "parsed",
-      "reviewedAt": "2026-10-20T07:55:42.375Z",
-      "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
-      "files": [
-        {
-          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036369",
-          "label": "(공고문) 인바운드국제협력강화(인바운드레지던시지원).pdf",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "HTTP_404"
-        },
-        {
-          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036591",
-          "label": "2027년도 인바운드레지던시지원 지원신청서_신청단체명.hwp",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "HTTP_404"
-        },
-        {
-          "url": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
-          "label": "",
-          "format": "pdf",
-          "status": "parsed",
-          "reason": "",
-          "characters": 19666,
-          "pages": 31
-        }
-      ],
-      "snippets": [
-        {
-          "label": "지원 자격 문구",
-          "quote": "적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인서, 신청자격 체크리스트, 청렴이행서약서(감사실), 성희롱·성폭력 방지 등에 관한 서약서에 동의해야 지원신청을 등록하실 수 있습니다.• 어떤 사업에 신청해야 할지 모르실 경우, 맞춤형 공모사업 찾기 서비스(바로가기)와 AI 안내 챗봇(바로가기)을 이용해 도움받으실 수 있습니다. 5 Q. 심의는 어떤 절차로 진행되나요?A. 사업별로 다릅니다. 대",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
-        },
-        {
-          "label": "지원 규모 문구",
-          "quote": "다음 회차 지원심의에 반영될 수 있고, 다년 사업은 다음 해 지원금이 늘거나 줄어들 수 있습니다. 7 ② 신청 자격과 선정 제한Q. 누가 신청할 수 있고, 신청할 수 없는 경우는 무엇인가요?A. 문화예술 단체 및 예술인이 신청할 수 있으며, 단체는 사업자등록번호·법인번호· 고유번호 중 하나를 갖고 있어야 합니다. 다음에 해당하면 부적격 처리되며, 모든 심의 항목에서 ‘최하점’을 받습니다.• 대한민국 ",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
-        },
-        {
-          "label": "제출서류 문구",
-          "quote": "다른 사업을 선택해 신청한 경우• 지원신청서 또는 사업별 필수 제출서류를 내지 않은 경우• 다른 사업의 신청서 양식을 쓴 경우, 첨부파일이 빠지거나 열리지 않은 경우• 그밖에 사업별 공고문에서 결격으로 정한 경우※ 첨부파일은 전체 파일 용량에는 제한이 없으나, zip 파일과 1개 파일당 100mb 이상 첨부가 불가합니다. 제출 전에 파일이 정상적으로 열리는지 확인해 주시기 바랍니다. • 지원신청 확인",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
-        },
-        {
-          "label": "부담·제한 문구",
-          "quote": "인바운드국제협력강화(인바운드리서치지원) 12 ④ 예산 편성Q. 자부담을 반드시 편성해야 하나요?A. 자기부담금을 의무적으로 편성해야 하는 비율은 없습니다. 다만 다음의 경우는 유의해 주시기 바랍니다.• 과세사업자는 보조금에 공급가액만 편성할 수 있으며, 부가가치세는 e나라도움에서‘사업비 외 자부담’으로 집행해야 합니다. 겸업사업자는 해당 보조사업의 과세/면세 여부 확인이 필요합니다. • 문화예술연수단",
-          "sourceUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf"
-        }
-      ],
-      "snippetVersion": 2
-    },
-    "score": 23,
-    "axooFitScore": 23,
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
-    "detailSummary": "",
     "eligibility": "",
     "supportDetails": "",
     "application": "",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "searchText": "2027년 인바운드국제협력강화(인바운드레지던시지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
+    "searchText": "2027년 인바운드국제협력강화(인바운드리서치지원) 한국문화예술위원회 한국문화예술위원회 예술 콘텐츠 지원사업 기타",
     "collectionSourceId": "support_arko",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "priorityVersion": "priority_g2b_support_v2.0"
@@ -7032,8 +7258,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -7168,8 +7394,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -7303,8 +7529,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -7437,7 +7663,7 @@
     "endDate": "",
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
-    "verificationStatus": "date_unconfirmed",
+    "verificationStatus": "source_unavailable",
     "collectionVerifiedAt": "2026-10-20T23:23:25.652Z",
     "sourceLastCheckedAt": "2026-10-20T23:23:25.652Z",
     "sourceDetailVerified": true,
@@ -7606,8 +7832,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -7954,8 +8180,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -8120,8 +8346,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -8290,8 +8516,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -8457,8 +8683,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -8591,8 +8817,8 @@
     "status": "마감",
     "statusBasis": "접수기간 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -8726,8 +8952,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -8863,8 +9089,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:24:16.501Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:16.501Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:26.449Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:26.449Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -9449,8 +9675,8 @@
     "status": "마감",
     "statusBasis": "신청접수 1일자",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10534,8 +10760,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10700,8 +10926,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10818,6 +11044,165 @@
     "priorityVersion": "priority_g2b_support_v2.0"
   },
   {
+    "id": "ifac-333d71bdaf494e",
+    "source": "인천문화재단",
+    "sourceCode": "IFAC",
+    "sourceType": "지원사업",
+    "title": "예술창작 제목 2026 인천 대표공연 콘텐츠 유통활성화 인터뷰심의",
+    "organization": "인천문화재단",
+    "agency": "인천문화재단",
+    "amount": 0,
+    "budget": null,
+    "supportAmount": null,
+    "publishedDate": "",
+    "postedDate": "",
+    "startDate": "",
+    "deadline": "",
+    "deadlineDate": "",
+    "endDate": "",
+    "status": "확인 필요",
+    "statusBasis": "원문에서 접수 일정 추출 실패",
+    "verificationStatus": "date_unconfirmed",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
+    "sourceDetailVerified": true,
+    "sourceLevel": "광역",
+    "region": "기타",
+    "sourceUrl": "https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236140",
+    "originalUrl": "https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236140",
+    "documentUrl": "",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "priorityRank": 0,
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
+    "businessAreas": [
+      {
+        "code": "other",
+        "label": "기타"
+      }
+    ],
+    "matchedPriorityKeywords": [],
+    "matchedKeywords": [],
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoringVersion": "AXOO_FIT_V2_2026_10",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 8,
+        "maxScore": 40
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 10,
+        "maxScore": 20
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 3,
+        "maxScore": 15
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 2,
+        "maxScore": 5
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -25,
+        "maxScore": 0
+      },
+      {
+        "code": "cap_adjustment",
+        "label": "제외·근거부족 상한 보정",
+        "score": 2,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점",
+      "상세 본문 부족 · 첨부파일 근거만 확인"
+    ],
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요",
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
+      "documentAudit": {
+        "status": "manual_review_required",
+        "files": [
+          {
+            "url": "https://ifac.or.kr/cmm/fileDown.do?key=229512&type=bbs",
+            "label": "(붙임)인터뷰심의 안내문 ( 0.04150390625 MB)",
+            "format": "hwp",
+            "status": "unsupported",
+            "reason": "Binary HWP requires manual conversion"
+          }
+        ]
+      }
+    },
+    "documentReview": {
+      "status": "manual_review_required",
+      "reviewedAt": "2026-10-21T05:17:33.929Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=229512&type=bbs",
+          "label": "(붙임)인터뷰심의 안내문 ( 0.04150390625 MB)",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        }
+      ],
+      "snippets": [],
+      "snippetVersion": 2
+    },
+    "score": 0,
+    "axooFitScore": 0,
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "detailSummary": "",
+    "eligibility": "",
+    "supportDetails": "",
+    "application": "",
+    "nextAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "recommendedAction": "공식 원문에서 신청 주체·업력·소재지·접수시간 확인",
+    "searchText": "예술창작 제목 2026 인천 대표공연 콘텐츠 유통활성화 인터뷰심의 인천문화재단 인천문화재단 예술 콘텐츠 지원사업 기타",
+    "collectionSourceId": "support_ifac",
+    "collectionVersion": "regional_official_html_v1",
+    "priorityVersion": "priority_g2b_support_v2.0"
+  },
+  {
     "id": "bscf-409cc43a1c2b6c",
     "source": "부산문화재단",
     "sourceCode": "BSCF",
@@ -10837,8 +11222,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -10979,8 +11364,8 @@
     "status": "확인 필요",
     "statusBasis": "원문에서 접수 일정 추출 실패",
     "verificationStatus": "date_unconfirmed",
-    "collectionVerifiedAt": "2026-10-20T23:24:08.555Z",
-    "sourceLastCheckedAt": "2026-10-20T23:24:08.555Z",
+    "collectionVerifiedAt": "2026-10-21T05:17:19.813Z",
+    "sourceLastCheckedAt": "2026-10-21T05:17:19.813Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -11264,8 +11649,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "신청기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:30.079Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:30.079Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:27.800Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:27.800Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "기타",
@@ -11470,8 +11855,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -11698,8 +12083,8 @@
     "status": "기간상 접수 가능",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
@@ -12112,8 +12497,8 @@
     "status": "접수 예정",
     "statusBasis": "접수기간",
     "verificationStatus": "date_extracted",
-    "collectionVerifiedAt": "2026-10-20T23:23:14.503Z",
-    "sourceLastCheckedAt": "2026-10-20T23:23:14.503Z",
+    "collectionVerifiedAt": "2026-10-21T05:16:17.417Z",
+    "sourceLastCheckedAt": "2026-10-21T05:16:17.417Z",
     "sourceDetailVerified": true,
     "sourceLevel": "광역",
     "region": "서울",
