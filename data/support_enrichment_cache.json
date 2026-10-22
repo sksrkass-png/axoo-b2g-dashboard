@@ -30,13 +30,6 @@
       ],
       "snippets": []
     },
-    "kocca-326D00110005|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110005&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
-      "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": []
-    },
     "scas-515abc3fedccf0|https://www.scas.kr/biz/detail/495?page=1": {
       "status": "parsed",
       "reviewedAt": "2026-10-20T07:55:42.375Z",
@@ -1893,5 +1886,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-22T00:54:14.010Z"
+  "updatedAt": "2026-10-22T07:57:56.445Z"
 }
