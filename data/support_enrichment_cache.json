@@ -713,7 +713,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "manual_review_required"
     },
     "seoul-3cc3d0de10e042|https://mediahub.seoul.go.kr/gongmo/2000782": {
       "status": "manual_review_required",
@@ -972,7 +972,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-0c1f64768485|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD7s7MarnkJQYIUP8ctK9D2UPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -1975,5 +1977,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-22T18:48:52.452Z"
+  "updatedAt": "2026-10-22T23:35:42.924Z"
 }
