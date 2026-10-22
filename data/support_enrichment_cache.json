@@ -560,14 +560,18 @@
       "reviewedAt": "2026-10-19T09:48:54.935Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "kcdf-9134|https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9134&brdCodeValue=&searchField=titlecontent": {
       "status": "no_attachment_detected",
       "reviewedAt": "2026-10-19T09:58:39.569Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "seoul-86386eeb4ff162|https://mediahub.seoul.go.kr/gongmo/2000778": {
       "status": "parsed",
@@ -615,19 +619,28 @@
       "snippets": []
     },
     "seoul-7c13e35b85aff9|https://mediahub.seoul.go.kr/gongmo/2000788": {
-      "status": "attachment_not_readable",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
+      "status": "parsed",
+      "reviewedAt": "2026-10-22T14:06:04.694Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2281715",
       "files": [
         {
           "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2281715",
           "label": "2026년겨울편서울꿈새김판문안공모공고문.hwpx",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "fetch failed"
+          "format": "hwpx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 1659,
+          "pages": 0
         }
       ],
-      "snippets": []
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "6. 10. 19.(월) ～ 10. 28.(수), 10일간 ㅇ 공모대상 : 서울을 사랑하는 모든 분 (연령 및 거주지 제한 없음) ㅇ 공모주제 : 추운 겨울을 녹이는 온기와 사랑을 담은 글귀 ㅇ 공모문안 : 한글 자수 30자 이내 (띄어쓰기 제외) 시민 창작 문안 ㅇ 응모방법 : 서울시 누리집 (seoul.go.kr) 온라인 신청 및 우편신청 － 우편접수 : (04524) 서울특별시 중구 세종대로 1",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2281715"
+        }
+      ],
+      "snippetVersion": 2
     },
     "kocca-126D00107006|https://www.kocca.kr/kocca/pims/view.do?intcNo=126D00107006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "manual_review_required",
@@ -671,7 +684,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "kocca-326D00110006|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "no_attachment_detected",
@@ -686,7 +701,9 @@
       "documentUrl": "",
       "files": [],
       "snippets": [],
-      "reason": "fetch failed"
+      "reason": "fetch failed",
+      "snippetVersion": 2,
+      "refreshWarning": "source_unavailable"
     },
     "seoul-6f19dda6c32c5f|https://mediahub.seoul.go.kr/gongmo/2000781": {
       "status": "source_unavailable",
@@ -694,7 +711,9 @@
       "documentUrl": "",
       "files": [],
       "snippets": [],
-      "reason": "fetch failed"
+      "reason": "fetch failed",
+      "snippetVersion": 2,
+      "refreshWarning": "source_unavailable"
     },
     "seoul-3cc3d0de10e042|https://mediahub.seoul.go.kr/gongmo/2000782": {
       "status": "manual_review_required",
@@ -716,7 +735,9 @@
           "reason": "Binary HWP requires manual conversion"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "manual_review_required"
     },
     "kocca-326D00088011|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "no_attachment_detected",
@@ -858,7 +879,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-a7bc3632ba31|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDztQ2kylQHZEY8CVJZTTmwEPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -887,7 +910,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-67c2f5a0fa11|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2oIW650hEulqLto2J%2FPBFkPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -1158,12 +1183,40 @@
       "snippets": []
     },
     "seoul-8f04c919b2144a|https://mediahub.seoul.go.kr/gongmo/2000784": {
-      "status": "source_unavailable",
-      "reviewedAt": "2026-10-19T10:42:59.376Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": [],
-      "reason": "fetch failed"
+      "status": "parsed",
+      "reviewedAt": "2026-10-22T14:06:04.694Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
+      "files": [
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
+          "label": "공고문.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 2219,
+          "pages": 4
+        },
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280848",
+          "label": "(붙임)제출서류.hwp",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "기간 : 2026. 10. 8.(목) ~ 11. 8.(일) ㅇ 응모자격 : 누구나(전국 단위 공모) ㅇ 공모주제 : 도심 쓰레기 문제 해결 아이디어 - 사람이 많이 모이는 행사장이나 홍대 등 번화가 쓰레기 문제 해결 ㅇ 공모분야 : ① 아이디어 공모전 ② 아이디어 한 줄 톡! ① 개인/팀(3인) 참여, 그림, 카드뉴스, 웹툰, 동영상 등 형식 제한 없이 제안 ② 아이디어는 있지만 공모전 응모가 부담스",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "법 : 이메일 제출 zeroseoul26@gmail.com - 제출서류 작성 후 서명하여 아이디어 파일(그림, 영상, 글 등)과 함께 제출 ㅇ 제출서류 : 참가신청서, 개인정보 수집·이용 동의서, 청렴서약서 ㅇ 응모제한 - 타 공모전 입상·수상작, 서울시 타 공모전에서 표절·중복응모·도용 등 부정행위 발생으로 수상 취소 및 상금·부상 환수 이력이 있는 자 ※ 청렴서약서 제출(‘타 공모전 수상 경력없음",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847"
+        }
+      ],
+      "snippetVersion": 2
     },
     "seoul-3fe6492becb7fb|https://mediahub.seoul.go.kr/gongmo/2000783": {
       "status": "source_unavailable",
@@ -1171,14 +1224,18 @@
       "documentUrl": "",
       "files": [],
       "snippets": [],
-      "reason": "fetch failed"
+      "reason": "fetch failed",
+      "snippetVersion": 2,
+      "refreshWarning": "manual_review_required"
     },
     "arko-239201|https://theater.arko.or.kr/Rent/Notice/239201/?q=null": {
       "status": "no_attachment_detected",
       "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "seoul-636b66cf2f51ba|https://mediahub.seoul.go.kr/gongmo/2000786": {
       "status": "parsed",
@@ -1886,5 +1943,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-22T07:57:56.445Z"
+  "updatedAt": "2026-10-22T14:06:04.694Z"
 }

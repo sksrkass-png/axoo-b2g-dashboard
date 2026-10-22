@@ -323,7 +323,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -461,7 +463,9 @@
       "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1001,7 +1005,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1175,7 +1181,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -3099,7 +3107,9 @@
       "reviewedAt": "2026-10-19T09:48:54.935Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -3243,7 +3253,9 @@
       "reviewedAt": "2026-10-19T09:58:39.569Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -3258,6 +3270,137 @@
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "no_attachment_detected",
+        "files": []
+      }
+    },
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
+  },
+  {
+    "id": "kocca-326D00085010",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "한국콘텐츠진흥원",
+    "sourceCode": "KOCCA",
+    "sourceType": "지원사업",
+    "title": "2027 콘텐츠 아메리카 한국공동관 및 쇼케이스 참가기업 추가모집 공고",
+    "organization": "한국콘텐츠진흥원",
+    "agency": "한국콘텐츠진흥원",
+    "status": "진행중",
+    "postedDate": "2026-10-22",
+    "publishedDate": "2026-10-22",
+    "startDate": "2026-10-22",
+    "endDate": "2026-11-03",
+    "deadline": "2026-11-03",
+    "budget": null,
+    "supportAmount": null,
+    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00085010&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00085010&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
+    "documentUrl": "",
+    "field": "콘텐츠 제작·브랜딩",
+    "businessArea": "content_brand",
+    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "businessAreas": [
+      {
+        "code": "content_brand",
+        "label": "콘텐츠 제작·브랜딩"
+      }
+    ],
+    "matchedKeywords": [
+      "IP"
+    ],
+    "matchedPriorityKeywords": [
+      "IP"
+    ],
+    "axooFitScore": 69,
+    "score": 69,
+    "grade": "B",
+    "fitVerdict": "조건부 검토",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 40
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 12,
+        "maxScore": 20
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 9,
+        "maxScore": 15
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 5,
+        "maxScore": 5
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": 0,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "콘텐츠 제작·브랜딩 사업영역과 연결",
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+      "기획·제작·운영 수행역량 활용 가능",
+      "사업화·유통·지원금 요소 확인"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": true,
+    "axooFitReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "gradeReason": "조건부 검토: 콘텐츠 제작·브랜딩 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
+    "detailSummary": "지원규모 및 내용 ㅇ 모집규모 : 최대 2개사 이내 ㅇ 지원내용 - 한국공동관 기업별 상담테이블 제공 - 참가사별 등록 뱃지 2개 지원 - 마켓 참가 주요 바이어 비즈매칭 지원 - 공동관 참가사 대상 쇼케이스 개최 지원 ※ 참가사 직접 발표 필수 - 한국공동관 디렉토리북 제작, 사전 마켓 정보제공, 홍보 지원 등 ※ 위에 명시되지 않은 사항(항공/숙박, 해외운송비 등)에 대한 지원 없음, 기업 개별진행 및 비용부담 ※ 지원규모 및 세부 지원사항 추후 변동 가능 선정 및 지원절차 ㅇ 모집공고(10.22.(목)) ？ 국내기업 대상 모집안내 및 홍보(10월 5주) ？ 접수마감(11. 3.(화) 17:00) ？ 선정평가 및 참가기업 확정(~ 11월 2주) 선정기준 ㅇ 평가방법 : 서류평가 ㅇ 평가항목 : 콘텐츠의 경쟁력, 참가계획 및 목표, 해외진출 역량 3개 항목 종합 평가 ※ 선정기업의 참가취소 시, 후순위 기업에 참가기회 제공 가능(70점 미만 혹은 결격사유 발생 기업 제외) 참가기업의 역할 ㅇ 발표자료 작성(PPT 텍",
+    "eligibility": "지원대상 및 참가자격 ㅇ 국내 방송프로그램의 기획·제작·배급 및 유통 관련 해외수출을 희망하는 기업 ㅇ 글로벌 OTT를 통해 해외 방영ㆍ전송된 방송영상콘텐츠 기획개발 및 제작 레퍼런스 보유 혹은 자사 콘텐츠 IP 비즈니스 경쟁력이 높은 기업 ㅇ 한국공동관 및 쇼케이스 모두 참가 가능한 기업(참가사 직접 발표 예정)",
+    "supportDetails": "지원규모 및 내용 ㅇ 모집규모 : 최대 2개사 이내 ㅇ 지원내용 - 한국공동관 기업별 상담테이블 제공 - 참가사별 등록 뱃지 2개 지원 - 마켓 참가 주요 바이어 비즈매칭 지원 - 공동관 참가사 대상 쇼케이스 개최 지원 ※ 참가사 직접 발표 필수 - 한국공동관 디렉토리북 제작, 사전 마켓 정보제공, 홍보 지원 등 ※ 위에 명시되지 않은 사항(항공/숙박, 해외운송비 등)에 대한 지원 없음, 기업 개별진행 및 비용부담 ※ 지원규모 및 세부 지원사항 추후 변동 가능 선정 및 지원절차 ㅇ 모집공고(10.22.(목)) ？ 국내기업 대상 모집안내 및 홍보(10월 5주) ？ 접수마감(11. 3.(화) 17:00) ？ 선정평가 및 참가기업 확정(~ 11월 2주) 선정기준 ㅇ 평가방법 : 서류평가 ㅇ 평가항목 : 콘텐츠의 경쟁력, 참가계획 및 목표, 해외진출 역량 3개 항목 종합 평가 ※ 선정기업의 참가취소 시, 후순위 기업에 참가기회 제공 가능(70점 미만 혹은 결격사유 발생 기업 제외) 참가기업의 역할 ㅇ 발표자료 작성(PPT 텍",
+    "application": "신청방법 ㅇ 신청기간 : 2026. 10. 22.(목) ~ 11. 3.(화) 17:00 *마감시간 이후 접수 불가(유의) ㅇ 지원방법 : 웰콘 홈페이지 접수(http://welcon.kocca.kr) ㅇ 제출자료 : ① 추가신청서, ② 이해관계자리스트(엑셀), ③ 개인정보활용동의서, ④ 쇼케이스 참고자료(트레일러 등) ※ 웰콘 온라인 등록 관련 문의 : WelCon HelpDesk(1566-9984/welcon@kocca.kr) ※ 온라인 접수 미완료 또는 제출기한 이후에 접수된 신청서 및 자료는 무효 처리됩니다 (‘작성완료’ 건만 접수 인정) ※ 별도의 메일 및 우편접수는 불가합니다 ※ 직인 날인이 없는 신청서 무효 처리되어 평가 제외",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-22",
+    "updatedAt": "2026-10-22",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "snippets": []
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [
+        "신청서",
+        "동의서"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
         "files": []
       }
     },
