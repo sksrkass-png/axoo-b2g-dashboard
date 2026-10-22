@@ -105,7 +105,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -215,7 +215,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "마감일 확인 필요",
     "staleReason": ""
   },
@@ -271,7 +271,7 @@
         "value": "2026-10-15",
         "raw": "2026-10-15",
         "label": "등록일",
-        "evidence": "등록일 2026-10-15 조회수 1,423",
+        "evidence": "등록일 2026-10-15 조회수 1,641",
         "confidence": "high"
       },
       "agency": {
@@ -325,7 +325,7 @@
     "isStaleCandidate": false,
     "deadlineStatus": "마감일 확인 필요",
     "collectedAt": "2026-10-15",
-    "updatedAt": "2026-10-21",
+    "updatedAt": "2026-10-22",
     "collectionSourceId": "lh_notice",
     "collectionVersion": "nationwide-generic-1.5.0",
     "detailFetchStatus": "ok",
@@ -339,7 +339,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "staleReason": ""
   },
   {
@@ -394,7 +394,7 @@
         "value": "2026-10-15",
         "raw": "2026-10-15",
         "label": "등록일",
-        "evidence": "등록일 2026-10-15 조회수 1,422",
+        "evidence": "등록일 2026-10-15 조회수 1,640",
         "confidence": "high"
       },
       "agency": {
@@ -448,7 +448,7 @@
     "isStaleCandidate": false,
     "deadlineStatus": "마감일 확인 필요",
     "collectedAt": "2026-10-15",
-    "updatedAt": "2026-10-21",
+    "updatedAt": "2026-10-22",
     "collectionSourceId": "lh_notice",
     "collectionVersion": "nationwide-generic-1.5.0",
     "detailFetchStatus": "ok",
@@ -462,7 +462,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "staleReason": ""
   },
   {
@@ -572,7 +572,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -683,7 +683,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -794,7 +794,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -905,7 +905,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1016,7 +1016,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1127,7 +1127,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1238,7 +1238,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1349,7 +1349,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1459,7 +1459,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1505,7 +1505,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-21",
+    "dateNormalizedAt": "2026-10-22",
     "deadlineStatus": "진행중",
     "staleReason": ""
   }
