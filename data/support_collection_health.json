@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T14:05:04.122Z",
+  "updatedAt": "2026-10-22T18:47:08.057Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-22T14:05:04.122Z",
-      "lastSuccessAt": "2026-10-22T14:05:04.122Z",
+      "checkedAt": "2026-10-22T18:47:08.058Z",
+      "lastSuccessAt": "2026-10-22T18:47:08.058Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -22,12 +22,14 @@
       "name": "경기문화재단",
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
-      "state": "ok",
-      "checkedAt": "2026-10-22T14:05:14.019Z",
-      "lastSuccessAt": "2026-10-22T14:05:14.019Z",
-      "found": 2,
-      "verified": 2,
-      "errors": []
+      "state": "failed",
+      "checkedAt": "2026-10-22T18:47:24.624Z",
+      "found": 0,
+      "verified": 0,
+      "errors": [
+        "HTTP 403"
+      ],
+      "lastSuccessAt": "2026-10-22T14:05:14.019Z"
     },
     {
       "code": "IFAC",
@@ -35,8 +37,8 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-22T14:05:17.670Z",
-      "lastSuccessAt": "2026-10-22T14:05:17.670Z",
+      "checkedAt": "2026-10-22T18:47:26.094Z",
+      "lastSuccessAt": "2026-10-22T18:47:26.094Z",
       "found": 11,
       "verified": 11,
       "errors": []
@@ -47,8 +49,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-22T14:05:51.820Z",
-      "lastSuccessAt": "2026-10-22T14:05:51.820Z",
+      "checkedAt": "2026-10-22T18:48:31.302Z",
+      "lastSuccessAt": "2026-10-22T18:48:31.302Z",
       "found": 9,
       "verified": 9,
       "errors": []
@@ -59,8 +61,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "ok",
-      "checkedAt": "2026-10-22T14:05:58.029Z",
-      "lastSuccessAt": "2026-10-22T14:05:58.029Z",
+      "checkedAt": "2026-10-22T18:48:40.714Z",
+      "lastSuccessAt": "2026-10-22T18:48:40.714Z",
       "found": 9,
       "verified": 9,
       "errors": []

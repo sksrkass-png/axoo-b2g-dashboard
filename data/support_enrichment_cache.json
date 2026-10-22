@@ -941,7 +941,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-ddb71cf7de41|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD6pDx%2BABF3dZKRwuIqwjzWUPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -1941,7 +1943,37 @@
       ],
       "snippets": [],
       "snippetVersion": 2
+    },
+    "arko-953211739e54|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDyhT8R%2FrREV1FR1b%2FnOuXSUPBZm1EJpnMlsBwvsh76BM": {
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-22T18:48:52.452Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037958",
+          "label": "2027년 문학상주작가 지원사업 공고문.pdf",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037959",
+          "label": "2027년 문학상주작가 지원신청서(다년)_시설명.hwp",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037960",
+          "label": "2027년 문학상주작가 지원사업 FAQ.hwp",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": [],
+      "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-22T14:06:04.694Z"
+  "updatedAt": "2026-10-22T18:48:52.452Z"
 }
