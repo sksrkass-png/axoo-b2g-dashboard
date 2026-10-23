@@ -698,7 +698,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "manual_review_required"
     },
     "seoul-3cc3d0de10e042|https://mediahub.seoul.go.kr/gongmo/2000782": {
       "status": "manual_review_required",
@@ -786,7 +786,7 @@
     },
     "arko-54a4b2c41697|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD0mTniArRVouwj7U5teZEgUPBZm1EJpnMlsBwvsh76BM": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T07:55:42.375Z",
+      "reviewedAt": "2026-10-23T21:39:18.544Z",
       "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
       "files": [
         {
@@ -1829,11 +1829,12 @@
           "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272849"
         }
       ],
-      "snippetVersion": 2
+      "snippetVersion": 2,
+      "refreshWarning": "source_unavailable"
     },
     "seoul-c6c9edbd574207|https://mediahub.seoul.go.kr/gongmo/2000760": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T18:43:20.917Z",
+      "reviewedAt": "2026-10-23T21:39:18.544Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272852",
       "files": [
         {
@@ -1962,5 +1963,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-23T17:26:33.971Z"
+  "updatedAt": "2026-10-23T21:39:18.544Z"
 }
