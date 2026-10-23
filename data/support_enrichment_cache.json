@@ -713,7 +713,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "manual_review_required"
+      "refreshWarning": "source_unavailable"
     },
     "seoul-3cc3d0de10e042|https://mediahub.seoul.go.kr/gongmo/2000782": {
       "status": "manual_review_required",
@@ -1977,5 +1977,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-22T23:35:42.924Z"
+  "updatedAt": "2026-10-23T05:19:27.213Z"
 }

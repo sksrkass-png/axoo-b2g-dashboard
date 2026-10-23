@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-22T23:34:46.079Z",
+  "updatedAt": "2026-10-23T05:18:25.382Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-22T23:34:46.080Z",
-      "lastSuccessAt": "2026-10-22T23:34:46.080Z",
+      "checkedAt": "2026-10-23T05:18:25.383Z",
+      "lastSuccessAt": "2026-10-23T05:18:25.383Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -23,8 +23,8 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-22T23:34:57.020Z",
-      "lastSuccessAt": "2026-10-22T23:34:57.020Z",
+      "checkedAt": "2026-10-23T05:18:38.811Z",
+      "lastSuccessAt": "2026-10-23T05:18:38.811Z",
       "found": 2,
       "verified": 2,
       "errors": []
@@ -35,8 +35,8 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-22T23:35:00.660Z",
-      "lastSuccessAt": "2026-10-22T23:35:00.660Z",
+      "checkedAt": "2026-10-23T05:18:42.973Z",
+      "lastSuccessAt": "2026-10-23T05:18:42.973Z",
       "found": 11,
       "verified": 11,
       "errors": []
@@ -47,8 +47,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-22T23:35:28.424Z",
-      "lastSuccessAt": "2026-10-22T23:35:28.424Z",
+      "checkedAt": "2026-10-23T05:19:11.541Z",
+      "lastSuccessAt": "2026-10-23T05:19:11.541Z",
       "found": 9,
       "verified": 9,
       "errors": []
@@ -59,8 +59,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "ok",
-      "checkedAt": "2026-10-22T23:35:34.680Z",
-      "lastSuccessAt": "2026-10-22T23:35:34.680Z",
+      "checkedAt": "2026-10-23T05:19:18.182Z",
+      "lastSuccessAt": "2026-10-23T05:19:18.182Z",
       "found": 9,
       "verified": 9,
       "errors": []
