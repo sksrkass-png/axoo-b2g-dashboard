@@ -32,18 +32,9 @@
     },
     "scas-515abc3fedccf0|https://www.scas.kr/biz/detail/495?page=1": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T07:55:42.375Z",
-      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf",
+      "reviewedAt": "2026-10-23T12:04:29.096Z",
+      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026631&filename=2d1c1f1b-061e-4d4c-8772-d8439e6f6493.pdf",
       "files": [
-        {
-          "url": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf",
-          "label": "[공모안내]2027 서울문화재단 예술지원 통합공모 안내책자.pdf",
-          "format": "pdf",
-          "status": "parsed",
-          "reason": "",
-          "characters": 26000,
-          "pages": 51
-        },
         {
           "url": "https://www.scas.kr/s/f/file/download?filesn=1026631&filename=2d1c1f1b-061e-4d4c-8772-d8439e6f6493.pdf",
           "label": "[매뉴얼] 2027년 예술창작지원 지원신청 안내 매뉴얼.pdf",
@@ -59,29 +50,18 @@
           "format": "hwp",
           "status": "unsupported",
           "reason": "Binary HWP requires manual conversion"
+        },
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1026633&filename=af83cdcb-bcc7-47c4-b0f1-800aecb9348c.docx",
+          "label": "[양식] 2027년 예술창작지원 지원신청서(연극, 무용, 음악, 전통).docx",
+          "format": "docx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 9923,
+          "pages": 0
         }
       ],
       "snippets": [
-        {
-          "label": "지원 자격 문구",
-          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
-        },
-        {
-          "label": "지원 규모 문구",
-          "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
-        },
-        {
-          "label": "지원 내용 문구",
-          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
-        },
-        {
-          "label": "제출서류 문구",
-          "quote": "업 간 2. 지원신청 단계별 유의사항 지원신청 시 - 지원신청 필수서류(해당 사업, 해당 분야, 해당 연도의 지정양식 필수 사용) 미제출/미사용 시 심의 제외 - 지원신청 시 제시하는 아래 내용 동의 및 서약 필수(지정양식) •지원신청자의 ‘개인정보 수집·이용 동의서’ •문화예술계 성희롱·성폭력 근절을 위한 ‘성희롱·성폭력 예방실천 관련 서약’ •지원자 책임 신청제 등 ‘지원신청자 확인 내용’ - 동",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026605&filename=cc589111-e6de-40aa-9da6-2b0b5ebd6d66.pdf"
-        },
         {
           "label": "지원 규모 문구",
           "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
@@ -91,24 +71,30 @@
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026631&filename=2d1c1f1b-061e-4d4c-8772-d8439e6f6493.pdf"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "◦ 선정 이후 과도한 변경이 발생할 경우, 변경조치기준에 따라 지원금 삭감 또는 취소 조치가 있을 수 있으므로, 실현가능성을 고려 하여 신중히 작성해 주시기 바랍니다. ※ 공모안내 책자 p.37 변경조치 기준 확인 필수 ◦ 서울문화예술지원시스템(SCAS)과 지원신청서상의 정보는 반드시 일치하여야 하며, 상이할 경우 서울문화예술지원시스템(SCAS)에 기재된 정보를 기준으로 심의가 진행됩니다. 지원신청 ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026633&filename=af83cdcb-bcc7-47c4-b0f1-800aecb9348c.docx"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "내용의 파일 2개를 제출해 주시기 바랍니다. ※ 사전에 공지된 제출서류(지원신청서) 외 첨부된 자료는 심의 시 반영되지 않습니다 . ※ [연극] 계획한 프로젝트의 대본(PDF형식)을 선택 제출 가능합니다. 유의사항 ◦ 본 지원신청서는 심의지표에 따라 항목별로 내용을 작성하도록 구성되어 있습니다. 파란색 글씨로 작성된 안내 문구를 반드시 확인하신 후, 작성해 주시기 바랍니다. ◦ 지원신청서 및 첨부 링",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026633&filename=af83cdcb-bcc7-47c4-b0f1-800aecb9348c.docx"
+        },
+        {
+          "label": "부담·제한 문구",
+          "quote": ",000 원 ※ 사업의 전체 규모를 파악하기 위해 지원신청액과 자부담을 포함한 총 사업비를 작성해 주시기 바랍니다 . ※ 자부담은 필수가 아니며, 자부담이 없는 경우 지원신청액과 동일하게 기재해 주시기 바랍니다. ○ 지원신청액 16,000,000 원 ※ 금액 단위가 맞는지 확인해 주시기 바랍니다. ※ SCAS내 기재한 금액과 일치하는지 검토해 주시기 바랍니다. 항목 내역 금액산출 지원신청액 회계검증수",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026633&filename=af83cdcb-bcc7-47c4-b0f1-800aecb9348c.docx"
         }
       ],
       "snippetVersion": 2
     },
     "scas-2a7788fc904a07|https://www.scas.kr/biz/detail/496?page=1": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T07:55:42.375Z",
-      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf",
+      "reviewedAt": "2026-10-23T12:04:29.096Z",
+      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026635&filename=31ddcbed-4fab-4325-a735-ea1220a3bec0.pdf",
       "files": [
-        {
-          "url": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf",
-          "label": "[공모안내]2027 서울문화재단 예술지원 통합공모 안내책자.pdf",
-          "format": "pdf",
-          "status": "parsed",
-          "reason": "",
-          "characters": 26000,
-          "pages": 51
-        },
         {
           "url": "https://www.scas.kr/s/f/file/download?filesn=1026635&filename=31ddcbed-4fab-4325-a735-ea1220a3bec0.pdf",
           "label": "[매뉴얼] 2027년 예술창작지원 지원신청 안내 매뉴얼.pdf",
@@ -124,29 +110,18 @@
           "format": "hwp",
           "status": "unsupported",
           "reason": "Binary HWP requires manual conversion"
+        },
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1026637&filename=271dd8f9-737e-42e4-9c02-bf65cbdc5165.docx",
+          "label": "[양식] 2027년 예술창작지원 지원신청서(연극, 무용, 음악, 전통).docx",
+          "format": "docx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 9923,
+          "pages": 0
         }
       ],
       "snippets": [
-        {
-          "label": "지원 자격 문구",
-          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
-        },
-        {
-          "label": "지원 규모 문구",
-          "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
-        },
-        {
-          "label": "지원 내용 문구",
-          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
-        },
-        {
-          "label": "제출서류 문구",
-          "quote": "업 간 2. 지원신청 단계별 유의사항 지원신청 시 - 지원신청 필수서류(해당 사업, 해당 분야, 해당 연도의 지정양식 필수 사용) 미제출/미사용 시 심의 제외 - 지원신청 시 제시하는 아래 내용 동의 및 서약 필수(지정양식) •지원신청자의 ‘개인정보 수집·이용 동의서’ •문화예술계 성희롱·성폭력 근절을 위한 ‘성희롱·성폭력 예방실천 관련 서약’ •지원자 책임 신청제 등 ‘지원신청자 확인 내용’ - 동",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026608&filename=8e55b4b1-3407-4ddc-82ab-2cf6a1d37c39.pdf"
-        },
         {
           "label": "지원 규모 문구",
           "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
@@ -156,24 +131,30 @@
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026635&filename=31ddcbed-4fab-4325-a735-ea1220a3bec0.pdf"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "◦ 선정 이후 과도한 변경이 발생할 경우, 변경조치기준에 따라 지원금 삭감 또는 취소 조치가 있을 수 있으므로, 실현가능성을 고려 하여 신중히 작성해 주시기 바랍니다. ※ 공모안내 책자 p.37 변경조치 기준 확인 필수 ◦ 서울문화예술지원시스템(SCAS)과 지원신청서상의 정보는 반드시 일치하여야 하며, 상이할 경우 서울문화예술지원시스템(SCAS)에 기재된 정보를 기준으로 심의가 진행됩니다. 지원신청 ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026637&filename=271dd8f9-737e-42e4-9c02-bf65cbdc5165.docx"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "내용의 파일 2개를 제출해 주시기 바랍니다. ※ 사전에 공지된 제출서류(지원신청서) 외 첨부된 자료는 심의 시 반영되지 않습니다 . ※ [연극] 계획한 프로젝트의 대본(PDF형식)을 선택 제출 가능합니다. 유의사항 ◦ 본 지원신청서는 심의지표에 따라 항목별로 내용을 작성하도록 구성되어 있습니다. 파란색 글씨로 작성된 안내 문구를 반드시 확인하신 후, 작성해 주시기 바랍니다. ◦ 지원신청서 및 첨부 링",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026637&filename=271dd8f9-737e-42e4-9c02-bf65cbdc5165.docx"
+        },
+        {
+          "label": "부담·제한 문구",
+          "quote": ",000 원 ※ 사업의 전체 규모를 파악하기 위해 지원신청액과 자부담을 포함한 총 사업비를 작성해 주시기 바랍니다 . ※ 자부담은 필수가 아니며, 자부담이 없는 경우 지원신청액과 동일하게 기재해 주시기 바랍니다. ○ 지원신청액 16,000,000 원 ※ 금액 단위가 맞는지 확인해 주시기 바랍니다. ※ SCAS내 기재한 금액과 일치하는지 검토해 주시기 바랍니다. 항목 내역 금액산출 지원신청액 회계검증수",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026637&filename=271dd8f9-737e-42e4-9c02-bf65cbdc5165.docx"
         }
       ],
       "snippetVersion": 2
     },
     "scas-1b446ace9eb2c9|https://www.scas.kr/biz/detail/497?page=1": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T07:55:42.375Z",
-      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf",
+      "reviewedAt": "2026-10-23T12:04:29.096Z",
+      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026639&filename=5700e6ce-c972-4c9c-a8b4-d4587d34b1f5.pdf",
       "files": [
-        {
-          "url": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf",
-          "label": "[공모안내]2027 서울문화재단 예술지원 통합공모 안내책자.pdf",
-          "format": "pdf",
-          "status": "parsed",
-          "reason": "",
-          "characters": 26000,
-          "pages": 51
-        },
         {
           "url": "https://www.scas.kr/s/f/file/download?filesn=1026639&filename=5700e6ce-c972-4c9c-a8b4-d4587d34b1f5.pdf",
           "label": "[매뉴얼] 2027년 예술창작지원 지원신청 안내 매뉴얼.pdf",
@@ -189,29 +170,18 @@
           "format": "hwp",
           "status": "unsupported",
           "reason": "Binary HWP requires manual conversion"
+        },
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1026641&filename=4d00857c-3ac5-4864-bfdf-d9cd2b8355c2.docx",
+          "label": "[양식] 2027년 예술창작지원 지원신청서(연극, 무용, 음악, 전통).docx",
+          "format": "docx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 9923,
+          "pages": 0
         }
       ],
       "snippets": [
-        {
-          "label": "지원 자격 문구",
-          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
-        },
-        {
-          "label": "지원 규모 문구",
-          "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
-        },
-        {
-          "label": "지원 내용 문구",
-          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
-        },
-        {
-          "label": "제출서류 문구",
-          "quote": "업 간 2. 지원신청 단계별 유의사항 지원신청 시 - 지원신청 필수서류(해당 사업, 해당 분야, 해당 연도의 지정양식 필수 사용) 미제출/미사용 시 심의 제외 - 지원신청 시 제시하는 아래 내용 동의 및 서약 필수(지정양식) •지원신청자의 ‘개인정보 수집·이용 동의서’ •문화예술계 성희롱·성폭력 근절을 위한 ‘성희롱·성폭력 예방실천 관련 서약’ •지원자 책임 신청제 등 ‘지원신청자 확인 내용’ - 동",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026613&filename=4d99e503-984e-4b99-96b5-3273e9526861.pdf"
-        },
         {
           "label": "지원 규모 문구",
           "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
@@ -221,24 +191,30 @@
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026639&filename=5700e6ce-c972-4c9c-a8b4-d4587d34b1f5.pdf"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "◦ 선정 이후 과도한 변경이 발생할 경우, 변경조치기준에 따라 지원금 삭감 또는 취소 조치가 있을 수 있으므로, 실현가능성을 고려 하여 신중히 작성해 주시기 바랍니다. ※ 공모안내 책자 p.37 변경조치 기준 확인 필수 ◦ 서울문화예술지원시스템(SCAS)과 지원신청서상의 정보는 반드시 일치하여야 하며, 상이할 경우 서울문화예술지원시스템(SCAS)에 기재된 정보를 기준으로 심의가 진행됩니다. 지원신청 ",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026641&filename=4d00857c-3ac5-4864-bfdf-d9cd2b8355c2.docx"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "내용의 파일 2개를 제출해 주시기 바랍니다. ※ 사전에 공지된 제출서류(지원신청서) 외 첨부된 자료는 심의 시 반영되지 않습니다 . ※ [연극] 계획한 프로젝트의 대본(PDF형식)을 선택 제출 가능합니다. 유의사항 ◦ 본 지원신청서는 심의지표에 따라 항목별로 내용을 작성하도록 구성되어 있습니다. 파란색 글씨로 작성된 안내 문구를 반드시 확인하신 후, 작성해 주시기 바랍니다. ◦ 지원신청서 및 첨부 링",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026641&filename=4d00857c-3ac5-4864-bfdf-d9cd2b8355c2.docx"
+        },
+        {
+          "label": "부담·제한 문구",
+          "quote": ",000 원 ※ 사업의 전체 규모를 파악하기 위해 지원신청액과 자부담을 포함한 총 사업비를 작성해 주시기 바랍니다 . ※ 자부담은 필수가 아니며, 자부담이 없는 경우 지원신청액과 동일하게 기재해 주시기 바랍니다. ○ 지원신청액 16,000,000 원 ※ 금액 단위가 맞는지 확인해 주시기 바랍니다. ※ SCAS내 기재한 금액과 일치하는지 검토해 주시기 바랍니다. 항목 내역 금액산출 지원신청액 회계검증수",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026641&filename=4d00857c-3ac5-4864-bfdf-d9cd2b8355c2.docx"
         }
       ],
       "snippetVersion": 2
     },
     "scas-ab662b9c035bba|https://www.scas.kr/biz/detail/507?page=1": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T07:55:42.375Z",
-      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf",
+      "reviewedAt": "2026-10-23T12:04:29.096Z",
+      "documentUrl": "https://www.scas.kr/s/f/file/download?filesn=1026612&filename=108dbbd6-81c4-4b17-bc41-70c7816b3df2.pdf",
       "files": [
-        {
-          "url": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf",
-          "label": "붙임1. 2027 예술지원 통합공모 안내책자_최종.pdf",
-          "format": "pdf",
-          "status": "parsed",
-          "reason": "",
-          "characters": 26000,
-          "pages": 51
-        },
         {
           "url": "https://www.scas.kr/s/f/file/download?filesn=1026610&filename=8c8d95d0-33fe-476f-93dd-7e20c54ee47e.pptx",
           "label": "[양식] 2027년 예술창작지원 지원신청서(다원).pptx",
@@ -254,29 +230,18 @@
           "reason": "",
           "characters": 3833,
           "pages": 20
+        },
+        {
+          "url": "https://www.scas.kr/s/f/file/download?filesn=1049819&filename=87bd8214-bc8d-4ba1-997b-d94144042685.pdf",
+          "label": "[공모안내]2027_서울문화재단_예술지원_통합공모_안내책자.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 26000,
+          "pages": 51
         }
       ],
       "snippets": [
-        {
-          "label": "지원 자격 문구",
-          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
-        },
-        {
-          "label": "지원 규모 문구",
-          "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
-        },
-        {
-          "label": "지원 내용 문구",
-          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
-        },
-        {
-          "label": "제출서류 문구",
-          "quote": "업 간 2. 지원신청 단계별 유의사항 지원신청 시 - 지원신청 필수서류(해당 사업, 해당 분야, 해당 연도의 지정양식 필수 사용) 미제출/미사용 시 심의 제외 - 지원신청 시 제시하는 아래 내용 동의 및 서약 필수(지정양식) •지원신청자의 ‘개인정보 수집·이용 동의서’ •문화예술계 성희롱·성폭력 근절을 위한 ‘성희롱·성폭력 예방실천 관련 서약’ •지원자 책임 신청제 등 ‘지원신청자 확인 내용’ - 동",
-          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026607&filename=5ff324d1-7535-47ed-9372-12c648cc717b.pdf"
-        },
         {
           "label": "지원 규모 문구",
           "quote": "한 내용과 동일하게 작성해주세요. 신청개요 작성 신청사업 분야 총사업비 지원신청액 예술 창작 지원 연극 무용 음악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ",
@@ -286,6 +251,26 @@
           "label": "부담·제한 문구",
           "quote": "악 전통 시각 다원 사업 진행을 위해 소요되는 사업비 (지원금+자부담) ※ 자부담은 필수 아님 ※ 자부담 없을 시, 총사업비와 지원신청액 일치하여 기입 지원금 신청액 기입 ※ 트랙, 장르별 최대 금액 상이함 문학 10,000,000원 기입 10,000,000원 기입 8 신청개요 작성 ( , ) ( , ) ※ ( ) “ ” ※ ※ ( ) “ ” 사업 장소를 작성해주세요. ※ 신청개요는 지원신청서 서류 ",
           "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1026612&filename=108dbbd6-81c4-4b17-bc41-70c7816b3df2.pdf"
+        },
+        {
+          "label": "지원 자격 문구",
+          "quote": "미완료, 임의포기, 환수 대상자 등) ※ 기존 선정사업에 따라 신청자격 제한 등 제재 기한, 제재 방식 등이 상이하므로 반드시 지원신청 전 관련 부서에 사전 확인 후 신청 ※ 기존 서울문화재단 예술지원사업에 선정되었으나, 아직 사업이 종료되지 않았거나 사업 종료 후 기한 내 정산·성과보고 진행 중인 예술인 또는 예술단체는 기존 사업 정산·성과보고 승인 완료 후 지원금 교부 가능 ※ 재단이 정당한 사유",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1049819&filename=87bd8214-bc8d-4ba1-997b-d94144042685.pdf"
+        },
+        {
+          "label": "지원 규모 문구",
+          "quote": "한 창작기반 조성 기업 기부금의 최대 100% 이내 재단 매칭 지원금 지원(최대 2,000만원) ● ● ● ● ● ● ● p.81 장애예술인 창작활성화 지원 전 장르에서 활동하는 장애예술인/ 단체의 창작활동과 발표를 지원 최소 500만원~최대 2,000만원 * 문학 분야는 1,000만원 정액 ● ● ● ● ● ● ● ● p.81 융합예술지원 기술 기반 예술과 스크린 기반 미디어아트의 제작·발표 및 국",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1049819&filename=87bd8214-bc8d-4ba1-997b-d94144042685.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "16년 내외 및 그 이상의 예술활동을 한 예술인 또는 예술단체 지원내용 지원신청 방법 - 접수기간: 2026년 9월 30일(수)~10월 23일(금) 18:00(KST, 한국표준시) 마감 - 접수방법: 서울문화예술지원시스템(SCAS)을 통한 온라인 지원신청 제출서류 ※ 지원신청서는 재단 홈페이지 내 2027년 지정서식 다운로드 ※ 지원신청서는 원본 손상 방지를 위해 2개 파일로 제출 (① 한글 혹은 워",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1049819&filename=87bd8214-bc8d-4ba1-997b-d94144042685.pdf"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "업 간 2. 지원신청 단계별 유의사항 지원신청 시 - 지원신청 필수서류(해당 사업, 해당 분야, 해당 연도의 지정양식 필수 사용) 미제출/미사용 시 심의 제외 - 지원신청 시 제시하는 아래 내용 동의 및 서약 필수(지정양식) •지원신청자의 ‘개인정보 수집·이용 동의서’ •문화예술계 성희롱·성폭력 근절을 위한 ‘성희롱·성폭력 예방실천 관련 서약’ •지원자 책임 신청제 등 ‘지원신청자 확인 내용’ - 동",
+          "sourceUrl": "https://www.scas.kr/s/f/file/download?filesn=1049819&filename=87bd8214-bc8d-4ba1-997b-d94144042685.pdf"
         }
       ],
       "snippetVersion": 2
@@ -575,7 +560,7 @@
     },
     "seoul-86386eeb4ff162|https://mediahub.seoul.go.kr/gongmo/2000778": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T07:55:42.375Z",
+      "reviewedAt": "2026-10-23T12:04:29.096Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2278429",
       "files": [
         {
@@ -588,12 +573,12 @@
           "pages": 0
         },
         {
-          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100",
-          "label": "2026서울영상공모전_서울밤로그_공고문.pdf",
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282905",
+          "label": "(기간연장)2026서울영상공모전_서울밤로그_공고문.pdf",
           "format": "pdf",
           "status": "parsed",
           "reason": "",
-          "characters": 4219,
+          "characters": 4223,
           "pages": 5
         }
       ],
@@ -601,12 +586,12 @@
         {
           "label": "지원 자격 문구",
           "quote": "지 ○활용계획:<내손안에서울>누리집,서울시SNS등홍보매체활용2.응모자격및제한 ○응모자격:국내거주내·외국인누구나(개인,3인이하팀) ○응모제한: 타공 모 전및이 벤 트입 상·수 상또 는표 절·중 복 응 모·도 용등부 정 행 위발 생시수 상 취 소,상 금·부 상환 수,향 후5년 간공 모 전응 시 참 여제 한 - 2 - 3.응모방법 ○접수방법 ①제 작 한숏 폼영 상 을개 인S N S계 정(유 튜 브쇼 츠,인",
-          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100"
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282905"
         },
         {
           "label": "지원 내용 문구",
           "quote": "5 - 붙임 24시간 활력경제도시 서울 주요 사업(예시)구 분 사업내용야간 문화생활▸박물관·미술관·한옥 등 시설 야간개방(서울 컬처나잇)▸야외도서관, 야간 콘서트 등 야간 특화프로그램야간 체육·웰니스▸운동장, 체육관 등 체육시설 야간개방▸나이트런, 7979 서울 러닝크루, 운동하는 서울광장 등 야간 특화프로그램 펀스테이션▸러너스테이션, 핏스테이션, 러너지원공간, K-문화스테이션 등 야간 이용▸야간 특",
-          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279100"
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282905"
         }
       ],
       "snippetVersion": 2
@@ -1977,5 +1962,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-23T05:19:27.213Z"
+  "updatedAt": "2026-10-23T12:04:29.096Z"
 }
