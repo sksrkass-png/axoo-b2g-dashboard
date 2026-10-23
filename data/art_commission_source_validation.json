@@ -1,8 +1,8 @@
 {
-  "validatedAt": "2026-10-22",
+  "validatedAt": "2026-10-23",
   "channelCount": 33,
-  "reachableCount": 31,
-  "unreachableCount": 2,
+  "reachableCount": 28,
+  "unreachableCount": 5,
   "channels": [
     {
       "id": "gyeonggi_public_art",
@@ -16,7 +16,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 887,
+      "elapsedMs": 1241,
       "error": ""
     },
     {
@@ -31,7 +31,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 761,
+      "elapsedMs": 981,
       "error": ""
     },
     {
@@ -46,7 +46,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1339,
+      "elapsedMs": 1564,
       "error": ""
     },
     {
@@ -61,7 +61,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1080,
+      "elapsedMs": 1514,
       "error": ""
     },
     {
@@ -76,7 +76,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10483,
+      "elapsedMs": 1544,
       "error": "fetch failed"
     },
     {
@@ -91,7 +91,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10483,
+      "elapsedMs": 1549,
       "error": "fetch failed"
     },
     {
@@ -106,7 +106,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 3968,
+      "elapsedMs": 4142,
       "error": ""
     },
     {
@@ -121,7 +121,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1242,
+      "elapsedMs": 1596,
       "error": ""
     },
     {
@@ -136,7 +136,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1787,
+      "elapsedMs": 2082,
       "error": ""
     },
     {
@@ -151,7 +151,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1091,
+      "elapsedMs": 1674,
       "error": ""
     },
     {
@@ -166,7 +166,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1182,
+      "elapsedMs": 1787,
       "error": ""
     },
     {
@@ -181,7 +181,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 808,
+      "elapsedMs": 2277,
       "error": ""
     },
     {
@@ -196,7 +196,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 2078,
+      "elapsedMs": 2927,
       "error": ""
     },
     {
@@ -211,7 +211,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1132,
+      "elapsedMs": 1287,
       "error": ""
     },
     {
@@ -221,13 +221,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://www.daegu.go.kr/index.do?menu_id=00940170",
-      "finalUrl": "https://www.daegu.go.kr/index.do?menu_id=00940170",
-      "reachable": true,
-      "status": 200,
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
       "redirected": false,
-      "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 3736,
-      "error": ""
+      "contentType": "",
+      "elapsedMs": 10143,
+      "error": "fetch failed"
     },
     {
       "id": "daegu_urban_development",
@@ -241,7 +241,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 776,
+      "elapsedMs": 1114,
       "error": ""
     },
     {
@@ -256,7 +256,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1070,
+      "elapsedMs": 1302,
       "error": ""
     },
     {
@@ -271,7 +271,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1558,
+      "elapsedMs": 1730,
       "error": ""
     },
     {
@@ -286,7 +286,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1881,
+      "elapsedMs": 3260,
       "error": ""
     },
     {
@@ -301,7 +301,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 709,
+      "elapsedMs": 1598,
       "error": ""
     },
     {
@@ -316,7 +316,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1498,
+      "elapsedMs": 2760,
       "error": ""
     },
     {
@@ -326,13 +326,13 @@
       "sourceType": "public_corporation",
       "crawlMode": "keyword_search",
       "configuredUrl": "https://www.cbdc.co.kr",
-      "finalUrl": "https://www.cbdc.co.kr/home/index.do",
-      "reachable": true,
-      "status": 200,
-      "redirected": true,
-      "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 7035,
-      "error": ""
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
+      "redirected": false,
+      "contentType": "",
+      "elapsedMs": 10278,
+      "error": "fetch failed"
     },
     {
       "id": "chungbuk_notice",
@@ -341,13 +341,13 @@
       "sourceType": "public_corporation",
       "crawlMode": "board",
       "configuredUrl": "https://www.cbdc.co.kr/zboard/list.do?lmCode=BBSMSTR_000000000018",
-      "finalUrl": "https://www.cbdc.co.kr/zboard/list.do?lmCode=BBSMSTR_000000000018",
-      "reachable": true,
-      "status": 200,
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
       "redirected": false,
-      "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 3095,
-      "error": ""
+      "contentType": "",
+      "elapsedMs": 10240,
+      "error": "fetch failed"
     },
     {
       "id": "jeonnam_development_corporation",
@@ -361,7 +361,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 8567,
+      "elapsedMs": 13811,
       "error": ""
     },
     {
@@ -376,7 +376,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 4361,
+      "elapsedMs": 3970,
       "error": ""
     },
     {
@@ -391,7 +391,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 3276,
+      "elapsedMs": 2224,
       "error": ""
     },
     {
@@ -406,7 +406,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 4293,
+      "elapsedMs": 5616,
       "error": ""
     },
     {
@@ -421,7 +421,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 3831,
+      "elapsedMs": 3511,
       "error": ""
     },
     {
@@ -436,7 +436,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1568,
+      "elapsedMs": 1807,
       "error": ""
     },
     {
@@ -451,7 +451,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1393,
+      "elapsedMs": 1364,
       "error": ""
     },
     {
@@ -466,7 +466,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 980,
+      "elapsedMs": 3466,
       "error": ""
     },
     {
@@ -481,7 +481,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 838,
+      "elapsedMs": 1016,
       "error": ""
     },
     {
@@ -496,7 +496,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1105,
+      "elapsedMs": 2855,
       "error": ""
     }
   ]
