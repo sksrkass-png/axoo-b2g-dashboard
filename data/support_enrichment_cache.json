@@ -1830,7 +1830,7 @@
         }
       ],
       "snippetVersion": 2,
-      "refreshWarning": "attachment_not_readable"
+      "refreshWarning": "source_unavailable"
     },
     "seoul-c6c9edbd574207|https://mediahub.seoul.go.kr/gongmo/2000760": {
       "status": "parsed",
@@ -1963,5 +1963,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-24T12:56:02.942Z"
+  "updatedAt": "2026-10-24T17:35:30.791Z"
 }
