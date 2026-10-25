@@ -540,15 +540,6 @@
         }
       ]
     },
-    "kcdf-9213|https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9213&brdCodeValue=&searchField=titlecontent": {
-      "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T09:48:54.935Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": [],
-      "snippetVersion": 2,
-      "refreshWarning": "no_attachment_detected"
-    },
     "kcdf-9134|https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9134&brdCodeValue=&searchField=titlecontent": {
       "status": "no_attachment_detected",
       "reviewedAt": "2026-10-19T09:58:39.569Z",
@@ -605,7 +596,7 @@
     },
     "seoul-7c13e35b85aff9|https://mediahub.seoul.go.kr/gongmo/2000788": {
       "status": "parsed",
-      "reviewedAt": "2026-10-22T14:06:04.694Z",
+      "reviewedAt": "2026-10-25T16:48:52.310Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2281715",
       "files": [
         {
@@ -1173,7 +1164,7 @@
     },
     "seoul-8f04c919b2144a|https://mediahub.seoul.go.kr/gongmo/2000784": {
       "status": "parsed",
-      "reviewedAt": "2026-10-22T14:06:04.694Z",
+      "reviewedAt": "2026-10-25T16:48:52.310Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
       "files": [
         {
@@ -1963,5 +1954,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-25T11:59:21.320Z"
+  "updatedAt": "2026-10-25T16:48:52.310Z"
 }
