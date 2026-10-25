@@ -679,7 +679,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "attachment_not_readable"
     },
     "seoul-6f19dda6c32c5f|https://mediahub.seoul.go.kr/gongmo/2000781": {
       "status": "source_unavailable",
@@ -1821,7 +1821,7 @@
         }
       ],
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "attachment_not_readable"
     },
     "seoul-c6c9edbd574207|https://mediahub.seoul.go.kr/gongmo/2000760": {
       "status": "parsed",
@@ -1951,8 +1951,9 @@
         }
       ],
       "snippets": [],
-      "snippetVersion": 2
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     }
   },
-  "updatedAt": "2026-10-25T16:48:52.310Z"
+  "updatedAt": "2026-10-25T21:13:55.827Z"
 }

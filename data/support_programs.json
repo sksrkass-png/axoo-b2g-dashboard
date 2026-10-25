@@ -338,7 +338,8 @@
         }
       ],
       "snippets": [],
-      "snippetVersion": 2
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
