@@ -672,14 +672,33 @@
       "snippets": []
     },
     "seoul-d2155f8f7bf5af|https://mediahub.seoul.go.kr/gongmo/2000779": {
-      "status": "source_unavailable",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": [],
-      "reason": "fetch failed",
-      "snippetVersion": 2,
-      "refreshWarning": "attachment_not_readable"
+      "status": "parsed",
+      "reviewedAt": "2026-10-26T00:43:41.793Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279115",
+      "files": [
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279115",
+          "label": "노들글로벌예술섬_사진숏폼공모전_공고문.pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 3040,
+          "pages": 4
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "누리집 및 SNS, 온·오프라인 전시 등 홍보 콘텐츠로 활용□ 응모자격 및 제한 ㅇ 응모자격 : 대한민국 국민(개인 응모만 가능, 단체 응모 불가) ㅇ 응모제한 - 1인 최대 5개 작품까지 응모 가능(사진 최대 3점, 숏폼 최대 2점) - 타 저작물 표절작 응모 불가 ※ 중복 수상 불가 / 표절, 도용, 초상권 침해 등 부정행위 발생 시 수상 취소 - 2 - □ 심사개요 ㅇ 심사방법 - (1차심사) ",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279115"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "- 2 - □ 심사개요 ㅇ 심사방법 - (1차심사) 작품규격, 제출서류 등 출품작의 응모요건 준수 여부 검토 - (2차심사) 콘텐츠 분야 전문가 5명 이내로 심사위원회 구성 후, 심사 기준을 종합적으로 심사하여 수상 후보작 선정 ㅇ 심사기준 항 목배점(점) 세부내용주제 해석력35 수변문화공간의 변화와 매력을 시민의 관점에서 잘 표현하고, 작품을 통해 노들 글로벌 예술섬의 미래에 대한 기대를 효과적으로",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279115"
+        }
+      ],
+      "snippetVersion": 2
     },
     "seoul-6f19dda6c32c5f|https://mediahub.seoul.go.kr/gongmo/2000781": {
       "status": "source_unavailable",
@@ -1795,7 +1814,7 @@
     },
     "seoul-56ad89dc1363cb|https://mediahub.seoul.go.kr/gongmo/2000759": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T18:43:20.917Z",
+      "reviewedAt": "2026-10-26T00:43:41.793Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272849",
       "files": [
         {
@@ -1820,8 +1839,7 @@
           "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272849"
         }
       ],
-      "snippetVersion": 2,
-      "refreshWarning": "attachment_not_readable"
+      "snippetVersion": 2
     },
     "seoul-c6c9edbd574207|https://mediahub.seoul.go.kr/gongmo/2000760": {
       "status": "parsed",
@@ -1953,7 +1971,15 @@
       "snippets": [],
       "snippetVersion": 2,
       "refreshWarning": "attachment_not_readable"
+    },
+    "kcdf-9213|https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9213&brdCodeValue=&searchField=titlecontent": {
+      "status": "no_attachment_detected",
+      "reviewedAt": "2026-10-26T00:43:41.793Z",
+      "documentUrl": "",
+      "files": [],
+      "snippets": [],
+      "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-25T21:13:55.827Z"
+  "updatedAt": "2026-10-26T00:43:41.793Z"
 }
