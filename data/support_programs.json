@@ -1,5 +1,142 @@
 [
   {
+    "id": "kams-2835",
+    "category": "arts_content_support",
+    "categoryLabel": "예술·콘텐츠 지원사업",
+    "priorityCategory": "arts_content_support",
+    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
+    "source": "예술경영지원센터",
+    "sourceCode": "KAMS",
+    "sourceType": "지원사업",
+    "title": "2027년 대표공연 콘텐츠 지역유통 지원사업 공모",
+    "organization": "예술경영지원센터",
+    "agency": "예술경영지원센터",
+    "status": "진행중",
+    "postedDate": "2026-10-26",
+    "publishedDate": "2026-10-26",
+    "startDate": "",
+    "endDate": "2027-01-07",
+    "deadline": "2027-01-07",
+    "budget": null,
+    "supportAmount": null,
+    "originalUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2835&page=1&txtKeyword=&ddlKeyfield=45",
+    "sourceUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2835&page=1&txtKeyword=&ddlKeyfield=45",
+    "documentUrl": "",
+    "field": "사업화·유통",
+    "businessArea": "business_distribution",
+    "businessAreaLabel": "사업화·유통",
+    "businessAreas": [
+      {
+        "code": "business_distribution",
+        "label": "사업화·유통"
+      }
+    ],
+    "matchedKeywords": [
+      "예술경영"
+    ],
+    "matchedPriorityKeywords": [
+      "예술경영"
+    ],
+    "axooFitScore": 29,
+    "score": 29,
+    "grade": "C",
+    "fitVerdict": "낮은 적합도",
+    "scoreBreakdown": [
+      {
+        "code": "relevance",
+        "label": "사업영역",
+        "score": 23,
+        "maxScore": 40
+      },
+      {
+        "code": "eligibility",
+        "label": "지원자격",
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "code": "execution",
+        "label": "수행역량",
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "code": "business",
+        "label": "사업성",
+        "score": 6,
+        "maxScore": 15
+      },
+      {
+        "code": "evidence",
+        "label": "상세근거",
+        "score": 5,
+        "maxScore": 5
+      },
+      {
+        "code": "penalty",
+        "label": "감점",
+        "score": -25,
+        "maxScore": 0
+      }
+    ],
+    "scoreReasons": [
+      "사업화·유통 사업영역과 연결",
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
+      "사업화·유통·지원금 요소 확인",
+      "AXOO 비핵심 장르 비중으로 감점"
+    ],
+    "analysisBasis": "상세 공고문",
+    "analysisConfidence": "high",
+    "companyEligible": true,
+    "axooFitReason": "낮은 적합도: 사업화·유통 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
+    "gradeReason": "낮은 적합도: 사업화·유통 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · AXOO 비핵심 장르 비중으로 감점",
+    "detailSummary": "",
+    "eligibility": "지원대상 공연장 목록(1).pdf 2027년 문화예술 전국 유통지원 통합 공모 FAQ(4).pdf [공연단체 지정양식] 2027년 대표공연 콘텐츠 지역유통 지원사업_ 공연단체 제출서류(공연단체명)(1).hwp [공연단체 지정양식] 2027년 대표공연 콘텐츠 지역유통 지원사업_정부시상 수상실적 증빙자료(공연단체명)(1).xlsx [공연시설 지정양식] 2027년 대표공연 콘텐츠 지역유통 지원사업_ 공연시설 제출서류(공연시설명)(1).hwp --> ▶ 공모신청 바로가기 ▶ 사업설명회 영상 보러가기 문의 (재)예술경영지원센터 02-6953-1830 전화 02-6953-1830 이메일 gokams@contestweb.net --> 이전글이 없습니다. 2027년 공연예술 지역유통 지원사업 공모 08 월 19 일 문화가 있는날 혜택보기 정부3.0 -->",
+    "supportDetails": "",
+    "application": "제출서류 (공연단체명)(1).hwp [공연단체 지정양식] 2027년 대표공연 콘텐츠 지역유통 지원사업_정부시상 수상실적 증빙자료(공연단체명)(1).xlsx [공연시설 지정양식] 2027년 대표공연 콘텐츠 지역유통 지원사업_ 공연시설 제출서류(공연시설명)(1).hwp --> ▶ 공모신청 바로가기 ▶ 사업설명회 영상 보러가기 문의 (재)예술경영지원센터 02-6953-1830 전화 02-6953-1830 이메일 gokams@contestweb.net --> 이전글이 없습니다. 2027년 공연예술 지역유통 지원사업 공모 08 월 19 일 문화가 있는날 혜택보기 정부3.0 --> 문화가 있는날 서울문화포털 일본 수출규제대응 이렇게 대응합니다. --",
+    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
+    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
+    "isPriority": true,
+    "isExcludedFromPriority": false,
+    "exclusionReason": "",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
+    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
+    "documentReview": {
+      "status": "pending_review",
+      "files": [],
+      "snippets": []
+    },
+    "applicationReview": {
+      "version": "p0_eligibility_review_v1",
+      "participationCode": "artist_collab_review",
+      "participationLabel": "작가·예술단체 협업 검토",
+      "applicantBasis": "공연단체",
+      "evidence": [
+        {
+          "field": "신청 자격",
+          "quote": "지원대상 공연장 목록(1).pdf 2027년 문화예술 전국 유통지원 통합 공모 FAQ(4).pdf [공연단체 지정양식] 2027년 대표공연 콘텐츠 지역유통 지원사업_ 공연단체 제출서류(공연단체명)(1).hwp [공연단체 지정양식] 2027년 대표공연 콘텐츠 지역유통 지원사업_정부시상 수상실적 증빙자료(공연단체명)(1).xlsx [공연시설 지정양식] 2027년 대표공연 콘텐츠 지역유통 지원사업_ 공연시설 제출서류(공연시설명)(1).hwp --> ▶ 공모신청",
+          "source": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2835&page=1&txtKeyword=&ddlKeyfield=45",
+          "sourceType": "공고 자격 안내"
+        }
+      ],
+      "restrictions": [],
+      "submissionDocuments": [
+        "제출서류"
+      ],
+      "missingEvidence": false,
+      "detailQuality": "eligibility_parsed",
+      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
+      "documentAudit": {
+        "status": "pending_review",
+        "files": []
+      }
+    },
+    "participationCode": "artist_collab_review",
+    "participationLabel": "작가·예술단체 협업 검토",
+    "scoringVersion": "AXOO_FIT_V2_2026_10"
+  },
+  {
     "id": "kams-2833",
     "category": "arts_content_support",
     "categoryLabel": "예술·콘텐츠 지원사업",
@@ -15,8 +152,8 @@
     "postedDate": "2026-10-26",
     "publishedDate": "2026-10-26",
     "startDate": "",
-    "endDate": "2026-10-26",
-    "deadline": "2026-10-26",
+    "endDate": "2027-01-07",
+    "deadline": "2027-01-07",
     "budget": null,
     "supportAmount": null,
     "originalUrl": "https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2833&page=1&txtKeyword=&ddlKeyfield=45",
@@ -88,14 +225,14 @@
     "detailSummary": "",
     "eligibility": "",
     "supportDetails": "",
-    "application": "",
+    "application": "제출서류 (공연단체명)(2).hwp [공연시설 지정양식] 2027년 공연예술 지역유통 지원사업_ 공연시설 제출서류(공연시설명)(2).hwp --> ▶ 공모신청 바로가기 ▶ 사업설명회 영상 보러가기 문의 (재)예술경영지원센터 공연예술본부 공연유통팀 전화 02-6953-1830 이메일 gokams@contestweb.net --> 2027년 대표공연 콘텐츠 지역유통 지원사업 공모 2026 예술산업 금융지원 시범사업(융자) 5차 공모(~10.2.(금) 16:00) 08 월 19 일 문화가 있는날 혜택보기 정부3.0 --> 문화가 있는날 서울문화포털 일본 수출규제대응 이렇게 대응합니다. --> 문화체육관광부 문화셈터 문화포털 채용비리 통합신고센터",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "parsed",
@@ -174,7 +311,9 @@
       "applicantBasis": "",
       "evidence": [],
       "restrictions": [],
-      "submissionDocuments": [],
+      "submissionDocuments": [
+        "제출서류"
+      ],
       "missingEvidence": true,
       "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
@@ -313,8 +452,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -482,8 +621,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -637,8 +776,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "no_attachment_detected",
@@ -763,8 +902,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "parsed",
@@ -958,8 +1097,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "parsed",
@@ -1157,8 +1296,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -1189,7 +1328,7 @@
       ],
       "snippets": [],
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "attachment_not_readable"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1333,8 +1472,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -1509,8 +1648,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -1679,8 +1818,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -1851,8 +1990,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -2021,8 +2160,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -2196,8 +2335,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -2367,8 +2506,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -2537,8 +2676,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -2708,8 +2847,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -2878,8 +3017,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "attachment_not_readable",
@@ -3060,8 +3199,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "parsed",
@@ -3285,8 +3424,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "결과·채용·교육 등 비지원 공고",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "no_attachment_detected",
@@ -3430,8 +3569,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "no_attachment_detected",
@@ -3562,8 +3701,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "pending_review",
@@ -3688,8 +3827,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "pending_review",
@@ -3815,8 +3954,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "no_attachment_detected",
@@ -3954,8 +4093,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "no_attachment_detected",
@@ -4100,8 +4239,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "결과·채용·교육 등 비지원 공고",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "no_attachment_detected",
@@ -4232,8 +4371,8 @@
     "isPriority": true,
     "isExcludedFromPriority": false,
     "exclusionReason": "",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "manual_review_required",
@@ -4408,8 +4547,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "결과·채용·교육 등 비지원 공고",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "no_attachment_detected",
@@ -4559,8 +4698,8 @@
     "isPriority": false,
     "isExcludedFromPriority": true,
     "exclusionReason": "결과·채용·교육 등 비지원 공고",
-    "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-26",
+    "collectedAt": "2026-10-27",
+    "updatedAt": "2026-10-27",
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "no_attachment_detected",

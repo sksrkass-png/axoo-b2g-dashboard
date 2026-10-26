@@ -551,7 +551,7 @@
     },
     "seoul-86386eeb4ff162|https://mediahub.seoul.go.kr/gongmo/2000778": {
       "status": "parsed",
-      "reviewedAt": "2026-10-23T12:04:29.096Z",
+      "reviewedAt": "2026-10-26T15:28:53.880Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2278429",
       "files": [
         {
@@ -708,7 +708,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "manual_review_required"
     },
     "seoul-3cc3d0de10e042|https://mediahub.seoul.go.kr/gongmo/2000782": {
       "status": "manual_review_required",
@@ -732,7 +732,7 @@
       ],
       "snippets": [],
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "manual_review_required"
     },
     "kocca-326D00088011|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "no_attachment_detected",
@@ -876,7 +876,7 @@
       ],
       "snippets": [],
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-a7bc3632ba31|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDztQ2kylQHZEY8CVJZTTmwEPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -1986,5 +1986,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-26T08:06:58.550Z"
+  "updatedAt": "2026-10-26T15:28:53.880Z"
 }
