@@ -708,7 +708,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "manual_review_required"
+      "refreshWarning": "source_unavailable"
     },
     "seoul-3cc3d0de10e042|https://mediahub.seoul.go.kr/gongmo/2000782": {
       "status": "manual_review_required",
@@ -732,7 +732,7 @@
       ],
       "snippets": [],
       "snippetVersion": 2,
-      "refreshWarning": "manual_review_required"
+      "refreshWarning": "source_unavailable"
     },
     "kocca-326D00088011|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "no_attachment_detected",
@@ -743,7 +743,7 @@
     },
     "arko-04f87e7f7dcb|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM": {
       "status": "parsed",
-      "reviewedAt": "2026-10-23T17:26:33.971Z",
+      "reviewedAt": "2026-10-26T21:12:32.581Z",
       "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
       "files": [
         {
@@ -1986,5 +1986,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-26T15:28:53.880Z"
+  "updatedAt": "2026-10-26T21:12:32.581Z"
 }
