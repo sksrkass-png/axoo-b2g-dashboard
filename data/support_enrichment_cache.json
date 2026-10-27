@@ -540,15 +540,6 @@
         }
       ]
     },
-    "kcdf-9134|https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9134&brdCodeValue=&searchField=titlecontent": {
-      "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": [],
-      "snippetVersion": 2,
-      "refreshWarning": "no_attachment_detected"
-    },
     "seoul-86386eeb4ff162|https://mediahub.seoul.go.kr/gongmo/2000778": {
       "status": "parsed",
       "reviewedAt": "2026-10-26T15:28:53.880Z",
@@ -1060,7 +1051,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-6c9132dd59d9|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxYxRhim%2FzZoNvFBlbIP%2F8wPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -1853,14 +1846,6 @@
       "snippetVersion": 2,
       "refreshWarning": "attachment_not_readable"
     },
-    "kcdf-9213|https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9213&brdCodeValue=&searchField=titlecontent": {
-      "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-26T00:43:41.793Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": [],
-      "snippetVersion": 2
-    },
     "kams-2833|https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2833&page=1&txtKeyword=&ddlKeyfield=45": {
       "status": "parsed",
       "reviewedAt": "2026-10-26T08:06:58.550Z",
@@ -1957,5 +1942,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-27T14:55:23.278Z"
+  "updatedAt": "2026-10-27T20:57:23.588Z"
 }
