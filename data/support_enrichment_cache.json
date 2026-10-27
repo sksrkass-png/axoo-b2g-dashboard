@@ -998,7 +998,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-fbbb8b195fff|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD2dc3QlWH2dX3oBhTrp0XP0PBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -1027,7 +1029,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-418d2ba0f400|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD4XPCWwjivUlPkskx%2BtAklsPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -1953,5 +1957,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-27T08:22:56.064Z"
+  "updatedAt": "2026-10-27T14:55:23.278Z"
 }

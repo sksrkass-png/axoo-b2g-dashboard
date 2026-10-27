@@ -2282,7 +2282,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -2452,7 +2454,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
