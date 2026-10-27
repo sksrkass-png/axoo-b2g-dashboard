@@ -1116,35 +1116,6 @@
       ],
       "snippets": []
     },
-    "arko-24a527d60ffe|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD1GweGAsBYCEmz2GVsgjSt0PBZm1EJpnMlsBwvsh76BM": {
-      "status": "attachment_not_readable",
-      "reviewedAt": "2026-10-19T10:36:50.246Z",
-      "documentUrl": "",
-      "files": [
-        {
-          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036328",
-          "label": "(공고문) 공연예술창작산실(2차 제작지원).pdf",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "HTTP_404"
-        },
-        {
-          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036329",
-          "label": "(양식) 1. 2027년 2차 제작지원(○○분야)_지원신청서_신청자(단체)명.hwp",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "HTTP_404"
-        },
-        {
-          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10036330",
-          "label": "(양식) 2. 2027년 2차 제작지원(○○분야)_예산집행계획서_신청자(단체)명.xlsx",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "HTTP_404"
-        }
-      ],
-      "snippets": []
-    },
     "kocca-326D00034008|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "no_attachment_detected",
       "reviewedAt": "2026-10-19T10:42:59.376Z",
@@ -1749,7 +1720,7 @@
     },
     "seoul-c6c9edbd574207|https://mediahub.seoul.go.kr/gongmo/2000760": {
       "status": "parsed",
-      "reviewedAt": "2026-10-23T21:39:18.544Z",
+      "reviewedAt": "2026-10-27T08:22:56.064Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272852",
       "files": [
         {
@@ -1774,8 +1745,7 @@
           "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272852"
         }
       ],
-      "snippetVersion": 2,
-      "refreshWarning": "attachment_not_readable"
+      "snippetVersion": 2
     },
     "kcdf-9218|https://www.kcdf.or.kr/brd/board/337/L/menu/284?brdType=R&thisPage=1&bbIdx=9218&brdCodeValue=&searchField=titlecontent": {
       "status": "parsed",
@@ -1965,7 +1935,23 @@
       "snippets": [],
       "reason": "This operation was aborted",
       "snippetVersion": 2
+    },
+    "arko-9ad2b04e09f4|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxfggl%2BQfK4LboAEnelw3QsPBZm1EJpnMlsBwvsh76BM": {
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-10-27T08:22:56.064Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10038329",
+          "label": "(해외레지던시참가지원) 2027년 오스트리아 임펄스탄츠 아틀라스 레지던시.pdf",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": [],
+      "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-27T01:38:33.089Z"
+  "updatedAt": "2026-10-27T08:22:56.064Z"
 }
