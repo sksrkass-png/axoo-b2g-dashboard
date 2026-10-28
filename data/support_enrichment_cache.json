@@ -578,13 +578,6 @@
       ],
       "snippetVersion": 2
     },
-    "kocca-326D00108003|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00108003&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
-      "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": []
-    },
     "seoul-7c13e35b85aff9|https://mediahub.seoul.go.kr/gongmo/2000788": {
       "status": "parsed",
       "reviewedAt": "2026-10-25T16:48:52.310Z",
@@ -1942,5 +1935,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-28T01:41:16.567Z"
+  "updatedAt": "2026-10-28T08:59:11.084Z"
 }
