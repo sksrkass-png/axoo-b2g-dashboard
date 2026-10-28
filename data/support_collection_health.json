@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-27T20:56:26.448Z",
+  "updatedAt": "2026-10-28T01:40:13.678Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-27T20:56:26.449Z",
-      "lastSuccessAt": "2026-10-27T20:56:26.449Z",
+      "checkedAt": "2026-10-28T01:40:13.678Z",
+      "lastSuccessAt": "2026-10-28T01:40:13.678Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -23,8 +23,8 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-27T20:56:38.000Z",
-      "lastSuccessAt": "2026-10-27T20:56:38.000Z",
+      "checkedAt": "2026-10-28T01:40:27.611Z",
+      "lastSuccessAt": "2026-10-28T01:40:27.611Z",
       "found": 2,
       "verified": 2,
       "errors": []
@@ -35,8 +35,8 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-27T20:56:41.955Z",
-      "lastSuccessAt": "2026-10-27T20:56:41.955Z",
+      "checkedAt": "2026-10-28T01:40:32.325Z",
+      "lastSuccessAt": "2026-10-28T01:40:32.325Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -47,8 +47,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-10-27T20:57:08.802Z",
-      "lastSuccessAt": "2026-10-27T20:57:08.802Z",
+      "checkedAt": "2026-10-28T01:40:59.599Z",
+      "lastSuccessAt": "2026-10-28T01:40:59.599Z",
       "found": 9,
       "verified": 9,
       "errors": []
@@ -59,8 +59,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-10-27T20:57:15.082Z",
-      "lastSuccessAt": "2026-10-27T20:57:15.082Z",
+      "checkedAt": "2026-10-28T01:41:06.729Z",
+      "lastSuccessAt": "2026-10-28T01:41:06.729Z",
       "found": 10,
       "verified": 9,
       "errors": [
