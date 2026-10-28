@@ -1115,7 +1115,7 @@
     },
     "seoul-8f04c919b2144a|https://mediahub.seoul.go.kr/gongmo/2000784": {
       "status": "parsed",
-      "reviewedAt": "2026-10-25T16:48:52.310Z",
+      "reviewedAt": "2026-10-28T16:50:04.901Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
       "files": [
         {
@@ -1170,15 +1170,17 @@
     },
     "seoul-636b66cf2f51ba|https://mediahub.seoul.go.kr/gongmo/2000786": {
       "status": "parsed",
-      "reviewedAt": "2026-10-20T07:55:42.375Z",
-      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282139",
+      "reviewedAt": "2026-10-28T16:50:04.901Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
       "files": [
         {
           "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
           "label": "공고문.pdf",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "fetch failed"
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 3854,
+          "pages": 5
         },
         {
           "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282139",
@@ -1935,5 +1937,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-28T08:59:11.084Z"
+  "updatedAt": "2026-10-28T16:50:04.901Z"
 }
