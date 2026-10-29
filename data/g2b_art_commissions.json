@@ -104,7 +104,7 @@
     "g2bNoticeType": "goods",
     "g2bArtCandidate": true,
     "collectedAt": "2026-10-22",
-    "updatedAt": "2026-10-28"
+    "updatedAt": "2026-10-29"
   },
   {
     "bidNtceNo": "R26BK01786502",
@@ -211,7 +211,7 @@
     "g2bNoticeType": "goods",
     "g2bArtCandidate": true,
     "collectedAt": "2026-10-23",
-    "updatedAt": "2026-10-28"
+    "updatedAt": "2026-10-29"
   },
   {
     "bidNtceNo": "R26BK01788527",
@@ -360,7 +360,7 @@
     "g2bNoticeType": "construction",
     "g2bArtCandidate": true,
     "collectedAt": "2026-10-24",
-    "updatedAt": "2026-10-28"
+    "updatedAt": "2026-10-29"
   },
   {
     "bidNtceNo": "R26BK01792394",
@@ -467,6 +467,6 @@
     "g2bNoticeType": "goods",
     "g2bArtCandidate": true,
     "collectedAt": "2026-10-27",
-    "updatedAt": "2026-10-28"
+    "updatedAt": "2026-10-29"
   }
 ]
