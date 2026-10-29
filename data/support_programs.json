@@ -3779,54 +3779,50 @@
     "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
     "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
     "documentUrl": "",
-    "field": "콘텐츠 제작·브랜딩",
-    "businessArea": "content_brand",
-    "businessAreaLabel": "콘텐츠 제작·브랜딩",
+    "field": "기타",
+    "businessArea": "other",
+    "businessAreaLabel": "기타",
     "businessAreas": [
       {
-        "code": "content_brand",
-        "label": "콘텐츠 제작·브랜딩"
+        "code": "other",
+        "label": "기타"
       }
     ],
-    "matchedKeywords": [
-      "IP"
-    ],
-    "matchedPriorityKeywords": [
-      "IP"
-    ],
-    "axooFitScore": 35,
-    "score": 35,
+    "matchedKeywords": [],
+    "matchedPriorityKeywords": [],
+    "axooFitScore": 18,
+    "score": 18,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
       {
         "code": "relevance",
         "label": "사업영역",
-        "score": 23,
+        "score": 8,
         "maxScore": 40
       },
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 20,
+        "score": 10,
         "maxScore": 20
       },
       {
         "code": "execution",
         "label": "수행역량",
-        "score": 4,
+        "score": 0,
         "maxScore": 20
       },
       {
         "code": "business",
         "label": "사업성",
-        "score": 3,
+        "score": 0,
         "maxScore": 15
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 5,
+        "score": 0,
         "maxScore": 5
       },
       {
@@ -3834,29 +3830,20 @@
         "label": "감점",
         "score": 0,
         "maxScore": 0
-      },
-      {
-        "code": "cap_adjustment",
-        "label": "제외·근거부족 상한 보정",
-        "score": -20,
-        "maxScore": 0
       }
     ],
     "scoreReasons": [
-      "콘텐츠 제작·브랜딩 사업영역과 연결",
-      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
+      "공고 상세 근거 미확인"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "axooFitReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "gradeReason": "낮은 적합도: 콘텐츠 제작·브랜딩 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원규모 : 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인되었을 시 입주 협약 해지 사유가 됨 - 입주기간 중 월 상주율 50% 이상 유지 * 상주율은 해당 월의 영업일을 기준으로 산정하며, 상주인력 중 1명 이상이 입주공간에 출근하여 근무한 경우 해당 일을 상주일로 인정 신청서 접수기간 ㅇ 공고기간: 공고게시일 ~ 2026.11.04.(수), 15:00까지 ㅇ 접수기간 : ’2026.10.14.(수) ~ 2026.11.04.(수) 15:00까지 ※ 신청 마감시간까지 사업관리시스템에 접수(파일 업로드 포함)된 건만 인정 (접수 마감시간에 시스템이 자동 종료되",
-    "eligibility": "모집대상 : 일본 진출을 희망하는 국내 콘텐츠 제작사 또는 콘텐츠 IP 보유 기업 - 공고일 기준 「중소기업기본법」에서 정의하는 중소기업 및 「중견기업법」에 따른 중견기업 - 「콘텐츠산업 진흥법」에서 정의하는 콘텐츠제작자 또는 콘텐츠사업자에 해당되는 기업 - 입주기간 동안 수행할 사업 결과물은 대중문화공연, 방송, 영상, 애니메이션, 만화, 스토리, 캐릭터, 음악, 패션, 신기술 등의 콘텐츠 분야를 포함하여야 함 ㅇ",
-    "supportDetails": "지원규모 : 2개사 이내 ㅇ 입주사 지원 조건 - 입주기업 협약 후 1개월 이내 공유오피스 입주 - 신규 지사 설립 기업은 입주 후 제공되는 지사 설립 지원을 통해 일본 내 법인 또는 지점 설립 추진 * 법인, 지점 형태의 등기만 인정 / 연락사무소 불가 - 기존 지사를 보유한 경우, 입주기업 협약 후 즉시 법인등기 주소 이전 절차 실시 * 입주 후 일본 도쿄 내 타 기관 입주시설 입주 또는 별도의 사무실 보유 현황이 확인되었을 시 입주 협약 해지 사유가 됨 - 입주기간 중 월 상주율 50% 이상 유지 * 상주율은 해당 월의 영업일을 기준으로 산정하며, 상주인력 중 1명 이상이 입주공간에 출근하여 근무한 경우 해당 일을 상주일로 인정 신청서 접수기간 ㅇ 공고기간: 공고게시일 ~ 2026.11.04.(수), 15:00까지 ㅇ 접수기간 : ’2026.10.14.(수) ~ 2026.11.04.(수) 15:00까지 ※ 신청 마감시간까지 사업관리시스템에 접수(파일 업로드 포함)된 건만 인정 (접수 마감시간에 시스템이 자동 종료되",
-    "application": "접수방법 ㅇ 접수방법: KOCCA 사업관리시스템을 통한 온라인 접수(https://pms.kocca.kr 회원 가입 후 접수) ① KOCCA 사업관리시스템(pms.kocca.kr) 접속 후 회원가입 및 로그인 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기’ 버튼을 클릭해서 접속하실 수도 있습니다. ② KOCCA 사업관리시스템(pms.kocca.kr) - 지원사업 신청/접수 → 공고조회/신청 메뉴에서 ‘2026년 KOCCA CKL TOKYO 입주기업 모집’ 공고 확인 ③ 공고명 클릭하여 하단 ‘파일첨부’에서 필요양식 다운로드 후 신청내역 작성 ④ ‘신청접수’ 클릭하여 신청서 작성 및 제출파일 업로",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "axooFitReason": "낮은 적합도: 공고 상세 근거 미확인",
+    "gradeReason": "낮은 적합도: 공고 상세 근거 미확인",
+    "detailSummary": "",
+    "eligibility": "",
+    "supportDetails": "",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": false,
@@ -3870,7 +3857,9 @@
       "reviewedAt": "2026-10-19T09:58:39.569Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -3879,11 +3868,9 @@
       "applicantBasis": "",
       "evidence": [],
       "restrictions": [],
-      "submissionDocuments": [
-        "신청서"
-      ],
-      "missingEvidence": false,
-      "detailQuality": "eligibility_parsed",
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "no_attachment_detected",
@@ -3892,181 +3879,6 @@
     },
     "participationCode": "needs_review",
     "participationLabel": "자격 확인 필요",
-    "scoringVersion": "AXOO_FIT_V2_2026_10"
-  },
-  {
-    "id": "kocca-126D00107006",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "source": "한국콘텐츠진흥원",
-    "sourceCode": "KOCCA",
-    "sourceType": "지원사업",
-    "title": "2026년 방송영상콘텐츠후반작업지원 추가공고",
-    "organization": "한국콘텐츠진흥원",
-    "agency": "한국콘텐츠진흥원",
-    "status": "진행중",
-    "postedDate": "2026-10-13",
-    "publishedDate": "2026-10-13",
-    "startDate": "2026-10-19",
-    "endDate": "2026-10-29",
-    "deadline": "2026-10-29",
-    "budget": null,
-    "supportAmount": null,
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=126D00107006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=126D00107006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "documentUrl": "",
-    "field": "사업화·유통",
-    "businessArea": "business_distribution",
-    "businessAreaLabel": "사업화·유통",
-    "businessAreas": [
-      {
-        "code": "business_distribution",
-        "label": "사업화·유통"
-      }
-    ],
-    "matchedKeywords": [
-      "투자"
-    ],
-    "matchedPriorityKeywords": [
-      "투자"
-    ],
-    "axooFitScore": 65,
-    "score": 65,
-    "grade": "B",
-    "fitVerdict": "조건부 검토",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 23,
-        "maxScore": 40
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 20,
-        "maxScore": 20
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 8,
-        "maxScore": 20
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 9,
-        "maxScore": 15
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 5,
-        "maxScore": 5
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "사업화·유통 사업영역과 연결",
-      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "axooFitReason": "조건부 검토: 사업화·유통 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "gradeReason": "조건부 검토: 사업화·유통 사업영역과 연결 · 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원내용 ㅇ 후반작업 전반 종합지원 - CG, VFX, 뷰티, DI, 고난이도 에셋 제작, 디지털휴먼, 버츄얼 스튜디오, 타이틀 제작 등 - 사운드 디자인, 사운드 믹싱, 음원 구매,교체, 제작 등 - 편집실(장비포함) 임차, 편집기사, VFX 슈퍼바이저,코디네이터 인건비, CG/VFX 작업자 인건비 등 ㅇ 지원규모 : 최대 7.5억 원 / 1개 내외 ㅇ 지원요건 : 공고문 참조 신청서 접수기간 ㅇ 공고기간 : 2026. 10. 13.(화) - 2026.10.29.(목) ㅇ 접수기간 : 2026. 10. 19.(월) - 2026.10.29.(목) 14:00까지 ※ 접수기간 외 접수 불가하니 마감 시한을 지켜 주시기를 바랍니다.",
-    "eligibility": "지원대상 - 방송영상독립제작사(국내 법인, 개인 사업자) - 방송영상독립제작사-후반작업기업 컨소시엄 ※ 주관기관은 방송영상독립제작사(독립제작사신고필증제출 필수)이며, CG/VFX 등 실제 제작에 참여하는 후반작업 기업만 컨소시엄으로 참여가능 ※ 중소/중견/대기업 참여 가능하나, 방송법 제2조 3항의 방송사업자는 신청불가 ※ 지원결과물이 해외방송사 및 OTT 플랫폼으로부터 제작비 전액 이상을 투자받아 해당 플랫폼에 1차 독점 전송·방영하는 경우(바이아웃(Buyout), 올라이트 판매(All rights sales) 등) 선정 및 협약이 취소되며, 협약 종료 이후에도 동일하게 적용되어 위반 시 지원금이 환수될 수 있습니다. (단, 국내 동시공개/방영은 가능) ※ 영화, 애니메이션은 지원대상이 아님",
-    "supportDetails": "지원내용 ㅇ 후반작업 전반 종합지원 - CG, VFX, 뷰티, DI, 고난이도 에셋 제작, 디지털휴먼, 버츄얼 스튜디오, 타이틀 제작 등 - 사운드 디자인, 사운드 믹싱, 음원 구매,교체, 제작 등 - 편집실(장비포함) 임차, 편집기사, VFX 슈퍼바이저,코디네이터 인건비, CG/VFX 작업자 인건비 등 ㅇ 지원규모 : 최대 7.5억 원 / 1개 내외 ㅇ 지원요건 : 공고문 참조 신청서 접수기간 ㅇ 공고기간 : 2026. 10. 13.(화) - 2026.10.29.(목) ㅇ 접수기간 : 2026. 10. 19.(월) - 2026.10.29.(목) 14:00까지 ※ 접수기간 외 접수 불가하니 마감 시한을 지켜 주시기를 바랍니다.",
-    "application": "신청방법 ㅇ e나라도움을 통한 접수(KOCCA 홈페이지, 우편 및 방문 신청 불가) - KOCCA 홈페이지 접속 후 해당사업 신청서 양식을 다운받아 작성하여 첨부서류와 함께 e나라도움 홈페이지 통해 접수 ※ e나라도움 시스템 관련 문의는 한국재정정보원 e나라도움 고객센터로 문의하시기를 바랍니다. ※ e나라도움 신청시 ‘사업명’은 KOCCA 지원사업명이 아닌, ‘작품 명’을 의미하며, ‘작품명’에는 특수문자 사용 불가 선정절차 및 평가기준 ㅇ 선정절차 안내 : 1차 서면평가 → 2차 발표평가 → 체불신고 및 체불사업주 조회 → 종합심의 및 사업비 조정 → 협약체결 ㅇ 1차 서면평가 - 평가방법 : 과제 신청 시 제출한 과제신청서 및 제작계",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "collectedAt": "2026-10-29",
-    "updatedAt": "2026-10-29",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
-    "documentReview": {
-      "status": "manual_review_required",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
-      "files": [
-        {
-          "url": "https://www.kocca.kr/download/e-naraguide.zip",
-          "label": "e나라도움사용설명서",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "file_too_large"
-        },
-        {
-          "url": "https://www.kocca.kr/about/laws/rule/pimslaws.zip",
-          "label": "관련규정 다운로드",
-          "format": "archive_unknown",
-          "status": "unsupported",
-          "reason": "Zip document with unrecognized format"
-        }
-      ],
-      "snippets": []
-    },
-    "applicationReview": {
-      "version": "p0_eligibility_review_v1",
-      "participationCode": "consortium_review",
-      "participationLabel": "컨소시엄 참여 검토",
-      "applicantBasis": "컨소시엄",
-      "evidence": [
-        {
-          "field": "신청 자격",
-          "quote": "지원대상 - 방송영상독립제작사(국내 법인, 개인 사업자) - 방송영상독립제작사-후반작업기업 컨소시엄 ※ 주관기관은 방송영상독립제작사(독립제작사신고필증제출 필수)이며, CG/VFX 등 실제 제작에 참여하는 후반작업 기업만 컨소시엄으로 참여가능 ※ 중소/중견/대기업 참여 가능하나, 방송법 제2조 3항의 방송사업자는 신청불가 ※ 지원결과물이 해외방송사 및 OTT 플랫폼으로부터 제작비 전액 이상을 투자받아 해당 플랫폼에 1차 독점 전송·방영하는 경우(바",
-          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=126D00107006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-          "sourceType": "공고 자격 안내"
-        }
-      ],
-      "restrictions": [
-        {
-          "code": "credentials",
-          "label": "신청 증빙·등록",
-          "quote": "립제작사-후반작업기업 컨소시엄 ※ 주관기관은 방송영상독립제작사(독립제작사신고필증제출 필수)이며, CG/VFX 등 실제 제작에 참여하는 후반작업 기업만 컨소시엄으로 참여가능 ※ 중소/중견/대기업 참여 가능하나, 방송법 제2조 3항의 방송사업자는 신청불가 ※ 지원결과물이 해외방송사 및 OT"
-        }
-      ],
-      "submissionDocuments": [
-        "신청서"
-      ],
-      "missingEvidence": false,
-      "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
-      "documentAudit": {
-        "status": "manual_review_required",
-        "files": [
-          {
-            "url": "https://www.kocca.kr/download/e-naraguide.zip",
-            "label": "e나라도움사용설명서",
-            "format": "unknown",
-            "status": "failed",
-            "reason": "file_too_large"
-          },
-          {
-            "url": "https://www.kocca.kr/about/laws/rule/pimslaws.zip",
-            "label": "관련규정 다운로드",
-            "format": "archive_unknown",
-            "status": "unsupported",
-            "reason": "Zip document with unrecognized format"
-          }
-        ]
-      }
-    },
-    "participationCode": "consortium_review",
-    "participationLabel": "컨소시엄 참여 검토",
     "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
@@ -4103,8 +3915,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 35,
-    "score": 35,
+    "axooFitScore": 22,
+    "score": 22,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -4117,7 +3929,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 20,
+        "score": 10,
         "maxScore": 20
       },
       {
@@ -4129,13 +3941,13 @@
       {
         "code": "business",
         "label": "사업성",
-        "score": 3,
+        "score": 0,
         "maxScore": 15
       },
       {
         "code": "evidence",
         "label": "상세근거",
-        "score": 5,
+        "score": 0,
         "maxScore": 5
       },
       {
@@ -4143,28 +3955,21 @@
         "label": "감점",
         "score": 0,
         "maxScore": 0
-      },
-      {
-        "code": "cap_adjustment",
-        "label": "제외·근거부족 상한 보정",
-        "score": -5,
-        "maxScore": 0
       }
     ],
     "scoreReasons": [
-      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
+      "공고 상세 근거 미확인"
     ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원내용 - 임대료 및 관리비 전액 지원",
-    "eligibility": "신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외) · 공고일 현재 창업(사업자등록 또는 법인설립 등기)을 하지 않은 자로 입주 후 1년 이내 사업자등록 가능자 · 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문",
-    "supportDetails": "지원내용 - 임대료 및 관리비 전액 지원",
-    "application": "접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기(신청접수)’ 버튼을 클릭해서 접속하실 수도 있습니다. ㅇ 제출서류: 공고문 내 각 유형별 모집 공고문 참고 유의사항 ㅇ 본 모집공고 내 양식 및 유의사항을 반드시 숙지 후 접수 바랍니다. ㅇ 입주신청 전 입주시설 사전방문 및 답사를 권장합니다. ㅇ 접수마감 이후 추가 신청은 불가하며, 접수마감 전 사전 제출 권장합니다. ㅇ 제출서류는 접수 후 임의로 추가 또는 보완될 수 없으며, 일체의 서류는 반환되지 않습니다. ㅇ 최종 선정결과는 신청기",
+    "analysisBasis": "공고 제목",
+    "analysisConfidence": "low",
+    "companyEligible": false,
+    "axooFitReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 공고 상세 근거 미확인",
+    "gradeReason": "낮은 적합도: 기획·제작·운영 수행역량 활용 가능 · 공고 상세 근거 미확인",
+    "detailSummary": "",
+    "eligibility": "",
+    "supportDetails": "",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": false,
@@ -4178,46 +3983,28 @@
       "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
-      "participationCode": "corporate_review",
-      "participationLabel": "법인 직접 신청 검토",
-      "applicantBasis": "사업자등록증",
-      "evidence": [
-        {
-          "field": "신청 자격",
-          "quote": "· 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문",
-          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-          "sourceType": "공고 자격 안내"
-        }
-      ],
-      "restrictions": [
-        {
-          "code": "tenure",
-          "label": "업력",
-          "quote": "신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외"
-        },
-        {
-          "code": "credentials",
-          "label": "신청 증빙·등록",
-          "quote": "창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문 접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문"
-        }
-      ],
-      "submissionDocuments": [
-        "제출서류"
-      ],
-      "missingEvidence": false,
-      "detailQuality": "eligibility_parsed",
+      "participationCode": "needs_review",
+      "participationLabel": "자격 확인 필요",
+      "applicantBasis": "",
+      "evidence": [],
+      "restrictions": [],
+      "submissionDocuments": [],
+      "missingEvidence": true,
+      "detailQuality": "not_verified",
       "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
       "documentAudit": {
         "status": "no_attachment_detected",
         "files": []
       }
     },
-    "participationCode": "corporate_review",
-    "participationLabel": "법인 직접 신청 검토",
+    "participationCode": "needs_review",
+    "participationLabel": "자격 확인 필요",
     "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {

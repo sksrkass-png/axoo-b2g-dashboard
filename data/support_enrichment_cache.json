@@ -602,28 +602,6 @@
       ],
       "snippetVersion": 2
     },
-    "kocca-126D00107006|https://www.kocca.kr/kocca/pims/view.do?intcNo=126D00107006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
-      "status": "manual_review_required",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
-      "files": [
-        {
-          "url": "https://www.kocca.kr/download/e-naraguide.zip",
-          "label": "e나라도움사용설명서",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "file_too_large"
-        },
-        {
-          "url": "https://www.kocca.kr/about/laws/rule/pimslaws.zip",
-          "label": "관련규정 다운로드",
-          "format": "archive_unknown",
-          "status": "unsupported",
-          "reason": "Zip document with unrecognized format"
-        }
-      ],
-      "snippets": []
-    },
     "arko-57e328b201a6|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD8KCZRuK3BLLPelAz0mYGXYPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
       "reviewedAt": "2026-10-19T09:58:39.569Z",
@@ -657,7 +635,7 @@
     },
     "seoul-d2155f8f7bf5af|https://mediahub.seoul.go.kr/gongmo/2000779": {
       "status": "parsed",
-      "reviewedAt": "2026-10-26T00:43:41.793Z",
+      "reviewedAt": "2026-10-29T06:26:52.975Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2279115",
       "files": [
         {
@@ -723,7 +701,9 @@
       "reviewedAt": "2026-10-19T09:58:39.569Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "arko-04f87e7f7dcb|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM": {
       "status": "parsed",
@@ -1111,7 +1091,9 @@
       "reviewedAt": "2026-10-19T10:42:59.376Z",
       "documentUrl": "",
       "files": [],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "no_attachment_detected"
     },
     "seoul-8f04c919b2144a|https://mediahub.seoul.go.kr/gongmo/2000784": {
       "status": "parsed",
@@ -1157,7 +1139,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "manual_review_required"
+      "refreshWarning": "source_unavailable"
     },
     "arko-239201|https://theater.arko.or.kr/Rent/Notice/239201/?q=null": {
       "status": "no_attachment_detected",
@@ -1683,7 +1665,7 @@
     },
     "seoul-56ad89dc1363cb|https://mediahub.seoul.go.kr/gongmo/2000759": {
       "status": "parsed",
-      "reviewedAt": "2026-10-26T00:43:41.793Z",
+      "reviewedAt": "2026-10-29T06:26:52.975Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272849",
       "files": [
         {
@@ -1937,5 +1919,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-28T22:51:50.686Z"
+  "updatedAt": "2026-10-29T06:26:52.975Z"
 }
