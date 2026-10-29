@@ -542,7 +542,7 @@
     },
     "seoul-86386eeb4ff162|https://mediahub.seoul.go.kr/gongmo/2000778": {
       "status": "parsed",
-      "reviewedAt": "2026-10-26T15:28:53.880Z",
+      "reviewedAt": "2026-10-29T19:51:36.918Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2278429",
       "files": [
         {
@@ -670,7 +670,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "manual_review_required"
+      "refreshWarning": "source_unavailable"
     },
     "seoul-3cc3d0de10e042|https://mediahub.seoul.go.kr/gongmo/2000782": {
       "status": "manual_review_required",
@@ -694,7 +694,7 @@
       ],
       "snippets": [],
       "snippetVersion": 2,
-      "refreshWarning": "manual_review_required"
+      "refreshWarning": "source_unavailable"
     },
     "kocca-326D00088011|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
       "status": "no_attachment_detected",
@@ -1907,5 +1907,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-29T13:41:39.131Z"
+  "updatedAt": "2026-10-29T19:51:36.918Z"
 }
