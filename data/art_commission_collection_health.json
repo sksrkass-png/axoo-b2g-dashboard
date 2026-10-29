@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-10-28",
+  "updatedAt": "2026-10-29",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 23,
-    "sourceFailureCount": 2,
+    "sourceSuccessCount": 25,
+    "sourceFailureCount": 0,
     "discoveredCandidateCount": 3,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -39,7 +39,7 @@
         "sourceName": "대전광역시 고시공고·부서 게시판",
         "region": "대전",
         "accessOk": true,
-        "pagesFetched": 5,
+        "pagesFetched": 6,
         "candidatesFound": 1,
         "error": ""
       },
@@ -119,8 +119,8 @@
         "sourceId": "chungnam_development_corporation",
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,8 +236,8 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 21,
-    "matched": 5,
+    "checked": 18,
+    "matched": 4,
     "status": "ok"
   }
 }
