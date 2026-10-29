@@ -1139,7 +1139,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "refreshWarning": "manual_review_required"
     },
     "arko-239201|https://theater.arko.or.kr/Rent/Notice/239201/?q=null": {
       "status": "no_attachment_detected",
@@ -1825,12 +1825,12 @@
     },
     "kams-2833|https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2833&page=1&txtKeyword=&ddlKeyfield=45": {
       "status": "parsed",
-      "reviewedAt": "2026-10-26T08:06:58.550Z",
-      "documentUrl": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8_%ea%b3%b5%ea%b3%a0%eb%ac%b8%282%29.pdf",
+      "reviewedAt": "2026-10-29T13:41:39.131Z",
+      "documentUrl": "https://www.gokams.or.kr/DATA/GO/1.%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8%20%ea%b3%b5%ea%b3%a0%eb%ac%b8.pdf",
       "files": [
         {
-          "url": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8_%ea%b3%b5%ea%b3%a0%eb%ac%b8%282%29.pdf",
-          "label": "2027년 공연예술 지역유통 지원사업 공모_공고문(2).pdf",
+          "url": "https://www.gokams.or.kr/DATA/GO/1.%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8%20%ea%b3%b5%ea%b3%a0%eb%ac%b8.pdf",
+          "label": "1. 2027년 공연예술 지역유통 지원사업 공모 공고문.pdf",
           "format": "pdf",
           "status": "parsed",
           "reason": "",
@@ -1838,17 +1838,15 @@
           "pages": 14
         },
         {
-          "url": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%eb%ac%b8%ed%99%94%ec%98%88%ec%88%a0%20%ec%a0%84%ea%b5%ad%20%ec%9c%a0%ed%86%b5%ec%a7%80%ec%9b%90%20%ed%86%b5%ed%95%a9%20%ea%b3%b5%eb%aa%a8%20FAQ%285%29.pdf",
-          "label": "2027년 문화예술 전국 유통지원 통합 공모 FAQ(5).pdf",
-          "format": "pdf",
-          "status": "parsed",
-          "reason": "",
-          "characters": 14336,
-          "pages": 14
+          "url": "https://www.gokams.or.kr/DATA/GO/2.%20%5B%ea%b3%b5%ec%97%b0%eb%8b%a8%ec%b2%b4%20%ec%a7%80%ec%a0%95%ec%96%91%ec%8b%9d%5D%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85_%20%ea%b3%b5%ec%97%b0%eb%8b%a8%ec%b2%b4%20%ec%a0%9c%ec%b6%9c%ec%84%9c%eb%a5%98%28%ea%b3%b5%ec%97%b0%eb%8b%a8%ec%b2%b4%eb%aa%85%29.hwp",
+          "label": "2. [공연단체 지정양식] 2027년 공연예술 지역유통 지원사업_ 공연단체 제출서류(공연단체명).hwp",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
         },
         {
-          "url": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%ec%97%b0%eb%8b%a8%ec%b2%b4%20%ec%a7%80%ec%a0%95%ec%96%91%ec%8b%9d%5D%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85_%20%ea%b3%b5%ec%97%b0%eb%8b%a8%ec%b2%b4%20%ec%a0%9c%ec%b6%9c%ec%84%9c%eb%a5%98%28%ea%b3%b5%ec%97%b0%eb%8b%a8%ec%b2%b4%eb%aa%85%29%282%29.hwp",
-          "label": "[공연단체 지정양식] 2027년 공연예술 지역유통 지원사업_ 공연단체 제출서류(공연단체명)(2).hwp",
+          "url": "https://www.gokams.or.kr/DATA/GO/3.%20%5B%ea%b3%b5%ec%97%b0%ec%8b%9c%ec%84%a4%20%ec%a7%80%ec%a0%95%ec%96%91%ec%8b%9d%5D%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85_%20%ea%b3%b5%ec%97%b0%ec%8b%9c%ec%84%a4%20%ec%a0%9c%ec%b6%9c%ec%84%9c%eb%a5%98%28%ea%b3%b5%ec%97%b0%ec%8b%9c%ec%84%a4%eb%aa%85%29.hwp",
+          "label": "3. [공연시설 지정양식] 2027년 공연예술 지역유통 지원사업_ 공연시설 제출서류(공연시설명).hwp",
           "format": "hwp",
           "status": "unsupported",
           "reason": "Binary HWP requires manual conversion"
@@ -1858,37 +1856,27 @@
         {
           "label": "지원 자격 문구",
           "quote": "을 신청시설 수 로 나눈 금액 시설별 상한액 총 지원예산 최종 지원대상 시설 수 으로 산정한 지원금 조정 가능 공통 참여요건□ ㅇ 공연유통플랫폼공연예술유통 회원가입 및 플랫폼을 통한 신청 ㅇ 공연시설과 공연단체는 사업 내용일시 장소 예산 수익분배 역할 등 과 무대 장비 조건을 사전협의 공연 협의 확인서 제출 ㅇ 유료 공연 필수 정가 원 이상 할인정책 적용 가능 ㅇ 공연예술통합전산망 에 집계 가능한 온",
-          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8_%ea%b3%b5%ea%b3%a0%eb%ac%b8%282%29.pdf"
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/1.%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8%20%ea%b3%b5%ea%b3%a0%eb%ac%b8.pdf"
         },
         {
           "label": "지원 규모 문구",
           "quote": "외 지역 공공 공연시설의 자율 매칭을 통한 공연 유통지원 ㅇ 지원규모 총 억 원 내외 지원 예정 ㅇ 지원 내용 매칭된 공연의 유통비용 공연료 홍보마케팅비 회계검증 수수료 보험료 등 일부를 공공 공연시설에 지원 - 2 - 지원 방식 자율 매칭( )□ ㅇ 년 공연예술 지역유통 지원사업 은 「 」 지원요건을 충족한 공연단체 와 공연시설이 협의를 통해 매칭한 공연작품을 지원 대상으로 하며 최종 지원금은 사업",
-          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8_%ea%b3%b5%ea%b3%a0%eb%ac%b8%282%29.pdf"
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/1.%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8%20%ea%b3%b5%ea%b3%a0%eb%ac%b8.pdf"
         },
         {
           "label": "지원 내용 문구",
           "quote": "제고 ㅇ 사업기간 년 월 월 공연 기간 년 월 일 일 종료 ㅇ 사업내용 민간 공연단체와 서울 외 지역 공공 공연시설의 자율 매칭을 통한 공연 유통지원 ㅇ 지원규모 총 억 원 내외 지원 예정 ㅇ 지원 내용 매칭된 공연의 유통비용 공연료 홍보마케팅비 회계검증 수수료 보험료 등 일부를 공공 공연시설에 지원 - 2 - 지원 방식 자율 매칭( )□ ㅇ 년 공연예술 지역유통 지원사업 은 「 」 지원요건을 충족한",
-          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8_%ea%b3%b5%ea%b3%a0%eb%ac%b8%282%29.pdf"
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/1.%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8%20%ea%b3%b5%ea%b3%a0%eb%ac%b8.pdf"
         },
         {
           "label": "제출서류 문구",
           "quote": "인할 수 없는 경우에는 . 결격 처리 증빙자료 및 제출 방법은 제출서류 및 참고( p.11 ‘ ’ FAQ ) 작품의 명칭이나 장르만으로 지원 여부를 판단하지 않으며 작품의 기획 의도 실제 구성 및 제출 증빙* , , 자료를 종합적으로 고려하여 판단 예정 해외예술단체 예술가의 단독 내한공연 단 국내예술단체 및 예술가와 협연은 가능3) · ( , ) 쇼케이스 공연4) 라이선스 뮤지컬 레플리카 스몰 라이선",
-          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8_%ea%b3%b5%ea%b3%a0%eb%ac%b8%282%29.pdf"
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/1.%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8%20%ea%b3%b5%ea%b3%a0%eb%ac%b8.pdf"
         },
         {
           "label": "부담·제한 문구",
           "quote": "- 5 - 사업 수행이 가능한 시설 지원금 외 총사업비의 이상 자부담을 편성할 수 있는 시설 총사업비 억 원 보조금 천만 원 자부담 천만 원 총사업비의 공연단체와 국가계약법 및 관련 규정에 따른 공연 또는 예술행사 용역으로 수의계약 체결이 가능하여 용역비 집행이 가능한 시설 공연유통플랫폼 내 공연 준비 및 진행에 필요한 공연시설과 공연장 정보를 제공한 시설 분류 필수 제출자료 무대 무대장치 목록 평면",
-          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8_%ea%b3%b5%ea%b3%a0%eb%ac%b8%282%29.pdf"
-        },
-        {
-          "label": "지원 자격 문구",
-          "quote": "민간 공연시설도 참여가 가능한가요? → 불가합니다.본 통합공모 지원대상은 공공 공연시설입니다 . Q2. 국립시설도 참여가 가능한가요? → 불가합니다.본 사업은 전국 문화예술회관 및 공공 공연장을 대상으로 하는 사 업으로 국립시설은 본 사업에 참여하실 수 없습니다, Q3. 지역문화재단이 대관하여 운영하는 공연장으로도 지원할 수 있나요? → 불가합니다.전국 문화시설 총람 최신 기준 에 등재된 문예회관이거",
-          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%eb%ac%b8%ed%99%94%ec%98%88%ec%88%a0%20%ec%a0%84%ea%b5%ad%20%ec%9c%a0%ed%86%b5%ec%a7%80%ec%9b%90%20%ed%86%b5%ed%95%a9%20%ea%b3%b5%eb%aa%a8%20FAQ%285%29.pdf"
-        },
-        {
-          "label": "지원 규모 문구",
-          "quote": "련 보조금 관리 규정에 따라 판단합니다. 예술경영지원센터로부터 지원금 억 원을 초과하여 교부받은 사업은 년 1 2027→ 예술경영지원센터 전체 사업 기준으로 최대 개까지만 수행할 수 있습니다3 . 공연시설 공연단체의 매칭이 불발될 경우 재매칭이 진행되나요Q6. - ? → 그렇지 않습니다. 본 사업은 예술경영지원센터가 일괄 매칭하는 방식이 아니라 공연시설과 공연단체의 자율 매칭 방식으로 진행됩니다 협의",
-          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/2027%eb%85%84%20%eb%ac%b8%ed%99%94%ec%98%88%ec%88%a0%20%ec%a0%84%ea%b5%ad%20%ec%9c%a0%ed%86%b5%ec%a7%80%ec%9b%90%20%ed%86%b5%ed%95%a9%20%ea%b3%b5%eb%aa%a8%20FAQ%285%29.pdf"
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/1.%202027%eb%85%84%20%ea%b3%b5%ec%97%b0%ec%98%88%ec%88%a0%20%ec%a7%80%ec%97%ad%ec%9c%a0%ed%86%b5%20%ec%a7%80%ec%9b%90%ec%82%ac%ec%97%85%20%ea%b3%b5%eb%aa%a8%20%ea%b3%b5%ea%b3%a0%eb%ac%b8.pdf"
         }
       ],
       "snippetVersion": 2
@@ -1919,5 +1907,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-29T06:26:52.975Z"
+  "updatedAt": "2026-10-29T13:41:39.131Z"
 }
