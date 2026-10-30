@@ -1687,7 +1687,7 @@
     },
     "seoul-c6c9edbd574207|https://mediahub.seoul.go.kr/gongmo/2000760": {
       "status": "parsed",
-      "reviewedAt": "2026-10-27T08:22:56.064Z",
+      "reviewedAt": "2026-10-30T13:31:21.463Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2272852",
       "files": [
         {
@@ -1898,8 +1898,80 @@
         }
       ],
       "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
+    },
+    "kams-2836|https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2836&page=1&txtKeyword=&ddlKeyfield=45": {
+      "status": "parsed",
+      "reviewedAt": "2026-10-30T13:31:21.463Z",
+      "documentUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%eb%b3%b4%ec%a6%9d%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95_11%ec%9b%94%281%29.pdf",
+      "files": [
+        {
+          "url": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%eb%b3%b4%ec%a6%9d%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95_11%ec%9b%94%281%29.pdf",
+          "label": "[공모] 2026 예술산업보증 공모요강_11월(1).pdf",
+          "format": "pdf",
+          "status": "parsed",
+          "reason": "",
+          "characters": 7241,
+          "pages": 7
+        },
+        {
+          "url": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%84%201.%20%ec%8b%a0%ec%b2%ad%ec%84%9c%20%eb%b0%8f%20%ea%b8%b0%ec%88%a0%ec%82%ac%ec%97%85%ea%b3%84%ed%9a%8d%ec%84%9c_%ec%98%88%ec%88%a0%ea%b8%b0%ec%97%85%20%eb%b3%b4%ec%a6%9d_11%ec%9b%94%281%29.hwp",
+          "label": "붙임 1. 신청서 및 기술사업계획서_예술기업 보증_11월(1).hwp",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        },
+        {
+          "url": "https://www.gokams.or.kr/DATA/GO/%eb%b6%99%ec%9e%84%202.%20%ec%8b%a0%ec%b2%ad%ec%84%9c%20%eb%b0%8f%20%ea%b8%b0%ec%88%a0%ec%82%ac%ec%97%85%ea%b3%84%ed%9a%8d%ec%84%9c_%ec%98%88%ec%88%a0%ed%94%84%eb%a1%9c%ec%a0%9d%ed%8a%b8%20%eb%b3%b4%ec%a6%9d_11%ec%9b%94%281%29.hwp",
+          "label": "붙임 2. 신청서 및 기술사업계획서_예술프로젝트 보증_11월(1).hwp",
+          "format": "hwp",
+          "status": "unsupported",
+          "reason": "Binary HWP requires manual conversion"
+        }
+      ],
+      "snippets": [
+        {
+          "label": "지원 자격 문구",
+          "quote": "개인정보 수집·이용·제공·활용 동의서 필수필수3. 예술산업보증 신청자격 확인서필수필수4. 예술산업보증 신청자 서약서필수필수5. 사업자등록증명원 * 대표자가 만 39세 이하인 개인사업자의 경우, 주민등록번호 앞자리 공개하여 제출 필수필수6. 법인등기부등본법인만 필수법인만 필수7. [법인/개인사업자] 최근 3개년 표준재무제표 * 재무제표가 없는 개인사업자인 경우, 최근 3개년 간편장부 소득금액계산서(간편",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%eb%b3%b4%ec%a6%9d%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95_11%ec%9b%94%281%29.pdf"
+        },
+        {
+          "label": "지원 내용 문구",
+          "quote": "보증을 받은 경우, 보증추천이 취소될 수 있습니다. ③ 동일한 사업내용에 대해서는 예술산업 금융지원 ‘융자사업’과 ‘보증사업’을 중복하여 지원받을 수 없습니다.④ 연간 보증재원이 한정되어 있어, 보증추천자 선정 또는 기보의 보증 대상으로 선정되어 보증서를 발급받은 경우에도 예산이 조기 소진될 수 있으니 가급적 빠른 시일 내 보증 또는 대출 상담을 진행하시기 바랍니다. ⑤ 예술산업보증 사업추진 중 또는",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%eb%b3%b4%ec%a6%9d%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95_11%ec%9b%94%281%29.pdf"
+        },
+        {
+          "label": "제출서류 문구",
+          "quote": "약 1.5% 내외 수준) 납부 필요 - 5 - Ⅴ 신청방법 및 제출서류ㅇ (접수방법)국가문화예술지원시스템(www.ncas.or.kr)을 통한 온라인접수n 국가문화예술지원시스템(NCAS, www.ncas.or.kr) 온라인 신청 - 로그인 후, 보조금 주관기관 「예술경영지원센터」 선택 - 지원신청 > 지원관리 > 「2026년 예술산업보증 공고」 선택 후 신청서 작성 - 센터 내부 구비서류 확인을 거쳐 ",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%eb%b3%b4%ec%a6%9d%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95_11%ec%9b%94%281%29.pdf"
+        },
+        {
+          "label": "부담·제한 문구",
+          "quote": "여우대사항적용**비수도권예술기업:기보가인정하는주된사업장(실제본사소재지등)소재지가서울,경기,인천외지역인기업n 2억원 초과의 예술 프로젝트 보증을 신청하는 경우, 순 제작비의 30%에 해당하는 자금조달 확정금액 확보 필수 n 공연예술의 경우, 대중음악 및 대중예술 콘서트를 제외한 음악(클래식 등), 무용, 연극, 국악 뮤지컬 등 전체를 포함합니다. n 게임, 방송(드라마·예능), 애니메이션, 영화, 음악",
+          "sourceUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%eb%b3%b4%ec%a6%9d%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95_11%ec%9b%94%281%29.pdf"
+        }
+      ],
+      "snippetVersion": 2
+    },
+    "seoul-6192df0b00aedb|https://mediahub.seoul.go.kr/gongmo/2000785": {
+      "status": "source_unavailable",
+      "reviewedAt": "2026-10-30T13:31:21.463Z",
+      "documentUrl": "",
+      "files": [],
+      "snippets": [],
+      "reason": "fetch failed",
+      "snippetVersion": 2
+    },
+    "seoul-92d3b92a0169d9|https://mediahub.seoul.go.kr/gongmo/2000787": {
+      "status": "source_unavailable",
+      "reviewedAt": "2026-10-30T13:31:21.463Z",
+      "documentUrl": "",
+      "files": [],
+      "snippets": [],
+      "reason": "fetch failed",
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-30T06:25:16.866Z"
+  "updatedAt": "2026-10-30T13:31:21.463Z"
 }
