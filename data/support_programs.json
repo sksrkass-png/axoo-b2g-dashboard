@@ -435,7 +435,8 @@
       "files": [],
       "snippets": [],
       "reason": "This operation was aborted",
-      "snippetVersion": 2
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "applicationReview": {
       "version": "p0_eligibility_review_v1",
@@ -1350,7 +1351,7 @@
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-10-27T01:38:33.089Z",
+      "reviewedAt": "2026-10-30T06:25:16.866Z",
       "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
       "files": [
         {
@@ -3609,137 +3610,6 @@
     },
     "participationCode": "needs_review",
     "participationLabel": "자격 확인 필요",
-    "scoringVersion": "AXOO_FIT_V2_2026_10"
-  },
-  {
-    "id": "kocca-326D00110006",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "source": "한국콘텐츠진흥원",
-    "sourceCode": "KOCCA",
-    "sourceType": "지원사업",
-    "title": "2027 대중음악 해외 쇼케이스(Korea Spotlight) 참가뮤지션 모집 공고(1차/스페인)",
-    "organization": "한국콘텐츠진흥원",
-    "agency": "한국콘텐츠진흥원",
-    "status": "진행중",
-    "postedDate": "2026-10-14",
-    "publishedDate": "2026-10-14",
-    "startDate": "2026-10-14",
-    "endDate": "2026-10-30",
-    "deadline": "2026-10-30",
-    "budget": null,
-    "supportAmount": null,
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "documentUrl": "",
-    "field": "기타",
-    "businessArea": "other",
-    "businessAreaLabel": "기타",
-    "businessAreas": [
-      {
-        "code": "other",
-        "label": "기타"
-      }
-    ],
-    "matchedKeywords": [],
-    "matchedPriorityKeywords": [],
-    "axooFitScore": 23,
-    "score": 23,
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 8,
-        "maxScore": 40
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 10,
-        "maxScore": 20
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 0,
-        "maxScore": 20
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 0,
-        "maxScore": 15
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 5,
-        "maxScore": 5
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 상세 자격과 수행범위 확인 필요",
-    "gradeReason": "낮은 적합도: 상세 자격과 수행범위 확인 필요",
-    "detailSummary": "사업내용 문의 : 대중음악산업팀 (061-900-6455 / friendly@kocca.kr) ㅇ 접수페이지(시스템) 문의 : IDC (061-900-6080) 공고관련자료확인 정책자료 사업관리시스템 바로가기 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기",
-    "eligibility": "신청자격 ㅇ 모집대상 : 2027년 소나르 페스티벌 참가를 희망하는 국내 뮤지션 ㅇ 신청자격 : 소나르 페스티벌의 취지 및 주요 공연 장르에 부합하는 대중음악 뮤지션 (클래식, 오페라, 국악 장르 제외) - 신청일 기준 국내 음반 발매 경력이 있고 국내에서 활동 중인 대중음악 뮤지션(국내 소속사가 있거나, 소속사가 없을 경우 한국 국적인 뮤지션) - 본인 곡으로 60분 내외 단독 공연이 가능한 뮤지션 * 세부사항 공고문 참조 신청서 접수 ㅇ 선정규모 : 2팀 (Live Act 1팀 / DJ Set 1팀) *중복신청 불가 ㅇ 공고/접수기간 : 2026. 10. 14.(수) ~ 2026. 10. 30.(금) / 11:00까지 ㅇ",
-    "supportDetails": "사업내용 문의 : 대중음악산업팀 (061-900-6455 / friendly@kocca.kr) ㅇ 접수페이지(시스템) 문의 : IDC (061-900-6080) 공고관련자료확인 정책자료 사업관리시스템 바로가기 목록 콘텐츠 만족도 조사 이 페이지에서 제공하는 정보에 대하여 만족하시나요? 매우만족 만족 보통 불만족 매우불만족 평가하기",
-    "application": "제출서류 : 참가신청서(필수), 영문 소개자료(선택) * 세부사항 공고문 참조 선정방법 및 기준 ㅇ 선정방법 : 1차 서면평가, 2차 현지 디렉터평가를 통한 뮤지션 선정 ㅇ 평가기준 - (1차 서면평가) 페스티벌 장르 적합성(30점), 뮤지션 역량(30점), 해외진출 전략(30점), Chartmetric 점수(10점) - (2차 현지 디렉터평가) 페스티벌 사무국 내부 심사에 따른 최종선정 접수 주의사항 ㅇ 접수페이지 외 이메일, 우편, 방문 등을 통한 접수 불가 ㅇ 접수마감일에는 트래픽으로 인한 시스템 장애가 발생할 수 있으니 마감기한 1일 전 접수완료 권장 ㅇ 한 기획사가 여러 팀의 뮤지션을 신청할 시 뮤지션별 나누어 신청 * 한 신청",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "isPriority": true,
-    "isExcludedFromPriority": false,
-    "exclusionReason": "",
-    "collectedAt": "2026-10-30",
-    "updatedAt": "2026-10-30",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
-    "documentReview": {
-      "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": []
-    },
-    "applicationReview": {
-      "version": "p0_eligibility_review_v1",
-      "participationCode": "artist_collab_review",
-      "participationLabel": "작가·예술단체 협업 검토",
-      "applicantBasis": "뮤지션",
-      "evidence": [
-        {
-          "field": "신청 자격",
-          "quote": "신청자격 ㅇ 모집대상 : 2027년 소나르 페스티벌 참가를 희망하는 국내 뮤지션 ㅇ 신청자격 : 소나르 페스티벌의 취지 및 주요 공연 장르에 부합하는 대중음악 뮤지션 (클래식, 오페라, 국악 장르 제외) - 신청일 기준 국내 음반 발매 경력이 있고 국내에서 활동 중인 대중음악 뮤지션(국내 소속사가 있거나, 소속사가 없을 경우 한국 국적인 뮤지션) - 본인 곡으로 60분 내외 단독 공연이 가능한 뮤지션 * 세부사항 공고문 참조 신",
-          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00110006&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-          "sourceType": "공고 자격 안내"
-        }
-      ],
-      "restrictions": [],
-      "submissionDocuments": [
-        "제출서류",
-        "신청서"
-      ],
-      "missingEvidence": false,
-      "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
-      "documentAudit": {
-        "status": "no_attachment_detected",
-        "files": []
-      }
-    },
-    "participationCode": "artist_collab_review",
-    "participationLabel": "작가·예술단체 협업 검토",
     "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
