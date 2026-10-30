@@ -602,30 +602,6 @@
       ],
       "snippetVersion": 2
     },
-    "arko-57e328b201a6|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD8KCZRuK3BLLPelAz0mYGXYPBZm1EJpnMlsBwvsh76BM": {
-      "status": "attachment_not_readable",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
-      "files": [
-        {
-          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037436",
-          "label": "(공고문) 2026년 크라우드펀딩 확산 사업 2차 공모(공고연장).pdf",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "HTTP_404"
-        },
-        {
-          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10037437",
-          "label": "(지원신청서) 2026년 크라우드펀딩 확산 사업_신청자(단체)명.hwp",
-          "format": "unknown",
-          "status": "failed",
-          "reason": "HTTP_404"
-        }
-      ],
-      "snippets": [],
-      "snippetVersion": 2,
-      "refreshWarning": "attachment_not_readable"
-    },
     "seoul-d2155f8f7bf5af|https://mediahub.seoul.go.kr/gongmo/2000779": {
       "status": "parsed",
       "reviewedAt": "2026-10-29T06:26:52.975Z",
@@ -1973,5 +1949,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-30T13:31:21.463Z"
+  "updatedAt": "2026-10-30T19:40:58.890Z"
 }
