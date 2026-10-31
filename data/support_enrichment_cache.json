@@ -1066,7 +1066,7 @@
     },
     "seoul-8f04c919b2144a|https://mediahub.seoul.go.kr/gongmo/2000784": {
       "status": "parsed",
-      "reviewedAt": "2026-10-28T16:50:04.901Z",
+      "reviewedAt": "2026-10-31T18:45:34.704Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2280847",
       "files": [
         {
@@ -1121,7 +1121,7 @@
     },
     "seoul-636b66cf2f51ba|https://mediahub.seoul.go.kr/gongmo/2000786": {
       "status": "parsed",
-      "reviewedAt": "2026-10-28T16:50:04.901Z",
+      "reviewedAt": "2026-10-31T18:45:34.704Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2282138",
       "files": [
         {
@@ -1949,5 +1949,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-31T13:01:52.140Z"
+  "updatedAt": "2026-10-31T18:45:34.704Z"
 }
