@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-30",
+  "updatedAt": "2026-10-31",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 25,
-    "sourceFailureCount": 0,
+    "sourceSuccessCount": 24,
+    "sourceFailureCount": 1,
     "discoveredCandidateCount": 3,
     "sourceRuns": [
       {
@@ -182,8 +182,8 @@
         "sourceId": "gyeongnam_culture_portal",
         "sourceName": "경상남도 문화예술 정보플랫폼",
         "region": "경남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,8 +236,8 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 17,
-    "matched": 4,
+    "checked": 16,
+    "matched": 3,
     "status": "ok"
   }
 }
