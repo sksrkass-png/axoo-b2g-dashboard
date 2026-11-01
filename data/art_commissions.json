@@ -106,7 +106,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -216,7 +216,7 @@
     "isStaleCandidate": false,
     "deadlineStatus": "마감일 확인 필요",
     "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-31",
+    "updatedAt": "2026-11-01",
     "collectionSourceId": "lh_notice",
     "collectionVersion": "nationwide-generic-1.5.0",
     "detailFetchStatus": "ok",
@@ -230,7 +230,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "staleReason": ""
   },
   {
@@ -285,7 +285,7 @@
         "value": "2026-10-26",
         "raw": "2026-10-26",
         "label": "등록일",
-        "evidence": "등록일 2026-10-26 조회수 1,233",
+        "evidence": "등록일 2026-10-26 조회수 1,424",
         "confidence": "high"
       },
       "agency": {
@@ -339,7 +339,7 @@
     "isStaleCandidate": false,
     "deadlineStatus": "마감일 확인 필요",
     "collectedAt": "2026-10-26",
-    "updatedAt": "2026-10-31",
+    "updatedAt": "2026-11-01",
     "collectionSourceId": "lh_notice",
     "collectionVersion": "nationwide-generic-1.5.0",
     "detailFetchStatus": "ok",
@@ -353,7 +353,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "staleReason": ""
   },
   {
@@ -462,7 +462,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -573,7 +573,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -626,8 +626,8 @@
     "detailFetchStatus": "not_requested",
     "detailFetchError": "",
     "rawText": "함평읍 도시재생사업(한우테마거리조성) 미디어 조형물 제작 설치 공고문_함평읍 도시재생(한우테마거리 조성) 미디어 조형물 제작 설치(협상에 의한 계약).hwpx 함평군 디자인 안내판 조형물 제작설치 제안요청서 및 과업지시서(조형물).pdf 공고문_함평읍 도시재생(한우테마거리 조성) 미디어 조형물 제작 설치(협상에 의한 계약).pdf  ",
-    "collectedAt": "2026-10-31",
-    "updatedAt": "2026-10-31",
+    "collectedAt": "2026-11-01",
+    "updatedAt": "2026-11-01",
     "periodStart": "",
     "periodEnd": "",
     "detailTextSample": "접근 가능 브라우저 안내 나라장터 국가종합전자조달 접근 가능 브라우저 안내 차세대 나라장터 안정적인 지원을 위해 HTML5를 지원 하는 브라우저로 접근 가능합니다. 크롬, 엣지 브라우저로 접근 부탁 드립니다.",
@@ -640,7 +640,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -750,7 +750,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -860,7 +860,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "마감일 확인 필요",
     "staleReason": ""
   },
@@ -984,7 +984,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "staleReason": ""
   },
   {
@@ -1107,7 +1107,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "staleReason": ""
   },
   {
@@ -1217,7 +1217,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1328,7 +1328,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1439,7 +1439,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1550,7 +1550,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1661,7 +1661,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1771,7 +1771,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1882,7 +1882,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1928,7 +1928,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-10-31",
+    "dateNormalizedAt": "2026-11-01",
     "deadlineStatus": "진행중",
     "staleReason": ""
   }
