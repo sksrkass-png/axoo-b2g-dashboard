@@ -1024,7 +1024,9 @@
           "reason": "HTTP_404"
         }
       ],
-      "snippets": []
+      "snippets": [],
+      "snippetVersion": 2,
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-360bd6a9eb60|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDxeWBfXYq5PfDFvTFxDIKHgPBZm1EJpnMlsBwvsh76BM": {
       "status": "attachment_not_readable",
@@ -1949,5 +1951,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-10-31T23:42:39.532Z"
+  "updatedAt": "2026-11-01T06:48:53.254Z"
 }
