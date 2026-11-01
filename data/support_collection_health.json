@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-01T15:26:56.153Z",
+  "updatedAt": "2026-11-01T20:48:33.261Z",
   "interval": "every 2 hours (GitHub Actions cron; not live push)",
   "sources": [
     {
@@ -9,8 +9,8 @@
       "url": "https://www.scas.kr/biz/list",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-11-01T15:26:56.153Z",
-      "lastSuccessAt": "2026-11-01T15:26:56.153Z",
+      "checkedAt": "2026-11-01T20:48:33.262Z",
+      "lastSuccessAt": "2026-11-01T20:48:33.262Z",
       "found": 12,
       "verified": 11,
       "errors": [
@@ -23,7 +23,7 @@
       "url": "https://www.ggcf.kr/boards/businessNotices/articles?category=03",
       "region": "기타",
       "state": "failed",
-      "checkedAt": "2026-11-01T15:27:09.187Z",
+      "checkedAt": "2026-11-01T20:48:46.626Z",
       "found": 0,
       "verified": 0,
       "errors": [
@@ -37,8 +37,8 @@
       "url": "https://ifac.or.kr/artsSupProjects/supProjects/list.do?key=m2501143953255",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-11-01T15:27:10.177Z",
-      "lastSuccessAt": "2026-11-01T15:27:10.177Z",
+      "checkedAt": "2026-11-01T20:48:47.529Z",
+      "lastSuccessAt": "2026-11-01T20:48:47.529Z",
       "found": 10,
       "verified": 10,
       "errors": []
@@ -49,8 +49,8 @@
       "url": "https://www.bscf.or.kr/view.do?no=1010",
       "region": "기타",
       "state": "ok",
-      "checkedAt": "2026-11-01T15:27:37.131Z",
-      "lastSuccessAt": "2026-11-01T15:27:37.131Z",
+      "checkedAt": "2026-11-01T20:49:13.882Z",
+      "lastSuccessAt": "2026-11-01T20:49:13.882Z",
       "found": 8,
       "verified": 8,
       "errors": []
@@ -61,8 +61,8 @@
       "url": "https://mediahub.seoul.go.kr/competition/competitionList.do",
       "region": "서울",
       "state": "partial",
-      "checkedAt": "2026-11-01T15:27:48.270Z",
-      "lastSuccessAt": "2026-11-01T15:27:48.270Z",
+      "checkedAt": "2026-11-01T20:49:20.363Z",
+      "lastSuccessAt": "2026-11-01T20:49:20.363Z",
       "found": 10,
       "verified": 9,
       "errors": [
