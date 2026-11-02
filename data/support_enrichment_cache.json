@@ -1881,7 +1881,7 @@
     },
     "kams-2836|https://www.gokams.or.kr/02_apply/introduction_view.aspx?Idx=2836&page=1&txtKeyword=&ddlKeyfield=45": {
       "status": "parsed",
-      "reviewedAt": "2026-10-30T13:31:21.463Z",
+      "reviewedAt": "2026-11-02T20:31:19.017Z",
       "documentUrl": "https://www.gokams.or.kr/DATA/GO/%5B%ea%b3%b5%eb%aa%a8%5D%202026%20%ec%98%88%ec%88%a0%ec%82%b0%ec%97%85%eb%b3%b4%ec%a6%9d%20%ea%b3%b5%eb%aa%a8%ec%9a%94%ea%b0%95_11%ec%9b%94%281%29.pdf",
       "files": [
         {
@@ -1939,7 +1939,8 @@
       "files": [],
       "snippets": [],
       "reason": "fetch failed",
-      "snippetVersion": 2
+      "snippetVersion": 2,
+      "refreshWarning": "source_unavailable"
     },
     "seoul-92d3b92a0169d9|https://mediahub.seoul.go.kr/gongmo/2000787": {
       "status": "source_unavailable",
@@ -1948,8 +1949,9 @@
       "files": [],
       "snippets": [],
       "reason": "fetch failed",
-      "snippetVersion": 2
+      "snippetVersion": 2,
+      "refreshWarning": "source_unavailable"
     }
   },
-  "updatedAt": "2026-11-02T09:56:36.273Z"
+  "updatedAt": "2026-11-02T20:31:19.017Z"
 }
