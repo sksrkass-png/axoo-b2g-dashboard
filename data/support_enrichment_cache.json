@@ -1965,7 +1965,23 @@
       "reason": "fetch failed",
       "snippetVersion": 2,
       "refreshWarning": "source_unavailable"
+    },
+    "ifac-ddf1a407feb2e5|https://ifac.or.kr/artsSupProjects/supProjects/view.do?key=m2501143953255&bbsSn=236177": {
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-11-03T10:04:15.169Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://ifac.or.kr/cmm/fileDown.do?key=229742&type=bbs",
+          "label": "참여 공연장 신청서(양식) ( 0.0595703125 MB)",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": [],
+      "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-11-03T02:39:08.708Z"
+  "updatedAt": "2026-11-03T10:04:15.169Z"
 }
