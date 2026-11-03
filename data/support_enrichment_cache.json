@@ -1933,14 +1933,28 @@
       "snippetVersion": 2
     },
     "seoul-6192df0b00aedb|https://mediahub.seoul.go.kr/gongmo/2000785": {
-      "status": "source_unavailable",
-      "reviewedAt": "2026-10-30T13:31:21.463Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": [],
-      "reason": "fetch failed",
-      "snippetVersion": 2,
-      "refreshWarning": "source_unavailable"
+      "status": "parsed",
+      "reviewedAt": "2026-11-03T02:39:08.708Z",
+      "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2281467",
+      "files": [
+        {
+          "url": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2281467",
+          "label": "[양식]서울시행정서식,뚝딱뚝딱개선아이디어공모전제출서식.hwpx",
+          "format": "hwpx",
+          "status": "parsed",
+          "reason": "",
+          "characters": 1587,
+          "pages": 0
+        }
+      ],
+      "snippets": [
+        {
+          "label": "제출서류 문구",
+          "quote": "붙 임 1 행정서식 개선 아이디어 공모 제출서류 <서식 1> 행정서식 개선 아이디어 제안서 서울시 행정서식 개선 아이디어 공모 신청서 기본정보 성 명 (생년월일) ○ ○ ○ ( ○○.○○.○○) 연락처 010-0000-0000 이메일 주 소 응모과제 □ 서식간소화 □ 우리말 서식 □ 이용방식 개선(디지털 전환 등) □ 기타 (※ 해당되는 분야에 ■ 체크) 제 목 현행 서식명 ※ 개선 대",
+          "sourceUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2281467"
+        }
+      ],
+      "snippetVersion": 2
     },
     "seoul-92d3b92a0169d9|https://mediahub.seoul.go.kr/gongmo/2000787": {
       "status": "source_unavailable",
@@ -1953,5 +1967,5 @@
       "refreshWarning": "source_unavailable"
     }
   },
-  "updatedAt": "2026-11-02T20:31:19.017Z"
+  "updatedAt": "2026-11-03T02:39:08.708Z"
 }
