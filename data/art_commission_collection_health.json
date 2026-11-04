@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-03",
+  "updatedAt": "2026-11-04",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 24,
-    "sourceFailureCount": 1,
-    "discoveredCandidateCount": 2,
+    "sourceSuccessCount": 25,
+    "sourceFailureCount": 0,
+    "discoveredCandidateCount": 1,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -229,15 +229,15 @@
         "region": "전국",
         "accessOk": true,
         "pagesFetched": 6,
-        "candidatesFound": 1,
+        "candidatesFound": 0,
         "error": ""
       }
     ]
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 15,
-    "matched": 2,
+    "checked": 14,
+    "matched": 3,
     "status": "ok"
   }
 }
