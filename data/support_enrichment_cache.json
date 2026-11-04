@@ -665,15 +665,6 @@
       "snippetVersion": 2,
       "refreshWarning": "manual_review_required"
     },
-    "kocca-326D00088011|https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00088011&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=": {
-      "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T09:58:39.569Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": [],
-      "snippetVersion": 2,
-      "refreshWarning": "no_attachment_detected"
-    },
     "arko-04f87e7f7dcb|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyD5p4sbIal%2F4IjFWHPt7ZbLIPBZm1EJpnMlsBwvsh76BM": {
       "status": "parsed",
       "reviewedAt": "2026-11-02T01:47:47.924Z",
@@ -1110,7 +1101,7 @@
       "snippets": [],
       "reason": "fetch failed",
       "snippetVersion": 2,
-      "refreshWarning": "manual_review_required"
+      "refreshWarning": "attachment_not_readable"
     },
     "arko-239201|https://theater.arko.or.kr/Rent/Notice/239201/?q=null": {
       "status": "no_attachment_detected",
@@ -1981,7 +1972,37 @@
       ],
       "snippets": [],
       "snippetVersion": 2
+    },
+    "arko-db3164e2efe1|https://artnuri.or.kr/crawler/info/view.do?key=2301170002&encData=sUiBAI0l4sHqoD%2B2npmyDyvPI6tP3p%2FaL9YbfRJz7w0PBZm1EJpnMlsBwvsh76BM": {
+      "status": "attachment_not_readable",
+      "reviewedAt": "2026-11-04T06:58:36.796Z",
+      "documentUrl": "",
+      "files": [
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10038817",
+          "label": "1. 2027년 지역대표예술단체 지원사업 공고문.pdf",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10038818",
+          "label": "2. 2027년 지역대표예술단체 지원 사업 지원신청서_지자체명_(장르)신청단체명.hwpx",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        },
+        {
+          "url": "https://artnuri.or.kr/crawler/Info/fileDown.do?crlAttachId=10038819",
+          "label": "3. (참고) 2024년 결산 재정자립도 개편 후 기준.xlsx",
+          "format": "unknown",
+          "status": "failed",
+          "reason": "HTTP_404"
+        }
+      ],
+      "snippets": [],
+      "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-11-03T23:41:08.972Z"
+  "updatedAt": "2026-11-04T06:58:36.796Z"
 }
