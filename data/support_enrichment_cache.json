@@ -542,7 +542,7 @@
     },
     "seoul-86386eeb4ff162|https://mediahub.seoul.go.kr/gongmo/2000778": {
       "status": "parsed",
-      "reviewedAt": "2026-11-01T20:49:29.640Z",
+      "reviewedAt": "2026-11-04T22:10:47.150Z",
       "documentUrl": "https://mediahub.seoul.go.kr/competition/downloadFile.do?attachNo=2278429",
       "files": [
         {
@@ -2004,5 +2004,5 @@
       "snippetVersion": 2
     }
   },
-  "updatedAt": "2026-11-04T16:33:58.912Z"
+  "updatedAt": "2026-11-04T22:10:47.150Z"
 }
