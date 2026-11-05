@@ -558,8 +558,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 33,
-    "score": 33,
+    "axooFitScore": 23,
+    "score": 23,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -572,7 +572,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 20,
+        "score": 10,
         "maxScore": 20
       },
       {
@@ -601,19 +601,18 @@
       }
     ],
     "scoreReasons": [
-      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "사업화·유통·지원금 요소 확인",
       "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
-    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "지원대상 단체",
+    "eligibility": "",
     "supportDetails": "",
-    "application": "신청기간 2026-11-04 ~ 2026-12-17",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -1351,9 +1350,9 @@
     "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 전체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -1559,7 +1558,7 @@
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-11-02T09:56:36.273Z",
+      "reviewedAt": "2026-11-05T12:44:10.018Z",
       "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
       "files": [
         {
@@ -1745,9 +1744,9 @@
     "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 전체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-10-08 ~ 2026-11-05",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
