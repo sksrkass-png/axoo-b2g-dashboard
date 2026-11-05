@@ -558,8 +558,8 @@
     ],
     "matchedKeywords": [],
     "matchedPriorityKeywords": [],
-    "axooFitScore": 23,
-    "score": 23,
+    "axooFitScore": 33,
+    "score": 33,
     "grade": "C",
     "fitVerdict": "낮은 적합도",
     "scoreBreakdown": [
@@ -572,7 +572,7 @@
       {
         "code": "eligibility",
         "label": "지원자격",
-        "score": 10,
+        "score": 20,
         "maxScore": 20
       },
       {
@@ -601,18 +601,19 @@
       }
     ],
     "scoreReasons": [
+      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
       "사업화·유통·지원금 요소 확인",
       "상세 본문 부족 · 첨부파일 근거만 확인"
     ],
     "analysisBasis": "공고 제목",
     "analysisConfidence": "low",
     "companyEligible": false,
-    "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
-    "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
+    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "",
+    "eligibility": "지원대상 단체",
     "supportDetails": "",
-    "application": "",
+    "application": "신청기간 2026-11-04 ~ 2026-12-17",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -1350,9 +1351,9 @@
     "axooFitReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "gradeReason": "낮은 적합도: 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "지원대상 전체",
+    "eligibility": "",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -1363,7 +1364,7 @@
     "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
     "documentReview": {
       "status": "parsed",
-      "reviewedAt": "2026-11-02T01:47:47.924Z",
+      "reviewedAt": "2026-11-05T02:45:57.524Z",
       "documentUrl": "https://artnuri.or.kr/resource/www_new/file/chatbot/2027%EB%85%84%20%EB%AC%B8%EC%98%88%EC%A7%84%ED%9D%A5%EA%B8%B0%EA%B8%88%20%EA%B3%B5%EB%AA%A8%EC%82%AC%EC%97%85%20%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD%20FAQ(%EC%A7%80%EC%9B%90%EC%8B%A0%EC%B2%AD.%20AI%20%ED%99%9C%EC%9A%A9%20%EA%B0%80%EC%9D%B4%EB%93%9C)_%EC%B5%9C%EC%A2%85.pdf",
       "files": [
         {
@@ -1744,9 +1745,9 @@
     "axooFitReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "gradeReason": "낮은 적합도: 협업·해외진출 사업영역과 연결 · 사업화·유통·지원금 요소 확인 · 상세 본문 부족 · 첨부파일 근거만 확인",
     "detailSummary": "",
-    "eligibility": "지원대상 전체",
+    "eligibility": "",
     "supportDetails": "",
-    "application": "신청기간 2026-10-08 ~ 2026-11-05",
+    "application": "",
     "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
     "nextAction": "AXOO 참여 가능성과 지원조건 검토",
     "isPriority": true,
@@ -3688,159 +3689,6 @@
     },
     "participationCode": "needs_review",
     "participationLabel": "자격 확인 필요",
-    "scoringVersion": "AXOO_FIT_V2_2026_10"
-  },
-  {
-    "id": "kocca-326D00034008",
-    "category": "arts_content_support",
-    "categoryLabel": "예술·콘텐츠 지원사업",
-    "priorityCategory": "arts_content_support",
-    "priorityCategoryLabel": "예술·콘텐츠 지원사업",
-    "source": "한국콘텐츠진흥원",
-    "sourceCode": "KOCCA",
-    "sourceType": "지원사업",
-    "title": "2026년 제 2차 글로벌게임허브센터 게임벤처4.0 신규 입주기업 모집",
-    "organization": "한국콘텐츠진흥원",
-    "agency": "한국콘텐츠진흥원",
-    "status": "진행중",
-    "postedDate": "2026-10-13",
-    "publishedDate": "2026-10-13",
-    "startDate": "2026-10-15",
-    "endDate": "2026-11-05",
-    "deadline": "2026-11-05",
-    "budget": null,
-    "supportAmount": null,
-    "originalUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "sourceUrl": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-    "documentUrl": "",
-    "field": "기타",
-    "businessArea": "other",
-    "businessAreaLabel": "기타",
-    "businessAreas": [
-      {
-        "code": "other",
-        "label": "기타"
-      }
-    ],
-    "matchedKeywords": [],
-    "matchedPriorityKeywords": [],
-    "axooFitScore": 35,
-    "score": 35,
-    "grade": "C",
-    "fitVerdict": "낮은 적합도",
-    "scoreBreakdown": [
-      {
-        "code": "relevance",
-        "label": "사업영역",
-        "score": 8,
-        "maxScore": 40
-      },
-      {
-        "code": "eligibility",
-        "label": "지원자격",
-        "score": 20,
-        "maxScore": 20
-      },
-      {
-        "code": "execution",
-        "label": "수행역량",
-        "score": 4,
-        "maxScore": 20
-      },
-      {
-        "code": "business",
-        "label": "사업성",
-        "score": 3,
-        "maxScore": 15
-      },
-      {
-        "code": "evidence",
-        "label": "상세근거",
-        "score": 5,
-        "maxScore": 5
-      },
-      {
-        "code": "penalty",
-        "label": "감점",
-        "score": 0,
-        "maxScore": 0
-      },
-      {
-        "code": "cap_adjustment",
-        "label": "제외·근거부족 상한 보정",
-        "score": -5,
-        "maxScore": 0
-      }
-    ],
-    "scoreReasons": [
-      "개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인)",
-      "기획·제작·운영 수행역량 활용 가능",
-      "사업화·유통·지원금 요소 확인"
-    ],
-    "analysisBasis": "상세 공고문",
-    "analysisConfidence": "high",
-    "companyEligible": true,
-    "axooFitReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "gradeReason": "낮은 적합도: 개인·기업·단체 등 신청 주체의 단서(지원 자격 별도 확인) · 기획·제작·운영 수행역량 활용 가능 · 사업화·유통·지원금 요소 확인",
-    "detailSummary": "지원내용 - 임대료 및 관리비 전액 지원",
-    "eligibility": "신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외) · 공고일 현재 창업(사업자등록 또는 법인설립 등기)을 하지 않은 자로 입주 후 1년 이내 사업자등록 가능자 · 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문",
-    "supportDetails": "지원내용 - 임대료 및 관리비 전액 지원",
-    "application": "접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문 참고 * KOCCA 홈페이지(www.kocca.kr) 지원공고 하단의 ‘사업관리시스템 바로가기(신청접수)’ 버튼을 클릭해서 접속하실 수도 있습니다. ㅇ 제출서류: 공고문 내 각 유형별 모집 공고문 참고 유의사항 ㅇ 본 모집공고 내 양식 및 유의사항을 반드시 숙지 후 접수 바랍니다. ㅇ 입주신청 전 입주시설 사전방문 및 답사를 권장합니다. ㅇ 접수마감 이후 추가 신청은 불가하며, 접수마감 전 사전 제출 권장합니다. ㅇ 제출서류는 접수 후 임의로 추가 또는 보완될 수 없으며, 일체의 서류는 반환되지 않습니다. ㅇ 최종 선정결과는 신청기",
-    "recommendedAction": "AXOO 참여 가능성과 지원조건 검토",
-    "nextAction": "AXOO 참여 가능성과 지원조건 검토",
-    "isPriority": false,
-    "isExcludedFromPriority": true,
-    "exclusionReason": "결과·채용·교육 등 비지원 공고",
-    "collectedAt": "2026-11-05",
-    "updatedAt": "2026-11-05",
-    "collectionVersion": "support_programs_kams_arko_kcdf_kocca_v5.1_evidence_qa",
-    "documentReview": {
-      "status": "no_attachment_detected",
-      "reviewedAt": "2026-10-19T10:42:59.376Z",
-      "documentUrl": "",
-      "files": [],
-      "snippets": [],
-      "snippetVersion": 2,
-      "refreshWarning": "no_attachment_detected"
-    },
-    "applicationReview": {
-      "version": "p0_eligibility_review_v1",
-      "participationCode": "corporate_review",
-      "participationLabel": "법인 직접 신청 검토",
-      "applicantBasis": "사업자등록증",
-      "evidence": [
-        {
-          "field": "신청 자격",
-          "quote": "· 입주 후 1년 이내 사업자등록 필수 - 창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문",
-          "source": "https://www.kocca.kr/kocca/pims/view.do?intcNo=326D00034008&menuNo=204104&recptSt=&category=&pageIndex=1&search=&searchWrd=",
-          "sourceType": "공고 자격 안내"
-        }
-      ],
-      "restrictions": [
-        {
-          "code": "tenure",
-          "label": "업력",
-          "quote": "신청자격 ㅇ 창업 준비 중 또는 공고일 현재 창업 5년 미만의 게임 개발사 ㅇ 4인 내외 기업(팀)도 신청 가능하며, 4인 초과 인원의 입주 공간은 접수 규모 및 공석 현황에 따라 변동 가능 ㅇ 아래 각 호에 해당하는 자 - 예비창업자(1인) 또는 예비창업팀(4인 내외"
-        },
-        {
-          "code": "credentials",
-          "label": "신청 증빙·등록",
-          "quote": "창업 5년 미만 기업 (공고일 기준) · 4인 내외 기업으로, 사업자등록증명상 [사업개시일(개업일)] 또는 법인등기부등본상 [법인설립등기일] 기준 ㅇ 선정대상 제외 경우: 공고문 접수방법 : KOCCA 사업관리시스템을 통한 온라인 접수 * 세부 접수방법 공고문 내 각 유형별 모집 공고문"
-        }
-      ],
-      "submissionDocuments": [
-        "제출서류"
-      ],
-      "missingEvidence": false,
-      "detailQuality": "eligibility_parsed",
-      "decisionNote": "자동 분류 결과는 신청 자격 확정이 아닙니다. 신청 대상 본문만으로 보수적으로 분류했습니다. 공통 이용안내 PDF의 법인등록 문구는 법인 신청 근거가 아닙니다. 신청 주체·공고 원문·제한조건은 담당자가 재확인해야 합니다.",
-      "documentAudit": {
-        "status": "no_attachment_detected",
-        "files": []
-      }
-    },
-    "participationCode": "corporate_review",
-    "participationLabel": "법인 직접 신청 검토",
     "scoringVersion": "AXOO_FIT_V2_2026_10"
   },
   {
