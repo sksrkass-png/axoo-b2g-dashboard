@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-05",
+  "updatedAt": "2026-11-06",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 22,
-    "sourceFailureCount": 3,
+    "sourceSuccessCount": 25,
+    "sourceFailureCount": 0,
     "discoveredCandidateCount": 1,
     "sourceRuns": [
       {
@@ -12,7 +12,7 @@
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
         "accessOk": true,
-        "pagesFetched": 1,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -29,8 +29,8 @@
         "sourceId": "gwangju_city_notice",
         "sourceName": "전남광주통합특별시 고시공고 - 광주권",
         "region": "광주",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 1,
         "candidatesFound": 0,
         "error": ""
       },
@@ -47,8 +47,8 @@
         "sourceId": "ulsan_city_notice",
         "sourceName": "울산광역시 고시공고",
         "region": "울산",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -146,8 +146,8 @@
         "sourceId": "jeonnam_notice",
         "sourceName": "전라남도 공고·고시",
         "region": "전남",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,8 +236,8 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 16,
-    "matched": 3,
+    "checked": 18,
+    "matched": 4,
     "status": "ok"
   }
 }
