@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-07",
+  "updatedAt": "2026-11-08",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 24,
-    "sourceFailureCount": 1,
+    "sourceSuccessCount": 23,
+    "sourceFailureCount": 2,
     "discoveredCandidateCount": 1,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -228,7 +228,7 @@
         "sourceName": "한국토지주택공사 LH 공고",
         "region": "전국",
         "accessOk": true,
-        "pagesFetched": 1,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       }
@@ -236,8 +236,8 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 17,
-    "matched": 2,
+    "checked": 21,
+    "matched": 6,
     "status": "ok"
   }
 }
