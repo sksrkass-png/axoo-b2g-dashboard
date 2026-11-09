@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const {scoreRecord} = require("./regrade_support_programs");
+const {isHousingArtCommission} = require("./art_housing_scope");
 
 
 /* =========================================================
@@ -1275,6 +1276,8 @@ function main() {
 
   const latestG2b =
     [...byNotice.values()]
+      // Housing artwork notices belong exclusively to tab 01, not mural tab 02.
+      .filter(item => !isHousingArtCommission(item))
       .map(mapG2bItem)
       .sort(sortG2b);
 
