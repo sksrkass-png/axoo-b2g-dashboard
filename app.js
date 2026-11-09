@@ -253,37 +253,53 @@ function encodeGithubFile(value) {
   return btoa(Array.from(bytes, byte => String.fromCharCode(byte)).join(""));
 }
 
-async function persistExcludedArtNotice(item, token) {
+async function persistArtExclusionEntries(entries, token) {
   const scope = getArtScope();
   if (!scope) throw new Error("건축물 미술작품 분류 모듈을 불러오지 못했습니다.");
-  const keys = scope.getExclusionKeys(item);
   const endpoint = "https://api.github.com/repos/" + ART_GITHUB_REPO + "/contents/" + ART_EXCLUSION_PATH;
   const headers = {
     Accept: "application/vnd.github+json",
     Authorization: "Bearer " + token,
     "X-GitHub-Api-Version": "2022-11-28"
   };
+
   for (let attempt = 0; attempt < 3; attempt += 1) {
-    const getResponse = await fetch(endpoint + "?ref=main&t=" + Date.now(), { headers, cache: "no-store" });
+    const getResponse = await fetch(endpoint + "?ref=main&t=" + Date.now(), {
+      headers,
+      cache: "no-store"
+    });
     if (!getResponse.ok) throw new Error("제외 목록 읽기 실패 (" + getResponse.status + ")");
     const remote = await getResponse.json();
     const binary = atob(String(remote.content || "").replace(/\s/g, ""));
     const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
     const latest = JSON.parse(new TextDecoder().decode(bytes));
     if (!Array.isArray(latest.excluded)) latest.excluded = [];
-    if (!scope.isExcluded(item, latest)) {
+
+    const present = scope.exclusionSet(latest);
+    let changed = false;
+    entries.forEach(entry => {
+      const keys = (entry && Array.isArray(entry.keys) ? entry.keys : []).filter(Boolean);
+      const newKeys = keys.filter(key => !present.has(key));
+      if (!newKeys.length) return;
       latest.excluded.push({
-        keys,
-        title: String(item.title || ""),
-        source: String(item.source || ""),
-        excludedAt: new Date().toISOString()
+        keys: newKeys,
+        title: String(entry.title || "사용자 제외 공고"),
+        source: String(entry.source || ""),
+        excludedAt: entry.excludedAt || new Date().toISOString()
       });
+      newKeys.forEach(key => present.add(key));
+      changed = true;
+    });
+    if (!changed) {
+      artExclusions = latest;
+      return;
     }
+
     const response = await fetch(endpoint, {
       method: "PUT",
       headers: { ...headers, "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: "Exclude building art notice: " + String(item.title || item.id || "").slice(0, 65),
+        message: "Persist manually excluded housing artwork notices",
         content: encodeGithubFile(latest),
         sha: remote.sha,
         branch: "main"
@@ -295,6 +311,15 @@ async function persistExcludedArtNotice(item, token) {
     return;
   }
   throw new Error("변경 충돌로 제외 목록 반영에 실패했습니다.");
+}
+
+async function persistExcludedArtNotice(item, token) {
+  const scope = getArtScope();
+  await persistArtExclusionEntries([{
+    keys: scope.getExclusionKeys(item),
+    title: String(item.title || ""),
+    source: String(item.source || "")
+  }], token);
 }
 
 async function excludeArtNotice(item) {
@@ -333,6 +358,33 @@ async function excludeArtNotice(item) {
     artAdminToken = "";
     alert("브라우저에서는 삭제되었지만 GitHub 영구 제외에는 실패했습니다.\n" +
       error.message + "\nGitHub 토큰 권한을 확인한 후 다시 시도해 주세요.");
+  }
+}
+
+async function syncLocalArtExclusions() {
+  if (!artLocalExcludedKeys.size) {
+    alert("이 브라우저에는 영구 동기화할 삭제 내역이 없습니다.");
+    return;
+  }
+  if (!artAdminToken) {
+    const entered = prompt(
+      "GitHub에 삭제 내역을 영구 저장하려면 Fine-grained token을 입력해 주세요.\n" +
+      ART_GITHUB_REPO + " → Contents: Read and write 권한이 필요합니다.\n" +
+      "토큰은 이 페이지에 저장하지 않습니다."
+    );
+    if (entered) artAdminToken = entered.trim();
+  }
+  if (!artAdminToken) return;
+  try {
+    const entries = [...artLocalExcludedKeys].map(key => ({
+      keys: [key],
+      title: "브라우저 삭제 내역 동기화"
+    }));
+    await persistArtExclusionEntries(entries, artAdminToken);
+    alert("삭제 내역을 GitHub에 영구 동기화했습니다. 이후 자동 수집에서도 제외됩니다.");
+  } catch (error) {
+    artAdminToken = "";
+    alert("GitHub 동기화에 실패했습니다. 토큰 권한을 확인해 주세요.\n" + error.message);
   }
 }
 
@@ -1245,6 +1297,7 @@ function bindFilterControls() {
   const artStatusFilter = document.getElementById("artStatusFilter");
   const artReviewFilter = document.getElementById("artReviewFilter");
   const artFilterToggle = document.getElementById("artFilterToggle");
+  const artExclusionSyncButton = document.getElementById("artExclusionSyncButton");
   const artFilters = document.querySelector("#artTab .research-filters");
 
   const localSearchInput = document.getElementById("localSearchInput");
@@ -1270,6 +1323,7 @@ function bindFilterControls() {
   if (artSourceFilter) artSourceFilter.addEventListener("change", renderArtCards);
   if (artStatusFilter) artStatusFilter.addEventListener("change", renderArtCards);
   if (artReviewFilter) artReviewFilter.addEventListener("change", renderArtCards);
+  if (artExclusionSyncButton) artExclusionSyncButton.addEventListener("click", syncLocalArtExclusions);
   if (artFilterToggle && artFilters) {
     artFilterToggle.addEventListener("click", () => {
       const expanded = artFilters.classList.toggle("expanded");
