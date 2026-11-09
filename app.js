@@ -6,6 +6,13 @@ let localProjects = [];
 let dashboardMeta = {};
 
 const REVIEW_STORAGE_KEY = "axooB2GReviewStatus";
+const ART_EXCLUSION_LOCAL_KEY = "axooB2GArtExcludedKeysV1";
+const ART_EXCLUSION_PATH = "data/art_commission_exclusions.json";
+const ART_GITHUB_REPO = "sksrkass-png/axoo-b2g-dashboard";
+let artExclusions = { version: 1, excluded: [] };
+let artLocalExcludedKeys = new Set();
+// The GitHub Contents token exists only in memory, never localStorage or source.
+let artAdminToken = "";
 
 const categoryNames = {
   arts_content_support: "예술·콘텐츠 지원사업",
@@ -214,6 +221,121 @@ function getArtReviewKey(item) {
   return `art-${item.bidNtceNo || item.title || ""}-${item.deadline || ""}`;
 }
 
+function getArtScope() {
+  return typeof window !== "undefined" ? window.AxooHousingArt : null;
+}
+
+function loadLocalArtExclusions() {
+  try {
+    const data = JSON.parse(localStorage.getItem(ART_EXCLUSION_LOCAL_KEY) || "[]");
+    artLocalExcludedKeys = new Set(Array.isArray(data) ? data : []);
+  } catch (_) {
+    artLocalExcludedKeys = new Set();
+  }
+}
+
+function blockedArtKeys() {
+  const scope = getArtScope();
+  const globalKeys = scope ? scope.exclusionSet(artExclusions) : new Set();
+  return new Set([...globalKeys, ...artLocalExcludedKeys]);
+}
+
+function shouldShowArtNotice(item) {
+  const scope = getArtScope();
+  return !scope || (scope.isHousingArtCommission(item) &&
+    !scope.isExcluded(item, blockedArtKeys()));
+}
+
+if (typeof window !== "undefined") window.AxooArtShouldShow = shouldShowArtNotice;
+
+function encodeGithubFile(value) {
+  const bytes = new TextEncoder().encode(JSON.stringify(value, null, 2) + "\n");
+  return btoa(Array.from(bytes, byte => String.fromCharCode(byte)).join(""));
+}
+
+async function persistExcludedArtNotice(item, token) {
+  const scope = getArtScope();
+  if (!scope) throw new Error("건축물 미술작품 분류 모듈을 불러오지 못했습니다.");
+  const keys = scope.getExclusionKeys(item);
+  const endpoint = "https://api.github.com/repos/" + ART_GITHUB_REPO + "/contents/" + ART_EXCLUSION_PATH;
+  const headers = {
+    Accept: "application/vnd.github+json",
+    Authorization: "Bearer " + token,
+    "X-GitHub-Api-Version": "2022-11-28"
+  };
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const getResponse = await fetch(endpoint + "?ref=main&t=" + Date.now(), { headers, cache: "no-store" });
+    if (!getResponse.ok) throw new Error("제외 목록 읽기 실패 (" + getResponse.status + ")");
+    const remote = await getResponse.json();
+    const binary = atob(String(remote.content || "").replace(/\s/g, ""));
+    const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
+    const latest = JSON.parse(new TextDecoder().decode(bytes));
+    if (!Array.isArray(latest.excluded)) latest.excluded = [];
+    if (!scope.isExcluded(item, latest)) {
+      latest.excluded.push({
+        keys,
+        title: String(item.title || ""),
+        source: String(item.source || ""),
+        excludedAt: new Date().toISOString()
+      });
+    }
+    const response = await fetch(endpoint, {
+      method: "PUT",
+      headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: "Exclude building art notice: " + String(item.title || item.id || "").slice(0, 65),
+        content: encodeGithubFile(latest),
+        sha: remote.sha,
+        branch: "main"
+      })
+    });
+    if (response.status === 409 || response.status === 422) continue;
+    if (!response.ok) throw new Error("GitHub 영구 제외 쓰기 실패 (" + response.status + ")");
+    artExclusions = latest;
+    return;
+  }
+  throw new Error("변경 충돌로 제외 목록 반영에 실패했습니다.");
+}
+
+async function excludeArtNotice(item) {
+  const scope = getArtScope();
+  if (!scope) {
+    alert("삭제 기능을 준비하지 못했습니다. 페이지를 새로고침해 주세요.");
+    return;
+  }
+  if (!confirm("이 공고를 삭제하고 앞으로 다시 보이지 않게 할까요?")) return;
+
+  // Immediate local removal, including after refresh.
+  scope.getExclusionKeys(item).forEach(key => artLocalExcludedKeys.add(key));
+  localStorage.setItem(ART_EXCLUSION_LOCAL_KEY, JSON.stringify([...artLocalExcludedKeys]));
+  renderArtCards();
+  renderDashboardMeta();
+  window.dispatchEvent(new Event("axoo:artExcluded"));
+
+  if (!artAdminToken) {
+    const entered = prompt(
+      "모든 기기와 다음 자동 수집에서도 영구 제외하려면 GitHub 개인 액세스 토큰을 입력해 주세요.\n" +
+      "Fine-grained token: " + ART_GITHUB_REPO + " 저장소 Contents 읽기/쓰기 권한.\n" +
+      "토큰은 저장되지 않고 현재 페이지가 열려 있는 동안만 유지됩니다.\n\n" +
+      "취소하면 현재 브라우저에서만 삭제됩니다."
+    );
+    if (entered) artAdminToken = entered.trim();
+  }
+  if (!artAdminToken) {
+    alert("현재 브라우저에서 제외했습니다. 모든 기기/자동 수집에 반영하려면 GitHub 토큰으로 영구 제외를 진행해 주세요.");
+    return;
+  }
+
+  try {
+    await persistExcludedArtNotice(item, artAdminToken);
+    alert("GitHub 영구 제외 목록에 반영했습니다. 이후 수집에서도 다시 등장하지 않습니다.");
+  } catch (error) {
+    artAdminToken = "";
+    alert("브라우저에서는 삭제되었지만 GitHub 영구 제외에는 실패했습니다.\n" +
+      error.message + "\nGitHub 토큰 권한을 확인한 후 다시 시도해 주세요.");
+  }
+}
+
 function getArtItemKey(item) {
   const sourceUrl = plainText(
     item && (item.sourceUrl || item.originalUrl || item.url)
@@ -343,7 +465,7 @@ function renderDashboardMeta() {
   }
 
   if (artCount) {
-    artCount.textContent = dashboardMeta.artCommissionCount ?? artCommissions.length ?? 0;
+    artCount.textContent = artCommissions.filter(shouldShowArtNotice).length;
   }
 
   if (localCount) {
@@ -740,9 +862,15 @@ function createArtCard(item) {
 
     ${createReviewControl(reviewKey)}
 
+    <button type="button" class="art-remove-button" aria-label="이 공고 삭제 및 영구 제외"
+      style="margin:10px 8px 4px 0;padding:9px 13px;border-radius:8px;background:#fff5f4;border:1px solid #e9b2ac;color:#aa3429;font-size:12px;font-weight:700;cursor:pointer;">
+      삭제 / 영구 제외
+    </button>
+
     ${sourceUrl ? `<a class="link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer">공고문 보기</a>` : ""}
   `;
 
+  card.querySelector(".art-remove-button")?.addEventListener("click", () => excludeArtNotice(item));
   return card;
 }
 
@@ -762,7 +890,7 @@ function renderArtCards() {
   const displayItems = buildArtDisplayItems(
     artCommissions,
     artCommissionArchive
-  );
+  ).filter(shouldShowArtNotice);
 
   const filtered = displayItems.filter(item => {
     const keywords = Array.isArray(item.keywords) ? item.keywords : [];
@@ -1171,6 +1299,8 @@ async function init() {
   targetAgencies = await loadJson("data/target_agencies.json", []);
   artCommissions = await loadJson("data/art_commissions.json", []);
   artCommissionArchive = await loadJson("data/art_commissions_archive.json", []);
+  artExclusions = await loadJson(ART_EXCLUSION_PATH, { version: 1, excluded: [] });
+  loadLocalArtExclusions();
   localProjects = await loadJson("data/local_projects.json", []);
   dashboardMeta = await loadJson("data/dashboard_meta.json", {});
 
