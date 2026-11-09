@@ -74,6 +74,7 @@ jobs:
           node --check scripts/collect_remaining_art_commissions.js
           node --check scripts/import_g2b_art_commissions.js
           node --check scripts/validate_art_commission_sources.js
+          node --check scripts/art_housing_scope.js
           node --check scripts/filter_art_commission_results.js
           node --check scripts/normalize_art_dates.js
           node --check scripts/repair_art_deadlines.js
@@ -86,6 +87,7 @@ jobs:
       - name: Test art commission result filter
         run: |
           node scripts/filter_art_commission_results.js --self-test
+          node scripts/test_art_housing_scope.js
           node scripts/test_import_g2b_art_commissions.js
           node scripts/test_art_dashboard_archive.js
           node scripts/test_validate_art_commission_sources.js
@@ -257,6 +259,12 @@ jobs:
       - name: Refresh archive current flags
         run: |
           node scripts/normalize_art_dates.js
+
+      # Final guard: neither relabeling nor expiry-prune can resurrect off-scope
+      # or user-deleted notices in the published feed.
+      - name: Final residential art scope and manual-exclusion guard
+        run: |
+          node scripts/filter_art_commission_results.js
 
 
       # --------------------------------------------------
