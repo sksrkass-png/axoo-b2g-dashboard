@@ -10,7 +10,7 @@ const {
 
 const BUILDING_ART_NOTICE = {
   bidNtceNo: "R26BK00000001",
-  bidNtceNm: "청주시 농수산물도매시장 건축물 미술작품 제작 및 설치 공모",
+  bidNtceNm: "청주시 A2BL 공동주택 건축물 미술작품 제작 및 설치 공모",
   ntceInsttNm: "청주시",
   dminsttNm: "청주시",
   bidNtceDt: "2026-09-10 09:00:00",
@@ -47,7 +47,7 @@ const LOW_BUDGET_GOODS_NOTICE = {
 assert.strictEqual(isArchitecturalArtCommission(BUILDING_ART_NOTICE), true);
 assert.strictEqual(isArchitecturalArtCommission(NON_BUILDING_ART_NOTICE), false);
 assert.strictEqual(isArchitecturalArtCommission(RESULT_NOTICE), false);
-assert.strictEqual(isArchitecturalArtCommission(LOW_BUDGET_GOODS_NOTICE), true);
+assert.strictEqual(isArchitecturalArtCommission(LOW_BUDGET_GOODS_NOTICE), false);
 
 const rawCandidates = mergeActiveG2bArtCandidates(
   [BUILDING_ART_NOTICE],
@@ -55,11 +55,11 @@ const rawCandidates = mergeActiveG2bArtCandidates(
   "2026-09-11"
 );
 
-assert.strictEqual(rawCandidates.length, 2, "일반 대시보드 필터와 무관하게 미술 공고 원본을 보존해야 합니다.");
+assert.strictEqual(rawCandidates.length, 1, "공동주택과 무관한 조형물은 미술작품 후보에서도 제거해야 합니다.");
 assert.strictEqual(
   combineG2bSources([BUILDING_ART_NOTICE], rawCandidates).length,
-  2,
-  "일반/미술 전용 G2B 데이터는 공고번호 기준으로 합쳐야 합니다."
+  1,
+  "주택 미술작품 공고번호 기준으로 합쳐야 합니다."
 );
 
 const result = importG2bArtCommissions({
