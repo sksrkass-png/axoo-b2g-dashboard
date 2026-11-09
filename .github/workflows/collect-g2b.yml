@@ -46,6 +46,7 @@ jobs:
           node scripts/test_g2b_collection_coverage.js
           node scripts/test_import_g2b_art_commissions.js
           node scripts/test_art_housing_scope.js
+          node scripts/test_g2b_sculpture_routing.js
 
 
       # --------------------------------------------------
