@@ -1,0 +1,49 @@
+name: Verify Housing Art Notice Routing
+
+on:
+  push:
+    paths:
+      - ".github/workflows/verify-housing-art-routing.yml"
+      - "app.js"
+      - "index.html"
+      - "dashboard_ui_update.js"
+      - "scripts/art_housing_scope.js"
+      - "scripts/import_g2b_art_commissions.js"
+      - "scripts/collect_g2b_opportunities.js"
+      - "scripts/filter_art_commission_results.js"
+      - "scripts/build_priority_projects.js"
+      - "scripts/test_art_housing_scope.js"
+      - "scripts/test_g2b_sculpture_routing.js"
+      - "data/art_commissions.json"
+      - "data/art_commissions_archive.json"
+      - "data/g2b_art_commissions.json"
+      - "data/g2b_sculpture_candidates.json"
+      - "data/art_commission_exclusions.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check dashboard and collection JavaScript syntax
+        run: |
+          node --check app.js
+          node --check dashboard_ui_update.js
+          node --check scripts/art_housing_scope.js
+          node --check scripts/import_g2b_art_commissions.js
+          node --check scripts/collect_g2b_opportunities.js
+          node --check scripts/filter_art_commission_results.js
+          node --check scripts/build_priority_projects.js
+      - name: Test residential artwork and sculpture exclusive routing
+        run: |
+          node scripts/test_art_housing_scope.js
+          node scripts/test_import_g2b_art_commissions.js
+          node scripts/test_g2b_sculpture_routing.js
+          node scripts/test_art_dashboard_archive.js
