@@ -152,8 +152,9 @@
 
   function syncLiveArtCount() {
 
-    const count =
-      artData.length;
+    const count = artData.filter(item =>
+      !window.AxooArtShouldShow || window.AxooArtShouldShow(item)
+    ).length;
 
 
     /*
@@ -1815,6 +1816,10 @@
       }
     );
 
+
+    window.addEventListener("axoo:artExcluded", () => {
+      scheduleApply(80);
+    });
 
     window.addEventListener(
       "axoo:rendered",
