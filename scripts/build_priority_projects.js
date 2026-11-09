@@ -13,6 +13,12 @@ const G2B_FILE = path.join(
   "b2g_opportunities.json"
 );
 
+const SCULPTURE_FILE = path.join(
+  process.cwd(),
+  "data",
+  "g2b_sculpture_candidates.json"
+);
+
 const SUPPORT_FILE = path.join(
   process.cwd(),
   "data",
@@ -1169,6 +1175,11 @@ function main() {
   }
 
 
+  const sculptureCandidates = readJson(SCULPTURE_FILE, []);
+  if (!Array.isArray(sculptureCandidates)) {
+    throw new Error("data/g2b_sculpture_candidates.json must be an array.");
+  }
+
   const supportPrograms =
     readJson(
       SUPPORT_FILE,
@@ -1243,14 +1254,29 @@ function main() {
     최신 G2B
   */
 
+  const byNotice = new Map();
+  for (const item of opportunities) {
+    const key = text(item.bidNtceNo || item.noticeNo || item.id || item.sourceUrl);
+    if (key) byNotice.set(key, item);
+  }
+  for (const item of sculptureCandidates) {
+    const key = text(item.bidNtceNo || item.noticeNo || item.id || item.sourceUrl);
+    if (!key || byNotice.has(key)) continue;
+    byNotice.set(key, {
+      ...item,
+      sourceType: "나라장터 입찰공고",
+      collectionSourceId: "g2b_sculpture_candidate",
+      category: "public_art",
+      sourceUrl: item.sourceUrl || item.bidNtceUrl ||
+        (item.bidNtceNo ? "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=" +
+          encodeURIComponent(item.bidNtceNo) + "&bidPbancOrd=000" : "")
+    });
+  }
+
   const latestG2b =
-    opportunities
-      .map(
-        mapG2bItem
-      )
-      .sort(
-        sortG2b
-      );
+    [...byNotice.values()]
+      .map(mapG2bItem)
+      .sort(sortG2b);
 
 
   /*
