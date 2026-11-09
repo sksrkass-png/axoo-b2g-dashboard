@@ -3,9 +3,9 @@
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 24,
-    "sourceFailureCount": 1,
-    "discoveredCandidateCount": 1,
+    "sourceSuccessCount": 25,
+    "sourceFailureCount": 0,
+    "discoveredCandidateCount": 2,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
@@ -47,8 +47,8 @@
         "sourceId": "ulsan_city_notice",
         "sourceName": "울산광역시 고시공고",
         "region": "울산",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -112,7 +112,7 @@
         "region": "충남",
         "accessOk": true,
         "pagesFetched": 6,
-        "candidatesFound": 0,
+        "candidatesFound": 1,
         "error": ""
       },
       {
