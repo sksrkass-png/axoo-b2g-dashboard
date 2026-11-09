@@ -136,6 +136,34 @@ function isArchitecturalArtCommission(item) {
 }
 
 
+function isGenericSculptureNotice(item) {
+  const title = text(item && (item.title || item.bidNtceNm));
+  const words = sourceText(item);
+  if (isArchitecturalArtCommission(item)) return false;
+  return /조형물|조각\s*작품|벽화|상징물|아트월|경관\s*미술/.test(title) &&
+    /제작|설치|공사|구매|용역|개선|정비|설계/.test(words);
+}
+
+function mergeActiveSculptureCandidates(existing, discovered, today = todayKst()) {
+  const map = new Map();
+  [...(Array.isArray(existing) ? existing : []), ...(Array.isArray(discovered) ? discovered : [])]
+    .filter(isGenericSculptureNotice)
+    .filter(item => activeDeadline(item, today))
+    .forEach(item => {
+      const key = noticeKey(item);
+      const previous = map.get(key) || {};
+      map.set(key, {
+        ...previous,
+        ...item,
+        sourceType: "나라장터 입찰공고",
+        collectionSourceId: "g2b_sculpture_candidate",
+        category: "public_art",
+        updatedAt: today
+      });
+    });
+  return [...map.values()];
+}
+
 function noticeKey(item) {
   const noticeNo = text(item && (item.bidNtceNo || item.noticeNo));
   if (noticeNo) return "notice:" + noticeNo;
@@ -366,6 +394,8 @@ if (require.main === module) {
 
 module.exports = {
   isArchitecturalArtCommission,
+  isGenericSculptureNotice,
+  mergeActiveSculptureCandidates,
   mergeActiveG2bArtCandidates,
   combineG2bSources,
   buildItem,
