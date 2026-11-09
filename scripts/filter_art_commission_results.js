@@ -1,10 +1,11 @@
 const fs = require("fs");
 const path = require("path");
+const housing = require("./art_housing_scope");
 
 
 /* =========================================================
    AXOO B2G · ART COMMISSION RESULT FILTER
-   v1.0.0
+   v2.0.0
 
    목적:
    - 실제 지원 가능한 "진행 공모"만 리서치 데이터에 남긴다.
@@ -25,7 +26,7 @@ const path = require("path");
 ========================================================= */
 
 const VERSION =
-  "axoo_art_result_filter_v1.0.0";
+  "axoo_art_result_filter_v2.0.0";
 
 
 const DATA_FILE =
@@ -344,7 +345,8 @@ function evaluateTitle(
 
 
 function shouldExcludeItem(
-  item
+  item,
+  exclusions
 ) {
 
   if (
@@ -366,15 +368,36 @@ function shouldExcludeItem(
   }
 
 
-  return evaluateTitle(
-    item.title
-  );
+  const result = evaluateTitle(item.title);
+  if (result.excluded) return result;
+
+  const scope = housing.evaluate(item);
+  if (!scope.allowed) {
+    return {
+      excluded: true,
+      reason: scope.reason,
+      matchedKeyword: "",
+      reopenKeyword: ""
+    };
+  }
+
+  if (housing.isExcluded(item, exclusions)) {
+    return {
+      excluded: true,
+      reason: "manually_excluded",
+      matchedKeyword: "",
+      reopenKeyword: ""
+    };
+  }
+
+  return result;
 }
 
 
 function filterItems(
   items,
-  label
+  label,
+  exclusions
 ) {
 
   const kept =
@@ -391,7 +414,8 @@ function filterItems(
 
       const evaluation =
         shouldExcludeItem(
-          item
+          item,
+          exclusions
         );
 
 
@@ -629,17 +653,24 @@ function main() {
     );
 
 
+  const exclusionFile = path.join(process.cwd(), "data", "art_commission_exclusions.json");
+  const exclusions = fs.existsSync(exclusionFile)
+    ? JSON.parse(fs.readFileSync(exclusionFile, "utf8"))
+    : { excluded: [] };
+
   const liveResult =
     filterItems(
       live,
-      "LIVE"
+      "LIVE",
+      exclusions
     );
 
 
   const archiveResult =
     filterItems(
       archive,
-      "ARCHIVE"
+      "ARCHIVE",
+      exclusions
     );
 
 
