@@ -88,6 +88,7 @@ jobs:
         run: |
           node scripts/filter_art_commission_results.js --self-test
           node scripts/test_art_housing_scope.js
+          node scripts/test_g2b_sculpture_routing.js
           node scripts/test_import_g2b_art_commissions.js
           node scripts/test_art_dashboard_archive.js
           node scripts/test_validate_art_commission_sources.js
