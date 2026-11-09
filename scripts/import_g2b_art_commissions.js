@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { isHousingArtCommission } = require("./art_housing_scope");
 const path = require("path");
 
 const {
@@ -125,10 +126,13 @@ function isArchitecturalArtCommission(item) {
     return false;
   }
 
-  const explicitBuildingArt = /건축물\s*미술작품|건축물미술작품|미술장식품|미술장식/.test(value);
-  const artInstallation = /미술\s*작품|미술작품|미술품|조형물|조각\s*작품/.test(value) && /제작|설치|공모|구매/.test(value);
-
-  return explicitBuildingArt || artInstallation;
+  // Generic sculptures do NOT qualify. Evidence must identify a residential
+  // building/estate AND an actual artwork notice, never just "조형물 + 설치".
+  return isHousingArtCommission({
+    ...item,
+    title: item.title || item.bidNtceNm,
+    rawText: value
+  });
 }
 
 
