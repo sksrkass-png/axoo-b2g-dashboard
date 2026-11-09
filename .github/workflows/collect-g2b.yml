@@ -45,6 +45,7 @@ jobs:
           node --check scripts/import_g2b_art_commissions.js
           node scripts/test_g2b_collection_coverage.js
           node scripts/test_import_g2b_art_commissions.js
+          node scripts/test_art_housing_scope.js
 
 
       # --------------------------------------------------
@@ -122,6 +123,7 @@ jobs:
           if git diff --quiet -- \
             data/b2g_opportunities.json \
             data/g2b_art_commissions.json \
+            data/g2b_sculpture_candidates.json \
             data/priority_projects.json \
             data/dashboard_meta.json; then
 
@@ -153,6 +155,7 @@ jobs:
           git add \
             data/b2g_opportunities.json \
             data/g2b_art_commissions.json \
+            data/g2b_sculpture_candidates.json \
             data/priority_projects.json \
             data/dashboard_meta.json
 
