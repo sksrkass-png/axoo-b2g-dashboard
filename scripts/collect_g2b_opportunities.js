@@ -3,6 +3,8 @@ const path = require("path");
 
 const {
   isArchitecturalArtCommission,
+  isGenericSculptureNotice,
+  mergeActiveSculptureCandidates,
   mergeActiveG2bArtCandidates
 } = require("./import_g2b_art_commissions");
 
@@ -27,6 +29,12 @@ const G2B_ART_FILE = path.join(
   process.cwd(),
   "data",
   "g2b_art_commissions.json"
+);
+
+const G2B_SCULPTURE_FILE = path.join(
+  process.cwd(),
+  "data",
+  "g2b_sculpture_candidates.json"
 );
 
 const API_BASE_URL =
@@ -3896,6 +3904,22 @@ async function main() {
     artCandidates
   );
 
+  // General sculptures are a separate feed for tab 02 (벽화 & 조형물).
+  // Include legacy G2B-art false positives once, so they are moved rather than lost.
+  const sculptureCandidates = mergeActiveSculptureCandidates(
+    [
+      ...readJson(G2B_SCULPTURE_FILE, []),
+      ...existingArtCandidates.filter(isGenericSculptureNotice)
+    ],
+    discovered.filter(isGenericSculptureNotice),
+    koreaDateString()
+  );
+
+  writeJson(
+    G2B_SCULPTURE_FILE,
+    sculptureCandidates
+  );
+
 
   const filterStats =
     createFilterStats();
@@ -4030,8 +4054,13 @@ async function main() {
   );
 
   console.log(
-    "건축물 미술작품 원본 후보:",
+    "주거용 건축물 미술작품 후보:",
     artCandidates.length
+  );
+
+  console.log(
+    "벽화·일반 조형물 전용 후보:",
+    sculptureCandidates.length
   );
 
 
