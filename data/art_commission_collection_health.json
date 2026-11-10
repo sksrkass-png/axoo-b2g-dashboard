@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09",
+  "updatedAt": "2026-11-10",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
@@ -236,7 +236,7 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 19,
+    "checked": 22,
     "matched": 0,
     "status": "ok"
   }
