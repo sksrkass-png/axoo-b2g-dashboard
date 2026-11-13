@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12",
+  "updatedAt": "2026-11-13",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
@@ -12,7 +12,7 @@
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
         "accessOk": true,
-        "pagesFetched": 1,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,7 +236,7 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 19,
+    "checked": 20,
     "matched": 0,
     "status": "ok"
   }
