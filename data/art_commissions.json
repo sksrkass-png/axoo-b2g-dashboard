@@ -10,7 +10,7 @@
     "status": "공모중",
     "publishedDate": "2026-11-13",
     "postedDate": "2026-11-13",
-    "periodStart": "",
+    "periodStart": "2026-11-13",
     "deadline": "2026-12-04",
     "endDate": "2026-12-04",
     "amount": "",
@@ -26,7 +26,7 @@
       "제작",
       "설치"
     ],
-    "recommendedAction": "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토",
+    "recommendedAction": "공고 원문 확인 후 공모 요강·접수 기간·참여 자격 검토 / 공모기간: 2026-11-13 ~ 2026-12-04",
     "sourceUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110906883&menuId=3865",
     "originalUrl": "https://www.gg.go.kr/publicart/bbs/boardView.do?bsIdx=825&bIdx=110906883&menuId=3865",
     "bidNtceNo": "",
@@ -39,31 +39,32 @@
     "detailFetchStatus": "ok",
     "detailFetchTransport": "apps-script-bridge",
     "detailFetchError": "",
-    "detailHtmlBytes": 30760,
-    "detailTextSample": "상동역 롯데캐슬 시그니처 건축물 미술작품 제작 및 설치 공모 공고 | 공모공고 | 미술작품 공모 | 경기도 건축물 미술작품 본문 바로가기 주메뉴 바로가기 제도 소개 제도 개요 제도 운영 미술작품 비용산출 미술작품 FAQ 미술작품 정보검색 심의위원회 위원회 소개 심의계획·결과 미술작품 공모 공모개요 공모공고 공모결과 자료실 자료실 경기도 건축물 미술작품 기회와 상생의 새로운 패러다임 지금 만들어 갑니다. --> 미술작품 공모 공모개요 공모공고 공모결과 공모공고 홈 미술작품 공모 공모공고 --> 게시판 검색 검색 시작날짜 선택 ~ 검색 끝날짜 선택 게시글의 분야,제목으로 검색하세요. 검색 옵션 키워드 입력 검색 총 게시물 수 0 / 총 페이지 수 0 공모공고 목록 공모공고 목록으로 의 정보를 제공합니다. [제4유형:출처명시+상업적 이용금지+변경금지] 관련사이트 경기도청 공익제보 핫라인 공공미술포털 담당부서: 예술정책과 | 전화번호: 031-8008-4652 경기도청: 16508 경기도 수원시 영통구 도청로 30 (이의동) © GYEONGGI PROVINCE All Rights Reserved.",
+    "detailHtmlBytes": 43700,
+    "detailTextSample": "상동역 롯데캐슬 시그니처 건축물 미술작품 제작 및 설치 공모 공고 | 공모공고 | 미술작품 공모 | 경기도 건축물 미술작품 본문 바로가기 주메뉴 바로가기 제도 소개 제도 개요 제도 운영 미술작품 비용산출 미술작품 FAQ 미술작품 정보검색 심의위원회 위원회 소개 심의계획·결과 미술작품 공모 공모개요 공모공고 공모결과 자료실 자료실 경기도 건축물 미술작품 기회와 상생의 새로운 패러다임 지금 만들어 갑니다. --> 미술작품 공모 공모개요 공모공고 공모결과 공모공고 홈 미술작품 공모 공모공고 상동역 롯데캐슬 시그니처 건축물 미술작품 제작 및 설치 공모 공고 게시물 정보 구분 공모 작성자 관리자 등록일 2026-11-13 o 공모기간 : 2026년 11월 13일 (금) ~ 12월 4일 (금) 총 22일 o 모작품 : 조각 총 2개소 (위치 A, 위치 B) o 제출마감 : 2026년 12월 4일 (금) 오후 5시까지 o 문의사항: public-art1@naver.com ※ 문의 사항에 대해서는 이메일로 질의 바라며, 질의 취합하여 개별 회신 첨부파일 상동역 롯데캐슬 시그니처 미술작품 공모지침 및 응모서류.hwp 바로보기 바로듣기 목록보기 다음글이 없습니다. 이전글 오산 내삼미2구역 A2블럭 공동주택 신축공사 미술작품 선정 공모 공고 [제4유형:출처명시+상업적 이용금지+변경금지] 관련사이트 경기도청 공익제보 핫라인 공공미술포털 담당부서: 예술정책과 | 전화번호: 031-8008-4652 경기도청: 16508 경기도 수원시 영통구 도청로 30 (이의동) © GYEONGGI PROVINCE All Rights Reserved.",
     "listFetchTransport": "apps-script-bridge-ajax",
     "listBIdx": "110906883",
     "listRecordNo": 589,
     "listCategory": "공모",
     "listFileName": "상동역 롯데캐슬 시그니처 미술작품 공모지침 및 응모서류.hwp",
     "listRemarkExtractionStatus": "ok",
-    "detailExtractionStatus": "empty",
-    "detailExtractionCount": 0,
+    "detailExtractionStatus": "extracted",
+    "detailExtractionCount": 3,
     "detailExtractionVersion": "art-detail-1.1.0",
     "detailExtractionEvidence": {
       "deadline": {
-        "value": "",
-        "raw": "",
-        "label": "",
-        "evidence": "",
-        "confidence": "none"
+        "value": "2026-12-04",
+        "raw": "2026년 12월 4일",
+        "label": "공모기간",
+        "evidence": "o 공모기간 : 2026년 11월 13일 (금) ~ 12월 4일 (금) 총 22일 o 모작품 : 조각 총 2개소 (위치 A, 위치 B) o 제출마감 : 2026년 12월 4일 (금) 오후 5시까지",
+        "confidence": "high",
+        "dateSource": "full_date_range"
       },
       "publishedDate": {
-        "value": "",
-        "raw": "",
-        "label": "",
-        "evidence": "",
-        "confidence": "none"
+        "value": "2026-11-13",
+        "raw": "2026-11-13",
+        "label": "등록일",
+        "evidence": "등록일 2026-11-13",
+        "confidence": "high"
       },
       "agency": {
         "value": "",
@@ -81,11 +82,11 @@
         "numericValue": null
       },
       "location": {
-        "value": "",
-        "raw": "",
-        "label": "",
-        "evidence": "",
-        "confidence": "none"
+        "value": "조각 총 2개소 (위치 A, 위치 B)",
+        "raw": "조각 총 2개소 (위치 A, 위치 B)",
+        "label": "위치",
+        "evidence": "o 모작품 : 조각 총 2개소 (위치 A, 위치 B) o 제출마감 : 2026년 12월 4일 (금) 오후 5시까지",
+        "confidence": "high"
       },
       "eligibility": {
         "value": "",
@@ -95,17 +96,17 @@
         "confidence": "none"
       }
     },
-    "periodEnd": "",
-    "publishedDateSource": "existing",
-    "periodSource": "not_found",
-    "periodKeyword": "",
-    "deadlineSource": "existing_deadline",
-    "deadlineKeyword": "",
-    "deadlineRaw": "",
+    "periodEnd": "2026-12-04",
+    "publishedDateSource": "detail_metadata",
+    "periodSource": "detail_body",
+    "periodKeyword": "공모기간",
+    "deadlineSource": "priority_deadline",
+    "deadlineKeyword": "제출마감",
+    "deadlineRaw": "2026년 12월 4일",
     "suspiciousPeriodIgnored": false,
-    "dateConfidence": "MEDIUM",
+    "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -216,7 +217,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -326,13 +327,13 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "deadlineStatus": "진행중",
     "staleReason": "",
     "deadlineRepairSource": "detailTextSample",
     "deadlineRepairMode": "range_end",
     "deadlineRepairVersion": "axoo_art_deadline_repair_v1.0.0",
-    "deadlineRepairedAt": "2026-11-13"
+    "deadlineRepairedAt": "2026-11-14"
   },
   {
     "id": "external-206a9f6ac432b4aa",
@@ -441,7 +442,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -552,7 +553,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -676,7 +677,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "staleReason": ""
   },
   {
@@ -799,7 +800,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "staleReason": ""
   },
   {
@@ -908,7 +909,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1019,7 +1020,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1129,7 +1130,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "deadlineStatus": "마감일 확인 필요",
     "staleReason": ""
   },
@@ -1253,7 +1254,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "staleReason": ""
   },
   {
@@ -1376,7 +1377,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-13",
+    "dateNormalizedAt": "2026-11-14",
     "staleReason": ""
   }
 ]
