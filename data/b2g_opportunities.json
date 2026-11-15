@@ -118,7 +118,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 221982000,
-    "daysLeft": 11,
+    "daysLeft": 10,
     "score": 99,
     "fitScore": 99,
     "grade": "S",
@@ -184,7 +184,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-10",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01806165",
@@ -318,7 +318,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 111146000,
-    "daysLeft": 10,
+    "daysLeft": 9,
     "score": 85,
     "fitScore": 85,
     "grade": "A",
@@ -384,7 +384,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-04",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01805850",
@@ -518,7 +518,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 201628480,
-    "daysLeft": 11,
+    "daysLeft": 10,
     "score": 80,
     "fitScore": 80,
     "grade": "A",
@@ -584,7 +584,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-04",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01808596",
@@ -718,7 +718,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 352970000,
-    "daysLeft": 33,
+    "daysLeft": 32,
     "score": 80,
     "fitScore": 80,
     "grade": "A",
@@ -782,7 +782,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-06",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01812973",
@@ -913,15 +913,15 @@
     "noticeDate": "2026-11-05",
     "deadline": "2026-11-18",
     "deadlineDate": "2026-11-18",
-    "opportunityStatus": "진행중",
+    "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 80000000,
-    "daysLeft": 4,
+    "daysLeft": 3,
     "score": 75,
     "fitScore": 75,
     "grade": "A",
-    "executionScore": 70,
-    "priorityScore": 74,
+    "executionScore": 57,
+    "priorityScore": 71,
     "category": "media_art",
     "categoryLabel": "미디어아트",
     "matchedCategories": [
@@ -968,17 +968,17 @@
     ],
     "executionReasons": [
       "5천만원 이상",
-      "검토 가능한 마감 일정",
+      "마감 임박",
       "협상에 의한 계약",
       "기술평가 비중 80% 이상"
     ],
-    "fitReason": "핵심 수행영역: 미디어파사드. 보조 적합요소: 콘텐츠 제작. AXOO FIT 75점 / A등급. 실행조건 70점 (5천만원 이상, 검토 가능한 마감 일정, 협상에 의한 계약, 기술평가 비중 80% 이상).",
+    "fitReason": "핵심 수행영역: 미디어파사드. 보조 적합요소: 콘텐츠 제작. AXOO FIT 75점 / A등급. 실행조건 57점 (5천만원 이상, 마감 임박, 협상에 의한 계약, 기술평가 비중 80% 이상).",
     "recommendedAction": "우선 검토 — 수행범위·예산·참가자격 확인",
     "scoringVersion": "axoo_bid_fit_v6",
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-06",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01829840",
@@ -1099,7 +1099,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 450840000,
-    "daysLeft": 10,
+    "daysLeft": 9,
     "score": 75,
     "fitScore": 75,
     "grade": "A",
@@ -1159,204 +1159,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-14",
-    "updatedAt": "2026-11-14"
-  },
-  {
-    "bidNtceNo": "R26BK01816030",
-    "bidNtceOrd": "001",
-    "reNtceYn": "N",
-    "rgstTyNm": "조달청 또는 나라장터 자체 공고건",
-    "ntceKindNm": "변경공고",
-    "intrbidYn": "N",
-    "bidNtceDt": "2026-11-07 15:31:42",
-    "refNo": "전시사업부-1363",
-    "bidNtceNm": "예술의전당 한가람미술관 재개관전 전시연출 설계 및 제작 설치 용역",
-    "ntceInsttCd": "B551005",
-    "ntceInsttNm": "예술의전당",
-    "dminsttCd": "B551005",
-    "dminsttNm": "예술의전당",
-    "bidMethdNm": "전자입찰",
-    "cntrctCnclsMthdNm": "제한경쟁",
-    "ntceInsttOfclNm": "박준기",
-    "ntceInsttOfclTelNo": "02-580-1111",
-    "ntceInsttOfclEmailAdrs": "",
-    "exctvNm": "박준기",
-    "bidQlfctRgstDt": "2026-11-17 18:00",
-    "cmmnSpldmdAgrmntRcptdocMethd": "없음",
-    "cmmnSpldmdAgrmntClseDt": "",
-    "cmmnSpldmdCorpRgnLmtYn": "N",
-    "bidBeginDt": "2026-11-16 09:00:00",
-    "bidClseDt": "2026-11-18 16:00:00",
-    "opengDt": "2026-11-18 17:00:00",
-    "ntceSpecDocUrl1": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01816030&bidPbancOrd=001&fileType=&fileSeq=1&prcmBsneSeCd=03",
-    "ntceSpecDocUrl2": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01816030&bidPbancOrd=001&fileType=&fileSeq=2&prcmBsneSeCd=03",
-    "ntceSpecDocUrl3": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01816030&bidPbancOrd=001&fileType=&fileSeq=3&prcmBsneSeCd=03",
-    "ntceSpecDocUrl4": "",
-    "ntceSpecDocUrl5": "",
-    "ntceSpecDocUrl6": "",
-    "ntceSpecDocUrl7": "",
-    "ntceSpecDocUrl8": "",
-    "ntceSpecDocUrl9": "",
-    "ntceSpecDocUrl10": "",
-    "ntceSpecFileNm1": "1. 입찰공고문_한가람 재개관전 연출.pdf",
-    "ntceSpecFileNm2": "2. 입찰공고문_한가람 재개관전 연출.hwp",
-    "ntceSpecFileNm3": "3. 제안요청서_한가람 재개관전 연출.hwp",
-    "ntceSpecFileNm4": "",
-    "ntceSpecFileNm5": "",
-    "ntceSpecFileNm6": "",
-    "ntceSpecFileNm7": "",
-    "ntceSpecFileNm8": "",
-    "ntceSpecFileNm9": "",
-    "ntceSpecFileNm10": "",
-    "rbidPermsnYn": "",
-    "pqApplDocRcptMthdNm": "",
-    "pqApplDocRcptDt": "",
-    "tpEvalApplMthdNm": "",
-    "tpEvalApplClseDt": "",
-    "jntcontrctDutyRgnNm1": "",
-    "jntcontrctDutyRgnNm2": "",
-    "jntcontrctDutyRgnNm3": "",
-    "rgnDutyJntcontrctRt": "",
-    "dtlsBidYn": "",
-    "bidPrtcptLmtYn": "N",
-    "prearngPrceDcsnMthdNm": "비예가",
-    "totPrdprcNum": "",
-    "drwtPrdprcNum": "",
-    "asignBdgtAmt": "200000000",
-    "presmptPrce": "181818182",
-    "opengPlce": "국가종합전자조달시스템(나라장터)",
-    "dcmtgOprtnDt": "",
-    "dcmtgOprtnPlce": "",
-    "bidNtceDtlUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01816030&bidPbancOrd=001",
-    "bidNtceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01816030&bidPbancOrd=001",
-    "bidPrtcptFeePaymntYn": "",
-    "bidPrtcptFee": "0",
-    "bidGrntymnyPaymntYn": "",
-    "crdtrNm": "예술의전당사장",
-    "ppswGnrlSrvceYn": "N",
-    "srvceDivNm": "일반용역",
-    "prdctClsfcLmtYn": "N",
-    "mnfctYn": "",
-    "purchsObjPrdctList": "",
-    "untyNtceNo": "R26BM01034561",
-    "cmmnSpldmdMethdCd": "",
-    "cmmnSpldmdMethdNm": "(없음)공동수급불허",
-    "stdNtceDocUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01816030&bidPbancOrd=001&fileType=&fileSeq=2&prcmBsneSeCd=03",
-    "brffcBidprcPermsnYn": "",
-    "dsgntCmptYn": "N",
-    "arsltCmptYn": "N",
-    "pqEvalYn": "",
-    "tpEvalYn": "",
-    "ntceDscrptYn": "",
-    "rsrvtnPrceReMkngMthdNm": "",
-    "arsltApplDocRcptMthdNm": "",
-    "arsltReqstdocRcptDt": "",
-    "orderPlanUntyNo": "R26DD20913525",
-    "sucsfbidLwltRate": "",
-    "rgstDt": "2026-11-07 15:31:42",
-    "bfSpecRgstNo": "R26BD00293134",
-    "infoBizYn": "",
-    "sucsfbidMthdCd": "낙030005",
-    "sucsfbidMthdNm": "협상에의한계약-협상에 의한 낙찰자 결정",
-    "chgDt": "",
-    "dminsttOfclEmailAdrs": "",
-    "indstrytyLmtYn": "Y",
-    "chgNtceRsn": "[변경공고] 예술의전당 한가람미술관 재개관전 전시연출 설계 및 제작 설치 용역",
-    "rbidOpengDt": "2026-11-18 17:00:00",
-    "VAT": "18181818",
-    "indutyVAT": "",
-    "rgnLmtBidLocplcJdgmBssCd": "",
-    "rgnLmtBidLocplcJdgmBssNm": "",
-    "pubPrcrmntLrgClsfcNm": "행사관리 및 기타 사업 지원서비스 ",
-    "pubPrcrmntMidClsfcNm": "행사 기획 및 대행",
-    "pubPrcrmntClsfcNo": "90151890",
-    "pubPrcrmntClsfcNm": "축제기획및대행서비스",
-    "techAbltEvlRt": "90",
-    "bidPrceEvlRt": "10",
-    "sucsfbidMthdAppStd": "",
-    "befBidBbancNo": "",
-    "bidWgrnteeRcptClseDt": "",
-    "g2bNoticeType": "service",
-    "sourceType": "입찰공고",
-    "sourceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01816030&bidPbancOrd=001",
-    "title": "예술의전당 한가람미술관 재개관전 전시연출 설계 및 제작 설치 용역",
-    "agency": "예술의전당",
-    "noticeAgency": "예술의전당",
-    "demandAgency": "예술의전당",
-    "contractMethod": "협상에의한계약-협상에 의한 낙찰자 결정",
-    "noticeNo": "R26BK01816030",
-    "publishedDate": "2026-11-07",
-    "postedDate": "2026-11-07",
-    "noticeDate": "2026-11-07",
-    "deadline": "2026-11-18",
-    "deadlineDate": "2026-11-18",
-    "opportunityStatus": "진행중",
-    "projectScale": "중형",
-    "budgetAmount": 200000000,
-    "daysLeft": 4,
-    "score": 68,
-    "fitScore": 68,
-    "grade": "A",
-    "executionScore": 88,
-    "priorityScore": 72,
-    "category": "exhibition",
-    "categoryLabel": "전시 콘텐츠",
-    "matchedCategories": [
-      "exhibition"
-    ],
-    "visualArtKeywords": [
-      "전시연출"
-    ],
-    "hardFilterPassed": true,
-    "hardFilterVersion": "axoo_hard_filter_v1",
-    "strongFitConcepts": [
-      "exhibition_planning"
-    ],
-    "strongFitLabels": [
-      "전시기획·전시연출"
-    ],
-    "strongFitKeywords": [
-      "전시연출"
-    ],
-    "mediumFitConcepts": [
-      "generic_exhibition"
-    ],
-    "mediumFitLabels": [
-      "전시"
-    ],
-    "mediumFitKeywords": [
-      "전시"
-    ],
-    "matchedKeywords": [
-      "전시연출",
-      "전시"
-    ],
-    "directFitKeywords": [
-      "전시연출"
-    ],
-    "supportFitKeywords": [
-      "전시"
-    ],
-    "hardExcludeKeywords": [],
-    "procurementFitLabels": [],
-    "scoreReasons": [
-      "핵심 수행영역: 전시기획·전시연출",
-      "보조 적합요소: 전시"
-    ],
-    "executionReasons": [
-      "1억원 이상",
-      "검토 가능한 마감 일정",
-      "협상에 의한 계약",
-      "문화·예술·관광·콘텐츠 관련 기관",
-      "기술평가 비중 80% 이상"
-    ],
-    "fitReason": "핵심 수행영역: 전시기획·전시연출. 보조 적합요소: 전시. AXOO FIT 68점 / A등급. 실행조건 88점 (1억원 이상, 검토 가능한 마감 일정, 협상에 의한 계약, 문화·예술·관광·콘텐츠 관련 기관, 기술평가 비중 80% 이상).",
-    "recommendedAction": "우선 검토 — 수행범위·예산·참가자격 확인",
-    "scoringVersion": "axoo_bid_fit_v6",
-    "collectionSourceId": "g2b_bid_public_info_servc",
-    "collectionVersion": "1.2.0",
-    "collectedAt": "2026-11-08",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01815922",
@@ -1490,7 +1293,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 486000000,
-    "daysLeft": 13,
+    "daysLeft": 12,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1545,7 +1348,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-07",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01827674",
@@ -1679,7 +1482,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 400000000,
-    "daysLeft": 20,
+    "daysLeft": 19,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1734,7 +1537,204 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-13",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
+  },
+  {
+    "bidNtceNo": "R26BK01816030",
+    "bidNtceOrd": "001",
+    "reNtceYn": "N",
+    "rgstTyNm": "조달청 또는 나라장터 자체 공고건",
+    "ntceKindNm": "변경공고",
+    "intrbidYn": "N",
+    "bidNtceDt": "2026-11-07 15:31:42",
+    "refNo": "전시사업부-1363",
+    "bidNtceNm": "예술의전당 한가람미술관 재개관전 전시연출 설계 및 제작 설치 용역",
+    "ntceInsttCd": "B551005",
+    "ntceInsttNm": "예술의전당",
+    "dminsttCd": "B551005",
+    "dminsttNm": "예술의전당",
+    "bidMethdNm": "전자입찰",
+    "cntrctCnclsMthdNm": "제한경쟁",
+    "ntceInsttOfclNm": "박준기",
+    "ntceInsttOfclTelNo": "02-580-1111",
+    "ntceInsttOfclEmailAdrs": "",
+    "exctvNm": "박준기",
+    "bidQlfctRgstDt": "2026-11-17 18:00",
+    "cmmnSpldmdAgrmntRcptdocMethd": "없음",
+    "cmmnSpldmdAgrmntClseDt": "",
+    "cmmnSpldmdCorpRgnLmtYn": "N",
+    "bidBeginDt": "2026-11-16 09:00:00",
+    "bidClseDt": "2026-11-18 16:00:00",
+    "opengDt": "2026-11-18 17:00:00",
+    "ntceSpecDocUrl1": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01816030&bidPbancOrd=001&fileType=&fileSeq=1&prcmBsneSeCd=03",
+    "ntceSpecDocUrl2": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01816030&bidPbancOrd=001&fileType=&fileSeq=2&prcmBsneSeCd=03",
+    "ntceSpecDocUrl3": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01816030&bidPbancOrd=001&fileType=&fileSeq=3&prcmBsneSeCd=03",
+    "ntceSpecDocUrl4": "",
+    "ntceSpecDocUrl5": "",
+    "ntceSpecDocUrl6": "",
+    "ntceSpecDocUrl7": "",
+    "ntceSpecDocUrl8": "",
+    "ntceSpecDocUrl9": "",
+    "ntceSpecDocUrl10": "",
+    "ntceSpecFileNm1": "1. 입찰공고문_한가람 재개관전 연출.pdf",
+    "ntceSpecFileNm2": "2. 입찰공고문_한가람 재개관전 연출.hwp",
+    "ntceSpecFileNm3": "3. 제안요청서_한가람 재개관전 연출.hwp",
+    "ntceSpecFileNm4": "",
+    "ntceSpecFileNm5": "",
+    "ntceSpecFileNm6": "",
+    "ntceSpecFileNm7": "",
+    "ntceSpecFileNm8": "",
+    "ntceSpecFileNm9": "",
+    "ntceSpecFileNm10": "",
+    "rbidPermsnYn": "",
+    "pqApplDocRcptMthdNm": "",
+    "pqApplDocRcptDt": "",
+    "tpEvalApplMthdNm": "",
+    "tpEvalApplClseDt": "",
+    "jntcontrctDutyRgnNm1": "",
+    "jntcontrctDutyRgnNm2": "",
+    "jntcontrctDutyRgnNm3": "",
+    "rgnDutyJntcontrctRt": "",
+    "dtlsBidYn": "",
+    "bidPrtcptLmtYn": "N",
+    "prearngPrceDcsnMthdNm": "비예가",
+    "totPrdprcNum": "",
+    "drwtPrdprcNum": "",
+    "asignBdgtAmt": "200000000",
+    "presmptPrce": "181818182",
+    "opengPlce": "국가종합전자조달시스템(나라장터)",
+    "dcmtgOprtnDt": "",
+    "dcmtgOprtnPlce": "",
+    "bidNtceDtlUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01816030&bidPbancOrd=001",
+    "bidNtceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01816030&bidPbancOrd=001",
+    "bidPrtcptFeePaymntYn": "",
+    "bidPrtcptFee": "0",
+    "bidGrntymnyPaymntYn": "",
+    "crdtrNm": "예술의전당사장",
+    "ppswGnrlSrvceYn": "N",
+    "srvceDivNm": "일반용역",
+    "prdctClsfcLmtYn": "N",
+    "mnfctYn": "",
+    "purchsObjPrdctList": "",
+    "untyNtceNo": "R26BM01034561",
+    "cmmnSpldmdMethdCd": "",
+    "cmmnSpldmdMethdNm": "(없음)공동수급불허",
+    "stdNtceDocUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01816030&bidPbancOrd=001&fileType=&fileSeq=2&prcmBsneSeCd=03",
+    "brffcBidprcPermsnYn": "",
+    "dsgntCmptYn": "N",
+    "arsltCmptYn": "N",
+    "pqEvalYn": "",
+    "tpEvalYn": "",
+    "ntceDscrptYn": "",
+    "rsrvtnPrceReMkngMthdNm": "",
+    "arsltApplDocRcptMthdNm": "",
+    "arsltReqstdocRcptDt": "",
+    "orderPlanUntyNo": "R26DD20913525",
+    "sucsfbidLwltRate": "",
+    "rgstDt": "2026-11-07 15:31:42",
+    "bfSpecRgstNo": "R26BD00293134",
+    "infoBizYn": "",
+    "sucsfbidMthdCd": "낙030005",
+    "sucsfbidMthdNm": "협상에의한계약-협상에 의한 낙찰자 결정",
+    "chgDt": "",
+    "dminsttOfclEmailAdrs": "",
+    "indstrytyLmtYn": "Y",
+    "chgNtceRsn": "[변경공고] 예술의전당 한가람미술관 재개관전 전시연출 설계 및 제작 설치 용역",
+    "rbidOpengDt": "2026-11-18 17:00:00",
+    "VAT": "18181818",
+    "indutyVAT": "",
+    "rgnLmtBidLocplcJdgmBssCd": "",
+    "rgnLmtBidLocplcJdgmBssNm": "",
+    "pubPrcrmntLrgClsfcNm": "행사관리 및 기타 사업 지원서비스 ",
+    "pubPrcrmntMidClsfcNm": "행사 기획 및 대행",
+    "pubPrcrmntClsfcNo": "90151890",
+    "pubPrcrmntClsfcNm": "축제기획및대행서비스",
+    "techAbltEvlRt": "90",
+    "bidPrceEvlRt": "10",
+    "sucsfbidMthdAppStd": "",
+    "befBidBbancNo": "",
+    "bidWgrnteeRcptClseDt": "",
+    "g2bNoticeType": "service",
+    "sourceType": "입찰공고",
+    "sourceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01816030&bidPbancOrd=001",
+    "title": "예술의전당 한가람미술관 재개관전 전시연출 설계 및 제작 설치 용역",
+    "agency": "예술의전당",
+    "noticeAgency": "예술의전당",
+    "demandAgency": "예술의전당",
+    "contractMethod": "협상에의한계약-협상에 의한 낙찰자 결정",
+    "noticeNo": "R26BK01816030",
+    "publishedDate": "2026-11-07",
+    "postedDate": "2026-11-07",
+    "noticeDate": "2026-11-07",
+    "deadline": "2026-11-18",
+    "deadlineDate": "2026-11-18",
+    "opportunityStatus": "임박",
+    "projectScale": "중형",
+    "budgetAmount": 200000000,
+    "daysLeft": 3,
+    "score": 68,
+    "fitScore": 68,
+    "grade": "A",
+    "executionScore": 75,
+    "priorityScore": 69,
+    "category": "exhibition",
+    "categoryLabel": "전시 콘텐츠",
+    "matchedCategories": [
+      "exhibition"
+    ],
+    "visualArtKeywords": [
+      "전시연출"
+    ],
+    "hardFilterPassed": true,
+    "hardFilterVersion": "axoo_hard_filter_v1",
+    "strongFitConcepts": [
+      "exhibition_planning"
+    ],
+    "strongFitLabels": [
+      "전시기획·전시연출"
+    ],
+    "strongFitKeywords": [
+      "전시연출"
+    ],
+    "mediumFitConcepts": [
+      "generic_exhibition"
+    ],
+    "mediumFitLabels": [
+      "전시"
+    ],
+    "mediumFitKeywords": [
+      "전시"
+    ],
+    "matchedKeywords": [
+      "전시연출",
+      "전시"
+    ],
+    "directFitKeywords": [
+      "전시연출"
+    ],
+    "supportFitKeywords": [
+      "전시"
+    ],
+    "hardExcludeKeywords": [],
+    "procurementFitLabels": [],
+    "scoreReasons": [
+      "핵심 수행영역: 전시기획·전시연출",
+      "보조 적합요소: 전시"
+    ],
+    "executionReasons": [
+      "1억원 이상",
+      "마감 임박",
+      "협상에 의한 계약",
+      "문화·예술·관광·콘텐츠 관련 기관",
+      "기술평가 비중 80% 이상"
+    ],
+    "fitReason": "핵심 수행영역: 전시기획·전시연출. 보조 적합요소: 전시. AXOO FIT 68점 / A등급. 실행조건 75점 (1억원 이상, 마감 임박, 협상에 의한 계약, 문화·예술·관광·콘텐츠 관련 기관, 기술평가 비중 80% 이상).",
+    "recommendedAction": "우선 검토 — 수행범위·예산·참가자격 확인",
+    "scoringVersion": "axoo_bid_fit_v6",
+    "collectionSourceId": "g2b_bid_public_info_servc",
+    "collectionVersion": "1.2.0",
+    "collectedAt": "2026-11-08",
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01792051",
@@ -1867,7 +1867,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 180000000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1922,7 +1922,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-10-27",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01814251",
@@ -2056,7 +2056,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 96487000,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -2111,7 +2111,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-06",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01808338",
@@ -2245,7 +2245,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 52429000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 66,
     "fitScore": 66,
     "grade": "A",
@@ -2308,7 +2308,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-04",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01828472",
@@ -2442,7 +2442,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 1990000000,
-    "daysLeft": 24,
+    "daysLeft": 23,
     "score": 65,
     "fitScore": 65,
     "grade": "A",
@@ -2495,7 +2495,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-13",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01792297",
@@ -2629,7 +2629,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 1650000000,
-    "daysLeft": 9,
+    "daysLeft": 8,
     "score": 65,
     "fitScore": 65,
     "grade": "A",
@@ -2681,7 +2681,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-12",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01830471",
@@ -2815,7 +2815,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 1000000000,
-    "daysLeft": 10,
+    "daysLeft": 9,
     "score": 65,
     "fitScore": 65,
     "grade": "A",
@@ -2867,7 +2867,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-14",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01812708",
@@ -2988,7 +2988,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 110000000,
-    "daysLeft": 10,
+    "daysLeft": 9,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -3040,7 +3040,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-13",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01809438",
@@ -3174,7 +3174,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 202013000,
-    "daysLeft": 5,
+    "daysLeft": 4,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -3226,7 +3226,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-05",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01817200",
@@ -3347,7 +3347,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 190000000,
-    "daysLeft": 6,
+    "daysLeft": 5,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -3399,7 +3399,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-09",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01813232",
@@ -3520,7 +3520,7 @@
     "opportunityStatus": "임박",
     "projectScale": "대형",
     "budgetAmount": 954240000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -3570,7 +3570,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-07",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01810741",
@@ -3704,7 +3704,7 @@
     "opportunityStatus": "임박",
     "projectScale": "대형",
     "budgetAmount": 386323000,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -3754,6 +3754,6 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-05",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   }
 ]

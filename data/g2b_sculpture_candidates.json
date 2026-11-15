@@ -117,7 +117,7 @@
     "g2bNoticeType": "service",
     "g2bArtCandidate": true,
     "collectedAt": "2026-11-07",
-    "updatedAt": "2026-11-14",
+    "updatedAt": "2026-11-15",
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
@@ -241,7 +241,7 @@
     "g2bNoticeType": "service",
     "g2bArtCandidate": true,
     "collectedAt": "2026-11-07",
-    "updatedAt": "2026-11-14",
+    "updatedAt": "2026-11-15",
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
@@ -352,7 +352,7 @@
     "g2bNoticeType": "goods",
     "g2bArtCandidate": true,
     "collectedAt": "2026-11-07",
-    "updatedAt": "2026-11-14",
+    "updatedAt": "2026-11-15",
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
@@ -464,7 +464,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01820409",
@@ -572,7 +572,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   },
   {
     "bidNtceNo": "R26BK01812708",
@@ -680,6 +680,6 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-14"
+    "updatedAt": "2026-11-15"
   }
 ]
