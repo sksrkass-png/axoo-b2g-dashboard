@@ -106,7 +106,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -217,7 +217,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -327,13 +327,13 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "MEDIUM",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "deadlineStatus": "진행중",
     "staleReason": "",
     "deadlineRepairSource": "detailTextSample",
     "deadlineRepairMode": "range_end",
     "deadlineRepairVersion": "axoo_art_deadline_repair_v1.0.0",
-    "deadlineRepairedAt": "2026-11-15"
+    "deadlineRepairedAt": "2026-11-16"
   },
   {
     "id": "external-206a9f6ac432b4aa",
@@ -442,7 +442,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -553,7 +553,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -677,7 +677,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "staleReason": ""
   },
   {
@@ -800,7 +800,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "staleReason": ""
   },
   {
@@ -909,7 +909,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1020,7 +1020,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "HIGH",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "deadlineStatus": "진행중",
     "staleReason": ""
   },
@@ -1130,7 +1130,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "deadlineStatus": "마감일 확인 필요",
     "staleReason": ""
   },
@@ -1254,7 +1254,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "staleReason": ""
   },
   {
@@ -1377,7 +1377,7 @@
     "suspiciousPeriodIgnored": false,
     "dateConfidence": "LOW",
     "dateNormalizationVersion": "1.4.1",
-    "dateNormalizedAt": "2026-11-15",
+    "dateNormalizedAt": "2026-11-16",
     "staleReason": ""
   }
 ]
