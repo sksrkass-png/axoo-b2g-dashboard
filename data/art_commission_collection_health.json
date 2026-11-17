@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-16",
+  "updatedAt": "2026-11-17",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
     "sourceSuccessCount": 25,
     "sourceFailureCount": 0,
-    "discoveredCandidateCount": 1,
+    "discoveredCandidateCount": 2,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
@@ -112,7 +112,7 @@
         "region": "충남",
         "accessOk": true,
         "pagesFetched": 6,
-        "candidatesFound": 0,
+        "candidatesFound": 1,
         "error": ""
       },
       {
@@ -236,7 +236,7 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 20,
+    "checked": 23,
     "matched": 0,
     "status": "ok"
   }
