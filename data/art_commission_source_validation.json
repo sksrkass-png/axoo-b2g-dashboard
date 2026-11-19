@@ -1,8 +1,8 @@
 {
-  "validatedAt": "2026-11-18",
+  "validatedAt": "2026-11-19",
   "channelCount": 33,
-  "reachableCount": 30,
-  "unreachableCount": 3,
+  "reachableCount": 28,
+  "unreachableCount": 5,
   "channels": [
     {
       "id": "gyeonggi_public_art",
@@ -16,7 +16,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1205,
+      "elapsedMs": 1483,
       "error": ""
     },
     {
@@ -31,7 +31,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1130,
+      "elapsedMs": 1210,
       "error": ""
     },
     {
@@ -46,7 +46,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1704,
+      "elapsedMs": 1590,
       "error": ""
     },
     {
@@ -56,13 +56,13 @@
       "sourceType": "official_board",
       "crawlMode": "board",
       "configuredUrl": "https://www.incheon.go.kr/culture/CU070302",
-      "finalUrl": "https://www.incheon.go.kr/culture/CU070302",
-      "reachable": true,
-      "status": 200,
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
       "redirected": false,
-      "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1839,
-      "error": ""
+      "contentType": "",
+      "elapsedMs": 1392,
+      "error": "fetch failed"
     },
     {
       "id": "busan_city_notice",
@@ -76,7 +76,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 1827,
+      "elapsedMs": 10486,
       "error": "fetch failed"
     },
     {
@@ -91,7 +91,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 1821,
+      "elapsedMs": 10485,
       "error": "fetch failed"
     },
     {
@@ -106,7 +106,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 4379,
+      "elapsedMs": 4006,
       "error": ""
     },
     {
@@ -121,7 +121,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1986,
+      "elapsedMs": 1777,
       "error": ""
     },
     {
@@ -136,7 +136,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 2617,
+      "elapsedMs": 2120,
       "error": ""
     },
     {
@@ -151,7 +151,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1526,
+      "elapsedMs": 1580,
       "error": ""
     },
     {
@@ -166,7 +166,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 2061,
+      "elapsedMs": 1317,
       "error": ""
     },
     {
@@ -181,7 +181,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2452,
+      "elapsedMs": 1397,
       "error": ""
     },
     {
@@ -191,13 +191,13 @@
       "sourceType": "official_notice",
       "crawlMode": "board",
       "configuredUrl": "https://www.gb.go.kr/Main/page.do?BD_CODE=gosi_notice&URL=%2Fcommon%2Fboard%2Fboard.do&cmd=1&mnu_uid=6789",
-      "finalUrl": "https://www.gb.go.kr/page/10109/67.do",
-      "reachable": true,
-      "status": 200,
-      "redirected": true,
-      "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 3729,
-      "error": ""
+      "finalUrl": "",
+      "reachable": false,
+      "status": 0,
+      "redirected": false,
+      "contentType": "",
+      "elapsedMs": 15000,
+      "error": "timeout"
     },
     {
       "id": "gyeongbuk_development_corporation",
@@ -211,7 +211,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 1722,
+      "elapsedMs": 1295,
       "error": ""
     },
     {
@@ -226,7 +226,7 @@
       "status": 0,
       "redirected": false,
       "contentType": "",
-      "elapsedMs": 10090,
+      "elapsedMs": 10413,
       "error": "fetch failed"
     },
     {
@@ -241,7 +241,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 3034,
+      "elapsedMs": 1032,
       "error": ""
     },
     {
@@ -256,7 +256,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 1812,
+      "elapsedMs": 1624,
       "error": ""
     },
     {
@@ -271,7 +271,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 2459,
+      "elapsedMs": 1682,
       "error": ""
     },
     {
@@ -286,7 +286,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 6148,
+      "elapsedMs": 4026,
       "error": ""
     },
     {
@@ -301,7 +301,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1483,
+      "elapsedMs": 1547,
       "error": ""
     },
     {
@@ -316,7 +316,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=utf-8",
-      "elapsedMs": 2031,
+      "elapsedMs": 2643,
       "error": ""
     },
     {
@@ -331,7 +331,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 9091,
+      "elapsedMs": 8357,
       "error": ""
     },
     {
@@ -346,7 +346,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=utf-8",
-      "elapsedMs": 7561,
+      "elapsedMs": 7069,
       "error": ""
     },
     {
@@ -361,7 +361,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 9870,
+      "elapsedMs": 6843,
       "error": ""
     },
     {
@@ -376,7 +376,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 8491,
+      "elapsedMs": 3714,
       "error": ""
     },
     {
@@ -391,7 +391,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html",
-      "elapsedMs": 4127,
+      "elapsedMs": 1071,
       "error": ""
     },
     {
@@ -406,7 +406,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2838,
+      "elapsedMs": 2136,
       "error": ""
     },
     {
@@ -421,7 +421,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 2803,
+      "elapsedMs": 1850,
       "error": ""
     },
     {
@@ -436,7 +436,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1062,
+      "elapsedMs": 1031,
       "error": ""
     },
     {
@@ -451,7 +451,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html; charset=UTF-8",
-      "elapsedMs": 1515,
+      "elapsedMs": 1222,
       "error": ""
     },
     {
@@ -466,7 +466,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1063,
+      "elapsedMs": 1067,
       "error": ""
     },
     {
@@ -481,7 +481,7 @@
       "status": 200,
       "redirected": false,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1162,
+      "elapsedMs": 1317,
       "error": ""
     },
     {
@@ -496,7 +496,7 @@
       "status": 200,
       "redirected": true,
       "contentType": "text/html;charset=UTF-8",
-      "elapsedMs": 1445,
+      "elapsedMs": 1612,
       "error": ""
     }
   ]
