@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-19",
+  "updatedAt": "2026-11-20",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 25,
-    "sourceFailureCount": 0,
+    "sourceSuccessCount": 24,
+    "sourceFailureCount": 1,
     "discoveredCandidateCount": 2,
     "sourceRuns": [
       {
@@ -119,8 +119,8 @@
         "sourceId": "chungnam_development_corporation",
         "sourceName": "충남개발공사 공지·공고",
         "region": "충남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,7 +236,7 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 27,
+    "checked": 26,
     "matched": 0,
     "status": "ok"
   }
