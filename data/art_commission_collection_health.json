@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-23",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 23,
-    "sourceFailureCount": 2,
+    "sourceSuccessCount": 22,
+    "sourceFailureCount": 3,
     "discoveredCandidateCount": 2,
     "sourceRuns": [
       {
         "sourceId": "daegu_city_notice",
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -83,8 +83,8 @@
         "sourceId": "gangwon_notice",
         "sourceName": "강원특별자치도 고시공고",
         "region": "강원",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -182,8 +182,8 @@
         "sourceId": "gyeongnam_culture_portal",
         "sourceName": "경상남도 문화예술 정보플랫폼",
         "region": "경남",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
