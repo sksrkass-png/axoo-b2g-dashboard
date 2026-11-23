@@ -118,7 +118,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 221982000,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "score": 99,
     "fitScore": 99,
     "grade": "S",
@@ -184,7 +184,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-10",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01806165",
@@ -318,7 +318,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 111146000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 85,
     "fitScore": 85,
     "grade": "A",
@@ -384,7 +384,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-04",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01808596",
@@ -518,7 +518,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 352970000,
-    "daysLeft": 25,
+    "daysLeft": 24,
     "score": 80,
     "fitScore": 80,
     "grade": "A",
@@ -583,7 +583,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-06",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01805850",
@@ -717,7 +717,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 201628480,
-    "daysLeft": 3,
+    "daysLeft": 2,
     "score": 80,
     "fitScore": 80,
     "grade": "A",
@@ -783,7 +783,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-04",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01846270",
@@ -917,7 +917,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 1519000000,
-    "daysLeft": 9,
+    "daysLeft": 8,
     "score": 76,
     "fitScore": 76,
     "grade": "A",
@@ -982,7 +982,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-21",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01829840",
@@ -1103,7 +1103,7 @@
     "opportunityStatus": "임박",
     "projectScale": "대형",
     "budgetAmount": 450840000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 75,
     "fitScore": 75,
     "grade": "A",
@@ -1163,7 +1163,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-14",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01840889",
@@ -1297,7 +1297,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 200000000,
-    "daysLeft": 10,
+    "daysLeft": 9,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1360,7 +1360,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-19",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01839472",
@@ -1494,7 +1494,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 486000000,
-    "daysLeft": 8,
+    "daysLeft": 7,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1549,7 +1549,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-18",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01838385",
@@ -1683,7 +1683,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 400000000,
-    "daysLeft": 12,
+    "daysLeft": 11,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1738,7 +1738,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-18",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01837283",
@@ -1872,7 +1872,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 180000000,
-    "daysLeft": 8,
+    "daysLeft": 7,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -1927,7 +1927,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-18",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01820550",
@@ -2061,7 +2061,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 294000000,
-    "daysLeft": 16,
+    "daysLeft": 15,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -2116,7 +2116,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-17",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01839195",
@@ -2250,7 +2250,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 170000000,
-    "daysLeft": 19,
+    "daysLeft": 18,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -2305,7 +2305,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-18",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01838248",
@@ -2439,7 +2439,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 96487000,
-    "daysLeft": 8,
+    "daysLeft": 7,
     "score": 68,
     "fitScore": 68,
     "grade": "A",
@@ -2494,7 +2494,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-18",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01828472",
@@ -2628,7 +2628,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 1990000000,
-    "daysLeft": 16,
+    "daysLeft": 15,
     "score": 65,
     "fitScore": 65,
     "grade": "A",
@@ -2681,7 +2681,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-16",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01833183",
@@ -2802,7 +2802,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 264105000,
-    "daysLeft": 24,
+    "daysLeft": 23,
     "score": 65,
     "fitScore": 65,
     "grade": "A",
@@ -2854,7 +2854,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-17",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01792297",
@@ -2988,7 +2988,7 @@
     "opportunityStatus": "임박",
     "projectScale": "대형",
     "budgetAmount": 1650000000,
-    "daysLeft": 1,
+    "daysLeft": 0,
     "score": 65,
     "fitScore": 65,
     "grade": "A",
@@ -3040,7 +3040,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-12",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01830471",
@@ -3174,7 +3174,7 @@
     "opportunityStatus": "임박",
     "projectScale": "대형",
     "budgetAmount": 1000000000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 65,
     "fitScore": 65,
     "grade": "A",
@@ -3226,7 +3226,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-14",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01832118",
@@ -3347,7 +3347,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 219354000,
-    "daysLeft": 1,
+    "daysLeft": 0,
     "score": 65,
     "fitScore": 65,
     "grade": "A",
@@ -3397,7 +3397,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-16",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01833619",
@@ -3531,7 +3531,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 350000000,
-    "daysLeft": 5,
+    "daysLeft": 4,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -3583,7 +3583,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-17",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01840451",
@@ -3704,7 +3704,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "중형",
     "budgetAmount": 150000000,
-    "daysLeft": 8,
+    "daysLeft": 7,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -3756,7 +3756,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-19",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01812708",
@@ -3877,7 +3877,7 @@
     "opportunityStatus": "임박",
     "projectScale": "중형",
     "budgetAmount": 110000000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -3929,7 +3929,7 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-13",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01836922",
@@ -4050,7 +4050,7 @@
     "opportunityStatus": "진행중",
     "projectScale": "대형",
     "budgetAmount": 1848498000,
-    "daysLeft": 8,
+    "daysLeft": 7,
     "score": 60,
     "fitScore": 60,
     "grade": "A",
@@ -4100,7 +4100,220 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-18",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
+  },
+  {
+    "bidNtceNo": "R26BK01847300",
+    "bidNtceOrd": "000",
+    "reNtceYn": "N",
+    "rgstTyNm": "조달청 또는 나라장터 자체 공고건",
+    "ntceKindNm": "등록공고",
+    "intrbidYn": "N",
+    "bidNtceDt": "2026-11-23 09:49:28",
+    "refNo": "성남시 공고 제2026-2728호",
+    "bidNtceNm": "모란민속5일장 조형물 철거공사",
+    "ntceInsttCd": "3780000",
+    "ntceInsttNm": "경기도 성남시",
+    "dminsttCd": "3780000",
+    "dminsttNm": "경기도 성남시",
+    "bidMethdNm": "전자입찰",
+    "cntrctCnclsMthdNm": "수의계약",
+    "ntceInsttOfclNm": "이민주",
+    "ntceInsttOfclTelNo": "031-729-2754",
+    "ntceInsttOfclEmailAdrs": "mjlee1120@korea.kr",
+    "exctvNm": "이민주",
+    "bidQlfctRgstDt": "2026-11-26 18:00",
+    "cmmnSpldmdAgrmntRcptdocMethd": "없음",
+    "cmmnSpldmdAgrmntClseDt": "",
+    "cmmnSpldmdCorpRgnLmtYn": "N",
+    "bidBeginDt": "2026-11-25 10:00:00",
+    "bidClseDt": "2026-11-27 10:00:00",
+    "opengDt": "2026-11-27 11:00:00",
+    "ntceSpecDocUrl1": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01847300&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=07",
+    "ntceSpecDocUrl2": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01847300&bidPbancOrd=000&fileType=&fileSeq=2&prcmBsneSeCd=07",
+    "ntceSpecDocUrl3": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01847300&bidPbancOrd=000&fileType=&fileSeq=3&prcmBsneSeCd=07",
+    "ntceSpecDocUrl4": "",
+    "ntceSpecDocUrl5": "",
+    "ntceSpecDocUrl6": "",
+    "ntceSpecDocUrl7": "",
+    "ntceSpecDocUrl8": "",
+    "ntceSpecDocUrl9": "",
+    "ntceSpecDocUrl10": "",
+    "ntceSpecFileNm1": "0 공고문(모란민속5일장 조형물 철거공사).pdf",
+    "ntceSpecFileNm2": "1 시방서(모란민속5일장 조형물 철거공사).hwpx",
+    "ntceSpecFileNm3": "2 물량내역서(모란민속5일장 조형물 철거공사).xlsx",
+    "ntceSpecFileNm4": "",
+    "ntceSpecFileNm5": "",
+    "ntceSpecFileNm6": "",
+    "ntceSpecFileNm7": "",
+    "ntceSpecFileNm8": "",
+    "ntceSpecFileNm9": "",
+    "ntceSpecFileNm10": "",
+    "rbidPermsnYn": "Y",
+    "pqApplDocRcptMthdNm": "",
+    "pqApplDocRcptDt": "",
+    "arsltApplDocRcptMthdNm": "",
+    "arsltApplDocRcptDt": "",
+    "jntcontrctDutyRgnNm1": "",
+    "jntcontrctDutyRgnNm2": "",
+    "jntcontrctDutyRgnNm3": "",
+    "rgnDutyJntcontrctRt": "",
+    "dtlsBidYn": "N",
+    "bidPrtcptLmtYn": "N",
+    "prearngPrceDcsnMthdNm": "복수예가",
+    "totPrdprcNum": "15",
+    "drwtPrdprcNum": "4",
+    "bdgtAmt": "86298000",
+    "presmptPrce": "78452728",
+    "govsplyAmt": "0",
+    "aplBssCntnts": "행자부",
+    "indstrytyEvlRt": "",
+    "mainCnsttyNm": "",
+    "mainCnsttyCnstwkPrearngAmt": "",
+    "incntvRgnNm1": "",
+    "incntvRgnNm2": "",
+    "incntvRgnNm3": "",
+    "incntvRgnNm4": "",
+    "opengPlce": "국가종합전자조달시스템(나라장터)",
+    "dcmtgOprtnDt": "",
+    "dcmtgOprtnPlce": "",
+    "contrctrcnstrtnGovsplyMtrlAmt": "0",
+    "govcnstrtnGovsplyMtrlAmt": "0",
+    "bidNtceDtlUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01847300&bidPbancOrd=000",
+    "bidNtceUrl": "",
+    "bidPrtcptFeePaymntYn": "",
+    "bidPrtcptFee": "",
+    "bidGrntymnyPaymntYn": "",
+    "crdtrNm": "성남시장",
+    "cmmnSpldmdCnum": "공고서에 의함",
+    "untyNtceNo": "R26BM01059881",
+    "sptDscrptDocUrl1": "",
+    "sptDscrptDocUrl2": "",
+    "sptDscrptDocUrl3": "",
+    "sptDscrptDocUrl4": "",
+    "sptDscrptDocUrl5": "",
+    "subsiCnsttyNm1": "",
+    "subsiCnsttyNm2": "",
+    "subsiCnsttyNm3": "",
+    "subsiCnsttyNm4": "",
+    "subsiCnsttyNm5": "",
+    "subsiCnsttyNm6": "",
+    "subsiCnsttyNm7": "",
+    "subsiCnsttyNm8": "",
+    "subsiCnsttyNm9": "",
+    "subsiCnsttyIndstrytyEvlRt1": "",
+    "subsiCnsttyIndstrytyEvlRt2": "",
+    "subsiCnsttyIndstrytyEvlRt3": "",
+    "subsiCnsttyIndstrytyEvlRt4": "",
+    "subsiCnsttyIndstrytyEvlRt5": "",
+    "subsiCnsttyIndstrytyEvlRt6": "",
+    "subsiCnsttyIndstrytyEvlRt7": "",
+    "subsiCnsttyIndstrytyEvlRt8": "",
+    "subsiCnsttyIndstrytyEvlRt9": "",
+    "cmmnSpldmdMethdCd": "",
+    "cmmnSpldmdMethdNm": "(없음)공동수급불허",
+    "stdNtceDocUrl": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01847300&bidPbancOrd=000&fileType=&fileSeq=1&prcmBsneSeCd=07",
+    "brffcBidprcPermsnYn": "",
+    "cnsttyAccotShreRateList": "",
+    "cnstrtnAbltyEvlAmtList": "",
+    "dsgntCmptYn": "N",
+    "arsltCmptYn": "N",
+    "pqEvalYn": "",
+    "ntceDscrptYn": "",
+    "rsrvtnPrceReMkngMthdNm": "재입찰시 예비가격을 다시 생성하여 예정가격이 산정됩니다.",
+    "mainCnsttyPresmptPrce": "",
+    "orderPlanUntyNo": "",
+    "sucsfbidLwltRate": "89.745",
+    "rgstDt": "2026-11-23 09:49:28",
+    "bfSpecRgstNo": "",
+    "sucsfbidMthdCd": "낙030029",
+    "sucsfbidMthdNm": "소액수의견적-소액수의견적(2인 이상 견적 제출)-국민연금보험료 등 합산액 감액 적용",
+    "chgDt": "",
+    "dminsttOfclEmailAdrs": "",
+    "indstrytyLmtYn": "Y",
+    "cnstrtsiteRgnNm": "경기도 성남시",
+    "rgnDutyJntcontrctYn": "N",
+    "chgNtceRsn": "",
+    "rbidOpengDt": "2026-11-27 11:00:00",
+    "ciblAplYn": "Y",
+    "mtltyAdvcPsblYn": "N",
+    "mtltyAdvcPsblYnCnstwkNm": "전문공사-유지보수공사",
+    "VAT": "7845272",
+    "indutyVAT": "",
+    "indstrytyMfrcFldEvlYn": "N",
+    "bidWgrnteeRcptClseDt": "",
+    "rgnLmtBidLocplcJdgmBssCd": "N",
+    "rgnLmtBidLocplcJdgmBssNm": "본사또는참여지사소재지",
+    "sucsfbidMthdAppStd": "",
+    "befBidBbancNo": "",
+    "g2bNoticeType": "construction",
+    "sourceType": "입찰공고",
+    "sourceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01847300&bidPbancOrd=000",
+    "title": "모란민속5일장 조형물 철거공사",
+    "agency": "경기도 성남시",
+    "noticeAgency": "경기도 성남시",
+    "demandAgency": "경기도 성남시",
+    "contractMethod": "소액수의견적-소액수의견적(2인 이상 견적 제출)-국민연금보험료 등 합산액 감액 적용",
+    "noticeNo": "R26BK01847300",
+    "publishedDate": "2026-11-23",
+    "postedDate": "2026-11-23",
+    "noticeDate": "2026-11-23",
+    "deadline": "2026-11-27",
+    "deadlineDate": "2026-11-27",
+    "opportunityStatus": "진행중",
+    "projectScale": "중형",
+    "budgetAmount": 78452728,
+    "daysLeft": 4,
+    "score": 60,
+    "fitScore": 60,
+    "grade": "A",
+    "executionScore": 30,
+    "priorityScore": 54,
+    "category": "public_art",
+    "categoryLabel": "공공미술",
+    "matchedCategories": [
+      "public_art"
+    ],
+    "visualArtKeywords": [
+      "조형물"
+    ],
+    "hardFilterPassed": true,
+    "hardFilterVersion": "axoo_hard_filter_v1",
+    "strongFitConcepts": [
+      "mural_sculpture"
+    ],
+    "strongFitLabels": [
+      "벽화·조형물"
+    ],
+    "strongFitKeywords": [
+      "조형물"
+    ],
+    "mediumFitConcepts": [],
+    "mediumFitLabels": [],
+    "mediumFitKeywords": [],
+    "matchedKeywords": [
+      "조형물"
+    ],
+    "directFitKeywords": [
+      "조형물"
+    ],
+    "supportFitKeywords": [],
+    "hardExcludeKeywords": [],
+    "procurementFitLabels": [],
+    "scoreReasons": [
+      "핵심 수행영역: 벽화·조형물"
+    ],
+    "executionReasons": [
+      "5천만원 이상",
+      "검토 가능한 마감 일정"
+    ],
+    "fitReason": "핵심 수행영역: 벽화·조형물. AXOO FIT 60점 / A등급. 실행조건 30점 (5천만원 이상, 검토 가능한 마감 일정).",
+    "recommendedAction": "AXOO 적합도 높음 — 과업지시서 확인 후 지원 판단",
+    "scoringVersion": "axoo_bid_fit_v6",
+    "collectionSourceId": "g2b_bid_public_info_servc",
+    "collectionVersion": "1.2.0",
+    "collectedAt": "2026-11-23",
+    "updatedAt": "2026-11-23"
   },
   {
     "bidNtceNo": "R26BK01831871",
@@ -4234,7 +4447,7 @@
     "opportunityStatus": "임박",
     "projectScale": "대형",
     "budgetAmount": 802502000,
-    "daysLeft": 2,
+    "daysLeft": 1,
     "score": 35,
     "fitScore": 35,
     "grade": "B",
@@ -4289,6 +4502,6 @@
     "collectionSourceId": "g2b_bid_public_info_servc",
     "collectionVersion": "1.2.0",
     "collectedAt": "2026-11-16",
-    "updatedAt": "2026-11-22"
+    "updatedAt": "2026-11-23"
   }
 ]
