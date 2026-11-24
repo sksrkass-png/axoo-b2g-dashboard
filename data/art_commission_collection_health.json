@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23",
+  "updatedAt": "2026-11-24",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
@@ -11,8 +11,8 @@
         "sourceId": "daegu_city_notice",
         "sourceName": "대구광역시 고시공고",
         "region": "대구",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -29,8 +29,8 @@
         "sourceId": "gwangju_city_notice",
         "sourceName": "전남광주통합특별시 고시공고 - 광주권",
         "region": "광주",
-        "accessOk": true,
-        "pagesFetched": 1,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -83,8 +83,8 @@
         "sourceId": "gangwon_notice",
         "sourceName": "강원특별자치도 고시공고",
         "region": "강원",
-        "accessOk": false,
-        "pagesFetched": 0,
+        "accessOk": true,
+        "pagesFetched": 6,
         "candidatesFound": 0,
         "error": ""
       },
@@ -182,8 +182,8 @@
         "sourceId": "gyeongnam_culture_portal",
         "sourceName": "경상남도 문화예술 정보플랫폼",
         "region": "경남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,7 +236,7 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 23,
+    "checked": 24,
     "matched": 0,
     "status": "ok"
   }
