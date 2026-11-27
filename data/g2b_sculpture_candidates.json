@@ -117,7 +117,7 @@
     "g2bNoticeType": "service",
     "g2bArtCandidate": true,
     "collectedAt": "2026-11-07",
-    "updatedAt": "2026-11-26",
+    "updatedAt": "2026-11-27",
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
@@ -229,7 +229,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01820550",
@@ -350,7 +350,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01837283",
@@ -471,7 +471,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01838248",
@@ -592,7 +592,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01839472",
@@ -713,7 +713,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01836922",
@@ -821,7 +821,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01840451",
@@ -929,7 +929,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01847207",
@@ -1050,7 +1050,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01847300",
@@ -1200,7 +1200,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01849815",
@@ -1321,7 +1321,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01849019",
@@ -1429,7 +1429,7 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
   },
   {
     "bidNtceNo": "R26BK01853561",
@@ -1579,6 +1579,127 @@
     "sourceType": "나라장터 입찰공고",
     "collectionSourceId": "g2b_sculpture_candidate",
     "category": "public_art",
-    "updatedAt": "2026-11-26"
+    "updatedAt": "2026-11-27"
+  },
+  {
+    "bidNtceNo": "R26BK01860701",
+    "bidNtceOrd": "000",
+    "reNtceYn": "N",
+    "rgstTyNm": "조달청 또는 나라장터 자체 공고건",
+    "ntceKindNm": "등록공고",
+    "intrbidYn": "N",
+    "bidNtceDt": "2026-11-26 23:07:06",
+    "refNo": "함안농지관리-6155",
+    "bidNtceNm": "영동지구 취약지역생활여건개조사업 벽화설치 용역",
+    "ntceInsttCd": "D150537",
+    "ntceInsttNm": "한국농어촌공사 경남지역본부 함안지사",
+    "dminsttCd": "D150537",
+    "dminsttNm": "한국농어촌공사 경남지역본부 함안지사",
+    "bidMethdNm": "전자시담",
+    "cntrctCnclsMthdNm": "수의계약",
+    "ntceInsttOfclNm": "윤은지",
+    "ntceInsttOfclTelNo": "055-580-0312",
+    "ntceInsttOfclEmailAdrs": "",
+    "exctvNm": "윤은지",
+    "bidQlfctRgstDt": "2026-11-27 10:00",
+    "cmmnSpldmdAgrmntRcptdocMethd": "없음",
+    "cmmnSpldmdAgrmntClseDt": "",
+    "cmmnSpldmdCorpRgnLmtYn": "N",
+    "bidBeginDt": "2026-11-27 10:00:00",
+    "bidClseDt": "2026-11-27 11:00:00",
+    "opengDt": "2026-11-27 12:00:00",
+    "ntceSpecDocUrl1": "",
+    "ntceSpecDocUrl2": "",
+    "ntceSpecDocUrl3": "",
+    "ntceSpecDocUrl4": "",
+    "ntceSpecDocUrl5": "",
+    "ntceSpecDocUrl6": "",
+    "ntceSpecDocUrl7": "",
+    "ntceSpecDocUrl8": "",
+    "ntceSpecDocUrl9": "",
+    "ntceSpecDocUrl10": "",
+    "ntceSpecFileNm1": "",
+    "ntceSpecFileNm2": "",
+    "ntceSpecFileNm3": "",
+    "ntceSpecFileNm4": "",
+    "ntceSpecFileNm5": "",
+    "ntceSpecFileNm6": "",
+    "ntceSpecFileNm7": "",
+    "ntceSpecFileNm8": "",
+    "ntceSpecFileNm9": "",
+    "ntceSpecFileNm10": "",
+    "rbidPermsnYn": "Y",
+    "pqApplDocRcptMthdNm": "",
+    "pqApplDocRcptDt": "",
+    "tpEvalApplMthdNm": "",
+    "tpEvalApplClseDt": "",
+    "jntcontrctDutyRgnNm1": "",
+    "jntcontrctDutyRgnNm2": "",
+    "jntcontrctDutyRgnNm3": "",
+    "rgnDutyJntcontrctRt": "",
+    "dtlsBidYn": "",
+    "bidPrtcptLmtYn": "N",
+    "prearngPrceDcsnMthdNm": "단일예가",
+    "totPrdprcNum": "1",
+    "drwtPrdprcNum": "0",
+    "asignBdgtAmt": "18242000",
+    "presmptPrce": "16583636",
+    "opengPlce": "국가종합전자조달시스템(나라장터)",
+    "dcmtgOprtnDt": "",
+    "dcmtgOprtnPlce": "",
+    "bidNtceDtlUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01860701&bidPbancOrd=000",
+    "bidNtceUrl": "https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01860701&bidPbancOrd=000",
+    "bidPrtcptFeePaymntYn": "",
+    "bidPrtcptFee": "0",
+    "bidGrntymnyPaymntYn": "",
+    "crdtrNm": "한국농어촌공사 경남지역본부 함안지사",
+    "ppswGnrlSrvceYn": "N",
+    "srvceDivNm": "일반용역",
+    "prdctClsfcLmtYn": "N",
+    "mnfctYn": "",
+    "purchsObjPrdctList": "",
+    "untyNtceNo": "R26BM01071426",
+    "cmmnSpldmdMethdCd": "",
+    "cmmnSpldmdMethdNm": "(없음)공동수급불허",
+    "stdNtceDocUrl": "",
+    "brffcBidprcPermsnYn": "",
+    "dsgntCmptYn": "N",
+    "arsltCmptYn": "N",
+    "pqEvalYn": "",
+    "tpEvalYn": "",
+    "ntceDscrptYn": "",
+    "rsrvtnPrceReMkngMthdNm": "",
+    "arsltApplDocRcptMthdNm": "",
+    "arsltReqstdocRcptDt": "",
+    "orderPlanUntyNo": "",
+    "sucsfbidLwltRate": "",
+    "rgstDt": "2026-11-26 23:07:06",
+    "bfSpecRgstNo": "",
+    "infoBizYn": "",
+    "sucsfbidMthdCd": "낙030009",
+    "sucsfbidMthdNm": "수의시담-수의시담",
+    "chgDt": "",
+    "dminsttOfclEmailAdrs": "",
+    "indstrytyLmtYn": "N",
+    "chgNtceRsn": "",
+    "rbidOpengDt": "2026-11-27 12:00:00",
+    "VAT": "1658364",
+    "indutyVAT": "",
+    "rgnLmtBidLocplcJdgmBssCd": "",
+    "rgnLmtBidLocplcJdgmBssNm": "",
+    "pubPrcrmntLrgClsfcNm": "행사관리 및 기타 사업 지원서비스 ",
+    "pubPrcrmntMidClsfcNm": "기타",
+    "pubPrcrmntClsfcNo": "80161590",
+    "pubPrcrmntClsfcNm": "기타사업지원서비스",
+    "techAbltEvlRt": "",
+    "bidPrceEvlRt": "",
+    "sucsfbidMthdAppStd": "",
+    "befBidBbancNo": "",
+    "bidWgrnteeRcptClseDt": "",
+    "g2bNoticeType": "service",
+    "sourceType": "나라장터 입찰공고",
+    "collectionSourceId": "g2b_sculpture_candidate",
+    "category": "public_art",
+    "updatedAt": "2026-11-27"
   }
 ]
