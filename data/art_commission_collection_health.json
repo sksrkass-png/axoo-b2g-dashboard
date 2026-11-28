@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-27",
+  "updatedAt": "2026-11-28",
   "nationwideWeb": {
     "targetRegionCount": 13,
     "nationalSourceCount": 2,
-    "sourceSuccessCount": 24,
-    "sourceFailureCount": 1,
+    "sourceSuccessCount": 22,
+    "sourceFailureCount": 3,
     "discoveredCandidateCount": 2,
     "sourceRuns": [
       {
@@ -165,7 +165,7 @@
         "sourceName": "경상북도 고시공고",
         "region": "경북",
         "accessOk": true,
-        "pagesFetched": 6,
+        "pagesFetched": 1,
         "candidatesFound": 0,
         "error": ""
       },
@@ -173,8 +173,8 @@
         "sourceId": "gyeongbuk_development_corporation",
         "sourceName": "경상북도개발공사 공지·공고",
         "region": "경북",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -182,8 +182,8 @@
         "sourceId": "gyeongnam_culture_portal",
         "sourceName": "경상남도 문화예술 정보플랫폼",
         "region": "경남",
-        "accessOk": true,
-        "pagesFetched": 6,
+        "accessOk": false,
+        "pagesFetched": 0,
         "candidatesFound": 0,
         "error": ""
       },
@@ -236,7 +236,7 @@
   },
   "g2bArchitecturalArt": {
     "sourceId": "g2b_architectural_art",
-    "checked": 24,
+    "checked": 25,
     "matched": 0,
     "status": "ok"
   }
